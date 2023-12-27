@@ -18,6 +18,8 @@ dependencies:
   flutter_svg_provider: ^1.0.3
   intl: ^0.18.0
   go_router: ^13.0.0
+  pinput: ^3.0.1
+  
 
 dev_dependencies: 
   flutter_test: 
@@ -28,46 +30,3 @@ flutter:
   assets: 
     - assets/
     - assets/images/
-  fonts: 
-    - family: Poppins
-      fonts: 
-        - asset: assets/fonts/PoppinsBold.ttf
-          weight: 700
-        - asset: assets/fonts/PoppinsRegular.ttf
-          weight: 400
-        - asset: assets/fonts/PoppinsSemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/PoppinsMedium.ttf
-          weight: 500
-        - asset: assets/fonts/PoppinsExtraBold.ttf
-          weight: 800
-    - family: Inter
-      fonts: 
-        - asset: assets/fonts/InterBold.ttf
-          weight: 700
-    - family: Lexend
-      fonts: 
-        - asset: assets/fonts/LexendBold.ttf
-          weight: 700
-    - family: SF Pro
-      fonts: 
-        - asset: assets/fonts/SFProSemibold.ttf
-          weight: 600
-    - family: Lato
-      fonts: 
-        - asset: assets/fonts/LatoRegular.ttf
-          weight: 400
-    - family: Public Sans
-      fonts: 
-        - asset: assets/fonts/PublicSansRegular.ttf
-          weight: 400
-    - family: Asap
-      fonts: 
-        - asset: assets/fonts/AsapMedium.ttf
-          weight: 500
-        - asset: assets/fonts/AsapRomanBold.ttf
-          weight: 700
-        - asset: assets/fonts/AsapRomanMedium.ttf
-          weight: 500
-        - asset: assets/fonts/AsapRomanRegular.ttf
-          weight: 400

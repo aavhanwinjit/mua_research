@@ -9,3 +9,4 @@ export 'package:ekyc/theme/custom_text_style.dart';
 export 'package:ekyc/theme/theme_helper.dart';
 export 'package:ekyc/theme/custom_button_style.dart';
 export 'package:ekyc/core/utils/date_time_utils.dart';
+export 'package:ekyc/widgets/custom_material_button.dart';
