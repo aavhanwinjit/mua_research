@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'core/app_export.dart';
 // import 'package:ekyc/theme/theme_helper.dart';
 
@@ -20,11 +21,10 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       // theme: theme,
       title: 'EKYC',
       debugShowCheckedModeBanner: false,
-      navigatorKey: NavigatorService.navigatorKey,
       localizationsDelegates: [
         AppLocalizationDelegate(),
         GlobalMaterialLocalizations.delegate,
@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
           '',
         ),
       ],
-      initialRoute: AppRoutes.splashScreen,
-      routes: AppRoutes.routes,
+      routeInformationParser: router.routeInformationParser,
+      routerDelegate: router.routerDelegate,
+      routeInformationProvider: router.routeInformationProvider,
     );
   }
 }
