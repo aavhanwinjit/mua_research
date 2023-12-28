@@ -1,6 +1,8 @@
 ///Strings organised by feature
 /// 1.Global
-/// 12.Login
+/// 2.Login
+/// 3.OTP Screen
+/// 4.OTP Success Screen
 
 class Strings {
   // 1.Global
@@ -22,12 +24,26 @@ class Strings {
   static const String agreeTerms = "By clicking, I agree with ";
   static const String termsAndCondition = "Terms & Condition";
   static const String safetyGuidelines = " and safety guidelines";
+  static const String edit = "Edit";
+  static const String contn = "Continue";
 
   //2.Login
-  static const String appBarTitle = "Let's get started!";
-  static const String appBarSubTitle = "Please enter your valid mobile number to proceed.";
+  static const String loginScreenTitle = "Let's get started!";
+  static const String loginScreenSubTitle = "Please enter your valid mobile number to proceed.";
   static const String loginPhoneHint = "8 digit phone number";
   static const String loginPhoneLabel = "Mobile Number";
   static const String loginPhoneValidatorString = "Enter valid mobile number";
   static const String loginButtonTitle = "Get Verification Code";
+
+  //3.OTP Screen
+  static const String otpScreenTitle = "Enter the OTP sent to";
+
+  //4.OTP Success Screen
+  static const String otpSuccessScreenTitle = "Great, that matches!";
+  static const String otpSuccessScreenSubTitle = "Your profile is loading. Sit tight!";
+
+  static const String otpFailureScreenTitle = "Oops!";
+  static const String otpFailureScreenSubTitle =
+      "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your MUA for assistance";
+  static const String otpFailureScreenButtonTitle = "Got it!";
 }

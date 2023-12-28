@@ -5,9 +5,8 @@ class ImageConstants {
 
   static const String pngSplashLogo = imagePath + '/splash_logo.png';
   static const String pngLogo = imagePath + '/logo.png';
-  static String logoWithName = '$imagePath/logo_with_name.png';
-  static String successImage = "$imagePath/success.png";
-  static String failureImage = "$imagePath/failure.png";
+  static const String successImage = "$imagePath/success.png";
+  static const String failureImage = "$imagePath/failure.png";
 
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';
