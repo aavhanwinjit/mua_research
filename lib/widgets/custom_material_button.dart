@@ -11,7 +11,7 @@ class CustomMaterialButton extends StatelessWidget {
     required this.callback,
     required this.btnText,
     required this.btnTextColor,
-    this.borderRadius = 0.0,
+    this.borderRadius = 100.0,
     Key? key,
   }) : super(key: key);
 
@@ -20,6 +20,7 @@ class CustomMaterialButton extends StatelessWidget {
     return MaterialButton(
       elevation: 0,
       color: btnColor,
+      height: 60,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),

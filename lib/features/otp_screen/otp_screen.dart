@@ -24,7 +24,7 @@ class _OTPScreenState extends State<OTPScreen> {
                 horizontal: 10,
                 vertical: 25,
               ),
-              child: Image.asset(ImageConstant.logoWithName),
+              child: Image.asset(ImageConstants.logoWithName),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(

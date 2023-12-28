@@ -1,5 +1,4 @@
-import 'package:ekyc/core/constants/constants.dart';
-import 'package:ekyc/core/utils/image_constant.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/widgets/custom_material_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,7 @@ class FailureScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Spacer(),
-            Image.asset(ImageConstant.failureImage),
+            Image.asset(ImageConstants.failureImage),
             SizedBox(height: 25),
             Text(
               "Oops!",
