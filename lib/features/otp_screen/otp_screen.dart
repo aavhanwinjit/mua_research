@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPScreen extends StatefulWidget {
@@ -118,7 +119,13 @@ class _OTPScreenState extends State<OTPScreen> {
                       btnColor: otpController.text.length == 6
                           ? primaryColor
                           : disabledButtonColor,
-                      callback: () {},
+                      callback: () {
+                        otpController.text.length == 6
+                            ? otpController.text == "123456"
+                                ? context.go(AppRoutes.successScreen)
+                                : context.go(AppRoutes.failureScreen)
+                            : null;
+                      },
                       btnText: "Continue",
                       btnTextColor: otpController.text.length == 6
                           ? Colors.white
