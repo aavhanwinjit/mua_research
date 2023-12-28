@@ -15,7 +15,7 @@ class SuccessScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset(
-                ImageConstant.successImage,
+                ImageConstants.successImage,
               ),
               SizedBox(height: 20),
               Text(
