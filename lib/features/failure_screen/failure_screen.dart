@@ -2,6 +2,7 @@ import 'package:ekyc/core/constants/constants.dart';
 import 'package:ekyc/core/utils/image_constant.dart';
 import 'package:ekyc/widgets/custom_material_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class FailureScreen extends StatelessWidget {
   const FailureScreen({Key? key}) : super(key: key);
@@ -50,7 +51,7 @@ class FailureScreen extends StatelessWidget {
                   Expanded(
                     child: CustomMaterialButton(
                       btnColor: primaryColor,
-                      callback: () {},
+                      callback: () => context.pop(),
                       btnText: "Got it!",
                       btnTextColor: Colors.white,
                       borderRadius: 100,

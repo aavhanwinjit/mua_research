@@ -12,12 +12,6 @@ class AppRoutes {
   static const String failureScreen = '/failure_screen';
 }
 
-class RouteName {
-  static String otpScreen = 'otp_screen';
-  static String successScreen = 'success_screen';
-  static String failureScreen = 'failure_screen';
-}
-
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
@@ -32,21 +26,21 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: AppRoutes.otpScreen,
-      name: RouteName.otpScreen,
+      name: AppRoutes.otpScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const OTPScreen();
       },
     ),
     GoRoute(
       path: AppRoutes.successScreen,
-      name: RouteName.successScreen,
+      name: AppRoutes.successScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const SuccessScreen();
       },
     ),
     GoRoute(
       path: AppRoutes.failureScreen,
-      name: RouteName.failureScreen,
+      name: AppRoutes.failureScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const FailureScreen();
       },

@@ -122,8 +122,8 @@ class _OTPScreenState extends State<OTPScreen> {
                       callback: () {
                         otpController.text.length == 6
                             ? otpController.text == "123456"
-                                ? context.go(AppRoutes.successScreen)
-                                : context.go(AppRoutes.failureScreen)
+                                ? context.goNamed(AppRoutes.successScreen)
+                                : context.pushNamed(AppRoutes.failureScreen)
                             : null;
                       },
                       btnText: "Continue",
