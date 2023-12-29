@@ -10,13 +10,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-final formKey = GlobalKey<FormState>();
-
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends ConsumerState<LoginScreen> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneNumberController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarHelper.customAppBar(
         title: Strings.loginScreenTitle,
@@ -36,6 +42,7 @@ class LoginScreen extends ConsumerWidget {
             children: [
               SizedBox(height: 32.h),
               AppPhoneTextFormField(
+                controller: _phoneNumberController,
                 maxLength: 8,
                 validator: (value) {
                   if (value!.trim().isEmpty || value.trim().length < 8) {
@@ -43,7 +50,6 @@ class LoginScreen extends ConsumerWidget {
                   }
                   return null;
                 },
-                onChanged: (value) {},
                 keyboardType: TextInputType.phone,
                 hint: Strings.loginPhoneHint,
                 label: Strings.loginPhoneLabel,
@@ -52,6 +58,7 @@ class LoginScreen extends ConsumerWidget {
               ),
               SizedBox(height: 24.h),
               CustomPrimaryButton(
+                disable: _phoneNumberController.text.trim().length < 8,
                 onTap: () {
                   context.pushNamed(AppRoutes.otpScreen);
                   // if (formKey.currentState!.validate()) {

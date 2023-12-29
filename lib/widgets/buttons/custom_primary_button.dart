@@ -7,6 +7,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final VoidCallback? onTap;
   final double? height;
   final double? width;
+  final bool? disable;
 
   const CustomPrimaryButton({
     super.key,
@@ -14,6 +15,7 @@ class CustomPrimaryButton extends StatelessWidget {
     this.onTap,
     this.height,
     this.width,
+    this.disable = false,
   });
 
   @override
@@ -34,7 +36,7 @@ class CustomPrimaryButton extends StatelessWidget {
           ),
           shadowColor: Colors.transparent,
         ),
-        onPressed: onTap,
+        onPressed: disable == true ? null : onTap,
         child: Text(
           label,
           style: TextStyle(
