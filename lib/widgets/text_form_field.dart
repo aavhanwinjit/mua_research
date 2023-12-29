@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppPhoneTextFormField extends StatelessWidget {
-  final TextEditingController? nameController;
+  final TextEditingController? controller;
   final String? label;
   final Color? labelColor;
   final String? Function(String?)? validator;
@@ -21,10 +21,12 @@ class AppPhoneTextFormField extends StatelessWidget {
   final void Function()? onTap;
   final Color? textColor;
   final bool? obscureText;
+  final bool? autofocus;
+  final int? maxLength;
 
   const AppPhoneTextFormField({
     super.key,
-    this.nameController,
+    this.controller,
     this.label,
     this.labelColor,
     this.validator,
@@ -41,12 +43,15 @@ class AppPhoneTextFormField extends StatelessWidget {
     this.textColor,
     this.obscureText,
     required this.hint,
+    this.autofocus,
+    this.maxLength,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autofocus: true,
+      controller: controller,
+      autofocus: autofocus ?? false,
       onChanged: onChanged,
       validator: validator,
       keyboardType: keyboardType,
@@ -55,12 +60,13 @@ class AppPhoneTextFormField extends StatelessWidget {
       style: TextStyle(
         fontSize: 16.sp,
       ),
+      maxLength: maxLength,
       decoration: InputDecoration(
         prefixText: prefixText,
         prefixStyle: TextStyle(
           color: black,
         ),
-        // prefixIcon: prefixIcon,
+        prefixIcon: prefixIcon,
         counterText: "",
         hintText: hint,
         hintStyle: TextStyle(
@@ -74,7 +80,7 @@ class AppPhoneTextFormField extends StatelessWidget {
         border: CustomBorderStyle.customTextFieldBorder,
         focusedBorder: CustomBorderStyle.customTextFieldBorder,
         enabledBorder: CustomBorderStyle.customTextFieldBorder,
-        errorBorder: CustomBorderStyle.customTextFieldBorder,
+        errorBorder: CustomBorderStyle.customTextFieldErrorBorder,
         disabledBorder: CustomBorderStyle.customTextFieldBorder,
       ),
     );

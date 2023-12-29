@@ -4,7 +4,14 @@ import 'package:flutter/material.dart';
 class CustomBorderStyle {
   static final InputBorder customTextFieldBorder = OutlineInputBorder(
     borderSide: BorderSide(
-      color: textFieldBorderColor,
+      color: borderColor,
+    ),
+    borderRadius: BorderRadius.circular(12),
+  );
+
+  static final InputBorder customTextFieldErrorBorder = OutlineInputBorder(
+    borderSide: BorderSide(
+      color: primaryColor,
     ),
     borderRadius: BorderRadius.circular(12),
   );
