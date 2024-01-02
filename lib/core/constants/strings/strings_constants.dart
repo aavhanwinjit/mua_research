@@ -26,6 +26,13 @@ class Strings {
   static const String safetyGuidelines = " and safety guidelines";
   static const String edit = "Edit";
   static const String contn = "Continue";
+  static const String clear = "Clear";
+  static const String save = "Save";
+  static const String email = "Email";
+  static const String mobileNo = "Mobile No";
+  static const String address = "Address";
+  static const String companyName = "Company Name";
+  static const String cancel = "Cancel";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -41,9 +48,30 @@ class Strings {
   //4.OTP Success Screen
   static const String otpSuccessScreenTitle = "Great, that matches!";
   static const String otpSuccessScreenSubTitle = "Your profile is loading. Sit tight!";
+  static const String otpValidationString = "Enter valid OTP";
+  static const String otpDidntReceiveIt = "Didn't received it? Retry in";
 
+  //5.OTP Failure Screen
   static const String otpFailureScreenTitle = "Oops!";
   static const String otpFailureScreenSubTitle =
       "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your MUA for assistance";
   static const String otpFailureScreenButtonTitle = "Got it!";
+
+  //Fonts
+  static const String isodoraFont = "Isidora Sans";
+  static const String nunitoFont = "Nunito Sans";
+
+  //Auth-Profile Screen
+  static const String welcomeString = "Welcome";
+  static const String addSignature = "Add your signature";
+  static const String thatsNotMe = "That’s not me!";
+  static const String digitalSignature = 'Digital Signature';
+  static const String uploadSignatureImage = 'Upload Signature Image';
+
+  //Signature Screen
+  static const String signHere = "Sign Here";
+
+  //Dashboard
+  static const String emptyDashboardText = "No data to display!\nClick the labelLarge below\nto start KYC.";
+  static const String startKyc = "Start KYC";
 }
