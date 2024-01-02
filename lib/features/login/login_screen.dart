@@ -1,4 +1,3 @@
-import 'package:country_picker/country_picker.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
@@ -88,10 +87,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         RichText(
           text: TextSpan(
             text: "  +91",
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                _showCountryCodePickerBottomsheet(context);
-              },
+            // recognizer: TapGestureRecognizer()
+            //   ..onTap = () {
+            //     _showCountryCodePickerBottomsheet(context);
+            //   },
             style: TextStyle(
               color: black,
               fontSize: 16.sp,
@@ -143,13 +142,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  void _showCountryCodePickerBottomsheet(BuildContext context) {
-    showCountryPicker(
-      context: context,
-      showPhoneCode: true,
-      onSelect: (Country country) {
-        print('Select country: ${country.displayName}');
-      },
-    );
-  }
+  // void _showCountryCodePickerBottomsheet(BuildContext context) {
+  //   showCountryPicker(
+  //     context: context,
+  //     showPhoneCode: true,
+  //     onSelect: (Country country) {
+  //       print('Select country: ${country.displayName}');
+  //     },
+  //   );
+  // }
 }
