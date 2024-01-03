@@ -1,8 +1,11 @@
-import 'package:ekyc/features/failure/failure_screen.dart';
-import 'package:ekyc/features/login/login_screen.dart';
-import 'package:ekyc/features/otp/otp_screen.dart';
-import 'package:ekyc/features/splash_screen/splash_screen.dart';
-import 'package:ekyc/features/success/success_screen.dart';
+import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
+import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:ekyc/features/failure/presentation/pages/failure_screen.dart';
+import 'package:ekyc/features/login/presentation/pages/login_screen.dart';
+import 'package:ekyc/features/otp/presentation/pages/otp_screen.dart';
+import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
+import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
+import 'package:ekyc/features/success/presentation/pages/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -12,11 +15,15 @@ class AppRoutes {
   static const String successScreen = '/success_screen';
   static const String failureScreen = '/failure_screen';
   static const String loginScreen = '/login_screen';
+  static const String authProfileScreen = '/auth_profile_screen';
+  static const String signatureScreen = '/signature_screen';
+  static const String dashboardScreen = '/dashboard_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
+  // initialLocation: AppRoutes.dashboardScreen,
   initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
@@ -52,6 +59,27 @@ final GoRouter router = GoRouter(
       name: AppRoutes.failureScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const FailureScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.authProfileScreen,
+      name: AppRoutes.authProfileScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AuthProfileScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.signatureScreen,
+      name: AppRoutes.signatureScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignatureScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.dashboardScreen,
+      name: AppRoutes.dashboardScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const DashboardScreen();
       },
     ),
   ],

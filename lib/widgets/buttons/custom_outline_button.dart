@@ -1,21 +1,23 @@
-import 'package:ekyc/core/constants/color/color_constants.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomPrimaryButton extends StatelessWidget {
+class CustomOutlineButton extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
   final double? height;
   final double? width;
   final bool? disable;
+  final bool? primary;
 
-  const CustomPrimaryButton({
+  const CustomOutlineButton({
     super.key,
     required this.label,
     this.onTap,
     this.height,
     this.width,
     this.disable = false,
+    this.primary = true,
   });
 
   @override
@@ -26,16 +28,13 @@ class CustomPrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          disabledBackgroundColor: disabledButtonColor,
-          foregroundColor: white,
-          disabledForegroundColor: textGrayColor,
+      child: OutlinedButton(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: primary == true ? primaryColor : white,
+          side: BorderSide(width: 1.0, color: primary == true ? primaryColor : Colors.white),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(29),
           ),
-          shadowColor: Colors.transparent,
         ),
         onPressed: disable == true ? null : onTap,
         child: Text(
