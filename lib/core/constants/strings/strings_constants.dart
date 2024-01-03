@@ -74,4 +74,13 @@ class Strings {
   //Dashboard
   static const String emptyDashboardText = "No data to display!\nClick the labelLarge below\nto start KYC.";
   static const String startKyc = "Start KYC";
+  static const String referenceNo = "Reference No.";
+  static const String applications = "Applications";
+  static const String searchApplicants = "Search applicants";
+  static const String resume = "Resume";
+
+  static const String chipStatusIDMissing = "Incomplete - ID Missing";
+  static const String chipStatusPORMissing = "Imcomplete - POR missing";
+  static const String chipStatusPOAMissing = "Imcomplete - POA missing";
+  static const String chipStatusCompleted = "Completed";
 }

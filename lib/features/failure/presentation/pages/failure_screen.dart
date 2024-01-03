@@ -42,7 +42,7 @@ class FailureScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 37.w),
               child: CustomPrimaryButton(
                 onTap: () {
-                  context.pop();
+                  context.go(AppRoutes.loginScreen);
                 },
                 label: Strings.otpFailureScreenButtonTitle,
               ),

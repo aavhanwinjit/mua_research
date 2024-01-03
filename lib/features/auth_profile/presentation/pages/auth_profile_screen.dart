@@ -45,7 +45,9 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                 CustomOutlineButton(
                   primary: false,
                   disable: false,
-                  onTap: () {},
+                  onTap: () {
+                    context.go(AppRoutes.loginScreen);
+                  },
                   label: Strings.thatsNotMe,
                 ),
               ],
@@ -153,30 +155,30 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
   Widget _signatureBox() {
     final signature = ref.watch(signatureProvider);
 
-    return DottedBorder(
-      borderType: BorderType.RRect,
-      color: primaryBlueColor,
-      radius: Radius.circular(12),
-      dashPattern: [8, 4],
-      strokeWidth: 1,
-      child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
-        child: Container(
-          height: 100.h,
-          width: double.infinity,
-          child: Center(
-            child: signature != null
-                ? Image.memory(
-                    signature,
-                    height: double.infinity,
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  )
-                : InkWell(
-                    onTap: () {
-                      _showActionSheet();
-                    },
-                    child: Container(
+    return InkWell(
+      onTap: () {
+        _showActionSheet();
+      },
+      child: DottedBorder(
+        borderType: BorderType.RRect,
+        color: primaryBlueColor,
+        radius: Radius.circular(12),
+        dashPattern: [8, 4],
+        strokeWidth: 1,
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+          child: Container(
+            height: 100.h,
+            width: double.infinity,
+            child: Center(
+              child: signature != null
+                  ? Image.memory(
+                      signature,
+                      height: double.infinity,
+                      width: double.infinity,
+                      fit: BoxFit.fill,
+                    )
+                  : Container(
                       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
                       decoration: BoxDecoration(
                         color: primaryBlueColor.withOpacity(0.16),
@@ -190,7 +192,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                         ),
                       ),
                     ),
-                  ),
+            ),
           ),
         ),
       ),
@@ -216,6 +218,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             onPressed: () {
+              context.pop();
               context.pushNamed(AppRoutes.signatureScreen);
             },
             child: Text(

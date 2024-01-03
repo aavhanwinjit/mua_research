@@ -23,8 +23,8 @@ class AppRoutes {
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
-  initialLocation: AppRoutes.dashboardScreen,
-  // initialLocation: AppRoutes.splashScreen,
+  // initialLocation: AppRoutes.dashboardScreen,
+  initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
       path: AppRoutes.splashScreen,

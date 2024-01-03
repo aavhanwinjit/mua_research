@@ -16,6 +16,11 @@ Color get primaryBlueColor => Color(0xFF0033A1);
 
 Color get iosButtonBlueTextColor => Color(0xFF007AFF);
 
+Color get iconColor => Color(0xFF292D32);
+
+Color get darkYellow => Color(0xFFDEA415);
+Color get lightYellow => Color(0xFFFDF2DC);
+
 // White
 Color get white => Colors.white;
 

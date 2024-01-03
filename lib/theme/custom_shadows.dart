@@ -10,4 +10,13 @@ class CustomShadows {
       spreadRadius: -4,
     ),
   ];
+
+  static final List<BoxShadow> applicantCardShadow = [
+    BoxShadow(
+      color: shadowColor.withOpacity(0.12),
+      offset: Offset(0, 2),
+      blurRadius: 4,
+      spreadRadius: -2,
+    ),
+  ];
 }
