@@ -12,7 +12,7 @@ class CustomTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final double? width;
   final double? height;
-  final String hint;
+  final String? hint;
   final String? prefixText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
@@ -23,6 +23,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? obscureText;
   final bool? autofocus;
   final int? maxLength;
+  final FloatingLabelBehavior? floatingLabelBehavior;
 
   const CustomTextFormField({
     super.key,
@@ -42,9 +43,10 @@ class CustomTextFormField extends StatelessWidget {
     this.onTap,
     this.textColor,
     this.obscureText,
-    required this.hint,
+    this.hint,
     this.autofocus,
     this.maxLength,
+    this.floatingLabelBehavior,
   });
 
   @override
@@ -82,11 +84,11 @@ class CustomTextFormField extends StatelessWidget {
         floatingLabelStyle: TextStyle(
           color: textGrayColor,
         ),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
+        floatingLabelBehavior: floatingLabelBehavior,
         border: CustomBorderStyle.customTextFieldBorder,
-        focusedBorder: CustomBorderStyle.customTextFieldBorder,
+        focusedBorder: CustomBorderStyle.customTextFieldFocusedBorder,
         enabledBorder: CustomBorderStyle.customTextFieldBorder,
-        errorBorder: CustomBorderStyle.customTextFieldErrorBorder,
+        errorBorder: CustomBorderStyle.customTextFieldBorder,
         disabledBorder: CustomBorderStyle.customTextFieldBorder,
       ),
     );

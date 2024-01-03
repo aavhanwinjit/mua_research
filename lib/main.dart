@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 844),
       builder: (_, child) {
         return MaterialApp.router(
-          title: 'EKYC',
+          title: 'MUA KYC',
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             AppLocalizationDelegate(),

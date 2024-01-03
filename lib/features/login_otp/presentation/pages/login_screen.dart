@@ -2,7 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/login/presentation/providers/login_provider.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:ekyc/widgets/custom_text_form_field.dart';
@@ -60,7 +60,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     keyboardType: TextInputType.phone,
                     hint: Strings.loginPhoneHint,
                     label: Strings.loginPhoneLabel,
-                    // prefixText: "+91 | ",
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
                     prefixIcon: _prefix(context),
                   ),
                   SizedBox(height: 24.h),
