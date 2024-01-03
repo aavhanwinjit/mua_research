@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 Color get primaryColor => Color(0xFFFF671D);
 
 Color get borderColor => Color(0xFFDDDDDD);
+Color get borderColorSecondary => Color(0xFFBBBBBB);
 
 Color get disabledButtonColor => Color(0xFFF3F3F3);
 

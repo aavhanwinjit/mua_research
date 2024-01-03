@@ -2,6 +2,8 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
+import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
+import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/kyc_type_bottomsheet.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:ekyc/widgets/custom_text_form_field.dart';
@@ -19,6 +21,7 @@ class DashboardScreen extends ConsumerStatefulWidget {
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   ScrollController _scrollController = ScrollController();
+  bool _listEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           backgroundColor: disabledButtonColor,
           appBar: _appBar(),
           floatingActionButton: _fab(),
-          // bottomNavigationBar: _bottomNavBarWidget(),
+          bottomNavigationBar: _listEmpty ? _bottomNavBarWidget() : null,
           body: _bodyWidget(),
           // body: NoDataBody(),
         ),
@@ -83,7 +86,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             children: [
               Expanded(
                 child: CustomTextFormField(
-                  hint: Strings.searchApplicants,
+                  label: Strings.searchApplicants,
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: ImageIcon(
@@ -94,7 +97,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
                 ),
               ),
               IconButton(
-                onPressed: () {},
+                onPressed: showFilterBottomSheet,
                 icon: ImageIcon(
                   AssetImage(ImageConstants.sortIcon),
                   color: iconColor,
@@ -122,7 +125,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           fontWeight: FontWeight.w800,
         ),
       ),
-      onPress: () {},
+      onPress: showKYCStartBottomSheet,
       scrollController: _scrollController,
       animateIcon: true,
       inverted: false,
@@ -134,7 +137,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
-        onTap: () {},
+        onTap: showKYCStartBottomSheet,
         label: Strings.startKyc,
       ),
     );
@@ -155,6 +158,40 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ),
         SizedBox(width: 20.w),
       ],
+    );
+  }
+
+  void showFilterBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24.sp),
+          topRight: Radius.circular(24.sp),
+        ),
+      ),
+      builder: (builder) {
+        return FilterBottomsheet();
+      },
+    );
+  }
+
+  void showKYCStartBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24.sp),
+          topRight: Radius.circular(24.sp),
+        ),
+      ),
+      builder: (builder) {
+        return KYCTypeBottomsheet();
+      },
     );
   }
 }

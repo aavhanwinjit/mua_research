@@ -1,0 +1,6 @@
+enum ApplicationStatusType {
+  INCOMPLETE_ID,
+  INCOMPLETE_POR,
+  INCOMPLETE_POA,
+  COMPLETE,
+}

@@ -1,11 +1,11 @@
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:ekyc/features/failure/presentation/pages/failure_screen.dart';
-import 'package:ekyc/features/login/presentation/pages/login_screen.dart';
-import 'package:ekyc/features/otp/presentation/pages/otp_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
 import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
-import 'package:ekyc/features/success/presentation/pages/success_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

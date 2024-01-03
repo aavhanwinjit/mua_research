@@ -33,6 +33,7 @@ class Strings {
   static const String address = "Address";
   static const String companyName = "Company Name";
   static const String cancel = "Cancel";
+  static const String next = "Next";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -78,6 +79,15 @@ class Strings {
   static const String applications = "Applications";
   static const String searchApplicants = "Search applicants";
   static const String resume = "Resume";
+  static const String filter = "Filter";
+  static const String status = "Status";
+  static const String apply = "Apply";
+  static const String clearAll = "Clear All";
+  static const String selectKYCType = "Select KYC Type";
+  static const String kycBottomsheetDescription = "Please specify the type of insurance you are working on.";
+  static const String lifeInsurance = "Life\nInsurance";
+  static const String motorInsurance = "Motor\nInsurance";
+  static const String nonMotorInsurance = "Non-Motor\nInsurance";
 
   static const String chipStatusIDMissing = "Incomplete - ID Missing";
   static const String chipStatusPORMissing = "Imcomplete - POR missing";
