@@ -20,30 +20,21 @@ class CustomPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height ?? 60.h,
-      width: double.infinity,
-      decoration: BoxDecoration(
+    return MaterialButton(
+      elevation: 0,
+      height: 60.h,
+      minWidth: double.infinity,
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(100),
       ),
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          disabledBackgroundColor: disabledButtonColor,
-          foregroundColor: white,
-          disabledForegroundColor: textGrayColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(29),
-          ),
-          shadowColor: Colors.transparent,
-        ),
-        onPressed: disable == true ? null : onTap,
-        child: Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 16.sp,
-          ),
+      color: disable == false ? primaryColor : disabledButtonColor,
+      onPressed: disable == false ? onTap : null,
+      child: Text(
+        label,
+        style: TextStyle(
+          color: disable == false ? white : textGrayColor,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );

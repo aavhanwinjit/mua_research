@@ -7,6 +7,7 @@ class ImageConstants {
   static const String pngLogo = imagePath + '/logo.png';
   static const String successImage = "$imagePath/success.png";
   static const String failureImage = "$imagePath/failure.png";
+  static const String pinFaceIdImage = "$imagePath/pin_face_id.png";
   static const String emptyScreenImage = imagePath + '/empty_screen.png';
   static const String searchIcon = imagePath + '/search.png';
   static const String sortIcon = imagePath + '/sort.png';

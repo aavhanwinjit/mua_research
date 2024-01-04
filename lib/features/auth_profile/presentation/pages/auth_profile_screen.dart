@@ -37,7 +37,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                 CustomPrimaryButton(
                   disable: ref.watch(signatureProvider) == null,
                   onTap: () {
-                    context.go(AppRoutes.dashboardScreen);
+                    context.go(AppRoutes.createPINFaceIdscreen);
                   },
                   label: Strings.contn,
                 ),

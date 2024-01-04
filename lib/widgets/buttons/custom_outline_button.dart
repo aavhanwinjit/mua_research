@@ -22,27 +22,23 @@ class CustomOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: height ?? 60.h,
-      width: double.infinity,
-      decoration: BoxDecoration(
+    return MaterialButton(
+      elevation: 0,
+      height: 60.h,
+      minWidth: double.infinity,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: primary == true ? primaryColor : white,
+        ),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: OutlinedButton(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: primary == true ? primaryColor : white,
-          side: BorderSide(width: 1.0, color: primary == true ? primaryColor : Colors.white),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(29),
-          ),
-        ),
-        onPressed: disable == true ? null : onTap,
-        child: Text(
-          label,
-          style: TextStyle(
-            fontWeight: FontWeight.w800,
-            fontSize: 16.sp,
-          ),
+      onPressed: disable == false ? onTap : null,
+      child: Text(
+        label,
+        style: TextStyle(
+          color: primary == true ? primaryColor : white,
+          fontSize: 16.sp,
+          fontWeight: FontWeight.w700,
         ),
       ),
     );
