@@ -1,12 +1,15 @@
 import 'package:ekyc/features/confirm_pin_screen/confirm_pin_screen.dart';
 import 'package:ekyc/features/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
 import 'package:ekyc/features/create_pin_face_id_screen/create_pin_face_id_screen.dart';
-import 'package:ekyc/features/failure/failure_screen.dart';
-import 'package:ekyc/features/login/login_screen.dart';
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
-import 'package:ekyc/features/otp/otp_screen.dart';
-import 'package:ekyc/features/splash_screen/splash_screen.dart';
-import 'package:ekyc/features/success/success_screen.dart';
+import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
+import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
+import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
+import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,12 +24,16 @@ class AppRoutes {
       "/create_pin_and_face_id_screen";
   static const String confirmPINScreen = '/confirm_pin_screen';
   static const String onboardSuccessScreen = '/onboard_success_screen';
+  static const String authProfileScreen = '/auth_profile_screen';
+  static const String signatureScreen = '/signature_screen';
+  static const String dashboardScreen = '/dashboard_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
+  // initialLocation: AppRoutes.dashboardScreen,
   initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
@@ -86,10 +93,30 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.onboardSuccessScreen,
-      name: AppRoutes.onboardSuccessScreen,
+        path: AppRoutes.onboardSuccessScreen,
+        name: AppRoutes.onboardSuccessScreen,
+        builder: (BuildContext context, GoRouterState state) {
+          return const OnboardSuccessScreen();
+        }),
+    GoRoute(
+      path: AppRoutes.authProfileScreen,
+      name: AppRoutes.authProfileScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const OnboardSuccessScreen();
+        return const AuthProfileScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.signatureScreen,
+      name: AppRoutes.signatureScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignatureScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.dashboardScreen,
+      name: AppRoutes.dashboardScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const DashboardScreen();
       },
     ),
   ],

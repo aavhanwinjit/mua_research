@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 Color get primaryColor => Color(0xFFFF671D);
 
 Color get borderColor => Color(0xFFDDDDDD);
+Color get borderColorSecondary => Color(0xFFBBBBBB);
 
 Color get disabledButtonColor => Color(0xFFF3F3F3);
 
@@ -14,6 +15,13 @@ Color get primaryGreenColor => Color(0xFF0E8345);
 
 Color get primaryBlueColor => Color(0xFF0033A1);
 
+Color get iosButtonBlueTextColor => Color(0xFF007AFF);
+
+Color get iconColor => Color(0xFF292D32);
+
+Color get darkYellow => Color(0xFFDEA415);
+Color get lightYellow => Color(0xFFFDF2DC);
+
 // White
 Color get white => Colors.white;
 
@@ -22,6 +30,10 @@ Color get black => Color(0XFF000000);
 
 // Transparent
 Color get transparent => Colors.transparent;
+
+Color get lightPurple => Color(0XFFC490F9);
+
+Color get shadowColor => Color(0XFF18274B);
 
 
 // // Gray

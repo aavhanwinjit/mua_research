@@ -9,7 +9,7 @@ class CustomBorderStyle {
     borderRadius: BorderRadius.circular(12),
   );
 
-  static final InputBorder customTextFieldErrorBorder = OutlineInputBorder(
+  static final InputBorder customTextFieldFocusedBorder = OutlineInputBorder(
     borderSide: BorderSide(
       color: primaryColor,
     ),

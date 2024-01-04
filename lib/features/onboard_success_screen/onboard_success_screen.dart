@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class OnboardSuccessScreen extends StatelessWidget {
   const OnboardSuccessScreen({super.key});
@@ -45,7 +46,7 @@ class OnboardSuccessScreen extends StatelessWidget {
             child: CustomPrimaryButton(
               label: "Go to Dashboard",
               disable: false,
-              onTap: () {},
+              onTap: () => context.pushNamed(AppRoutes.dashboardScreen),
             ),
           ),
         ],

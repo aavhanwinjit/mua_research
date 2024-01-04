@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:ekyc/core/app_export.dart';
 
 class CreatePINFaceIdScreen extends StatelessWidget {
   const CreatePINFaceIdScreen({super.key});
@@ -48,9 +49,10 @@ class CreatePINFaceIdScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 20),
-              CustomSecondaryButton(
+              CustomOutlineButton(
                 label: 'Create PIN Only',
                 disable: false,
+                primary: true,
                 onTap: () {},
               ),
               SizedBox(height: 40),

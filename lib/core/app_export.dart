@@ -8,6 +8,6 @@ export 'package:ekyc/routes/app_routes.dart';
 export 'package:ekyc/theme/app_decoration.dart';
 export 'package:ekyc/theme/custom_button_style.dart';
 export 'package:ekyc/theme/custom_text_style.dart';
-export 'package:ekyc/theme/theme_helper.dart';
-export 'package:ekyc/widgets/buttons/custom_secondary_button.dart';
 export 'package:flutter_screenutil/flutter_screenutil.dart';
+export 'package:ekyc/theme/app_theme.dart';
+export 'package:ekyc/widgets/buttons/custom_outline_button.dart';

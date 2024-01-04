@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/app_export.dart';
-// import 'package:ekyc/theme/theme_helper.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  runApp(MyApp());
+  runApp(
+    ProviderScope(
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 844),
       builder: (_, child) {
         return MaterialApp.router(
-          title: 'EKYC',
+          title: 'MUA KYC',
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             AppLocalizationDelegate(),
@@ -28,6 +32,7 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
+          theme: AppTheme.lightTheme,
           supportedLocales: [
             Locale(
               'en',
