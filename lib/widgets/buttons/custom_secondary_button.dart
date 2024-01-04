@@ -2,14 +2,14 @@ import 'package:ekyc/core/constants/color/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomPrimaryButton extends StatelessWidget {
+class CustomSecondaryButton extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
   final double? height;
   final double? width;
   final bool? disable;
 
-  const CustomPrimaryButton({
+  const CustomSecondaryButton({
     super.key,
     required this.label,
     this.onTap,
@@ -25,14 +25,16 @@ class CustomPrimaryButton extends StatelessWidget {
       height: 60.h,
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: disable == false ? primaryColor : disabledButtonColor,
+        ),
         borderRadius: BorderRadius.circular(100),
       ),
-      color: disable == false ? primaryColor : disabledButtonColor,
       onPressed: disable == false ? onTap : null,
       child: Text(
         label,
         style: TextStyle(
-          color: disable == false ? white : textGrayColor,
+          color: disable == false ? primaryColor : textGrayColor,
           fontSize: 16.sp,
           fontWeight: FontWeight.w700,
         ),

@@ -28,9 +28,13 @@ class _OTPScreenState extends State<OTPScreen> {
             _pinInputField(),
             SizedBox(height: 24.h),
             CustomPrimaryButton(
+              disable: otpController.text.length < 6,
               onTap: () {
-                context.pushNamed(AppRoutes.failureScreen);
-                // context.pushNamed(AppRoutes.successScreen);
+                if (otpController.text == "111111") {
+                  context.pushNamed(AppRoutes.failureScreen);
+                } else {
+                  context.pushNamed(AppRoutes.successScreen);
+                }
               },
               label: Strings.contn,
             ),
