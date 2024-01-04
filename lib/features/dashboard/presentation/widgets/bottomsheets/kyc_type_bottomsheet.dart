@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/insurance_type_card.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,11 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
-        onTap: () {},
+        disable: ref.watch(kycTypeProvider) == null,
+        onTap: () {
+          context.pop();
+          context.push(AppRoutes.customerInfoScreen);
+        },
         label: Strings.next,
       ),
     );

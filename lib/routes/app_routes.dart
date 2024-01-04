@@ -1,11 +1,13 @@
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/customer_info_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/insurance_stages_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
+import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
 import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
-import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,6 +20,8 @@ class AppRoutes {
   static const String authProfileScreen = '/auth_profile_screen';
   static const String signatureScreen = '/signature_screen';
   static const String dashboardScreen = '/dashboard_screen';
+  static const String customerInfoScreen = '/customer_info_screen';
+  static const String insuranceStagesScreen = '/insurance_stages_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
@@ -80,6 +84,20 @@ final GoRouter router = GoRouter(
       name: AppRoutes.dashboardScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const DashboardScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.customerInfoScreen,
+      name: AppRoutes.customerInfoScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const CustomerInfoScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.insuranceStagesScreen,
+      name: AppRoutes.insuranceStagesScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const InsuranceStagesScreen();
       },
     ),
   ],
