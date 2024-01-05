@@ -17,7 +17,8 @@ class SignatureScreen extends ConsumerStatefulWidget {
   const SignatureScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _SignatureScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _SignatureScreenState();
 }
 
 class _SignatureScreenState extends ConsumerState<SignatureScreen> {
@@ -92,7 +93,8 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
   }
 
   void _handleSaveButtonPressed() async {
-    final data = await signatureGlobalKey.currentState!.toImage(pixelRatio: 3.0);
+    final data =
+        await signatureGlobalKey.currentState!.toImage(pixelRatio: 3.0);
     final bytes = await data.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List list = bytes!.buffer.asUint8List();
 

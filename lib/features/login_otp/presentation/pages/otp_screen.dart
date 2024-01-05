@@ -20,6 +20,7 @@ class OTPScreen extends ConsumerStatefulWidget {
 }
 
 class _OTPScreenState extends ConsumerState<OTPScreen> {
+   TextEditingController otpController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final phoneNumber = ref.watch(phoneNumberProvider);
@@ -82,7 +83,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     KeyboardHelper.hideKeyboard(context);
 
     if (ref.read(otpProvider).trim().length < 6) {
-      return;
+      if (otpController.text == "111111") {
+        context.pushNamed(AppRoutes.failureScreen);
+      }
     } else {
       context.pushNamed(AppRoutes.successScreen);
       // context.pushNamed(AppRoutes.failureScreen);
@@ -92,6 +95,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
   Widget _pinInputField() {
     return Pinput(
       length: 6,
+       controller: otpController,
       defaultPinTheme: PinTheme(
         height: 50,
         width: 50,
