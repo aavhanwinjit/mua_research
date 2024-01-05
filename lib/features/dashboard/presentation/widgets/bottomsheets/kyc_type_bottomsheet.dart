@@ -12,7 +12,8 @@ class KYCTypeBottomsheet extends ConsumerStatefulWidget {
   const KYCTypeBottomsheet({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _FilterBottomsheetState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FilterBottomsheetState();
 }
 
 class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
@@ -75,7 +76,9 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
-        onTap: () {},
+        onTap: () {
+          context.pushNamed(AppRoutes.uploadIDproofScreen);
+        },
         label: Strings.next,
       ),
     );
