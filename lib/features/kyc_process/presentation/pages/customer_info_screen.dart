@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/marital_status_enums.dart';
 import 'package:ekyc/core/constants/enums/nationality_type_enums.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/customer_info_providers.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
@@ -27,24 +28,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
           KeyboardHelper.onScreenTap(context);
         },
         child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              Strings.customerInfo,
-              style: TextStyle(
-                color: black,
-                fontWeight: FontWeight.bold,
-                fontSize: 20.sp,
-              ),
-            ),
-            leading: IconButton(
-              onPressed: () {
-                context.pop();
-              },
-              icon: Icon(
-                Icons.chevron_left,
-                color: black,
-              ),
-            ),
+          appBar: AppBarHelper.showCustomAppbar(
+            context: context,
+            title: Strings.customerInfo,
           ),
           body: SingleChildScrollView(
             child: Padding(

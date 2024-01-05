@@ -68,6 +68,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onTap: () {
                       _navigateToOtpScreen();
                     },
+                    disabledOnTap: () {
+                      context.showErrorSnackBar(message: Strings.loginPhoneValidatorString);
+                    },
                     label: Strings.loginButtonTitle,
                   ),
                   SizedBox(height: 24.h),

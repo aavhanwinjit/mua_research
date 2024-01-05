@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/insurance_stage_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,20 +19,10 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: primaryBlueColor,
-        appBar: AppBar(
-          title: Text(
-            Strings.lifeInsuranceTitle,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20.sp,
-            ),
-          ),
-          leading: IconButton(
-            onPressed: () {
-              context.pop();
-            },
-            icon: Icon(Icons.chevron_left),
-          ),
+        appBar: AppBarHelper.showCustomAppbar(
+          context: context,
+          title: Strings.lifeInsuranceTitle,
+          blueBackground: true,
         ),
         body: Container(
           height: double.infinity,
@@ -70,7 +61,9 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {
                   InsuranceStageCard(
                     title: Strings.identityIdDetails,
                     subTitle: Strings.idDetailsSubtitle,
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(AppRoutes.uploadIDproofScreen);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   InsuranceStageCard(

@@ -1,15 +1,18 @@
-import 'package:ekyc/features/confirm_pin_screen/confirm_pin_screen.dart';
-import 'package:ekyc/features/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
-import 'package:ekyc/features/create_pin_face_id_screen/create_pin_face_id_screen.dart';
-import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/confirm_pin_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/pages/customer_info_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/id_details/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/pages/insurance_stages_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/review_uploaded_document_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
+import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
 import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +25,7 @@ class AppRoutes {
   static const String failureScreen = '/failure_screen';
   static const String loginScreen = '/login_screen';
   static const String createPINFaceIdscreen = '/create_pin_face_id_screen';
-  static const String createPINandFaceIdScreen =
-      "/create_pin_and_face_id_screen";
+  static const String createPINandFaceIdScreen = '/create_pin_and_face_id_screen';
   static const String confirmPINScreen = '/confirm_pin_screen';
   static const String onboardSuccessScreen = '/onboard_success_screen';
   static const String authProfileScreen = '/auth_profile_screen';
@@ -31,14 +33,16 @@ class AppRoutes {
   static const String dashboardScreen = '/dashboard_screen';
   static const String customerInfoScreen = '/customer_info_screen';
   static const String insuranceStagesScreen = '/insurance_stages_screen';
+  static const String uploadIDproofScreen = '/upload_id_proof_screen';
+  static const String confirmUploadOrRetakeScreen = '/confirm_upload_or_retake_screen';
+  static const String reviewSubmitScreen = '/review_submit_screen';
 }
 
-final GlobalKey<NavigatorState> rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
-  // initialLocation: AppRoutes.dashboardScreen,
-  initialLocation: AppRoutes.splashScreen,
+  initialLocation: AppRoutes.uploadIDproofScreen,
+  // initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
       path: AppRoutes.splashScreen,
@@ -135,6 +139,27 @@ final GoRouter router = GoRouter(
       name: AppRoutes.insuranceStagesScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const InsuranceStagesScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.uploadIDproofScreen,
+      name: AppRoutes.uploadIDproofScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const UploadIDdetailsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.confirmUploadOrRetakeScreen,
+      name: AppRoutes.confirmUploadOrRetakeScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ReviewUploadedDocumentScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.reviewSubmitScreen,
+      name: AppRoutes.reviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ReviewSubmitScreen();
       },
     ),
   ],
