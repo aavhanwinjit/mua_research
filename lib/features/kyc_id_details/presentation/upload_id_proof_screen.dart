@@ -1,5 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: white,
+        forceMaterialTransparency: true,
         title: Text(
           "Identity/ID details",
           style: TextStyle(
@@ -31,71 +33,86 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
         ),
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: Text(
-                  "Upload Identity Proof",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 10,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Text(
+                    "Upload Identity Proof",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                  ),
+                  child: Text(
+                    "Please specify the type of identification document you are uploading.",
+                  ),
                 ),
-                child: Text(
-                  "Please specify the type of identification document you are uploading.",
+                Row(
+                  children: [
+                    Radio.adaptive(
+                      activeColor: primaryBlueColor,
+                      value: 1,
+                      groupValue: idType,
+                      onChanged: (int? i) {
+                        setState(() {
+                          idType = 1;
+                        });
+                      },
+                    ),
+                    Text(
+                      "National ID Card (NIC)",
+                    ),
+                  ],
                 ),
-              ),
-              Row(
-                children: [
-                  Radio.adaptive(
-                    activeColor: primaryBlueColor,
-                    value: 1,
-                    groupValue: idType,
-                    onChanged: (int? i) {
-                      setState(() {
-                        idType = 1;
-                      });
-                    },
+                Row(
+                  children: [
+                    Radio.adaptive(
+                      activeColor: primaryBlueColor,
+                      value: 2,
+                      groupValue: idType,
+                      onChanged: (int? i) {
+                        setState(() {
+                          idType = 1;
+                        });
+                      },
+                    ),
+                    Text(
+                      "Passport",
+                    ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                uploadPhotoBox("Upload front side photo"),
+                SizedBox(height: 20),
+                uploadPhotoBox("Upload back side photo"),
+                SizedBox(height: 50),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
                   ),
-                  Text(
-                    "National ID Card (NIC)",
+                  child: CustomPrimaryButton(
+                    disable: false,
+                    label: 'Next',
+                    onTap: () =>
+                        context.pushNamed(AppRoutes.reviewSubmitScreen),
                   ),
-                ],
-              ),
-              Row(
-                children: [
-                  Radio.adaptive(
-                    activeColor: primaryBlueColor,
-                    value: 2,
-                    groupValue: idType,
-                    onChanged: (int? i) {
-                      setState(() {
-                        idType = 1;
-                      });
-                    },
-                  ),
-                  Text(
-                    "Passport",
-                  ),
-                ],
-              ),
-              SizedBox(height: 20),
-              uploadPhotoBox("Upload front side photo"),
-              SizedBox(height: 20),
-              uploadPhotoBox("Upload back side photo"),
-            ],
+                ),
+                SizedBox(height: 50),
+              ],
+            ),
           ),
         ),
       ),
@@ -116,7 +133,7 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
         child: InkWell(
           onTap: () => context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen),
           child: Container(
-            height: 250.h,
+            height: 225.h,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
