@@ -46,7 +46,7 @@ class OnboardSuccessScreen extends StatelessWidget {
             child: CustomPrimaryButton(
               label: "Go to Dashboard",
               disable: false,
-              onTap: () => context.pushNamed(AppRoutes.dashboardScreen),
+              onTap: () => context.go(AppRoutes.dashboardScreen),
             ),
           ),
         ],

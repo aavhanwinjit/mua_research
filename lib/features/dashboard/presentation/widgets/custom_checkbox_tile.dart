@@ -1,7 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCheckboxTile extends ConsumerWidget {
   final bool value;

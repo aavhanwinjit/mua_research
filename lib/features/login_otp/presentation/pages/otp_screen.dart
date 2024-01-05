@@ -8,7 +8,6 @@ import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
@@ -20,7 +19,14 @@ class OTPScreen extends ConsumerStatefulWidget {
 }
 
 class _OTPScreenState extends ConsumerState<OTPScreen> {
-   TextEditingController otpController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+
+  @override
+  void dispose() {
+    otpController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final phoneNumber = ref.watch(phoneNumberProvider);
@@ -95,7 +101,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
   Widget _pinInputField() {
     return Pinput(
       length: 6,
-       controller: otpController,
+      controller: otpController,
       defaultPinTheme: PinTheme(
         height: 50,
         width: 50,

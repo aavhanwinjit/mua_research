@@ -3,7 +3,6 @@ import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/insurance_stage_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 class InsuranceStagesScreen extends ConsumerStatefulWidget {

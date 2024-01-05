@@ -3,7 +3,6 @@ import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InsuranceTypeCard extends ConsumerWidget {
   final String title;

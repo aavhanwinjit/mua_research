@@ -9,7 +9,6 @@ import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:ekyc/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_scrolling_fab_animated/flutter_scrolling_fab_animated.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
