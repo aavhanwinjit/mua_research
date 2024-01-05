@@ -1,6 +1,8 @@
-import 'package:ekyc/features/confirm_pin_screen/confirm_pin_screen.dart';
-import 'package:ekyc/features/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
-import 'package:ekyc/features/create_pin_face_id_screen/create_pin_face_id_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/confirm_pin_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
+import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/confirm_upload_or_retake_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/upload_id_proof_screen.dart';
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
@@ -21,12 +23,15 @@ class AppRoutes {
   static const String loginScreen = '/login_screen';
   static const String createPINFaceIdscreen = '/create_pin_face_id_screen';
   static const String createPINandFaceIdScreen =
-      "/create_pin_and_face_id_screen";
+      '/create_pin_and_face_id_screen';
   static const String confirmPINScreen = '/confirm_pin_screen';
   static const String onboardSuccessScreen = '/onboard_success_screen';
   static const String authProfileScreen = '/auth_profile_screen';
   static const String signatureScreen = '/signature_screen';
   static const String dashboardScreen = '/dashboard_screen';
+  static const String uploadIDproofScreen = '/upload_id_proof_screen';
+  static const String confirmUploadOrRetakeScreen =
+      '/confirm_upload_or_retake_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -117,6 +122,20 @@ final GoRouter router = GoRouter(
       name: AppRoutes.dashboardScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const DashboardScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.uploadIDproofScreen,
+      name: AppRoutes.uploadIDproofScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const UploadIDdetailsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.confirmUploadOrRetakeScreen,
+      name: AppRoutes.confirmUploadOrRetakeScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ConfirmUploadOrRetakeScreen();
       },
     ),
   ],
