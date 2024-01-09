@@ -54,24 +54,21 @@ class InsuranceStageCard extends StatelessWidget {
   }
 
   Widget _continueWidget() {
-    return InkWell(
-      onTap: () {},
-      child: Row(
-        children: [
-          Text(
-            Strings.contn,
-            style: TextStyle(
-              color: primaryColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 12.sp,
-            ),
-          ),
-          Icon(
-            Icons.chevron_right,
+    return Row(
+      children: [
+        Text(
+          Strings.contn,
+          style: TextStyle(
             color: primaryColor,
+            fontWeight: FontWeight.w600,
+            fontSize: 12.sp,
           ),
-        ],
-      ),
+        ),
+        Icon(
+          Icons.chevron_right,
+          color: primaryColor,
+        ),
+      ],
     );
   }
 }

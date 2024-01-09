@@ -44,8 +44,8 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
                   ),
                   child: Text(
                     "Please specify the type of identification document you are uploading.",
@@ -121,7 +121,8 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
         borderType: BorderType.RRect,
         radius: Radius.circular(16),
         child: InkWell(
-          onTap: () => context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen),
+          onTap: () => context.pushNamed(AppRoutes.cameraScreen),
+          // onTap: () => context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen),
           child: Container(
             height: 225.h,
             child: Column(

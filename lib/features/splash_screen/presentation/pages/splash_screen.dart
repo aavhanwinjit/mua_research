@@ -10,14 +10,12 @@ class SplashScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     _navigateToLoginPage(context);
 
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: primaryColor,
-        body: Center(
-          child: Image.asset(
-            ImageConstants.pngSplashLogo,
-            width: 212.w,
-          ),
+    return Scaffold(
+      backgroundColor: primaryColor,
+      body: Center(
+        child: Image.asset(
+          ImageConstants.pngSplashLogo,
+          width: 212.w,
         ),
       ),
     );

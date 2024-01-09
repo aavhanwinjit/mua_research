@@ -16,15 +16,15 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
 class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: primaryBlueColor,
-        appBar: AppBarHelper.showCustomAppbar(
-          context: context,
-          title: Strings.lifeInsuranceTitle,
-          blueBackground: true,
-        ),
-        body: Container(
+    return Scaffold(
+      backgroundColor: primaryBlueColor,
+      appBar: AppBarHelper.showCustomAppbar(
+        context: context,
+        title: Strings.lifeInsuranceTitle,
+        blueBackground: true,
+      ),
+      body: SafeArea(
+        child: Container(
           height: double.infinity,
           width: double.infinity,
           margin: EdgeInsets.only(top: 20.h),
@@ -69,12 +69,26 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {
                   InsuranceStageCard(
                     title: Strings.addressDetails,
                     subTitle: Strings.addressDetailsSubtitle,
-                    onTap: () {},
+                    onTap: () {
+                      context.pushNamed(AppRoutes.addressDetailsScreen);
+                    },
                   ),
                   SizedBox(height: 16.h),
                   InsuranceStageCard(
                     title: Strings.policyDocuments,
                     subTitle: Strings.policyDocSubtitle,
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 16.h),
+                  InsuranceStageCard(
+                    title: Strings.motorDocuments,
+                    subTitle: Strings.motorDocSubtitle,
+                    onTap: () {},
+                  ),
+                  SizedBox(height: 16.h),
+                  InsuranceStageCard(
+                    title: Strings.nonMotorDocuments,
+                    subTitle: Strings.nonMotorDocSubtitle,
                     onTap: () {},
                   ),
                   SizedBox(height: 16.h),

@@ -18,6 +18,9 @@ class ImageConstants {
   static const String radioOn = imagePath + '/radio_on.png';
   static const String cameraImage = "$imagePath/camera.png";
   static const String idImage = '$imagePath/id.png';
+  static const String cameraStencil = imagePath + '/camera_stencil.png';
+  static const String flashIcon = imagePath + '/flash.png';
+  static const String galleryIcon = imagePath + '/gallery.png';
 
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';

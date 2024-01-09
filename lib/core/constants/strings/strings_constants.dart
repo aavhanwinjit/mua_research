@@ -34,6 +34,8 @@ class Strings {
   static const String companyName = "Company Name";
   static const String cancel = "Cancel";
   static const String next = "Next";
+  static const String selectDocument = "Select Document";
+  static const String addMoreDocuments = "Add More Documents";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -134,5 +136,25 @@ class Strings {
   static const String policyDocuments = "Policy Documents (Optional)";
   static const String policyDocSubtitle = "Upload the policy document with visible details like policy number.";
   static const String additionalDocs = "Additional Documents (Optional)";
-  static const String additionalDocsSubtitle = "Provide any additional documents required for the specific KYC type you selected.";
+  static const String additionalDocsSubtitle =
+      "Provide any additional documents required for the specific KYC type you selected.";
+  static const String motorDocuments = "Motor Documents";
+  static const String motorDocSubtitle = "Upload the motor document with visible details like number.";
+  static const String nonMotorDocuments = "Non-Motor Documents";
+  static const String nonMotorDocSubtitle = "Upload the non-motor document with visible details like number.";
+
+  //Camera Screen
+  static const String cameraPermissionRequired = "Camera Permission Required to Scan the document";
+
+  //Address Details Screen
+  static const String uploadAddressProof = "Upload address proof";
+  static const String addressDetailsScreenSubtitle =
+      "Please specify the type of address proof document you are uploading.";
+  static const String addressDocumentContainerLabel = "Take a photo or upload Address\nProof Document";
+
+  //Insured Document Screen
+  static const String uploadInsuredDocuments = "Upload Insured Documents";
+  static const String uploadProofOfRelationship = "Proof of Relationship Documents";
+  static const String specifyDocumentType = "Please specify the type of document you are uploading.";
+  static const String insuredDocumentContainerLabel = "Take a photo or upload\ninsured documents";
 }

@@ -1,6 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ReviewUploadedDocumentScreen extends StatelessWidget {
   const ReviewUploadedDocumentScreen({super.key});
@@ -8,19 +10,9 @@ class ReviewUploadedDocumentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        title: Text(
-          "Identity/ID details",
-          style: TextStyle(
-            color: black,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: BackButton(
-          color: black,
-        ),
+      appBar: AppBarHelper.showCustomAppbar(
+        context: context,
+        title: "Identity/ID details",
       ),
       body: SafeArea(
         child: Column(
@@ -76,7 +68,9 @@ class ReviewUploadedDocumentScreen extends StatelessWidget {
                 disable: false,
                 primary: true,
                 label: 'Retake Photo',
-                onTap: () {},
+                onTap: () {
+                  context.pushReplacementNamed(AppRoutes.cameraScreen);
+                },
               ),
             ),
             SizedBox(height: 40),

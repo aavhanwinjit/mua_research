@@ -4,6 +4,9 @@ import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:ekyc/features/kyc_id_details/presentation/review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/address_details/address_details_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/address_details/insured_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/pages/camera/camera_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/pages/customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/pages/id_details/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/pages/insurance_stages_screen.dart';
@@ -36,13 +39,16 @@ class AppRoutes {
   static const String uploadIDproofScreen = '/upload_id_proof_screen';
   static const String confirmUploadOrRetakeScreen = '/confirm_upload_or_retake_screen';
   static const String reviewSubmitScreen = '/review_submit_screen';
+  static const String cameraScreen = '/camera_screen';
+  static const String addressDetailsScreen = '/address_details_screen';
+  static const String insuredDocumentScreen = '/insured_document_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
-  initialLocation: AppRoutes.uploadIDproofScreen,
-  // initialLocation: AppRoutes.splashScreen,
+  // initialLocation: AppRoutes.dashboardScreen,
+  initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
       path: AppRoutes.splashScreen,
@@ -160,6 +166,27 @@ final GoRouter router = GoRouter(
       name: AppRoutes.reviewSubmitScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const ReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.cameraScreen,
+      name: AppRoutes.cameraScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const CameraScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.addressDetailsScreen,
+      name: AppRoutes.addressDetailsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AddressDetailsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.insuredDocumentScreen,
+      name: AppRoutes.insuredDocumentScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const InsuredDocumentsScreen();
       },
     ),
   ],

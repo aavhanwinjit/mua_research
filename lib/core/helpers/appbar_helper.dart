@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 
 class AppBarHelper {
@@ -28,6 +29,12 @@ class AppBarHelper {
           backIcon ?? Icons.chevron_left,
           color: blueBackground == true ? white : black,
         ),
+      ),
+      systemOverlayStyle: SystemUiOverlayStyle(
+        // statusBarColor: Colors.red,
+        statusBarIconBrightness:
+            blueBackground == true ? Brightness.light : Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: blueBackground == true ? Brightness.light : Brightness.dark, // For iOS (dark icons)
       ),
     );
   }

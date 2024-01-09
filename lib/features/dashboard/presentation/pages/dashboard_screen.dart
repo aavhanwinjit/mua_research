@@ -8,6 +8,7 @@ import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:ekyc/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_scrolling_fab_animated/flutter_scrolling_fab_animated.dart';
 
@@ -24,31 +25,31 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () {
-          KeyboardHelper.onScreenTap(context);
-        },
-        child: Scaffold(
-          backgroundColor: disabledButtonColor,
-          appBar: _appBar(),
-          floatingActionButton: _fab(),
-          bottomNavigationBar: _listEmpty ? _bottomNavBarWidget() : null,
-          body: _bodyWidget(),
-          // body: NoDataBody(),
-        ),
+    return GestureDetector(
+      onTap: () {
+        KeyboardHelper.onScreenTap(context);
+      },
+      child: Scaffold(
+        backgroundColor: disabledButtonColor,
+        appBar: _appBar(),
+        floatingActionButton: _fab(),
+        bottomNavigationBar: _listEmpty ? _bottomNavBarWidget() : null,
+        body: _bodyWidget(),
+        // body: NoDataBody(),
       ),
     );
   }
 
   Widget _bodyWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _headingAndSearchBarWidget(),
-        SizedBox(height: 25.h),
-        _listView(),
-      ],
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _headingAndSearchBarWidget(),
+          SizedBox(height: 25.h),
+          _listView(),
+        ],
+      ),
     );
   }
 
@@ -157,6 +158,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ),
         SizedBox(width: 20.w),
       ],
+      systemOverlayStyle: SystemUiOverlayStyle(
+        // statusBarColor: Colors.red,
+        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: Brightness.dark, // For iOS (dark icons)
+      ),
     );
   }
 

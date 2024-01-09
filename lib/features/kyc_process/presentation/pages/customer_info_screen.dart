@@ -22,17 +22,17 @@ class CustomerInfoScreen extends ConsumerStatefulWidget {
 class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () {
-          KeyboardHelper.onScreenTap(context);
-        },
-        child: Scaffold(
-          appBar: AppBarHelper.showCustomAppbar(
-            context: context,
-            title: Strings.customerInfo,
-          ),
-          body: SingleChildScrollView(
+    return GestureDetector(
+      onTap: () {
+        KeyboardHelper.onScreenTap(context);
+      },
+      child: Scaffold(
+        appBar: AppBarHelper.showCustomAppbar(
+          context: context,
+          title: Strings.customerInfo,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
               child: Column(
