@@ -17,6 +17,9 @@ class ImageConstants {
       imagePath + '/non_motor_insurance.png';
   static const String cameraImage = "$imagePath/camera.png";
   static const String idImage = '$imagePath/id.png';
+  static const String signatureImage = '$imagePath/signature.png';
+  static const String disabledCameraImage = '$imagePath/disabled_camera.png';
+
 
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';

@@ -2,8 +2,12 @@ import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
 import 'package:ekyc/features/kyc_id_details/presentation/confirm_upload_or_retake_screen.dart';
-import 'package:ekyc/features/kyc_id_details/presentation/review_submit_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/edit_customer_info_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/edit_id_screen.dart';
+import 'package:ekyc/features/kyc_id_details/presentation/id_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_id_details/presentation/upload_id_proof_screen.dart';
+import 'package:ekyc/features/kyc_policy_documents/presentation/pd_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_policy_documents/presentation/policy_documents_screen.dart';
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
@@ -33,7 +37,11 @@ class AppRoutes {
   static const String uploadIDproofScreen = '/upload_id_proof_screen';
   static const String confirmUploadOrRetakeScreen =
       '/confirm_upload_or_retake_screen';
-  static const String reviewSubmitScreen = '/review_submit_screen';
+  static const String idReviewSubmitScreen = '/id_review_submit_screen';
+  static const String editCustomerInfoScreen = '/edit_customer_info_screen';
+  static const String editIDScreen = '/edit_id_screen';
+  static const String policyDocumentScreen = '/policy_document_screen';
+  static const String pdReviewSubmitScreen = '/policy_document_review_submit_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -141,10 +149,38 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.reviewSubmitScreen,
-      name: AppRoutes.reviewSubmitScreen,
+      path: AppRoutes.idReviewSubmitScreen,
+      name: AppRoutes.idReviewSubmitScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const ReviewSubmitScreen();
+        return const IDReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.editCustomerInfoScreen,
+      name: AppRoutes.editCustomerInfoScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EditCustomerInfoScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.editIDScreen,
+      name: AppRoutes.editIDScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EditIDScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.policyDocumentScreen,
+      name: AppRoutes.policyDocumentScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const PolicyDocumentsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.pdReviewSubmitScreen,
+      name: AppRoutes.pdReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const PDReviewSubmitScreen();
       },
     ),
   ],

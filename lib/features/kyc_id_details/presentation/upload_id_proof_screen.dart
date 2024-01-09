@@ -107,7 +107,7 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
                     disable: false,
                     label: 'Next',
                     onTap: () =>
-                        context.pushNamed(AppRoutes.reviewSubmitScreen),
+                        context.pushNamed(AppRoutes.idReviewSubmitScreen),
                   ),
                 ),
                 SizedBox(height: 50),

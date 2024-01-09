@@ -77,7 +77,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
         onTap: () {
-          context.pushNamed(AppRoutes.uploadIDproofScreen);
+          context.pushNamed(AppRoutes.policyDocumentScreen);
         },
         label: Strings.next,
       ),
