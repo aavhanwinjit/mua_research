@@ -18,6 +18,7 @@ class AppTheme {
         subThemesData: FlexSubThemesData(
           elevatedButtonRadius: 100,
           elevatedButtonSchemeColor: SchemeColor.primary,
+          appBarScrolledUnderElevation: 0,
         ),
         colors: FlexSchemeColor(
           primary: primaryColor,

@@ -13,10 +13,17 @@ class ImageConstants {
   static const String sortIcon = imagePath + '/sort.png';
   static const String lifeInsuranceImage = imagePath + '/life_insurance.png';
   static const String motorInsuranceImage = imagePath + '/motor_insurance.png';
-  static const String nonMotorInsuranceImage =
-      imagePath + '/non_motor_insurance.png';
+  static const String nonMotorInsuranceImage = imagePath + '/non_motor_insurance.png';
+  static const String radioOff = imagePath + '/radio_off.png';
+  static const String radioOn = imagePath + '/radio_on.png';
   static const String cameraImage = "$imagePath/camera.png";
   static const String idImage = '$imagePath/id.png';
+  static const String signatureImage = '$imagePath/signature.png';
+  static const String disabledCameraImage = '$imagePath/disabled_camera.png';
+
+  static const String cameraStencil = imagePath + '/camera_stencil.png';
+  static const String flashIcon = imagePath + '/flash.png';
+  static const String galleryIcon = imagePath + '/gallery.png';
 
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';

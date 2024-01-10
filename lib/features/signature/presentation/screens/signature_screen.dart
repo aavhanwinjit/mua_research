@@ -5,11 +5,9 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
-import 'package:ekyc/widgets/buttons/custom_outline_button.dart';
 import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
@@ -17,8 +15,7 @@ class SignatureScreen extends ConsumerStatefulWidget {
   const SignatureScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _SignatureScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _SignatureScreenState();
 }
 
 class _SignatureScreenState extends ConsumerState<SignatureScreen> {
@@ -93,8 +90,7 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
   }
 
   void _handleSaveButtonPressed() async {
-    final data =
-        await signatureGlobalKey.currentState!.toImage(pixelRatio: 3.0);
+    final data = await signatureGlobalKey.currentState!.toImage(pixelRatio: 3.0);
     final bytes = await data.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List list = bytes!.buffer.asUint8List();
 
