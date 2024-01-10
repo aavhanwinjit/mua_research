@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomPrimaryButton extends StatelessWidget {
   final String label;
-  final VoidCallback? onTap;
+  final VoidCallback onTap;
+  final VoidCallback? disabledOnTap;
   final double? height;
   final double? width;
   final bool? disable;
@@ -12,10 +13,11 @@ class CustomPrimaryButton extends StatelessWidget {
   const CustomPrimaryButton({
     super.key,
     required this.label,
-    this.onTap,
+    required this.onTap,
     this.height,
     this.width,
     this.disable = false,
+    this.disabledOnTap,
   });
 
   @override
@@ -28,7 +30,7 @@ class CustomPrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       color: disable == false ? primaryColor : disabledButtonColor,
-      onPressed: disable == false ? onTap : null,
+      onPressed: disable == false ? onTap : disabledOnTap ?? () {},
       child: Text(
         label,
         style: TextStyle(

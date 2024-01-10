@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
+import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,20 +18,9 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        forceMaterialTransparency: true,
-        title: Text(
-          "Identity/ID details",
-          style: TextStyle(
-            color: black,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-        leading: BackButton(
-          color: black,
-        ),
+      appBar: AppBarHelper.showCustomAppbar(
+        context: context,
+        title: Strings.identityIdDetails,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -53,8 +43,8 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 10,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
                   ),
                   child: Text(
                     "Please specify the type of identification document you are uploading.",
@@ -131,7 +121,8 @@ class _UploadIDdetailsScreenState extends State<UploadIDdetailsScreen> {
         borderType: BorderType.RRect,
         radius: Radius.circular(16),
         child: InkWell(
-          onTap: () => context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen),
+          onTap: () => context.pushNamed(AppRoutes.cameraScreen),
+          // onTap: () => context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen),
           child: Container(
             height: 225.h,
             child: Column(

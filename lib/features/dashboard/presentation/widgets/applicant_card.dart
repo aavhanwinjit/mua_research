@@ -4,7 +4,6 @@ import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ApplicantCard extends StatelessWidget {
   const ApplicantCard({super.key});
