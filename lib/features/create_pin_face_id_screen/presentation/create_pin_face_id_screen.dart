@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
+import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,11 +11,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        backgroundColor: white,
-        elevation: 0,
-        leading: BackButton(),
-      ),
+      appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -32,7 +29,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
               ),
               SizedBox(height: 25),
               Text(
-                "Choose a faster way to log in on this device",
+                Strings.chooseFasterWayToLogIn,
                 style: TextStyle(
                   fontSize: 30.sp,
                   fontWeight: FontWeight.w700,
@@ -41,7 +38,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
               ),
               Spacer(),
               CustomPrimaryButton(
-                label: "Create PIN & Face ID",
+                label: Strings.createPinAndFaceId,
                 disable: false,
                 onTap: () {
                   context.pushNamed(AppRoutes.createPINandFaceIdScreen);
@@ -49,7 +46,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
               ),
               SizedBox(height: 20),
               CustomOutlineButton(
-                label: 'Create PIN Only',
+                label: Strings.createPinOnly,
                 disable: false,
                 primary: true,
                 onTap: () {},

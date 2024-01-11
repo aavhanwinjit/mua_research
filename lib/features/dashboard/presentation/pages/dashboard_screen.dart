@@ -4,13 +4,12 @@ import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/kyc_type_bottomsheet.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
-import 'package:ekyc/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_scrolling_fab_animated/flutter_scrolling_fab_animated.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -146,10 +145,15 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   AppBar _appBar() {
     return AppBar(
       scrolledUnderElevation: 0,
-      title: CustomProfileImageWidget(
-        userName: "Arjun Kumar",
-        size: 32.w,
-        fontSize: 12.sp,
+      title: InkWell(
+        onTap: () {
+          context.pushNamed(AppRoutes.profileScreen);
+        },
+        child: CustomProfileImageWidget(
+          userName: "Arjun Kumar",
+          size: 32.w,
+          fontSize: 12.sp,
+        ),
       ),
       actions: [
         Image.asset(

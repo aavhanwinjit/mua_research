@@ -4,6 +4,7 @@ import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ApplicantCard extends StatelessWidget {
   const ApplicantCard({super.key});
@@ -67,7 +68,7 @@ class ApplicantCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 StatusChip(),
-                _resumeWidget(),
+                _resumeWidget(context),
               ],
             ),
           ),
@@ -98,9 +99,11 @@ class ApplicantCard extends StatelessWidget {
     );
   }
 
-  Widget _resumeWidget() {
+  Widget _resumeWidget(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        context.pushNamed(AppRoutes.insuranceStagesScreen);
+      },
       child: Row(
         children: [
           Text(

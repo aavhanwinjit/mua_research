@@ -25,6 +25,13 @@ class ImageConstants {
   static const String flashIcon = imagePath + '/flash.png';
   static const String galleryIcon = imagePath + '/gallery.png';
 
+  static const String fingerPrintIcon = imagePath + '/finger_print.png';
+  static const String keyIcon = imagePath + '/key.png';
+  static const String callIcon = imagePath + '/call.png';
+  static const String logoutIcon = imagePath + '/logout.png';
+  static const String pageBgImage = imagePath + '/page_bg.png';
+  static const String pdfIcon = imagePath + '/pdf_icon.png';
+
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';
   // static const String svgRightArrow = svgPath + '/right_arrow.svg';

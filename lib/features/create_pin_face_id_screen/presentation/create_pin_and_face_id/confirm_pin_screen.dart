@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,17 +12,12 @@ class ConfirmPINScreen extends StatefulWidget {
 
 class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
   String pin = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        leading: BackButton(
-          color: black,
-        ),
-      ),
+      appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +64,7 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                 );
               }),
             ),
-            SizedBox(height: 40),
+            SizedBox(height: 30),
             pin.length == 6
                 ? Container(
                     color: primaryGreenColor,
@@ -84,7 +80,7 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                       ),
                     ),
                   )
-                : SizedBox(height: 25),
+                : SizedBox(height: 10),
             SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -125,8 +121,7 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                               if (pin.length == 6) {
                                 //navigate
                                 Future.delayed(Duration(seconds: 2), () {
-                                  context.pushNamed(
-                                      AppRoutes.onboardSuccessScreen);
+                                  context.pushNamed(AppRoutes.onboardSuccessScreen);
                                 });
                               }
                             }
