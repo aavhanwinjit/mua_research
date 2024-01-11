@@ -2,24 +2,33 @@ import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_scree
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/confirm_pin_screen.dart';
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
-import 'package:ekyc/features/kyc_id_details/presentation/edit_customer_info_screen.dart';
-import 'package:ekyc/features/kyc_id_details/presentation/edit_id_screen.dart';
-import 'package:ekyc/features/kyc_id_details/presentation/id_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_policy_documents/presentation/pd_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_policy_documents/presentation/policy_documents_screen.dart';
-import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/address_details/address_details_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/address_details/insured_documents_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/camera/camera_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/customer_info_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/id_details/upload_id_proof_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/insurance_stages_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/pages/review_uploaded_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_details_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/document_review/pages/review_uploaded_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/edit_id_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/kyu_submit/pages/kyc_submitted_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/pages/non_motor_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/pages/non_motor_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/pages/pd_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/pages/policy_documents_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
+import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
+import 'package:ekyc/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
 import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -41,8 +50,7 @@ class AppRoutes {
   static const String customerInfoScreen = '/customer_info_screen';
   static const String insuranceStagesScreen = '/insurance_stages_screen';
   static const String uploadIDproofScreen = '/upload_id_proof_screen';
-  static const String confirmUploadOrRetakeScreen =
-      '/confirm_upload_or_retake_screen';
+  static const String confirmUploadOrRetakeScreen = '/confirm_upload_or_retake_screen';
   static const String idReviewSubmitScreen = '/id_review_submit_screen';
   static const String editCustomerInfoScreen = '/edit_customer_info_screen';
   static const String editIDScreen = '/edit_id_screen';
@@ -52,6 +60,15 @@ class AppRoutes {
   static const String cameraScreen = '/camera_screen';
   static const String addressDetailsScreen = '/address_details_screen';
   static const String insuredDocumentScreen = '/insured_document_screen';
+  static const String addressReviewSubmitScreen = '/address_review_submit_screen';
+  static const String additionalDocsScreen = '/additional_docs_screen';
+  static const String additionalDocsReviewSubmitScreen = '/additional_docs_review_submit_screen';
+  static const String motorDocsScreen = '/motor_docs_screen';
+  static const String motorDocsReviewSubmitScreen = '/motor_docs_review_submit_screen';
+  static const String nonMotorDocsScreen = '/non_motor_docs_screen';
+  static const String nonMotorDocsReviewSubmitScreen = '/non_motor_docs_review_submit_screen';
+  static const String profileScreen = '/profile_screen';
+  static const String kycSubmittedScreen = '/kyc_submit_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
@@ -225,6 +242,69 @@ final GoRouter router = GoRouter(
       name: AppRoutes.insuredDocumentScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const InsuredDocumentsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.addressReviewSubmitScreen,
+      name: AppRoutes.addressReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AddressReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.additionalDocsScreen,
+      name: AppRoutes.additionalDocsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AdditionalDocumentsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.additionalDocsReviewSubmitScreen,
+      name: AppRoutes.additionalDocsReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const AdditionalDocsReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.motorDocsScreen,
+      name: AppRoutes.motorDocsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const MotorDocumentScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.motorDocsReviewSubmitScreen,
+      name: AppRoutes.motorDocsReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const MotorDocsReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.nonMotorDocsScreen,
+      name: AppRoutes.nonMotorDocsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const NonMotorDocumentScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.nonMotorDocsReviewSubmitScreen,
+      name: AppRoutes.nonMotorDocsReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const NonMotorDocsReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.profileScreen,
+      name: AppRoutes.profileScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const ProfileScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.kycSubmittedScreen,
+      name: AppRoutes.kycSubmittedScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const KYCSubmittedScreen();
       },
     ),
   ],

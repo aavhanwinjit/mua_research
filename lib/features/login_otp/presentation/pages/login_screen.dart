@@ -4,8 +4,6 @@ import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
-import 'package:ekyc/widgets/custom_text_form_field.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,13 +22,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: GestureDetector(
         onTap: () {
           KeyboardHelper.onScreenTap(context);
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Form(
               key: formKey,
               child: Column(

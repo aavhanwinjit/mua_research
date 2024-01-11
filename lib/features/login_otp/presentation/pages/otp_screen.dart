@@ -5,7 +5,6 @@ import 'package:ekyc/core/utils/extensions/string_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -32,13 +31,14 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     final phoneNumber = ref.watch(phoneNumberProvider);
 
     return SafeArea(
+      top: false,
       child: GestureDetector(
         onTap: () {
           KeyboardHelper.onScreenTap(context);
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(

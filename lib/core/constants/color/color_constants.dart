@@ -35,6 +35,8 @@ Color get lightPurple => Color(0XFFC490F9);
 
 Color get shadowColor => Color(0XFF18274B);
 
+Color get iosSwitchColor => Color(0XFF34C759);
+
 
 // // Gray
 // const MaterialColor greySwatch = MaterialColor(0xFF828282, {

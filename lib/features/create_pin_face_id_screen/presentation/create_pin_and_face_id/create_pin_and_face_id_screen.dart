@@ -1,28 +1,23 @@
-import 'package:flutter/material.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CreatePINandFaceIdScreen extends StatefulWidget {
   const CreatePINandFaceIdScreen({super.key});
 
   @override
-  State<CreatePINandFaceIdScreen> createState() =>
-      _CreatePINandFaceIdScreenState();
+  State<CreatePINandFaceIdScreen> createState() => _CreatePINandFaceIdScreenState();
 }
 
 class _CreatePINandFaceIdScreenState extends State<CreatePINandFaceIdScreen> {
   String pin = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: white,
-        leading: BackButton(
-          color: black,
-        ),
-      ),
+      appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

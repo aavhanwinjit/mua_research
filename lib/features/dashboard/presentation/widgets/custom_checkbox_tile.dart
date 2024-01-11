@@ -6,8 +6,15 @@ class CustomCheckboxTile extends ConsumerWidget {
   final bool value;
   final Function(bool?) onChanged;
   final String title;
+  final double? fontSize;
 
-  const CustomCheckboxTile({required this.value, required this.onChanged, required this.title, super.key});
+  const CustomCheckboxTile({
+    this.fontSize,
+    required this.value,
+    required this.onChanged,
+    required this.title,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,7 +31,7 @@ class CustomCheckboxTile extends ConsumerWidget {
       title: Text(
         title,
         style: TextStyle(
-          fontSize: 14.sp,
+          fontSize: fontSize ?? 14.sp,
           color: value ? black : textGrayColor2,
         ),
       ),

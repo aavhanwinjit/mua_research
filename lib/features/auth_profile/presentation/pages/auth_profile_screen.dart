@@ -1,11 +1,10 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
+import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -22,11 +21,12 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      top: false,
       child: Scaffold(
         backgroundColor: primaryBlueColor,
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.w),
+            padding: EdgeInsets.only(left: 25.w, right: 25.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 SizedBox(height: 40.h),
@@ -155,7 +155,12 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
 
     return InkWell(
       onTap: () {
-        _showActionSheet();
+        ActionSheetHelper.showSignatureSourceActionSheet(
+          context,
+          onPressed: () {
+            pickImage();
+          },
+        );
       },
       child: DottedBorder(
         borderType: BorderType.RRect,
@@ -197,50 +202,50 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
     );
   }
 
-  void _showActionSheet() {
-    showCupertinoModalPopup<void>(
-      context: context,
-      builder: (BuildContext context) => CupertinoActionSheet(
-        cancelButton: CupertinoActionSheetAction(
-          onPressed: () {
-            context.pop();
-          },
-          isDefaultAction: true,
-          child: Text(
-            Strings.cancel,
-            style: TextStyle(
-              color: iosButtonBlueTextColor,
-            ),
-          ),
-        ),
-        actions: <CupertinoActionSheetAction>[
-          CupertinoActionSheetAction(
-            onPressed: () {
-              context.pop();
-              context.pushNamed(AppRoutes.signatureScreen);
-            },
-            child: Text(
-              Strings.digitalSignature,
-              style: TextStyle(
-                color: iosButtonBlueTextColor,
-              ),
-            ),
-          ),
-          CupertinoActionSheetAction(
-            onPressed: () {
-              pickImage();
-            },
-            child: Text(
-              Strings.uploadSignatureImage,
-              style: TextStyle(
-                color: iosButtonBlueTextColor,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showActionSheet() {
+  //   showCupertinoModalPopup<void>(
+  //     context: context,
+  //     builder: (BuildContext context) => CupertinoActionSheet(
+  //       cancelButton: CupertinoActionSheetAction(
+  //         onPressed: () {
+  //           context.pop();
+  //         },
+  //         isDefaultAction: true,
+  //         child: Text(
+  //           Strings.cancel,
+  //           style: TextStyle(
+  //             color: iosButtonBlueTextColor,
+  //           ),
+  //         ),
+  //       ),
+  //       actions: <CupertinoActionSheetAction>[
+  //         CupertinoActionSheetAction(
+  //           onPressed: () {
+  //             context.pop();
+  //             context.pushNamed(AppRoutes.signatureScreen);
+  //           },
+  //           child: Text(
+  //             Strings.digitalSignature,
+  //             style: TextStyle(
+  //               color: iosButtonBlueTextColor,
+  //             ),
+  //           ),
+  //         ),
+  //         CupertinoActionSheetAction(
+  //           onPressed: () {
+  //             pickImage();
+  //           },
+  //           child: Text(
+  //             Strings.uploadSignatureImage,
+  //             style: TextStyle(
+  //               color: iosButtonBlueTextColor,
+  //             ),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void pickImage() async {
     XFile? result = await ImagePicker().pickImage(

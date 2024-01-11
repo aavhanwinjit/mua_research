@@ -1,12 +1,11 @@
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
@@ -23,32 +22,32 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: disabledButtonColor,
-        appBar: _appBar(),
-        bottomNavigationBar: _buttons(),
-        body: _signaturePad(),
-      ),
+    return Scaffold(
+      backgroundColor: disabledButtonColor,
+      appBar: _appBar(),
+      bottomNavigationBar: _buttons(),
+      body: _signaturePad(),
     );
   }
 
   Widget _signaturePad() {
-    return Container(
-      margin: EdgeInsets.all(20.w),
-      decoration: BoxDecoration(
-        boxShadow: CustomShadows.signatureCardShadow,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(
-          8.sp,
+    return SafeArea(
+      child: Container(
+        margin: EdgeInsets.all(20.w),
+        decoration: BoxDecoration(
+          boxShadow: CustomShadows.signatureCardShadow,
         ),
-        child: SfSignaturePad(
-          key: signatureGlobalKey,
-          backgroundColor: Colors.white,
-          strokeColor: Colors.black,
-          minimumStrokeWidth: 4.0,
-          maximumStrokeWidth: 8.0,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(
+            8.sp,
+          ),
+          child: SfSignaturePad(
+            key: signatureGlobalKey,
+            backgroundColor: Colors.white,
+            strokeColor: Colors.black,
+            minimumStrokeWidth: 4.0,
+            maximumStrokeWidth: 8.0,
+          ),
         ),
       ),
     );
@@ -121,6 +120,11 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
           ),
         ),
       ],
+      systemOverlayStyle: SystemUiOverlayStyle(
+        // statusBarColor: Colors.red,
+        statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: Brightness.dark, // For iOS (dark icons)
+      ),
     );
   }
 }

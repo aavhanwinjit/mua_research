@@ -3,7 +3,6 @@ import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/insurance_type_card.dart';
-import 'package:ekyc/widgets/buttons/custom_primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -78,7 +77,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
         disable: ref.watch(kycTypeProvider) == null,
         onTap: () {
           context.pop();
-          context.push(AppRoutes.insuranceStagesScreen);
+          context.push(AppRoutes.customerInfoScreen);
         },
         label: Strings.next,
       ),
