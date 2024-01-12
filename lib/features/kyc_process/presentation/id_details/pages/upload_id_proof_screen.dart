@@ -1,7 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/id_proof_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +11,8 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
   const UploadIDdetailsScreen({super.key});
 
   @override
-  ConsumerState<UploadIDdetailsScreen> createState() => _UploadIDdetailsScreenState();
+  ConsumerState<UploadIDdetailsScreen> createState() =>
+      _UploadIDdetailsScreenState();
 }
 
 class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
@@ -39,7 +40,9 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
                   value: IdProofType.NIC_CARD,
                   groupValue: ref.watch(idProofTypeProvider),
                   onChange: () {
-                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.NIC_CARD);
+                    ref
+                        .watch(idProofTypeProvider.notifier)
+                        .update((state) => IdProofType.NIC_CARD);
                   },
                 ),
                 SizedBox(height: 16.h),
@@ -48,7 +51,9 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
                   value: IdProofType.PASSPORT,
                   groupValue: ref.watch(idProofTypeProvider),
                   onChange: () {
-                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.PASSPORT);
+                    ref
+                        .watch(idProofTypeProvider.notifier)
+                        .update((state) => IdProofType.PASSPORT);
                   },
                 ),
                 SizedBox(height: 24.h),

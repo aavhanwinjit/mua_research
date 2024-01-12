@@ -1,7 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/widgets/customer_info_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_docs_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';

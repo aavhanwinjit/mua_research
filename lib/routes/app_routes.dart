@@ -15,7 +15,7 @@ import 'package:ekyc/features/kyc_process/presentation/document_review/pages/rev
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/kyu_submit/pages/kyc_submitted_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/kyc_submit/pages/kyc_submitted_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_docs_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/pages/non_motor_docs_review_submit_screen.dart';
