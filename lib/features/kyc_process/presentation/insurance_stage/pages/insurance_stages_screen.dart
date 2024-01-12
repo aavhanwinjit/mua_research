@@ -1,7 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/insurance_stage/presentation/widgets/insurance_stage_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/widgets/insurance_stage_card.dart';
 import 'package:ekyc/widgets/buttons/custom_outline_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +10,8 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
   const InsuranceStagesScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => InsuranceStagesScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      InsuranceStagesScreenState();
 }
 
 class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {

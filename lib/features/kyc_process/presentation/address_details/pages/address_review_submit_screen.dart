@@ -1,23 +1,24 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/widgets/customer_info_card.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/widgets/nic_details_card.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/id_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_details_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/provider/address_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
 import 'package:ekyc/widgets/signature_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class IDReviewSubmitScreen extends ConsumerStatefulWidget {
-  const IDReviewSubmitScreen({super.key});
+class AddressReviewSubmitScreen extends ConsumerStatefulWidget {
+  const AddressReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<IDReviewSubmitScreen> createState() =>
+  ConsumerState<AddressReviewSubmitScreen> createState() =>
       _ReviewSubmitScreenState();
 }
 
-class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen> {
+class _ReviewSubmitScreenState
+    extends ConsumerState<AddressReviewSubmitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +40,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen> {
                 SizedBox(height: 24.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: NICDetailsCard(),
+                  child: AddressDetailsCard(),
                 ),
                 SizedBox(height: 24.h),
                 Padding(

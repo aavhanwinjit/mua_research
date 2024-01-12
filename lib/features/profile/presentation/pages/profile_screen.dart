@@ -4,7 +4,7 @@ import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
-import 'package:ekyc/features/profile/presentation/pages/widgets/options_tile.dart';
+import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
