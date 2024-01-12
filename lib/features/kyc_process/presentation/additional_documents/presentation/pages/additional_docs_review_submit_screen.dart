@@ -2,22 +2,22 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/widgets/customer_info_card.dart';
-import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/widgets/motor_docs_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/presentation/widgets/additional_docs_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
 import 'package:ekyc/widgets/signature_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MotorDocsReviewSubmitScreen extends ConsumerStatefulWidget {
-  const MotorDocsReviewSubmitScreen({super.key});
+class AdditionalDocsReviewSubmitScreen extends ConsumerStatefulWidget {
+  const AdditionalDocsReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<MotorDocsReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
+  ConsumerState<AdditionalDocsReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
 }
 
-class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen> {
+class _ReviewSubmitScreenState extends ConsumerState<AdditionalDocsReviewSubmitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +39,7 @@ class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen
                 SizedBox(height: 24.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: MotorDocsCard(),
+                  child: AdditionalDocsCard(),
                 ),
                 SizedBox(height: 24.h),
                 Padding(

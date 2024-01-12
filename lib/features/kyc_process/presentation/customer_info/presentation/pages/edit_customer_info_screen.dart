@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/customer_info_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/edit_customer_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -113,11 +114,89 @@ class _EditConstomerInfoScreenState
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  // RadioListTile.adaptive(value: , groupValue: groupValue, onChanged: onChanged)
-                ],
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomRadioTile(
+                        title: Strings.single,
+                        value: MaritalStatus.SINGLE,
+                        groupValue: ref.watch(maritalStatusProvider),
+                        onChange: () {
+                          ref
+                              .watch(maritalStatusProvider.notifier)
+                              .update((state) => MaritalStatus.SINGLE);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: CustomRadioTile(
+                        title: Strings.married,
+                        value: MaritalStatus.MARRIED,
+                        groupValue: ref.watch(maritalStatusProvider),
+                        onChange: () {
+                          ref
+                              .watch(maritalStatusProvider.notifier)
+                              .update((state) => MaritalStatus.MARRIED);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
+              SizedBox(height: 24.h),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Text(
+                  Strings.whatIsNationality,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.bold,
+                    color: black,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: CustomRadioTile(
+                        title: Strings.mauritian,
+                        value: NationalityType.MAURITIAN,
+                        groupValue: ref.watch(nationalityTypeProvider),
+                        onChange: () {
+                          ref
+                              .watch(nationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.MAURITIAN);
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: CustomRadioTile(
+                        title: Strings.nonMauritian,
+                        value: NationalityType.NON_MAURITIAN,
+                        groupValue: ref.watch(nationalityTypeProvider),
+                        onChange: () {
+                          ref
+                              .watch(nationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.NON_MAURITIAN);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,

@@ -1,7 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/widgets/insurance_stage_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/presentation/widgets/insurance_stage_card.dart';
 import 'package:ekyc/widgets/buttons/custom_outline_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

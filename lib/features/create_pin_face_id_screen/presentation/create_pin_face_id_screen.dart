@@ -31,8 +31,8 @@ class CreatePINFaceIdScreen extends StatelessWidget {
               Text(
                 Strings.chooseFasterWayToLogIn,
                 style: TextStyle(
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.w700,
+                  fontSize: 27.sp,
+                  fontWeight: FontWeight.w800,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -77,7 +77,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
         disable: ref.watch(kycTypeProvider) == null,
         onTap: () {
           context.pop();
-          context.push(AppRoutes.customerInfoScreen);
+          context.push(AppRoutes.insuranceStagesScreen);
         },
         label: Strings.next,
       ),

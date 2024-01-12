@@ -3,26 +3,24 @@ import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
 import 'package:ekyc/features/create_pin_face_id_screen/presentation/create_pin_face_id_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_docs_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_documents_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_details_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/presentation/pages/additional_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/presentation/pages/additional_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/presentation/pages/address_details_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/presentation/pages/address_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/presentation/pages/insured_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/pages/edit_customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/document_review/pages/review_uploaded_document_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/id_details/pages/edit_id_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/pages/id_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/pages/upload_id_proof_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/presentation/pages/insurance_stages_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/kyu_submit/pages/kyc_submitted_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_docs_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_documents_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/pages/non_motor_docs_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/pages/non_motor_document_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/policy_documents/pages/pd_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/policy_documents/pages/policy_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/presentation/pages/motor_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/presentation/pages/motor_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/presentation/pages/non_motor_docs_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/presentation/pages/non_motor_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/presentation/pages/pd_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/presentation/pages/policy_documents_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
@@ -161,13 +159,6 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.customerInfoScreen,
-      name: AppRoutes.customerInfoScreen,
-      builder: (BuildContext context, GoRouterState state) {
-        return const CustomerInfoScreen();
-      },
-    ),
-    GoRoute(
       path: AppRoutes.insuranceStagesScreen,
       name: AppRoutes.insuranceStagesScreen,
       builder: (BuildContext context, GoRouterState state) {
@@ -200,13 +191,6 @@ final GoRouter router = GoRouter(
       name: AppRoutes.editCustomerInfoScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const EditCustomerInfoScreen();
-      },
-    ),
-    GoRoute(
-      path: AppRoutes.editIDScreen,
-      name: AppRoutes.editIDScreen,
-      builder: (BuildContext context, GoRouterState state) {
-        return const EditIDScreen();
       },
     ),
     GoRoute(
