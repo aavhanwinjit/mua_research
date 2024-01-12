@@ -12,8 +12,8 @@ import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_scree
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/document_review/pages/review_uploaded_document_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/id_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/upload_id_proof_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/kyu_submit/pages/kyc_submitted_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/pages/motor_docs_review_submit_screen.dart';
