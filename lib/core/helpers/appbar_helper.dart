@@ -20,21 +20,21 @@ class AppBarHelper {
           fontSize: 20.sp,
         ),
       ),
-      leading: IconButton(
+      leading: BackButton(
         onPressed: onPressed ??
             () {
               context.pop();
             },
-        icon: Icon(
-          backIcon ?? Icons.chevron_left,
-          color: blueBackground == true ? white : black,
-        ),
+        color: blueBackground == true ? white : black,
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         // statusBarColor: Colors.red,
-        statusBarIconBrightness:
-            blueBackground == true ? Brightness.light : Brightness.dark, // For Android (dark icons)
-        statusBarBrightness: blueBackground == true ? Brightness.light : Brightness.dark, // For iOS (dark icons)
+        statusBarIconBrightness: blueBackground == true
+            ? Brightness.light
+            : Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: blueBackground == true
+            ? Brightness.light
+            : Brightness.dark, // For iOS (dark icons)
       ),
     );
   }

@@ -32,7 +32,7 @@ class CustomerInfoCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => context.pushNamed(AppRoutes.customerInfoScreen),
+                  onPressed: () => context.pushNamed(AppRoutes.editCustomerInfoScreen),
                   child: Text(
                     Strings.edit,
                     style: TextStyle(

@@ -2,22 +2,24 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
-import 'package:ekyc/features/kyc_process/presentation/policy_documents/pages/widgets/policy_docs_card.dart';
-import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
-import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/widgets/customer_info_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/presentation/widgets/address_details_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/provider/address_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
 import 'package:ekyc/widgets/signature_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PDReviewSubmitScreen extends ConsumerStatefulWidget {
-  const PDReviewSubmitScreen({super.key});
+class AddressReviewSubmitScreen extends ConsumerStatefulWidget {
+  const AddressReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<PDReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
+  ConsumerState<AddressReviewSubmitScreen> createState() =>
+      _ReviewSubmitScreenState();
 }
 
-class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen> {
+class _ReviewSubmitScreenState
+    extends ConsumerState<AddressReviewSubmitScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen> {
                 SizedBox(height: 24.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: PolicyDocsCard(),
+                  child: AddressDetailsCard(),
                 ),
                 SizedBox(height: 24.h),
                 Padding(
@@ -50,7 +52,9 @@ class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen> {
                 CustomCheckboxTile(
                   value: ref.watch(confirmationProvider),
                   onChanged: (value) {
-                    ref.read(confirmationProvider.notifier).update((state) => value!);
+                    ref
+                        .read(confirmationProvider.notifier)
+                        .update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,
