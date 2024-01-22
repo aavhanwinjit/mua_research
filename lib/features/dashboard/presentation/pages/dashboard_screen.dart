@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';

@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/buttons/custom_outline_icon_button.dart';
 import 'package:flutter/material.dart';

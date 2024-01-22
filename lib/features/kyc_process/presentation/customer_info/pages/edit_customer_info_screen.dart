@@ -8,12 +8,10 @@ class EditCustomerInfoScreen extends ConsumerStatefulWidget {
   const EditCustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EditConstomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditConstomerInfoScreenState();
 }
 
-class _EditConstomerInfoScreenState
-    extends ConsumerState<EditCustomerInfoScreen> {
+class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,9 +125,7 @@ class _EditConstomerInfoScreenState
                         value: MaritalStatus.SINGLE,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref
-                              .watch(maritalStatusProvider.notifier)
-                              .update((state) => MaritalStatus.SINGLE);
+                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
                         },
                       ),
                     ),
@@ -139,9 +135,7 @@ class _EditConstomerInfoScreenState
                         value: MaritalStatus.MARRIED,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref
-                              .watch(maritalStatusProvider.notifier)
-                              .update((state) => MaritalStatus.MARRIED);
+                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
                         },
                       ),
                     ),
@@ -175,9 +169,7 @@ class _EditConstomerInfoScreenState
                         value: NationalityType.MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.MAURITIAN);
+                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
                         },
                       ),
                     ),
@@ -187,9 +179,7 @@ class _EditConstomerInfoScreenState
                         value: NationalityType.NON_MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.NON_MAURITIAN);
+                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.NON_MAURITIAN);
                         },
                       ),
                     ),

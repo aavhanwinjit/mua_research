@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';

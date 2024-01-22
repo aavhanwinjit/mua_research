@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
