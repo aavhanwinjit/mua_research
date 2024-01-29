@@ -11,8 +11,7 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
   const UploadIDdetailsScreen({super.key});
 
   @override
-  ConsumerState<UploadIDdetailsScreen> createState() =>
-      _UploadIDdetailsScreenState();
+  ConsumerState<UploadIDdetailsScreen> createState() => _UploadIDdetailsScreenState();
 }
 
 class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
@@ -40,9 +39,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
                   value: IdProofType.NIC_CARD,
                   groupValue: ref.watch(idProofTypeProvider),
                   onChange: () {
-                    ref
-                        .watch(idProofTypeProvider.notifier)
-                        .update((state) => IdProofType.NIC_CARD);
+                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.NIC_CARD);
                   },
                 ),
                 SizedBox(height: 16.h),
@@ -51,19 +48,17 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
                   value: IdProofType.PASSPORT,
                   groupValue: ref.watch(idProofTypeProvider),
                   onChange: () {
-                    ref
-                        .watch(idProofTypeProvider.notifier)
-                        .update((state) => IdProofType.PASSPORT);
+                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.PASSPORT);
                   },
                 ),
                 SizedBox(height: 24.h),
-                DocumentUploadContainer(
+                const DocumentUploadContainer(
                   label: Strings.idDocumentFrontContainerLabel,
                   cameraScreenDescription: Strings.idDocumentFrontCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,
                 ),
                 SizedBox(height: 24.h),
-                DocumentUploadContainer(
+                const DocumentUploadContainer(
                   label: Strings.idDocumentBackContainerLabel,
                   cameraScreenDescription: Strings.idDocumentBackCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,

@@ -70,7 +70,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
               onChanged: (bool? value) {},
             ),
           ),
-          Divider(
+          const Divider(
             height: 0,
             color: borderColor,
           ),
@@ -78,13 +78,13 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             icon: ImageConstants.keyIcon,
             title: Strings.changePin,
             subtitle: Strings.resetAppPin,
-            trailing: Icon(
+            trailing: const Icon(
               Icons.chevron_right,
               color: textGrayColor2,
             ),
             onTap: () {},
           ),
-          Divider(
+          const Divider(
             height: 0,
             color: borderColor,
           ),
@@ -92,13 +92,13 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             icon: ImageConstants.callIcon,
             title: Strings.contactUs,
             subtitle: Strings.faq,
-            trailing: Icon(
+            trailing: const Icon(
               Icons.chevron_right,
               color: textGrayColor2,
             ),
             onTap: () {},
           ),
-          Divider(
+          const Divider(
             height: 0,
             color: borderColor,
           ),
@@ -176,7 +176,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
               onTap: () {
                 _changeSignature();
               },
-              child: Icon(
+              child: const Icon(
                 Icons.chevron_right,
                 color: textGrayColor2,
               ),
@@ -186,9 +186,9 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
         SizedBox(height: 8.h),
         DottedBorder(
           color: borderColor,
-          radius: Radius.circular(7),
+          radius: const Radius.circular(7),
           borderType: BorderType.RRect,
-          dashPattern: <double>[8, 4],
+          dashPattern: const <double>[8, 4],
           child: Center(
             child: Image.asset(
               ImageConstants.signatureImage,
@@ -273,7 +273,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             fontSize: 14.sp,
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           value,
           style: TextStyle(
@@ -322,7 +322,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
               ],
             ),
           ),
-          Icon(Icons.chevron_right),
+          const Icon(Icons.chevron_right),
         ],
       ),
     );

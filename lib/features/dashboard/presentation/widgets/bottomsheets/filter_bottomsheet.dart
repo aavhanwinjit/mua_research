@@ -122,7 +122,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
             onPressed: () {
               context.pop();
             },
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
           ),
         ],
       ),

@@ -48,7 +48,7 @@ class AddressDetailsCard extends StatelessWidget {
           SizedBox(height: 24.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Divider(
+            child: const Divider(
               height: 0,
               color: borderColor,
             ),
@@ -81,7 +81,7 @@ class AddressDetailsCard extends StatelessWidget {
   Widget _infoWidget() {
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -119,7 +119,7 @@ class AddressDetailsCard extends StatelessWidget {
   Widget _infoWidget2() {
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w),
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -155,11 +155,11 @@ class AddressDetailsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             Strings.nicCard,
             style: TextStyle(color: textGrayColor2),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           _imageWidget(),
         ],
       ),
@@ -172,11 +172,11 @@ class AddressDetailsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             Strings.nicCard,
             style: TextStyle(color: textGrayColor2),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             children: [
               _imageWidget(),

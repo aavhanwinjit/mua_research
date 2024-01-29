@@ -19,10 +19,10 @@ class KYCSubmittedScreen extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                Spacer(),
+                const Spacer(),
                 _titleWidget(),
                 _cardWidget(),
-                Spacer(),
+                const Spacer(),
                 _noteWidget(),
                 SizedBox(height: 40.h),
                 _buttons(context),
@@ -140,11 +140,11 @@ class KYCSubmittedScreen extends StatelessWidget {
         Container(
           height: 90.h,
           width: 90.h,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             shape: BoxShape.circle,
             color: primaryColor,
           ),
-          child: Center(
+          child: const Center(
             child: Icon(
               Icons.check_rounded,
               color: white,
@@ -152,7 +152,7 @@ class KYCSubmittedScreen extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
           Strings.kycSubmittedSuccessfully,
           textAlign: TextAlign.center,

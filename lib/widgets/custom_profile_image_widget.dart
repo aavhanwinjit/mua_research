@@ -42,7 +42,7 @@ class CustomProfileImageWidget extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(borderRadius!),
               ),
-              child: Center(
+              child: const Center(
                 child: SpinKitChasingDots(
                   color: primaryColor,
                   size: 28,

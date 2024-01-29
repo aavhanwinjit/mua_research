@@ -22,7 +22,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
           padding: EdgeInsets.all(20.w),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -41,12 +41,12 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 32.h),
-              Text(
+              const Text(
                 Strings.makeSureDocsClear,
                 style: TextStyle(),
                 textAlign: TextAlign.center,
               ),
-              Spacer(),
+              const Spacer(),
               CustomPrimaryButton(
                 disable: false,
                 label: Strings.upload,

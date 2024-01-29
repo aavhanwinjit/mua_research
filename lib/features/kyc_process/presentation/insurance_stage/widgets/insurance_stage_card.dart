@@ -63,7 +63,7 @@ class InsuranceStageCard extends StatelessWidget {
             fontSize: 12.sp,
           ),
         ),
-        Icon(
+        const Icon(
           Icons.chevron_right,
           color: primaryColor,
         ),

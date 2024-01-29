@@ -41,7 +41,7 @@ class CustomOutlineIconButton extends StatelessWidget {
             AssetImage(iconString),
             color: primaryColor,
           ),
-          SizedBox(width: 5),
+          const SizedBox(width: 5),
           Text(
             label,
             style: TextStyle(

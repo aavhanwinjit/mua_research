@@ -29,19 +29,19 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
               children: [
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.LIFE_INSURANCE,
                   title: Strings.lifeInsurance,
                   imagePath: ImageConstants.lifeInsuranceImage,
                 ),
                 SizedBox(width: 12.w),
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.MOTOR_INSURANCE,
                   title: Strings.motorInsurance,
                   imagePath: ImageConstants.motorInsuranceImage,
                 ),
                 SizedBox(width: 12.w),
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.NON_MOTOR_INSURANCE,
                   title: Strings.nonMotorInsurance,
                   imagePath: ImageConstants.nonMotorInsuranceImage,
@@ -101,7 +101,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
             onPressed: () {
               context.pop();
             },
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
           ),
         ],
       ),

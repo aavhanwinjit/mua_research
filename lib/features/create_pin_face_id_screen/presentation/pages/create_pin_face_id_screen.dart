@@ -20,13 +20,13 @@ class CreatePINFaceIdScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               Image.asset(
                 ImageConstants.pinFaceIdImage,
                 width: double.infinity,
                 height: 150.h,
               ),
-              SizedBox(height: 25),
+              const SizedBox(height: 25),
               Text(
                 Strings.chooseFasterWayToLogIn,
                 style: TextStyle(
@@ -35,7 +35,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
-              Spacer(),
+              const Spacer(),
               CustomPrimaryButton(
                 label: Strings.createPinAndFaceId,
                 disable: false,
@@ -43,14 +43,14 @@ class CreatePINFaceIdScreen extends StatelessWidget {
                   context.pushNamed(AppRoutes.createPINandFaceIdScreen);
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CustomOutlineButton(
                 label: Strings.createPinOnly,
                 disable: false,
                 primary: true,
                 onTap: () {},
               ),
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
             ],
           ),
         ),

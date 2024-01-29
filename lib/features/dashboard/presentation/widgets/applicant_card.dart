@@ -57,7 +57,7 @@ class ApplicantCard extends StatelessWidget {
               ],
             ),
           ),
-          Divider(
+          const Divider(
             height: 0,
             color: borderColor,
           ),
@@ -66,7 +66,7 @@ class ApplicantCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                StatusChip(),
+                const StatusChip(),
                 _resumeWidget(context),
               ],
             ),
@@ -113,7 +113,7 @@ class ApplicantCard extends StatelessWidget {
               fontSize: 12.sp,
             ),
           ),
-          Icon(
+          const Icon(
             Icons.chevron_right,
             color: primaryColor,
           ),

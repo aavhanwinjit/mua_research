@@ -48,7 +48,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  DocumentUploadContainer(
+                  const DocumentUploadContainer(
                     label: Strings.policyDocumentContainerLabel,
                     cameraScreenDescription: Strings.policyDocCameraLabel,
                     reviewScreenTitle: Strings.policyDocuments,

@@ -55,7 +55,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  DocumentUploadContainer(
+                  const DocumentUploadContainer(
                     label: Strings.nonMotorDocsContainerLabel,
                     cameraScreenDescription: Strings.nonMotorDocCameraLabel,
                     reviewScreenTitle: Strings.nonMotorDocuments,

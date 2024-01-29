@@ -14,12 +14,12 @@ class AppTheme {
         appBarBackground: transparent,
         appBarElevation: 0,
         scaffoldBackground: white,
-        subThemesData: FlexSubThemesData(
+        subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 100,
           elevatedButtonSchemeColor: SchemeColor.primary,
           appBarScrolledUnderElevation: 0,
         ),
-        colors: FlexSchemeColor(
+        colors: const FlexSchemeColor(
           primary: primaryColor,
           secondary: primaryBlueColor,
           appBarColor: white,

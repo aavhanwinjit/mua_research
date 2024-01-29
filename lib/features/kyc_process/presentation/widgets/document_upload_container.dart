@@ -25,7 +25,7 @@ class DocumentUploadContainer extends ConsumerWidget {
       strokeWidth: 1,
       dashPattern: const <double>[5, 4],
       borderType: BorderType.RRect,
-      radius: Radius.circular(16),
+      radius: const Radius.circular(16),
       child: InkWell(
         onTap: () {
           ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
@@ -33,7 +33,7 @@ class DocumentUploadContainer extends ConsumerWidget {
 
           context.pushNamed(AppRoutes.cameraScreen);
         },
-        child: Container(
+        child: SizedBox(
           height: 157.h,
           width: double.infinity,
           child: Column(
@@ -43,7 +43,7 @@ class DocumentUploadContainer extends ConsumerWidget {
               Image.asset(
                 ImageConstants.cameraImage,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 label,
                 textAlign: TextAlign.center,

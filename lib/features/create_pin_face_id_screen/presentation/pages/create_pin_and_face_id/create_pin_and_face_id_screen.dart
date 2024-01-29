@@ -34,9 +34,9 @@ class _CreatePINandFaceIdScreenState extends State<CreatePINandFaceIdScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Text(
@@ -44,7 +44,7 @@ class _CreatePINandFaceIdScreenState extends State<CreatePINandFaceIdScreen> {
                 style: TextStyle(),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(6, (index) {
@@ -64,7 +64,7 @@ class _CreatePINandFaceIdScreenState extends State<CreatePINandFaceIdScreen> {
                 );
               }),
             ),
-            SizedBox(height: 80),
+            const SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -100,7 +100,7 @@ class _CreatePINandFaceIdScreenState extends State<CreatePINandFaceIdScreen> {
                                   pin += "0";
                                 });
                               }
-                              print(pin);
+                              debugPrint(pin);
                               if (pin.length == 6) {
                                 //navigate
                                 context.pushNamed(AppRoutes.confirmPINScreen);

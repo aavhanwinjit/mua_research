@@ -99,13 +99,13 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
           SizedBox(height: 15.h),
           _nameImageWidget(),
           SizedBox(height: 15.h),
-          InfoWidget(title: Strings.email, value: "arjun@maubank.mu"),
+          const InfoWidget(title: Strings.email, value: "arjun@maubank.mu"),
           SizedBox(height: 16.h),
-          InfoWidget(title: Strings.mobileNo, value: "+230 5 123 4567"),
+          const InfoWidget(title: Strings.mobileNo, value: "+230 5 123 4567"),
           SizedBox(height: 16.h),
-          InfoWidget(title: Strings.address, value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius"),
+          const InfoWidget(title: Strings.address, value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius"),
           SizedBox(height: 16.h),
-          InfoWidget(title: Strings.companyName, value: "Mauritius Union Assurance Cy Ltd"),
+          const InfoWidget(title: Strings.companyName, value: "Mauritius Union Assurance Cy Ltd"),
           SizedBox(height: 24.h),
           _signatureBox(),
           SizedBox(height: 24.h),
@@ -164,12 +164,12 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
       child: DottedBorder(
         borderType: BorderType.RRect,
         color: primaryBlueColor,
-        radius: Radius.circular(12),
-        dashPattern: [8, 4],
+        radius: const Radius.circular(12),
+        dashPattern: const [8, 4],
         strokeWidth: 1,
         child: ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-          child: Container(
+          borderRadius: const BorderRadius.all(Radius.circular(12)),
+          child: SizedBox(
             height: 100.h,
             width: double.infinity,
             child: Center(
@@ -186,7 +186,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                         color: primaryBlueColor.withOpacity(0.16),
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: Text(
+                      child: const Text(
                         Strings.addSignature,
                         style: TextStyle(
                           color: primaryBlueColor,

@@ -67,21 +67,21 @@ class CustomTextFormField extends StatelessWidget {
         fillColor: white,
         filled: true,
         prefixText: prefixText,
-        prefixStyle: TextStyle(
+        prefixStyle: const TextStyle(
           color: black,
         ),
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         counterText: "",
         hintText: hint,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: textGrayColor,
         ),
         labelText: label,
-        labelStyle: TextStyle(
+        labelStyle: const TextStyle(
           color: textGrayColor,
         ),
-        floatingLabelStyle: TextStyle(
+        floatingLabelStyle: const TextStyle(
           color: textGrayColor,
         ),
         floatingLabelBehavior: floatingLabelBehavior,

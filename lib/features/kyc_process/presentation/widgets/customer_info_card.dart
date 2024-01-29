@@ -45,7 +45,7 @@ class CustomerInfoCard extends StatelessWidget {
           //information
           Padding(
             padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h, top: 20),
-            child: Row(
+            child: const Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(

@@ -15,7 +15,7 @@ class ActionSheetHelper {
             context.pop();
           },
           isDefaultAction: true,
-          child: Text(
+          child: const Text(
             Strings.cancel,
             style: TextStyle(
               color: iosButtonBlueTextColor,
@@ -28,7 +28,7 @@ class ActionSheetHelper {
               context.pop();
               context.pushNamed(AppRoutes.signatureScreen);
             },
-            child: Text(
+            child: const Text(
               Strings.digitalSignature,
               style: TextStyle(
                 color: iosButtonBlueTextColor,
@@ -37,7 +37,7 @@ class ActionSheetHelper {
           ),
           CupertinoActionSheetAction(
             onPressed: onPressed,
-            child: Text(
+            child: const Text(
               Strings.uploadSignatureImage,
               style: TextStyle(
                 color: iosButtonBlueTextColor,
@@ -62,7 +62,7 @@ class ActionSheetHelper {
             context.pop();
           },
           isDefaultAction: true,
-          child: Text(
+          child: const Text(
             Strings.cancel,
             style: TextStyle(
               color: iosButtonBlueTextColor,
@@ -72,7 +72,7 @@ class ActionSheetHelper {
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
             onPressed: onCameraPressed,
-            child: Text(
+            child: const Text(
               Strings.takePhotoFromCamera,
               style: TextStyle(
                 color: iosButtonBlueTextColor,
@@ -81,7 +81,7 @@ class ActionSheetHelper {
           ),
           CupertinoActionSheetAction(
             onPressed: onLibraryPressed,
-            child: Text(
+            child: const Text(
               Strings.uploadFromLibrary,
               style: TextStyle(
                 color: iosButtonBlueTextColor,

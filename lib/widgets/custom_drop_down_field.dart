@@ -35,7 +35,7 @@ class CustomDrowDownField extends StatelessWidget {
           filled: true,
           fillColor: white,
           labelText: labelText,
-          labelStyle: TextStyle(
+          labelStyle: const TextStyle(
             color: textGrayColor,
           ),
           border: CustomBorderStyle.customTextFieldBorder,

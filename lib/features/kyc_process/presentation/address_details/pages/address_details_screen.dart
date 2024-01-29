@@ -47,7 +47,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  DocumentUploadContainer(
+                  const DocumentUploadContainer(
                     label: Strings.addressDocumentContainerLabel,
                     cameraScreenDescription: Strings.addressDocCameraLabel,
                     reviewScreenTitle: Strings.addressDetails,

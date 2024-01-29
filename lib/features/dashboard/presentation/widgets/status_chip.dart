@@ -12,7 +12,7 @@ class StatusChip extends StatelessWidget {
         color: lightYellow,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(

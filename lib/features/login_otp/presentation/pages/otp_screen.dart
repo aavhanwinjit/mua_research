@@ -46,7 +46,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                     children: [
                       Text(
                         phoneNumber.maskMobileNumber(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           color: black,
                         ),

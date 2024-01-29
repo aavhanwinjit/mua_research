@@ -38,7 +38,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<AdditionalDocumentsScree
                   SizedBox(height: 8.h),
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  DocumentUploadContainer(
+                  const DocumentUploadContainer(
                     label: Strings.additionalDocsContainerLabel,
                     cameraScreenDescription: Strings.additionalDocCameraLabel,
                     reviewScreenTitle: Strings.additionalDocuments,
