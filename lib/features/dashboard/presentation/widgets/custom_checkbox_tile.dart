@@ -24,7 +24,7 @@ class CustomCheckboxTile extends ConsumerWidget {
       activeColor: primaryBlueColor,
       checkboxShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
-        side: BorderSide(
+        side: const BorderSide(
           color: textGrayColor,
         ),
       ),

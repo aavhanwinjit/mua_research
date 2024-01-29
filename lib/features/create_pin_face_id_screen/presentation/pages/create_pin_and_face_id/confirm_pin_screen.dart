@@ -34,9 +34,9 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.symmetric(
+            const SizedBox(height: 10),
+            const Padding(
+              padding: EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Text(
@@ -44,7 +44,7 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                 style: TextStyle(),
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(6, (index) {
@@ -64,14 +64,14 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                 );
               }),
             ),
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
             pin.length == 6
                 ? Container(
                     color: primaryGreenColor,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 10,
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         "PIN successfully set. Your account is now secured.",
                         style: TextStyle(
@@ -80,8 +80,8 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                       ),
                     ),
                   )
-                : SizedBox(height: 10),
-            SizedBox(height: 10),
+                : const SizedBox(height: 10),
+            const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -117,10 +117,10 @@ class _ConfirmPINScreenState extends State<ConfirmPINScreen> {
                                   pin += "0";
                                 });
                               }
-                              print(pin);
+                              debugPrint(pin);
                               if (pin.length == 6) {
                                 //navigate
-                                Future.delayed(Duration(seconds: 2), () {
+                                Future.delayed(const Duration(seconds: 2), () {
                                   context.pushNamed(AppRoutes.onboardSuccessScreen);
                                 });
                               }

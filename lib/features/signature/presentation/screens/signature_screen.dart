@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:flutter/material.dart';
@@ -114,13 +113,13 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
           onPressed: () {
             context.pop();
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.close,
             color: black,
           ),
         ),
       ],
-      systemOverlayStyle: SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         // statusBarColor: Colors.red,
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)

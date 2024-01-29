@@ -5,7 +5,7 @@ class CustomShadows {
   static final List<BoxShadow> signatureCardShadow = [
     BoxShadow(
       color: shadowColor.withOpacity(0.12),
-      offset: Offset(0, 8),
+      offset: const Offset(0, 8),
       blurRadius: 8,
       spreadRadius: -4,
     ),
@@ -14,7 +14,7 @@ class CustomShadows {
   static final List<BoxShadow> applicantCardShadow = [
     BoxShadow(
       color: shadowColor.withOpacity(0.12),
-      offset: Offset(0, 2),
+      offset: const Offset(0, 2),
       blurRadius: 4,
       spreadRadius: -2,
     ),
@@ -23,13 +23,13 @@ class CustomShadows {
   static final List<BoxShadow> kycSubmitCardShadow = [
     BoxShadow(
       color: shadowColor.withOpacity(0.12),
-      offset: Offset(0, 14),
+      offset: const Offset(0, 14),
       blurRadius: 64,
       spreadRadius: -4,
     ),
     BoxShadow(
       color: shadowColor.withOpacity(0.12),
-      offset: Offset(0, 8),
+      offset: const Offset(0, 8),
       blurRadius: 22,
       spreadRadius: -6,
     ),

@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
@@ -47,7 +46,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                     children: [
                       Text(
                         phoneNumber.maskMobileNumber(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.w700,
                           color: black,
                         ),

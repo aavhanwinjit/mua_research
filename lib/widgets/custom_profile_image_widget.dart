@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -43,7 +42,7 @@ class CustomProfileImageWidget extends StatelessWidget {
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(borderRadius!),
               ),
-              child: Center(
+              child: const Center(
                 child: SpinKitChasingDots(
                   color: primaryColor,
                   size: 28,

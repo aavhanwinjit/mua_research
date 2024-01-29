@@ -1,6 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/insurance_type_card.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +10,7 @@ class KYCTypeBottomsheet extends ConsumerStatefulWidget {
   const KYCTypeBottomsheet({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _FilterBottomsheetState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _FilterBottomsheetState();
 }
 
 class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
@@ -31,19 +29,19 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
               children: [
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.LIFE_INSURANCE,
                   title: Strings.lifeInsurance,
                   imagePath: ImageConstants.lifeInsuranceImage,
                 ),
                 SizedBox(width: 12.w),
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.MOTOR_INSURANCE,
                   title: Strings.motorInsurance,
                   imagePath: ImageConstants.motorInsuranceImage,
                 ),
                 SizedBox(width: 12.w),
-                InsuranceTypeCard(
+                const InsuranceTypeCard(
                   valueType: KYCType.NON_MOTOR_INSURANCE,
                   title: Strings.nonMotorInsurance,
                   imagePath: ImageConstants.nonMotorInsuranceImage,
@@ -103,7 +101,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
             onPressed: () {
               context.pop();
             },
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
           ),
         ],
       ),

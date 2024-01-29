@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 
 class AdditionalDocsCard extends StatelessWidget {
@@ -48,11 +47,11 @@ class AdditionalDocsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             Strings.otherKYCDocs,
             style: TextStyle(color: textGrayColor2),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           _imageWidget(),
         ],
       ),

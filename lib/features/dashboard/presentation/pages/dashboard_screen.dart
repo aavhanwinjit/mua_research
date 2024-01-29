@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
@@ -19,8 +18,8 @@ class DashboardScreen extends ConsumerStatefulWidget {
 }
 
 class _DashboardScreenState extends ConsumerState<DashboardScreen> {
-  ScrollController _scrollController = ScrollController();
-  bool _listEmpty = false;
+  final ScrollController _scrollController = ScrollController();
+  final bool _listEmpty = false;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +57,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         controller: _scrollController,
         padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
         itemBuilder: (context, index) {
-          return ApplicantCard();
+          return const ApplicantCard();
         },
         separatorBuilder: (context, index) => SizedBox(height: 16.h),
         itemCount: 10,
@@ -83,11 +82,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           SizedBox(height: 16.h),
           Row(
             children: [
-              Expanded(
+              const Expanded(
                 child: CustomTextFormField(
                   label: Strings.searchApplicants,
                   suffixIcon: Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(15.0),
                     child: ImageIcon(
                       AssetImage(ImageConstants.searchIcon),
                       color: iconColor,
@@ -97,7 +96,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
               ),
               IconButton(
                 onPressed: showFilterBottomSheet,
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage(ImageConstants.sortIcon),
                   color: iconColor,
                 ),
@@ -112,7 +111,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   Widget _fab() {
     return ScrollingFabAnimated(
       width: 170,
-      icon: Icon(
+      icon: const Icon(
         Icons.add,
         color: Colors.white,
       ),
@@ -162,7 +161,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ),
         SizedBox(width: 20.w),
       ],
-      systemOverlayStyle: SystemUiOverlayStyle(
+      systemOverlayStyle: const SystemUiOverlayStyle(
         // statusBarColor: Colors.red,
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
@@ -182,7 +181,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ),
       ),
       builder: (builder) {
-        return FilterBottomsheet();
+        return const FilterBottomsheet();
       },
     );
   }
@@ -199,7 +198,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
         ),
       ),
       builder: (builder) {
-        return KYCTypeBottomsheet();
+        return const KYCTypeBottomsheet();
       },
     );
   }

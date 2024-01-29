@@ -8,21 +8,19 @@ class EditCustomerInfoScreen extends ConsumerStatefulWidget {
   const EditCustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EditConstomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditConstomerInfoScreenState();
 }
 
-class _EditConstomerInfoScreenState
-    extends ConsumerState<EditCustomerInfoScreen> {
+class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
-        leading: BackButton(
+        leading: const BackButton(
           color: black,
         ),
-        title: Text(
+        title: const Text(
           "Edit Customer Information",
           style: TextStyle(
             color: black,
@@ -35,8 +33,8 @@ class _EditConstomerInfoScreenState
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
+              const Padding(
+                padding: EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
                 ),
@@ -69,7 +67,7 @@ class _EditConstomerInfoScreenState
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -92,7 +90,7 @@ class _EditConstomerInfoScreenState
                   ),
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -102,9 +100,9 @@ class _EditConstomerInfoScreenState
                   label: 'Contact No',
                 ),
               ),
-              SizedBox(height: 20),
-              Padding(
-                padding: const EdgeInsets.symmetric(
+              const SizedBox(height: 20),
+              const Padding(
+                padding: EdgeInsets.symmetric(
                   horizontal: 20,
                 ),
                 child: Text(
@@ -114,7 +112,7 @@ class _EditConstomerInfoScreenState
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -127,9 +125,7 @@ class _EditConstomerInfoScreenState
                         value: MaritalStatus.SINGLE,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref
-                              .watch(maritalStatusProvider.notifier)
-                              .update((state) => MaritalStatus.SINGLE);
+                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
                         },
                       ),
                     ),
@@ -139,9 +135,7 @@ class _EditConstomerInfoScreenState
                         value: MaritalStatus.MARRIED,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref
-                              .watch(maritalStatusProvider.notifier)
-                              .update((state) => MaritalStatus.MARRIED);
+                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
                         },
                       ),
                     ),
@@ -162,7 +156,7 @@ class _EditConstomerInfoScreenState
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -175,9 +169,7 @@ class _EditConstomerInfoScreenState
                         value: NationalityType.MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.MAURITIAN);
+                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
                         },
                       ),
                     ),
@@ -187,16 +179,14 @@ class _EditConstomerInfoScreenState
                         value: NationalityType.NON_MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.NON_MAURITIAN);
+                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.NON_MAURITIAN);
                         },
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,

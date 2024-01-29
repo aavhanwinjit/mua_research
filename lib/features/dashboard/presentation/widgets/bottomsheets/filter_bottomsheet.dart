@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/filter_status_provider.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:flutter/material.dart';
@@ -123,7 +122,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
             onPressed: () {
               context.pop();
             },
-            icon: Icon(Icons.close),
+            icon: const Icon(Icons.close),
           ),
         ],
       ),

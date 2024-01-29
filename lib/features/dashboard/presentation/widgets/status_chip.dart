@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 
 class StatusChip extends StatelessWidget {
@@ -13,7 +12,7 @@ class StatusChip extends StatelessWidget {
         color: lightYellow,
         borderRadius: BorderRadius.circular(100),
       ),
-      child: Row(
+      child: const Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(

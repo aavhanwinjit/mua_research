@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 
 class AddDocumentButton extends StatelessWidget {
@@ -12,7 +11,7 @@ class AddDocumentButton extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: TextButton.icon(
         onPressed: onPressed,
-        icon: Icon(Icons.add),
+        icon: const Icon(Icons.add),
         label: Text(
           Strings.addMoreDocuments,
           style: TextStyle(

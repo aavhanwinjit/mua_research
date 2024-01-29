@@ -7,16 +7,19 @@ import 'core/app_export.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -25,14 +28,14 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           title: 'MUA KYC',
           debugShowCheckedModeBanner: false,
-          localizationsDelegates: [
+          localizationsDelegates: const [
             AppLocalizationDelegate(),
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
           theme: AppTheme.lightTheme,
-          supportedLocales: [
+          supportedLocales: const [
             Locale(
               'en',
               '',

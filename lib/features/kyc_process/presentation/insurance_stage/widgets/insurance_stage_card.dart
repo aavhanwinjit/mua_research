@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 
 class InsuranceStageCard extends StatelessWidget {
@@ -64,7 +63,7 @@ class InsuranceStageCard extends StatelessWidget {
             fontSize: 12.sp,
           ),
         ),
-        Icon(
+        const Icon(
           Icons.chevron_right,
           color: primaryColor,
         ),

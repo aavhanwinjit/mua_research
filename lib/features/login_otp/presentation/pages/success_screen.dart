@@ -1,10 +1,9 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class SuccessScreen extends StatelessWidget {
-  const SuccessScreen({Key? key}) : super(key: key);
+  const SuccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,7 @@ class SuccessScreen extends StatelessWidget {
               SizedBox(
                 height: 15.h,
                 width: 15.h,
-                child: CircularProgressIndicator(
+                child: const CircularProgressIndicator(
                   color: Colors.white,
                   strokeWidth: 2,
                 ),
@@ -57,7 +56,7 @@ class SuccessScreen extends StatelessWidget {
   }
 
   void _navigateToAuthProfileScreen(BuildContext context) {
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       context.push(AppRoutes.authProfileScreen);
     });
   }

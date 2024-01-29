@@ -1,10 +1,9 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class FailureScreen extends StatelessWidget {
-  const FailureScreen({Key? key}) : super(key: key);
+  const FailureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class FailureScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Spacer(),
+          const Spacer(),
           Image.asset(ImageConstants.failureImage),
           SizedBox(height: 36.h),
           Text(
@@ -34,7 +33,7 @@ class FailureScreen extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 37.w),
             child: CustomPrimaryButton(

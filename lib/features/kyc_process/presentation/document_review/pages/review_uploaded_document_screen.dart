@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/document_review/providers/review_uploaded_doc_provider.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +22,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
           padding: EdgeInsets.all(20.w),
           child: Column(
             children: [
-              Spacer(),
+              const Spacer(),
               Container(
                 decoration: BoxDecoration(
                   border: Border.all(
@@ -42,12 +41,12 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 32.h),
-              Text(
+              const Text(
                 Strings.makeSureDocsClear,
                 style: TextStyle(),
                 textAlign: TextAlign.center,
               ),
-              Spacer(),
+              const Spacer(),
               CustomPrimaryButton(
                 disable: false,
                 label: Strings.upload,

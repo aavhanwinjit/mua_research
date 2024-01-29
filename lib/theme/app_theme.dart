@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 
@@ -15,12 +14,12 @@ class AppTheme {
         appBarBackground: transparent,
         appBarElevation: 0,
         scaffoldBackground: white,
-        subThemesData: FlexSubThemesData(
+        subThemesData: const FlexSubThemesData(
           elevatedButtonRadius: 100,
           elevatedButtonSchemeColor: SchemeColor.primary,
           appBarScrolledUnderElevation: 0,
         ),
-        colors: FlexSchemeColor(
+        colors: const FlexSchemeColor(
           primary: primaryColor,
           secondary: primaryBlueColor,
           appBarColor: white,

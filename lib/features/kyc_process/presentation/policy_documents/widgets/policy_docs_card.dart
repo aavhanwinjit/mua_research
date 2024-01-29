@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:flutter/material.dart';
 
 class PolicyDocsCard extends StatelessWidget {
@@ -58,11 +57,11 @@ class PolicyDocsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             Strings.nicCard,
             style: TextStyle(color: textGrayColor2),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           _imageWidget(),
         ],
       ),

@@ -46,11 +46,11 @@ class InsuranceTypeCard extends ConsumerWidget {
                     height: 27.h,
                   ),
                   kycType == valueType
-                      ? Icon(
+                      ? const Icon(
                           Icons.check_circle,
                           color: primaryBlueColor,
                         )
-                      : Icon(
+                      : const Icon(
                           Icons.radio_button_off,
                           color: borderColorSecondary,
                         ),

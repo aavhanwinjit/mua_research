@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
@@ -109,7 +108,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _appBar(),
-        Spacer(),
+        const Spacer(),
         Text(
           description,
           textAlign: TextAlign.center,
@@ -127,7 +126,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
             children: [
               IconButton(
                 onPressed: onSetFlashModeButtonPressed,
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage(ImageConstants.flashIcon),
                   color: white,
                 ),
@@ -137,7 +136,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
                 onPressed: () {
                   pickImage();
                 },
-                icon: ImageIcon(
+                icon: const ImageIcon(
                   AssetImage(ImageConstants.galleryIcon),
                   color: white,
                 ),
@@ -246,7 +245,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
             color: white,
           ),
         ),
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         height: 56.h,
         width: 56.h,
         child: Container(
@@ -257,7 +256,7 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
               color: white,
             ),
           ),
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           height: 56.h,
           width: 56.h,
         ),

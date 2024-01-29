@@ -13,9 +13,9 @@ class OnboardSuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Spacer(flex: 2),
+          const Spacer(flex: 2),
           Image.asset(ImageConstants.successImage),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Text(
             "Congratulations,\nArjun Kumar!",
             style: TextStyle(
@@ -25,7 +25,7 @@ class OnboardSuccessScreen extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
@@ -39,7 +39,7 @@ class OnboardSuccessScreen extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
           ),
-          Spacer(),
+          const Spacer(),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: CustomPrimaryButton(

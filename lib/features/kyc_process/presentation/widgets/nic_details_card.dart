@@ -1,5 +1,4 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/strings/strings_constants.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +56,7 @@ class NICDetailsCard extends StatelessWidget {
   Widget _infoWidget() {
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: Row(
+      child: const Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -98,11 +97,11 @@ class NICDetailsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             Strings.nicCard,
             style: TextStyle(color: textGrayColor2),
           ),
-          SizedBox(height: 5),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [

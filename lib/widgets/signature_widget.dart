@@ -34,12 +34,12 @@ class SignatureWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           DottedBorder(
             color: borderColor,
-            radius: Radius.circular(7),
+            radius: const Radius.circular(7),
             borderType: BorderType.RRect,
-            dashPattern: <double>[8, 4],
+            dashPattern: const <double>[8, 4],
             child: Center(
               child: Image.asset(
                 ImageConstants.signatureImage,
