@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:ekyc/models/device_info/device_info_model.dart';
+import 'package:injectable/injectable.dart';
 import 'package:platform_device_id/platform_device_id.dart';
 
+@lazySingleton
 class DeviceInformationHelper {
   Future<DeviceInfoModel> generateDeviceInformation() async {
     final String platform = Platform.isIOS ? "iOS" : "Android";

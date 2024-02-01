@@ -1,101 +1,120 @@
 import 'dart:convert';
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:crypto/crypto.dart' as crypto;
-import 'package:ekyc/models/device_info/device_info_model.dart';
-import 'package:encrypt/encrypt.dart';
+import 'package:ekyc/core/helpers/device_information_helper.dart';
+import 'package:ekyc/models/generic_header/header_model.dart';
+import 'package:ekyc/models/generic_request/request_model.dart';
+import 'package:ekyc/models/message_key/message_key_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pointycastle/export.dart';
 
-class RequestHeaderGenerator {
-  final DeviceInfoModel deviceInfoModel;
+@lazySingleton
+class RequestGenerator {
+  final DeviceInformationHelper deviceInformationHelper;
 
-  RequestHeaderGenerator({required this.deviceInfoModel});
+  RequestGenerator({required this.deviceInformationHelper});
 
-  Future generateMessageKeyModel() async {
-    final DeviceInfoModel deviceInfo = deviceInfoModel;
-
+  MessageKeyModel generateMessageKeyModel({required String serviceRequest}) {
     const String requestUUID = "1624521819414qj7ld, a23a5494-cc56-4ae3-a2ed-cdcd59acc23a_2024012316365815";
-
-    const String serviceRequest = "AgentAPI/AppStarts/LaunchDetails";
-
     const String channelId = "Agent";
-
     const String journeyId = "fa71c4eb-170602780284924";
-
     const String sessionId = "fa71c4eb-170602780284924";
-
-    const int index = 3;
-    // final int index = generateIndex();
-
+    final int index = generateIndex();
     const String languageId = "1";
+    final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
 
-    const String timestamp = "20240123110937";
-    // final String timestamp = DateTime.now().millisecondsSinceEpoch.toString();
-
-    const String deviceId = "918794c4-a479-36ad-949d-8c631c260a6b";
-    // final String deviceId = deviceInfo.deviceId ?? "";
-
-    const String sequence = "3210";
-
-    const String masterKeyPassword = "$sessionId$requestUUID$deviceId$timestamp";
-
-    const String masterKeyIv = "$deviceId$requestUUID$sessionId$timestamp";
-
-    // final String password =
-    //     createPassword(masterKey: masterKeyPassword, index: index, sequence: sequence, finalKeyLength: 32);
-    final String password = createPassword(
-        masterKey: '$sessionId$requestUUID$deviceId', index: index, sequence: sequence, finalKeyLength: 32);
-
-    // debugPrint("password: $password");
-
-    final String iv = createPassword(masterKey: masterKeyIv, index: index, sequence: sequence, finalKeyLength: 16);
-    // print("iv: $iv");
-
-    final body = {"rootedDevice": false, "deviceToken": "499dddb0-5ab1-4d04-90b6-87aadd4599ee"};
-
-    final jsonBody = jsonEncode(body);
-
-    // final encryptedText = encrypt(jsonBody, password);
-
-    // debugPrint("jsonBody: $jsonBody");
-
-    // MWEncryptDecrypt.encReq(
-    //   deviceId: deviceId,
-    //   requestUUID: requestUUID,
-    //   serviceRequestId: serviceRequest,
-    //   sessionId: sessionId,
-    //   timeStamp: timestamp,
-    //   requestBody: jsonBody,
-    // );
-
-    MWEncryptDecrypt().DycResponse(
-      deviceId: deviceId,
+    final MessageKeyModel messageKeyModel = MessageKeyModel(
       requestUUID: requestUUID,
-      serviceRequestId: serviceRequest,
+      serviceRequest: serviceRequest,
+      channelId: channelId,
+      journeyId: journeyId,
       sessionId: sessionId,
-      timeStamp: timestamp,
-      requestBody:
-          "dXfwFzaKLvxqFiuGpfwoeig3XrRS15wXdp6b4CZblyJCZrCv4op5xUPX0U3yvRC9Ji9U4KI2TuWzwOitbC/g8+eFRTCeZwPqK+2BkP/22SJGqgOx7JdM0waBQ3yr3C2VNGEKAjPoksUZ/7sTu3lINm1sQ2KGR3f2iiMYWZyHdl0icL4AH7S71Kecr0Lv6pybVvyGLyF5IXh/ymlBwunv46xF2eouw+WAspquKCFwzTiCeKOobfjqq6hrF+selO7ItSpRBs4Ch7hcEme4CM5FahGAuIBC3WtJTU4MuVkqXD7VTurUoKmnLN63jx8FZaxDUxpD0dIpMpgeNrSLVxR8je4BOJjgNlnosB631W8LuqiRVzUDdqhy//l7XO6xZo2Lc1ZtV0efAWBBTqkVFNAsjXzoIuwFCXPmUowzmjUUIjUUuvmere/vxgmDgFbH2EHuRiIXrNK5dS8xJS+XUbG2yMIno9C/Gqhl88l85pp+bdlmTBN3BUjH+MBWbfu7JojKTRYk74uq+xMJgra+Jr9NfvweTHjjrFAr2OOTnzee6rUdgBOoWiFXTicwCz8etvfPWYX0uk2Yw5q/IQt7R6fi0RNC0+dB+Is1e6b1uQxejl9HCqDun5pzpnjWQmf/sm+38Cz4BOTq6wOyo6CejB4jj4RRPSgBluyb/7bQOZTPwzrE4Z4ZBFzmtRaui5Smv81MVimUcH9atBII4fsKZoJzhwBFGiN03Rqhz/uU0TmiMIg3SPL+kG5FPwoHhUYghVBK3IJgY6pPUIcKjrwfPYPGGamQgylI5LbMiFoKpaJa1cEd7SbQOXEq3IfncSrT1TvluIVYXk6Ym3jdmjtDQswNPosmf7/1EuUVLSAB5TQ/ODoM6i1t9jTcu/NT0owS60PmocVyYXxkKkzzyZlSsPmebLbQCnCKSgVTR0Wi9kUADjjZy6YlqOagborP/EKHJC/F6xQYuIpfBBT6n65gVe9UhD3mteMeBQ5KcDCGfIVUsg+lsyUleS7X3ajn2lJ6+H+dPXIYIQDYaTsIujFXgBv4oO1exc0mQ3mha8x+uShTAcxKTYc4mbXC5JWIStr4FRRtjnZ9A+kviCUoIE8KEvpI6elPtjf2cEAT7T7E0+Ba0vWdRNZcvog/Lu71UsWsQyaEJHWr4B8xoEj5J6W0eQqY+Q==",
-      iv: iv,
-      password: password,
+      index: index.toString(),
+      languageId: languageId,
+      timestamp: timestamp,
     );
+
+    return messageKeyModel;
   }
 
-  String encrypt(String plainText, String password) {
-    final key = Key.fromUtf8(password);
-    final iv = IV.fromLength(16);
+  Future<HeaderModel> generateHeaderObject({required String serviceRequest}) async {
+    final deviceInfo = await deviceInformationHelper.generateDeviceInformation();
+    final messageKey = generateMessageKeyModel(serviceRequest: serviceRequest);
 
-    final encrypter = Encrypter(AES(key, mode: AESMode.cbc, padding: "PKCS7"));
+    final HeaderModel header = HeaderModel(deviceInfo: deviceInfo, messageKey: messageKey);
 
-    final encrypted = encrypter.encrypt(plainText, iv: iv);
-    final decrypted = encrypter.decrypt(encrypted, iv: iv);
-
-    print("encrypted: ${encrypted.base64}");
-    print("decrypted: $decrypted");
-
-    return encrypted.base64;
+    return header;
   }
+
+  Future<RequestModel> generateRequestModel({required dynamic body, required String apiEndpoint}) async {
+    final HeaderModel header = await generateHeaderObject(serviceRequest: apiEndpoint);
+
+    RequestModel request = RequestModel(body: body, header: header);
+
+    return request;
+  }
+
+  // const String sequence = "3210";
+
+  //   const String masterKeyPassword = "$sessionId$requestUUID$deviceId$timestamp";
+
+  //   const String masterKeyIv = "$deviceId$requestUUID$sessionId$timestamp";
+
+  //   // final String password =
+  //   //     createPassword(masterKey: masterKeyPassword, index: index, sequence: sequence, finalKeyLength: 32);
+  //   final String password = createPassword(
+  //       masterKey: '$sessionId$requestUUID$deviceId', index: index, sequence: sequence, finalKeyLength: 32);
+
+  //   // debugPrint("password: $password");
+
+  //   final String iv = createPassword(masterKey: masterKeyIv, index: index, sequence: sequence, finalKeyLength: 16);
+  //   // print("iv: $iv");
+
+  //   final body = {"rootedDevice": false, "deviceToken": "499dddb0-5ab1-4d04-90b6-87aadd4599ee"};
+
+  //   final jsonBody = jsonEncode(body);
+
+  //   // final encryptedText = encrypt(jsonBody, password);
+
+  //   // debugPrint("jsonBody: $jsonBody");
+
+  //   // MWEncryptDecrypt.encReq(
+  //   //   deviceId: deviceId,
+  //   //   requestUUID: requestUUID,
+  //   //   serviceRequestId: serviceRequest,
+  //   //   sessionId: sessionId,
+  //   //   timeStamp: timestamp,
+  //   //   requestBody: jsonBody,
+  //   // );
+
+  //   MWEncryptDecrypt().DycResponse(
+  //     deviceId: deviceId,
+  //     requestUUID: requestUUID,
+  //     serviceRequestId: serviceRequest,
+  //     sessionId: sessionId,
+  //     timeStamp: timestamp,
+  //     requestBody:
+  //         "dXfwFzaKLvxqFiuGpfwoeig3XrRS15wXdp6b4CZblyJCZrCv4op5xUPX0U3yvRC9Ji9U4KI2TuWzwOitbC/g8+eFRTCeZwPqK+2BkP/22SJGqgOx7JdM0waBQ3yr3C2VNGEKAjPoksUZ/7sTu3lINm1sQ2KGR3f2iiMYWZyHdl0icL4AH7S71Kecr0Lv6pybVvyGLyF5IXh/ymlBwunv46xF2eouw+WAspquKCFwzTiCeKOobfjqq6hrF+selO7ItSpRBs4Ch7hcEme4CM5FahGAuIBC3WtJTU4MuVkqXD7VTurUoKmnLN63jx8FZaxDUxpD0dIpMpgeNrSLVxR8je4BOJjgNlnosB631W8LuqiRVzUDdqhy//l7XO6xZo2Lc1ZtV0efAWBBTqkVFNAsjXzoIuwFCXPmUowzmjUUIjUUuvmere/vxgmDgFbH2EHuRiIXrNK5dS8xJS+XUbG2yMIno9C/Gqhl88l85pp+bdlmTBN3BUjH+MBWbfu7JojKTRYk74uq+xMJgra+Jr9NfvweTHjjrFAr2OOTnzee6rUdgBOoWiFXTicwCz8etvfPWYX0uk2Yw5q/IQt7R6fi0RNC0+dB+Is1e6b1uQxejl9HCqDun5pzpnjWQmf/sm+38Cz4BOTq6wOyo6CejB4jj4RRPSgBluyb/7bQOZTPwzrE4Z4ZBFzmtRaui5Smv81MVimUcH9atBII4fsKZoJzhwBFGiN03Rqhz/uU0TmiMIg3SPL+kG5FPwoHhUYghVBK3IJgY6pPUIcKjrwfPYPGGamQgylI5LbMiFoKpaJa1cEd7SbQOXEq3IfncSrT1TvluIVYXk6Ym3jdmjtDQswNPosmf7/1EuUVLSAB5TQ/ODoM6i1t9jTcu/NT0owS60PmocVyYXxkKkzzyZlSsPmebLbQCnCKSgVTR0Wi9kUADjjZy6YlqOagborP/EKHJC/F6xQYuIpfBBT6n65gVe9UhD3mteMeBQ5KcDCGfIVUsg+lsyUleS7X3ajn2lJ6+H+dPXIYIQDYaTsIujFXgBv4oO1exc0mQ3mha8x+uShTAcxKTYc4mbXC5JWIStr4FRRtjnZ9A+kviCUoIE8KEvpI6elPtjf2cEAT7T7E0+Ba0vWdRNZcvog/Lu71UsWsQyaEJHWr4B8xoEj5J6W0eQqY+Q==",
+  //     iv: iv,
+  //     password: password,
+  //   );
+
+  // String encrypt(String plainText, String password) {
+  //   final key = Key.fromUtf8(password);
+  //   final iv = IV.fromLength(16);
+
+  //   final encrypter = Encrypter(AES(key, mode: AESMode.cbc, padding: "PKCS7"));
+
+  //   final encrypted = encrypter.encrypt(plainText, iv: iv);
+  //   final decrypted = encrypter.decrypt(encrypted, iv: iv);
+
+  //   print("encrypted: ${encrypted.base64}");
+  //   print("decrypted: $decrypted");
+
+  //   return encrypted.base64;
+  // }
 
   // static String encrypt({required String data, required String password, String? iv}) {
   //   try {

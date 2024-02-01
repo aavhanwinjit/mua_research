@@ -1,5 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/network/interceptors/connection_checker_interceptor.dart';
+import 'package:ekyc/core/network/interceptors/header_interceptor.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class NetworkHelper {
@@ -15,14 +18,24 @@ class NetworkHelper {
     }
 
     dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
-      ),
+      ConnectionCheckerInterceptor(),
     );
+
+    dio.interceptors.add(
+      HeaderInterceptor(),
+    );
+
+    if (kDebugMode) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+        ),
+      );
+    }
 
     return dio;
   }

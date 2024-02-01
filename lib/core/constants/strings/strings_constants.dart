@@ -3,6 +3,7 @@
 /// 2.Login
 /// 3.OTP Screen
 /// 4.OTP Success Screen
+library;
 
 class Strings {
   // 1.Global
@@ -46,6 +47,7 @@ class Strings {
   static const String takePhotoFromCamera = "Take photo from camera";
   static const String uploadFromLibrary = "Upload from library";
   static const String done = "Done";
+  static const String technicalError = "Technical error. Please try again.";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -54,6 +56,7 @@ class Strings {
   static const String loginPhoneLabel = "Mobile Number";
   static const String loginPhoneValidatorString = "Please enter 8-digit mobile number";
   static const String loginButtonTitle = "Get Verification Code";
+  static const String otpSentSuccessfully = "An OTP has been sent successfully";
 
   //3.OTP Screen
   static const String otpScreenTitle = "Enter the OTP sent to";
@@ -62,7 +65,9 @@ class Strings {
   static const String otpSuccessScreenTitle = "Great, that matches!";
   static const String otpSuccessScreenSubTitle = "Your profile is loading. Sit tight!";
   static const String otpValidationString = "Enter valid OTP";
-  static const String otpDidntReceiveIt = "Didn't received it? Retry in";
+  static const String otpDidntReceiveIt = "Didn't received it? ";
+  static const String retryIn = "Retry in";
+  static const String maximumOTPRetryReached = "Maximum number of OTP reached, please try again after sometime";
 
   //5.OTP Failure Screen
   static const String otpFailureScreenTitle = "Oops!";
