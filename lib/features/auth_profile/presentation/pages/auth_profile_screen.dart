@@ -56,6 +56,8 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
   }
 
   Widget _profileCard() {
+    // final ValidateOtpResponseModel? validateOtpResponseProvider = ref.read(validateOTPResponseProvider);
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 25.w),

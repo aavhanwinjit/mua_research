@@ -1,3 +1,4 @@
+import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
@@ -15,6 +16,7 @@ extension SnackbarContextX on BuildContext {
       SnackBar(
         key: ValueKey(message),
         behavior: behavior ?? SnackBarBehavior.fixed,
+        backgroundColor: primaryGreenColor,
         margin: behavior == SnackBarBehavior.fixed ? const EdgeInsets.only(left: 16, right: 16, bottom: 16) : null,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),

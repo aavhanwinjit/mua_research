@@ -1,12 +1,18 @@
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'core/app_export.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  configureDependencies();
+  await getIt.allReady();
+  await GetStorage.init();
 
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

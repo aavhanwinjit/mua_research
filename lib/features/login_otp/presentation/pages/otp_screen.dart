@@ -1,8 +1,18 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
+import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/resend_otp/response/resend_otp_response_model.dart';
+import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validate_otp_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
+import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
+import 'package:ekyc/features/login_otp/presentation/widgets/timer_widget.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,6 +28,9 @@ class OTPScreen extends ConsumerStatefulWidget {
 
 class _OTPScreenState extends ConsumerState<OTPScreen> {
   TextEditingController otpController = TextEditingController();
+
+  int retryCount = 0;
+  bool showResendOption = false;
 
   @override
   void dispose() {
@@ -74,27 +87,14 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                   onTap: _verifyOTP,
                   label: Strings.contn,
                 ),
-                SizedBox(height: 24.h),
-                _subTitle(),
+                SizedBox(height: 18.h),
+                _resendWidget(),
               ],
             ),
           ),
         ),
       ),
     );
-  }
-
-  void _verifyOTP() {
-    KeyboardHelper.hideKeyboard(context);
-
-    if (ref.read(otpProvider).trim().length < 6) {
-      if (otpController.text == "111111") {
-        context.pushNamed(AppRoutes.failureScreen);
-      }
-    } else {
-      context.pushNamed(AppRoutes.successScreen);
-      // context.pushNamed(AppRoutes.failureScreen);
-    }
   }
 
   Widget _pinInputField() {
@@ -140,27 +140,105 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     );
   }
 
-  Widget _subTitle() {
+  Widget _resendWidget() {
     return Row(
       children: [
         Text(
-          "${Strings.otpDidntReceiveIt} 00:30",
+          Strings.otpDidntReceiveIt,
           style: TextStyle(
             color: textGrayColor2,
             fontSize: 14.sp,
             fontWeight: FontWeight.normal,
           ),
         ),
-        // TextButton(
-        //   onPressed: () {},
-        //   child: Text(
-        //     "Retry in 00:30",
-        //     style: TextStyle(
-        //       color: textGrayColor2,
-        //     ),
-        //   ),
-        // ),
+        if (!showResendOption)
+          Text(
+            Strings.retryIn,
+            style: TextStyle(
+              color: textGrayColor2,
+              fontSize: 14.sp,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        !showResendOption
+            ? TimerWidget(
+                onTimerFinished: () {
+                  setState(() {
+                    showResendOption = true;
+                  });
+                },
+                seconds: 30,
+                timerKey: ValueKey(retryCount),
+              )
+            : TextButton.icon(
+                onPressed: retryCount < 3 ? _resendOTP : null,
+                icon: const Icon(Icons.timer_outlined, color: black),
+                label: const Text(
+                  "Resend OTP",
+                  style: TextStyle(
+                    color: black,
+                  ),
+                ),
+              ),
       ],
+    );
+  }
+
+  void _verifyOTP() async {
+    KeyboardHelper.hideKeyboard(context);
+
+    final String phoneNumber = ref.read(phoneNumberProvider);
+
+    final VerifyMobileNumberResponseModel? verifyMobileNumberResponse = ref.read(verifyMobileNumberProvider);
+
+    final request = ValidateOtpRequestModel(
+      preValidationModel: PreValidationModel(
+        validationType: "OTP",
+        refCode: verifyMobileNumberResponse?.refCode,
+        otpNumber: ref.watch(otpProvider).trim(),
+        key: null,
+      ),
+      mobileNumber: phoneNumber,
+    );
+
+    final response = await getIt<ValidateOTP>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        // handle failure
+        context.pushNamed(AppRoutes.failureScreen);
+      },
+      (ValidateOtpResponseModel success) async {
+        ref.read(validateOTPResponseProvider.notifier).update((state) => success);
+
+        context.pushNamed(AppRoutes.successScreen);
+      },
+    );
+  }
+
+  void _resendOTP() async {
+    if (retryCount == 3) {
+      context.showErrorSnackBar(message: Strings.maximumOTPRetryReached);
+      return;
+    }
+    final VerifyMobileNumberResponseModel? verifyMobileNumberResponse = ref.read(verifyMobileNumberProvider);
+
+    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: verifyMobileNumberResponse?.refCode);
+
+    final response = await getIt<ResendOTP>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        // handle failure
+      },
+      (ResendOtpResponseModel success) async {
+        // ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
+        context.showSnackBar(message: Strings.otpSentSuccessfully);
+        retryCount++;
+        setState(() {});
+      },
     );
   }
 }

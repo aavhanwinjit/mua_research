@@ -20,11 +20,11 @@ class _ApiService implements ApiService {
 
   @override
   Future<LaunchDetailsResponse> launchDetails(
-      LaunchDetailsRequest loginRequest) async {
+      LaunchDetailsRequest request) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = loginRequest;
+    final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<LaunchDetailsResponse>(Options(
       method: 'POST',
@@ -43,6 +43,90 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = LaunchDetailsResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<VerifyMobileNumberResponseModel> verifyMobileNumber(
+      VerifyMobileNumberRequestModel request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<VerifyMobileNumberResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Registration/VerifyMobileNumber',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = VerifyMobileNumberResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ValidateOtpResponseModel> validateOTP(
+      ValidateOtpRequestModel request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ValidateOtpResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Registration/VerifyMobileNumber',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ValidateOtpResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ResendOtpResponseModel> resendOTP(
+      ResendOtpRequestModel request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ResendOtpResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Login/ResendOTP',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ResendOtpResponseModel.fromJson(_result.data!);
     return value;
   }
 

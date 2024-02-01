@@ -1,6 +1,10 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/gestures.dart';
@@ -64,7 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   CustomPrimaryButton(
                     disable: ref.watch(phoneNumberProvider).trim().length < 8,
                     onTap: () {
-                      _navigateToOtpScreen();
+                      _verifyMobileNumber();
                     },
                     disabledOnTap: () {
                       context.showErrorSnackBar(message: Strings.loginPhoneValidatorString);
@@ -82,11 +86,27 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     );
   }
 
-  void _navigateToOtpScreen() {
+  void _verifyMobileNumber() async {
     KeyboardHelper.hideKeyboard(context);
 
     if (formKey.currentState!.validate()) {
-      context.pushNamed(AppRoutes.otpScreen);
+      final String phoneNumber = ref.read(phoneNumberProvider);
+
+      final body = VerifyMobileNumberRequestModel(mobileNumber: phoneNumber);
+
+      final response = await getIt<VerifyMobileNumber>().call(body);
+
+      response.fold(
+        (failure) {
+          debugPrint("failure: $failure");
+          // handle failure
+        },
+        (VerifyMobileNumberResponseModel success) async {
+          ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
+          context.showSnackBar(message: Strings.otpSentSuccessfully);
+          context.pushNamed(AppRoutes.otpScreen);
+        },
+      );
     } else {
       context.showErrorSnackBar(
         message: Strings.loginPhoneValidatorString,
