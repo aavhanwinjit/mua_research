@@ -2,8 +2,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
-import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
-import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +56,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
   }
 
   Widget _profileCard() {
-    final ValidateOtpResponseModel? validateOtpResponseProvider = ref.read(validateOTPResponseProvider);
+    // final ValidateOtpResponseModel? validateOtpResponseProvider = ref.read(validateOTPResponseProvider);
 
     return Container(
       width: double.infinity,
