@@ -29,6 +29,12 @@ mixin _$ValidateOtpResponseModel {
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: "companyName")
   String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "email")
+  String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: "designation")
+  String? get designation => throw _privateConstructorUsedError;
+  @JsonKey(name: "agencyName")
+  String? get agencyName => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +52,10 @@ abstract class $ValidateOtpResponseModelCopyWith<$Res> {
       {@JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName});
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "email") String? email,
+      @JsonKey(name: "designation") String? designation,
+      @JsonKey(name: "agencyName") String? agencyName});
 }
 
 /// @nodoc
@@ -67,6 +76,9 @@ class _$ValidateOtpResponseModelCopyWithImpl<$Res,
     Object? mobileNumber = freezed,
     Object? address = freezed,
     Object? companyName = freezed,
+    Object? email = freezed,
+    Object? designation = freezed,
+    Object? agencyName = freezed,
   }) {
     return _then(_value.copyWith(
       agentName: freezed == agentName
@@ -85,6 +97,18 @@ class _$ValidateOtpResponseModelCopyWithImpl<$Res,
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      agencyName: freezed == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +126,10 @@ abstract class _$$ValidateOtpResponseModelImplCopyWith<$Res>
       {@JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName});
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "email") String? email,
+      @JsonKey(name: "designation") String? designation,
+      @JsonKey(name: "agencyName") String? agencyName});
 }
 
 /// @nodoc
@@ -122,6 +149,9 @@ class __$$ValidateOtpResponseModelImplCopyWithImpl<$Res>
     Object? mobileNumber = freezed,
     Object? address = freezed,
     Object? companyName = freezed,
+    Object? email = freezed,
+    Object? designation = freezed,
+    Object? agencyName = freezed,
   }) {
     return _then(_$ValidateOtpResponseModelImpl(
       agentName: freezed == agentName
@@ -140,6 +170,18 @@ class __$$ValidateOtpResponseModelImplCopyWithImpl<$Res>
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
               as String?,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      agencyName: freezed == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -151,7 +193,10 @@ class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
       {@JsonKey(name: "agentName") this.agentName,
       @JsonKey(name: "mobileNumber") this.mobileNumber,
       @JsonKey(name: "address") this.address,
-      @JsonKey(name: "companyName") this.companyName});
+      @JsonKey(name: "companyName") this.companyName,
+      @JsonKey(name: "email") this.email,
+      @JsonKey(name: "designation") this.designation,
+      @JsonKey(name: "agencyName") this.agencyName});
 
   factory _$ValidateOtpResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ValidateOtpResponseModelImplFromJson(json);
@@ -168,10 +213,19 @@ class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
   @override
   @JsonKey(name: "companyName")
   final String? companyName;
+  @override
+  @JsonKey(name: "email")
+  final String? email;
+  @override
+  @JsonKey(name: "designation")
+  final String? designation;
+  @override
+  @JsonKey(name: "agencyName")
+  final String? agencyName;
 
   @override
   String toString() {
-    return 'ValidateOtpResponseModel(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName)';
+    return 'ValidateOtpResponseModel(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, email: $email, designation: $designation, agencyName: $agencyName)';
   }
 
   @override
@@ -185,13 +239,18 @@ class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
                 other.mobileNumber == mobileNumber) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+                other.companyName == companyName) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.designation, designation) ||
+                other.designation == designation) &&
+            (identical(other.agencyName, agencyName) ||
+                other.agencyName == agencyName));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, agentName, mobileNumber, address, companyName);
+  int get hashCode => Object.hash(runtimeType, agentName, mobileNumber, address,
+      companyName, email, designation, agencyName);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +272,10 @@ abstract class _ValidateOtpResponseModel implements ValidateOtpResponseModel {
           {@JsonKey(name: "agentName") final String? agentName,
           @JsonKey(name: "mobileNumber") final String? mobileNumber,
           @JsonKey(name: "address") final String? address,
-          @JsonKey(name: "companyName") final String? companyName}) =
+          @JsonKey(name: "companyName") final String? companyName,
+          @JsonKey(name: "email") final String? email,
+          @JsonKey(name: "designation") final String? designation,
+          @JsonKey(name: "agencyName") final String? agencyName}) =
       _$ValidateOtpResponseModelImpl;
 
   factory _ValidateOtpResponseModel.fromJson(Map<String, dynamic> json) =
@@ -231,6 +293,15 @@ abstract class _ValidateOtpResponseModel implements ValidateOtpResponseModel {
   @override
   @JsonKey(name: "companyName")
   String? get companyName;
+  @override
+  @JsonKey(name: "email")
+  String? get email;
+  @override
+  @JsonKey(name: "designation")
+  String? get designation;
+  @override
+  @JsonKey(name: "agencyName")
+  String? get agencyName;
   @override
   @JsonKey(ignore: true)
   _$$ValidateOtpResponseModelImplCopyWith<_$ValidateOtpResponseModelImpl>

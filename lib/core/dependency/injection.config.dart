@@ -9,29 +9,41 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i7;
-import 'package:ekyc/core/dependency/injection.dart' as _i20;
+import 'package:ekyc/core/dependency/injection.dart' as _i26;
 import 'package:ekyc/core/helpers/device_information_helper.dart' as _i6;
 import 'package:ekyc/core/helpers/request_generator.dart' as _i10;
 import 'package:ekyc/core/network/network_info.dart' as _i9;
 import 'package:ekyc/core/network/services/api_service.dart' as _i11;
 import 'package:ekyc/core/storage/storage_manager.dart' as _i4;
 import 'package:ekyc/core/storage/storage_manager_impl.dart' as _i5;
+import 'package:ekyc/features/auth_profile/data/repositories/save_file_repository_impl.dart'
+    as _i18;
+import 'package:ekyc/features/auth_profile/domain/repositories/save_file_repository.dart'
+    as _i17;
+import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart'
+    as _i25;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
     as _i13;
 import 'package:ekyc/features/login_otp/domain/repositories/auth_repository.dart'
     as _i12;
 import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart'
-    as _i14;
-import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart'
-    as _i17;
-import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart'
-    as _i18;
-import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
     as _i16;
-import 'package:ekyc/features/splash_screen/domain/repositories/splash_screen_repository.dart'
+import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart'
+    as _i22;
+import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart'
+    as _i23;
+import 'package:ekyc/features/mpin_face_id/data/repositories/mpin_repository_impl.dart'
     as _i15;
-import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
+import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart'
+    as _i14;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart'
     as _i19;
+import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
+    as _i21;
+import 'package:ekyc/features/splash_screen/domain/repositories/splash_screen_repository.dart'
+    as _i20;
+import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
+    as _i24;
 import 'package:ekyc/models/app_config/app_config.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -67,18 +79,26 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.lazySingleton<_i12.AuthRepository>(
         () => _i13.AuthRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i14.ResendOTP>(
-        () => _i14.ResendOTP(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i15.SplashScreenRepository>(() =>
-        _i16.SplashScreenRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i17.ValidateOTP>(
-        () => _i17.ValidateOTP(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i18.VerifyMobileNumber>(
-        () => _i18.VerifyMobileNumber(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i19.LaunchDetails>(
-        () => _i19.LaunchDetails(gh<_i15.SplashScreenRepository>()));
+    gh.lazySingleton<_i14.MPINRepository>(
+        () => _i15.MPINRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i16.ResendOTP>(
+        () => _i16.ResendOTP(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i17.SaveFileRepository>(
+        () => _i18.SaveFileRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i19.SetAgentMPIN>(
+        () => _i19.SetAgentMPIN(gh<_i14.MPINRepository>()));
+    gh.lazySingleton<_i20.SplashScreenRepository>(() =>
+        _i21.SplashScreenRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i22.ValidateOTP>(
+        () => _i22.ValidateOTP(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i23.VerifyMobileNumber>(
+        () => _i23.VerifyMobileNumber(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i24.LaunchDetails>(
+        () => _i24.LaunchDetails(gh<_i20.SplashScreenRepository>()));
+    gh.lazySingleton<_i25.SaveFile>(
+        () => _i25.SaveFile(gh<_i17.SaveFileRepository>()));
     return this;
   }
 }
 
-class _$MAUEngineModule extends _i20.MAUEngineModule {}
+class _$MAUEngineModule extends _i26.MAUEngineModule {}

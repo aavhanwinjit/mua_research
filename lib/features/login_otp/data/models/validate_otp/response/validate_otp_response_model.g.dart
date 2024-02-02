@@ -13,6 +13,9 @@ _$ValidateOtpResponseModelImpl _$$ValidateOtpResponseModelImplFromJson(
       mobileNumber: json['mobileNumber'] as String?,
       address: json['address'] as String?,
       companyName: json['companyName'] as String?,
+      email: json['email'] as String?,
+      designation: json['designation'] as String?,
+      agencyName: json['agencyName'] as String?,
     );
 
 Map<String, dynamic> _$$ValidateOtpResponseModelImplToJson(
@@ -22,4 +25,7 @@ Map<String, dynamic> _$$ValidateOtpResponseModelImplToJson(
       'mobileNumber': instance.mobileNumber,
       'address': instance.address,
       'companyName': instance.companyName,
+      'email': instance.email,
+      'designation': instance.designation,
+      'agencyName': instance.agencyName,
     };

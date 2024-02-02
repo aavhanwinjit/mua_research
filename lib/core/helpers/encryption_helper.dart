@@ -1,1 +1,3 @@
-class EncryptionHelper {}
+class EncryptionHelper {
+  
+}

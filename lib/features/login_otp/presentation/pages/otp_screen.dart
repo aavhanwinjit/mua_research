@@ -167,11 +167,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                     showResendOption = true;
                   });
                 },
-                seconds: 30,
+                seconds: 10,
                 timerKey: ValueKey(retryCount),
               )
             : TextButton.icon(
-                onPressed: retryCount < 3 ? _resendOTP : null,
+                onPressed: _resendOTP,
                 icon: const Icon(Icons.timer_outlined, color: black),
                 label: const Text(
                   "Resend OTP",
@@ -219,6 +219,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
 
   void _resendOTP() async {
     if (retryCount == 3) {
+      debugPrint("retry count $retryCount");
       context.showErrorSnackBar(message: Strings.maximumOTPRetryReached);
       return;
     }
@@ -236,7 +237,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
       (ResendOtpResponseModel success) async {
         // ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
         context.showSnackBar(message: Strings.otpSentSuccessfully);
+
         retryCount++;
+        showResendOption = false;
         setState(() {});
       },
     );

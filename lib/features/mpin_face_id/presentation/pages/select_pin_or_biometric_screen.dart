@@ -1,13 +1,14 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class CreatePINFaceIdScreen extends StatelessWidget {
-  const CreatePINFaceIdScreen({super.key});
+class SelectPINorBiometricScreen extends ConsumerWidget {
+  const SelectPINorBiometricScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: white,
       appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
@@ -40,7 +41,7 @@ class CreatePINFaceIdScreen extends StatelessWidget {
                 label: Strings.createPinAndFaceId,
                 disable: false,
                 onTap: () {
-                  context.pushNamed(AppRoutes.createPINandFaceIdScreen);
+                  context.pushNamed(AppRoutes.createPINScreen);
                 },
               ),
               const SizedBox(height: 20),

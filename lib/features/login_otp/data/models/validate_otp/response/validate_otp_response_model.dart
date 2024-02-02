@@ -21,6 +21,9 @@ class ValidateOtpResponseModel with _$ValidateOtpResponseModel {
     @JsonKey(name: "mobileNumber") String? mobileNumber,
     @JsonKey(name: "address") String? address,
     @JsonKey(name: "companyName") String? companyName,
+    @JsonKey(name: "email") String? email,
+    @JsonKey(name: "designation") String? designation,
+    @JsonKey(name: "agencyName") String? agencyName,
   }) = _ValidateOtpResponseModel;
 
   factory ValidateOtpResponseModel.fromJson(Map<String, dynamic> json) => _$ValidateOtpResponseModelFromJson(json);
