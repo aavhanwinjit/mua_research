@@ -28,8 +28,8 @@ class HeaderInterceptor extends Interceptor {
     Response response,
     ResponseInterceptorHandler handler,
   ) {
-    final ResponseModel responseModel = ResponseModel.fromJson(response.data);
-    response.data = responseModel;
+    // final ResponseModel responseModel = ResponseModel.fromJson(response.data);
+    // response.data = responseModel;
 
     handler.next(response);
   }
