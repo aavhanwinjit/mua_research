@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/encryption_helper.dart';
 import 'package:ekyc/core/storage/storage_key.dart';
 import 'package:ekyc/core/storage/storage_manager.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -35,13 +39,15 @@ class SplashScreen extends ConsumerWidget {
   }
 
   void callLaunchDetailsApi(BuildContext context) async {
-    final body = LaunchDetailsRequest(rootedDevice: false, deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee");
+    final body = LaunchDetailsRequest(
+        rootedDevice: false,
+        deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee");
 
     final result = await getIt<LaunchDetails>().call(body);
 
     result.fold(
       (failure) {
-        debugPrint("failure: $failure");
+        debugPrint("failure: ${failure.exception}");
         context.showErrorSnackBar(message: Strings.technicalError);
         // handle failure
       },

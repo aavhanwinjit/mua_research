@@ -9,14 +9,16 @@ class HeaderInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final String path = options.path;
-    final String baseUrl = options.baseUrl;
+    // final String path = options.path;
+    // print(path);
+    // final String baseUrl = options.baseUrl;
 
-    options.path = baseUrl;
+    // options.path = baseUrl;
 
-    final request = await getIt<RequestGenerator>().generateRequestModel(apiEndpoint: path, body: options.data);
+    // final request = await getIt<RequestGenerator>()
+    //     .generateRequestModel(apiEndpoint: path, body: options.data);
 
-    options.data = request;
+    // options.data = request;
 
     handler.next(options);
   }
@@ -27,7 +29,6 @@ class HeaderInterceptor extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     final ResponseModel responseModel = ResponseModel.fromJson(response.data);
-
     response.data = responseModel;
 
     handler.next(response);
