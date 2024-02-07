@@ -35,22 +35,33 @@ class SplashScreen extends ConsumerWidget {
   }
 
   void callLaunchDetailsApi(BuildContext context) async {
-    final body = LaunchDetailsRequest(rootedDevice: false, deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee");
+    final body = LaunchDetailsRequest(
+      rootedDevice: false,
+      deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee",
+    );
 
     final result = await getIt<LaunchDetails>().call(body);
 
     result.fold(
       (failure) {
-        debugPrint("failure: $failure");
+        debugPrint("failure: ${failure.exception}");
         context.showErrorSnackBar(message: Strings.technicalError);
         // handle failure
       },
       (LaunchDetailsResponse success) async {
-        await getIt<AppStorageManager>().storeMap(
-          key: StorageKey.LAUNCH_DETAILS,
-          data: success.toJson(),
-        );
-        context.go(AppRoutes.loginScreen);
+        debugPrint("success in splash: $success");
+
+        if (success.status?.isSuccess == true) {
+          await getIt<AppStorageManager>().storeMap(
+            key: StorageKey.LAUNCH_DETAILS,
+            data: success.toJson(),
+          );
+          context.go(AppRoutes.loginScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
 
         // await getIt<SharedPreferences>().setBool(StorageConstant.isLoggedIn, true);
         // emit(LoginState.success(loginResponse: success));

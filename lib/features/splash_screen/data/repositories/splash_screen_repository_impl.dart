@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/errors/failure.dart';
-import 'package:ekyc/core/modked_data/launch_details_response_mocked.dart';
 import 'package:ekyc/core/network/services/api_service.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
@@ -19,9 +18,9 @@ class SplashScreenRepositoryImpl implements SplashScreenRepository {
     LaunchDetailsRequest loginRequest,
   ) async {
     try {
-      // final response = await apiService.launchDetails(loginRequest);
+      final response = await apiService.launchDetails(loginRequest);
 
-      final response = LaunchDetailsResponse.fromJson(LaunchDetailsResponseMocked.jsonResponse);
+      // final response = LaunchDetailsResponse.fromJson(LaunchDetailsResponseMocked.jsonResponse);
 
       return Right(response);
     } on DioException catch (e) {

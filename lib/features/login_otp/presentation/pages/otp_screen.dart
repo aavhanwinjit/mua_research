@@ -194,7 +194,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     final request = ValidateOtpRequestModel(
       preValidationModel: PreValidationModel(
         validationType: "OTP",
-        refCode: verifyMobileNumberResponse?.refCode,
+        refCode: verifyMobileNumberResponse?.body?.responseBody?.refCode,
         otpNumber: ref.watch(otpProvider).trim(),
         key: null,
       ),
@@ -207,12 +207,22 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
       (failure) {
         debugPrint("failure: $failure");
         // handle failure
-        context.pushNamed(AppRoutes.failureScreen);
+        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (ValidateOtpResponseModel success) async {
-        ref.read(validateOTPResponseProvider.notifier).update((state) => success);
+        debugPrint("success in otp screen: $success");
 
-        context.pushNamed(AppRoutes.successScreen);
+        if (success.status?.isSuccess == true) {
+          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
+
+          context.pushNamed(AppRoutes.successScreen);
+        } else {
+          // context.pushNamed(AppRoutes.failureScreen);
+
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
       },
     );
   }
@@ -225,7 +235,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     }
     final VerifyMobileNumberResponseModel? verifyMobileNumberResponse = ref.read(verifyMobileNumberProvider);
 
-    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: verifyMobileNumberResponse?.refCode);
+    final ResendOtpRequestModel request =
+        ResendOtpRequestModel(refCode: verifyMobileNumberResponse?.body?.responseBody?.refCode);
 
     final response = await getIt<ResendOTP>().call(request);
 
