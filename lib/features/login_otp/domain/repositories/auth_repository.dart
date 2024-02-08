@@ -12,5 +12,9 @@ abstract class AuthRepository {
 
   Future<Either<Failure, ValidateOtpResponseModel>> validateOTP(ValidateOtpRequestModel request);
 
-  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(ResendOtpRequestModel request);
+  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(
+    ResendOtpRequestModel request,
+    String token,
+    String sessionId,
+  );
 }

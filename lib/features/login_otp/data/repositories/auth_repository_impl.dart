@@ -45,9 +45,13 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(ResendOtpRequestModel request) async {
+  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(
+    ResendOtpRequestModel request,
+    String token,
+    String sessionId,
+  ) async {
     try {
-      final response = await apiService.resendOTP(request);
+      final response = await apiService.resendOTP(token, sessionId, request);
 
       // final response = ResendOtpResponseModel.fromJson(ResendOTPResponseMocked.jsonResponse);
 

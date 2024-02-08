@@ -104,10 +104,17 @@ class _ApiService implements ApiService {
 
   @override
   Future<ResendOtpResponseModel> resendOTP(
-      ResendOtpRequestModel request) async {
+    String authorization,
+    String sessionId,
+    ResendOtpRequestModel request,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'SessionId': sessionId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResendOtpResponseModel>(Options(
@@ -131,10 +138,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SaveFileResponseModel> saveFile(SaveFileRequestModel request) async {
+  Future<SaveFileResponseModel> saveFile(
+    String authorization,
+    SaveFileRequestModel request,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': authorization};
+    _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<SaveFileResponseModel>(Options(

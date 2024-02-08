@@ -46,7 +46,6 @@ class SplashScreen extends ConsumerWidget {
       (failure) {
         debugPrint("failure: ${failure.exception}");
         context.showErrorSnackBar(message: Strings.technicalError);
-        // handle failure
       },
       (LaunchDetailsResponse success) async {
         debugPrint("success in splash: $success");

@@ -5,12 +5,14 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/file_type_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
 import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
@@ -55,33 +57,12 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                   },
                   label: Strings.thatsNotMe,
                 ),
+                SizedBox(height: 16.h),
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-
-  void _uploadSignature() async {
-    final signatureBytes = ref.watch(signatureProvider) as List<int>;
-    final String signatureBase64 = base64Encode(signatureBytes);
-
-    final SaveFileRequestModel request =
-        SaveFileRequestModel(fileName: FileType.SIGNATURE.toString(), fileString: signatureBase64);
-
-    final response = await getIt<SaveFile>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        // handle failure
-      },
-      (SaveFileResponseModel success) async {
-        ref.read(authProfileProvider.notifier).update((state) => success);
-
-        context.go(AppRoutes.selectPINorBiometricScreen);
-      },
     );
   }
 
@@ -254,5 +235,39 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
 
       context.pop();
     }
+  }
+
+  void _uploadSignature() async {
+    final signatureBytes = ref.watch(signatureProvider) as List<int>;
+    final String signatureBase64 = base64Encode(signatureBytes);
+
+    final SaveFileRequestModel request =
+        SaveFileRequestModel(fileName: FileType.SIGNATURE.toString().split('.').last, fileString: signatureBase64);
+
+    debugPrint("request in save file.to json: ${request.toJson()}");
+
+    final String? token = ref.watch(tokenProvider);
+
+    final response = await getIt<SaveFile>().call(request, token ?? "");
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (SaveFileResponseModel success) async {
+        debugPrint("success in auth profile screen: $success");
+
+        if (success.status?.isSuccess == true) {
+          ref.read(authProfileProvider.notifier).update((state) => success);
+
+          context.go(AppRoutes.selectPINorBiometricScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
+    );
   }
 }

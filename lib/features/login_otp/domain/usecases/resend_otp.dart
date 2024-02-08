@@ -12,7 +12,11 @@ class ResendOTP implements UseCase<ResendOtpResponseModel, ResendOtpRequestModel
   ResendOTP(this.authRepository);
 
   @override
-  Future<Either<Failure, ResendOtpResponseModel>> call(ResendOtpRequestModel params) async {
-    return await authRepository.resendOTP(params);
+  Future<Either<Failure, ResendOtpResponseModel>> call(
+    ResendOtpRequestModel params, [
+    String? token,
+    String? sessionId,
+  ]) async {
+    return await authRepository.resendOTP(params, token!, sessionId!);
   }
 }

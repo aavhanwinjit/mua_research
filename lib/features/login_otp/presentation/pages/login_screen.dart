@@ -106,6 +106,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
           if (success.status?.isSuccess == true) {
             ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
+            ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+            ref.read(tokenProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.token);
+
             context.showSnackBar(message: Strings.otpSentSuccessfully);
             context.pushNamed(AppRoutes.otpScreen);
           } else {

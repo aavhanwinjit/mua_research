@@ -36,10 +36,17 @@ abstract class ApiService {
   Future<ValidateOtpResponseModel> validateOTP(@Body() ValidateOtpRequestModel request);
 
   @POST(RESEND_OTP)
-  Future<ResendOtpResponseModel> resendOTP(@Body() ResendOtpRequestModel request);
+  Future<ResendOtpResponseModel> resendOTP(
+    @Header("Authorization") String authorization,
+    @Header("SessionId") String sessionId,
+    @Body() ResendOtpRequestModel request,
+  );
 
   @POST(SAVE_FILE)
-  Future<SaveFileResponseModel> saveFile(@Body() SaveFileRequestModel request);
+  Future<SaveFileResponseModel> saveFile(
+    @Header("Authorization") String authorization,
+    @Body() SaveFileRequestModel request,
+  );
 
   @POST(SET_AGENT_MPIN)
   Future<SetAgentMpinResponseModel> setAgentMPIN(@Body() SetAgentMpinRequestModel request);

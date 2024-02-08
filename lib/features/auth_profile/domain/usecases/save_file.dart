@@ -12,7 +12,11 @@ class SaveFile implements UseCase<SaveFileResponseModel, SaveFileRequestModel> {
   SaveFile(this.saveFileRepository);
 
   @override
-  Future<Either<Failure, SaveFileResponseModel>> call(SaveFileRequestModel params) async {
-    return await saveFileRepository.saveFile(params);
+  Future<Either<Failure, SaveFileResponseModel>> call(
+    SaveFileRequestModel params, [
+    String? token,
+    String? sessionId,
+  ]) async {
+    return await saveFileRepository.saveFile(params, token!);
   }
 }
