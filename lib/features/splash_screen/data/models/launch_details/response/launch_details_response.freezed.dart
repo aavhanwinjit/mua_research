@@ -21,6 +21,437 @@ LaunchDetailsResponse _$LaunchDetailsResponseFromJson(
 
 /// @nodoc
 mixin _$LaunchDetailsResponse {
+  @JsonKey(name: "h")
+  HeaderModel? get header => throw _privateConstructorUsedError;
+  @JsonKey(name: "b")
+  LaunchDetailsData? get body => throw _privateConstructorUsedError;
+  @JsonKey(name: "s")
+  StatusModel? get status => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LaunchDetailsResponseCopyWith<LaunchDetailsResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LaunchDetailsResponseCopyWith<$Res> {
+  factory $LaunchDetailsResponseCopyWith(LaunchDetailsResponse value,
+          $Res Function(LaunchDetailsResponse) then) =
+      _$LaunchDetailsResponseCopyWithImpl<$Res, LaunchDetailsResponse>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "h") HeaderModel? header,
+      @JsonKey(name: "b") LaunchDetailsData? body,
+      @JsonKey(name: "s") StatusModel? status});
+
+  $HeaderModelCopyWith<$Res>? get header;
+  $LaunchDetailsDataCopyWith<$Res>? get body;
+  $StatusModelCopyWith<$Res>? get status;
+}
+
+/// @nodoc
+class _$LaunchDetailsResponseCopyWithImpl<$Res,
+        $Val extends LaunchDetailsResponse>
+    implements $LaunchDetailsResponseCopyWith<$Res> {
+  _$LaunchDetailsResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? header = freezed,
+    Object? body = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_value.copyWith(
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as HeaderModel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as LaunchDetailsData?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HeaderModelCopyWith<$Res>? get header {
+    if (_value.header == null) {
+      return null;
+    }
+
+    return $HeaderModelCopyWith<$Res>(_value.header!, (value) {
+      return _then(_value.copyWith(header: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LaunchDetailsDataCopyWith<$Res>? get body {
+    if (_value.body == null) {
+      return null;
+    }
+
+    return $LaunchDetailsDataCopyWith<$Res>(_value.body!, (value) {
+      return _then(_value.copyWith(body: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusModelCopyWith<$Res>? get status {
+    if (_value.status == null) {
+      return null;
+    }
+
+    return $StatusModelCopyWith<$Res>(_value.status!, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$LaunchDetailsResponseImplCopyWith<$Res>
+    implements $LaunchDetailsResponseCopyWith<$Res> {
+  factory _$$LaunchDetailsResponseImplCopyWith(
+          _$LaunchDetailsResponseImpl value,
+          $Res Function(_$LaunchDetailsResponseImpl) then) =
+      __$$LaunchDetailsResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "h") HeaderModel? header,
+      @JsonKey(name: "b") LaunchDetailsData? body,
+      @JsonKey(name: "s") StatusModel? status});
+
+  @override
+  $HeaderModelCopyWith<$Res>? get header;
+  @override
+  $LaunchDetailsDataCopyWith<$Res>? get body;
+  @override
+  $StatusModelCopyWith<$Res>? get status;
+}
+
+/// @nodoc
+class __$$LaunchDetailsResponseImplCopyWithImpl<$Res>
+    extends _$LaunchDetailsResponseCopyWithImpl<$Res,
+        _$LaunchDetailsResponseImpl>
+    implements _$$LaunchDetailsResponseImplCopyWith<$Res> {
+  __$$LaunchDetailsResponseImplCopyWithImpl(_$LaunchDetailsResponseImpl _value,
+      $Res Function(_$LaunchDetailsResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? header = freezed,
+    Object? body = freezed,
+    Object? status = freezed,
+  }) {
+    return _then(_$LaunchDetailsResponseImpl(
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as HeaderModel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as LaunchDetailsData?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LaunchDetailsResponseImpl implements _LaunchDetailsResponse {
+  const _$LaunchDetailsResponseImpl(
+      {@JsonKey(name: "h") this.header,
+      @JsonKey(name: "b") this.body,
+      @JsonKey(name: "s") this.status});
+
+  factory _$LaunchDetailsResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LaunchDetailsResponseImplFromJson(json);
+
+  @override
+  @JsonKey(name: "h")
+  final HeaderModel? header;
+  @override
+  @JsonKey(name: "b")
+  final LaunchDetailsData? body;
+  @override
+  @JsonKey(name: "s")
+  final StatusModel? status;
+
+  @override
+  String toString() {
+    return 'LaunchDetailsResponse(header: $header, body: $body, status: $status)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LaunchDetailsResponseImpl &&
+            (identical(other.header, header) || other.header == header) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.status, status) || other.status == status));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, header, body, status);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LaunchDetailsResponseImplCopyWith<_$LaunchDetailsResponseImpl>
+      get copyWith => __$$LaunchDetailsResponseImplCopyWithImpl<
+          _$LaunchDetailsResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LaunchDetailsResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LaunchDetailsResponse implements LaunchDetailsResponse {
+  const factory _LaunchDetailsResponse(
+          {@JsonKey(name: "h") final HeaderModel? header,
+          @JsonKey(name: "b") final LaunchDetailsData? body,
+          @JsonKey(name: "s") final StatusModel? status}) =
+      _$LaunchDetailsResponseImpl;
+
+  factory _LaunchDetailsResponse.fromJson(Map<String, dynamic> json) =
+      _$LaunchDetailsResponseImpl.fromJson;
+
+  @override
+  @JsonKey(name: "h")
+  HeaderModel? get header;
+  @override
+  @JsonKey(name: "b")
+  LaunchDetailsData? get body;
+  @override
+  @JsonKey(name: "s")
+  StatusModel? get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$LaunchDetailsResponseImplCopyWith<_$LaunchDetailsResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+LaunchDetailsData _$LaunchDetailsDataFromJson(Map<String, dynamic> json) {
+  return _LaunchDetailsData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LaunchDetailsData {
+  @JsonKey(name: "rb")
+  LaunchDetailsResponseBody? get responseBody =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "checkSum")
+  String? get checkSum => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LaunchDetailsDataCopyWith<LaunchDetailsData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LaunchDetailsDataCopyWith<$Res> {
+  factory $LaunchDetailsDataCopyWith(
+          LaunchDetailsData value, $Res Function(LaunchDetailsData) then) =
+      _$LaunchDetailsDataCopyWithImpl<$Res, LaunchDetailsData>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "rb") LaunchDetailsResponseBody? responseBody,
+      @JsonKey(name: "checkSum") String? checkSum});
+
+  $LaunchDetailsResponseBodyCopyWith<$Res>? get responseBody;
+}
+
+/// @nodoc
+class _$LaunchDetailsDataCopyWithImpl<$Res, $Val extends LaunchDetailsData>
+    implements $LaunchDetailsDataCopyWith<$Res> {
+  _$LaunchDetailsDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? responseBody = freezed,
+    Object? checkSum = freezed,
+  }) {
+    return _then(_value.copyWith(
+      responseBody: freezed == responseBody
+          ? _value.responseBody
+          : responseBody // ignore: cast_nullable_to_non_nullable
+              as LaunchDetailsResponseBody?,
+      checkSum: freezed == checkSum
+          ? _value.checkSum
+          : checkSum // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $LaunchDetailsResponseBodyCopyWith<$Res>? get responseBody {
+    if (_value.responseBody == null) {
+      return null;
+    }
+
+    return $LaunchDetailsResponseBodyCopyWith<$Res>(_value.responseBody!,
+        (value) {
+      return _then(_value.copyWith(responseBody: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$LaunchDetailsDataImplCopyWith<$Res>
+    implements $LaunchDetailsDataCopyWith<$Res> {
+  factory _$$LaunchDetailsDataImplCopyWith(_$LaunchDetailsDataImpl value,
+          $Res Function(_$LaunchDetailsDataImpl) then) =
+      __$$LaunchDetailsDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "rb") LaunchDetailsResponseBody? responseBody,
+      @JsonKey(name: "checkSum") String? checkSum});
+
+  @override
+  $LaunchDetailsResponseBodyCopyWith<$Res>? get responseBody;
+}
+
+/// @nodoc
+class __$$LaunchDetailsDataImplCopyWithImpl<$Res>
+    extends _$LaunchDetailsDataCopyWithImpl<$Res, _$LaunchDetailsDataImpl>
+    implements _$$LaunchDetailsDataImplCopyWith<$Res> {
+  __$$LaunchDetailsDataImplCopyWithImpl(_$LaunchDetailsDataImpl _value,
+      $Res Function(_$LaunchDetailsDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? responseBody = freezed,
+    Object? checkSum = freezed,
+  }) {
+    return _then(_$LaunchDetailsDataImpl(
+      responseBody: freezed == responseBody
+          ? _value.responseBody
+          : responseBody // ignore: cast_nullable_to_non_nullable
+              as LaunchDetailsResponseBody?,
+      checkSum: freezed == checkSum
+          ? _value.checkSum
+          : checkSum // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LaunchDetailsDataImpl implements _LaunchDetailsData {
+  const _$LaunchDetailsDataImpl(
+      {@JsonKey(name: "rb") this.responseBody,
+      @JsonKey(name: "checkSum") this.checkSum});
+
+  factory _$LaunchDetailsDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LaunchDetailsDataImplFromJson(json);
+
+  @override
+  @JsonKey(name: "rb")
+  final LaunchDetailsResponseBody? responseBody;
+  @override
+  @JsonKey(name: "checkSum")
+  final String? checkSum;
+
+  @override
+  String toString() {
+    return 'LaunchDetailsData(responseBody: $responseBody, checkSum: $checkSum)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LaunchDetailsDataImpl &&
+            (identical(other.responseBody, responseBody) ||
+                other.responseBody == responseBody) &&
+            (identical(other.checkSum, checkSum) ||
+                other.checkSum == checkSum));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, responseBody, checkSum);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LaunchDetailsDataImplCopyWith<_$LaunchDetailsDataImpl> get copyWith =>
+      __$$LaunchDetailsDataImplCopyWithImpl<_$LaunchDetailsDataImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LaunchDetailsDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LaunchDetailsData implements LaunchDetailsData {
+  const factory _LaunchDetailsData(
+          {@JsonKey(name: "rb") final LaunchDetailsResponseBody? responseBody,
+          @JsonKey(name: "checkSum") final String? checkSum}) =
+      _$LaunchDetailsDataImpl;
+
+  factory _LaunchDetailsData.fromJson(Map<String, dynamic> json) =
+      _$LaunchDetailsDataImpl.fromJson;
+
+  @override
+  @JsonKey(name: "rb")
+  LaunchDetailsResponseBody? get responseBody;
+  @override
+  @JsonKey(name: "checkSum")
+  String? get checkSum;
+  @override
+  @JsonKey(ignore: true)
+  _$$LaunchDetailsDataImplCopyWith<_$LaunchDetailsDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+LaunchDetailsResponseBody _$LaunchDetailsResponseBodyFromJson(
+    Map<String, dynamic> json) {
+  return _LaunchDetailsResponseBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LaunchDetailsResponseBody {
   @JsonKey(name: "appStart")
   AppStart? get appStart => throw _privateConstructorUsedError;
   @JsonKey(name: "agentData")
@@ -36,15 +467,15 @@ mixin _$LaunchDetailsResponse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LaunchDetailsResponseCopyWith<LaunchDetailsResponse> get copyWith =>
+  $LaunchDetailsResponseBodyCopyWith<LaunchDetailsResponseBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LaunchDetailsResponseCopyWith<$Res> {
-  factory $LaunchDetailsResponseCopyWith(LaunchDetailsResponse value,
-          $Res Function(LaunchDetailsResponse) then) =
-      _$LaunchDetailsResponseCopyWithImpl<$Res, LaunchDetailsResponse>;
+abstract class $LaunchDetailsResponseBodyCopyWith<$Res> {
+  factory $LaunchDetailsResponseBodyCopyWith(LaunchDetailsResponseBody value,
+          $Res Function(LaunchDetailsResponseBody) then) =
+      _$LaunchDetailsResponseBodyCopyWithImpl<$Res, LaunchDetailsResponseBody>;
   @useResult
   $Res call(
       {@JsonKey(name: "appStart") AppStart? appStart,
@@ -61,10 +492,10 @@ abstract class $LaunchDetailsResponseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LaunchDetailsResponseCopyWithImpl<$Res,
-        $Val extends LaunchDetailsResponse>
-    implements $LaunchDetailsResponseCopyWith<$Res> {
-  _$LaunchDetailsResponseCopyWithImpl(this._value, this._then);
+class _$LaunchDetailsResponseBodyCopyWithImpl<$Res,
+        $Val extends LaunchDetailsResponseBody>
+    implements $LaunchDetailsResponseBodyCopyWith<$Res> {
+  _$LaunchDetailsResponseBodyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -159,12 +590,12 @@ class _$LaunchDetailsResponseCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$LaunchDetailsResponseImplCopyWith<$Res>
-    implements $LaunchDetailsResponseCopyWith<$Res> {
-  factory _$$LaunchDetailsResponseImplCopyWith(
-          _$LaunchDetailsResponseImpl value,
-          $Res Function(_$LaunchDetailsResponseImpl) then) =
-      __$$LaunchDetailsResponseImplCopyWithImpl<$Res>;
+abstract class _$$LaunchDetailsResponseBodyImplCopyWith<$Res>
+    implements $LaunchDetailsResponseBodyCopyWith<$Res> {
+  factory _$$LaunchDetailsResponseBodyImplCopyWith(
+          _$LaunchDetailsResponseBodyImpl value,
+          $Res Function(_$LaunchDetailsResponseBodyImpl) then) =
+      __$$LaunchDetailsResponseBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -186,12 +617,13 @@ abstract class _$$LaunchDetailsResponseImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$LaunchDetailsResponseImplCopyWithImpl<$Res>
-    extends _$LaunchDetailsResponseCopyWithImpl<$Res,
-        _$LaunchDetailsResponseImpl>
-    implements _$$LaunchDetailsResponseImplCopyWith<$Res> {
-  __$$LaunchDetailsResponseImplCopyWithImpl(_$LaunchDetailsResponseImpl _value,
-      $Res Function(_$LaunchDetailsResponseImpl) _then)
+class __$$LaunchDetailsResponseBodyImplCopyWithImpl<$Res>
+    extends _$LaunchDetailsResponseBodyCopyWithImpl<$Res,
+        _$LaunchDetailsResponseBodyImpl>
+    implements _$$LaunchDetailsResponseBodyImplCopyWith<$Res> {
+  __$$LaunchDetailsResponseBodyImplCopyWithImpl(
+      _$LaunchDetailsResponseBodyImpl _value,
+      $Res Function(_$LaunchDetailsResponseBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -204,7 +636,7 @@ class __$$LaunchDetailsResponseImplCopyWithImpl<$Res>
     Object? tokenData = freezed,
     Object? unreadPushMessageCount = freezed,
   }) {
-    return _then(_$LaunchDetailsResponseImpl(
+    return _then(_$LaunchDetailsResponseBodyImpl(
       appStart: freezed == appStart
           ? _value.appStart
           : appStart // ignore: cast_nullable_to_non_nullable
@@ -235,8 +667,8 @@ class __$$LaunchDetailsResponseImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LaunchDetailsResponseImpl implements _LaunchDetailsResponse {
-  const _$LaunchDetailsResponseImpl(
+class _$LaunchDetailsResponseBodyImpl implements _LaunchDetailsResponseBody {
+  const _$LaunchDetailsResponseBodyImpl(
       {@JsonKey(name: "appStart") this.appStart,
       @JsonKey(name: "agentData") this.agentData,
       @JsonKey(name: "appSettingsData") this.appSettingsData,
@@ -245,8 +677,8 @@ class _$LaunchDetailsResponseImpl implements _LaunchDetailsResponse {
       @JsonKey(name: "unreadPushMessageCount") this.unreadPushMessageCount})
       : _languages = languages;
 
-  factory _$LaunchDetailsResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LaunchDetailsResponseImplFromJson(json);
+  factory _$LaunchDetailsResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LaunchDetailsResponseBodyImplFromJson(json);
 
   @override
   @JsonKey(name: "appStart")
@@ -277,14 +709,14 @@ class _$LaunchDetailsResponseImpl implements _LaunchDetailsResponse {
 
   @override
   String toString() {
-    return 'LaunchDetailsResponse(appStart: $appStart, agentData: $agentData, appSettingsData: $appSettingsData, languages: $languages, tokenData: $tokenData, unreadPushMessageCount: $unreadPushMessageCount)';
+    return 'LaunchDetailsResponseBody(appStart: $appStart, agentData: $agentData, appSettingsData: $appSettingsData, languages: $languages, tokenData: $tokenData, unreadPushMessageCount: $unreadPushMessageCount)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LaunchDetailsResponseImpl &&
+            other is _$LaunchDetailsResponseBodyImpl &&
             (identical(other.appStart, appStart) ||
                 other.appStart == appStart) &&
             (identical(other.agentData, agentData) ||
@@ -313,30 +745,30 @@ class _$LaunchDetailsResponseImpl implements _LaunchDetailsResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LaunchDetailsResponseImplCopyWith<_$LaunchDetailsResponseImpl>
-      get copyWith => __$$LaunchDetailsResponseImplCopyWithImpl<
-          _$LaunchDetailsResponseImpl>(this, _$identity);
+  _$$LaunchDetailsResponseBodyImplCopyWith<_$LaunchDetailsResponseBodyImpl>
+      get copyWith => __$$LaunchDetailsResponseBodyImplCopyWithImpl<
+          _$LaunchDetailsResponseBodyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LaunchDetailsResponseImplToJson(
+    return _$$LaunchDetailsResponseBodyImplToJson(
       this,
     );
   }
 }
 
-abstract class _LaunchDetailsResponse implements LaunchDetailsResponse {
-  const factory _LaunchDetailsResponse(
+abstract class _LaunchDetailsResponseBody implements LaunchDetailsResponseBody {
+  const factory _LaunchDetailsResponseBody(
       {@JsonKey(name: "appStart") final AppStart? appStart,
       @JsonKey(name: "agentData") final AgentData? agentData,
       @JsonKey(name: "appSettingsData") final AppSettingsData? appSettingsData,
       @JsonKey(name: "languages") final List<Language>? languages,
       @JsonKey(name: "tokenData") final TokenData? tokenData,
       @JsonKey(name: "unreadPushMessageCount")
-      final int? unreadPushMessageCount}) = _$LaunchDetailsResponseImpl;
+      final int? unreadPushMessageCount}) = _$LaunchDetailsResponseBodyImpl;
 
-  factory _LaunchDetailsResponse.fromJson(Map<String, dynamic> json) =
-      _$LaunchDetailsResponseImpl.fromJson;
+  factory _LaunchDetailsResponseBody.fromJson(Map<String, dynamic> json) =
+      _$LaunchDetailsResponseBodyImpl.fromJson;
 
   @override
   @JsonKey(name: "appStart")
@@ -358,7 +790,7 @@ abstract class _LaunchDetailsResponse implements LaunchDetailsResponse {
   int? get unreadPushMessageCount;
   @override
   @JsonKey(ignore: true)
-  _$$LaunchDetailsResponseImplCopyWith<_$LaunchDetailsResponseImpl>
+  _$$LaunchDetailsResponseBodyImplCopyWith<_$LaunchDetailsResponseBodyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 

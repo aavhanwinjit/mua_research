@@ -99,12 +99,23 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       response.fold(
         (failure) {
           debugPrint("failure: $failure");
-          // handle failure
+          context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
         },
         (VerifyMobileNumberResponseModel success) async {
-          ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
-          context.showSnackBar(message: Strings.otpSentSuccessfully);
-          context.pushNamed(AppRoutes.otpScreen);
+          debugPrint("success in login screen : $success");
+
+          if (success.status?.isSuccess == true) {
+            ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
+            ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+            ref.read(tokenProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.token);
+
+            context.showSnackBar(message: Strings.otpSentSuccessfully);
+            context.pushNamed(AppRoutes.otpScreen);
+          } else {
+            context.showErrorSnackBar(
+              message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            );
+          }
         },
       );
     } else {

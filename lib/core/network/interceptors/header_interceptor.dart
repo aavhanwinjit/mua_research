@@ -1,7 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/helpers/request_generator.dart';
-import 'package:ekyc/models/generic_response/response_model.dart';
 
 class HeaderInterceptor extends Interceptor {
   @override

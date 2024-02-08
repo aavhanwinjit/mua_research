@@ -57,7 +57,7 @@ class SuccessScreen extends StatelessWidget {
 
   void _navigateToAuthProfileScreen(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      context.push(AppRoutes.authProfileScreen);
+      context.pushReplacementNamed(AppRoutes.authProfileScreen);
     });
   }
 }

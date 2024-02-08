@@ -9,6 +9,45 @@ part of 'launch_details_response.dart';
 _$LaunchDetailsResponseImpl _$$LaunchDetailsResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$LaunchDetailsResponseImpl(
+      header: json['h'] == null
+          ? null
+          : HeaderModel.fromJson(json['h'] as Map<String, dynamic>),
+      body: json['b'] == null
+          ? null
+          : LaunchDetailsData.fromJson(json['b'] as Map<String, dynamic>),
+      status: json['s'] == null
+          ? null
+          : StatusModel.fromJson(json['s'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$LaunchDetailsResponseImplToJson(
+        _$LaunchDetailsResponseImpl instance) =>
+    <String, dynamic>{
+      'h': instance.header,
+      'b': instance.body,
+      's': instance.status,
+    };
+
+_$LaunchDetailsDataImpl _$$LaunchDetailsDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$LaunchDetailsDataImpl(
+      responseBody: json['rb'] == null
+          ? null
+          : LaunchDetailsResponseBody.fromJson(
+              json['rb'] as Map<String, dynamic>),
+      checkSum: json['checkSum'] as String?,
+    );
+
+Map<String, dynamic> _$$LaunchDetailsDataImplToJson(
+        _$LaunchDetailsDataImpl instance) =>
+    <String, dynamic>{
+      'rb': instance.responseBody,
+      'checkSum': instance.checkSum,
+    };
+
+_$LaunchDetailsResponseBodyImpl _$$LaunchDetailsResponseBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$LaunchDetailsResponseBodyImpl(
       appStart: json['appStart'] == null
           ? null
           : AppStart.fromJson(json['appStart'] as Map<String, dynamic>),
@@ -28,8 +67,8 @@ _$LaunchDetailsResponseImpl _$$LaunchDetailsResponseImplFromJson(
       unreadPushMessageCount: json['unreadPushMessageCount'] as int?,
     );
 
-Map<String, dynamic> _$$LaunchDetailsResponseImplToJson(
-        _$LaunchDetailsResponseImpl instance) =>
+Map<String, dynamic> _$$LaunchDetailsResponseBodyImplToJson(
+        _$LaunchDetailsResponseBodyImpl instance) =>
     <String, dynamic>{
       'appStart': instance.appStart,
       'agentData': instance.agentData,

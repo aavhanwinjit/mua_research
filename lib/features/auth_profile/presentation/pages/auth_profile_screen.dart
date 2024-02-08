@@ -1,7 +1,19 @@
+import 'dart:convert';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/file_type_enums.dart';
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
+import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
+import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart';
+import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
+import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -33,9 +45,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                 SizedBox(height: 40.h),
                 CustomPrimaryButton(
                   disable: ref.watch(signatureProvider) == null,
-                  onTap: () {
-                    context.go(AppRoutes.createPINFaceIdscreen);
-                  },
+                  onTap: _uploadSignature,
                   label: Strings.contn,
                 ),
                 SizedBox(height: 16.h),
@@ -47,6 +57,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                   },
                   label: Strings.thatsNotMe,
                 ),
+                SizedBox(height: 16.h),
               ],
             ),
           ),
@@ -56,7 +67,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
   }
 
   Widget _profileCard() {
-    // final ValidateOtpResponseModel? validateOtpResponseProvider = ref.read(validateOTPResponseProvider);
+    final ValidateOtpResponseModel? validateOtpResponseProvider = ref.read(validateOTPResponseProvider);
 
     return Container(
       width: double.infinity,
@@ -99,15 +110,23 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
             ],
           ),
           SizedBox(height: 15.h),
-          _nameImageWidget(),
+          _nameImageWidget(
+            agentName: validateOtpResponseProvider?.body?.responseBody?.agentName ?? "-",
+            designation: validateOtpResponseProvider?.body?.responseBody?.designation ?? "-",
+          ),
           SizedBox(height: 15.h),
-          const InfoWidget(title: Strings.email, value: "arjun@maubank.mu"),
+          InfoWidget(title: Strings.email, value: validateOtpResponseProvider?.body?.responseBody?.emailId ?? "-"),
           SizedBox(height: 16.h),
-          const InfoWidget(title: Strings.mobileNo, value: "+230 5 123 4567"),
+          InfoWidget(
+              title: Strings.mobileNo, value: validateOtpResponseProvider?.body?.responseBody?.mobileNumber ?? "-"),
           SizedBox(height: 16.h),
-          const InfoWidget(title: Strings.address, value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius"),
+          InfoWidget(title: Strings.address, value: validateOtpResponseProvider?.body?.responseBody?.address ?? "-"),
           SizedBox(height: 16.h),
-          const InfoWidget(title: Strings.companyName, value: "Mauritius Union Assurance Cy Ltd"),
+          InfoWidget(
+              title: Strings.agencyName, value: validateOtpResponseProvider?.body?.responseBody?.agencyName ?? "-"),
+          SizedBox(height: 16.h),
+          InfoWidget(
+              title: Strings.companyName, value: validateOtpResponseProvider?.body?.responseBody?.companyName ?? "-"),
           SizedBox(height: 24.h),
           _signatureBox(),
           SizedBox(height: 24.h),
@@ -116,11 +135,11 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
     );
   }
 
-  Widget _nameImageWidget() {
+  Widget _nameImageWidget({required String agentName, required String designation}) {
     return Row(
       children: [
         CustomProfileImageWidget(
-          userName: "Arjun Kumar",
+          userName: agentName,
           size: 62.w,
           fontSize: 24.sp,
         ),
@@ -129,7 +148,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Arjun Kumar",
+              agentName,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 22.sp,
@@ -138,7 +157,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
             ),
             SizedBox(height: 4.h),
             Text(
-              "Assistant Branch Manager",
+              designation,
               style: TextStyle(
                 color: textGrayColor2,
                 fontSize: 12.sp,
@@ -203,51 +222,6 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
     );
   }
 
-  // void _showActionSheet() {
-  //   showCupertinoModalPopup<void>(
-  //     context: context,
-  //     builder: (BuildContext context) => CupertinoActionSheet(
-  //       cancelButton: CupertinoActionSheetAction(
-  //         onPressed: () {
-  //           context.pop();
-  //         },
-  //         isDefaultAction: true,
-  //         child: Text(
-  //           Strings.cancel,
-  //           style: TextStyle(
-  //             color: iosButtonBlueTextColor,
-  //           ),
-  //         ),
-  //       ),
-  //       actions: <CupertinoActionSheetAction>[
-  //         CupertinoActionSheetAction(
-  //           onPressed: () {
-  //             context.pop();
-  //             context.pushNamed(AppRoutes.signatureScreen);
-  //           },
-  //           child: Text(
-  //             Strings.digitalSignature,
-  //             style: TextStyle(
-  //               color: iosButtonBlueTextColor,
-  //             ),
-  //           ),
-  //         ),
-  //         CupertinoActionSheetAction(
-  //           onPressed: () {
-  //             pickImage();
-  //           },
-  //           child: Text(
-  //             Strings.uploadSignatureImage,
-  //             style: TextStyle(
-  //               color: iosButtonBlueTextColor,
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   void pickImage() async {
     XFile? result = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -261,5 +235,39 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
 
       context.pop();
     }
+  }
+
+  void _uploadSignature() async {
+    final signatureBytes = ref.watch(signatureProvider) as List<int>;
+    final String signatureBase64 = base64Encode(signatureBytes);
+
+    final SaveFileRequestModel request =
+        SaveFileRequestModel(fileName: FileType.SIGNATURE.toString().split('.').last, fileString: signatureBase64);
+
+    debugPrint("request in save file.to json: ${request.toJson()}");
+
+    final String? token = ref.watch(tokenProvider);
+
+    final response = await getIt<SaveFile>().call(request, token ?? "");
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (SaveFileResponseModel success) async {
+        debugPrint("success in auth profile screen: $success");
+
+        if (success.status?.isSuccess == true) {
+          ref.read(authProfileProvider.notifier).update((state) => success);
+
+          context.go(AppRoutes.selectPINorBiometricScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
+    );
   }
 }

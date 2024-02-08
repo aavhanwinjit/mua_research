@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:ekyc/models/generic_header/header_model.dart';
+import 'package:ekyc/models/status/status_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'launch_details_response.freezed.dart';
@@ -16,15 +18,36 @@ String launchDetailsResponseToJson(LaunchDetailsResponse data) => json.encode(da
 @freezed
 class LaunchDetailsResponse with _$LaunchDetailsResponse {
   const factory LaunchDetailsResponse({
+    @JsonKey(name: "h") HeaderModel? header,
+    @JsonKey(name: "b") LaunchDetailsData? body,
+    @JsonKey(name: "s") StatusModel? status,
+  }) = _LaunchDetailsResponse;
+
+  factory LaunchDetailsResponse.fromJson(Map<String, dynamic> json) => _$LaunchDetailsResponseFromJson(json);
+}
+
+@freezed
+class LaunchDetailsData with _$LaunchDetailsData {
+  const factory LaunchDetailsData({
+    @JsonKey(name: "rb") LaunchDetailsResponseBody? responseBody,
+    @JsonKey(name: "checkSum") String? checkSum,
+  }) = _LaunchDetailsData;
+
+  factory LaunchDetailsData.fromJson(Map<String, dynamic> json) => _$LaunchDetailsDataFromJson(json);
+}
+
+@freezed
+class LaunchDetailsResponseBody with _$LaunchDetailsResponseBody {
+  const factory LaunchDetailsResponseBody({
     @JsonKey(name: "appStart") AppStart? appStart,
     @JsonKey(name: "agentData") AgentData? agentData,
     @JsonKey(name: "appSettingsData") AppSettingsData? appSettingsData,
     @JsonKey(name: "languages") List<Language>? languages,
     @JsonKey(name: "tokenData") TokenData? tokenData,
     @JsonKey(name: "unreadPushMessageCount") int? unreadPushMessageCount,
-  }) = _LaunchDetailsResponse;
+  }) = _LaunchDetailsResponseBody;
 
-  factory LaunchDetailsResponse.fromJson(Map<String, dynamic> json) => _$LaunchDetailsResponseFromJson(json);
+  factory LaunchDetailsResponseBody.fromJson(Map<String, dynamic> json) => _$LaunchDetailsResponseBodyFromJson(json);
 }
 
 @freezed

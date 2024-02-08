@@ -1,7 +1,4 @@
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
-import 'package:ekyc/features/create_pin_face_id_screen/presentation/pages/create_pin_and_face_id/confirm_pin_screen.dart';
-import 'package:ekyc/features/create_pin_face_id_screen/presentation/pages/create_pin_and_face_id/create_pin_and_face_id_screen.dart';
-import 'package:ekyc/features/create_pin_face_id_screen/presentation/pages/create_pin_face_id_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_docs_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_documents_screen.dart';
@@ -26,6 +23,9 @@ import 'package:ekyc/features/login_otp/presentation/pages/failure_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/login_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/confirm_pin_screen.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/create_pin_screen.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/select_pin_or_biometric_screen.dart';
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
@@ -39,9 +39,8 @@ class AppRoutes {
   static const String successScreen = '/success_screen';
   static const String failureScreen = '/failure_screen';
   static const String loginScreen = '/login_screen';
-  static const String createPINFaceIdscreen = '/create_pin_face_id_screen';
-  static const String createPINandFaceIdScreen =
-      '/create_pin_and_face_id_screen';
+  static const String selectPINorBiometricScreen = '/select_pin_or_biometric_screen';
+  static const String createPINScreen = '/create_pin_screen';
   static const String confirmPINScreen = '/confirm_pin_screen';
   static const String onboardSuccessScreen = '/onboard_success_screen';
   static const String authProfileScreen = '/auth_profile_screen';
@@ -50,35 +49,28 @@ class AppRoutes {
   static const String customerInfoScreen = '/customer_info_screen';
   static const String insuranceStagesScreen = '/insurance_stages_screen';
   static const String uploadIDproofScreen = '/upload_id_proof_screen';
-  static const String confirmUploadOrRetakeScreen =
-      '/confirm_upload_or_retake_screen';
+  static const String confirmUploadOrRetakeScreen = '/confirm_upload_or_retake_screen';
   static const String idReviewSubmitScreen = '/id_review_submit_screen';
   static const String editCustomerInfoScreen = '/edit_customer_info_screen';
   static const String editIDScreen = '/edit_id_screen';
   static const String policyDocumentScreen = '/policy_document_screen';
-  static const String pdReviewSubmitScreen =
-      '/policy_document_review_submit_screen';
+  static const String pdReviewSubmitScreen = '/policy_document_review_submit_screen';
   static const String reviewSubmitScreen = '/review_submit_screen';
   static const String cameraScreen = '/camera_screen';
   static const String addressDetailsScreen = '/address_details_screen';
   static const String insuredDocumentScreen = '/insured_document_screen';
-  static const String addressReviewSubmitScreen =
-      '/address_review_submit_screen';
+  static const String addressReviewSubmitScreen = '/address_review_submit_screen';
   static const String additionalDocsScreen = '/additional_docs_screen';
-  static const String additionalDocsReviewSubmitScreen =
-      '/additional_docs_review_submit_screen';
+  static const String additionalDocsReviewSubmitScreen = '/additional_docs_review_submit_screen';
   static const String motorDocsScreen = '/motor_docs_screen';
-  static const String motorDocsReviewSubmitScreen =
-      '/motor_docs_review_submit_screen';
+  static const String motorDocsReviewSubmitScreen = '/motor_docs_review_submit_screen';
   static const String nonMotorDocsScreen = '/non_motor_docs_screen';
-  static const String nonMotorDocsReviewSubmitScreen =
-      '/non_motor_docs_review_submit_screen';
+  static const String nonMotorDocsReviewSubmitScreen = '/non_motor_docs_review_submit_screen';
   static const String profileScreen = '/profile_screen';
   static const String kycSubmittedScreen = '/kyc_submit_screen';
 }
 
-final GlobalKey<NavigatorState> rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
   // initialLocation: AppRoutes.dashboardScreen,
@@ -120,17 +112,17 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.createPINFaceIdscreen,
-      name: AppRoutes.createPINFaceIdscreen,
+      path: AppRoutes.selectPINorBiometricScreen,
+      name: AppRoutes.selectPINorBiometricScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const CreatePINFaceIdScreen();
+        return const SelectPINorBiometricScreen();
       },
     ),
     GoRoute(
-      path: AppRoutes.createPINandFaceIdScreen,
-      name: AppRoutes.createPINandFaceIdScreen,
+      path: AppRoutes.createPINScreen,
+      name: AppRoutes.createPINScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const CreatePINandFaceIdScreen();
+        return const CreatePinScreen();
       },
     ),
     GoRoute(
@@ -167,7 +159,7 @@ final GoRouter router = GoRouter(
         return const DashboardScreen();
       },
     ),
-     GoRoute(
+    GoRoute(
       path: AppRoutes.customerInfoScreen,
       name: AppRoutes.customerInfoScreen,
       builder: (BuildContext context, GoRouterState state) {

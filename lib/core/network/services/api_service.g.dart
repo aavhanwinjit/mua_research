@@ -89,7 +89,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/AgentAPI/Registration/VerifyMobileNumber',
+              '/AgentAPI/Registration/ValidateAgentRegOTP',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -104,10 +104,17 @@ class _ApiService implements ApiService {
 
   @override
   Future<ResendOtpResponseModel> resendOTP(
-      ResendOtpRequestModel request) async {
+    String authorization,
+    String sessionId,
+    ResendOtpRequestModel request,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
+    final _headers = <String, dynamic>{
+      r'Authorization': authorization,
+      r'SessionId': sessionId,
+    };
+    _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ResendOtpResponseModel>(Options(
@@ -127,6 +134,65 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = ResendOtpResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SaveFileResponseModel> saveFile(
+    String authorization,
+    SaveFileRequestModel request,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': authorization};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SaveFileResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/FileHandling/SaveFile',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SaveFileResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SetAgentMpinResponseModel> setAgentMPIN(
+      SetAgentMpinRequestModel request) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SetAgentMpinResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Registration/SetAgentMPIN',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SetAgentMpinResponseModel.fromJson(_result.data!);
     return value;
   }
 

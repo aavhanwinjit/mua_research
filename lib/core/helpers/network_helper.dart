@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/network/interceptors/connection_checker_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/encryption_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/header_interceptor.dart';
 import 'package:flutter/foundation.dart';

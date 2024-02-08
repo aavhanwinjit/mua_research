@@ -243,4 +243,8 @@ class Strings {
   static const String chooseFasterWayToLogIn = "Choose a faster way to log in on this device";
   static const String createPinAndFaceId = "Create PIN & Face ID";
   static const String createPinOnly = 'Create PIN Only';
+  static const String createPin = "Create PIN";
+  static const String createPinSubtitle =
+      "You'll use it to securely unlock and access your app, so please don't share it with anyone.";
+  static const String confirmPin = "Confirm PIN";
 }

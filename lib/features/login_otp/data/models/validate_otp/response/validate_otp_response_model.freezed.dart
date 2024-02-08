@@ -21,14 +21,12 @@ ValidateOtpResponseModel _$ValidateOtpResponseModelFromJson(
 
 /// @nodoc
 mixin _$ValidateOtpResponseModel {
-  @JsonKey(name: "agentName")
-  String? get agentName => throw _privateConstructorUsedError;
-  @JsonKey(name: "mobileNumber")
-  String? get mobileNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: "address")
-  String? get address => throw _privateConstructorUsedError;
-  @JsonKey(name: "companyName")
-  String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "h")
+  HeaderModel? get header => throw _privateConstructorUsedError;
+  @JsonKey(name: "b")
+  ValidateOTPData? get body => throw _privateConstructorUsedError;
+  @JsonKey(name: "s")
+  StatusModel? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,10 +41,13 @@ abstract class $ValidateOtpResponseModelCopyWith<$Res> {
       _$ValidateOtpResponseModelCopyWithImpl<$Res, ValidateOtpResponseModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "agentName") String? agentName,
-      @JsonKey(name: "mobileNumber") String? mobileNumber,
-      @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName});
+      {@JsonKey(name: "h") HeaderModel? header,
+      @JsonKey(name: "b") ValidateOTPData? body,
+      @JsonKey(name: "s") StatusModel? status});
+
+  $HeaderModelCopyWith<$Res>? get header;
+  $ValidateOTPDataCopyWith<$Res>? get body;
+  $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
@@ -63,29 +64,60 @@ class _$ValidateOtpResponseModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? agentName = freezed,
-    Object? mobileNumber = freezed,
-    Object? address = freezed,
-    Object? companyName = freezed,
+    Object? header = freezed,
+    Object? body = freezed,
+    Object? status = freezed,
   }) {
     return _then(_value.copyWith(
-      agentName: freezed == agentName
-          ? _value.agentName
-          : agentName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      mobileNumber: freezed == mobileNumber
-          ? _value.mobileNumber
-          : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as HeaderModel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as ValidateOTPData?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HeaderModelCopyWith<$Res>? get header {
+    if (_value.header == null) {
+      return null;
+    }
+
+    return $HeaderModelCopyWith<$Res>(_value.header!, (value) {
+      return _then(_value.copyWith(header: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ValidateOTPDataCopyWith<$Res>? get body {
+    if (_value.body == null) {
+      return null;
+    }
+
+    return $ValidateOTPDataCopyWith<$Res>(_value.body!, (value) {
+      return _then(_value.copyWith(body: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $StatusModelCopyWith<$Res>? get status {
+    if (_value.status == null) {
+      return null;
+    }
+
+    return $StatusModelCopyWith<$Res>(_value.status!, (value) {
+      return _then(_value.copyWith(status: value) as $Val);
+    });
   }
 }
 
@@ -99,10 +131,16 @@ abstract class _$$ValidateOtpResponseModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "agentName") String? agentName,
-      @JsonKey(name: "mobileNumber") String? mobileNumber,
-      @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName});
+      {@JsonKey(name: "h") HeaderModel? header,
+      @JsonKey(name: "b") ValidateOTPData? body,
+      @JsonKey(name: "s") StatusModel? status});
+
+  @override
+  $HeaderModelCopyWith<$Res>? get header;
+  @override
+  $ValidateOTPDataCopyWith<$Res>? get body;
+  @override
+  $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
@@ -118,28 +156,23 @@ class __$$ValidateOtpResponseModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? agentName = freezed,
-    Object? mobileNumber = freezed,
-    Object? address = freezed,
-    Object? companyName = freezed,
+    Object? header = freezed,
+    Object? body = freezed,
+    Object? status = freezed,
   }) {
     return _then(_$ValidateOtpResponseModelImpl(
-      agentName: freezed == agentName
-          ? _value.agentName
-          : agentName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      mobileNumber: freezed == mobileNumber
-          ? _value.mobileNumber
-          : mobileNumber // ignore: cast_nullable_to_non_nullable
-              as String?,
-      address: freezed == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String?,
-      companyName: freezed == companyName
-          ? _value.companyName
-          : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
+      header: freezed == header
+          ? _value.header
+          : header // ignore: cast_nullable_to_non_nullable
+              as HeaderModel?,
+      body: freezed == body
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
+              as ValidateOTPData?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as StatusModel?,
     ));
   }
 }
@@ -148,30 +181,26 @@ class __$$ValidateOtpResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
   const _$ValidateOtpResponseModelImpl(
-      {@JsonKey(name: "agentName") this.agentName,
-      @JsonKey(name: "mobileNumber") this.mobileNumber,
-      @JsonKey(name: "address") this.address,
-      @JsonKey(name: "companyName") this.companyName});
+      {@JsonKey(name: "h") this.header,
+      @JsonKey(name: "b") this.body,
+      @JsonKey(name: "s") this.status});
 
   factory _$ValidateOtpResponseModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ValidateOtpResponseModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "agentName")
-  final String? agentName;
+  @JsonKey(name: "h")
+  final HeaderModel? header;
   @override
-  @JsonKey(name: "mobileNumber")
-  final String? mobileNumber;
+  @JsonKey(name: "b")
+  final ValidateOTPData? body;
   @override
-  @JsonKey(name: "address")
-  final String? address;
-  @override
-  @JsonKey(name: "companyName")
-  final String? companyName;
+  @JsonKey(name: "s")
+  final StatusModel? status;
 
   @override
   String toString() {
-    return 'ValidateOtpResponseModel(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName)';
+    return 'ValidateOtpResponseModel(header: $header, body: $body, status: $status)';
   }
 
   @override
@@ -179,19 +208,14 @@ class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ValidateOtpResponseModelImpl &&
-            (identical(other.agentName, agentName) ||
-                other.agentName == agentName) &&
-            (identical(other.mobileNumber, mobileNumber) ||
-                other.mobileNumber == mobileNumber) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName));
+            (identical(other.header, header) || other.header == header) &&
+            (identical(other.body, body) || other.body == body) &&
+            (identical(other.status, status) || other.status == status));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, agentName, mobileNumber, address, companyName);
+  int get hashCode => Object.hash(runtimeType, header, body, status);
 
   @JsonKey(ignore: true)
   @override
@@ -210,14 +234,484 @@ class _$ValidateOtpResponseModelImpl implements _ValidateOtpResponseModel {
 
 abstract class _ValidateOtpResponseModel implements ValidateOtpResponseModel {
   const factory _ValidateOtpResponseModel(
-          {@JsonKey(name: "agentName") final String? agentName,
-          @JsonKey(name: "mobileNumber") final String? mobileNumber,
-          @JsonKey(name: "address") final String? address,
-          @JsonKey(name: "companyName") final String? companyName}) =
+          {@JsonKey(name: "h") final HeaderModel? header,
+          @JsonKey(name: "b") final ValidateOTPData? body,
+          @JsonKey(name: "s") final StatusModel? status}) =
       _$ValidateOtpResponseModelImpl;
 
   factory _ValidateOtpResponseModel.fromJson(Map<String, dynamic> json) =
       _$ValidateOtpResponseModelImpl.fromJson;
+
+  @override
+  @JsonKey(name: "h")
+  HeaderModel? get header;
+  @override
+  @JsonKey(name: "b")
+  ValidateOTPData? get body;
+  @override
+  @JsonKey(name: "s")
+  StatusModel? get status;
+  @override
+  @JsonKey(ignore: true)
+  _$$ValidateOtpResponseModelImplCopyWith<_$ValidateOtpResponseModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ValidateOTPData _$ValidateOTPDataFromJson(Map<String, dynamic> json) {
+  return _ValidateOTPData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ValidateOTPData {
+  @JsonKey(name: "rb")
+  ValidateOTPResponseBody? get responseBody =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "checkSum")
+  String? get checkSum => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ValidateOTPDataCopyWith<ValidateOTPData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ValidateOTPDataCopyWith<$Res> {
+  factory $ValidateOTPDataCopyWith(
+          ValidateOTPData value, $Res Function(ValidateOTPData) then) =
+      _$ValidateOTPDataCopyWithImpl<$Res, ValidateOTPData>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "rb") ValidateOTPResponseBody? responseBody,
+      @JsonKey(name: "checkSum") String? checkSum});
+
+  $ValidateOTPResponseBodyCopyWith<$Res>? get responseBody;
+}
+
+/// @nodoc
+class _$ValidateOTPDataCopyWithImpl<$Res, $Val extends ValidateOTPData>
+    implements $ValidateOTPDataCopyWith<$Res> {
+  _$ValidateOTPDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? responseBody = freezed,
+    Object? checkSum = freezed,
+  }) {
+    return _then(_value.copyWith(
+      responseBody: freezed == responseBody
+          ? _value.responseBody
+          : responseBody // ignore: cast_nullable_to_non_nullable
+              as ValidateOTPResponseBody?,
+      checkSum: freezed == checkSum
+          ? _value.checkSum
+          : checkSum // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ValidateOTPResponseBodyCopyWith<$Res>? get responseBody {
+    if (_value.responseBody == null) {
+      return null;
+    }
+
+    return $ValidateOTPResponseBodyCopyWith<$Res>(_value.responseBody!,
+        (value) {
+      return _then(_value.copyWith(responseBody: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ValidateOTPDataImplCopyWith<$Res>
+    implements $ValidateOTPDataCopyWith<$Res> {
+  factory _$$ValidateOTPDataImplCopyWith(_$ValidateOTPDataImpl value,
+          $Res Function(_$ValidateOTPDataImpl) then) =
+      __$$ValidateOTPDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "rb") ValidateOTPResponseBody? responseBody,
+      @JsonKey(name: "checkSum") String? checkSum});
+
+  @override
+  $ValidateOTPResponseBodyCopyWith<$Res>? get responseBody;
+}
+
+/// @nodoc
+class __$$ValidateOTPDataImplCopyWithImpl<$Res>
+    extends _$ValidateOTPDataCopyWithImpl<$Res, _$ValidateOTPDataImpl>
+    implements _$$ValidateOTPDataImplCopyWith<$Res> {
+  __$$ValidateOTPDataImplCopyWithImpl(
+      _$ValidateOTPDataImpl _value, $Res Function(_$ValidateOTPDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? responseBody = freezed,
+    Object? checkSum = freezed,
+  }) {
+    return _then(_$ValidateOTPDataImpl(
+      responseBody: freezed == responseBody
+          ? _value.responseBody
+          : responseBody // ignore: cast_nullable_to_non_nullable
+              as ValidateOTPResponseBody?,
+      checkSum: freezed == checkSum
+          ? _value.checkSum
+          : checkSum // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ValidateOTPDataImpl implements _ValidateOTPData {
+  const _$ValidateOTPDataImpl(
+      {@JsonKey(name: "rb") this.responseBody,
+      @JsonKey(name: "checkSum") this.checkSum});
+
+  factory _$ValidateOTPDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ValidateOTPDataImplFromJson(json);
+
+  @override
+  @JsonKey(name: "rb")
+  final ValidateOTPResponseBody? responseBody;
+  @override
+  @JsonKey(name: "checkSum")
+  final String? checkSum;
+
+  @override
+  String toString() {
+    return 'ValidateOTPData(responseBody: $responseBody, checkSum: $checkSum)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateOTPDataImpl &&
+            (identical(other.responseBody, responseBody) ||
+                other.responseBody == responseBody) &&
+            (identical(other.checkSum, checkSum) ||
+                other.checkSum == checkSum));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, responseBody, checkSum);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValidateOTPDataImplCopyWith<_$ValidateOTPDataImpl> get copyWith =>
+      __$$ValidateOTPDataImplCopyWithImpl<_$ValidateOTPDataImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ValidateOTPDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ValidateOTPData implements ValidateOTPData {
+  const factory _ValidateOTPData(
+          {@JsonKey(name: "rb") final ValidateOTPResponseBody? responseBody,
+          @JsonKey(name: "checkSum") final String? checkSum}) =
+      _$ValidateOTPDataImpl;
+
+  factory _ValidateOTPData.fromJson(Map<String, dynamic> json) =
+      _$ValidateOTPDataImpl.fromJson;
+
+  @override
+  @JsonKey(name: "rb")
+  ValidateOTPResponseBody? get responseBody;
+  @override
+  @JsonKey(name: "checkSum")
+  String? get checkSum;
+  @override
+  @JsonKey(ignore: true)
+  _$$ValidateOTPDataImplCopyWith<_$ValidateOTPDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ValidateOTPResponseBody _$ValidateOTPResponseBodyFromJson(
+    Map<String, dynamic> json) {
+  return _ValidateOTPResponseBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ValidateOTPResponseBody {
+  @JsonKey(name: "agentName")
+  String? get agentName => throw _privateConstructorUsedError;
+  @JsonKey(name: "mobileNumber")
+  String? get mobileNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "address")
+  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: "companyName")
+  String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "emailId")
+  String? get emailId => throw _privateConstructorUsedError;
+  @JsonKey(name: "designation")
+  String? get designation => throw _privateConstructorUsedError;
+  @JsonKey(name: "agencyName")
+  String? get agencyName => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ValidateOTPResponseBodyCopyWith<ValidateOTPResponseBody> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ValidateOTPResponseBodyCopyWith<$Res> {
+  factory $ValidateOTPResponseBodyCopyWith(ValidateOTPResponseBody value,
+          $Res Function(ValidateOTPResponseBody) then) =
+      _$ValidateOTPResponseBodyCopyWithImpl<$Res, ValidateOTPResponseBody>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "agentName") String? agentName,
+      @JsonKey(name: "mobileNumber") String? mobileNumber,
+      @JsonKey(name: "address") String? address,
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "emailId") String? emailId,
+      @JsonKey(name: "designation") String? designation,
+      @JsonKey(name: "agencyName") String? agencyName});
+}
+
+/// @nodoc
+class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
+        $Val extends ValidateOTPResponseBody>
+    implements $ValidateOTPResponseBodyCopyWith<$Res> {
+  _$ValidateOTPResponseBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? agentName = freezed,
+    Object? mobileNumber = freezed,
+    Object? address = freezed,
+    Object? companyName = freezed,
+    Object? emailId = freezed,
+    Object? designation = freezed,
+    Object? agencyName = freezed,
+  }) {
+    return _then(_value.copyWith(
+      agentName: freezed == agentName
+          ? _value.agentName
+          : agentName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailId: freezed == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      agencyName: freezed == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ValidateOTPResponseBodyImplCopyWith<$Res>
+    implements $ValidateOTPResponseBodyCopyWith<$Res> {
+  factory _$$ValidateOTPResponseBodyImplCopyWith(
+          _$ValidateOTPResponseBodyImpl value,
+          $Res Function(_$ValidateOTPResponseBodyImpl) then) =
+      __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "agentName") String? agentName,
+      @JsonKey(name: "mobileNumber") String? mobileNumber,
+      @JsonKey(name: "address") String? address,
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "emailId") String? emailId,
+      @JsonKey(name: "designation") String? designation,
+      @JsonKey(name: "agencyName") String? agencyName});
+}
+
+/// @nodoc
+class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
+    extends _$ValidateOTPResponseBodyCopyWithImpl<$Res,
+        _$ValidateOTPResponseBodyImpl>
+    implements _$$ValidateOTPResponseBodyImplCopyWith<$Res> {
+  __$$ValidateOTPResponseBodyImplCopyWithImpl(
+      _$ValidateOTPResponseBodyImpl _value,
+      $Res Function(_$ValidateOTPResponseBodyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? agentName = freezed,
+    Object? mobileNumber = freezed,
+    Object? address = freezed,
+    Object? companyName = freezed,
+    Object? emailId = freezed,
+    Object? designation = freezed,
+    Object? agencyName = freezed,
+  }) {
+    return _then(_$ValidateOTPResponseBodyImpl(
+      agentName: freezed == agentName
+          ? _value.agentName
+          : agentName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mobileNumber: freezed == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      emailId: freezed == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      designation: freezed == designation
+          ? _value.designation
+          : designation // ignore: cast_nullable_to_non_nullable
+              as String?,
+      agencyName: freezed == agencyName
+          ? _value.agencyName
+          : agencyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
+  const _$ValidateOTPResponseBodyImpl(
+      {@JsonKey(name: "agentName") this.agentName,
+      @JsonKey(name: "mobileNumber") this.mobileNumber,
+      @JsonKey(name: "address") this.address,
+      @JsonKey(name: "companyName") this.companyName,
+      @JsonKey(name: "emailId") this.emailId,
+      @JsonKey(name: "designation") this.designation,
+      @JsonKey(name: "agencyName") this.agencyName});
+
+  factory _$ValidateOTPResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ValidateOTPResponseBodyImplFromJson(json);
+
+  @override
+  @JsonKey(name: "agentName")
+  final String? agentName;
+  @override
+  @JsonKey(name: "mobileNumber")
+  final String? mobileNumber;
+  @override
+  @JsonKey(name: "address")
+  final String? address;
+  @override
+  @JsonKey(name: "companyName")
+  final String? companyName;
+  @override
+  @JsonKey(name: "emailId")
+  final String? emailId;
+  @override
+  @JsonKey(name: "designation")
+  final String? designation;
+  @override
+  @JsonKey(name: "agencyName")
+  final String? agencyName;
+
+  @override
+  String toString() {
+    return 'ValidateOTPResponseBody(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, emailId: $emailId, designation: $designation, agencyName: $agencyName)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ValidateOTPResponseBodyImpl &&
+            (identical(other.agentName, agentName) ||
+                other.agentName == agentName) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.emailId, emailId) || other.emailId == emailId) &&
+            (identical(other.designation, designation) ||
+                other.designation == designation) &&
+            (identical(other.agencyName, agencyName) ||
+                other.agencyName == agencyName));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, agentName, mobileNumber, address,
+      companyName, emailId, designation, agencyName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ValidateOTPResponseBodyImplCopyWith<_$ValidateOTPResponseBodyImpl>
+      get copyWith => __$$ValidateOTPResponseBodyImplCopyWithImpl<
+          _$ValidateOTPResponseBodyImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ValidateOTPResponseBodyImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ValidateOTPResponseBody implements ValidateOTPResponseBody {
+  const factory _ValidateOTPResponseBody(
+          {@JsonKey(name: "agentName") final String? agentName,
+          @JsonKey(name: "mobileNumber") final String? mobileNumber,
+          @JsonKey(name: "address") final String? address,
+          @JsonKey(name: "companyName") final String? companyName,
+          @JsonKey(name: "emailId") final String? emailId,
+          @JsonKey(name: "designation") final String? designation,
+          @JsonKey(name: "agencyName") final String? agencyName}) =
+      _$ValidateOTPResponseBodyImpl;
+
+  factory _ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) =
+      _$ValidateOTPResponseBodyImpl.fromJson;
 
   @override
   @JsonKey(name: "agentName")
@@ -232,7 +726,16 @@ abstract class _ValidateOtpResponseModel implements ValidateOtpResponseModel {
   @JsonKey(name: "companyName")
   String? get companyName;
   @override
+  @JsonKey(name: "emailId")
+  String? get emailId;
+  @override
+  @JsonKey(name: "designation")
+  String? get designation;
+  @override
+  @JsonKey(name: "agencyName")
+  String? get agencyName;
+  @override
   @JsonKey(ignore: true)
-  _$$ValidateOtpResponseModelImplCopyWith<_$ValidateOtpResponseModelImpl>
+  _$$ValidateOTPResponseBodyImplCopyWith<_$ValidateOTPResponseBodyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
