@@ -27,6 +27,9 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
   @POST(LAUNCH_DETAILS)
+  // @Headers(<String, dynamic>{
+  //   'Content-Type': 'application/json',
+  // })
   Future<LaunchDetailsResponse> launchDetails(@Body() LaunchDetailsRequest request);
 
   @POST(VERIFY_MOBILE_NUMBER)

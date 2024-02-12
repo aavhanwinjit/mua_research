@@ -241,8 +241,11 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
     final signatureBytes = ref.watch(signatureProvider) as List<int>;
     final String signatureBase64 = base64Encode(signatureBytes);
 
-    final SaveFileRequestModel request =
-        SaveFileRequestModel(fileName: FileType.SIGNATURE.toString().split('.').last, fileString: signatureBase64);
+    final SaveFileRequestModel request = SaveFileRequestModel(
+      fileName: "${FileType.SIGNATURE.toString().split('.').last}.png",
+      fileString: signatureBase64,
+      allowedFileId: 9,
+    );
 
     debugPrint("request in save file.to json: ${request.toJson()}");
 
@@ -253,7 +256,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SaveFileResponseModel success) async {
         debugPrint("success in auth profile screen: $success");
