@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
@@ -20,6 +21,7 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
 
 class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
   String pin = "";
+  bool successVal = false;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +57,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
             const SizedBox(height: 50),
             _maskedPinTextField(),
             const SizedBox(height: 30),
-            pin.length == 6
+            successVal
                 ? Container(
                     color: primaryGreenColor,
                     padding: const EdgeInsets.symmetric(
@@ -76,31 +78,6 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  void _setAgentMPIN() async {
-    final validateOTPResponse = ref.read(validateOTPResponseProvider);
-    final authProfileResponse = ref.read(authProfileProvider);
-
-    SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
-      confirmMpin: ref.read(confirmPINProvider),
-      mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
-      mpin: ref.read(createPINProvider),
-      signaturePath: authProfileResponse?.body?.responseBody?.fileName,
-    );
-    final response = await getIt<SetAgentMPIN>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        // handle failure
-      },
-      (SetAgentMpinResponseModel success) async {
-        // ref.read(authProfileProvider.notifier).update((state) => success);
-
-        context.pushNamed(AppRoutes.onboardSuccessScreen);
-      },
     );
   }
 
@@ -163,12 +140,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                         });
                       }
                       debugPrint(pin);
-                      if (pin.length == 6) {
-                        //navigate
-                        Future.delayed(const Duration(seconds: 2), () {
-                          _setAgentMPIN();
-                        });
-                      }
+                    }
+
+                    ref.watch(confirmPINProvider.notifier).update((state) => pin);
+
+                    if (pin.length == 6) {
+                      //navigate
+                      Future.delayed(const Duration(seconds: 2), () {
+                        _setAgentMPIN();
+                      });
                     }
                   },
                   shape: RoundedRectangleBorder(
@@ -187,6 +167,42 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  void _setAgentMPIN() async {
+    final validateOTPResponse = ref.read(validateOTPResponseProvider);
+    final authProfileResponse = ref.read(authProfileProvider);
+
+    SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
+      confirmMpin: ref.read(confirmPINProvider),
+      mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
+      mpin: ref.read(createPINProvider),
+      signaturePath: authProfileResponse?.body?.responseBody?.fileName,
+    );
+
+    debugPrint("request in set agent mpin.to json: ${request.toJson()}");
+
+    final response = await getIt<SetAgentMPIN>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (SetAgentMpinResponseModel success) async {
+        if (success.status?.isSuccess == true) {
+          successVal = true;
+          setState(() {});
+          ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
+
+          context.pushNamed(AppRoutes.onboardSuccessScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
     );
   }
 }

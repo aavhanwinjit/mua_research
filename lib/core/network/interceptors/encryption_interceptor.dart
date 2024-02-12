@@ -24,22 +24,28 @@ class EncryptionInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
-      cipherText: response.data["b"],
-      deviceID: response.data["h"]["di"]["d"],
-      requestUUID: response.data["h"]["mk"]["r"],
-      sessionId: response.data["h"]["mk"]["s"],
-      timestamp: response.data["h"]["mk"]["t"],
-      index: int.parse(response.data["h"]["mk"]["i"]),
-    );
+    debugPrint("response.data['b']:${response.data["b"]}");
 
-    debugPrint("decrypted Response: $decryptedResponse");
-    debugPrint("decrypted Response type: ${decryptedResponse.runtimeType}");
-    debugPrint("decrypted Response rb: ${decryptedResponse['rb']}");
+    if (response.data["b"] != null) {
+      Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
+        cipherText: response.data["b"],
+        deviceID: response.data["h"]["di"]["d"],
+        requestUUID: response.data["h"]["mk"]["r"],
+        sessionId: response.data["h"]["mk"]["s"],
+        timestamp: response.data["h"]["mk"]["t"],
+        index: int.parse(response.data["h"]["mk"]["i"]),
+      );
 
-    decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
+      debugPrint("decrypted Response: $decryptedResponse");
+      debugPrint("decrypted Response type: ${decryptedResponse.runtimeType}");
+      debugPrint("decrypted Response rb: ${decryptedResponse['rb']}");
 
-    response.data["b"] = decryptedResponse;
+      decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
+
+      response.data["b"] = decryptedResponse;
+
+      handler.next(response);
+    }
 
     // debugPrint("response.data in interceptor: ${response.data}");
     // debugPrint("response.data type in interceptor: ${response.data.runtimeType}");
@@ -49,8 +55,6 @@ class EncryptionInterceptor extends Interceptor {
     // final LaunchDetailsResponse responseModel = LaunchDetailsResponse.fromJson(response.data);
 
     // debugPrint("responseModel: $responseModel");
-
-    handler.next(response);
   }
 
   @override

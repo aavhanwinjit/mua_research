@@ -52,6 +52,7 @@ class EncryptionHelper {
     String sequence = "3210";
     String deviceId = deviceInfoModel.deviceId!;
     String requestUUID = generateRandomAlphaNumeric();
+    // const String sessionId = "1707392469778";
     final String sessionId = DateTime.now().millisecondsSinceEpoch.toString();
     final String timeStamp = DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
     final index = Random().nextInt(15);

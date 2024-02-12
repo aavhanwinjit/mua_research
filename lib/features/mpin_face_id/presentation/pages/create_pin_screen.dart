@@ -143,10 +143,13 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                         });
                       }
                       debugPrint(pin);
-                      if (pin.length == 6) {
-                        //navigate
-                        context.pushNamed(AppRoutes.confirmPINScreen);
-                      }
+                    }
+
+                    ref.watch(createPINProvider.notifier).update((state) => pin);
+
+                    if (pin.length == 6) {
+                      //navigate
+                      context.pushNamed(AppRoutes.confirmPINScreen);
                     }
                     // if (pin.length < 6) {
                     //   if (index != 9) {

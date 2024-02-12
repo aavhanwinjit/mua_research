@@ -237,10 +237,13 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
 
     final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
 
+    debugPrint("request resed otp to json: ${request.toJson()}");
+
     final response = await getIt<ResendOTP>().call(
       request,
       token ?? "",
-      verifyMobileNumberResponse?.header?.messageKey?.sessionId ?? "",
+      verifyMobileNumberResponse?.body?.responseBody?.tokenData?.sessionId ?? "",
+      // "1707392469778",
     );
 
     response.fold(
