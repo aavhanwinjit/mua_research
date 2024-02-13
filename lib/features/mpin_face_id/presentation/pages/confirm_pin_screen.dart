@@ -175,9 +175,11 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
     final authProfileResponse = ref.read(authProfileProvider);
 
     SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
+      // confirmMpin: "2121",
       confirmMpin: ref.read(confirmPINProvider),
       mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
-      mpin: ref.read(createPINProvider),
+      // mPIN: "2121",
+      mPIN: ref.read(createPINProvider),
       signaturePath: authProfileResponse?.body?.responseBody?.fileName,
     );
 
