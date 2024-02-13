@@ -75,6 +75,117 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                 : const SizedBox(height: 10),
             const SizedBox(height: 10),
             _pinKeypad(),
+            // pin keypad last row
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: SizedBox(
+                    height: 70,
+                    width: 70,
+                    child: Container(),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: Container(
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: primaryBlueColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        if (pin.length < 6) {
+                          setState(() {
+                            pin += "0";
+                          });
+
+                          debugPrint(pin);
+                        }
+
+                        ref
+                            .watch(createPINProvider.notifier)
+                            .update((state) => pin);
+
+                        if (pin.length == 6) {
+                          //navigate
+                          context.pushNamed(AppRoutes.confirmPINScreen);
+                        }
+                        // if (pin.length < 6) {
+                        //   if (index != 9) {
+                        //     ref.watch(createPINProvider.notifier).update(
+                        //           (state) => "$state${index + 1}",
+                        //         );
+                        //   } else {
+                        //     ref.watch(createPINProvider.notifier).update(
+                        //           (state) => "${state}0",
+                        //         );
+                        //   }
+                        //   debugPrint(pin);
+
+                        //   if (pin.length == 6) {
+                        //     context.pushNamed(AppRoutes.confirmPINScreen);
+                        //   }
+                        // }
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Text(
+                        "0",
+                        style: TextStyle(
+                          color: primaryBlueColor,
+                          fontSize: 36.sp,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 20,
+                  ),
+                  child: Container(
+                    height: 70,
+                    width: 70,
+                    decoration: BoxDecoration(
+                      color: primaryBlueColor.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: MaterialButton(
+                      onPressed: () {
+                        if ((pin.length < 6) && (pin.isNotEmpty)) {
+                          setState(() {
+                            pin = pin.substring(0, pin.length - 1);
+                          });
+                          debugPrint(pin);
+                        }
+                        ref
+                            .watch(createPINProvider.notifier)
+                            .update((state) => pin);
+                      },
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: const Icon(
+                        Icons.backspace,
+                        color: primaryBlueColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
@@ -114,7 +225,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
           runAlignment: WrapAlignment.spaceBetween,
           crossAxisAlignment: WrapCrossAlignment.center,
           children: List.generate(
-            10,
+            9,
             (index) => Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 20,
@@ -130,19 +241,16 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                 child: MaterialButton(
                   onPressed: () {
                     if (pin.length < 6) {
-                      if (index != 9) {
-                        setState(() {
-                          pin += "${index + 1}";
-                        });
-                      } else {
-                        setState(() {
-                          pin += "0";
-                        });
-                      }
+                      setState(() {
+                        pin += "${index + 1}";
+                      });
+
                       debugPrint(pin);
                     }
 
-                    ref.watch(confirmPINProvider.notifier).update((state) => pin);
+                    ref
+                        .watch(confirmPINProvider.notifier)
+                        .update((state) => pin);
 
                     if (pin.length == 6) {
                       //navigate
@@ -155,7 +263,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Text(
-                    index == 9 ? "0" : "${index + 1}",
+                    "${index + 1}",
                     style: TextStyle(
                       color: primaryBlueColor,
                       fontSize: 36.sp,
@@ -190,18 +298,22 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (SetAgentMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           successVal = true;
           setState(() {});
-          ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
+          ref
+              .read(setAgentMpinResponseProvider.notifier)
+              .update((state) => success);
 
           context.pushNamed(AppRoutes.onboardSuccessScreen);
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
