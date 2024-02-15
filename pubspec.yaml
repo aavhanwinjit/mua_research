@@ -2,6 +2,10 @@ name: ekyc
 
 description: A new Flutter project.
 
+# Production
+# version: 1.0.0+1
+
+# Development
 version: 1.0.0+1
 
 environment: 
@@ -43,6 +47,7 @@ dependencies:
   internet_connection_checker_plus: ^2.2.0
   get_storage: ^2.1.1
   safe_device: ^1.1.4
+  package_info_plus: ^4.2.0
 
 dev_dependencies: 
   flutter_test: 
