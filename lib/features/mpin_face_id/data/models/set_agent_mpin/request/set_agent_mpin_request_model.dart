@@ -17,7 +17,7 @@ String setAgentMpinRequestModelToJson(SetAgentMpinRequestModel data) => json.enc
 @freezed
 class SetAgentMpinRequestModel with _$SetAgentMpinRequestModel {
   const factory SetAgentMpinRequestModel({
-    @JsonKey(name: "mpin") String? mpin,
+    @JsonKey(name: "mPIN") String? mPIN,
     @JsonKey(name: "confirmMPIN") String? confirmMpin,
     @JsonKey(name: "mobileNo") String? mobileNo,
     @JsonKey(name: "signaturePath") String? signaturePath,

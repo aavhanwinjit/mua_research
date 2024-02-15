@@ -22,6 +22,8 @@ const Color iconColor = Color(0xFF292D32);
 const Color darkYellow = Color(0xFFDEA415);
 const Color lightYellow = Color(0xFFFDF2DC);
 
+const Color errorTextRed = Color(0xFFDF271C);
+
 // White
 const Color white = Colors.white;
 

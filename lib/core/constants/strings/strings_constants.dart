@@ -48,6 +48,7 @@ class Strings {
   static const String uploadFromLibrary = "Upload from library";
   static const String done = "Done";
   static const String technicalError = "Technical error. Please try again.";
+  static const String hi = "Hi";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -247,4 +248,9 @@ class Strings {
   static const String createPinSubtitle =
       "You'll use it to securely unlock and access your app, so please don't share it with anyone.";
   static const String confirmPin = "Confirm PIN";
+
+  static const String verifypin = "Verify 6-digit PIN";
+  static const String wrongPin = "Wrong PIN";
+  static const String forgotPin = "Forget PIN/Re-register";
+  static const String useTouchId = "Use touch ID";
 }

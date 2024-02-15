@@ -7,7 +7,7 @@ import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/providers/set_agent_mpin_providers.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -112,9 +112,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                           debugPrint(pin);
                         }
 
-                        ref
-                            .watch(createPINProvider.notifier)
-                            .update((state) => pin);
+                        ref.watch(createPINProvider.notifier).update((state) => pin);
 
                         if (pin.length == 6) {
                           //navigate
@@ -170,9 +168,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                           });
                           debugPrint(pin);
                         }
-                        ref
-                            .watch(createPINProvider.notifier)
-                            .update((state) => pin);
+                        ref.watch(createPINProvider.notifier).update((state) => pin);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),
@@ -248,14 +244,13 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                       debugPrint(pin);
                     }
 
-                    ref
-                        .watch(confirmPINProvider.notifier)
-                        .update((state) => pin);
+                    ref.watch(confirmPINProvider.notifier).update((state) => pin);
 
                     if (pin.length == 6) {
                       //navigate
                       Future.delayed(const Duration(seconds: 2), () {
-                        _setAgentMPIN();
+                        // _setAgentMPIN();
+                        context.pushNamed(AppRoutes.onboardSuccessScreen);
                       });
                     }
                   },
@@ -285,7 +280,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
     SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
       confirmMpin: ref.read(confirmPINProvider),
       mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
-      mpin: ref.read(createPINProvider),
+      mPIN: ref.read(createPINProvider),
       signaturePath: authProfileResponse?.body?.responseBody?.fileName,
     );
 
@@ -296,22 +291,18 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SetAgentMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           successVal = true;
           setState(() {});
-          ref
-              .read(setAgentMpinResponseProvider.notifier)
-              .update((state) => success);
+          ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
 
           context.pushNamed(AppRoutes.onboardSuccessScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

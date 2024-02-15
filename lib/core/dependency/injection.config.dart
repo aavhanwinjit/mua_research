@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i7;
-import 'package:ekyc/core/dependency/injection.dart' as _i26;
+import 'package:ekyc/core/dependency/injection.dart' as _i27;
 import 'package:ekyc/core/helpers/device_information_helper.dart' as _i6;
 import 'package:ekyc/core/helpers/request_generator.dart' as _i10;
 import 'package:ekyc/core/network/network_info.dart' as _i9;
@@ -21,7 +21,7 @@ import 'package:ekyc/features/auth_profile/data/repositories/save_file_repositor
 import 'package:ekyc/features/auth_profile/domain/repositories/save_file_repository.dart'
     as _i17;
 import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart'
-    as _i25;
+    as _i26;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
     as _i13;
 import 'package:ekyc/features/login_otp/domain/repositories/auth_repository.dart'
@@ -36,6 +36,8 @@ import 'package:ekyc/features/mpin_face_id/data/repositories/mpin_repository_imp
     as _i15;
 import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart'
     as _i14;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart'
+    as _i25;
 import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart'
     as _i19;
 import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
@@ -95,10 +97,12 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i23.VerifyMobileNumber(gh<_i12.AuthRepository>()));
     gh.lazySingleton<_i24.LaunchDetails>(
         () => _i24.LaunchDetails(gh<_i20.SplashScreenRepository>()));
-    gh.lazySingleton<_i25.SaveFile>(
-        () => _i25.SaveFile(gh<_i17.SaveFileRepository>()));
+    gh.lazySingleton<_i25.LoginByMpin>(
+        () => _i25.LoginByMpin(gh<_i14.MPINRepository>()));
+    gh.lazySingleton<_i26.SaveFile>(
+        () => _i26.SaveFile(gh<_i17.SaveFileRepository>()));
     return this;
   }
 }
 
-class _$MAUEngineModule extends _i26.MAUEngineModule {}
+class _$MAUEngineModule extends _i27.MAUEngineModule {}

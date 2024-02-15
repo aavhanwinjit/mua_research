@@ -9,6 +9,7 @@ import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:safe_device/safe_device.dart';
 
 class SplashScreen extends ConsumerWidget {
   const SplashScreen({super.key});
@@ -30,13 +31,16 @@ class SplashScreen extends ConsumerWidget {
 
   void _navigateToLoginPage(BuildContext context) {
     Future.delayed(const Duration(seconds: 3), () {
-      callLaunchDetailsApi(context);
+      // callLaunchDetailsApi(context);
+      context.go(AppRoutes.loginScreen);
     });
   }
 
   void callLaunchDetailsApi(BuildContext context) async {
+    final isJailBroken = await detectRootOrJailbreak();
+
     final body = LaunchDetailsRequest(
-      rootedDevice: false,
+      rootedDevice: isJailBroken,
       deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee",
     );
 
@@ -66,5 +70,15 @@ class SplashScreen extends ConsumerWidget {
         // emit(LoginState.success(loginResponse: success));
       },
     );
+  }
+
+  Future<bool> detectRootOrJailbreak() async {
+    bool isJailBroken = await SafeDevice.isJailBroken;
+    debugPrint("jailBroken: $isJailBroken");
+
+    bool isRealDevice = await SafeDevice.isRealDevice;
+    debugPrint("realDevice: $isRealDevice");
+
+    return isJailBroken;
   }
 }

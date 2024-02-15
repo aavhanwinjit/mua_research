@@ -1,51 +1,53 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'set_agent_mpin_response_model.dart';
+part of 'login_by_mpin_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SetAgentMpinResponseModelImpl _$$SetAgentMpinResponseModelImplFromJson(
+_$LoginbyMpinResponseModelImpl _$$LoginbyMpinResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$SetAgentMpinResponseModelImpl(
+    _$LoginbyMpinResponseModelImpl(
       header: json['h'] == null
           ? null
           : HeaderModel.fromJson(json['h'] as Map<String, dynamic>),
       body: json['b'] == null
           ? null
-          : SetAgentMpinData.fromJson(json['b'] as Map<String, dynamic>),
+          : LoginByMpinData.fromJson(json['b'] as Map<String, dynamic>),
       status: json['s'] == null
           ? null
           : StatusModel.fromJson(json['s'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$SetAgentMpinResponseModelImplToJson(
-        _$SetAgentMpinResponseModelImpl instance) =>
+Map<String, dynamic> _$$LoginbyMpinResponseModelImplToJson(
+        _$LoginbyMpinResponseModelImpl instance) =>
     <String, dynamic>{
       'h': instance.header,
       'b': instance.body,
       's': instance.status,
     };
 
-_$SetAgentMpinDataImpl _$$SetAgentMpinDataImplFromJson(
+_$LoginByMpinDataImpl _$$LoginByMpinDataImplFromJson(
         Map<String, dynamic> json) =>
-    _$SetAgentMpinDataImpl(
+    _$LoginByMpinDataImpl(
       responseBody: json['rb'] == null
           ? null
-          : ResponseBody.fromJson(json['rb'] as Map<String, dynamic>),
+          : LoginByMpinResponseBody.fromJson(
+              json['rb'] as Map<String, dynamic>),
       checkSum: json['checkSum'] as String?,
     );
 
-Map<String, dynamic> _$$SetAgentMpinDataImplToJson(
-        _$SetAgentMpinDataImpl instance) =>
+Map<String, dynamic> _$$LoginByMpinDataImplToJson(
+        _$LoginByMpinDataImpl instance) =>
     <String, dynamic>{
       'rb': instance.responseBody,
       'checkSum': instance.checkSum,
     };
 
-_$ResponseBodyImpl _$$ResponseBodyImplFromJson(Map<String, dynamic> json) =>
-    _$ResponseBodyImpl(
+_$LoginByMpinResponseBodyImpl _$$LoginByMpinResponseBodyImplFromJson(
+        Map<String, dynamic> json) =>
+    _$LoginByMpinResponseBodyImpl(
       agentId: json['agentId'] as int?,
       agentName: json['agentName'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
@@ -60,15 +62,16 @@ _$ResponseBodyImpl _$$ResponseBodyImplFromJson(Map<String, dynamic> json) =>
       profileImagePath: json['profileImagePath'] as String?,
       referralCode: json['referralCode'] as String?,
       isBirthday: json['isBirthday'] as bool?,
-      agentAuthStatus: json['agentAuthStatus'],
-      kycType: json['kycType'],
-      kycStatus: json['kycStatus'],
+      agentAuthStatus: json['agentAuthStatus'] as String?,
+      kycType: json['kycType'] as String?,
+      kycStatus: json['kycStatus'] as String?,
       isFpLogin: json['isFPLogin'] as bool?,
-      authorized: json['authorized'],
-      dailyLimit: json['dailyLimit'],
+      authorized: json['authorized'] as bool?,
+      dailyLimit: json['dailyLimit'] as int?,
     );
 
-Map<String, dynamic> _$$ResponseBodyImplToJson(_$ResponseBodyImpl instance) =>
+Map<String, dynamic> _$$LoginByMpinResponseBodyImplToJson(
+        _$LoginByMpinResponseBodyImpl instance) =>
     <String, dynamic>{
       'agentId': instance.agentId,
       'agentName': instance.agentName,
