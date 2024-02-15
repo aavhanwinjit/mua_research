@@ -25,6 +25,7 @@ import 'package:ekyc/features/login_otp/presentation/pages/otp_screen.dart';
 import 'package:ekyc/features/login_otp/presentation/pages/success_screen.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/confirm_pin_screen.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/create_pin_screen.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/mpin_login_screen.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/select_pin_or_biometric_screen.dart';
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/profile/presentation/pages/profile_screen.dart';
@@ -68,12 +69,13 @@ class AppRoutes {
   static const String nonMotorDocsReviewSubmitScreen = '/non_motor_docs_review_submit_screen';
   static const String profileScreen = '/profile_screen';
   static const String kycSubmittedScreen = '/kyc_submit_screen';
+  static const String mpinLoginScreen = '/mpin_login_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
-  // initialLocation: AppRoutes.dashboardScreen,
+  // initialLocation: AppRoutes.mpinLoginScreen,
   initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
@@ -297,6 +299,13 @@ final GoRouter router = GoRouter(
       name: AppRoutes.kycSubmittedScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const KYCSubmittedScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.mpinLoginScreen,
+      name: AppRoutes.mpinLoginScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const MPINLoginScreen();
       },
     ),
   ],

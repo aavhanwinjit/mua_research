@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'set_agent_mpin_response_model.dart';
+part of 'login_by_mpin_response_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,47 +14,47 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SetAgentMpinResponseModel _$SetAgentMpinResponseModelFromJson(
+LoginbyMpinResponseModel _$LoginbyMpinResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _SetAgentMpinResponseModel.fromJson(json);
+  return _LoginbyMpinResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SetAgentMpinResponseModel {
+mixin _$LoginbyMpinResponseModel {
   @JsonKey(name: "h")
   HeaderModel? get header => throw _privateConstructorUsedError;
   @JsonKey(name: "b")
-  SetAgentMpinData? get body => throw _privateConstructorUsedError;
+  LoginByMpinData? get body => throw _privateConstructorUsedError;
   @JsonKey(name: "s")
   StatusModel? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SetAgentMpinResponseModelCopyWith<SetAgentMpinResponseModel> get copyWith =>
+  $LoginbyMpinResponseModelCopyWith<LoginbyMpinResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SetAgentMpinResponseModelCopyWith<$Res> {
-  factory $SetAgentMpinResponseModelCopyWith(SetAgentMpinResponseModel value,
-          $Res Function(SetAgentMpinResponseModel) then) =
-      _$SetAgentMpinResponseModelCopyWithImpl<$Res, SetAgentMpinResponseModel>;
+abstract class $LoginbyMpinResponseModelCopyWith<$Res> {
+  factory $LoginbyMpinResponseModelCopyWith(LoginbyMpinResponseModel value,
+          $Res Function(LoginbyMpinResponseModel) then) =
+      _$LoginbyMpinResponseModelCopyWithImpl<$Res, LoginbyMpinResponseModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") SetAgentMpinData? body,
+      @JsonKey(name: "b") LoginByMpinData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   $HeaderModelCopyWith<$Res>? get header;
-  $SetAgentMpinDataCopyWith<$Res>? get body;
+  $LoginByMpinDataCopyWith<$Res>? get body;
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class _$SetAgentMpinResponseModelCopyWithImpl<$Res,
-        $Val extends SetAgentMpinResponseModel>
-    implements $SetAgentMpinResponseModelCopyWith<$Res> {
-  _$SetAgentMpinResponseModelCopyWithImpl(this._value, this._then);
+class _$LoginbyMpinResponseModelCopyWithImpl<$Res,
+        $Val extends LoginbyMpinResponseModel>
+    implements $LoginbyMpinResponseModelCopyWith<$Res> {
+  _$LoginbyMpinResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,7 +76,7 @@ class _$SetAgentMpinResponseModelCopyWithImpl<$Res,
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as SetAgentMpinData?,
+              as LoginByMpinData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -98,12 +98,12 @@ class _$SetAgentMpinResponseModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $SetAgentMpinDataCopyWith<$Res>? get body {
+  $LoginByMpinDataCopyWith<$Res>? get body {
     if (_value.body == null) {
       return null;
     }
 
-    return $SetAgentMpinDataCopyWith<$Res>(_value.body!, (value) {
+    return $LoginByMpinDataCopyWith<$Res>(_value.body!, (value) {
       return _then(_value.copyWith(body: value) as $Val);
     });
   }
@@ -122,35 +122,35 @@ class _$SetAgentMpinResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$SetAgentMpinResponseModelImplCopyWith<$Res>
-    implements $SetAgentMpinResponseModelCopyWith<$Res> {
-  factory _$$SetAgentMpinResponseModelImplCopyWith(
-          _$SetAgentMpinResponseModelImpl value,
-          $Res Function(_$SetAgentMpinResponseModelImpl) then) =
-      __$$SetAgentMpinResponseModelImplCopyWithImpl<$Res>;
+abstract class _$$LoginbyMpinResponseModelImplCopyWith<$Res>
+    implements $LoginbyMpinResponseModelCopyWith<$Res> {
+  factory _$$LoginbyMpinResponseModelImplCopyWith(
+          _$LoginbyMpinResponseModelImpl value,
+          $Res Function(_$LoginbyMpinResponseModelImpl) then) =
+      __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") SetAgentMpinData? body,
+      @JsonKey(name: "b") LoginByMpinData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   @override
   $HeaderModelCopyWith<$Res>? get header;
   @override
-  $SetAgentMpinDataCopyWith<$Res>? get body;
+  $LoginByMpinDataCopyWith<$Res>? get body;
   @override
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class __$$SetAgentMpinResponseModelImplCopyWithImpl<$Res>
-    extends _$SetAgentMpinResponseModelCopyWithImpl<$Res,
-        _$SetAgentMpinResponseModelImpl>
-    implements _$$SetAgentMpinResponseModelImplCopyWith<$Res> {
-  __$$SetAgentMpinResponseModelImplCopyWithImpl(
-      _$SetAgentMpinResponseModelImpl _value,
-      $Res Function(_$SetAgentMpinResponseModelImpl) _then)
+class __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>
+    extends _$LoginbyMpinResponseModelCopyWithImpl<$Res,
+        _$LoginbyMpinResponseModelImpl>
+    implements _$$LoginbyMpinResponseModelImplCopyWith<$Res> {
+  __$$LoginbyMpinResponseModelImplCopyWithImpl(
+      _$LoginbyMpinResponseModelImpl _value,
+      $Res Function(_$LoginbyMpinResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +160,7 @@ class __$$SetAgentMpinResponseModelImplCopyWithImpl<$Res>
     Object? body = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$SetAgentMpinResponseModelImpl(
+    return _then(_$LoginbyMpinResponseModelImpl(
       header: freezed == header
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class __$$SetAgentMpinResponseModelImplCopyWithImpl<$Res>
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as SetAgentMpinData?,
+              as LoginByMpinData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -179,35 +179,35 @@ class __$$SetAgentMpinResponseModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SetAgentMpinResponseModelImpl implements _SetAgentMpinResponseModel {
-  const _$SetAgentMpinResponseModelImpl(
+class _$LoginbyMpinResponseModelImpl implements _LoginbyMpinResponseModel {
+  const _$LoginbyMpinResponseModelImpl(
       {@JsonKey(name: "h") this.header,
       @JsonKey(name: "b") this.body,
       @JsonKey(name: "s") this.status});
 
-  factory _$SetAgentMpinResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SetAgentMpinResponseModelImplFromJson(json);
+  factory _$LoginbyMpinResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoginbyMpinResponseModelImplFromJson(json);
 
   @override
   @JsonKey(name: "h")
   final HeaderModel? header;
   @override
   @JsonKey(name: "b")
-  final SetAgentMpinData? body;
+  final LoginByMpinData? body;
   @override
   @JsonKey(name: "s")
   final StatusModel? status;
 
   @override
   String toString() {
-    return 'SetAgentMpinResponseModel(header: $header, body: $body, status: $status)';
+    return 'LoginbyMpinResponseModel(header: $header, body: $body, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SetAgentMpinResponseModelImpl &&
+            other is _$LoginbyMpinResponseModelImpl &&
             (identical(other.header, header) || other.header == header) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.status, status) || other.status == status));
@@ -220,77 +220,78 @@ class _$SetAgentMpinResponseModelImpl implements _SetAgentMpinResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SetAgentMpinResponseModelImplCopyWith<_$SetAgentMpinResponseModelImpl>
-      get copyWith => __$$SetAgentMpinResponseModelImplCopyWithImpl<
-          _$SetAgentMpinResponseModelImpl>(this, _$identity);
+  _$$LoginbyMpinResponseModelImplCopyWith<_$LoginbyMpinResponseModelImpl>
+      get copyWith => __$$LoginbyMpinResponseModelImplCopyWithImpl<
+          _$LoginbyMpinResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SetAgentMpinResponseModelImplToJson(
+    return _$$LoginbyMpinResponseModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _SetAgentMpinResponseModel implements SetAgentMpinResponseModel {
-  const factory _SetAgentMpinResponseModel(
+abstract class _LoginbyMpinResponseModel implements LoginbyMpinResponseModel {
+  const factory _LoginbyMpinResponseModel(
           {@JsonKey(name: "h") final HeaderModel? header,
-          @JsonKey(name: "b") final SetAgentMpinData? body,
+          @JsonKey(name: "b") final LoginByMpinData? body,
           @JsonKey(name: "s") final StatusModel? status}) =
-      _$SetAgentMpinResponseModelImpl;
+      _$LoginbyMpinResponseModelImpl;
 
-  factory _SetAgentMpinResponseModel.fromJson(Map<String, dynamic> json) =
-      _$SetAgentMpinResponseModelImpl.fromJson;
+  factory _LoginbyMpinResponseModel.fromJson(Map<String, dynamic> json) =
+      _$LoginbyMpinResponseModelImpl.fromJson;
 
   @override
   @JsonKey(name: "h")
   HeaderModel? get header;
   @override
   @JsonKey(name: "b")
-  SetAgentMpinData? get body;
+  LoginByMpinData? get body;
   @override
   @JsonKey(name: "s")
   StatusModel? get status;
   @override
   @JsonKey(ignore: true)
-  _$$SetAgentMpinResponseModelImplCopyWith<_$SetAgentMpinResponseModelImpl>
+  _$$LoginbyMpinResponseModelImplCopyWith<_$LoginbyMpinResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-SetAgentMpinData _$SetAgentMpinDataFromJson(Map<String, dynamic> json) {
-  return _SetAgentMpinData.fromJson(json);
+LoginByMpinData _$LoginByMpinDataFromJson(Map<String, dynamic> json) {
+  return _LoginByMpinData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SetAgentMpinData {
+mixin _$LoginByMpinData {
   @JsonKey(name: "rb")
-  ResponseBody? get responseBody => throw _privateConstructorUsedError;
+  LoginByMpinResponseBody? get responseBody =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "checkSum")
   String? get checkSum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SetAgentMpinDataCopyWith<SetAgentMpinData> get copyWith =>
+  $LoginByMpinDataCopyWith<LoginByMpinData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SetAgentMpinDataCopyWith<$Res> {
-  factory $SetAgentMpinDataCopyWith(
-          SetAgentMpinData value, $Res Function(SetAgentMpinData) then) =
-      _$SetAgentMpinDataCopyWithImpl<$Res, SetAgentMpinData>;
+abstract class $LoginByMpinDataCopyWith<$Res> {
+  factory $LoginByMpinDataCopyWith(
+          LoginByMpinData value, $Res Function(LoginByMpinData) then) =
+      _$LoginByMpinDataCopyWithImpl<$Res, LoginByMpinData>;
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") ResponseBody? responseBody,
+      {@JsonKey(name: "rb") LoginByMpinResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
-  $ResponseBodyCopyWith<$Res>? get responseBody;
+  $LoginByMpinResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class _$SetAgentMpinDataCopyWithImpl<$Res, $Val extends SetAgentMpinData>
-    implements $SetAgentMpinDataCopyWith<$Res> {
-  _$SetAgentMpinDataCopyWithImpl(this._value, this._then);
+class _$LoginByMpinDataCopyWithImpl<$Res, $Val extends LoginByMpinData>
+    implements $LoginByMpinDataCopyWith<$Res> {
+  _$LoginByMpinDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -307,7 +308,7 @@ class _$SetAgentMpinDataCopyWithImpl<$Res, $Val extends SetAgentMpinData>
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as ResponseBody?,
+              as LoginByMpinResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -317,39 +318,40 @@ class _$SetAgentMpinDataCopyWithImpl<$Res, $Val extends SetAgentMpinData>
 
   @override
   @pragma('vm:prefer-inline')
-  $ResponseBodyCopyWith<$Res>? get responseBody {
+  $LoginByMpinResponseBodyCopyWith<$Res>? get responseBody {
     if (_value.responseBody == null) {
       return null;
     }
 
-    return $ResponseBodyCopyWith<$Res>(_value.responseBody!, (value) {
+    return $LoginByMpinResponseBodyCopyWith<$Res>(_value.responseBody!,
+        (value) {
       return _then(_value.copyWith(responseBody: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$SetAgentMpinDataImplCopyWith<$Res>
-    implements $SetAgentMpinDataCopyWith<$Res> {
-  factory _$$SetAgentMpinDataImplCopyWith(_$SetAgentMpinDataImpl value,
-          $Res Function(_$SetAgentMpinDataImpl) then) =
-      __$$SetAgentMpinDataImplCopyWithImpl<$Res>;
+abstract class _$$LoginByMpinDataImplCopyWith<$Res>
+    implements $LoginByMpinDataCopyWith<$Res> {
+  factory _$$LoginByMpinDataImplCopyWith(_$LoginByMpinDataImpl value,
+          $Res Function(_$LoginByMpinDataImpl) then) =
+      __$$LoginByMpinDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") ResponseBody? responseBody,
+      {@JsonKey(name: "rb") LoginByMpinResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
   @override
-  $ResponseBodyCopyWith<$Res>? get responseBody;
+  $LoginByMpinResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class __$$SetAgentMpinDataImplCopyWithImpl<$Res>
-    extends _$SetAgentMpinDataCopyWithImpl<$Res, _$SetAgentMpinDataImpl>
-    implements _$$SetAgentMpinDataImplCopyWith<$Res> {
-  __$$SetAgentMpinDataImplCopyWithImpl(_$SetAgentMpinDataImpl _value,
-      $Res Function(_$SetAgentMpinDataImpl) _then)
+class __$$LoginByMpinDataImplCopyWithImpl<$Res>
+    extends _$LoginByMpinDataCopyWithImpl<$Res, _$LoginByMpinDataImpl>
+    implements _$$LoginByMpinDataImplCopyWith<$Res> {
+  __$$LoginByMpinDataImplCopyWithImpl(
+      _$LoginByMpinDataImpl _value, $Res Function(_$LoginByMpinDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -358,11 +360,11 @@ class __$$SetAgentMpinDataImplCopyWithImpl<$Res>
     Object? responseBody = freezed,
     Object? checkSum = freezed,
   }) {
-    return _then(_$SetAgentMpinDataImpl(
+    return _then(_$LoginByMpinDataImpl(
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as ResponseBody?,
+              as LoginByMpinResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -373,31 +375,31 @@ class __$$SetAgentMpinDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SetAgentMpinDataImpl implements _SetAgentMpinData {
-  const _$SetAgentMpinDataImpl(
+class _$LoginByMpinDataImpl implements _LoginByMpinData {
+  const _$LoginByMpinDataImpl(
       {@JsonKey(name: "rb") this.responseBody,
       @JsonKey(name: "checkSum") this.checkSum});
 
-  factory _$SetAgentMpinDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SetAgentMpinDataImplFromJson(json);
+  factory _$LoginByMpinDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoginByMpinDataImplFromJson(json);
 
   @override
   @JsonKey(name: "rb")
-  final ResponseBody? responseBody;
+  final LoginByMpinResponseBody? responseBody;
   @override
   @JsonKey(name: "checkSum")
   final String? checkSum;
 
   @override
   String toString() {
-    return 'SetAgentMpinData(responseBody: $responseBody, checkSum: $checkSum)';
+    return 'LoginByMpinData(responseBody: $responseBody, checkSum: $checkSum)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SetAgentMpinDataImpl &&
+            other is _$LoginByMpinDataImpl &&
             (identical(other.responseBody, responseBody) ||
                 other.responseBody == responseBody) &&
             (identical(other.checkSum, checkSum) ||
@@ -411,45 +413,46 @@ class _$SetAgentMpinDataImpl implements _SetAgentMpinData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$SetAgentMpinDataImplCopyWith<_$SetAgentMpinDataImpl> get copyWith =>
-      __$$SetAgentMpinDataImplCopyWithImpl<_$SetAgentMpinDataImpl>(
+  _$$LoginByMpinDataImplCopyWith<_$LoginByMpinDataImpl> get copyWith =>
+      __$$LoginByMpinDataImplCopyWithImpl<_$LoginByMpinDataImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SetAgentMpinDataImplToJson(
+    return _$$LoginByMpinDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _SetAgentMpinData implements SetAgentMpinData {
-  const factory _SetAgentMpinData(
-          {@JsonKey(name: "rb") final ResponseBody? responseBody,
+abstract class _LoginByMpinData implements LoginByMpinData {
+  const factory _LoginByMpinData(
+          {@JsonKey(name: "rb") final LoginByMpinResponseBody? responseBody,
           @JsonKey(name: "checkSum") final String? checkSum}) =
-      _$SetAgentMpinDataImpl;
+      _$LoginByMpinDataImpl;
 
-  factory _SetAgentMpinData.fromJson(Map<String, dynamic> json) =
-      _$SetAgentMpinDataImpl.fromJson;
+  factory _LoginByMpinData.fromJson(Map<String, dynamic> json) =
+      _$LoginByMpinDataImpl.fromJson;
 
   @override
   @JsonKey(name: "rb")
-  ResponseBody? get responseBody;
+  LoginByMpinResponseBody? get responseBody;
   @override
   @JsonKey(name: "checkSum")
   String? get checkSum;
   @override
   @JsonKey(ignore: true)
-  _$$SetAgentMpinDataImplCopyWith<_$SetAgentMpinDataImpl> get copyWith =>
+  _$$LoginByMpinDataImplCopyWith<_$LoginByMpinDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-ResponseBody _$ResponseBodyFromJson(Map<String, dynamic> json) {
-  return _ResponseBody.fromJson(json);
+LoginByMpinResponseBody _$LoginByMpinResponseBodyFromJson(
+    Map<String, dynamic> json) {
+  return _LoginByMpinResponseBody.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ResponseBody {
+mixin _$LoginByMpinResponseBody {
   @JsonKey(name: "agentId")
   int? get agentId => throw _privateConstructorUsedError;
   @JsonKey(name: "agentName")
@@ -475,29 +478,29 @@ mixin _$ResponseBody {
   @JsonKey(name: "isBirthday")
   bool? get isBirthday => throw _privateConstructorUsedError;
   @JsonKey(name: "agentAuthStatus")
-  dynamic get agentAuthStatus => throw _privateConstructorUsedError;
+  String? get agentAuthStatus => throw _privateConstructorUsedError;
   @JsonKey(name: "kycType")
-  dynamic get kycType => throw _privateConstructorUsedError;
+  String? get kycType => throw _privateConstructorUsedError;
   @JsonKey(name: "kycStatus")
-  dynamic get kycStatus => throw _privateConstructorUsedError;
+  String? get kycStatus => throw _privateConstructorUsedError;
   @JsonKey(name: "isFPLogin")
   bool? get isFpLogin => throw _privateConstructorUsedError;
   @JsonKey(name: "authorized")
-  dynamic get authorized => throw _privateConstructorUsedError;
+  bool? get authorized => throw _privateConstructorUsedError;
   @JsonKey(name: "dailyLimit")
-  dynamic get dailyLimit => throw _privateConstructorUsedError;
+  int? get dailyLimit => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResponseBodyCopyWith<ResponseBody> get copyWith =>
+  $LoginByMpinResponseBodyCopyWith<LoginByMpinResponseBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResponseBodyCopyWith<$Res> {
-  factory $ResponseBodyCopyWith(
-          ResponseBody value, $Res Function(ResponseBody) then) =
-      _$ResponseBodyCopyWithImpl<$Res, ResponseBody>;
+abstract class $LoginByMpinResponseBodyCopyWith<$Res> {
+  factory $LoginByMpinResponseBodyCopyWith(LoginByMpinResponseBody value,
+          $Res Function(LoginByMpinResponseBody) then) =
+      _$LoginByMpinResponseBodyCopyWithImpl<$Res, LoginByMpinResponseBody>;
   @useResult
   $Res call(
       {@JsonKey(name: "agentId") int? agentId,
@@ -512,20 +515,21 @@ abstract class $ResponseBodyCopyWith<$Res> {
       @JsonKey(name: "profileImagePath") String? profileImagePath,
       @JsonKey(name: "referralCode") String? referralCode,
       @JsonKey(name: "isBirthday") bool? isBirthday,
-      @JsonKey(name: "agentAuthStatus") dynamic agentAuthStatus,
-      @JsonKey(name: "kycType") dynamic kycType,
-      @JsonKey(name: "kycStatus") dynamic kycStatus,
+      @JsonKey(name: "agentAuthStatus") String? agentAuthStatus,
+      @JsonKey(name: "kycType") String? kycType,
+      @JsonKey(name: "kycStatus") String? kycStatus,
       @JsonKey(name: "isFPLogin") bool? isFpLogin,
-      @JsonKey(name: "authorized") dynamic authorized,
-      @JsonKey(name: "dailyLimit") dynamic dailyLimit});
+      @JsonKey(name: "authorized") bool? authorized,
+      @JsonKey(name: "dailyLimit") int? dailyLimit});
 
   $AuthTokenCopyWith<$Res>? get authToken;
 }
 
 /// @nodoc
-class _$ResponseBodyCopyWithImpl<$Res, $Val extends ResponseBody>
-    implements $ResponseBodyCopyWith<$Res> {
-  _$ResponseBodyCopyWithImpl(this._value, this._then);
+class _$LoginByMpinResponseBodyCopyWithImpl<$Res,
+        $Val extends LoginByMpinResponseBody>
+    implements $LoginByMpinResponseBodyCopyWith<$Res> {
+  _$LoginByMpinResponseBodyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -606,15 +610,15 @@ class _$ResponseBodyCopyWithImpl<$Res, $Val extends ResponseBody>
       agentAuthStatus: freezed == agentAuthStatus
           ? _value.agentAuthStatus
           : agentAuthStatus // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       kycType: freezed == kycType
           ? _value.kycType
           : kycType // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       kycStatus: freezed == kycStatus
           ? _value.kycStatus
           : kycStatus // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isFpLogin: freezed == isFpLogin
           ? _value.isFpLogin
           : isFpLogin // ignore: cast_nullable_to_non_nullable
@@ -622,11 +626,11 @@ class _$ResponseBodyCopyWithImpl<$Res, $Val extends ResponseBody>
       authorized: freezed == authorized
           ? _value.authorized
           : authorized // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       dailyLimit: freezed == dailyLimit
           ? _value.dailyLimit
           : dailyLimit // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
     ) as $Val);
   }
 
@@ -644,11 +648,12 @@ class _$ResponseBodyCopyWithImpl<$Res, $Val extends ResponseBody>
 }
 
 /// @nodoc
-abstract class _$$ResponseBodyImplCopyWith<$Res>
-    implements $ResponseBodyCopyWith<$Res> {
-  factory _$$ResponseBodyImplCopyWith(
-          _$ResponseBodyImpl value, $Res Function(_$ResponseBodyImpl) then) =
-      __$$ResponseBodyImplCopyWithImpl<$Res>;
+abstract class _$$LoginByMpinResponseBodyImplCopyWith<$Res>
+    implements $LoginByMpinResponseBodyCopyWith<$Res> {
+  factory _$$LoginByMpinResponseBodyImplCopyWith(
+          _$LoginByMpinResponseBodyImpl value,
+          $Res Function(_$LoginByMpinResponseBodyImpl) then) =
+      __$$LoginByMpinResponseBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -664,23 +669,25 @@ abstract class _$$ResponseBodyImplCopyWith<$Res>
       @JsonKey(name: "profileImagePath") String? profileImagePath,
       @JsonKey(name: "referralCode") String? referralCode,
       @JsonKey(name: "isBirthday") bool? isBirthday,
-      @JsonKey(name: "agentAuthStatus") dynamic agentAuthStatus,
-      @JsonKey(name: "kycType") dynamic kycType,
-      @JsonKey(name: "kycStatus") dynamic kycStatus,
+      @JsonKey(name: "agentAuthStatus") String? agentAuthStatus,
+      @JsonKey(name: "kycType") String? kycType,
+      @JsonKey(name: "kycStatus") String? kycStatus,
       @JsonKey(name: "isFPLogin") bool? isFpLogin,
-      @JsonKey(name: "authorized") dynamic authorized,
-      @JsonKey(name: "dailyLimit") dynamic dailyLimit});
+      @JsonKey(name: "authorized") bool? authorized,
+      @JsonKey(name: "dailyLimit") int? dailyLimit});
 
   @override
   $AuthTokenCopyWith<$Res>? get authToken;
 }
 
 /// @nodoc
-class __$$ResponseBodyImplCopyWithImpl<$Res>
-    extends _$ResponseBodyCopyWithImpl<$Res, _$ResponseBodyImpl>
-    implements _$$ResponseBodyImplCopyWith<$Res> {
-  __$$ResponseBodyImplCopyWithImpl(
-      _$ResponseBodyImpl _value, $Res Function(_$ResponseBodyImpl) _then)
+class __$$LoginByMpinResponseBodyImplCopyWithImpl<$Res>
+    extends _$LoginByMpinResponseBodyCopyWithImpl<$Res,
+        _$LoginByMpinResponseBodyImpl>
+    implements _$$LoginByMpinResponseBodyImplCopyWith<$Res> {
+  __$$LoginByMpinResponseBodyImplCopyWithImpl(
+      _$LoginByMpinResponseBodyImpl _value,
+      $Res Function(_$LoginByMpinResponseBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -705,7 +712,7 @@ class __$$ResponseBodyImplCopyWithImpl<$Res>
     Object? authorized = freezed,
     Object? dailyLimit = freezed,
   }) {
-    return _then(_$ResponseBodyImpl(
+    return _then(_$LoginByMpinResponseBodyImpl(
       agentId: freezed == agentId
           ? _value.agentId
           : agentId // ignore: cast_nullable_to_non_nullable
@@ -757,15 +764,15 @@ class __$$ResponseBodyImplCopyWithImpl<$Res>
       agentAuthStatus: freezed == agentAuthStatus
           ? _value.agentAuthStatus
           : agentAuthStatus // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       kycType: freezed == kycType
           ? _value.kycType
           : kycType // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       kycStatus: freezed == kycStatus
           ? _value.kycStatus
           : kycStatus // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isFpLogin: freezed == isFpLogin
           ? _value.isFpLogin
           : isFpLogin // ignore: cast_nullable_to_non_nullable
@@ -773,19 +780,19 @@ class __$$ResponseBodyImplCopyWithImpl<$Res>
       authorized: freezed == authorized
           ? _value.authorized
           : authorized // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as bool?,
       dailyLimit: freezed == dailyLimit
           ? _value.dailyLimit
           : dailyLimit // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int?,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$ResponseBodyImpl implements _ResponseBody {
-  const _$ResponseBodyImpl(
+class _$LoginByMpinResponseBodyImpl implements _LoginByMpinResponseBody {
+  const _$LoginByMpinResponseBodyImpl(
       {@JsonKey(name: "agentId") this.agentId,
       @JsonKey(name: "agentName") this.agentName,
       @JsonKey(name: "mobileNumber") this.mobileNumber,
@@ -805,8 +812,8 @@ class _$ResponseBodyImpl implements _ResponseBody {
       @JsonKey(name: "authorized") this.authorized,
       @JsonKey(name: "dailyLimit") this.dailyLimit});
 
-  factory _$ResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ResponseBodyImplFromJson(json);
+  factory _$LoginByMpinResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoginByMpinResponseBodyImplFromJson(json);
 
   @override
   @JsonKey(name: "agentId")
@@ -846,33 +853,33 @@ class _$ResponseBodyImpl implements _ResponseBody {
   final bool? isBirthday;
   @override
   @JsonKey(name: "agentAuthStatus")
-  final dynamic agentAuthStatus;
+  final String? agentAuthStatus;
   @override
   @JsonKey(name: "kycType")
-  final dynamic kycType;
+  final String? kycType;
   @override
   @JsonKey(name: "kycStatus")
-  final dynamic kycStatus;
+  final String? kycStatus;
   @override
   @JsonKey(name: "isFPLogin")
   final bool? isFpLogin;
   @override
   @JsonKey(name: "authorized")
-  final dynamic authorized;
+  final bool? authorized;
   @override
   @JsonKey(name: "dailyLimit")
-  final dynamic dailyLimit;
+  final int? dailyLimit;
 
   @override
   String toString() {
-    return 'ResponseBody(agentId: $agentId, agentName: $agentName, mobileNumber: $mobileNumber, emailId: $emailId, authToken: $authToken, isMpinExpired: $isMpinExpired, isFirstLogin: $isFirstLogin, deviceToken: $deviceToken, fpDeviceToken: $fpDeviceToken, profileImagePath: $profileImagePath, referralCode: $referralCode, isBirthday: $isBirthday, agentAuthStatus: $agentAuthStatus, kycType: $kycType, kycStatus: $kycStatus, isFpLogin: $isFpLogin, authorized: $authorized, dailyLimit: $dailyLimit)';
+    return 'LoginByMpinResponseBody(agentId: $agentId, agentName: $agentName, mobileNumber: $mobileNumber, emailId: $emailId, authToken: $authToken, isMpinExpired: $isMpinExpired, isFirstLogin: $isFirstLogin, deviceToken: $deviceToken, fpDeviceToken: $fpDeviceToken, profileImagePath: $profileImagePath, referralCode: $referralCode, isBirthday: $isBirthday, agentAuthStatus: $agentAuthStatus, kycType: $kycType, kycStatus: $kycStatus, isFpLogin: $isFpLogin, authorized: $authorized, dailyLimit: $dailyLimit)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResponseBodyImpl &&
+            other is _$LoginByMpinResponseBodyImpl &&
             (identical(other.agentId, agentId) || other.agentId == agentId) &&
             (identical(other.agentName, agentName) ||
                 other.agentName == agentName) &&
@@ -895,16 +902,17 @@ class _$ResponseBodyImpl implements _ResponseBody {
                 other.referralCode == referralCode) &&
             (identical(other.isBirthday, isBirthday) ||
                 other.isBirthday == isBirthday) &&
-            const DeepCollectionEquality()
-                .equals(other.agentAuthStatus, agentAuthStatus) &&
-            const DeepCollectionEquality().equals(other.kycType, kycType) &&
-            const DeepCollectionEquality().equals(other.kycStatus, kycStatus) &&
+            (identical(other.agentAuthStatus, agentAuthStatus) ||
+                other.agentAuthStatus == agentAuthStatus) &&
+            (identical(other.kycType, kycType) || other.kycType == kycType) &&
+            (identical(other.kycStatus, kycStatus) ||
+                other.kycStatus == kycStatus) &&
             (identical(other.isFpLogin, isFpLogin) ||
                 other.isFpLogin == isFpLogin) &&
-            const DeepCollectionEquality()
-                .equals(other.authorized, authorized) &&
-            const DeepCollectionEquality()
-                .equals(other.dailyLimit, dailyLimit));
+            (identical(other.authorized, authorized) ||
+                other.authorized == authorized) &&
+            (identical(other.dailyLimit, dailyLimit) ||
+                other.dailyLimit == dailyLimit));
   }
 
   @JsonKey(ignore: true)
@@ -923,29 +931,30 @@ class _$ResponseBodyImpl implements _ResponseBody {
       profileImagePath,
       referralCode,
       isBirthday,
-      const DeepCollectionEquality().hash(agentAuthStatus),
-      const DeepCollectionEquality().hash(kycType),
-      const DeepCollectionEquality().hash(kycStatus),
+      agentAuthStatus,
+      kycType,
+      kycStatus,
       isFpLogin,
-      const DeepCollectionEquality().hash(authorized),
-      const DeepCollectionEquality().hash(dailyLimit));
+      authorized,
+      dailyLimit);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResponseBodyImplCopyWith<_$ResponseBodyImpl> get copyWith =>
-      __$$ResponseBodyImplCopyWithImpl<_$ResponseBodyImpl>(this, _$identity);
+  _$$LoginByMpinResponseBodyImplCopyWith<_$LoginByMpinResponseBodyImpl>
+      get copyWith => __$$LoginByMpinResponseBodyImplCopyWithImpl<
+          _$LoginByMpinResponseBodyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResponseBodyImplToJson(
+    return _$$LoginByMpinResponseBodyImplToJson(
       this,
     );
   }
 }
 
-abstract class _ResponseBody implements ResponseBody {
-  const factory _ResponseBody(
+abstract class _LoginByMpinResponseBody implements LoginByMpinResponseBody {
+  const factory _LoginByMpinResponseBody(
           {@JsonKey(name: "agentId") final int? agentId,
           @JsonKey(name: "agentName") final String? agentName,
           @JsonKey(name: "mobileNumber") final String? mobileNumber,
@@ -958,16 +967,16 @@ abstract class _ResponseBody implements ResponseBody {
           @JsonKey(name: "profileImagePath") final String? profileImagePath,
           @JsonKey(name: "referralCode") final String? referralCode,
           @JsonKey(name: "isBirthday") final bool? isBirthday,
-          @JsonKey(name: "agentAuthStatus") final dynamic agentAuthStatus,
-          @JsonKey(name: "kycType") final dynamic kycType,
-          @JsonKey(name: "kycStatus") final dynamic kycStatus,
+          @JsonKey(name: "agentAuthStatus") final String? agentAuthStatus,
+          @JsonKey(name: "kycType") final String? kycType,
+          @JsonKey(name: "kycStatus") final String? kycStatus,
           @JsonKey(name: "isFPLogin") final bool? isFpLogin,
-          @JsonKey(name: "authorized") final dynamic authorized,
-          @JsonKey(name: "dailyLimit") final dynamic dailyLimit}) =
-      _$ResponseBodyImpl;
+          @JsonKey(name: "authorized") final bool? authorized,
+          @JsonKey(name: "dailyLimit") final int? dailyLimit}) =
+      _$LoginByMpinResponseBodyImpl;
 
-  factory _ResponseBody.fromJson(Map<String, dynamic> json) =
-      _$ResponseBodyImpl.fromJson;
+  factory _LoginByMpinResponseBody.fromJson(Map<String, dynamic> json) =
+      _$LoginByMpinResponseBodyImpl.fromJson;
 
   @override
   @JsonKey(name: "agentId")
@@ -1007,26 +1016,26 @@ abstract class _ResponseBody implements ResponseBody {
   bool? get isBirthday;
   @override
   @JsonKey(name: "agentAuthStatus")
-  dynamic get agentAuthStatus;
+  String? get agentAuthStatus;
   @override
   @JsonKey(name: "kycType")
-  dynamic get kycType;
+  String? get kycType;
   @override
   @JsonKey(name: "kycStatus")
-  dynamic get kycStatus;
+  String? get kycStatus;
   @override
   @JsonKey(name: "isFPLogin")
   bool? get isFpLogin;
   @override
   @JsonKey(name: "authorized")
-  dynamic get authorized;
+  bool? get authorized;
   @override
   @JsonKey(name: "dailyLimit")
-  dynamic get dailyLimit;
+  int? get dailyLimit;
   @override
   @JsonKey(ignore: true)
-  _$$ResponseBodyImplCopyWith<_$ResponseBodyImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoginByMpinResponseBodyImplCopyWith<_$LoginByMpinResponseBodyImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AuthToken _$AuthTokenFromJson(Map<String, dynamic> json) {

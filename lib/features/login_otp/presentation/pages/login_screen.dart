@@ -68,7 +68,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   CustomPrimaryButton(
                     disable: ref.watch(phoneNumberProvider).trim().length < 8,
                     onTap: () {
-                      _verifyMobileNumber();
+                      // _verifyMobileNumber();
+                      context.pushNamed(AppRoutes.otpScreen);
                     },
                     disabledOnTap: () {
                       context.showErrorSnackBar(message: Strings.loginPhoneValidatorString);

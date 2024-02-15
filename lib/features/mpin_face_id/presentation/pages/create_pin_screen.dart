@@ -1,6 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/providers/set_agent_mpin_providers.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

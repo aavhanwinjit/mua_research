@@ -6,3 +6,5 @@ final createPINProvider = StateProvider<String>((ref) => '');
 final confirmPINProvider = StateProvider<String>((ref) => '');
 
 final setAgentMpinResponseProvider = StateProvider<SetAgentMpinResponseModel?>((ref) => null);
+
+final loginPINProvider = StateProvider<String>((ref) => '');

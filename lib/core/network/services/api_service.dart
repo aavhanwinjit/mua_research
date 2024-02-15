@@ -7,6 +7,8 @@ import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validat
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
@@ -23,6 +25,7 @@ abstract class ApiService {
   static const RESEND_OTP = "/AgentAPI/Login/ResendOTP";
   static const SAVE_FILE = "/AgentAPI/FileHandling/SaveFile";
   static const SET_AGENT_MPIN = "/AgentAPI/Registration/SetAgentMPIN";
+  static const LOGIN_BY_MPIN = "/AgentAPI/Login/LoginByMPIN";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -53,4 +56,7 @@ abstract class ApiService {
 
   @POST(SET_AGENT_MPIN)
   Future<SetAgentMpinResponseModel> setAgentMPIN(@Body() SetAgentMpinRequestModel request);
+
+  @POST(LOGIN_BY_MPIN)
+  Future<LoginbyMpinResponseModel> loginByMpin(@Body() LoginbyMpinRequestModel request);
 }

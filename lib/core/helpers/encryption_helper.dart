@@ -7,6 +7,7 @@ import 'package:ekyc/core/helpers/decryption.dart';
 import 'package:ekyc/core/helpers/encryption.dart';
 import 'package:ekyc/core/helpers/generate_key_iv.dart';
 import 'package:ekyc/models/device_info/device_info_model.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EncryptionHelper {
@@ -44,7 +45,7 @@ class EncryptionHelper {
     String ip = deviceInfoModel.ipAddress!;
     String customer = "Agent";
     String journeyId = generateRandomAlphaNumeric();
-    String channelId = "";
+    // String channelId = "";
     String languageId = "1";
 
     BodyObject bodyObject = BodyObject(rb: plainData, checkSum: computeSha256Hash(json.encode(plainData)));
@@ -81,8 +82,8 @@ class EncryptionHelper {
     };
 
     final encryptedData = response;
-    print("Encrypted map:");
-    print(encryptedData);
+    debugPrint("Encrypted map:");
+    debugPrint(encryptedData.toString());
 
     return encryptedData;
   }

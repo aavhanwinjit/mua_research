@@ -59,6 +59,6 @@ class EncryptionInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    print(err.error);
+    debugPrint(err.error.toString());
   }
 }
