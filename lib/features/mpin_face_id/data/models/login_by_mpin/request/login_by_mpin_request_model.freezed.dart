@@ -12,7 +12,7 @@ part of 'login_by_mpin_request_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 LoginbyMpinRequestModel _$LoginbyMpinRequestModelFromJson(
     Map<String, dynamic> json) {
@@ -27,6 +27,8 @@ mixin _$LoginbyMpinRequestModel {
   String? get deviceToken => throw _privateConstructorUsedError;
   @JsonKey(name: "mPIN")
   String? get mPin => throw _privateConstructorUsedError;
+  @JsonKey(name: "mobileNo")
+  String? get mobileNo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +45,8 @@ abstract class $LoginbyMpinRequestModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "deviceId") String? deviceId,
       @JsonKey(name: "deviceToken") String? deviceToken,
-      @JsonKey(name: "mPIN") String? mPin});
+      @JsonKey(name: "mPIN") String? mPin,
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -63,6 +66,7 @@ class _$LoginbyMpinRequestModelCopyWithImpl<$Res,
     Object? deviceId = freezed,
     Object? deviceToken = freezed,
     Object? mPin = freezed,
+    Object? mobileNo = freezed,
   }) {
     return _then(_value.copyWith(
       deviceId: freezed == deviceId
@@ -76,6 +80,10 @@ class _$LoginbyMpinRequestModelCopyWithImpl<$Res,
       mPin: freezed == mPin
           ? _value.mPin
           : mPin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      mobileNo: freezed == mobileNo
+          ? _value.mobileNo
+          : mobileNo // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -93,7 +101,8 @@ abstract class _$$LoginbyMpinRequestModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "deviceId") String? deviceId,
       @JsonKey(name: "deviceToken") String? deviceToken,
-      @JsonKey(name: "mPIN") String? mPin});
+      @JsonKey(name: "mPIN") String? mPin,
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -112,6 +121,7 @@ class __$$LoginbyMpinRequestModelImplCopyWithImpl<$Res>
     Object? deviceId = freezed,
     Object? deviceToken = freezed,
     Object? mPin = freezed,
+    Object? mobileNo = freezed,
   }) {
     return _then(_$LoginbyMpinRequestModelImpl(
       deviceId: freezed == deviceId
@@ -126,6 +136,10 @@ class __$$LoginbyMpinRequestModelImplCopyWithImpl<$Res>
           ? _value.mPin
           : mPin // ignore: cast_nullable_to_non_nullable
               as String?,
+      mobileNo: freezed == mobileNo
+          ? _value.mobileNo
+          : mobileNo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -136,7 +150,8 @@ class _$LoginbyMpinRequestModelImpl implements _LoginbyMpinRequestModel {
   const _$LoginbyMpinRequestModelImpl(
       {@JsonKey(name: "deviceId") this.deviceId,
       @JsonKey(name: "deviceToken") this.deviceToken,
-      @JsonKey(name: "mPIN") this.mPin});
+      @JsonKey(name: "mPIN") this.mPin,
+      @JsonKey(name: "mobileNo") this.mobileNo});
 
   factory _$LoginbyMpinRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginbyMpinRequestModelImplFromJson(json);
@@ -150,10 +165,13 @@ class _$LoginbyMpinRequestModelImpl implements _LoginbyMpinRequestModel {
   @override
   @JsonKey(name: "mPIN")
   final String? mPin;
+  @override
+  @JsonKey(name: "mobileNo")
+  final String? mobileNo;
 
   @override
   String toString() {
-    return 'LoginbyMpinRequestModel(deviceId: $deviceId, deviceToken: $deviceToken, mPin: $mPin)';
+    return 'LoginbyMpinRequestModel(deviceId: $deviceId, deviceToken: $deviceToken, mPin: $mPin, mobileNo: $mobileNo)';
   }
 
   @override
@@ -165,12 +183,15 @@ class _$LoginbyMpinRequestModelImpl implements _LoginbyMpinRequestModel {
                 other.deviceId == deviceId) &&
             (identical(other.deviceToken, deviceToken) ||
                 other.deviceToken == deviceToken) &&
-            (identical(other.mPin, mPin) || other.mPin == mPin));
+            (identical(other.mPin, mPin) || other.mPin == mPin) &&
+            (identical(other.mobileNo, mobileNo) ||
+                other.mobileNo == mobileNo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, deviceId, deviceToken, mPin);
+  int get hashCode =>
+      Object.hash(runtimeType, deviceId, deviceToken, mPin, mobileNo);
 
   @JsonKey(ignore: true)
   @override
@@ -191,7 +212,8 @@ abstract class _LoginbyMpinRequestModel implements LoginbyMpinRequestModel {
   const factory _LoginbyMpinRequestModel(
           {@JsonKey(name: "deviceId") final String? deviceId,
           @JsonKey(name: "deviceToken") final String? deviceToken,
-          @JsonKey(name: "mPIN") final String? mPin}) =
+          @JsonKey(name: "mPIN") final String? mPin,
+          @JsonKey(name: "mobileNo") final String? mobileNo}) =
       _$LoginbyMpinRequestModelImpl;
 
   factory _LoginbyMpinRequestModel.fromJson(Map<String, dynamic> json) =
@@ -206,6 +228,9 @@ abstract class _LoginbyMpinRequestModel implements LoginbyMpinRequestModel {
   @override
   @JsonKey(name: "mPIN")
   String? get mPin;
+  @override
+  @JsonKey(name: "mobileNo")
+  String? get mobileNo;
   @override
   @JsonKey(ignore: true)
   _$$LoginbyMpinRequestModelImplCopyWith<_$LoginbyMpinRequestModelImpl>

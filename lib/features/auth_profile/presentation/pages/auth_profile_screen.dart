@@ -45,10 +45,10 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                 SizedBox(height: 40.h),
                 CustomPrimaryButton(
                   disable: ref.watch(signatureProvider) == null,
-                  onTap: () {
-                    context.go(AppRoutes.selectPINorBiometricScreen);
-                  },
-                  // onTap: _uploadSignature,
+                  // onTap: () {
+                  // context.go(AppRoutes.selectPINorBiometricScreen);
+                  // },
+                  onTap: _uploadSignature,
                   label: Strings.contn,
                 ),
                 SizedBox(height: 16.h),

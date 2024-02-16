@@ -23,7 +23,7 @@ class Strings {
   static const String invalidId = "INVALID_DEVICE_ID";
   static const String globalNoInternet = 'No Internet connection !!!';
   static const String agreeTerms = "By clicking, I agree with ";
-  static const String termsAndCondition = "Terms & Condition";
+  static const String termsAndCondition = "Terms & Conditions";
   static const String safetyGuidelines = " and safety guidelines";
   static const String edit = "Edit";
   static const String contn = "Continue";
@@ -66,7 +66,7 @@ class Strings {
   static const String otpSuccessScreenTitle = "Great, that matches!";
   static const String otpSuccessScreenSubTitle = "Your profile is loading. Sit tight!";
   static const String otpValidationString = "Enter valid OTP";
-  static const String otpDidntReceiveIt = "Didn't received it? ";
+  static const String otpDidntReceiveIt = "Didn't receive it? ";
   static const String retryIn = "Retry in";
   static const String maximumOTPRetryReached = "Maximum number of OTP reached, please try again after sometime";
 

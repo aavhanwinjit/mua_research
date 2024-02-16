@@ -1,6 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/storage/storage_key.dart';
+import 'package:ekyc/core/storage/storage_manager.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
@@ -249,8 +251,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                     if (pin.length == 6) {
                       //navigate
                       Future.delayed(const Duration(seconds: 2), () {
-                        // _setAgentMPIN();
-                        context.pushNamed(AppRoutes.onboardSuccessScreen);
+                        _setAgentMPIN();
+                        // context.pushNamed(AppRoutes.onboardSuccessScreen);
                       });
                     }
                   },
@@ -299,6 +301,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
           setState(() {});
           ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
 
+          // store the auth token
+          await _storeDeviceToken(success.body?.responseBody?.deviceToken);
+
           context.pushNamed(AppRoutes.onboardSuccessScreen);
         } else {
           context.showErrorSnackBar(
@@ -307,5 +312,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
         }
       },
     );
+  }
+
+  Future<void> _storeDeviceToken(String? deviceToken) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
   }
 }

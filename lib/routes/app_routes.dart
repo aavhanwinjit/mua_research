@@ -30,7 +30,7 @@ import 'package:ekyc/features/mpin_face_id/presentation/pages/select_pin_or_biom
 import 'package:ekyc/features/onboard_success_screen/onboard_success_screen.dart';
 import 'package:ekyc/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
-import 'package:ekyc/features/splash_screen/presentation/splash_screen.dart';
+import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

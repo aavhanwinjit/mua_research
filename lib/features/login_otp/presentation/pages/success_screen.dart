@@ -15,8 +15,11 @@ class SuccessScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            ImageConstants.successImage,
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 140.w),
+            child: Image.asset(
+              ImageConstants.successImage,
+            ),
           ),
           SizedBox(height: 36.h),
           Text(

@@ -12,6 +12,7 @@ _$LoginbyMpinRequestModelImpl _$$LoginbyMpinRequestModelImplFromJson(
       deviceId: json['deviceId'] as String?,
       deviceToken: json['deviceToken'] as String?,
       mPin: json['mPIN'] as String?,
+      mobileNo: json['mobileNo'] as String?,
     );
 
 Map<String, dynamic> _$$LoginbyMpinRequestModelImplToJson(
@@ -20,4 +21,5 @@ Map<String, dynamic> _$$LoginbyMpinRequestModelImplToJson(
       'deviceId': instance.deviceId,
       'deviceToken': instance.deviceToken,
       'mPIN': instance.mPin,
+      'mobileNo': instance.mobileNo,
     };

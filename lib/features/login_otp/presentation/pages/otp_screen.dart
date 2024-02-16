@@ -84,10 +84,10 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                 SizedBox(height: 24.h),
                 CustomPrimaryButton(
                   disable: ref.watch(otpProvider).trim().length < 6,
-                  onTap: () {
-                    context.pushReplacementNamed(AppRoutes.successScreen);
-                  },
-                  // onTap: _verifyOTP,
+                  // onTap: () {
+                  //   context.pushReplacementNamed(AppRoutes.successScreen);
+                  // },
+                  onTap: _verifyOTP,
                   label: Strings.contn,
                 ),
                 SizedBox(height: 18.h),
@@ -174,8 +174,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                 timerKey: ValueKey(retryCount),
               )
             : TextButton.icon(
-                onPressed: () {},
-                // onPressed: _resendOTP,
+                // onPressed: () {},
+                onPressed: _resendOTP,
                 icon: const Icon(Icons.timer_outlined, color: black),
                 label: const Text(
                   "Resend OTP",

@@ -14,7 +14,10 @@ class OnboardSuccessScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Spacer(flex: 2),
-          Image.asset(ImageConstants.successImage),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 140.w),
+            child: Image.asset(ImageConstants.successImage),
+          ),
           const SizedBox(height: 20),
           Text(
             "Congratulations,\nArjun Kumar!",

@@ -21,7 +21,7 @@ class _ApiService implements ApiService {
   @override
   Future<LaunchDetailsResponse> launchDetails(
       LaunchDetailsRequest request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -49,7 +49,7 @@ class _ApiService implements ApiService {
   @override
   Future<VerifyMobileNumberResponseModel> verifyMobileNumber(
       VerifyMobileNumberRequestModel request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -77,7 +77,7 @@ class _ApiService implements ApiService {
   @override
   Future<ValidateOtpResponseModel> validateOTP(
       ValidateOtpRequestModel request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -108,7 +108,7 @@ class _ApiService implements ApiService {
     String sessionId,
     ResendOtpRequestModel request,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{
       r'Authorization': authorization,
@@ -142,7 +142,7 @@ class _ApiService implements ApiService {
     String authorization,
     SaveFileRequestModel request,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': authorization};
     _headers.removeWhere((k, v) => v == null);
@@ -171,7 +171,7 @@ class _ApiService implements ApiService {
   @override
   Future<SetAgentMpinResponseModel> setAgentMPIN(
       SetAgentMpinRequestModel request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
@@ -199,7 +199,7 @@ class _ApiService implements ApiService {
   @override
   Future<LoginbyMpinResponseModel> loginByMpin(
       LoginbyMpinRequestModel request) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
