@@ -1,8 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
+import 'package:ekyc/core/storage/storage_manager.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/profile/data/models/logout/response/logout_response_model.dart';
+import 'package:ekyc/features/profile/domain/usecases/logout.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,7 +110,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
           OptionsTile(
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
-            onTap: () {},
+            onTap: _logout,
           ),
           SizedBox(height: 8.h),
         ],
@@ -325,6 +330,28 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
           const Icon(Icons.chevron_right),
         ],
       ),
+    );
+  }
+
+  void _logout() async {
+    final response = await getIt<Logout>().call(null);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (LogoutResponseModel success) async {
+        if (success.status?.isSuccess == true) {
+          getIt<AppStorageManager>().clearStorage();
+
+          context.go(AppRoutes.loginScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
     );
   }
 }

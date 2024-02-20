@@ -38,4 +38,24 @@ class StorageManagerImpl implements AppStorageManager {
   Future<void> clearStorage() {
     return box.erase();
   }
+
+  @override
+  Future<void> storeString({required StorageKey key, required String? data}) {
+    return box.write(
+      key.name,
+      data,
+    );
+  }
+
+  @override
+  Future<String?>? getString({required StorageKey key}) {
+    try {
+      final data = box.read(key.name);
+      final value = Future.value(data.toString());
+      return data == null ? data : value;
+    } catch (e) {
+      debugPrint("Error while extracting string from local storage: ${e.toString()}");
+      throw CacheException();
+    }
+  }
 }

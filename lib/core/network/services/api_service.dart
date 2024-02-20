@@ -7,10 +7,13 @@ import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validat
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
+import 'package:ekyc/features/profile/data/models/logout/response/logout_response_model.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
 import 'package:retrofit/http.dart';
@@ -26,6 +29,8 @@ abstract class ApiService {
   static const SAVE_FILE = "/AgentAPI/FileHandling/SaveFile";
   static const SET_AGENT_MPIN = "/AgentAPI/Registration/SetAgentMPIN";
   static const LOGIN_BY_MPIN = "/AgentAPI/Login/LoginByMPIN";
+  static const LOGIN_BY_BIOMETRIC = "/AgentAPI/Login/LoginByFP";
+  static const LOGOUT = "/AgentAPI/Login/Logout";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -59,4 +64,10 @@ abstract class ApiService {
 
   @POST(LOGIN_BY_MPIN)
   Future<LoginbyMpinResponseModel> loginByMpin(@Body() LoginbyMpinRequestModel request);
+
+  @POST(LOGIN_BY_BIOMETRIC)
+  Future<LoginByFpResponseModel> loginByFP(@Body() LoginByFpRequestModel request);
+
+  @POST(LOGOUT)
+  Future<LogoutResponseModel> logout();
 }

@@ -20,6 +20,7 @@ class LoginbyMpinRequestModel with _$LoginbyMpinRequestModel {
     @JsonKey(name: "deviceId") String? deviceId,
     @JsonKey(name: "deviceToken") String? deviceToken,
     @JsonKey(name: "mPIN") String? mPin,
+    @JsonKey(name: "mobileNo") String? mobileNo,
   }) = _LoginbyMpinRequestModel;
 
   factory LoginbyMpinRequestModel.fromJson(Map<String, dynamic> json) => _$LoginbyMpinRequestModelFromJson(json);

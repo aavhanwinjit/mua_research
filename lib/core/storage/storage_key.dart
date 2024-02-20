@@ -1,1 +1,1 @@
-enum StorageKey { LAUNCH_DETAILS }
+enum StorageKey { LAUNCH_DETAILS, DEVICE_TOKEN }

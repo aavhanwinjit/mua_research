@@ -7,10 +7,12 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
 import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart';
+import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safe_device/safe_device.dart';
+import 'package:uuid/uuid.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
@@ -71,20 +73,24 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
   void _navigateToLoginPage() {
     Future.delayed(const Duration(seconds: 3), () {
-      // callLaunchDetailsApi(context);
-      context.go(AppRoutes.loginScreen);
+      callLaunchDetailsApi(context);
+      // context.go(AppRoutes.loginScreen);
     });
   }
 
   void callLaunchDetailsApi(BuildContext context) async {
-    final isJailBroken = await detectRootOrJailbreak();
+    final isRootedDevice = await detectRootOrJailbreak();
 
-    final body = LaunchDetailsRequest(
-      rootedDevice: isJailBroken,
-      deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee",
+    final deviceToken = await _getDeviceToken();
+
+    final request = LaunchDetailsRequest(
+      rootedDevice: isRootedDevice,
+      deviceToken: deviceToken,
     );
 
-    final result = await getIt<LaunchDetails>().call(body);
+    debugPrint("request in launch details.json: ${request.toJson()}");
+
+    final result = await getIt<LaunchDetails>().call(request);
 
     result.fold(
       (failure) {
@@ -99,15 +105,19 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
             key: StorageKey.LAUNCH_DETAILS,
             data: success.toJson(),
           );
-          context.go(AppRoutes.loginScreen);
+
+          ref.watch(launchDetailsResponseProvider.notifier).update((state) => success);
+
+          if (success.body?.responseBody?.agentData != null) {
+            context.go(AppRoutes.mpinLoginScreen);
+          } else {
+            context.go(AppRoutes.loginScreen);
+          }
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
-
-        // await getIt<SharedPreferences>().setBool(StorageConstant.isLoggedIn, true);
-        // emit(LoginState.success(loginResponse: success));
       },
     );
   }
@@ -121,81 +131,25 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     return isJailBroken;
   }
+
+  Future<String> _getDeviceToken() async {
+    final deviceToken = await getIt<AppStorageManager>().getString(key: StorageKey.DEVICE_TOKEN);
+
+    if (deviceToken != null && deviceToken.isNotEmpty) {
+      return deviceToken;
+    }
+
+    final newUniqueDeviceToken = _generateUniqueToken();
+
+    return newUniqueDeviceToken;
+    // return "aad3935a-7b5c-484a-996a-552779b2355d";
+  }
+
+  String _generateUniqueToken() {
+    const uuid = Uuid();
+
+    final uniqueId = uuid.v1();
+
+    return uniqueId;
+  }
 }
-
-// class SplashScreen extends ConsumerWidget {
-//   const SplashScreen({super.key});
-
-//   @override
-//   Widget build(BuildContext context, WidgetRef ref) {
-//     _navigateToLoginPage(context);
-
-//     return Scaffold(
-//       backgroundColor: primaryColor,
-//       body: Stack(
-//         children: [
-//           Center(
-//             child: Image.asset(
-//               ImageConstants.pngSplashLogo,
-//               width: 212.w,
-//             ),
-//           ),
-//           const Text()
-//         ],
-//       ),
-//     );
-//   }
-
-//   void _navigateToLoginPage(BuildContext context) {
-//     Future.delayed(const Duration(seconds: 3), () {
-//       // callLaunchDetailsApi(context);
-//       context.go(AppRoutes.loginScreen);
-//     });
-//   }
-
-//   void callLaunchDetailsApi(BuildContext context) async {
-//     final isJailBroken = await detectRootOrJailbreak();
-
-//     final body = LaunchDetailsRequest(
-//       rootedDevice: isJailBroken,
-//       deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee",
-//     );
-
-//     final result = await getIt<LaunchDetails>().call(body);
-
-//     result.fold(
-//       (failure) {
-//         debugPrint("failure: ${failure.exception}");
-//         context.showErrorSnackBar(message: Strings.technicalError);
-//       },
-//       (LaunchDetailsResponse success) async {
-//         debugPrint("success in splash: $success");
-
-//         if (success.status?.isSuccess == true) {
-//           await getIt<AppStorageManager>().storeMap(
-//             key: StorageKey.LAUNCH_DETAILS,
-//             data: success.toJson(),
-//           );
-//           context.go(AppRoutes.loginScreen);
-//         } else {
-//           context.showErrorSnackBar(
-//             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-//           );
-//         }
-
-//         // await getIt<SharedPreferences>().setBool(StorageConstant.isLoggedIn, true);
-//         // emit(LoginState.success(loginResponse: success));
-//       },
-//     );
-//   }
-
-//   Future<bool> detectRootOrJailbreak() async {
-//     bool isJailBroken = await SafeDevice.isJailBroken;
-//     debugPrint("jailBroken: $isJailBroken");
-
-//     bool isRealDevice = await SafeDevice.isRealDevice;
-//     debugPrint("realDevice: $isRealDevice");
-
-//     return isJailBroken;
-//   }
-// }
