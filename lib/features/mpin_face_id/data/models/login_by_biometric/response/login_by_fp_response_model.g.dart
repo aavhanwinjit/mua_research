@@ -1,36 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'login_by_mpin_response_model.dart';
+part of 'login_by_fp_response_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LoginbyMpinResponseModelImpl _$$LoginbyMpinResponseModelImplFromJson(
+_$LoginByFpResponseModelImpl _$$LoginByFpResponseModelImplFromJson(
         Map<String, dynamic> json) =>
-    _$LoginbyMpinResponseModelImpl(
+    _$LoginByFpResponseModelImpl(
       header: json['h'] == null
           ? null
           : HeaderModel.fromJson(json['h'] as Map<String, dynamic>),
       body: json['b'] == null
           ? null
-          : LoginByMpinData.fromJson(json['b'] as Map<String, dynamic>),
+          : LoginByFPData.fromJson(json['b'] as Map<String, dynamic>),
       status: json['s'] == null
           ? null
           : StatusModel.fromJson(json['s'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$LoginbyMpinResponseModelImplToJson(
-        _$LoginbyMpinResponseModelImpl instance) =>
+Map<String, dynamic> _$$LoginByFpResponseModelImplToJson(
+        _$LoginByFpResponseModelImpl instance) =>
     <String, dynamic>{
       'h': instance.header,
       'b': instance.body,
       's': instance.status,
     };
 
-_$LoginByMpinDataImpl _$$LoginByMpinDataImplFromJson(
-        Map<String, dynamic> json) =>
-    _$LoginByMpinDataImpl(
+_$LoginByFPDataImpl _$$LoginByFPDataImplFromJson(Map<String, dynamic> json) =>
+    _$LoginByFPDataImpl(
       responseBody: json['rb'] == null
           ? null
           : AgentLoginDetailsResponseModel.fromJson(
@@ -38,8 +37,7 @@ _$LoginByMpinDataImpl _$$LoginByMpinDataImplFromJson(
       checkSum: json['checkSum'] as String?,
     );
 
-Map<String, dynamic> _$$LoginByMpinDataImplToJson(
-        _$LoginByMpinDataImpl instance) =>
+Map<String, dynamic> _$$LoginByFPDataImplToJson(_$LoginByFPDataImpl instance) =>
     <String, dynamic>{
       'rb': instance.responseBody,
       'checkSum': instance.checkSum,

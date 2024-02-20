@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'login_by_mpin_response_model.dart';
+part of 'logout_response_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,47 +14,45 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-LoginbyMpinResponseModel _$LoginbyMpinResponseModelFromJson(
-    Map<String, dynamic> json) {
-  return _LoginbyMpinResponseModel.fromJson(json);
+LogoutResponseModel _$LogoutResponseModelFromJson(Map<String, dynamic> json) {
+  return _LogoutResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LoginbyMpinResponseModel {
+mixin _$LogoutResponseModel {
   @JsonKey(name: "h")
   HeaderModel? get header => throw _privateConstructorUsedError;
   @JsonKey(name: "b")
-  LoginByMpinData? get body => throw _privateConstructorUsedError;
+  LogoutData? get body => throw _privateConstructorUsedError;
   @JsonKey(name: "s")
   StatusModel? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LoginbyMpinResponseModelCopyWith<LoginbyMpinResponseModel> get copyWith =>
+  $LogoutResponseModelCopyWith<LogoutResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoginbyMpinResponseModelCopyWith<$Res> {
-  factory $LoginbyMpinResponseModelCopyWith(LoginbyMpinResponseModel value,
-          $Res Function(LoginbyMpinResponseModel) then) =
-      _$LoginbyMpinResponseModelCopyWithImpl<$Res, LoginbyMpinResponseModel>;
+abstract class $LogoutResponseModelCopyWith<$Res> {
+  factory $LogoutResponseModelCopyWith(
+          LogoutResponseModel value, $Res Function(LogoutResponseModel) then) =
+      _$LogoutResponseModelCopyWithImpl<$Res, LogoutResponseModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") LoginByMpinData? body,
+      @JsonKey(name: "b") LogoutData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   $HeaderModelCopyWith<$Res>? get header;
-  $LoginByMpinDataCopyWith<$Res>? get body;
+  $LogoutDataCopyWith<$Res>? get body;
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class _$LoginbyMpinResponseModelCopyWithImpl<$Res,
-        $Val extends LoginbyMpinResponseModel>
-    implements $LoginbyMpinResponseModelCopyWith<$Res> {
-  _$LoginbyMpinResponseModelCopyWithImpl(this._value, this._then);
+class _$LogoutResponseModelCopyWithImpl<$Res, $Val extends LogoutResponseModel>
+    implements $LogoutResponseModelCopyWith<$Res> {
+  _$LogoutResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,7 +74,7 @@ class _$LoginbyMpinResponseModelCopyWithImpl<$Res,
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as LoginByMpinData?,
+              as LogoutData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -98,12 +96,12 @@ class _$LoginbyMpinResponseModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $LoginByMpinDataCopyWith<$Res>? get body {
+  $LogoutDataCopyWith<$Res>? get body {
     if (_value.body == null) {
       return null;
     }
 
-    return $LoginByMpinDataCopyWith<$Res>(_value.body!, (value) {
+    return $LogoutDataCopyWith<$Res>(_value.body!, (value) {
       return _then(_value.copyWith(body: value) as $Val);
     });
   }
@@ -122,35 +120,32 @@ class _$LoginbyMpinResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$LoginbyMpinResponseModelImplCopyWith<$Res>
-    implements $LoginbyMpinResponseModelCopyWith<$Res> {
-  factory _$$LoginbyMpinResponseModelImplCopyWith(
-          _$LoginbyMpinResponseModelImpl value,
-          $Res Function(_$LoginbyMpinResponseModelImpl) then) =
-      __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>;
+abstract class _$$LogoutResponseModelImplCopyWith<$Res>
+    implements $LogoutResponseModelCopyWith<$Res> {
+  factory _$$LogoutResponseModelImplCopyWith(_$LogoutResponseModelImpl value,
+          $Res Function(_$LogoutResponseModelImpl) then) =
+      __$$LogoutResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") LoginByMpinData? body,
+      @JsonKey(name: "b") LogoutData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   @override
   $HeaderModelCopyWith<$Res>? get header;
   @override
-  $LoginByMpinDataCopyWith<$Res>? get body;
+  $LogoutDataCopyWith<$Res>? get body;
   @override
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>
-    extends _$LoginbyMpinResponseModelCopyWithImpl<$Res,
-        _$LoginbyMpinResponseModelImpl>
-    implements _$$LoginbyMpinResponseModelImplCopyWith<$Res> {
-  __$$LoginbyMpinResponseModelImplCopyWithImpl(
-      _$LoginbyMpinResponseModelImpl _value,
-      $Res Function(_$LoginbyMpinResponseModelImpl) _then)
+class __$$LogoutResponseModelImplCopyWithImpl<$Res>
+    extends _$LogoutResponseModelCopyWithImpl<$Res, _$LogoutResponseModelImpl>
+    implements _$$LogoutResponseModelImplCopyWith<$Res> {
+  __$$LogoutResponseModelImplCopyWithImpl(_$LogoutResponseModelImpl _value,
+      $Res Function(_$LogoutResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +155,7 @@ class __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>
     Object? body = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$LoginbyMpinResponseModelImpl(
+    return _then(_$LogoutResponseModelImpl(
       header: freezed == header
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
@@ -168,7 +163,7 @@ class __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as LoginByMpinData?,
+              as LogoutData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -179,35 +174,35 @@ class __$$LoginbyMpinResponseModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LoginbyMpinResponseModelImpl implements _LoginbyMpinResponseModel {
-  const _$LoginbyMpinResponseModelImpl(
+class _$LogoutResponseModelImpl implements _LogoutResponseModel {
+  const _$LogoutResponseModelImpl(
       {@JsonKey(name: "h") this.header,
       @JsonKey(name: "b") this.body,
       @JsonKey(name: "s") this.status});
 
-  factory _$LoginbyMpinResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LoginbyMpinResponseModelImplFromJson(json);
+  factory _$LogoutResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LogoutResponseModelImplFromJson(json);
 
   @override
   @JsonKey(name: "h")
   final HeaderModel? header;
   @override
   @JsonKey(name: "b")
-  final LoginByMpinData? body;
+  final LogoutData? body;
   @override
   @JsonKey(name: "s")
   final StatusModel? status;
 
   @override
   String toString() {
-    return 'LoginbyMpinResponseModel(header: $header, body: $body, status: $status)';
+    return 'LogoutResponseModel(header: $header, body: $body, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginbyMpinResponseModelImpl &&
+            other is _$LogoutResponseModelImpl &&
             (identical(other.header, header) || other.header == header) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.status, status) || other.status == status));
@@ -220,78 +215,77 @@ class _$LoginbyMpinResponseModelImpl implements _LoginbyMpinResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginbyMpinResponseModelImplCopyWith<_$LoginbyMpinResponseModelImpl>
-      get copyWith => __$$LoginbyMpinResponseModelImplCopyWithImpl<
-          _$LoginbyMpinResponseModelImpl>(this, _$identity);
+  _$$LogoutResponseModelImplCopyWith<_$LogoutResponseModelImpl> get copyWith =>
+      __$$LogoutResponseModelImplCopyWithImpl<_$LogoutResponseModelImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoginbyMpinResponseModelImplToJson(
+    return _$$LogoutResponseModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _LoginbyMpinResponseModel implements LoginbyMpinResponseModel {
-  const factory _LoginbyMpinResponseModel(
+abstract class _LogoutResponseModel implements LogoutResponseModel {
+  const factory _LogoutResponseModel(
           {@JsonKey(name: "h") final HeaderModel? header,
-          @JsonKey(name: "b") final LoginByMpinData? body,
+          @JsonKey(name: "b") final LogoutData? body,
           @JsonKey(name: "s") final StatusModel? status}) =
-      _$LoginbyMpinResponseModelImpl;
+      _$LogoutResponseModelImpl;
 
-  factory _LoginbyMpinResponseModel.fromJson(Map<String, dynamic> json) =
-      _$LoginbyMpinResponseModelImpl.fromJson;
+  factory _LogoutResponseModel.fromJson(Map<String, dynamic> json) =
+      _$LogoutResponseModelImpl.fromJson;
 
   @override
   @JsonKey(name: "h")
   HeaderModel? get header;
   @override
   @JsonKey(name: "b")
-  LoginByMpinData? get body;
+  LogoutData? get body;
   @override
   @JsonKey(name: "s")
   StatusModel? get status;
   @override
   @JsonKey(ignore: true)
-  _$$LoginbyMpinResponseModelImplCopyWith<_$LoginbyMpinResponseModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$LogoutResponseModelImplCopyWith<_$LogoutResponseModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
-LoginByMpinData _$LoginByMpinDataFromJson(Map<String, dynamic> json) {
-  return _LoginByMpinData.fromJson(json);
+LogoutData _$LogoutDataFromJson(Map<String, dynamic> json) {
+  return _LogoutData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LoginByMpinData {
+mixin _$LogoutData {
   @JsonKey(name: "rb")
-  AgentLoginDetailsResponseModel? get responseBody =>
-      throw _privateConstructorUsedError;
+  LogoutResponseBody? get responseBody => throw _privateConstructorUsedError;
   @JsonKey(name: "checkSum")
   String? get checkSum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LoginByMpinDataCopyWith<LoginByMpinData> get copyWith =>
+  $LogoutDataCopyWith<LogoutData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LoginByMpinDataCopyWith<$Res> {
-  factory $LoginByMpinDataCopyWith(
-          LoginByMpinData value, $Res Function(LoginByMpinData) then) =
-      _$LoginByMpinDataCopyWithImpl<$Res, LoginByMpinData>;
+abstract class $LogoutDataCopyWith<$Res> {
+  factory $LogoutDataCopyWith(
+          LogoutData value, $Res Function(LogoutData) then) =
+      _$LogoutDataCopyWithImpl<$Res, LogoutData>;
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") AgentLoginDetailsResponseModel? responseBody,
+      {@JsonKey(name: "rb") LogoutResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
-  $AgentLoginDetailsResponseModelCopyWith<$Res>? get responseBody;
+  $LogoutResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class _$LoginByMpinDataCopyWithImpl<$Res, $Val extends LoginByMpinData>
-    implements $LoginByMpinDataCopyWith<$Res> {
-  _$LoginByMpinDataCopyWithImpl(this._value, this._then);
+class _$LogoutDataCopyWithImpl<$Res, $Val extends LogoutData>
+    implements $LogoutDataCopyWith<$Res> {
+  _$LogoutDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -308,7 +302,7 @@ class _$LoginByMpinDataCopyWithImpl<$Res, $Val extends LoginByMpinData>
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as AgentLoginDetailsResponseModel?,
+              as LogoutResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -318,40 +312,39 @@ class _$LoginByMpinDataCopyWithImpl<$Res, $Val extends LoginByMpinData>
 
   @override
   @pragma('vm:prefer-inline')
-  $AgentLoginDetailsResponseModelCopyWith<$Res>? get responseBody {
+  $LogoutResponseBodyCopyWith<$Res>? get responseBody {
     if (_value.responseBody == null) {
       return null;
     }
 
-    return $AgentLoginDetailsResponseModelCopyWith<$Res>(_value.responseBody!,
-        (value) {
+    return $LogoutResponseBodyCopyWith<$Res>(_value.responseBody!, (value) {
       return _then(_value.copyWith(responseBody: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$LoginByMpinDataImplCopyWith<$Res>
-    implements $LoginByMpinDataCopyWith<$Res> {
-  factory _$$LoginByMpinDataImplCopyWith(_$LoginByMpinDataImpl value,
-          $Res Function(_$LoginByMpinDataImpl) then) =
-      __$$LoginByMpinDataImplCopyWithImpl<$Res>;
+abstract class _$$LogoutDataImplCopyWith<$Res>
+    implements $LogoutDataCopyWith<$Res> {
+  factory _$$LogoutDataImplCopyWith(
+          _$LogoutDataImpl value, $Res Function(_$LogoutDataImpl) then) =
+      __$$LogoutDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") AgentLoginDetailsResponseModel? responseBody,
+      {@JsonKey(name: "rb") LogoutResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
   @override
-  $AgentLoginDetailsResponseModelCopyWith<$Res>? get responseBody;
+  $LogoutResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class __$$LoginByMpinDataImplCopyWithImpl<$Res>
-    extends _$LoginByMpinDataCopyWithImpl<$Res, _$LoginByMpinDataImpl>
-    implements _$$LoginByMpinDataImplCopyWith<$Res> {
-  __$$LoginByMpinDataImplCopyWithImpl(
-      _$LoginByMpinDataImpl _value, $Res Function(_$LoginByMpinDataImpl) _then)
+class __$$LogoutDataImplCopyWithImpl<$Res>
+    extends _$LogoutDataCopyWithImpl<$Res, _$LogoutDataImpl>
+    implements _$$LogoutDataImplCopyWith<$Res> {
+  __$$LogoutDataImplCopyWithImpl(
+      _$LogoutDataImpl _value, $Res Function(_$LogoutDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -360,11 +353,11 @@ class __$$LoginByMpinDataImplCopyWithImpl<$Res>
     Object? responseBody = freezed,
     Object? checkSum = freezed,
   }) {
-    return _then(_$LoginByMpinDataImpl(
+    return _then(_$LogoutDataImpl(
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as AgentLoginDetailsResponseModel?,
+              as LogoutResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -375,31 +368,31 @@ class __$$LoginByMpinDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$LoginByMpinDataImpl implements _LoginByMpinData {
-  const _$LoginByMpinDataImpl(
+class _$LogoutDataImpl implements _LogoutData {
+  const _$LogoutDataImpl(
       {@JsonKey(name: "rb") this.responseBody,
       @JsonKey(name: "checkSum") this.checkSum});
 
-  factory _$LoginByMpinDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$LoginByMpinDataImplFromJson(json);
+  factory _$LogoutDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LogoutDataImplFromJson(json);
 
   @override
   @JsonKey(name: "rb")
-  final AgentLoginDetailsResponseModel? responseBody;
+  final LogoutResponseBody? responseBody;
   @override
   @JsonKey(name: "checkSum")
   final String? checkSum;
 
   @override
   String toString() {
-    return 'LoginByMpinData(responseBody: $responseBody, checkSum: $checkSum)';
+    return 'LogoutData(responseBody: $responseBody, checkSum: $checkSum)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoginByMpinDataImpl &&
+            other is _$LogoutDataImpl &&
             (identical(other.responseBody, responseBody) ||
                 other.responseBody == responseBody) &&
             (identical(other.checkSum, checkSum) ||
@@ -413,35 +406,114 @@ class _$LoginByMpinDataImpl implements _LoginByMpinData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoginByMpinDataImplCopyWith<_$LoginByMpinDataImpl> get copyWith =>
-      __$$LoginByMpinDataImplCopyWithImpl<_$LoginByMpinDataImpl>(
-          this, _$identity);
+  _$$LogoutDataImplCopyWith<_$LogoutDataImpl> get copyWith =>
+      __$$LogoutDataImplCopyWithImpl<_$LogoutDataImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LoginByMpinDataImplToJson(
+    return _$$LogoutDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _LoginByMpinData implements LoginByMpinData {
-  const factory _LoginByMpinData(
-      {@JsonKey(name: "rb") final AgentLoginDetailsResponseModel? responseBody,
-      @JsonKey(name: "checkSum")
-      final String? checkSum}) = _$LoginByMpinDataImpl;
+abstract class _LogoutData implements LogoutData {
+  const factory _LogoutData(
+      {@JsonKey(name: "rb") final LogoutResponseBody? responseBody,
+      @JsonKey(name: "checkSum") final String? checkSum}) = _$LogoutDataImpl;
 
-  factory _LoginByMpinData.fromJson(Map<String, dynamic> json) =
-      _$LoginByMpinDataImpl.fromJson;
+  factory _LogoutData.fromJson(Map<String, dynamic> json) =
+      _$LogoutDataImpl.fromJson;
 
   @override
   @JsonKey(name: "rb")
-  AgentLoginDetailsResponseModel? get responseBody;
+  LogoutResponseBody? get responseBody;
   @override
   @JsonKey(name: "checkSum")
   String? get checkSum;
   @override
   @JsonKey(ignore: true)
-  _$$LoginByMpinDataImplCopyWith<_$LoginByMpinDataImpl> get copyWith =>
+  _$$LogoutDataImplCopyWith<_$LogoutDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+LogoutResponseBody _$LogoutResponseBodyFromJson(Map<String, dynamic> json) {
+  return _LogoutResponseBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$LogoutResponseBody {
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LogoutResponseBodyCopyWith<$Res> {
+  factory $LogoutResponseBodyCopyWith(
+          LogoutResponseBody value, $Res Function(LogoutResponseBody) then) =
+      _$LogoutResponseBodyCopyWithImpl<$Res, LogoutResponseBody>;
+}
+
+/// @nodoc
+class _$LogoutResponseBodyCopyWithImpl<$Res, $Val extends LogoutResponseBody>
+    implements $LogoutResponseBodyCopyWith<$Res> {
+  _$LogoutResponseBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$LogoutResponseBodyImplCopyWith<$Res> {
+  factory _$$LogoutResponseBodyImplCopyWith(_$LogoutResponseBodyImpl value,
+          $Res Function(_$LogoutResponseBodyImpl) then) =
+      __$$LogoutResponseBodyImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LogoutResponseBodyImplCopyWithImpl<$Res>
+    extends _$LogoutResponseBodyCopyWithImpl<$Res, _$LogoutResponseBodyImpl>
+    implements _$$LogoutResponseBodyImplCopyWith<$Res> {
+  __$$LogoutResponseBodyImplCopyWithImpl(_$LogoutResponseBodyImpl _value,
+      $Res Function(_$LogoutResponseBodyImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$LogoutResponseBodyImpl implements _LogoutResponseBody {
+  const _$LogoutResponseBodyImpl();
+
+  factory _$LogoutResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LogoutResponseBodyImplFromJson(json);
+
+  @override
+  String toString() {
+    return 'LogoutResponseBody()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LogoutResponseBodyImpl);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LogoutResponseBodyImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _LogoutResponseBody implements LogoutResponseBody {
+  const factory _LogoutResponseBody() = _$LogoutResponseBodyImpl;
+
+  factory _LogoutResponseBody.fromJson(Map<String, dynamic> json) =
+      _$LogoutResponseBodyImpl.fromJson;
 }

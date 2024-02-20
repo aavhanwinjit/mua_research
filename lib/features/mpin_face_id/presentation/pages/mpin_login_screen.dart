@@ -2,8 +2,11 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
@@ -101,7 +104,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
 
   Widget _useBiometricButton() {
     return TextButton(
-      onPressed: () {},
+      onPressed: _loginByFP,
       child: const Text(
         Strings.useTouchId,
         style: TextStyle(
@@ -344,6 +347,43 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
       (LoginbyMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
+
+          context.go(AppRoutes.dashboardScreen);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
+    );
+  }
+
+  void _loginByFP() async {
+    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
+
+    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
+
+    final String deviceToken = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.deviceToken ?? "";
+
+    LoginByFpRequestModel request = LoginByFpRequestModel(
+      deviceId: deviceInfo.deviceId,
+      deviceToken: deviceToken,
+      biometricStatus: true,
+      fpDeviceToken: "",
+    );
+
+    debugPrint("request in login by fp.to json: ${request.toJson()}");
+
+    final response = await getIt<LoginByFP>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (LoginByFpResponseModel success) async {
+        if (success.status?.isSuccess == true) {
+          ref.read(loginByFPResponseProvider.notifier).update((state) => success);
 
           context.go(AppRoutes.dashboardScreen);
         } else {
