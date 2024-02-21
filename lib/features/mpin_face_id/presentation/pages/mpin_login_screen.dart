@@ -1,6 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
+import 'package:ekyc/core/storage/storage_key.dart';
+import 'package:ekyc/core/storage/storage_manager.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
@@ -348,6 +350,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
         if (success.status?.isSuccess == true) {
           ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
 
+          await _setData(
+            deviceToken: success.body?.responseBody?.deviceToken,
+            authToken: success.body?.responseBody?.authToken?.token,
+            sessionId: success.body?.responseBody?.authToken?.sessionId,
+          );
+
           context.go(AppRoutes.dashboardScreen);
         } else {
           context.showErrorSnackBar(
@@ -385,6 +393,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
         if (success.status?.isSuccess == true) {
           ref.read(loginByFPResponseProvider.notifier).update((state) => success);
 
+          await _setData(
+            deviceToken: success.body?.responseBody?.deviceToken,
+            authToken: success.body?.responseBody?.authToken?.token,
+            sessionId: success.body?.responseBody?.authToken?.sessionId,
+          );
+
           context.go(AppRoutes.dashboardScreen);
         } else {
           context.showErrorSnackBar(
@@ -393,5 +407,23 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
         }
       },
     );
+  }
+
+  Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
+    await _storeDeviceToken(deviceToken);
+    await _storeAuthToken(authToken);
+    await _storeSessionId(sessionId);
+  }
+
+  Future<void> _storeDeviceToken(String? deviceToken) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
+  }
+
+  Future<void> _storeAuthToken(String? authToken) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
+  }
+
+  Future<void> _storeSessionId(String? sessionId) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.SESSION_ID, data: sessionId);
   }
 }

@@ -303,6 +303,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
 
           // store the auth token
           await _storeDeviceToken(success.body?.responseBody?.deviceToken);
+          await _storeAuthToken(success.body?.responseBody?.authToken?.token);
+          await _storeSessionId(success.body?.responseBody?.authToken?.sessionId);
 
           context.pushNamed(AppRoutes.onboardSuccessScreen);
         } else {
@@ -316,5 +318,13 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
 
   Future<void> _storeDeviceToken(String? deviceToken) async {
     await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
+  }
+
+  Future<void> _storeAuthToken(String? authToken) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
+  }
+
+  Future<void> _storeSessionId(String? sessionId) async {
+    await getIt<AppStorageManager>().storeString(key: StorageKey.SESSION_ID, data: sessionId);
   }
 }

@@ -69,5 +69,8 @@ abstract class ApiService {
   Future<LoginByFpResponseModel> loginByFP(@Body() LoginByFpRequestModel request);
 
   @POST(LOGOUT)
-  Future<LogoutResponseModel> logout();
+  Future<LogoutResponseModel> logout(
+    @Header("token") String authorization,
+    @Header("sessionId") String sessionId,
+  );
 }

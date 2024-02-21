@@ -16,6 +16,6 @@ class Logout implements UseCase<LogoutResponseModel, Null> {
     String? token,
     String? sessionId,
   ]) async {
-    return await profileRepository.logout();
+    return await profileRepository.logout(token!, sessionId!);
   }
 }
