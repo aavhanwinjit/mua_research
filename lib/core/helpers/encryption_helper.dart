@@ -34,7 +34,7 @@ class EncryptionHelper {
     return digest.toString();
   }
 
-  static encrypt(
+  static Map<String, dynamic> encrypt(
       {required Map<String, dynamic>? plainData,
       required DeviceInfoModel deviceInfoModel,
       required String serviceRequestURL}) {
@@ -58,17 +58,18 @@ class EncryptionHelper {
     final String timeStamp = DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
     final index = Random().nextInt(15);
 
-    if (plainData != null) {
-      BodyObject bodyObject = BodyObject(rb: plainData, checkSum: computeSha256Hash(json.encode(plainData)));
+    // if (plainData != null) {
+    BodyObject bodyObject = BodyObject(
+        rb: plainData ?? '''''', checkSum: computeSha256Hash(plainData == null ? '''''' : json.encode(plainData)));
 
-      final key = GenerateKeyIv.generate('$sessionId$requestUUID$deviceId$timeStamp', index, sequence, 32);
-      final iv = GenerateKeyIv.generate('$deviceId$requestUUID$sessionId$timeStamp', index, sequence, 16);
+    final key = GenerateKeyIv.generate('$sessionId$requestUUID$deviceId$timeStamp', index, sequence, 32);
+    final iv = GenerateKeyIv.generate('$deviceId$requestUUID$sessionId$timeStamp', index, sequence, 16);
 
-      final cipherText = Encryption.encryptAESCBCPKCS7(Uint8List.fromList(key.codeUnits),
-          Uint8List.fromList(iv.codeUnits), Uint8List.fromList(json.encode(bodyObject.toJson()).codeUnits));
+    final cipherText = Encryption.encryptAESCBCPKCS7(Uint8List.fromList(key.codeUnits),
+        Uint8List.fromList(iv.codeUnits), Uint8List.fromList(json.encode(bodyObject.toJson()).codeUnits));
 
-      encodedText = base64Encode(cipherText);
-    }
+    encodedText = base64Encode(cipherText);
+    // }
 
     final Map<String, dynamic> response = getIt<RequestGenerator>().generateHeaderObject(
       serviceRequestURL: serviceRequestURL,

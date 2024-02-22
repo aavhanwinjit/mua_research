@@ -10,7 +10,8 @@ import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/s
 abstract class MPINRepository {
   Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(SetAgentMpinRequestModel request);
 
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request);
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
+      LoginbyMpinRequestModel request, String authToken, String sessionId);
 
   Future<Either<Failure, LoginByFpResponseModel>> loginByFP(LoginByFpRequestModel request);
 }

@@ -325,6 +325,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
 
     final String deviceToken = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.deviceToken ?? "";
     final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
+    final String authToken = launchDetailsProvider?.body?.responseBody?.tokenData?.token ?? "";
+    final String sessionId = launchDetailsProvider?.body?.responseBody?.tokenData?.sessionId ?? "";
 
     LoginbyMpinRequestModel request = LoginbyMpinRequestModel(
         // deviceId: "918794c4-a479-36ad-949d-8c631c260a6b",
@@ -339,7 +341,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
 
     debugPrint("request in login by mpin.to json: ${request.toJson()}");
 
-    final response = await getIt<LoginByMpin>().call(request);
+    final response = await getIt<LoginByMpin>().call(request, authToken, sessionId);
 
     response.fold(
       (failure) {
