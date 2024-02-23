@@ -37,16 +37,6 @@ abstract class MAUEngineModule {
     return NetworkHelper.getDioClient();
   }
 
-  // @lazySingleton
-  // Future<DeviceInfoModel> getDeviceInfo() {
-  //   return DeviceInformationHelper().generateDeviceInformation();
-  // }
-
-  // @lazySingleton
-  // RequestHeaderGenerator getRequestHeaderGenerator(DeviceInfoModel deviceInformationHelper) {
-  //   return RequestHeaderGenerator(deviceInformationHelper: deviceInformationHelper);
-  // }
-
   @lazySingleton
   ApiService getApiService(
     Dio dio,
@@ -59,27 +49,4 @@ abstract class MAUEngineModule {
   InternetConnection getInternetConnection() {
     return InternetConnection();
   }
-
-  // @lazySingleton
-  // AuthenticationServices getAuthenticationServices(
-  //   Dio dio,
-  //   AppConfig appConfig,
-  // ) {
-  //   return AuthenticationServices(dio, baseUrl: appConfig.baseUrl);
-  // }
-
-  // @lazySingleton
-  // SqfliteManager getLocalDatabaseManager() {
-  //   return LocalDatabaseManager();
-  // }
-
-  // @lazySingleton
-  // DeviceManager getDeviceData() {
-  //   return DeviceInfo();
-  // }
-
-  // @lazySingleton
-  // AppRouter appRouter() {
-  //   return AppRouter();
-  // }
 }

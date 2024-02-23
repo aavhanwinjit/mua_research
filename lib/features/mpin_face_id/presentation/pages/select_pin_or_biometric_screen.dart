@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -38,9 +39,10 @@ class SelectPINorBiometricScreen extends ConsumerWidget {
               ),
               const Spacer(),
               CustomPrimaryButton(
-                label: Strings.createPinAndFaceId,
+                label: Strings.createPinAndBiometric,
                 disable: false,
                 onTap: () {
+                  ref.read(biometricSelectedProvider.notifier).update((state) => true);
                   context.pushNamed(AppRoutes.createPINScreen);
                 },
               ),
@@ -49,7 +51,10 @@ class SelectPINorBiometricScreen extends ConsumerWidget {
                 label: Strings.createPinOnly,
                 disable: false,
                 primary: true,
-                onTap: () {},
+                onTap: () {
+                  ref.read(biometricSelectedProvider.notifier).update((state) => false);
+                  context.pushNamed(AppRoutes.createPINScreen);
+                },
               ),
               const SizedBox(height: 40),
             ],

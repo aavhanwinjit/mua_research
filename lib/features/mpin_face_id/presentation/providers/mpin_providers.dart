@@ -14,3 +14,5 @@ final loginPINProvider = StateProvider<String>((ref) => '');
 final loginByMpinResponseProvider = StateProvider<LoginbyMpinResponseModel?>((ref) => null);
 
 final loginByFPResponseProvider = StateProvider<LoginByFpResponseModel?>((ref) => null);
+
+final biometricSelectedProvider = StateProvider<bool>((ref) => false);

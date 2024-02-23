@@ -31,9 +31,11 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request) async {
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
+      LoginbyMpinRequestModel request, String authToken, String sessionId) async {
     try {
       final response = await apiService.loginByMpin(request);
+      // final response = await apiService.loginByMpin(authToken, sessionId, request);
 
       return Right(response);
     } on DioException catch (e) {

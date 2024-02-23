@@ -13,9 +13,9 @@ class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRepositoryImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, LogoutResponseModel>> logout() async {
+  Future<Either<Failure, LogoutResponseModel>> logout(String token, String sessionId) async {
     try {
-      final response = await apiService.logout();
+      final response = await apiService.logout(token);
 
       return Right(response);
     } on DioException catch (e) {

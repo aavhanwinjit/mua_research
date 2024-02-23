@@ -1,12 +1,16 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class OnboardSuccessScreen extends StatelessWidget {
+class OnboardSuccessScreen extends ConsumerWidget {
   const OnboardSuccessScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final setAgentMPINResponse = ref.watch(setAgentMpinResponseProvider);
+
     return Scaffold(
       backgroundColor: primaryBlueColor,
       body: Column(
@@ -20,7 +24,7 @@ class OnboardSuccessScreen extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            "Congratulations,\nArjun Kumar!",
+            "Congratulations,\n${setAgentMPINResponse?.body?.responseBody?.agentName ?? ""}!",
             style: TextStyle(
               color: white,
               fontSize: 32.sp,
