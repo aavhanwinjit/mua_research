@@ -326,7 +326,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   Future<void> _biometricAuthentication() async {
     await authenticateWithBiometric(
       onAuthenticated: () {
-        // execute what needs to be done after biometric successfull
+        // execute what needs to be done after biometric successfully
 
         context.pushNamed(AppRoutes.onboardSuccessScreen);
       },

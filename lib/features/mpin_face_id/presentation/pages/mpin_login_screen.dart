@@ -107,7 +107,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
 
   Widget _useBiometricButton() {
     return TextButton(
-      onPressed: _loginByFP,
+      onPressed: _biometricAuthentication,
       child: const Text(
         Strings.useTouchId,
         style: TextStyle(
