@@ -10,6 +10,7 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/log
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
   ConsumerState<MPINLoginScreen> createState() => _CreatePinScreenState();
 }
 
-class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
+class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin {
   String pin = "";
   bool wrongPin = false;
 
@@ -364,6 +365,17 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> {
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
+      },
+    );
+  }
+
+  Future<void> _biometricAuthentication() async {
+    await authenticateWithBiometric(
+      onAuthenticated: () {
+        _loginByFP();
+      },
+      onAuthenticationFailure: (String error) {
+        context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
       },
     );
   }

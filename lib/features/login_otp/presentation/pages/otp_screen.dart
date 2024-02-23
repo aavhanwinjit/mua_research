@@ -74,6 +74,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                             color: primaryColor,
                             decoration: TextDecoration.underline,
                             fontSize: 16.sp,
+                            decorationColor: primaryColor,
                           ),
                         ),
                       ),
@@ -247,7 +248,6 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
       request,
       token ?? "",
       verifyMobileNumberResponse?.body?.responseBody?.tokenData?.sessionId ?? "",
-      // "1707392469778",
     );
 
     response.fold(

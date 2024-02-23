@@ -9,6 +9,7 @@ import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +22,7 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin {
   String pin = "";
   bool successVal = false;
 
@@ -306,12 +307,32 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
           await _storeAuthToken(success.body?.responseBody?.authToken?.token);
           await _storeSessionId(success.body?.responseBody?.authToken?.sessionId);
 
-          context.pushNamed(AppRoutes.onboardSuccessScreen);
+          final biometricSelected = ref.watch(biometricSelectedProvider);
+
+          if (biometricSelected) {
+            _biometricAuthentication();
+          } else {
+            context.pushNamed(AppRoutes.onboardSuccessScreen);
+          }
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
+      },
+    );
+  }
+
+  Future<void> _biometricAuthentication() async {
+    await authenticateWithBiometric(
+      onAuthenticated: () {
+        // execute what needs to be done after biometric successfull
+
+        context.pushNamed(AppRoutes.onboardSuccessScreen);
+      },
+      onAuthenticationFailure: (String error) {
+        context.pushNamed(AppRoutes.onboardSuccessScreen);
+        context.showErrorSnackBar(message: error);
       },
     );
   }

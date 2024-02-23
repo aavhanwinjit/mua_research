@@ -242,7 +242,7 @@ class Strings {
   static const String downloadPDF = "Download PDF";
 
   static const String chooseFasterWayToLogIn = "Choose a faster way to log in on this device";
-  static const String createPinAndFaceId = "Create PIN & Face ID";
+  static const String createPinAndBiometric = "Create PIN & Biometric";
   static const String createPinOnly = 'Create PIN Only';
   static const String createPin = "Create PIN";
   static const String createPinSubtitle =
@@ -253,4 +253,8 @@ class Strings {
   static const String wrongPin = "Wrong PIN";
   static const String forgotPin = "Forget PIN/Re-register";
   static const String useTouchId = "Use touch ID";
+
+  static const String biometricDialogBoxSubtitle = "This allows you to log in to MUA using Face ID";
+  static const String biometricAuthenticationFailed = "Biometric Authentication Failed";
+  static const String noBiometricsAvailable = "No Biometrics Available";
 }
