@@ -164,7 +164,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> {
                     ),
                     child: MaterialButton(
                       onPressed: () {
-                        if ((pin.length < 6) && (pin.isNotEmpty)) {
+                        if (pin.isNotEmpty) {
                           setState(() {
                             pin = pin.substring(0, pin.length - 1);
                           });
