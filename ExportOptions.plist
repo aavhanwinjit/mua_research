@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<false/>
+	<key>destination</key>
+	<string>export</string>
+	<key>method</key>
+	<string>development</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.equitas.selfeloans</key>
+		<string>Selfe_Loans_Development_Profile_24_Jul_23</string>
+		<key>com.equitas.selfeloans.LoanAppNCE</key>
+		<string>Selfie_Loans_Development_Profile_LoanAppNCE</string>
+		<key>com.equitas.selfeloans.LoanAppNSE</key>
+		<string>Selfie_Loans_Development_Profile_LoanAppNSE</string>
+	</dict>
+	<key>signingCertificate</key>
+	<string>Apple Development</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>CYLYUQRC52</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>
