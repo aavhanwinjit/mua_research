@@ -95,7 +95,7 @@ class Strings {
   static const String startKyc = "Start KYC";
   static const String referenceNo = "Reference No.";
   static const String applications = "Applications";
-  static const String searchApplicants = "Search applicants";
+  static const String searchApplicants = "Search by Name, Policy or Quote Number";
   static const String resume = "Resume";
   static const String filter = "Filter";
   static const String status = "Status";

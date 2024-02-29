@@ -16,9 +16,10 @@ class StatusChip extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Icon(
-            Icons.check_circle,
+            Icons.help,
             color: darkYellow,
           ),
+          SizedBox(width: 5),
           Text(
             Strings.chipStatusIDMissing,
             style: TextStyle(
