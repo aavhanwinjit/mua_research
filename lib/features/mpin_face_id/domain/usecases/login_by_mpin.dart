@@ -17,6 +17,6 @@ class LoginByMpin implements UseCase<LoginbyMpinResponseModel, LoginbyMpinReques
     String? token,
     String? sessionId,
   ]) async {
-    return await mpinRepository.loginByMPIN(params);
+    return await mpinRepository.loginByMPIN(params, token!, sessionId!);
   }
 }

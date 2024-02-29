@@ -75,6 +75,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                             color: primaryColor,
                             decoration: TextDecoration.underline,
                             fontSize: 16.sp,
+                            decorationColor: primaryColor,
                           ),
                         ),
                       ),
@@ -252,8 +253,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     final response = await getIt<ResendOTP>().call(
       request,
       token ?? "",
-      verifyMobileNumberResponse?.body?.responseBody?.tokenData?.sessionId ??
-          "",
+      verifyMobileNumberResponse?.body?.responseBody?.tokenData?.sessionId ?? "",
       // "1707392469778",
     );
 
