@@ -171,7 +171,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                           });
                           debugPrint(pin);
                         }
-                        ref.watch(createPINProvider.notifier).update((state) => pin);
+                        ref.watch(confirmPINProvider.notifier).update((state) => pin);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),

@@ -87,9 +87,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                           debugPrint(pin);
                         }
 
-                        ref
-                            .watch(createPINProvider.notifier)
-                            .update((state) => pin);
+                        ref.watch(createPINProvider.notifier).update((state) => pin);
 
                         if (pin.length == 6) {
                           //navigate
@@ -145,9 +143,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                           });
                           debugPrint(pin);
                         }
-                        ref
-                            .watch(createPINProvider.notifier)
-                            .update((state) => pin);
+                        ref.watch(createPINProvider.notifier).update((state) => pin);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),
@@ -248,9 +244,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                       debugPrint(pin);
                     }
 
-                    ref
-                        .watch(createPINProvider.notifier)
-                        .update((state) => pin);
+                    ref.watch(createPINProvider.notifier).update((state) => pin);
 
                     if (pin.length == 6) {
                       //navigate
