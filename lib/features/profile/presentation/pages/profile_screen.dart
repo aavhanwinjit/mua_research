@@ -4,6 +4,7 @@ import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -117,6 +118,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
   }
 
   Widget _profileWidget() {
+    final agentLoginDetails = ref.watch(agentLoginDetailsProvider);
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.w),
       decoration: BoxDecoration(
@@ -132,12 +135,13 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
           SizedBox(height: 24.h),
           _infoTile(
             title: Strings.email,
-            value: "arjunk@maubank.mu",
+            value: agentLoginDetails?.emailId ?? "-",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.mobileNo,
-            value: "+230 5 123 4567",
+            value: agentLoginDetails?.mobileNumber ?? "",
+            // value: "+230 5 123 4567",
           ),
           SizedBox(height: 16.h),
           _infoTile(

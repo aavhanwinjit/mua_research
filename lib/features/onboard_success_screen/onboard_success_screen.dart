@@ -9,7 +9,7 @@ class OnboardSuccessScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setAgentMPINResponse = ref.watch(setAgentMpinResponseProvider);
+    final agentLoginDetails = ref.watch(agentLoginDetailsProvider);
 
     return Scaffold(
       backgroundColor: primaryBlueColor,
@@ -24,7 +24,7 @@ class OnboardSuccessScreen extends ConsumerWidget {
           ),
           const SizedBox(height: 20),
           Text(
-            "Congratulations,\n${setAgentMPINResponse?.body?.responseBody?.agentName ?? ""}!",
+            "Congratulations,\n${agentLoginDetails?.agentName ?? ""}!",
             style: TextStyle(
               color: white,
               fontSize: 32.sp,

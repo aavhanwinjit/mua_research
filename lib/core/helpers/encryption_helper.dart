@@ -103,7 +103,7 @@ class EncryptionHelper {
     final encryptedData = response;
 
     debugPrint('******************* ENCRYPTED REQUEST ***********************');
-    debugPrint(encryptedData.toString());
+    debugPrint(jsonEncode(encryptedData));
     debugPrint('******************* ***************** ***********************');
 
     return encryptedData;

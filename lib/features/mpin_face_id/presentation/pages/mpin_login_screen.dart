@@ -353,7 +353,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
       },
       (LoginbyMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
+          // ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
+          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
