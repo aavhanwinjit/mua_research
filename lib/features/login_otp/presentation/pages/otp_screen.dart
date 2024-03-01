@@ -50,8 +50,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.only(
-                left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(
@@ -172,7 +171,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                     showResendOption = true;
                   });
                 },
-                seconds: 30,
+                seconds: 10,
                 timerKey: ValueKey(retryCount),
               )
             : TextButton.icon(
@@ -216,18 +215,14 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
       },
       (ValidateOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .read(validateOTPResponseProvider.notifier)
-              .update((state) => success);
+          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
 
           context.pushReplacementNamed(AppRoutes.successScreen);
-        } else if (success.status?.isSuccess == false &&
-            success.status?.statusCode == ApiErrorCodes.notFount) {
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
           context.pushReplacementNamed(AppRoutes.failureScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -245,8 +240,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     final String? token = ref.watch(tokenProvider);
     final verifyMobileNumberResponse = ref.watch(verifyMobileNumberProvider);
 
-    final ResendOtpRequestModel request =
-        ResendOtpRequestModel(refCode: refCode);
+    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
@@ -267,12 +261,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
 
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
-          ref
-              .read(tokenProvider.notifier)
-              .update((state) => success.body?.responseBody?.tokenData?.token);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref.read(tokenProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.token);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 
@@ -281,8 +271,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

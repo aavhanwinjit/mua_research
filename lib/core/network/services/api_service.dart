@@ -23,8 +23,8 @@ import 'package:ekyc/features/splash_screen/data/models/launch_details/request/l
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
 import 'package:ekyc/models/app_config/app_config.dart';
 import 'package:flutter/material.dart';
-// import 'package:retrofit/retrofit.dart';
 import 'package:http/http.dart' as http;
+
 // part 'api_service.g.dart';
 
 class ApiService {
@@ -59,15 +59,15 @@ class ApiService {
   }
 
   Future<ResendOtpResponseModel> resendOTP(String token, String sessionId, ResendOtpRequestModel request) async {
-    final headers = {
-      "Authorization":
-          "cx1J782xODD0PTp2myhNrJcwV0/xPayiyRlJ1cpGW3S0zkfTgAQB8ic8D8olRTBIo7S39urt3POIZnB5KrMPPBNTBlmkaEsqNtKDJTr1S/HFoil6eeetsN1X/p+8IDUAZ1kfYGHWE2vL+rl5nZXYS2+sCRu5x/E6dAc/NTO5P5RDP7ClEJ+98vZDr3TI8LoIQ6eHuTsw4ZdwHlBfgaSJSunLE1NbNbZHk8uoIC3TFF/q43yIWFdtZflr1lgMaEKQ",
-      "SessionId": "834dd3c0-170862782907683",
-    };
     // final headers = {
-    //   "Authorization": token,
-    //   "SessionId": sessionId,
+    //   "Authorization":
+    //       'cx1J782xODD0PTp2myhNrJcwV0/xPayiyRlJ1cpGW3S0zkfTgAQB8ic8D8olRTBIo7S39urt3PMMCLb0/BsepoORw69wGB/fXz2qhUr7mxFx8ntVCGRHEE9wRzjcitVjfzKTRLfa/AmDhSW5QvpfobbnOHOTMcLGd673jky0RHBkejGxY44CSa0b/P3GfSvdL/RR8o4xXidE+sLd2UO1QWZ+oGCtVxxzaXc+epKEFbD5hc9S7FUwYLkN4wo0fK3y',
+    //   "SessionId": 'bddb0fea-170922155961618',
     // };
+    final headers = {
+      "Authorization": token,
+      "SessionId": sessionId,
+    };
 
     final response = await postMethod(RESEND_OTP, request.toJson(), headers, true);
 
@@ -102,7 +102,7 @@ class ApiService {
     return LoginByFpResponseModel.fromJson(response);
   }
 
-  Future<LogoutResponseModel> logout(String token, {String? sessionId = ""}) async {
+  Future<LogoutResponseModel> logout(String token) async {
     // final headers = {
     //   // "SessionId": "7bdf0dba-170862610595707",
     //   "Authorization":
@@ -134,7 +134,6 @@ class ApiService {
     } else {
       headers = {'Content-Type': 'application/json'};
     }
-    // headers = {'Content-Type': 'application/json'};
 
     debugPrint('Headers: $headers');
 
@@ -143,19 +142,6 @@ class ApiService {
       deviceInfoModel: deviceInfo,
       serviceRequestURL: endpoint,
     );
-
-    debugPrint("Encrypted Request: $encryptedRequest");
-
-    // final request = http.Request(
-    //   'POST',
-    //   Uri.parse(baseURL),
-    // );
-
-    // request.headers.addAll(headers);
-
-    // final response = await request.send();
-
-    // final data = await response.stream.bytesToString();
 
     final data = {
       "h": {
@@ -168,19 +154,19 @@ class ApiService {
           "i": "10.235.234.111"
         },
         "mk": {
-          "r": "1624521819414qj7ld, 2024022218539729",
+          "r": "1624521819414qj7ld,2024022915501721",
           "sr": "AgentAPI/Login/ResendOTP",
           "c": "Customer",
           "j": "1624521806YQkAr",
-          "s": "0db5d1c5-170862801715690",
-          "i": "14",
+          "s": "d0b35662-170922181573141",
+          "i": "1",
           "l": "1",
-          "t": "20240222012337",
+          "t": "20240229102015",
           "ci": null
         }
       },
       "b":
-          "Nus4t6E5d7pYsSLrfn9u4zaiDMOMQfnOqE5agO8VtSYMe2Avsq/rt7nYAeM4YwFK3W5S0Y28BpDAFAwgNKS2EUixlV3XfDyxwA8TRqJPmLvKZn5BMCRIjEcNipo6KNpO3IUmm3xhyktZ1LH0sgJfuHq0Ne+fNrINl5CMiES8iov46jFyj4EuaR3DOnL+bYvn"
+          "QcBzIEuGI6uOqYCwWHh1z/lt+INszAbvgqfay1HyWTGrLD6eLTJD5xRTH2dWmQIr9JJJtOGgH/HWRQRm/APJl0eLux6Yc4TU9SPHZEX/h9d/xVeHQZjFzLi4To04bpLtsW2NWVwv5zTYJn8gj5CrRIJFOgp4kmrhQAhIzhPi8bVmR1ob9kZBPE71MKlV+3be"
     };
 
     var response = await http.post(
