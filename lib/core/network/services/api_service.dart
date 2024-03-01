@@ -127,7 +127,9 @@ class ApiService {
     final baseURL = getIt<AppConfig>().baseUrl;
     final deviceInfo = await getIt<DeviceInformationHelper>().generateDeviceInformation();
 
+    debugPrint('******************* REQUEST ***********************');
     debugPrint('POST ${baseURL! + endpoint}  + plain request = ${jsonEncode(payLoad)}');
+    debugPrint('******************* ********** ***********************');
 
     if (headers != null) {
       headers['Content-Type'] = 'application/json';
@@ -135,7 +137,9 @@ class ApiService {
       headers = {'Content-Type': 'application/json'};
     }
 
+    debugPrint('******************* HEADER ***********************');
     debugPrint('Headers: $headers');
+    debugPrint('******************* ****** ***********************');
 
     final Map<String, dynamic> encryptedRequest = EncryptionHelper.encrypt(
       plainData: payLoad,
@@ -179,9 +183,11 @@ class ApiService {
   }
 
   Future<Map<String, dynamic>> _handledResponse(http.Response response, String endpoint) async {
+    debugPrint('******************* RESPONSE ***********************');
     debugPrint('status code: ${response.statusCode}');
     debugPrint("Response Headers: ${response.headers}");
     debugPrint('response[$endpoint]: ${response.body}');
+    debugPrint('******************* ******** ***********************');
 
     // if (response.body!['auth'] == false) {
     //   LogoutDialog().logout();
@@ -201,7 +207,9 @@ class ApiService {
           index: int.parse(responseJson["h"]["mk"]["i"]),
         );
 
-        debugPrint("decrypted Response: $decryptedResponse");
+        debugPrint('******************* DECRYPTED RESPONSE ***********************');
+        debugPrint("$decryptedResponse");
+        debugPrint('******************* ****************** ***********************');
 
         decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
 

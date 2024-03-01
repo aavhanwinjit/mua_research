@@ -101,8 +101,10 @@ class EncryptionHelper {
     // };
 
     final encryptedData = response;
-    debugPrint("Encrypted map:");
+
+    debugPrint('******************* ENCRYPTED REQUEST ***********************');
     debugPrint(encryptedData.toString());
+    debugPrint('******************* ***************** ***********************');
 
     return encryptedData;
   }

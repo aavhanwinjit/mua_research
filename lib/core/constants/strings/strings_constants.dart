@@ -253,6 +253,7 @@ class Strings {
   static const String wrongPin = "Wrong PIN";
   static const String forgotPin = "Forget PIN/Re-register";
   static const String useTouchId = "Use touch ID";
+  static const String pinAuthenticationFailed = "Your PIN authentication failed. Please retry.";
 
   static const String biometricDialogBoxSubtitle = "This allows you to log in to MUA using Face ID";
   static const String biometricAuthenticationFailed = "Biometric Authentication Failed";

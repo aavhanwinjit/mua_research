@@ -3,6 +3,7 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/storage/storage_key.dart';
 import 'package:ekyc/core/storage/storage_manager.dart';
+import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
@@ -11,6 +12,7 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/lo
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,7 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
   ConsumerState<MPINLoginScreen> createState() => _CreatePinScreenState();
 }
 
-class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin {
+class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin, LogoutMixin {
   String pin = "";
   bool wrongPin = false;
 
@@ -360,11 +362,15 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           );
 
           context.go(AppRoutes.dashboardScreen);
-        } else {
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.inValidPin) {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: Strings.pinAuthenticationFailed,
           );
-        }
+          ref.watch(loginPINProvider.notifier).update((state) => "");
+          pin = "";
+          wrongPin = true;
+          setState(() {});
+        } else {}
       },
     );
   }
@@ -423,7 +429,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     );
   }
 
-  Future<void> _forgotPin() async {}
+  Future<void> _forgotPin() async {
+    await logout(context);
+  }
 
   Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
     await _storeDeviceToken(deviceToken);
