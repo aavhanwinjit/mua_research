@@ -3,10 +3,10 @@
 flutter clean && flutter build ipa --export-options-plist=ExportOptions.plist
 if [[ $? == 0 ]]; then
     echo "Copying IPA...."
-    cp -f $PWD/build/ios/ipa/selfe_loans.ipa $HOME/Desktop/
+    cp -f $PWD/build/ios/ipa/ekyc.ipa $HOME/Desktop/
     echo "IPA copied."
     echo "Renaming IPA...."
-    mv $HOME/Desktop/selfe_loans.ipa $HOME/Desktop/SelfeLoans-$(date +%F).ipa
+    mv $HOME/Desktop/ekyc.ipa $HOME/Desktop/ekyc-$(date +%F).ipa
 else
     echo "Flutter IPA Build Failed"
 fi

@@ -10,12 +10,8 @@
 	<string>development</string>
 	<key>provisioningProfiles</key>
 	<dict>
-		<key>com.equitas.selfeloans</key>
-		<string>Selfe_Loans_Development_Profile_24_Jul_23</string>
-		<key>com.equitas.selfeloans.LoanAppNCE</key>
-		<string>Selfie_Loans_Development_Profile_LoanAppNCE</string>
-		<key>com.equitas.selfeloans.LoanAppNSE</key>
-		<string>Selfie_Loans_Development_Profile_LoanAppNSE</string>
+		<key>com.winjit.</key>
+		<string>Winjit_Dev_Star_Profile</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Development</string>
@@ -24,7 +20,7 @@
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
-	<string>CYLYUQRC52</string>
+	<string>6DS2GXGJY7</string>
 	<key>thinning</key>
 	<string>&lt;none&gt;</string>
 </dict>

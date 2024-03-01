@@ -26,11 +26,9 @@
 	<string>Camera permission are required for the following reasons:
 	* To capture user profile photo
 	* Capture documents and upload to server for document approval process.
-		</string>
+	</string>	
 	<key>NSFaceIDUsageDescription</key>
 	<string>This allows you to log in to MUA using Face ID</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>your usage description here</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo Library permission are required to select images and upload to server for document approval process.</string>
 	<key>UILaunchStoryboardName</key>
