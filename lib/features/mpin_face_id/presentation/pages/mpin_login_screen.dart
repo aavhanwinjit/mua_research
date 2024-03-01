@@ -95,7 +95,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
 
   Widget _forgotPinButton() {
     return TextButton(
-      onPressed: () {},
+      onPressed: _forgotPin,
       child: const Text(
         Strings.forgotPin,
         style: TextStyle(
@@ -422,6 +422,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
       },
     );
   }
+
+  Future<void> _forgotPin() async {}
 
   Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
     await _storeDeviceToken(deviceToken);
