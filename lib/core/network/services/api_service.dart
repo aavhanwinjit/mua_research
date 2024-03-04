@@ -34,9 +34,11 @@ class ApiService {
   static const RESEND_OTP = "/AgentAPI/Login/ResendOTP";
   static const SAVE_FILE = "/AgentAPI/FileHandling/SaveFile";
   static const SET_AGENT_MPIN = "/AgentAPI/Registration/SetAgentMPIN";
+  static const SET_FINGERPRINT = "/AgentAPI/Login/SetFingerPrint";
   static const LOGIN_BY_MPIN = "/AgentAPI/Login/LoginByMPIN";
   static const LOGIN_BY_BIOMETRIC = "/AgentAPI/Login/LoginByFP";
   static const LOGOUT = "/AgentAPI/Login/Logout";
+  static const DE_REGISTER_FINGERPRINT = "/AgentAPI/Login/DeRegisterFingerPrint";
 
   ApiService(Dio dio, {String? baseUrl});
 
@@ -64,12 +66,13 @@ class ApiService {
     //       'cx1J782xODD0PTp2myhNrJcwV0/xPayiyRlJ1cpGW3S0zkfTgAQB8ic8D8olRTBIo7S39urt3PMMCLb0/BsepoORw69wGB/fXz2qhUr7mxFx8ntVCGRHEE9wRzjcitVjfzKTRLfa/AmDhSW5QvpfobbnOHOTMcLGd673jky0RHBkejGxY44CSa0b/P3GfSvdL/RR8o4xXidE+sLd2UO1QWZ+oGCtVxxzaXc+epKEFbD5hc9S7FUwYLkN4wo0fK3y',
     //   "SessionId": 'bddb0fea-170922155961618',
     // };
+
     final headers = {
       "Authorization": token,
-      "SessionId": sessionId,
+      // "SessionId": sessionId,
     };
 
-    final response = await postMethod(RESEND_OTP, request.toJson(), headers, true);
+    final response = await postMethod(RESEND_OTP, request.toJson(), headers);
 
     return ResendOtpResponseModel.fromJson(response);
   }
@@ -88,6 +91,31 @@ class ApiService {
     final response = await postMethod(SET_AGENT_MPIN, request.toJson());
 
     return SetAgentMpinResponseModel.fromJson(response);
+  }
+
+  Future setFingerPrint(String token) async {
+    final headers = {
+      "Authorization": token,
+    };
+
+    final response = await postMethod(SET_FINGERPRINT, null, headers);
+
+    return response;
+
+    // return SetAgentMpinResponseModel.fromJson(response);
+  }
+
+  Future deRegisterFingerprint(String token, String sessionId) async {
+    final headers = {
+      "Authorization": token,
+      "SessionId": sessionId,
+    };
+
+    final response = await postMethod(DE_REGISTER_FINGERPRINT, null, headers);
+
+    return response;
+
+    // return SetAgentMpinResponseModel.fromJson(response);
   }
 
   Future<LoginbyMpinResponseModel> loginByMpin(LoginbyMpinRequestModel request) async {
@@ -147,35 +175,40 @@ class ApiService {
       serviceRequestURL: endpoint,
     );
 
-    final data = {
-      "h": {
-        "di": {
-          "p": "Android",
-          "o": "8.1.0",
-          "m": "vivo 1820",
-          "d": "918794c4-a479-36ad-949d-8c631c260a6b",
-          "a": "1.0.1.8",
-          "i": "10.235.234.111"
-        },
-        "mk": {
-          "r": "1624521819414qj7ld,2024022915501721",
-          "sr": "AgentAPI/Login/ResendOTP",
-          "c": "Customer",
-          "j": "1624521806YQkAr",
-          "s": "d0b35662-170922181573141",
-          "i": "1",
-          "l": "1",
-          "t": "20240229102015",
-          "ci": null
-        }
-      },
-      "b":
-          "QcBzIEuGI6uOqYCwWHh1z/lt+INszAbvgqfay1HyWTGrLD6eLTJD5xRTH2dWmQIr9JJJtOGgH/HWRQRm/APJl0eLux6Yc4TU9SPHZEX/h9d/xVeHQZjFzLi4To04bpLtsW2NWVwv5zTYJn8gj5CrRIJFOgp4kmrhQAhIzhPi8bVmR1ob9kZBPE71MKlV+3be"
-    };
+    // final data = {
+    //   "h": {
+    //     "di": {
+    //       "p": "Android",
+    //       "o": "8.1.0",
+    //       "m": "vivo 1820",
+    //       "d": "918794c4-a479-36ad-949d-8c631c260a6b",
+    //       "a": "1.0.1.8",
+    //       "i": "10.235.234.111"
+    //     },
+    //     "mk": {
+    //       "r": "1624521819414qj7ld,2024022915501721",
+    //       "sr": "AgentAPI/Login/ResendOTP",
+    //       "c": "Customer",
+    //       "j": "1624521806YQkAr",
+    //       "s": "d0b35662-170922181573141",
+    //       "i": "1",
+    //       "l": "1",
+    //       "t": "20240229102015",
+    //       "ci": null
+    //     }
+    //   },
+    //   "b":
+    //       "QcBzIEuGI6uOqYCwWHh1z/lt+INszAbvgqfay1HyWTGrLD6eLTJD5xRTH2dWmQIr9JJJtOGgH/HWRQRm/APJl0eLux6Yc4TU9SPHZEX/h9d/xVeHQZjFzLi4To04bpLtsW2NWVwv5zTYJn8gj5CrRIJFOgp4kmrhQAhIzhPi8bVmR1ob9kZBPE71MKlV+3be"
+    // };
+
+    if (logout == true) {
+      return {};
+    }
 
     var response = await http.post(
       Uri.parse(baseURL),
-      body: json.encode(logout == true ? data : encryptedRequest),
+      body: json.encode(encryptedRequest),
+      // body: json.encode(logout == true ? data : encryptedRequest),
       headers: headers,
     );
 

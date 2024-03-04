@@ -53,4 +53,15 @@ class MPINRepositoryImpl implements MPINRepository {
       return Left(ServerFailure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, LoginByFpResponseModel>> setFingerPrint(String token) async {
+    try {
+      final response = await apiService.setFingerPrint(token);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
 }

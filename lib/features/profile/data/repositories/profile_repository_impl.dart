@@ -22,4 +22,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Left(ServerFailure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, LogoutResponseModel>> deRegisterFingerprint(String token, String sessionId) async {
+    try {
+      final response = await apiService.deRegisterFingerprint(token, sessionId);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
 }

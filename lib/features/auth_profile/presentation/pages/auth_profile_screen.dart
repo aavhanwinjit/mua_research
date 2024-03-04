@@ -122,7 +122,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
           SizedBox(height: 16.h),
           InfoWidget(
               title: Strings.mobileNo,
-              value: "+230 ${validateOtpResponseProvider?.body?.responseBody?.mobileNumber}" ?? "-"),
+              value: "+230 ${validateOtpResponseProvider?.body?.responseBody?.mobileNumber ?? "-"}"),
           SizedBox(height: 16.h),
           InfoWidget(title: Strings.address, value: validateOtpResponseProvider?.body?.responseBody?.address ?? "-"),
           SizedBox(height: 16.h),
@@ -268,7 +268,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
         if (success.status?.isSuccess == true) {
           ref.read(authProfileProvider.notifier).update((state) => success);
 
-          context.go(AppRoutes.selectPINorBiometricScreen);
+          context.pushReplacementNamed(AppRoutes.selectPINorBiometricScreen);
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
