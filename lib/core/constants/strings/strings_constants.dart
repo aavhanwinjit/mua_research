@@ -230,6 +230,8 @@ class Strings {
   static const String contactUs = "Contact Us";
   static const String faq = "FAQs and Chat support";
   static const String logout = "Logout";
+  static const String helpContact = "+230 207 5500";
+  static const String helpEmail = "info@mua.mu";
 
   static const String kycSubmittedSuccessfully = "KYC Submitted\nSuccessfully";
   static const String kycCompleted1 = "You have completed your KYC Application Process. Your request Id is ";

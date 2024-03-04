@@ -98,7 +98,9 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
               Icons.chevron_right,
               color: textGrayColor2,
             ),
-            onTap: () {},
+            onTap: () {
+              ActionSheetHelper.showContactUsActionSheet(context);
+            },
           ),
           const Divider(
             height: 0,
