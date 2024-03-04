@@ -12,7 +12,6 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/lo
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
   ConsumerState<MPINLoginScreen> createState() => _CreatePinScreenState();
 }
 
-class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin, LogoutMixin {
+class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin {
   String pin = "";
   bool wrongPin = false;
 
@@ -431,7 +430,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
   }
 
   Future<void> _forgotPin() async {
-    await logout(context);
+    ref.watch(forgotPasswordSelectedProvider.notifier).update((state) => true);
+
+    context.pushNamed(AppRoutes.loginScreen);
   }
 
   Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {

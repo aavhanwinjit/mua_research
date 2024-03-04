@@ -315,7 +315,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           if (biometricSelected) {
             _biometricAuthentication();
           } else {
-            context.pushNamed(AppRoutes.onboardSuccessScreen);
+            context.go(AppRoutes.onboardSuccessScreen);
           }
         } else {
           context.showErrorSnackBar(
@@ -328,6 +328,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
 
   Future<void> _biometricAuthentication() async {
     await _setFingerPrint();
+
     // await authenticateWithBiometric(
     //   onAuthenticated: () async {
     //     await _setFingerPrint();

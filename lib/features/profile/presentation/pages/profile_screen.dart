@@ -108,6 +108,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
+              // deRegisterFingerprint(context);
               logout(context);
             },
           ),

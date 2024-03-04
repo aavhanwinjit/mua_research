@@ -85,6 +85,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
 
     final request = LaunchDetailsRequest(
       rootedDevice: isRootedDevice,
+      // deviceToken: "d83ee94b-2067-45fc-bdda-622d4691f351",
       deviceToken: deviceToken,
     );
 

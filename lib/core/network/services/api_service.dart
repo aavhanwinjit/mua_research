@@ -38,6 +38,7 @@ class ApiService {
   static const LOGIN_BY_MPIN = "/AgentAPI/Login/LoginByMPIN";
   static const LOGIN_BY_BIOMETRIC = "/AgentAPI/Login/LoginByFP";
   static const LOGOUT = "/AgentAPI/Login/Logout";
+  static const DE_REGISTER_FINGERPRINT = "/AgentAPI/Login/DeRegisterFingerPrint";
 
   ApiService(Dio dio, {String? baseUrl});
 
@@ -98,6 +99,21 @@ class ApiService {
     };
 
     final response = await postMethod(SET_FINGERPRINT, null, headers);
+
+    return response;
+
+    // return SetAgentMpinResponseModel.fromJson(response);
+  }
+
+  Future deRegisterFingerprint(String token, String sessionId) async {
+    final headers = {
+      "Authorization": token,
+      "SessionId": sessionId,
+    };
+
+    final response = await postMethod(DE_REGISTER_FINGERPRINT, null, headers);
+
+    return response;
 
     // return SetAgentMpinResponseModel.fromJson(response);
   }
