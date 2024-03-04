@@ -14,7 +14,8 @@ import 'package:intl/intl.dart';
 
 class EncryptionHelper {
   static String generateRandomAlphaNumeric() {
-    const String alphaNumericChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const String alphaNumericChars =
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
     Random random = Random();
     StringBuffer buffer = StringBuffer();
@@ -55,23 +56,31 @@ class EncryptionHelper {
     String deviceId = deviceInfoModel.deviceId!;
     String requestUUID = generateRandomAlphaNumeric();
     final String sessionId = DateTime.now().millisecondsSinceEpoch.toString();
-    final String timeStamp = DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
+    final String timeStamp =
+        DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
     final index = Random().nextInt(15);
 
     // if (plainData != null) {
     BodyObject bodyObject = BodyObject(
-        rb: plainData ?? '''''', checkSum: computeSha256Hash(plainData == null ? '''''' : json.encode(plainData)));
+        rb: plainData ?? '''''',
+        checkSum: computeSha256Hash(
+            plainData == null ? '''''' : json.encode(plainData)));
 
-    final key = GenerateKeyIv.generate('$sessionId$requestUUID$deviceId$timeStamp', index, sequence, 32);
-    final iv = GenerateKeyIv.generate('$deviceId$requestUUID$sessionId$timeStamp', index, sequence, 16);
+    final key = GenerateKeyIv.generate(
+        '$sessionId$requestUUID$deviceId$timeStamp', index, sequence, 32);
+    final iv = GenerateKeyIv.generate(
+        '$deviceId$requestUUID$sessionId$timeStamp', index, sequence, 16);
 
-    final cipherText = Encryption.encryptAESCBCPKCS7(Uint8List.fromList(key.codeUnits),
-        Uint8List.fromList(iv.codeUnits), Uint8List.fromList(json.encode(bodyObject.toJson()).codeUnits));
+    final cipherText = Encryption.encryptAESCBCPKCS7(
+        Uint8List.fromList(key.codeUnits),
+        Uint8List.fromList(iv.codeUnits),
+        Uint8List.fromList(json.encode(bodyObject.toJson()).codeUnits));
 
     encodedText = base64Encode(cipherText);
     // }
 
-    final Map<String, dynamic> response = getIt<RequestGenerator>().generateHeaderObject(
+    final Map<String, dynamic> response =
+        getIt<RequestGenerator>().generateHeaderObject(
       serviceRequestURL: serviceRequestURL,
       journeyID: generateRandomAlphaNumeric(),
       requestUUID: requestUUID,
@@ -103,7 +112,7 @@ class EncryptionHelper {
     final encryptedData = response;
 
     debugPrint('******************* ENCRYPTED REQUEST ***********************');
-    debugPrint(encryptedData.toString());
+    print(encryptedData);
     debugPrint('******************* ***************** ***********************');
 
     return encryptedData;
@@ -123,8 +132,10 @@ class EncryptionHelper {
     // String? requestUUID = '1624521819414qj7ld';
     // String sessionId = "a6c8b7af-170620914305603";
     // String timeStamp = "20240125012903";
-    String formattedPasswordString = '$sessionId$requestUUID$deviceID$timestamp';
-    String password = GenerateKeyIv.generate(formattedPasswordString, index, sequence, 32);
+    String formattedPasswordString =
+        '$sessionId$requestUUID$deviceID$timestamp';
+    String password =
+        GenerateKeyIv.generate(formattedPasswordString, index, sequence, 32);
     String formattedivString = '$deviceID$requestUUID$sessionId$timestamp';
     final iv = GenerateKeyIv.generate(formattedivString, index, sequence, 16);
 
