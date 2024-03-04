@@ -17,10 +17,12 @@ class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _CustomerInfoScreenState();
 }
 
-class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin {
+class _CustomerInfoScreenState extends ConsumerState<ProfileScreen>
+    with LogoutMixin {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -84,7 +86,9 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
               Icons.chevron_right,
               color: textGrayColor2,
             ),
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(AppRoutes.createPINScreen);
+            },
           ),
           const Divider(
             height: 0,
@@ -271,7 +275,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
     }
   }
 
-  Widget _infoTile({required String title, required String value, FontWeight? fontWeight}) {
+  Widget _infoTile(
+      {required String title, required String value, FontWeight? fontWeight}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
