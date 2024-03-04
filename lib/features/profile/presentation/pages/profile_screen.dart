@@ -21,6 +21,13 @@ class ProfileScreen extends ConsumerStatefulWidget {
 }
 
 class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

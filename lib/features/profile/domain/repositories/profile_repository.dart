@@ -6,4 +6,6 @@ abstract class ProfileRepository {
   Future<Either<Failure, LogoutResponseModel>> logout(String token, String sessionId);
 
   Future<Either<Failure, LogoutResponseModel>> deRegisterFingerprint(String token, String sessionId);
+
+  Future<Either<Failure, LogoutResponseModel>> getAgentDetails(String token, String sessionId);
 }

@@ -33,4 +33,15 @@ class ProfileRepositoryImpl implements ProfileRepository {
       return Left(ServerFailure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, LogoutResponseModel>> getAgentDetails(String token, String sessionId) async {
+    try {
+      final response = await apiService.getAgentDetails(token);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
 }

@@ -39,6 +39,7 @@ class ApiService {
   static const LOGIN_BY_BIOMETRIC = "/AgentAPI/Login/LoginByFP";
   static const LOGOUT = "/AgentAPI/Login/Logout";
   static const DE_REGISTER_FINGERPRINT = "/AgentAPI/Login/DeRegisterFingerPrint";
+  static const GET_AGENT_DETAILS = "/AgentAPI/Agent/GetAgentDetails";
 
   ApiService(Dio dio, {String? baseUrl});
 
@@ -144,6 +145,18 @@ class ApiService {
     final response = await postMethod(LOGOUT, null, headers);
 
     return LogoutResponseModel.fromJson(response);
+  }
+
+  Future getAgentDetails(String token) async {
+    final headers = {
+      "Authorization": token,
+      // "SessionId": sessionId,
+    };
+
+    final response = await postMethod(LOGOUT, null, headers);
+
+    return response;
+    // return LogoutResponseModel.fromJson(response);
   }
 
   Future<Map<String, dynamic>> postMethod(
