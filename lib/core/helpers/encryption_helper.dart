@@ -55,7 +55,8 @@ class EncryptionHelper {
     String sequence = "3210";
     String deviceId = deviceInfoModel.deviceId!;
     String requestUUID = generateRandomAlphaNumeric();
-    final String sessionId = DateTime.now().millisecondsSinceEpoch.toString();
+    const sessionId = null;
+    // DateTime.now().millisecondsSinceEpoch.toString();
     final String timeStamp =
         DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
     final index = Random().nextInt(15);
@@ -112,7 +113,7 @@ class EncryptionHelper {
     final encryptedData = response;
 
     debugPrint('******************* ENCRYPTED REQUEST ***********************');
-    print(encryptedData);
+    debugPrint(json.encode(encryptedData).toString());
     debugPrint('******************* ***************** ***********************');
 
     return encryptedData;

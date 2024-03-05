@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
@@ -29,7 +30,8 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const LAUNCH_DETAILS = "/AgentAPI/AppStarts/LaunchDetails";
-  static const VERIFY_MOBILE_NUMBER = "/AgentAPI/Registration/VerifyMobileNumber";
+  static const VERIFY_MOBILE_NUMBER =
+      "/AgentAPI/Registration/VerifyMobileNumber";
   static const VALIDATE_OTP = "/AgentAPI/Registration/ValidateAgentRegOTP";
   static const RESEND_OTP = "/AgentAPI/Login/ResendOTP";
   static const SAVE_FILE = "/AgentAPI/FileHandling/SaveFile";
@@ -40,41 +42,46 @@ class ApiService {
 
   ApiService(Dio dio, {String? baseUrl});
 
-  Future<LaunchDetailsResponse> launchDetails(LaunchDetailsRequest request) async {
+  Future<LaunchDetailsResponse> launchDetails(
+      LaunchDetailsRequest request) async {
     final response = await postMethod(LAUNCH_DETAILS, request.toJson());
 
     return LaunchDetailsResponse.fromJson(response);
   }
 
-  Future<VerifyMobileNumberResponseModel> verifyMobileNumber(VerifyMobileNumberRequestModel request) async {
+  Future<VerifyMobileNumberResponseModel> verifyMobileNumber(
+      VerifyMobileNumberRequestModel request) async {
     final response = await postMethod(VERIFY_MOBILE_NUMBER, request.toJson());
 
     return VerifyMobileNumberResponseModel.fromJson(response);
   }
 
-  Future<ValidateOtpResponseModel> validateOTP(ValidateOtpRequestModel request) async {
+  Future<ValidateOtpResponseModel> validateOTP(
+      ValidateOtpRequestModel request) async {
     final response = await postMethod(VALIDATE_OTP, request.toJson());
 
     return ValidateOtpResponseModel.fromJson(response);
   }
 
-  Future<ResendOtpResponseModel> resendOTP(String token, String sessionId, ResendOtpRequestModel request) async {
+  Future<ResendOtpResponseModel> resendOTP(
+      String token, String sessionId, ResendOtpRequestModel request) async {
     // final headers = {
     //   "Authorization":
     //       'cx1J782xODD0PTp2myhNrJcwV0/xPayiyRlJ1cpGW3S0zkfTgAQB8ic8D8olRTBIo7S39urt3PMMCLb0/BsepoORw69wGB/fXz2qhUr7mxFx8ntVCGRHEE9wRzjcitVjfzKTRLfa/AmDhSW5QvpfobbnOHOTMcLGd673jky0RHBkejGxY44CSa0b/P3GfSvdL/RR8o4xXidE+sLd2UO1QWZ+oGCtVxxzaXc+epKEFbD5hc9S7FUwYLkN4wo0fK3y',
     //   "SessionId": 'bddb0fea-170922155961618',
     // };
     final headers = {
-      "Authorization": token,
-      "SessionId": sessionId,
+      "Authorization": token
     };
 
-    final response = await postMethod(RESEND_OTP, request.toJson(), headers, true);
+    final response =
+        await postMethod(RESEND_OTP, request.toJson(), headers, true);
 
     return ResendOtpResponseModel.fromJson(response);
   }
 
-  Future<SaveFileResponseModel> saveFile(String token, SaveFileRequestModel request) async {
+  Future<SaveFileResponseModel> saveFile(
+      String token, SaveFileRequestModel request) async {
     final headers = {
       "Authorization": token,
     };
@@ -84,19 +91,22 @@ class ApiService {
     return SaveFileResponseModel.fromJson(response);
   }
 
-  Future<SetAgentMpinResponseModel> setAgentMPIN(SetAgentMpinRequestModel request) async {
+  Future<SetAgentMpinResponseModel> setAgentMPIN(
+      SetAgentMpinRequestModel request) async {
     final response = await postMethod(SET_AGENT_MPIN, request.toJson());
 
     return SetAgentMpinResponseModel.fromJson(response);
   }
 
-  Future<LoginbyMpinResponseModel> loginByMpin(LoginbyMpinRequestModel request) async {
+  Future<LoginbyMpinResponseModel> loginByMpin(
+      LoginbyMpinRequestModel request) async {
     final response = await postMethod(LOGIN_BY_MPIN, request.toJson());
 
     return LoginbyMpinResponseModel.fromJson(response);
   }
 
-  Future<LoginByFpResponseModel> loginByFP(LoginByFpRequestModel request) async {
+  Future<LoginByFpResponseModel> loginByFP(
+      LoginByFpRequestModel request) async {
     final response = await postMethod(LOGIN_BY_BIOMETRIC, request.toJson());
 
     return LoginByFpResponseModel.fromJson(response);
@@ -125,10 +135,12 @@ class ApiService {
     bool? logout,
   ]) async {
     final baseURL = getIt<AppConfig>().baseUrl;
-    final deviceInfo = await getIt<DeviceInformationHelper>().generateDeviceInformation();
+    final deviceInfo =
+        await getIt<DeviceInformationHelper>().generateDeviceInformation();
 
     debugPrint('******************* REQUEST ***********************');
-    debugPrint('POST ${baseURL! + endpoint}  + plain request = ${jsonEncode(payLoad)}');
+    debugPrint(
+        'POST ${baseURL! + endpoint}  + plain request = ${jsonEncode(payLoad)}');
     debugPrint('******************* ********** ***********************');
 
     if (headers != null) {
@@ -182,7 +194,8 @@ class ApiService {
     return _handledResponse(response, endpoint);
   }
 
-  Future<Map<String, dynamic>> _handledResponse(http.Response response, String endpoint) async {
+  Future<Map<String, dynamic>> _handledResponse(
+      http.Response response, String endpoint) async {
     debugPrint('******************* RESPONSE ***********************');
     debugPrint('status code: ${response.statusCode}');
     debugPrint("Response Headers: ${response.headers}");
@@ -207,9 +220,11 @@ class ApiService {
           index: int.parse(responseJson["h"]["mk"]["i"]),
         );
 
-        debugPrint('******************* DECRYPTED RESPONSE ***********************');
-        debugPrint("$decryptedResponse");
-        debugPrint('******************* ****************** ***********************');
+        debugPrint(
+            '******************* DECRYPTED RESPONSE ***********************');
+        log("$decryptedResponse");
+        debugPrint(
+            '******************* ****************** ***********************');
 
         decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
 
