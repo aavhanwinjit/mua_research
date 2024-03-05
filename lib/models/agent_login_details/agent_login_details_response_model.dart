@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:ekyc/models/token_data/token_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'agent_login_details_response_model.freezed.dart';
@@ -21,7 +22,7 @@ class AgentLoginDetailsResponseModel with _$AgentLoginDetailsResponseModel {
     @JsonKey(name: "agentName") String? agentName,
     @JsonKey(name: "mobileNumber") String? mobileNumber,
     @JsonKey(name: "emailId") String? emailId,
-    @JsonKey(name: "authToken") AuthToken? authToken,
+    @JsonKey(name: "authToken") TokenData? authToken,
     @JsonKey(name: "isMPINExpired") bool? isMpinExpired,
     @JsonKey(name: "isFirstLogin") bool? isFirstLogin,
     @JsonKey(name: "deviceToken") String? deviceToken,
@@ -39,15 +40,4 @@ class AgentLoginDetailsResponseModel with _$AgentLoginDetailsResponseModel {
 
   factory AgentLoginDetailsResponseModel.fromJson(Map<String, dynamic> json) =>
       _$AgentLoginDetailsResponseModelFromJson(json);
-}
-
-@freezed
-class AuthToken with _$AuthToken {
-  const factory AuthToken({
-    @JsonKey(name: "token") String? token,
-    @JsonKey(name: "sessionId") String? sessionId,
-    @JsonKey(name: "expiry") int? expiry,
-  }) = _AuthToken;
-
-  factory AuthToken.fromJson(Map<String, dynamic> json) => _$AuthTokenFromJson(json);
 }

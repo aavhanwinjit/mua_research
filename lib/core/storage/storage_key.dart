@@ -1,6 +1,5 @@
 enum StorageKey {
-  LAUNCH_DETAILS,
   DEVICE_TOKEN,
   AUTH_TOKEN,
-  SESSION_ID,
+  FP_TOKEN,
 }

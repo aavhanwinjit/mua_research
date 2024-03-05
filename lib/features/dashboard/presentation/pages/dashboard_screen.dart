@@ -3,6 +3,9 @@ import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/kyc_type_bottomsheet.dart';
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
+import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
+import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,9 +20,16 @@ class DashboardScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentDetailsMixin {
   final ScrollController _scrollController = ScrollController();
   final bool _listEmpty = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getAgentDetails(context, ref);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +152,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   }
 
   AppBar _appBar() {
+    final GetAgentDetailsResponseModel? agentDetails = ref.watch(agentDetailsResponseProvider);
+
+    String agentName = agentDetails?.body?.responseBody?.agentName ?? "NA";
+
     return AppBar(
       scrolledUnderElevation: 0,
       title: InkWell(
@@ -149,7 +163,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
           context.pushNamed(AppRoutes.profileScreen);
         },
         child: CustomProfileImageWidget(
-          userName: "Arjun Kumar",
+          userName: agentName,
           size: 32.w,
           fontSize: 12.sp,
         ),

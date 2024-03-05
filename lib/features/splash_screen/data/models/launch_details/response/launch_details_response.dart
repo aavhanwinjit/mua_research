@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:ekyc/models/generic_header/header_model.dart';
 import 'package:ekyc/models/status/status_model.dart';
+import 'package:ekyc/models/token_data/token_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'launch_details_response.freezed.dart';
@@ -127,15 +128,4 @@ class Language with _$Language {
   }) = _Language;
 
   factory Language.fromJson(Map<String, dynamic> json) => _$LanguageFromJson(json);
-}
-
-@freezed
-class TokenData with _$TokenData {
-  const factory TokenData({
-    @JsonKey(name: "token") String? token,
-    @JsonKey(name: "sessionId") String? sessionId,
-    @JsonKey(name: "expiry") int? expiry,
-  }) = _TokenData;
-
-  factory TokenData.fromJson(Map<String, dynamic> json) => _$TokenDataFromJson(json);
 }

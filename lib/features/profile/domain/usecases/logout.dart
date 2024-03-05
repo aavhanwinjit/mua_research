@@ -11,11 +11,7 @@ class Logout implements UseCase<LogoutResponseModel, Null> {
   Logout(this.profileRepository);
 
   @override
-  Future<Either<Failure, LogoutResponseModel>> call(
-    Null params, [
-    String? token,
-    String? sessionId,
-  ]) async {
-    return await profileRepository.logout(token!, sessionId!);
+  Future<Either<Failure, LogoutResponseModel>> call(Null params) async {
+    return await profileRepository.logout();
   }
 }

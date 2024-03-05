@@ -12,11 +12,7 @@ class LaunchDetails implements UseCase<LaunchDetailsResponse, LaunchDetailsReque
   LaunchDetails(this.splashScreenRepository);
 
   @override
-  Future<Either<Failure, LaunchDetailsResponse>> call(
-    LaunchDetailsRequest params, [
-    String? token,
-    String? sessionId,
-  ]) async {
+  Future<Either<Failure, LaunchDetailsResponse>> call(LaunchDetailsRequest params) async {
     return await splashScreenRepository.launchDetails(params);
   }
 }

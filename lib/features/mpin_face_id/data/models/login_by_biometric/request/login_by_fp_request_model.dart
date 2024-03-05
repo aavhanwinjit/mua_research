@@ -20,6 +20,7 @@ class LoginByFpRequestModel with _$LoginByFpRequestModel {
     @JsonKey(name: "deviceToken") String? deviceToken,
     @JsonKey(name: "fpDeviceToken") String? fpDeviceToken,
     @JsonKey(name: "biometricStatus") bool? biometricStatus,
+    @JsonKey(name: "mobileNo") String? mobileNo,
   }) = _LoginByFpRequestModel;
 
   factory LoginByFpRequestModel.fromJson(Map<String, dynamic> json) => _$LoginByFpRequestModelFromJson(json);

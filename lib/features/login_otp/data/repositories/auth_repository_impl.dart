@@ -23,8 +23,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await apiService.verifyMobileNumber(request);
 
-      // final response = VerifyMobileNumberResponseModel.fromJson(VerifyMobileNumberResponseMocked.jsonResponse);
-
       return Right(response);
     } on DioException catch (e) {
       return Left(ServerFailure(e));
@@ -36,8 +34,6 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final response = await apiService.validateOTP(request);
 
-      // final response = ValidateOtpResponseModel.fromJson(ValidateOTPResponseMocked.jsonResponse);
-
       return Right(response);
     } on DioException catch (e) {
       return Left(ServerFailure(e));
@@ -45,15 +41,9 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(
-    ResendOtpRequestModel request,
-    String token,
-    String sessionId,
-  ) async {
+  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(ResendOtpRequestModel request) async {
     try {
-      final response = await apiService.resendOTP(token, sessionId, request);
-
-      // final response = ResendOtpResponseModel.fromJson(ResendOTPResponseMocked.jsonResponse);
+      final response = await apiService.resendOTP(request);
 
       return Right(response);
     } on DioException catch (e) {

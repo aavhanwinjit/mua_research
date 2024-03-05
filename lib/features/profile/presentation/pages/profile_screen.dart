@@ -4,8 +4,8 @@ import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
-import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
+import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -21,13 +21,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
 }
 
-class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin, AgentDetailsMixin {
-  @override
-  void initState() {
-    super.initState();
-    getAgentDetails(context);
-  }
-
+class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -119,8 +113,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
-              deRegisterFingerprint(context);
-              // logout(context);
+              logout(context);
             },
           ),
           SizedBox(height: 8.h),
@@ -130,7 +123,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
   }
 
   Widget _profileWidget() {
-    final agentLoginDetails = ref.watch(agentLoginDetailsProvider);
+    final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.w),
@@ -147,28 +141,31 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
           SizedBox(height: 24.h),
           _infoTile(
             title: Strings.email,
-            value: agentLoginDetails?.emailId ?? "-",
+            value: agentDetails?.emailId ?? "-",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.mobileNo,
-            value: agentLoginDetails?.mobileNumber ?? "",
+            value: agentDetails?.mobileNumber ?? "",
             // value: "+230 5 123 4567",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.address,
-            value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius",
+            value: agentDetails?.address ?? "",
+            // value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.agencyName,
-            value: "Head office",
+            value: agentDetails?.agencyName ?? "",
+            // value: "Head office",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.companyName,
-            value: "Mauritius Union Assurance Cy Ltd",
+            value:  agentDetails?.companies ?? "",
+            // value: "Mauritius Union Assurance Cy Ltd",
             fontWeight: FontWeight.w600,
           ),
           SizedBox(height: 24.h),

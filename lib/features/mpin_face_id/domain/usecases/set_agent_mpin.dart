@@ -12,11 +12,7 @@ class SetAgentMPIN implements UseCase<SetAgentMpinResponseModel, SetAgentMpinReq
   SetAgentMPIN(this.mpinRepository);
 
   @override
-  Future<Either<Failure, SetAgentMpinResponseModel>> call(
-    SetAgentMpinRequestModel params, [
-    String? token,
-    String? sessionId,
-  ]) async {
+  Future<Either<Failure, SetAgentMpinResponseModel>> call(SetAgentMpinRequestModel params) async {
     return await mpinRepository.setAgentMPIN(params);
   }
 }

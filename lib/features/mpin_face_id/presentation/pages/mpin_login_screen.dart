@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
@@ -324,25 +325,18 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
 
-    final String deviceToken = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.deviceToken ?? "";
     final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
-    final String authToken = launchDetailsProvider?.body?.responseBody?.tokenData?.token ?? "";
-    final String sessionId = launchDetailsProvider?.body?.responseBody?.tokenData?.sessionId ?? "";
+
+    final String deviceToken = await LocalDataHelper.getDeviceToken();
 
     LoginbyMpinRequestModel request = LoginbyMpinRequestModel(
-        // deviceId: "918794c4-a479-36ad-949d-8c631c260a6b",
-        deviceId: deviceInfo.deviceId,
-        deviceToken: deviceToken,
-        // deviceToken: "1dc2aac3-d1a3-452e-832d-8b7c6835faaa",
-        // deviceToken: "499dddb0-5ab1-4d04-90b6-87aadd4599ee",
-        mPin: pin,
-        mobileNo: mobileNo
-        // mobileNo: "92186387",
-        );
+      deviceId: deviceInfo.deviceId,
+      deviceToken: deviceToken,
+      mPin: pin,
+      mobileNo: mobileNo,
+    );
 
-    debugPrint("request in login by mpin.to json: ${request.toJson()}");
-
-    final response = await getIt<LoginByMpin>().call(request, authToken, sessionId);
+    final response = await getIt<LoginByMpin>().call(request);
 
     response.fold(
       (failure) {
@@ -375,31 +369,33 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
   }
 
   Future<void> _biometricAuthentication() async {
-    await authenticateWithBiometric(
-      onAuthenticated: () {
-        _loginByFP();
-      },
-      onAuthenticationFailure: (String error) {
-        context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
-      },
-    );
+    _loginByFP();
+    // await authenticateWithBiometric(
+    //   onAuthenticated: () {
+    //     _loginByFP();
+    //   },
+    //   onAuthenticationFailure: (String error) {
+    //     context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
+    //   },
+    // );
   }
 
   void _loginByFP() async {
     final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
 
-    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
+    final String deviceToken = await LocalDataHelper.getDeviceToken();
+    final String fpToken = await LocalDataHelper.getFPToken();
 
-    final String deviceToken = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.deviceToken ?? "";
+    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
+    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
 
     LoginByFpRequestModel request = LoginByFpRequestModel(
       deviceId: deviceInfo.deviceId,
       deviceToken: deviceToken,
       biometricStatus: true,
-      fpDeviceToken: "",
+      fpDeviceToken: fpToken,
+      mobileNo: mobileNo,
     );
-
-    debugPrint("request in login by fp.to json: ${request.toJson()}");
 
     final response = await getIt<LoginByFP>().call(request);
 
@@ -438,5 +434,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     await LocalDataHelper.storeDeviceToken(deviceToken);
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
+
+    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }
 }

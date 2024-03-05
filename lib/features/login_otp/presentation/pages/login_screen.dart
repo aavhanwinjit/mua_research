@@ -1,6 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
@@ -108,7 +110,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           if (success.status?.isSuccess == true) {
             ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
             ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
-            ref.read(tokenProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.token);
+
+            await _setData(
+              authToken: success.body?.responseBody?.tokenData?.token,
+              sessionId: success.body?.responseBody?.tokenData?.sessionId,
+            );
 
             context.showSnackBar(message: Strings.otpSentSuccessfully);
             context.pushNamed(AppRoutes.otpScreen);
@@ -198,4 +204,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   //     },
   //   );
   // }
+
+  Future<void> _setData({required String? authToken, required String? sessionId}) async {
+    await LocalDataHelper.storeAuthToken(authToken);
+    await LocalDataHelper.storeSessionId(sessionId);
+
+    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
+  }
 }

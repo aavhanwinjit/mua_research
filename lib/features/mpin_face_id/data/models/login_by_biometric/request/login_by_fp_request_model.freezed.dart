@@ -29,6 +29,8 @@ mixin _$LoginByFpRequestModel {
   String? get fpDeviceToken => throw _privateConstructorUsedError;
   @JsonKey(name: "biometricStatus")
   bool? get biometricStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: "mobileNo")
+  String? get mobileNo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -46,7 +48,8 @@ abstract class $LoginByFpRequestModelCopyWith<$Res> {
       {@JsonKey(name: "deviceId") String? deviceId,
       @JsonKey(name: "deviceToken") String? deviceToken,
       @JsonKey(name: "fpDeviceToken") String? fpDeviceToken,
-      @JsonKey(name: "biometricStatus") bool? biometricStatus});
+      @JsonKey(name: "biometricStatus") bool? biometricStatus,
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -67,6 +70,7 @@ class _$LoginByFpRequestModelCopyWithImpl<$Res,
     Object? deviceToken = freezed,
     Object? fpDeviceToken = freezed,
     Object? biometricStatus = freezed,
+    Object? mobileNo = freezed,
   }) {
     return _then(_value.copyWith(
       deviceId: freezed == deviceId
@@ -85,6 +89,10 @@ class _$LoginByFpRequestModelCopyWithImpl<$Res,
           ? _value.biometricStatus
           : biometricStatus // ignore: cast_nullable_to_non_nullable
               as bool?,
+      mobileNo: freezed == mobileNo
+          ? _value.mobileNo
+          : mobileNo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -102,7 +110,8 @@ abstract class _$$LoginByFpRequestModelImplCopyWith<$Res>
       {@JsonKey(name: "deviceId") String? deviceId,
       @JsonKey(name: "deviceToken") String? deviceToken,
       @JsonKey(name: "fpDeviceToken") String? fpDeviceToken,
-      @JsonKey(name: "biometricStatus") bool? biometricStatus});
+      @JsonKey(name: "biometricStatus") bool? biometricStatus,
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -121,6 +130,7 @@ class __$$LoginByFpRequestModelImplCopyWithImpl<$Res>
     Object? deviceToken = freezed,
     Object? fpDeviceToken = freezed,
     Object? biometricStatus = freezed,
+    Object? mobileNo = freezed,
   }) {
     return _then(_$LoginByFpRequestModelImpl(
       deviceId: freezed == deviceId
@@ -139,6 +149,10 @@ class __$$LoginByFpRequestModelImplCopyWithImpl<$Res>
           ? _value.biometricStatus
           : biometricStatus // ignore: cast_nullable_to_non_nullable
               as bool?,
+      mobileNo: freezed == mobileNo
+          ? _value.mobileNo
+          : mobileNo // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -150,7 +164,8 @@ class _$LoginByFpRequestModelImpl implements _LoginByFpRequestModel {
       {@JsonKey(name: "deviceId") this.deviceId,
       @JsonKey(name: "deviceToken") this.deviceToken,
       @JsonKey(name: "fpDeviceToken") this.fpDeviceToken,
-      @JsonKey(name: "biometricStatus") this.biometricStatus});
+      @JsonKey(name: "biometricStatus") this.biometricStatus,
+      @JsonKey(name: "mobileNo") this.mobileNo});
 
   factory _$LoginByFpRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$LoginByFpRequestModelImplFromJson(json);
@@ -167,10 +182,13 @@ class _$LoginByFpRequestModelImpl implements _LoginByFpRequestModel {
   @override
   @JsonKey(name: "biometricStatus")
   final bool? biometricStatus;
+  @override
+  @JsonKey(name: "mobileNo")
+  final String? mobileNo;
 
   @override
   String toString() {
-    return 'LoginByFpRequestModel(deviceId: $deviceId, deviceToken: $deviceToken, fpDeviceToken: $fpDeviceToken, biometricStatus: $biometricStatus)';
+    return 'LoginByFpRequestModel(deviceId: $deviceId, deviceToken: $deviceToken, fpDeviceToken: $fpDeviceToken, biometricStatus: $biometricStatus, mobileNo: $mobileNo)';
   }
 
   @override
@@ -185,13 +203,15 @@ class _$LoginByFpRequestModelImpl implements _LoginByFpRequestModel {
             (identical(other.fpDeviceToken, fpDeviceToken) ||
                 other.fpDeviceToken == fpDeviceToken) &&
             (identical(other.biometricStatus, biometricStatus) ||
-                other.biometricStatus == biometricStatus));
+                other.biometricStatus == biometricStatus) &&
+            (identical(other.mobileNo, mobileNo) ||
+                other.mobileNo == mobileNo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, deviceId, deviceToken, fpDeviceToken, biometricStatus);
+  int get hashCode => Object.hash(runtimeType, deviceId, deviceToken,
+      fpDeviceToken, biometricStatus, mobileNo);
 
   @JsonKey(ignore: true)
   @override
@@ -213,7 +233,8 @@ abstract class _LoginByFpRequestModel implements LoginByFpRequestModel {
           {@JsonKey(name: "deviceId") final String? deviceId,
           @JsonKey(name: "deviceToken") final String? deviceToken,
           @JsonKey(name: "fpDeviceToken") final String? fpDeviceToken,
-          @JsonKey(name: "biometricStatus") final bool? biometricStatus}) =
+          @JsonKey(name: "biometricStatus") final bool? biometricStatus,
+          @JsonKey(name: "mobileNo") final String? mobileNo}) =
       _$LoginByFpRequestModelImpl;
 
   factory _LoginByFpRequestModel.fromJson(Map<String, dynamic> json) =
@@ -231,6 +252,9 @@ abstract class _LoginByFpRequestModel implements LoginByFpRequestModel {
   @override
   @JsonKey(name: "biometricStatus")
   bool? get biometricStatus;
+  @override
+  @JsonKey(name: "mobileNo")
+  String? get mobileNo;
   @override
   @JsonKey(ignore: true)
   _$$LoginByFpRequestModelImplCopyWith<_$LoginByFpRequestModelImpl>

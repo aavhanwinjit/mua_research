@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
@@ -87,6 +88,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                   disable: ref.watch(otpProvider).trim().length < 6,
                   // onTap: () {
                   //   context.pushReplacementNamed(AppRoutes.successScreen);
+                  // },
+                  // onTap: () {
+                  //   final container = ProviderContainer();
+                  //   final String sId = ProviderContainer().read(sessionIdProvider);
+                  //   debugPrint("sid: $sId");
                   // },
                   onTap: _verifyOTP,
                   label: Strings.contn,
@@ -237,19 +243,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
     }
 
     final String? refCode = ref.watch(refCodeProvider);
-    final String? token = ref.watch(tokenProvider);
-    final verifyMobileNumberResponse = ref.watch(verifyMobileNumberProvider);
 
     final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
-    final response = await getIt<ResendOTP>().call(
-      request,
-      token ?? "",
-      verifyMobileNumberResponse?.body?.responseBody?.tokenData?.sessionId ?? "",
-      // "1707392469778",
-    );
+    final response = await getIt<ResendOTP>().call(request);
 
     response.fold(
       (failure) {
@@ -262,7 +261,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
           ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
-          ref.read(tokenProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.token);
+
+          await LocalDataHelper.storeAuthToken(success.body?.responseBody?.tokenData?.token);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 

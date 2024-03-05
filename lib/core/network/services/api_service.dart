@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/helpers/encryption_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
@@ -18,6 +19,9 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/log
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/set_fingerprint/response/set_fingerprint_response_model.dart';
+import 'package:ekyc/features/profile/data/models/de_register_fingerprint/request/de_register_fingerprint_response_model.dart';
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/data/models/logout/response/logout_response_model.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
@@ -61,16 +65,11 @@ class ApiService {
     return ValidateOtpResponseModel.fromJson(response);
   }
 
-  Future<ResendOtpResponseModel> resendOTP(String token, String sessionId, ResendOtpRequestModel request) async {
-    // final headers = {
-    //   "Authorization":
-    //       'cx1J782xODD0PTp2myhNrJcwV0/xPayiyRlJ1cpGW3S0zkfTgAQB8ic8D8olRTBIo7S39urt3PMMCLb0/BsepoORw69wGB/fXz2qhUr7mxFx8ntVCGRHEE9wRzjcitVjfzKTRLfa/AmDhSW5QvpfobbnOHOTMcLGd673jky0RHBkejGxY44CSa0b/P3GfSvdL/RR8o4xXidE+sLd2UO1QWZ+oGCtVxxzaXc+epKEFbD5hc9S7FUwYLkN4wo0fK3y',
-    //   "SessionId": 'bddb0fea-170922155961618',
-    // };
+  Future<ResendOtpResponseModel> resendOTP(ResendOtpRequestModel request) async {
+    final token = await LocalDataHelper.getAuthToken();
 
     final headers = {
       "Authorization": token,
-      // "SessionId": sessionId,
     };
 
     final response = await postMethod(RESEND_OTP, request.toJson(), headers);
@@ -78,7 +77,9 @@ class ApiService {
     return ResendOtpResponseModel.fromJson(response);
   }
 
-  Future<SaveFileResponseModel> saveFile(String token, SaveFileRequestModel request) async {
+  Future<SaveFileResponseModel> saveFile(SaveFileRequestModel request) async {
+    final token = await LocalDataHelper.getAuthToken();
+
     final headers = {
       "Authorization": token,
     };
@@ -94,29 +95,28 @@ class ApiService {
     return SetAgentMpinResponseModel.fromJson(response);
   }
 
-  Future setFingerPrint(String token, String sessionId) async {
+  Future<SetFingerprintResponseModel> setFingerPrint() async {
+    final token = await LocalDataHelper.getAuthToken();
+
     final headers = {
       "Authorization": token,
     };
 
     final response = await postMethod(SET_FINGERPRINT, null, headers);
 
-    return response;
-
-    // return SetAgentMpinResponseModel.fromJson(response);
+    return SetFingerprintResponseModel.fromJson(response);
   }
 
-  Future deRegisterFingerprint(String token, String sessionId) async {
+  Future<DeRegisterFingerprintResponseModel> deRegisterFingerprint() async {
+    final token = await LocalDataHelper.getAuthToken();
+
     final headers = {
       "Authorization": token,
-      "SessionId": sessionId,
     };
 
     final response = await postMethod(DE_REGISTER_FINGERPRINT, null, headers);
 
-    return response;
-
-    // return SetAgentMpinResponseModel.fromJson(response);
+    return DeRegisterFingerprintResponseModel.fromJson(response);
   }
 
   Future<LoginbyMpinResponseModel> loginByMpin(LoginbyMpinRequestModel request) async {
@@ -126,20 +126,22 @@ class ApiService {
   }
 
   Future<LoginByFpResponseModel> loginByFP(LoginByFpRequestModel request) async {
-    final response = await postMethod(LOGIN_BY_BIOMETRIC, request.toJson());
+    final token = await LocalDataHelper.getAuthToken();
+
+    final headers = {
+      "Authorization": token,
+    };
+
+    final response = await postMethod(LOGIN_BY_BIOMETRIC, request.toJson(), headers);
 
     return LoginByFpResponseModel.fromJson(response);
   }
 
-  Future<LogoutResponseModel> logout(String token) async {
-    // final headers = {
-    //   // "SessionId": "7bdf0dba-170862610595707",
-    //   "Authorization":
-    //       "cx1J782xODBxnYDJV4d3Yg3MSbhh+1uFyZ6xoEOacg5uayZUrKP4TbGDJuQ/RbFtgbBaHH66gRLCeKsC4onUCQFZ6zeyySnt99VYpvLgkeO9GfRsGoL1UCREEUhCkqClYskqSb3GJDs+eYckxbTu8odQvktvpDhxrBhxCriTHBCFzqSE0GRIwNlbDBp6mA2X+USNq5IOlX92jSPpYUCULxq1HvJH8amHBsTxVJztiHeAagJf2eqDe15lVBjHDNmZSAc821QD80Z/d9ijq6F2/l33cGl0zgqDSG9RkFiWprxpyQ7E4a6srHFjSvfbcDmOaXljcEoFKR9MN6x5pQxiSXuex2pQ+GDi9yE/C1+Cj0ZOQCOw8X9tMHSU6I7BX9eLiRhs8xXrS3UaG84wQ06YJG6Mme/s6FQgfwEhDpimI1g+VTf38FRqiBsCo4iENqo4JcGQIiPVU1LxUdGbVEWUqZZzAFDfIO4ohk2T+OnyZY0y9HVG68UxrK8lmkB8O8jv9bIzn7DZunu1DuSaftJOmnGN4HBnKm/DubhKhdbgPcGPC/+b6IkVUhBTJHxFhA/R9WihajJCTE/wzKamgx+EsrQFc2qIUTx7tx6YrS9x+y+D9EaEdfqy7g==",
-    // };
+  Future<LogoutResponseModel> logout() async {
+    final token = await LocalDataHelper.getAuthToken();
+
     final headers = {
       "Authorization": token,
-      // "SessionId": sessionId,
     };
 
     final response = await postMethod(LOGOUT, null, headers);
@@ -147,23 +149,22 @@ class ApiService {
     return LogoutResponseModel.fromJson(response);
   }
 
-  Future getAgentDetails(String token, String sessionId) async {
+  Future<GetAgentDetailsResponseModel> getAgentDetails() async {
+    final token = await LocalDataHelper.getAuthToken();
+
     final headers = {
       "Authorization": token,
-      "SessionId": sessionId,
     };
 
     final response = await postMethod(GET_AGENT_DETAILS, null, headers);
 
-    return response;
-    // return LogoutResponseModel.fromJson(response);
+    return GetAgentDetailsResponseModel.fromJson(response);
   }
 
   Future<Map<String, dynamic>> postMethod(
     String endpoint,
     Map<String, dynamic>? payLoad, [
     Map<String, String>? headers,
-    bool? logout,
   ]) async {
     final baseURL = getIt<AppConfig>().baseUrl;
     final deviceInfo = await getIt<DeviceInformationHelper>().generateDeviceInformation();
@@ -182,46 +183,15 @@ class ApiService {
     debugPrint('Headers: $headers');
     debugPrint('******************* ****** ***********************');
 
-    final Map<String, dynamic> encryptedRequest = EncryptionHelper.encrypt(
+    final Map<String, dynamic> encryptedRequest = await EncryptionHelper.encrypt(
       plainData: payLoad,
       deviceInfoModel: deviceInfo,
       serviceRequestURL: endpoint,
     );
 
-    // final data = {
-    //   "h": {
-    //     "di": {
-    //       "p": "Android",
-    //       "o": "8.1.0",
-    //       "m": "vivo 1820",
-    //       "d": "918794c4-a479-36ad-949d-8c631c260a6b",
-    //       "a": "1.0.1.8",
-    //       "i": "10.235.234.111"
-    //     },
-    //     "mk": {
-    //       "r": "1624521819414qj7ld,2024022915501721",
-    //       "sr": "AgentAPI/Login/ResendOTP",
-    //       "c": "Customer",
-    //       "j": "1624521806YQkAr",
-    //       "s": "d0b35662-170922181573141",
-    //       "i": "1",
-    //       "l": "1",
-    //       "t": "20240229102015",
-    //       "ci": null
-    //     }
-    //   },
-    //   "b":
-    //       "QcBzIEuGI6uOqYCwWHh1z/lt+INszAbvgqfay1HyWTGrLD6eLTJD5xRTH2dWmQIr9JJJtOGgH/HWRQRm/APJl0eLux6Yc4TU9SPHZEX/h9d/xVeHQZjFzLi4To04bpLtsW2NWVwv5zTYJn8gj5CrRIJFOgp4kmrhQAhIzhPi8bVmR1ob9kZBPE71MKlV+3be"
-    // };
-
-    if (logout == true) {
-      return {};
-    }
-
     var response = await http.post(
       Uri.parse(baseURL),
       body: json.encode(encryptedRequest),
-      // body: json.encode(logout == true ? data : encryptedRequest),
       headers: headers,
     );
 

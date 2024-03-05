@@ -12,7 +12,6 @@ import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
-import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
@@ -251,11 +250,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
       allowedFileId: 9,
     );
 
-    debugPrint("request in save file.to json: ${request.toJson()}");
-
-    final String? token = ref.watch(tokenProvider);
-
-    final response = await getIt<SaveFile>().call(request, token ?? "");
+    final response = await getIt<SaveFile>().call(request);
 
     response.fold(
       (failure) {
