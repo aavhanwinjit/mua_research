@@ -1,6 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/storage/storage_key.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/storage/storage_manager.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/profile/data/models/logout/response/logout_response_model.dart';
@@ -11,8 +11,8 @@ import 'package:go_router/go_router.dart';
 
 mixin LogoutMixin {
   Future<void> logout(BuildContext context) async {
-    final deviceToken = await _getDeviceToken();
-    final sessionId = await _getSessionId();
+    final deviceToken = await LocalDataHelper.getDeviceToken();
+    final sessionId = await LocalDataHelper.getSessionId();
 
     debugPrint("sessionId: $sessionId");
 
@@ -38,8 +38,8 @@ mixin LogoutMixin {
   }
 
   Future<void> deRegisterFingerprint(BuildContext context) async {
-    final deviceToken = await _getDeviceToken();
-    final sessionId = await _getSessionId();
+    final deviceToken = await LocalDataHelper.getDeviceToken();
+    final sessionId = await LocalDataHelper.getSessionId();
 
     debugPrint("sessionId: $sessionId");
 
@@ -62,17 +62,5 @@ mixin LogoutMixin {
         }
       },
     );
-  }
-
-  Future<String> _getDeviceToken() async {
-    final String? authToken = await getIt<AppStorageManager>().getString(key: StorageKey.AUTH_TOKEN);
-
-    return authToken ?? "";
-  }
-
-  Future<String> _getSessionId() async {
-    final String? sessionId = await getIt<AppStorageManager>().getString(key: StorageKey.SESSION_ID);
-
-    return sessionId ?? "";
   }
 }

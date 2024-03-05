@@ -16,6 +16,6 @@ class SetFingerPrint implements UseCase<LoginByFpResponseModel, Null> {
     String? token,
     String? sessionId,
   ]) async {
-    return await mpinRepository.setFingerPrint(token!);
+    return await mpinRepository.setFingerPrint(token!, sessionId!);
   }
 }

@@ -1,8 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/core/storage/storage_key.dart';
-import 'package:ekyc/core/storage/storage_manager.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
@@ -121,7 +120,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
 
                         if (pin.length == 6) {
                           //navigate
-                          context.pushNamed(AppRoutes.confirmPINScreen);
+                          Future.delayed(const Duration(seconds: 2), () {
+                            _setAgentMPIN();
+                          });
                         }
                         // if (pin.length < 6) {
                         //   if (index != 9) {
@@ -255,7 +256,6 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                       //navigate
                       Future.delayed(const Duration(seconds: 2), () {
                         _setAgentMPIN();
-                        // context.pushNamed(AppRoutes.onboardSuccessScreen);
                       });
                     }
                   },
@@ -306,9 +306,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           // ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
 
           // store the auth token
-          await _storeDeviceToken(success.body?.responseBody?.deviceToken);
-          await _storeAuthToken(success.body?.responseBody?.authToken?.token);
-          await _storeSessionId(success.body?.responseBody?.authToken?.sessionId);
+          await LocalDataHelper.storeDeviceToken(success.body?.responseBody?.deviceToken);
+          await LocalDataHelper.storeAuthToken(success.body?.responseBody?.authToken?.token);
+          await LocalDataHelper.storeSessionId(success.body?.responseBody?.authToken?.sessionId);
 
           final biometricSelected = ref.watch(biometricSelectedProvider);
 
@@ -343,9 +343,10 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   }
 
   Future<void> _setFingerPrint() async {
-    final String deviceToken = await _getDeviceToken();
+    final String deviceToken = await LocalDataHelper.getDeviceToken();
+    final String sessionId = await LocalDataHelper.getSessionId();
 
-    final response = await getIt<SetFingerPrint>().call(null, deviceToken);
+    final response = await getIt<SetFingerPrint>().call(null, deviceToken, sessionId);
 
     response.fold(
       (failure) {
@@ -378,23 +379,5 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
         // }
       },
     );
-  }
-
-  Future<void> _storeDeviceToken(String? deviceToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
-  }
-
-  Future<void> _storeAuthToken(String? authToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
-  }
-
-  Future<void> _storeSessionId(String? sessionId) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.SESSION_ID, data: sessionId);
-  }
-
-  Future<String> _getDeviceToken() async {
-    final String? authToken = await getIt<AppStorageManager>().getString(key: StorageKey.AUTH_TOKEN);
-
-    return authToken ?? "";
   }
 }

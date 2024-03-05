@@ -55,9 +55,9 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginByFpResponseModel>> setFingerPrint(String token) async {
+  Future<Either<Failure, LoginByFpResponseModel>> setFingerPrint(String token, String sessionId) async {
     try {
-      final response = await apiService.setFingerPrint(token);
+      final response = await apiService.setFingerPrint(token, sessionId);
 
       return Right(response);
     } on DioException catch (e) {

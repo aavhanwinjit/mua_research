@@ -1,8 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
-import 'package:ekyc/core/storage/storage_key.dart';
-import 'package:ekyc/core/storage/storage_manager.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
@@ -436,20 +435,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
   }
 
   Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
-    await _storeDeviceToken(deviceToken);
-    await _storeAuthToken(authToken);
-    await _storeSessionId(sessionId);
-  }
-
-  Future<void> _storeDeviceToken(String? deviceToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
-  }
-
-  Future<void> _storeAuthToken(String? authToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
-  }
-
-  Future<void> _storeSessionId(String? sessionId) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.SESSION_ID, data: sessionId);
+    await LocalDataHelper.storeDeviceToken(deviceToken);
+    await LocalDataHelper.storeAuthToken(authToken);
+    await LocalDataHelper.storeSessionId(sessionId);
   }
 }

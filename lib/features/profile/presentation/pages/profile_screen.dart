@@ -5,6 +5,7 @@ import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
+import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,12 +21,11 @@ class ProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
 }
 
-class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin {
-
+class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin, AgentDetailsMixin {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    getAgentDetails(context);
   }
 
   @override
@@ -117,8 +117,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
-              // deRegisterFingerprint(context);
-              logout(context);
+              deRegisterFingerprint(context);
+              // logout(context);
             },
           ),
           SizedBox(height: 8.h),

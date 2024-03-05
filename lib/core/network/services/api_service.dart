@@ -94,7 +94,7 @@ class ApiService {
     return SetAgentMpinResponseModel.fromJson(response);
   }
 
-  Future setFingerPrint(String token) async {
+  Future setFingerPrint(String token, String sessionId) async {
     final headers = {
       "Authorization": token,
     };
@@ -147,13 +147,13 @@ class ApiService {
     return LogoutResponseModel.fromJson(response);
   }
 
-  Future getAgentDetails(String token) async {
+  Future getAgentDetails(String token, String sessionId) async {
     final headers = {
       "Authorization": token,
-      // "SessionId": sessionId,
+      "SessionId": sessionId,
     };
 
-    final response = await postMethod(LOGOUT, null, headers);
+    final response = await postMethod(GET_AGENT_DETAILS, null, headers);
 
     return response;
     // return LogoutResponseModel.fromJson(response);
