@@ -24,7 +24,8 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
+    with BiometricAuthMixin {
   String pin = "";
   bool successVal = false;
 
@@ -117,11 +118,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                           debugPrint(pin);
                         }
 
-                        ref.watch(createPINProvider.notifier).update((state) => pin);
-
+                        ref
+                            .watch(createPINProvider.notifier)
+                            .update((state) => pin);
                         if (pin.length == 6) {
                           //navigate
-                          context.pushNamed(AppRoutes.confirmPINScreen);
+                          Future.delayed(const Duration(seconds: 2), () {
+                            _setAgentMPIN();
+                            // context.pushNamed(AppRoutes.onboardSuccessScreen);
+                          });
                         }
                         // if (pin.length < 6) {
                         //   if (index != 9) {
@@ -173,7 +178,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                           });
                           debugPrint(pin);
                         }
-                        ref.watch(confirmPINProvider.notifier).update((state) => pin);
+                        ref
+                            .watch(confirmPINProvider.notifier)
+                            .update((state) => pin);
                       },
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(100),
@@ -249,7 +256,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                       debugPrint(pin);
                     }
 
-                    ref.watch(confirmPINProvider.notifier).update((state) => pin);
+                    ref
+                        .watch(confirmPINProvider.notifier)
+                        .update((state) => pin);
 
                     if (pin.length == 6) {
                       //navigate
@@ -296,19 +305,23 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (SetAgentMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           successVal = true;
           setState(() {});
-          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
+          ref
+              .read(agentLoginDetailsProvider.notifier)
+              .update((state) => success.body?.responseBody);
           // ref.read(setAgentMpinResponseProvider.notifier).update((state) => success);
 
           // store the auth token
           await _storeDeviceToken(success.body?.responseBody?.deviceToken);
           await _storeAuthToken(success.body?.responseBody?.authToken?.token);
-          await _storeSessionId(success.body?.responseBody?.authToken?.sessionId);
+          await _storeSessionId(
+              success.body?.responseBody?.authToken?.sessionId);
 
           final biometricSelected = ref.watch(biometricSelectedProvider);
 
@@ -319,7 +332,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           }
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -350,7 +364,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LoginByFpResponseModel success) async {
         // if (success.status?.isSuccess == true) {
@@ -381,19 +396,23 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   }
 
   Future<void> _storeDeviceToken(String? deviceToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
+    await getIt<AppStorageManager>()
+        .storeString(key: StorageKey.DEVICE_TOKEN, data: deviceToken);
   }
 
   Future<void> _storeAuthToken(String? authToken) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
+    await getIt<AppStorageManager>()
+        .storeString(key: StorageKey.AUTH_TOKEN, data: authToken);
   }
 
   Future<void> _storeSessionId(String? sessionId) async {
-    await getIt<AppStorageManager>().storeString(key: StorageKey.SESSION_ID, data: sessionId);
+    await getIt<AppStorageManager>()
+        .storeString(key: StorageKey.SESSION_ID, data: sessionId);
   }
 
   Future<String> _getDeviceToken() async {
-    final String? authToken = await getIt<AppStorageManager>().getString(key: StorageKey.AUTH_TOKEN);
+    final String? authToken =
+        await getIt<AppStorageManager>().getString(key: StorageKey.AUTH_TOKEN);
 
     return authToken ?? "";
   }
