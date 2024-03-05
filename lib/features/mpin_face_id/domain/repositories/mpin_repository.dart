@@ -14,4 +14,6 @@ abstract class MPINRepository {
       LoginbyMpinRequestModel request, String authToken, String sessionId);
 
   Future<Either<Failure, LoginByFpResponseModel>> loginByFP(LoginByFpRequestModel request);
+
+  Future<Either<Failure, LoginByFpResponseModel>> setFingerPrint(String token);
 }

@@ -4,4 +4,6 @@ import 'package:ekyc/features/profile/data/models/logout/response/logout_respons
 
 abstract class ProfileRepository {
   Future<Either<Failure, LogoutResponseModel>> logout(String token, String sessionId);
+
+  Future<Either<Failure, LogoutResponseModel>> deRegisterFingerprint(String token, String sessionId);
 }
