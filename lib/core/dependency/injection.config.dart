@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i7;
-import 'package:ekyc/core/dependency/injection.dart' as _i33;
+import 'package:ekyc/core/dependency/injection.dart' as _i34;
 import 'package:ekyc/core/helpers/device_information_helper.dart' as _i6;
 import 'package:ekyc/core/helpers/request_generator.dart' as _i10;
 import 'package:ekyc/core/network/network_info.dart' as _i9;
@@ -21,7 +21,7 @@ import 'package:ekyc/features/auth_profile/data/repositories/save_file_repositor
 import 'package:ekyc/features/auth_profile/domain/repositories/save_file_repository.dart'
     as _i19;
 import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart'
-    as _i32;
+    as _i33;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
     as _i13;
 import 'package:ekyc/features/login_otp/domain/repositories/auth_repository.dart'
@@ -37,9 +37,9 @@ import 'package:ekyc/features/mpin_face_id/data/repositories/mpin_repository_imp
 import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart'
     as _i14;
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart'
-    as _i29;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart'
     as _i30;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart'
+    as _i31;
 import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart'
     as _i21;
 import 'package:ekyc/features/mpin_face_id/domain/usecases/set_fingerprint.dart'
@@ -50,13 +50,15 @@ import 'package:ekyc/features/profile/domain/repositories/profile_repository.dar
     as _i16;
 import 'package:ekyc/features/profile/domain/usecases/de_register_fingerprint.dart'
     as _i27;
-import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i31;
+import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart'
+    as _i28;
+import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i32;
 import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
     as _i24;
 import 'package:ekyc/features/splash_screen/domain/repositories/splash_screen_repository.dart'
     as _i23;
 import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
-    as _i28;
+    as _i29;
 import 'package:ekyc/models/app_config/app_config.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -112,18 +114,20 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i26.VerifyMobileNumber(gh<_i12.AuthRepository>()));
     gh.lazySingleton<_i27.DeRegisterFingerprint>(
         () => _i27.DeRegisterFingerprint(gh<_i16.ProfileRepository>()));
-    gh.lazySingleton<_i28.LaunchDetails>(
-        () => _i28.LaunchDetails(gh<_i23.SplashScreenRepository>()));
-    gh.lazySingleton<_i29.LoginByFP>(
-        () => _i29.LoginByFP(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i30.LoginByMpin>(
-        () => _i30.LoginByMpin(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i31.Logout>(
-        () => _i31.Logout(gh<_i16.ProfileRepository>()));
-    gh.lazySingleton<_i32.SaveFile>(
-        () => _i32.SaveFile(gh<_i19.SaveFileRepository>()));
+    gh.lazySingleton<_i28.GetAgentDetails>(
+        () => _i28.GetAgentDetails(gh<_i16.ProfileRepository>()));
+    gh.lazySingleton<_i29.LaunchDetails>(
+        () => _i29.LaunchDetails(gh<_i23.SplashScreenRepository>()));
+    gh.lazySingleton<_i30.LoginByFP>(
+        () => _i30.LoginByFP(gh<_i14.MPINRepository>()));
+    gh.lazySingleton<_i31.LoginByMpin>(
+        () => _i31.LoginByMpin(gh<_i14.MPINRepository>()));
+    gh.lazySingleton<_i32.Logout>(
+        () => _i32.Logout(gh<_i16.ProfileRepository>()));
+    gh.lazySingleton<_i33.SaveFile>(
+        () => _i33.SaveFile(gh<_i19.SaveFileRepository>()));
     return this;
   }
 }
 
-class _$MAUEngineModule extends _i33.MAUEngineModule {}
+class _$MAUEngineModule extends _i34.MAUEngineModule {}

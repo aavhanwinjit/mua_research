@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 
 class HeaderInterceptor extends Interceptor {
   @override
@@ -16,6 +17,9 @@ class HeaderInterceptor extends Interceptor {
     //     .generateRequestModel(apiEndpoint: path, body: options.data);
 
     // options.data = request;
+
+    final headers = options.headers;
+    debugPrint("headers: $headers");
 
     handler.next(options);
   }

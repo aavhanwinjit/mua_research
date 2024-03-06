@@ -12,11 +12,7 @@ class ValidateOTP implements UseCase<ValidateOtpResponseModel, ValidateOtpReques
   ValidateOTP(this.authRepository);
 
   @override
-  Future<Either<Failure, ValidateOtpResponseModel>> call(
-    ValidateOtpRequestModel params, [
-    String? token,
-    String? sessionId,
-  ]) async {
+  Future<Either<Failure, ValidateOtpResponseModel>> call(ValidateOtpRequestModel params) async {
     return await authRepository.validateOTP(params);
   }
 }

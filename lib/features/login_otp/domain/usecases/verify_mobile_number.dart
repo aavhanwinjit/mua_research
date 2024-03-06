@@ -12,11 +12,7 @@ class VerifyMobileNumber implements UseCase<VerifyMobileNumberResponseModel, Ver
   VerifyMobileNumber(this.authRepository);
 
   @override
-  Future<Either<Failure, VerifyMobileNumberResponseModel>> call(
-    VerifyMobileNumberRequestModel params, [
-    String? token,
-    String? sessionId,
-  ]) async {
+  Future<Either<Failure, VerifyMobileNumberResponseModel>> call(VerifyMobileNumberRequestModel params) async {
     return await authRepository.verifyMobileNumber(params);
   }
 }

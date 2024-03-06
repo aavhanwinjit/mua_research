@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'package:ekyc/models/generic_header/header_model.dart';
 import 'package:ekyc/models/status/status_model.dart';
+import 'package:ekyc/models/token_data/token_data.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'resend_otp_response_model.freezed.dart';
@@ -44,15 +45,4 @@ class ResendOtpResponseBody with _$ResendOtpResponseBody {
   }) = _ResendOtpResponseBody;
 
   factory ResendOtpResponseBody.fromJson(Map<String, dynamic> json) => _$ResendOtpResponseBodyFromJson(json);
-}
-
-@freezed
-class TokenData with _$TokenData {
-  const factory TokenData({
-    @JsonKey(name: "token") String? token,
-    @JsonKey(name: "sessionId") String? sessionId,
-    @JsonKey(name: "expiry") int? expiry,
-  }) = _TokenData;
-
-  factory TokenData.fromJson(Map<String, dynamic> json) => _$TokenDataFromJson(json);
 }

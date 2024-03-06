@@ -15,7 +15,7 @@ _$AgentLoginDetailsResponseModelImpl
           emailId: json['emailId'] as String?,
           authToken: json['authToken'] == null
               ? null
-              : AuthToken.fromJson(json['authToken'] as Map<String, dynamic>),
+              : TokenData.fromJson(json['authToken'] as Map<String, dynamic>),
           isMpinExpired: json['isMPINExpired'] as bool?,
           isFirstLogin: json['isFirstLogin'] as bool?,
           deviceToken: json['deviceToken'] as String?,
@@ -52,18 +52,4 @@ Map<String, dynamic> _$$AgentLoginDetailsResponseModelImplToJson(
       'isFPLogin': instance.isFpLogin,
       'authorized': instance.authorized,
       'dailyLimit': instance.dailyLimit,
-    };
-
-_$AuthTokenImpl _$$AuthTokenImplFromJson(Map<String, dynamic> json) =>
-    _$AuthTokenImpl(
-      token: json['token'] as String?,
-      sessionId: json['sessionId'] as String?,
-      expiry: json['expiry'] as int?,
-    );
-
-Map<String, dynamic> _$$AuthTokenImplToJson(_$AuthTokenImpl instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-      'sessionId': instance.sessionId,
-      'expiry': instance.expiry,
     };

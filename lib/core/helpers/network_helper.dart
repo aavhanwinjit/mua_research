@@ -12,7 +12,7 @@ class NetworkHelper {
   static Dio getDioClient({List<Interceptor>? interceptors}) {
     Dio dio = Dio();
 
-    // dio.options.headers[ACCEPT_HEADER] = "application/json";
+    dio.options.headers[ACCEPT_HEADER] = "application/json";
     dio.options.headers[CONTENT_TYPE_HEADER] = "application/json";
 
     if (interceptors != null) {

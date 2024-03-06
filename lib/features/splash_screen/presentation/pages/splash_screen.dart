@@ -1,8 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/helpers/package_info_helper.dart';
-import 'package:ekyc/core/storage/storage_key.dart';
-import 'package:ekyc/core/storage/storage_manager.dart';
+import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
@@ -99,17 +99,18 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
         context.showErrorSnackBar(message: Strings.technicalError);
       },
       (LaunchDetailsResponse success) async {
-        debugPrint("success in splash: $success");
-
         if (success.status?.isSuccess == true) {
-          await getIt<AppStorageManager>().storeMap(
-            key: StorageKey.LAUNCH_DETAILS,
-            data: success.toJson(),
-          );
-
           ref.watch(launchDetailsResponseProvider.notifier).update((state) => success);
 
           if (success.body?.responseBody?.agentData != null) {
+            if (success.body?.responseBody?.tokenData != null) {
+              await _setData(
+                authToken: success.body?.responseBody?.tokenData?.token,
+                sessionId: success.body?.responseBody?.tokenData?.sessionId,
+                deviceToken: success.body?.responseBody?.agentData?.loginData?.deviceToken,
+              );
+            }
+
             context.go(AppRoutes.mpinLoginScreen);
           } else {
             context.go(AppRoutes.loginScreen);
@@ -134,16 +135,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<String> _getDeviceToken() async {
-    final deviceToken = await getIt<AppStorageManager>().getString(key: StorageKey.DEVICE_TOKEN);
+    final String deviceToken = await LocalDataHelper.getDeviceToken();
+    return deviceToken;
 
-    if (deviceToken != null && deviceToken.isNotEmpty) {
-      return deviceToken;
-    }
+    // final deviceToken = await getIt<AppStorageManager>().getString(key: StorageKey.DEVICE_TOKEN);
 
-    final newUniqueDeviceToken = _generateUniqueToken();
+    // if (deviceToken != null && deviceToken.isNotEmpty) {
+    //   return deviceToken;
+    // }
 
-    return newUniqueDeviceToken;
-    // return "aad3935a-7b5c-484a-996a-552779b2355d";
+    // const newUniqueDeviceToken = "";
+    // // final newUniqueDeviceToken = _generateUniqueToken();
+
+    // return newUniqueDeviceToken;
+    // // return "aad3935a-7b5c-484a-996a-552779b2355d";
   }
 
   String _generateUniqueToken() {
@@ -152,5 +157,13 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final uniqueId = uuid.v1();
 
     return uniqueId;
+  }
+
+  Future<void> _setData({required String? authToken, required String? sessionId, required String? deviceToken}) async {
+    await LocalDataHelper.storeAuthToken(authToken);
+    await LocalDataHelper.storeSessionId(sessionId);
+    await LocalDataHelper.storeDeviceToken(deviceToken);
+
+    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }
 }

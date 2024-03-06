@@ -13,6 +13,7 @@ _$LoginByFpRequestModelImpl _$$LoginByFpRequestModelImplFromJson(
       deviceToken: json['deviceToken'] as String?,
       fpDeviceToken: json['fpDeviceToken'] as String?,
       biometricStatus: json['biometricStatus'] as bool?,
+      mobileNo: json['mobileNo'] as String?,
     );
 
 Map<String, dynamic> _$$LoginByFpRequestModelImplToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$LoginByFpRequestModelImplToJson(
       'deviceToken': instance.deviceToken,
       'fpDeviceToken': instance.fpDeviceToken,
       'biometricStatus': instance.biometricStatus,
+      'mobileNo': instance.mobileNo,
     };

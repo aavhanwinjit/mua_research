@@ -203,17 +203,3 @@ Map<String, dynamic> _$$LanguageImplToJson(_$LanguageImpl instance) =>
       'languageCode': instance.languageCode,
       'languageName': instance.languageName,
     };
-
-_$TokenDataImpl _$$TokenDataImplFromJson(Map<String, dynamic> json) =>
-    _$TokenDataImpl(
-      token: json['token'] as String?,
-      sessionId: json['sessionId'] as String?,
-      expiry: json['expiry'] as int?,
-    );
-
-Map<String, dynamic> _$$TokenDataImplToJson(_$TokenDataImpl instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-      'sessionId': instance.sessionId,
-      'expiry': instance.expiry,
-    };

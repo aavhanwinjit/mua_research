@@ -14,11 +14,9 @@ class SaveFileRepositoryImpl implements SaveFileRepository {
   SaveFileRepositoryImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, SaveFileResponseModel>> saveFile(SaveFileRequestModel request, String token) async {
+  Future<Either<Failure, SaveFileResponseModel>> saveFile(SaveFileRequestModel request) async {
     try {
-      final response = await apiService.saveFile(token, request);
-
-      // final response = SaveFileResponseModel.fromJson(SaveFileResponseMocked.jsonResponse);
+      final response = await apiService.saveFile(request);
 
       return Right(response);
     } on DioException catch (e) {

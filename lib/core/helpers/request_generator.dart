@@ -39,7 +39,7 @@ class RequestGenerator {
     required String journeyID,
     required String requestUUID,
     required int index,
-    required String sessionId,
+    required String? sessionId,
     required String timeStamp,
     required String? encodedText,
     required DeviceInfoModel deviceInfoModel,

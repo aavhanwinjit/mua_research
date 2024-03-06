@@ -12,11 +12,7 @@ class LoginByMpin implements UseCase<LoginbyMpinResponseModel, LoginbyMpinReques
   LoginByMpin(this.mpinRepository);
 
   @override
-  Future<Either<Failure, LoginbyMpinResponseModel>> call(
-    LoginbyMpinRequestModel params, [
-    String? token,
-    String? sessionId,
-  ]) async {
-    return await mpinRepository.loginByMPIN(params, token!, sessionId!);
+  Future<Either<Failure, LoginbyMpinResponseModel>> call(LoginbyMpinRequestModel params) async {
+    return await mpinRepository.loginByMPIN(params);
   }
 }

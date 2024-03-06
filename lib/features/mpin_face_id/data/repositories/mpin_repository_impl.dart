@@ -8,6 +8,7 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/log
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/set_fingerprint/response/set_fingerprint_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,8 +32,7 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
-      LoginbyMpinRequestModel request, String authToken, String sessionId) async {
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request) async {
     try {
       final response = await apiService.loginByMpin(request);
       // final response = await apiService.loginByMpin(authToken, sessionId, request);
@@ -55,9 +55,9 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginByFpResponseModel>> setFingerPrint(String token) async {
+  Future<Either<Failure, SetFingerprintResponseModel>> setFingerPrint() async {
     try {
-      final response = await apiService.setFingerPrint(token);
+      final response = await apiService.setFingerPrint();
 
       return Right(response);
     } on DioException catch (e) {

@@ -30,7 +30,7 @@ mixin _$AgentLoginDetailsResponseModel {
   @JsonKey(name: "emailId")
   String? get emailId => throw _privateConstructorUsedError;
   @JsonKey(name: "authToken")
-  AuthToken? get authToken => throw _privateConstructorUsedError;
+  TokenData? get authToken => throw _privateConstructorUsedError;
   @JsonKey(name: "isMPINExpired")
   bool? get isMpinExpired => throw _privateConstructorUsedError;
   @JsonKey(name: "isFirstLogin")
@@ -77,7 +77,7 @@ abstract class $AgentLoginDetailsResponseModelCopyWith<$Res> {
       @JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "emailId") String? emailId,
-      @JsonKey(name: "authToken") AuthToken? authToken,
+      @JsonKey(name: "authToken") TokenData? authToken,
       @JsonKey(name: "isMPINExpired") bool? isMpinExpired,
       @JsonKey(name: "isFirstLogin") bool? isFirstLogin,
       @JsonKey(name: "deviceToken") String? deviceToken,
@@ -92,7 +92,7 @@ abstract class $AgentLoginDetailsResponseModelCopyWith<$Res> {
       @JsonKey(name: "authorized") bool? authorized,
       @JsonKey(name: "dailyLimit") int? dailyLimit});
 
-  $AuthTokenCopyWith<$Res>? get authToken;
+  $TokenDataCopyWith<$Res>? get authToken;
 }
 
 /// @nodoc
@@ -148,7 +148,7 @@ class _$AgentLoginDetailsResponseModelCopyWithImpl<$Res,
       authToken: freezed == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
-              as AuthToken?,
+              as TokenData?,
       isMpinExpired: freezed == isMpinExpired
           ? _value.isMpinExpired
           : isMpinExpired // ignore: cast_nullable_to_non_nullable
@@ -206,12 +206,12 @@ class _$AgentLoginDetailsResponseModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $AuthTokenCopyWith<$Res>? get authToken {
+  $TokenDataCopyWith<$Res>? get authToken {
     if (_value.authToken == null) {
       return null;
     }
 
-    return $AuthTokenCopyWith<$Res>(_value.authToken!, (value) {
+    return $TokenDataCopyWith<$Res>(_value.authToken!, (value) {
       return _then(_value.copyWith(authToken: value) as $Val);
     });
   }
@@ -231,7 +231,7 @@ abstract class _$$AgentLoginDetailsResponseModelImplCopyWith<$Res>
       @JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "emailId") String? emailId,
-      @JsonKey(name: "authToken") AuthToken? authToken,
+      @JsonKey(name: "authToken") TokenData? authToken,
       @JsonKey(name: "isMPINExpired") bool? isMpinExpired,
       @JsonKey(name: "isFirstLogin") bool? isFirstLogin,
       @JsonKey(name: "deviceToken") String? deviceToken,
@@ -247,7 +247,7 @@ abstract class _$$AgentLoginDetailsResponseModelImplCopyWith<$Res>
       @JsonKey(name: "dailyLimit") int? dailyLimit});
 
   @override
-  $AuthTokenCopyWith<$Res>? get authToken;
+  $TokenDataCopyWith<$Res>? get authToken;
 }
 
 /// @nodoc
@@ -302,7 +302,7 @@ class __$$AgentLoginDetailsResponseModelImplCopyWithImpl<$Res>
       authToken: freezed == authToken
           ? _value.authToken
           : authToken // ignore: cast_nullable_to_non_nullable
-              as AuthToken?,
+              as TokenData?,
       isMpinExpired: freezed == isMpinExpired
           ? _value.isMpinExpired
           : isMpinExpired // ignore: cast_nullable_to_non_nullable
@@ -401,7 +401,7 @@ class _$AgentLoginDetailsResponseModelImpl
   final String? emailId;
   @override
   @JsonKey(name: "authToken")
-  final AuthToken? authToken;
+  final TokenData? authToken;
   @override
   @JsonKey(name: "isMPINExpired")
   final bool? isMpinExpired;
@@ -533,7 +533,7 @@ abstract class _AgentLoginDetailsResponseModel
           @JsonKey(name: "agentName") final String? agentName,
           @JsonKey(name: "mobileNumber") final String? mobileNumber,
           @JsonKey(name: "emailId") final String? emailId,
-          @JsonKey(name: "authToken") final AuthToken? authToken,
+          @JsonKey(name: "authToken") final TokenData? authToken,
           @JsonKey(name: "isMPINExpired") final bool? isMpinExpired,
           @JsonKey(name: "isFirstLogin") final bool? isFirstLogin,
           @JsonKey(name: "deviceToken") final String? deviceToken,
@@ -566,7 +566,7 @@ abstract class _AgentLoginDetailsResponseModel
   String? get emailId;
   @override
   @JsonKey(name: "authToken")
-  AuthToken? get authToken;
+  TokenData? get authToken;
   @override
   @JsonKey(name: "isMPINExpired")
   bool? get isMpinExpired;
@@ -611,193 +611,4 @@ abstract class _AgentLoginDetailsResponseModel
   _$$AgentLoginDetailsResponseModelImplCopyWith<
           _$AgentLoginDetailsResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
-}
-
-AuthToken _$AuthTokenFromJson(Map<String, dynamic> json) {
-  return _AuthToken.fromJson(json);
-}
-
-/// @nodoc
-mixin _$AuthToken {
-  @JsonKey(name: "token")
-  String? get token => throw _privateConstructorUsedError;
-  @JsonKey(name: "sessionId")
-  String? get sessionId => throw _privateConstructorUsedError;
-  @JsonKey(name: "expiry")
-  int? get expiry => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $AuthTokenCopyWith<AuthToken> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $AuthTokenCopyWith<$Res> {
-  factory $AuthTokenCopyWith(AuthToken value, $Res Function(AuthToken) then) =
-      _$AuthTokenCopyWithImpl<$Res, AuthToken>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: "token") String? token,
-      @JsonKey(name: "sessionId") String? sessionId,
-      @JsonKey(name: "expiry") int? expiry});
-}
-
-/// @nodoc
-class _$AuthTokenCopyWithImpl<$Res, $Val extends AuthToken>
-    implements $AuthTokenCopyWith<$Res> {
-  _$AuthTokenCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = freezed,
-    Object? sessionId = freezed,
-    Object? expiry = freezed,
-  }) {
-    return _then(_value.copyWith(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sessionId: freezed == sessionId
-          ? _value.sessionId
-          : sessionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expiry: freezed == expiry
-          ? _value.expiry
-          : expiry // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$AuthTokenImplCopyWith<$Res>
-    implements $AuthTokenCopyWith<$Res> {
-  factory _$$AuthTokenImplCopyWith(
-          _$AuthTokenImpl value, $Res Function(_$AuthTokenImpl) then) =
-      __$$AuthTokenImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: "token") String? token,
-      @JsonKey(name: "sessionId") String? sessionId,
-      @JsonKey(name: "expiry") int? expiry});
-}
-
-/// @nodoc
-class __$$AuthTokenImplCopyWithImpl<$Res>
-    extends _$AuthTokenCopyWithImpl<$Res, _$AuthTokenImpl>
-    implements _$$AuthTokenImplCopyWith<$Res> {
-  __$$AuthTokenImplCopyWithImpl(
-      _$AuthTokenImpl _value, $Res Function(_$AuthTokenImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = freezed,
-    Object? sessionId = freezed,
-    Object? expiry = freezed,
-  }) {
-    return _then(_$AuthTokenImpl(
-      token: freezed == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
-      sessionId: freezed == sessionId
-          ? _value.sessionId
-          : sessionId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      expiry: freezed == expiry
-          ? _value.expiry
-          : expiry // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$AuthTokenImpl implements _AuthToken {
-  const _$AuthTokenImpl(
-      {@JsonKey(name: "token") this.token,
-      @JsonKey(name: "sessionId") this.sessionId,
-      @JsonKey(name: "expiry") this.expiry});
-
-  factory _$AuthTokenImpl.fromJson(Map<String, dynamic> json) =>
-      _$$AuthTokenImplFromJson(json);
-
-  @override
-  @JsonKey(name: "token")
-  final String? token;
-  @override
-  @JsonKey(name: "sessionId")
-  final String? sessionId;
-  @override
-  @JsonKey(name: "expiry")
-  final int? expiry;
-
-  @override
-  String toString() {
-    return 'AuthToken(token: $token, sessionId: $sessionId, expiry: $expiry)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$AuthTokenImpl &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.sessionId, sessionId) ||
-                other.sessionId == sessionId) &&
-            (identical(other.expiry, expiry) || other.expiry == expiry));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, token, sessionId, expiry);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$AuthTokenImplCopyWith<_$AuthTokenImpl> get copyWith =>
-      __$$AuthTokenImplCopyWithImpl<_$AuthTokenImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$AuthTokenImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _AuthToken implements AuthToken {
-  const factory _AuthToken(
-      {@JsonKey(name: "token") final String? token,
-      @JsonKey(name: "sessionId") final String? sessionId,
-      @JsonKey(name: "expiry") final int? expiry}) = _$AuthTokenImpl;
-
-  factory _AuthToken.fromJson(Map<String, dynamic> json) =
-      _$AuthTokenImpl.fromJson;
-
-  @override
-  @JsonKey(name: "token")
-  String? get token;
-  @override
-  @JsonKey(name: "sessionId")
-  String? get sessionId;
-  @override
-  @JsonKey(name: "expiry")
-  int? get expiry;
-  @override
-  @JsonKey(ignore: true)
-  _$$AuthTokenImplCopyWith<_$AuthTokenImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
