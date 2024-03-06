@@ -41,17 +41,6 @@ class EncryptionHelper {
       required String serviceRequestURL}) async {
     String? encodedText;
 
-    // String serviceRequestId = serviceRequestURL.substring(1);
-    // String appVersion = deviceInfoModel.appVersion!;
-    // String platform = deviceInfoModel.platform!;
-    // String modelName = deviceInfoModel.model!;
-    // String osVersion = deviceInfoModel.osVersion!;
-    // String ip = deviceInfoModel.ipAddress!;
-    // String customer = "Agent";
-    // String journeyId = generateRandomAlphaNumeric();
-    // String? channelId;
-    // String languageId = "1";
-
     String sequence = "3210";
     String deviceId = deviceInfoModel.deviceId!;
     String requestUUID = generateRandomAlphaNumeric();

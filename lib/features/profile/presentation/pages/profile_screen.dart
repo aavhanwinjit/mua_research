@@ -1,4 +1,3 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
@@ -7,6 +6,7 @@ import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
+import 'package:ekyc/features/profile/presentation/widgets/signature_widget.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +137,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _nameImageWidget(),
+          _nameImageWidget(agentDetails),
           SizedBox(height: 24.h),
           _infoTile(
             title: Strings.email,
@@ -146,81 +146,32 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.mobileNo,
-            value: agentDetails?.mobileNumber ?? "",
+            value: agentDetails?.mobileNumber ?? "-",
             // value: "+230 5 123 4567",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.address,
-            value: agentDetails?.address ?? "",
+            value: agentDetails?.address ?? "-",
             // value: "Sand Tours Ltd Temple Rd,Quartier Militaire,Mauritius",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.agencyName,
-            value: agentDetails?.agencyName ?? "",
+            value: agentDetails?.agencyName ?? "-",
             // value: "Head office",
           ),
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.companyName,
-            value:  agentDetails?.companies ?? "",
+            value: agentDetails?.companies ?? "-",
             // value: "Mauritius Union Assurance Cy Ltd",
             fontWeight: FontWeight.w600,
           ),
           SizedBox(height: 24.h),
-          _signatureWidget(),
+          const SignatureContainer(),
         ],
       ),
-    );
-  }
-
-  Widget _signatureWidget() {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              Strings.signature,
-              style: TextStyle(
-                color: textGrayColor2,
-                fontSize: 14.sp,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                _changeSignature();
-              },
-              child: const Icon(
-                Icons.chevron_right,
-                color: textGrayColor2,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(height: 8.h),
-        DottedBorder(
-          color: borderColor,
-          radius: const Radius.circular(7),
-          borderType: BorderType.RRect,
-          dashPattern: const <double>[8, 4],
-          child: Center(
-            child: Image.asset(
-              ImageConstants.signatureImage,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _changeSignature() {
-    ActionSheetHelper.showSignatureSourceActionSheet(
-      context,
-      onPressed: () {
-        pickSignature();
-      },
     );
   }
 
@@ -230,21 +181,6 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
       onCameraPressed: pickProfileImageFromCamera,
       onLibraryPressed: pickProfileImageFromGallery,
     );
-  }
-
-  void pickSignature() async {
-    XFile? result = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 1500,
-      maxWidth: 1500,
-    );
-
-    if (result != null) {
-      // final list = await result.readAsBytes();
-      // ref.read(signatureProvider.notifier).update((state) => list);
-
-      context.pop();
-    }
   }
 
   void pickProfileImageFromGallery() async {
@@ -301,7 +237,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
     );
   }
 
-  Widget _nameImageWidget() {
+  Widget _nameImageWidget(GetAgentDetailsResponseBody? agentDetails) {
     return InkWell(
       onTap: () {
         _changeProfileImage();
@@ -309,7 +245,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
       child: Row(
         children: [
           CustomProfileImageWidget(
-            userName: "Arjun Kumar",
+            userName: agentDetails?.agentName ?? "NA",
             size: 62.w,
             fontSize: 24.sp,
           ),
@@ -319,7 +255,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Arjun Kumar",
+                  agentDetails?.agentName ?? "-",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 22.sp,
@@ -328,7 +264,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
                 ),
                 SizedBox(height: 4.h),
                 Text(
-                  "Assistant Branch Manager",
+                  agentDetails?.designation ?? "-",
                   style: TextStyle(
                     color: textGrayColor2,
                     fontSize: 12.sp,

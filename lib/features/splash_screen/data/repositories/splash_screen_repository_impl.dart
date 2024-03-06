@@ -20,10 +20,6 @@ class SplashScreenRepositoryImpl implements SplashScreenRepository {
     try {
       final response = await apiService.launchDetails(loginRequest);
 
-      // final response = await ApiService2().launchDetails(request: loginRequest);
-
-      // final response = LaunchDetailsResponse.fromJson(LaunchDetailsResponseMocked.jsonResponse);
-
       return Right(response);
     } on DioException catch (e) {
       return Left(ServerFailure(e));
