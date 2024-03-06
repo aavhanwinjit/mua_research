@@ -153,7 +153,6 @@ class ApiService {
   }
 }
 
-
 // import 'package:dio/dio.dart';
 // import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
 // import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
@@ -226,9 +225,7 @@ class ApiService {
 //   Future<DeRegisterFingerprintResponseModel> deRegisterFingerprint();
 
 //   @POST(LOGIN_BY_MPIN)
-//   Future<LoginbyMpinResponseModel> loginByMpin(
-//     @Body() LoginbyMpinRequestModel request,
-//   );
+//   Future<LoginbyMpinResponseModel> loginByMpin(@Body() LoginbyMpinRequestModel request);
 
 //   @POST(LOGIN_BY_BIOMETRIC)
 //   @retrofit.Headers(<String, dynamic>{'Authorization': true})

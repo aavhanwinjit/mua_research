@@ -363,7 +363,14 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           pin = "";
           wrongPin = true;
           setState(() {});
-        } else {}
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+          ref.watch(loginPINProvider.notifier).update((state) => "");
+          pin = "";
+          setState(() {});
+        }
       },
     );
   }
@@ -412,6 +419,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
             deviceToken: success.body?.responseBody?.deviceToken,
             authToken: success.body?.responseBody?.authToken?.token,
             sessionId: success.body?.responseBody?.authToken?.sessionId,
+            fpDeviceToken: success.body?.responseBody?.fpDeviceToken,
           );
 
           context.go(AppRoutes.dashboardScreen);
@@ -430,10 +438,19 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     context.pushNamed(AppRoutes.loginScreen);
   }
 
-  Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
+  Future<void> _setData({
+    required String? deviceToken,
+    required String? authToken,
+    required String? sessionId,
+    String? fpDeviceToken,
+  }) async {
     await LocalDataHelper.storeDeviceToken(deviceToken);
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
+
+    if (fpDeviceToken != null) {
+      await LocalDataHelper.storeFPToken(fpDeviceToken);
+    }
 
     ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }

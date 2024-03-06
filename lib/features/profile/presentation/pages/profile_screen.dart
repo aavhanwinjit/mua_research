@@ -274,7 +274,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
               ],
             ),
           ),
-          const Icon(Icons.chevron_right),
+          // const Icon(Icons.chevron_right),
         ],
       ),
     );
