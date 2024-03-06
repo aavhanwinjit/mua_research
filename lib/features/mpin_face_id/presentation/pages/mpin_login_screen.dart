@@ -107,17 +107,22 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
   }
 
   Widget _useBiometricButton() {
-    return TextButton(
-      onPressed: _biometricAuthentication,
-      child: const Text(
-        Strings.useTouchId,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          decoration: TextDecoration.underline,
-          decorationColor: primaryColor,
-        ),
-      ),
-    );
+    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
+    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
+
+    return isFPLogin
+        ? TextButton(
+            onPressed: _biometricAuthentication,
+            child: const Text(
+              Strings.useTouchId,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                decorationColor: primaryColor,
+              ),
+            ),
+          )
+        : const SizedBox();
   }
 
   Widget _keypadLastRow() {
