@@ -5,10 +5,10 @@ import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
+import 'package:ekyc/features/profile/presentation/widgets/biometric_switch_tile.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/features/profile/presentation/widgets/signature_widget.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -63,16 +63,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
       ),
       child: Column(
         children: [
-          OptionsTile(
-            icon: ImageConstants.fingerPrintIcon,
-            title: Strings.screenLock,
-            subtitle: Strings.biometricAndScreenlock,
-            trailing: CupertinoSwitch(
-              value: true,
-              activeColor: iosSwitchColor,
-              onChanged: (bool? value) {},
-            ),
-          ),
+          const BiometricSwitchTile(),
           const Divider(
             height: 0,
             color: borderColor,

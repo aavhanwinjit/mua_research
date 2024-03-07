@@ -1,18 +1,9 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
-import 'package:ekyc/core/helpers/local_data_helper.dart';
-import 'package:ekyc/core/providers/session_id_provider.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
-import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/set_fingerprint/response/set_fingerprint_response_model.dart';
-import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart';
-import 'package:ekyc/features/mpin_face_id/domain/usecases/set_fingerprint.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/registration_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
+import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +15,7 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin, RegistrationMixin {
   String pin = "";
   bool successVal = false;
 
@@ -122,7 +113,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                         if (pin.length == 6) {
                           //navigate
                           Future.delayed(const Duration(seconds: 2), () {
-                            _setAgentMPIN();
+                            setAgentMPIN(
+                              context: context,
+                              ref: ref,
+                              onSuccess: () {
+                                successVal = true;
+                                setState(() {});
+                              },
+                              biometricAuth: _biometricAuthentication,
+                            );
                           });
                         }
                         // if (pin.length < 6) {
@@ -256,7 +255,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                     if (pin.length == 6) {
                       //navigate
                       Future.delayed(const Duration(seconds: 2), () {
-                        _setAgentMPIN();
+                        setAgentMPIN(
+                          context: context,
+                          ref: ref,
+                          onSuccess: () {
+                            successVal = true;
+                            setState(() {});
+                          },
+                          biometricAuth: _biometricAuthentication,
+                        );
                       });
                     }
                   },
@@ -279,118 +286,39 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
     );
   }
 
-  void _setAgentMPIN() async {
-    final validateOTPResponse = ref.read(validateOTPResponseProvider);
-    final authProfileResponse = ref.read(authProfileProvider);
-
-    SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
-      confirmMpin: ref.read(confirmPINProvider),
-      mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
-      mPIN: ref.read(createPINProvider),
-      signaturePath: authProfileResponse?.body?.responseBody?.fileName,
-    );
-
-    debugPrint("request in set agent mpin.to json: ${request.toJson()}");
-
-    final response = await getIt<SetAgentMPIN>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-      },
-      (SetAgentMpinResponseModel success) async {
-        if (success.status?.isSuccess == true) {
-          successVal = true;
-          setState(() {});
-          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
-
-          // store the auth token
-          await _setData(
-            deviceToken: success.body?.responseBody?.deviceToken,
-            authToken: success.body?.responseBody?.authToken?.token,
-            sessionId: success.body?.responseBody?.authToken?.sessionId,
-          );
-
-          final biometricSelected = ref.watch(biometricSelectedProvider);
-
-          if (biometricSelected) {
-            _biometricAuthentication();
-          } else {
-            context.go(AppRoutes.onboardSuccessScreen);
-          }
-        } else {
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
-      },
-    );
-  }
-
   Future<void> _biometricAuthentication() async {
-    await _setFingerPrint();
+    await setFingerPrint(
+      context: context,
+      ref: ref,
+      onSuccess: () {
+        successVal = true;
+        setState(() {});
+      },
+      successNavigation: () {
+        ref.watch(isFPLoginProvider.notifier).update((state) => true);
+
+        context.pushNamed(AppRoutes.onboardSuccessScreen);
+      },
+    );
 
     // await authenticateWithBiometric(
     //   onAuthenticated: () async {
-    //     await _setFingerPrint();
-
-    //     // context.pushNamed(AppRoutes.onboardSuccessScreen);
+    //     await setFingerPrint(
+    //       context: context,
+    //       ref: ref,
+    //       onSuccess: () {
+    //         successVal = true;
+    //         setState(() {});
+    //       },
+    //       successNavigation: () {
+    //         context.pushNamed(AppRoutes.onboardSuccessScreen);
+    //       },
+    //     );
     //   },
     //   onAuthenticationFailure: (String error) {
     //     context.pushNamed(AppRoutes.onboardSuccessScreen);
     //     context.showErrorSnackBar(message: error);
     //   },
     // );
-  }
-
-  Future<void> _setFingerPrint() async {
-    final response = await getIt<SetFingerPrint>().call(null);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-      },
-      (SetFingerprintResponseModel success) async {
-        if (success.status?.isSuccess == true) {
-          successVal = true;
-          setState(() {});
-
-          context.showSnackBar(message: success.body?.responseBody?.data?.message ?? "");
-
-          // store the auth token
-          await _setData(
-            deviceToken: success.body?.responseBody?.data?.data?.deviceToken,
-            authToken: success.body?.responseBody?.tokenData?.token,
-            sessionId: success.body?.responseBody?.tokenData?.sessionId,
-            fpToken: success.body?.responseBody?.data?.data?.id,
-          );
-
-          context.pushNamed(AppRoutes.onboardSuccessScreen);
-        } else {
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
-      },
-    );
-  }
-
-  Future<void> _setData({
-    required String? deviceToken,
-    required String? authToken,
-    required String? sessionId,
-    String? fpToken,
-  }) async {
-    await LocalDataHelper.storeDeviceToken(deviceToken);
-    await LocalDataHelper.storeAuthToken(authToken);
-    await LocalDataHelper.storeSessionId(sessionId);
-
-    if (fpToken != null) {
-      await LocalDataHelper.storeFPToken(fpToken);
-    }
-
-    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }
 }

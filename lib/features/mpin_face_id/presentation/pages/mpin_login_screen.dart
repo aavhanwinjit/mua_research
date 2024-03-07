@@ -353,6 +353,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           // ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
           ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
 
+          debugPrint("success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
+
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
             authToken: success.body?.responseBody?.authToken?.token,
@@ -418,7 +420,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
       },
       (LoginByFpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(loginByFPResponseProvider.notifier).update((state) => success);
+          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
+
+          debugPrint("success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,

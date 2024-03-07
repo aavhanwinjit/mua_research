@@ -49,6 +49,7 @@ class Strings {
   static const String done = "Done";
   static const String technicalError = "Technical error. Please try again.";
   static const String hi = "Hi";
+  static const String version = "Version";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
