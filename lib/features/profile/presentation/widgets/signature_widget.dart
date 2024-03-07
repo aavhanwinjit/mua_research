@@ -1,6 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
+import 'package:ekyc/core/helpers/signature_upload_confirmation_dialog_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
 import 'package:ekyc/features/profile/presentation/mixins/signature_mixin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,6 +71,19 @@ class SignatureWidgetState extends ConsumerState<SignatureContainer> with Signat
           ref: ref,
           onSuccess: () {
             // confirmation dialog
+            SignatureUploadConfirmationDialogHelper.showSignatureUploadDialog(
+              context,
+              onConfirm: () async {
+                await uploadSignature(
+                  context: context,
+                  ref: ref,
+                  onSuccess: (SaveFileResponseModel success) {
+                    context.showSnackBar(message: success.status?.message ?? "");
+                    context.pop();
+                  },
+                );
+              },
+            );
           },
         );
       },
