@@ -177,7 +177,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                     showResendOption = true;
                   });
                 },
-                seconds: 10,
+                seconds: 30,
                 timerKey: ValueKey(retryCount),
               )
             : TextButton.icon(
