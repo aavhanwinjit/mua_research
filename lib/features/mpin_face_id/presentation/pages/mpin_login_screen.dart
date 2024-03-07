@@ -12,7 +12,6 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/lo
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/backspace_button.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/masked_pin_textfield.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/pin_keypad.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
