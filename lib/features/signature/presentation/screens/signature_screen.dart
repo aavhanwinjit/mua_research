@@ -1,6 +1,8 @@
 import 'dart:ui' as ui;
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
+import 'package:ekyc/features/profile/presentation/mixins/signature_mixin.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:flutter/material.dart';
@@ -10,13 +12,18 @@ import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 class SignatureScreen extends ConsumerStatefulWidget {
-  const SignatureScreen({super.key});
+  final bool? uploadFunction;
+
+  const SignatureScreen({
+    super.key,
+    this.uploadFunction = false,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SignatureScreenState();
 }
 
-class _SignatureScreenState extends ConsumerState<SignatureScreen> {
+class _SignatureScreenState extends ConsumerState<SignatureScreen> with SignatureMixin {
   final GlobalKey<SfSignaturePadState> signatureGlobalKey = GlobalKey();
 
   @override
@@ -93,6 +100,17 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> {
     final Uint8List list = bytes!.buffer.asUint8List();
 
     ref.read(signatureProvider.notifier).update((state) => list);
+
+    if (widget.uploadFunction == true) {
+      // upload Signature api call
+      await uploadSignature(
+        context: context,
+        ref: ref,
+        onSuccess: (SaveFileResponseModel success) {
+          
+        },
+      );
+    }
 
     context.pop();
   }

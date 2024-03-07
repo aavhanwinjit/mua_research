@@ -151,7 +151,9 @@ final GoRouter router = GoRouter(
       path: AppRoutes.signatureScreen,
       name: AppRoutes.signatureScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const SignatureScreen();
+        final bool? uploadFunction = state.extra as bool?;
+
+        return SignatureScreen(uploadFunction: uploadFunction);
       },
     ),
     GoRoute(
