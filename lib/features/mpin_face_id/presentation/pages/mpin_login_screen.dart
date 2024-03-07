@@ -12,6 +12,9 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/lo
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/backspace_button.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/masked_pin_textfield.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/pin_keypad.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +29,8 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
   ConsumerState<MPINLoginScreen> createState() => _CreatePinScreenState();
 }
 
-class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with BiometricAuthMixin {
-  String pin = "";
+class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
+    with BiometricAuthMixin {
   bool wrongPin = false;
 
   @override
@@ -40,24 +43,26 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _title(),
-            Column(
-              children: [
-                _subHeading(),
-                SizedBox(height: 24.h),
-                _maskedPinTextField(),
-                if (wrongPin) ...[
-                  SizedBox(height: 12.h),
-                  _wrongPinText(),
-                  _forgotPinButton(),
-                ],
-                _useBiometricButton(),
-              ],
-            ),
-            Column(
-              children: [
-                _pinKeypad(),
-                _keypadLastRow(),
-              ],
+            _subHeading(),
+            SizedBox(height: 24.h),
+            MaskedPinTextfield(provider: loginPINProvider),
+            if (wrongPin) ...[
+              SizedBox(height: 12.h),
+              _wrongPinText(),
+              _forgotPinButton(),
+            ],
+            _useBiometricButton(),
+            //PIN keypad
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+              ),
+              child: PinKeypad(
+                provider: loginPINProvider,
+                callback: () => Future.delayed(const Duration(seconds: 2), () {
+                  _loginByMPIN();
+                }),
+              ),
             ),
           ],
         ),
@@ -67,7 +72,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
 
   Widget _title() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final name = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
+    final name =
+        launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
 
     return Text(
       "${Strings.hi} ${name ?? "-"}",
@@ -135,80 +141,28 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
             child: Container(),
           ),
         ),
+        //Zero button
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 20,
           ),
-          child: Container(
-            height: 70,
-            width: 70,
-            decoration: BoxDecoration(
-              color: primaryBlueColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: MaterialButton(
-              onPressed: () {
-                if (pin.length < 6) {
-                  setState(() {
-                    pin += "0";
-                  });
-
-                  debugPrint(pin);
-                }
-
-                ref.watch(loginPINProvider.notifier).update((state) => pin);
-
-                if (pin.length == 6) {
-                  Future.delayed(const Duration(seconds: 2), () {
-                    _loginByMPIN();
-                  });
-                }
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Text(
-                "0",
-                style: TextStyle(
-                  color: primaryBlueColor,
-                  fontSize: 36.sp,
-                ),
-              ),
-            ),
+          child: ZeroButton(
+            provider: loginPINProvider,
+            callback: () {
+              Future.delayed(const Duration(seconds: 2), () {
+                _loginByMPIN();
+              });
+            },
           ),
         ),
+        //Backspace button
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 20,
             vertical: 20,
           ),
-          child: Container(
-            height: 70,
-            width: 70,
-            decoration: BoxDecoration(
-              color: primaryBlueColor.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(100),
-            ),
-            child: MaterialButton(
-              onPressed: () {
-                if (pin.isNotEmpty) {
-                  setState(() {
-                    pin = pin.substring(0, pin.length - 1);
-                  });
-                  debugPrint(pin);
-                }
-                ref.watch(loginPINProvider.notifier).update((state) => pin);
-              },
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: const Icon(
-                Icons.backspace,
-                color: primaryBlueColor,
-              ),
-            ),
-          ),
+          child: BackspaceButton(provider: loginPINProvider),
         ),
       ],
     );
@@ -232,107 +186,22 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     );
   }
 
-  Widget _maskedPinTextField() {
-    final String pin = ref.watch(loginPINProvider);
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(
-        6,
-        (index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 12,
-              width: 12,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: index + 1 <= pin.length ? primaryBlueColor : white,
-                border: Border.all(
-                  color: primaryBlueColor,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _pinKeypad() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-      ),
-      child: Center(
-        child: Wrap(
-          alignment: WrapAlignment.center,
-          runAlignment: WrapAlignment.spaceBetween,
-          crossAxisAlignment: WrapCrossAlignment.center,
-          children: List.generate(
-            9,
-            (index) => Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-                vertical: 20,
-              ),
-              child: Container(
-                height: 70,
-                width: 70,
-                decoration: BoxDecoration(
-                  color: primaryBlueColor.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(100),
-                ),
-                child: MaterialButton(
-                  onPressed: () {
-                    if (pin.length < 6) {
-                      setState(() {
-                        pin += "${index + 1}";
-                      });
-
-                      debugPrint(pin);
-                    }
-
-                    ref.watch(loginPINProvider.notifier).update((state) => pin);
-
-                    if (pin.length == 6) {
-                      Future.delayed(const Duration(seconds: 2), () {
-                        _loginByMPIN();
-                      });
-                    }
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Text(
-                    "${index + 1}",
-                    style: TextStyle(
-                      color: primaryBlueColor,
-                      fontSize: 36.sp,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   void _loginByMPIN() async {
-    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo =
+        await DeviceInformationHelper().generateDeviceInformation();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
 
-    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
+    final String mobileNo = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
+        "";
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
 
     LoginbyMpinRequestModel request = LoginbyMpinRequestModel(
       deviceId: deviceInfo.deviceId,
       deviceToken: deviceToken,
-      mPin: pin,
+      mPin: ref.watch(loginPINProvider),
       mobileNo: mobileNo,
     );
 
@@ -341,12 +210,15 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LoginbyMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
-          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
+          ref
+              .read(agentLoginDetailsProvider.notifier)
+              .update((state) => success.body?.responseBody);
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
@@ -355,12 +227,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           );
 
           context.go(AppRoutes.dashboardScreen);
-        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.inValidPin) {
+        } else if (success.status?.isSuccess == false &&
+            success.status?.statusCode == ApiErrorCodes.inValidPin) {
           context.showErrorSnackBar(
             message: Strings.pinAuthenticationFailed,
           );
           ref.watch(loginPINProvider.notifier).update((state) => "");
-          pin = "";
           wrongPin = true;
           setState(() {});
         } else {}
@@ -381,13 +253,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
   }
 
   void _loginByFP() async {
-    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo =
+        await DeviceInformationHelper().generateDeviceInformation();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
     final String fpToken = await LocalDataHelper.getFPToken();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
+    final String mobileNo = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
+        "";
 
     LoginByFpRequestModel request = LoginByFpRequestModel(
       deviceId: deviceInfo.deviceId,
@@ -402,11 +277,14 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LoginByFpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(loginByFPResponseProvider.notifier).update((state) => success);
+          ref
+              .read(loginByFPResponseProvider.notifier)
+              .update((state) => success);
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
@@ -417,7 +295,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
           context.go(AppRoutes.dashboardScreen);
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -430,7 +309,10 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen> with Biometri
     context.pushNamed(AppRoutes.loginScreen);
   }
 
-  Future<void> _setData({required String? deviceToken, required String? authToken, required String? sessionId}) async {
+  Future<void> _setData(
+      {required String? deviceToken,
+      required String? authToken,
+      required String? sessionId}) async {
     await LocalDataHelper.storeDeviceToken(deviceToken);
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
