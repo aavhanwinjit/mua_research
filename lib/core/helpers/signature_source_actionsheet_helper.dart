@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 class ActionSheetHelper {
   static void showSignatureSourceActionSheet(
     BuildContext context, {
-    required Function() onPressed,
+    required Function() onDigitalSignaturePressed,
+    required Function() onPickSignatureImagePressed,
   }) {
     showCupertinoModalPopup<void>(
       context: context,
@@ -25,10 +26,7 @@ class ActionSheetHelper {
         ),
         actions: <CupertinoActionSheetAction>[
           CupertinoActionSheetAction(
-            onPressed: () {
-              context.pop();
-              context.pushNamed(AppRoutes.signatureScreen);
-            },
+            onPressed: onDigitalSignaturePressed,
             child: const Text(
               Strings.digitalSignature,
               style: TextStyle(
@@ -37,7 +35,7 @@ class ActionSheetHelper {
             ),
           ),
           CupertinoActionSheetAction(
-            onPressed: onPressed,
+            onPressed: onPickSignatureImagePressed,
             child: const Text(
               Strings.uploadSignatureImage,
               style: TextStyle(

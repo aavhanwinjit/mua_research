@@ -42,7 +42,10 @@ class EncryptionHelper {
     String? encodedText;
 
     String sequence = "3210";
+
+    // String deviceId = "918794c4-a479-36ad-949d-8c631c260a6b";
     String deviceId = deviceInfoModel.deviceId!;
+
     String requestUUID = generateRandomAlphaNumeric();
 
     // final container = ProviderContainer();
@@ -57,6 +60,7 @@ class EncryptionHelper {
     String sessionId = await LocalDataHelper.getSessionId();
 
     final String timeStamp = DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
+
     final index = Random().nextInt(15);
 
     // if (plainData != null) {
