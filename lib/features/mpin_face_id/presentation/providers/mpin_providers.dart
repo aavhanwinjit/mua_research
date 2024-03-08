@@ -12,3 +12,6 @@ final loginPINProvider = StateProvider<String>((ref) => '');
 final biometricSelectedProvider = StateProvider<bool>((ref) => false);
 
 final forgotPasswordSelectedProvider = StateProvider<bool>((ref) => false);
+
+final oldPINProvider = StateProvider<String>((ref) => '');
+

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'resend_otp_response_model.dart';
+part of 'verify_mpin_response_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,47 +14,47 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-ResendOtpResponseModel _$ResendOtpResponseModelFromJson(
+VerifyMPINResponseModel _$VerifyMPINResponseModelFromJson(
     Map<String, dynamic> json) {
-  return _ResendOtpResponseModel.fromJson(json);
+  return _VerifyMPINResponseModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ResendOtpResponseModel {
+mixin _$VerifyMPINResponseModel {
   @JsonKey(name: "h")
   HeaderModel? get header => throw _privateConstructorUsedError;
   @JsonKey(name: "b")
-  ResendOtpData? get body => throw _privateConstructorUsedError;
+  VerifyMPINData? get body => throw _privateConstructorUsedError;
   @JsonKey(name: "s")
   StatusModel? get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResendOtpResponseModelCopyWith<ResendOtpResponseModel> get copyWith =>
+  $VerifyMPINResponseModelCopyWith<VerifyMPINResponseModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResendOtpResponseModelCopyWith<$Res> {
-  factory $ResendOtpResponseModelCopyWith(ResendOtpResponseModel value,
-          $Res Function(ResendOtpResponseModel) then) =
-      _$ResendOtpResponseModelCopyWithImpl<$Res, ResendOtpResponseModel>;
+abstract class $VerifyMPINResponseModelCopyWith<$Res> {
+  factory $VerifyMPINResponseModelCopyWith(VerifyMPINResponseModel value,
+          $Res Function(VerifyMPINResponseModel) then) =
+      _$VerifyMPINResponseModelCopyWithImpl<$Res, VerifyMPINResponseModel>;
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") ResendOtpData? body,
+      @JsonKey(name: "b") VerifyMPINData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   $HeaderModelCopyWith<$Res>? get header;
-  $ResendOtpDataCopyWith<$Res>? get body;
+  $VerifyMPINDataCopyWith<$Res>? get body;
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class _$ResendOtpResponseModelCopyWithImpl<$Res,
-        $Val extends ResendOtpResponseModel>
-    implements $ResendOtpResponseModelCopyWith<$Res> {
-  _$ResendOtpResponseModelCopyWithImpl(this._value, this._then);
+class _$VerifyMPINResponseModelCopyWithImpl<$Res,
+        $Val extends VerifyMPINResponseModel>
+    implements $VerifyMPINResponseModelCopyWith<$Res> {
+  _$VerifyMPINResponseModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -76,7 +76,7 @@ class _$ResendOtpResponseModelCopyWithImpl<$Res,
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as ResendOtpData?,
+              as VerifyMPINData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -98,12 +98,12 @@ class _$ResendOtpResponseModelCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $ResendOtpDataCopyWith<$Res>? get body {
+  $VerifyMPINDataCopyWith<$Res>? get body {
     if (_value.body == null) {
       return null;
     }
 
-    return $ResendOtpDataCopyWith<$Res>(_value.body!, (value) {
+    return $VerifyMPINDataCopyWith<$Res>(_value.body!, (value) {
       return _then(_value.copyWith(body: value) as $Val);
     });
   }
@@ -122,35 +122,35 @@ class _$ResendOtpResponseModelCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ResendOtpResponseModelImplCopyWith<$Res>
-    implements $ResendOtpResponseModelCopyWith<$Res> {
-  factory _$$ResendOtpResponseModelImplCopyWith(
-          _$ResendOtpResponseModelImpl value,
-          $Res Function(_$ResendOtpResponseModelImpl) then) =
-      __$$ResendOtpResponseModelImplCopyWithImpl<$Res>;
+abstract class _$$VerifyMPINResponseModelImplCopyWith<$Res>
+    implements $VerifyMPINResponseModelCopyWith<$Res> {
+  factory _$$VerifyMPINResponseModelImplCopyWith(
+          _$VerifyMPINResponseModelImpl value,
+          $Res Function(_$VerifyMPINResponseModelImpl) then) =
+      __$$VerifyMPINResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: "h") HeaderModel? header,
-      @JsonKey(name: "b") ResendOtpData? body,
+      @JsonKey(name: "b") VerifyMPINData? body,
       @JsonKey(name: "s") StatusModel? status});
 
   @override
   $HeaderModelCopyWith<$Res>? get header;
   @override
-  $ResendOtpDataCopyWith<$Res>? get body;
+  $VerifyMPINDataCopyWith<$Res>? get body;
   @override
   $StatusModelCopyWith<$Res>? get status;
 }
 
 /// @nodoc
-class __$$ResendOtpResponseModelImplCopyWithImpl<$Res>
-    extends _$ResendOtpResponseModelCopyWithImpl<$Res,
-        _$ResendOtpResponseModelImpl>
-    implements _$$ResendOtpResponseModelImplCopyWith<$Res> {
-  __$$ResendOtpResponseModelImplCopyWithImpl(
-      _$ResendOtpResponseModelImpl _value,
-      $Res Function(_$ResendOtpResponseModelImpl) _then)
+class __$$VerifyMPINResponseModelImplCopyWithImpl<$Res>
+    extends _$VerifyMPINResponseModelCopyWithImpl<$Res,
+        _$VerifyMPINResponseModelImpl>
+    implements _$$VerifyMPINResponseModelImplCopyWith<$Res> {
+  __$$VerifyMPINResponseModelImplCopyWithImpl(
+      _$VerifyMPINResponseModelImpl _value,
+      $Res Function(_$VerifyMPINResponseModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +160,7 @@ class __$$ResendOtpResponseModelImplCopyWithImpl<$Res>
     Object? body = freezed,
     Object? status = freezed,
   }) {
-    return _then(_$ResendOtpResponseModelImpl(
+    return _then(_$VerifyMPINResponseModelImpl(
       header: freezed == header
           ? _value.header
           : header // ignore: cast_nullable_to_non_nullable
@@ -168,7 +168,7 @@ class __$$ResendOtpResponseModelImplCopyWithImpl<$Res>
       body: freezed == body
           ? _value.body
           : body // ignore: cast_nullable_to_non_nullable
-              as ResendOtpData?,
+              as VerifyMPINData?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -179,35 +179,35 @@ class __$$ResendOtpResponseModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ResendOtpResponseModelImpl implements _ResendOtpResponseModel {
-  const _$ResendOtpResponseModelImpl(
+class _$VerifyMPINResponseModelImpl implements _VerifyMPINResponseModel {
+  const _$VerifyMPINResponseModelImpl(
       {@JsonKey(name: "h") this.header,
       @JsonKey(name: "b") this.body,
       @JsonKey(name: "s") this.status});
 
-  factory _$ResendOtpResponseModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ResendOtpResponseModelImplFromJson(json);
+  factory _$VerifyMPINResponseModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VerifyMPINResponseModelImplFromJson(json);
 
   @override
   @JsonKey(name: "h")
   final HeaderModel? header;
   @override
   @JsonKey(name: "b")
-  final ResendOtpData? body;
+  final VerifyMPINData? body;
   @override
   @JsonKey(name: "s")
   final StatusModel? status;
 
   @override
   String toString() {
-    return 'ResendOtpResponseModel(header: $header, body: $body, status: $status)';
+    return 'VerifyMPINResponseModel(header: $header, body: $body, status: $status)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResendOtpResponseModelImpl &&
+            other is _$VerifyMPINResponseModelImpl &&
             (identical(other.header, header) || other.header == header) &&
             (identical(other.body, body) || other.body == body) &&
             (identical(other.status, status) || other.status == status));
@@ -220,77 +220,78 @@ class _$ResendOtpResponseModelImpl implements _ResendOtpResponseModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResendOtpResponseModelImplCopyWith<_$ResendOtpResponseModelImpl>
-      get copyWith => __$$ResendOtpResponseModelImplCopyWithImpl<
-          _$ResendOtpResponseModelImpl>(this, _$identity);
+  _$$VerifyMPINResponseModelImplCopyWith<_$VerifyMPINResponseModelImpl>
+      get copyWith => __$$VerifyMPINResponseModelImplCopyWithImpl<
+          _$VerifyMPINResponseModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResendOtpResponseModelImplToJson(
+    return _$$VerifyMPINResponseModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _ResendOtpResponseModel implements ResendOtpResponseModel {
-  const factory _ResendOtpResponseModel(
+abstract class _VerifyMPINResponseModel implements VerifyMPINResponseModel {
+  const factory _VerifyMPINResponseModel(
           {@JsonKey(name: "h") final HeaderModel? header,
-          @JsonKey(name: "b") final ResendOtpData? body,
+          @JsonKey(name: "b") final VerifyMPINData? body,
           @JsonKey(name: "s") final StatusModel? status}) =
-      _$ResendOtpResponseModelImpl;
+      _$VerifyMPINResponseModelImpl;
 
-  factory _ResendOtpResponseModel.fromJson(Map<String, dynamic> json) =
-      _$ResendOtpResponseModelImpl.fromJson;
+  factory _VerifyMPINResponseModel.fromJson(Map<String, dynamic> json) =
+      _$VerifyMPINResponseModelImpl.fromJson;
 
   @override
   @JsonKey(name: "h")
   HeaderModel? get header;
   @override
   @JsonKey(name: "b")
-  ResendOtpData? get body;
+  VerifyMPINData? get body;
   @override
   @JsonKey(name: "s")
   StatusModel? get status;
   @override
   @JsonKey(ignore: true)
-  _$$ResendOtpResponseModelImplCopyWith<_$ResendOtpResponseModelImpl>
+  _$$VerifyMPINResponseModelImplCopyWith<_$VerifyMPINResponseModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
-ResendOtpData _$ResendOtpDataFromJson(Map<String, dynamic> json) {
-  return _ResendOtpData.fromJson(json);
+VerifyMPINData _$VerifyMPINDataFromJson(Map<String, dynamic> json) {
+  return _VerifyMPINData.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ResendOtpData {
+mixin _$VerifyMPINData {
   @JsonKey(name: "rb")
-  ResendOtpResponseBody? get responseBody => throw _privateConstructorUsedError;
+  VerifyMPINResponseBody? get responseBody =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "checkSum")
   String? get checkSum => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResendOtpDataCopyWith<ResendOtpData> get copyWith =>
+  $VerifyMPINDataCopyWith<VerifyMPINData> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResendOtpDataCopyWith<$Res> {
-  factory $ResendOtpDataCopyWith(
-          ResendOtpData value, $Res Function(ResendOtpData) then) =
-      _$ResendOtpDataCopyWithImpl<$Res, ResendOtpData>;
+abstract class $VerifyMPINDataCopyWith<$Res> {
+  factory $VerifyMPINDataCopyWith(
+          VerifyMPINData value, $Res Function(VerifyMPINData) then) =
+      _$VerifyMPINDataCopyWithImpl<$Res, VerifyMPINData>;
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") ResendOtpResponseBody? responseBody,
+      {@JsonKey(name: "rb") VerifyMPINResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
-  $ResendOtpResponseBodyCopyWith<$Res>? get responseBody;
+  $VerifyMPINResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class _$ResendOtpDataCopyWithImpl<$Res, $Val extends ResendOtpData>
-    implements $ResendOtpDataCopyWith<$Res> {
-  _$ResendOtpDataCopyWithImpl(this._value, this._then);
+class _$VerifyMPINDataCopyWithImpl<$Res, $Val extends VerifyMPINData>
+    implements $VerifyMPINDataCopyWith<$Res> {
+  _$VerifyMPINDataCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -307,7 +308,7 @@ class _$ResendOtpDataCopyWithImpl<$Res, $Val extends ResendOtpData>
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as ResendOtpResponseBody?,
+              as VerifyMPINResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -317,39 +318,39 @@ class _$ResendOtpDataCopyWithImpl<$Res, $Val extends ResendOtpData>
 
   @override
   @pragma('vm:prefer-inline')
-  $ResendOtpResponseBodyCopyWith<$Res>? get responseBody {
+  $VerifyMPINResponseBodyCopyWith<$Res>? get responseBody {
     if (_value.responseBody == null) {
       return null;
     }
 
-    return $ResendOtpResponseBodyCopyWith<$Res>(_value.responseBody!, (value) {
+    return $VerifyMPINResponseBodyCopyWith<$Res>(_value.responseBody!, (value) {
       return _then(_value.copyWith(responseBody: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$ResendOtpDataImplCopyWith<$Res>
-    implements $ResendOtpDataCopyWith<$Res> {
-  factory _$$ResendOtpDataImplCopyWith(
-          _$ResendOtpDataImpl value, $Res Function(_$ResendOtpDataImpl) then) =
-      __$$ResendOtpDataImplCopyWithImpl<$Res>;
+abstract class _$$VerifyMPINDataImplCopyWith<$Res>
+    implements $VerifyMPINDataCopyWith<$Res> {
+  factory _$$VerifyMPINDataImplCopyWith(_$VerifyMPINDataImpl value,
+          $Res Function(_$VerifyMPINDataImpl) then) =
+      __$$VerifyMPINDataImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "rb") ResendOtpResponseBody? responseBody,
+      {@JsonKey(name: "rb") VerifyMPINResponseBody? responseBody,
       @JsonKey(name: "checkSum") String? checkSum});
 
   @override
-  $ResendOtpResponseBodyCopyWith<$Res>? get responseBody;
+  $VerifyMPINResponseBodyCopyWith<$Res>? get responseBody;
 }
 
 /// @nodoc
-class __$$ResendOtpDataImplCopyWithImpl<$Res>
-    extends _$ResendOtpDataCopyWithImpl<$Res, _$ResendOtpDataImpl>
-    implements _$$ResendOtpDataImplCopyWith<$Res> {
-  __$$ResendOtpDataImplCopyWithImpl(
-      _$ResendOtpDataImpl _value, $Res Function(_$ResendOtpDataImpl) _then)
+class __$$VerifyMPINDataImplCopyWithImpl<$Res>
+    extends _$VerifyMPINDataCopyWithImpl<$Res, _$VerifyMPINDataImpl>
+    implements _$$VerifyMPINDataImplCopyWith<$Res> {
+  __$$VerifyMPINDataImplCopyWithImpl(
+      _$VerifyMPINDataImpl _value, $Res Function(_$VerifyMPINDataImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -358,11 +359,11 @@ class __$$ResendOtpDataImplCopyWithImpl<$Res>
     Object? responseBody = freezed,
     Object? checkSum = freezed,
   }) {
-    return _then(_$ResendOtpDataImpl(
+    return _then(_$VerifyMPINDataImpl(
       responseBody: freezed == responseBody
           ? _value.responseBody
           : responseBody // ignore: cast_nullable_to_non_nullable
-              as ResendOtpResponseBody?,
+              as VerifyMPINResponseBody?,
       checkSum: freezed == checkSum
           ? _value.checkSum
           : checkSum // ignore: cast_nullable_to_non_nullable
@@ -373,31 +374,31 @@ class __$$ResendOtpDataImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ResendOtpDataImpl implements _ResendOtpData {
-  const _$ResendOtpDataImpl(
+class _$VerifyMPINDataImpl implements _VerifyMPINData {
+  const _$VerifyMPINDataImpl(
       {@JsonKey(name: "rb") this.responseBody,
       @JsonKey(name: "checkSum") this.checkSum});
 
-  factory _$ResendOtpDataImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ResendOtpDataImplFromJson(json);
+  factory _$VerifyMPINDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VerifyMPINDataImplFromJson(json);
 
   @override
   @JsonKey(name: "rb")
-  final ResendOtpResponseBody? responseBody;
+  final VerifyMPINResponseBody? responseBody;
   @override
   @JsonKey(name: "checkSum")
   final String? checkSum;
 
   @override
   String toString() {
-    return 'ResendOtpData(responseBody: $responseBody, checkSum: $checkSum)';
+    return 'VerifyMPINData(responseBody: $responseBody, checkSum: $checkSum)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResendOtpDataImpl &&
+            other is _$VerifyMPINDataImpl &&
             (identical(other.responseBody, responseBody) ||
                 other.responseBody == responseBody) &&
             (identical(other.checkSum, checkSum) ||
@@ -411,44 +412,46 @@ class _$ResendOtpDataImpl implements _ResendOtpData {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResendOtpDataImplCopyWith<_$ResendOtpDataImpl> get copyWith =>
-      __$$ResendOtpDataImplCopyWithImpl<_$ResendOtpDataImpl>(this, _$identity);
+  _$$VerifyMPINDataImplCopyWith<_$VerifyMPINDataImpl> get copyWith =>
+      __$$VerifyMPINDataImplCopyWithImpl<_$VerifyMPINDataImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResendOtpDataImplToJson(
+    return _$$VerifyMPINDataImplToJson(
       this,
     );
   }
 }
 
-abstract class _ResendOtpData implements ResendOtpData {
-  const factory _ResendOtpData(
-      {@JsonKey(name: "rb") final ResendOtpResponseBody? responseBody,
-      @JsonKey(name: "checkSum") final String? checkSum}) = _$ResendOtpDataImpl;
+abstract class _VerifyMPINData implements VerifyMPINData {
+  const factory _VerifyMPINData(
+          {@JsonKey(name: "rb") final VerifyMPINResponseBody? responseBody,
+          @JsonKey(name: "checkSum") final String? checkSum}) =
+      _$VerifyMPINDataImpl;
 
-  factory _ResendOtpData.fromJson(Map<String, dynamic> json) =
-      _$ResendOtpDataImpl.fromJson;
+  factory _VerifyMPINData.fromJson(Map<String, dynamic> json) =
+      _$VerifyMPINDataImpl.fromJson;
 
   @override
   @JsonKey(name: "rb")
-  ResendOtpResponseBody? get responseBody;
+  VerifyMPINResponseBody? get responseBody;
   @override
   @JsonKey(name: "checkSum")
   String? get checkSum;
   @override
   @JsonKey(ignore: true)
-  _$$ResendOtpDataImplCopyWith<_$ResendOtpDataImpl> get copyWith =>
+  _$$VerifyMPINDataImplCopyWith<_$VerifyMPINDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
-ResendOtpResponseBody _$ResendOtpResponseBodyFromJson(
+VerifyMPINResponseBody _$VerifyMPINResponseBodyFromJson(
     Map<String, dynamic> json) {
-  return _ResendOtpResponseBody.fromJson(json);
+  return _VerifyMPINResponseBody.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ResendOtpResponseBody {
+mixin _$VerifyMPINResponseBody {
   @JsonKey(name: "refCode")
   String? get refCode => throw _privateConstructorUsedError;
   @JsonKey(name: "tokenData")
@@ -456,15 +459,15 @@ mixin _$ResendOtpResponseBody {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ResendOtpResponseBodyCopyWith<ResendOtpResponseBody> get copyWith =>
+  $VerifyMPINResponseBodyCopyWith<VerifyMPINResponseBody> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ResendOtpResponseBodyCopyWith<$Res> {
-  factory $ResendOtpResponseBodyCopyWith(ResendOtpResponseBody value,
-          $Res Function(ResendOtpResponseBody) then) =
-      _$ResendOtpResponseBodyCopyWithImpl<$Res, ResendOtpResponseBody>;
+abstract class $VerifyMPINResponseBodyCopyWith<$Res> {
+  factory $VerifyMPINResponseBodyCopyWith(VerifyMPINResponseBody value,
+          $Res Function(VerifyMPINResponseBody) then) =
+      _$VerifyMPINResponseBodyCopyWithImpl<$Res, VerifyMPINResponseBody>;
   @useResult
   $Res call(
       {@JsonKey(name: "refCode") String? refCode,
@@ -474,10 +477,10 @@ abstract class $ResendOtpResponseBodyCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$ResendOtpResponseBodyCopyWithImpl<$Res,
-        $Val extends ResendOtpResponseBody>
-    implements $ResendOtpResponseBodyCopyWith<$Res> {
-  _$ResendOtpResponseBodyCopyWithImpl(this._value, this._then);
+class _$VerifyMPINResponseBodyCopyWithImpl<$Res,
+        $Val extends VerifyMPINResponseBody>
+    implements $VerifyMPINResponseBodyCopyWith<$Res> {
+  _$VerifyMPINResponseBodyCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -516,12 +519,12 @@ class _$ResendOtpResponseBodyCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ResendOtpResponseBodyImplCopyWith<$Res>
-    implements $ResendOtpResponseBodyCopyWith<$Res> {
-  factory _$$ResendOtpResponseBodyImplCopyWith(
-          _$ResendOtpResponseBodyImpl value,
-          $Res Function(_$ResendOtpResponseBodyImpl) then) =
-      __$$ResendOtpResponseBodyImplCopyWithImpl<$Res>;
+abstract class _$$VerifyMPINResponseBodyImplCopyWith<$Res>
+    implements $VerifyMPINResponseBodyCopyWith<$Res> {
+  factory _$$VerifyMPINResponseBodyImplCopyWith(
+          _$VerifyMPINResponseBodyImpl value,
+          $Res Function(_$VerifyMPINResponseBodyImpl) then) =
+      __$$VerifyMPINResponseBodyImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -533,12 +536,13 @@ abstract class _$$ResendOtpResponseBodyImplCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$ResendOtpResponseBodyImplCopyWithImpl<$Res>
-    extends _$ResendOtpResponseBodyCopyWithImpl<$Res,
-        _$ResendOtpResponseBodyImpl>
-    implements _$$ResendOtpResponseBodyImplCopyWith<$Res> {
-  __$$ResendOtpResponseBodyImplCopyWithImpl(_$ResendOtpResponseBodyImpl _value,
-      $Res Function(_$ResendOtpResponseBodyImpl) _then)
+class __$$VerifyMPINResponseBodyImplCopyWithImpl<$Res>
+    extends _$VerifyMPINResponseBodyCopyWithImpl<$Res,
+        _$VerifyMPINResponseBodyImpl>
+    implements _$$VerifyMPINResponseBodyImplCopyWith<$Res> {
+  __$$VerifyMPINResponseBodyImplCopyWithImpl(
+      _$VerifyMPINResponseBodyImpl _value,
+      $Res Function(_$VerifyMPINResponseBodyImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -547,7 +551,7 @@ class __$$ResendOtpResponseBodyImplCopyWithImpl<$Res>
     Object? refCode = freezed,
     Object? tokenData = freezed,
   }) {
-    return _then(_$ResendOtpResponseBodyImpl(
+    return _then(_$VerifyMPINResponseBodyImpl(
       refCode: freezed == refCode
           ? _value.refCode
           : refCode // ignore: cast_nullable_to_non_nullable
@@ -562,13 +566,13 @@ class __$$ResendOtpResponseBodyImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ResendOtpResponseBodyImpl implements _ResendOtpResponseBody {
-  const _$ResendOtpResponseBodyImpl(
+class _$VerifyMPINResponseBodyImpl implements _VerifyMPINResponseBody {
+  const _$VerifyMPINResponseBodyImpl(
       {@JsonKey(name: "refCode") this.refCode,
       @JsonKey(name: "tokenData") this.tokenData});
 
-  factory _$ResendOtpResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ResendOtpResponseBodyImplFromJson(json);
+  factory _$VerifyMPINResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VerifyMPINResponseBodyImplFromJson(json);
 
   @override
   @JsonKey(name: "refCode")
@@ -579,14 +583,14 @@ class _$ResendOtpResponseBodyImpl implements _ResendOtpResponseBody {
 
   @override
   String toString() {
-    return 'ResendOtpResponseBody(refCode: $refCode, tokenData: $tokenData)';
+    return 'VerifyMPINResponseBody(refCode: $refCode, tokenData: $tokenData)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ResendOtpResponseBodyImpl &&
+            other is _$VerifyMPINResponseBodyImpl &&
             (identical(other.refCode, refCode) || other.refCode == refCode) &&
             (identical(other.tokenData, tokenData) ||
                 other.tokenData == tokenData));
@@ -599,26 +603,26 @@ class _$ResendOtpResponseBodyImpl implements _ResendOtpResponseBody {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ResendOtpResponseBodyImplCopyWith<_$ResendOtpResponseBodyImpl>
-      get copyWith => __$$ResendOtpResponseBodyImplCopyWithImpl<
-          _$ResendOtpResponseBodyImpl>(this, _$identity);
+  _$$VerifyMPINResponseBodyImplCopyWith<_$VerifyMPINResponseBodyImpl>
+      get copyWith => __$$VerifyMPINResponseBodyImplCopyWithImpl<
+          _$VerifyMPINResponseBodyImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ResendOtpResponseBodyImplToJson(
+    return _$$VerifyMPINResponseBodyImplToJson(
       this,
     );
   }
 }
 
-abstract class _ResendOtpResponseBody implements ResendOtpResponseBody {
-  const factory _ResendOtpResponseBody(
+abstract class _VerifyMPINResponseBody implements VerifyMPINResponseBody {
+  const factory _VerifyMPINResponseBody(
           {@JsonKey(name: "refCode") final String? refCode,
           @JsonKey(name: "tokenData") final TokenData? tokenData}) =
-      _$ResendOtpResponseBodyImpl;
+      _$VerifyMPINResponseBodyImpl;
 
-  factory _ResendOtpResponseBody.fromJson(Map<String, dynamic> json) =
-      _$ResendOtpResponseBodyImpl.fromJson;
+  factory _VerifyMPINResponseBody.fromJson(Map<String, dynamic> json) =
+      _$VerifyMPINResponseBodyImpl.fromJson;
 
   @override
   @JsonKey(name: "refCode")
@@ -628,6 +632,6 @@ abstract class _ResendOtpResponseBody implements ResendOtpResponseBody {
   TokenData? get tokenData;
   @override
   @JsonKey(ignore: true)
-  _$$ResendOtpResponseBodyImplCopyWith<_$ResendOtpResponseBodyImpl>
+  _$$VerifyMPINResponseBodyImplCopyWith<_$VerifyMPINResponseBodyImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
