@@ -9,6 +9,8 @@ import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/lo
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_fingerprint/response/set_fingerprint_response_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/request/verify_mpin_request_model.dart';
+import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/response/verify_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -19,7 +21,8 @@ class MPINRepositoryImpl implements MPINRepository {
   MPINRepositoryImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(SetAgentMpinRequestModel request) async {
+  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(
+      SetAgentMpinRequestModel request) async {
     try {
       final response = await apiService.setAgentMPIN(request);
 
@@ -32,7 +35,8 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request) async {
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
+      LoginbyMpinRequestModel request) async {
     try {
       final response = await apiService.loginByMpin(request);
       // final response = await apiService.loginByMpin(authToken, sessionId, request);
@@ -44,7 +48,8 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(LoginByFpRequestModel request) async {
+  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(
+      LoginByFpRequestModel request) async {
     try {
       final response = await apiService.loginByFP(request);
 
@@ -58,6 +63,20 @@ class MPINRepositoryImpl implements MPINRepository {
   Future<Either<Failure, SetFingerprintResponseModel>> setFingerPrint() async {
     try {
       final response = await apiService.setFingerPrint();
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, VerifyMPINResponseModel>> verifyMPIN(
+      VerifyMPINRequestModel request) async {
+    try {
+      final response = await apiService.verifyMPIN(request);
+
+      // final response = SetAgentMpinResponseModel.fromJson(SetAgentMPINResponseMocked.jsonResponse);
 
       return Right(response);
     } on DioException catch (e) {

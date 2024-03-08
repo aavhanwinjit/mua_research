@@ -39,13 +39,19 @@ mixin RegistrationMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
+        // clear controller
+        ref.watch(createPINProvider.notifier).update((state) => '');
+        ref.watch(confirmPINProvider.notifier).update((state) => '');
       },
       (SetAgentMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
           onSuccess();
-          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
-
+          ref
+              .read(agentLoginDetailsProvider.notifier)
+              .update((state) => success.body?.responseBody);
+          ref.watch(userLoggedInProvider.notifier).update((state) => true);
           // store the auth token
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
@@ -63,9 +69,13 @@ mixin RegistrationMixin {
           }
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
+        // clear controller
+        ref.watch(createPINProvider.notifier).update((state) => '');
+        ref.watch(confirmPINProvider.notifier).update((state) => '');
       },
     );
   }
@@ -81,13 +91,15 @@ mixin RegistrationMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (SetFingerprintResponseModel success) async {
         if (success.status?.isSuccess == true) {
           onSuccess();
 
-          context.showSnackBar(message: success.body?.responseBody?.data?.message ?? "");
+          context.showSnackBar(
+              message: success.body?.responseBody?.data?.message ?? "");
 
           // store the auth token
           await _setData(
@@ -101,7 +113,8 @@ mixin RegistrationMixin {
           successNavigation();
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

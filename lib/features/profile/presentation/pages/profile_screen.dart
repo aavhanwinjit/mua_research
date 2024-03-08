@@ -77,7 +77,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
               color: textGrayColor2,
             ),
             onTap: () {
-              context.pushNamed(AppRoutes.createPINScreen);
+              context.pushNamed(AppRoutes.oldPINScreen);
             },
           ),
           const Divider(

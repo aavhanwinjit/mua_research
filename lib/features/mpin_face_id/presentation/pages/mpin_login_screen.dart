@@ -5,6 +5,7 @@ import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
@@ -113,7 +114,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _useBiometricButton() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
+    final isFPLogin = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.isFpLogin ??
+        false;
 
     return isFPLogin
         ? TextButton(
@@ -182,13 +185,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
               .read(agentLoginDetailsProvider.notifier)
               .update((state) => success.body?.responseBody);
 
-          debugPrint("success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
+          debugPrint(
+              "success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
             authToken: success.body?.responseBody?.authToken?.token,
             sessionId: success.body?.responseBody?.authToken?.sessionId,
           );
+
+          ref.watch(userLoggedInProvider.notifier).update((state) => true);
 
           context.go(AppRoutes.dashboardScreen);
         } else if (success.status?.isSuccess == false &&
@@ -201,10 +207,11 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
           ref.watch(loginPINProvider.notifier).update((state) => "");
-         
+
           setState(() {});
         }
       },
@@ -253,9 +260,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       },
       (LoginByFpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(agentLoginDetailsProvider.notifier).update((state) => success.body?.responseBody);
+          ref
+              .read(agentLoginDetailsProvider.notifier)
+              .update((state) => success.body?.responseBody);
 
-          debugPrint("success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
+          debugPrint(
+              "success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
 
           await _setData(
             deviceToken: success.body?.responseBody?.deviceToken,
@@ -263,6 +273,10 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
             sessionId: success.body?.responseBody?.authToken?.sessionId,
             fpDeviceToken: success.body?.responseBody?.fpDeviceToken,
           );
+
+          debugPrint("Token: ${success.body?.responseBody?.authToken?.token}");
+          debugPrint(
+              "Session ID: ${success.body?.responseBody?.authToken?.sessionId}");
 
           context.go(AppRoutes.dashboardScreen);
         } else {
