@@ -1,24 +1,17 @@
-import 'dart:convert';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/enums/file_type_enums.dart';
-import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
-import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
+import 'package:ekyc/features/profile/presentation/mixins/signature_mixin.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
 
 class AuthProfileScreen extends ConsumerStatefulWidget {
   const AuthProfileScreen({super.key});
@@ -27,7 +20,7 @@ class AuthProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _AuthProfileScreenState();
 }
 
-class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
+class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with SignatureMixin {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +40,16 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
                   // onTap: () {
                   // context.go(AppRoutes.selectPINorBiometricScreen);
                   // },
-                  onTap: _uploadSignature,
+                  onTap: () async {
+                    await uploadSignature(
+                        context: context,
+                        ref: ref,
+                        onSuccess: (SaveFileResponseModel success) {
+                          ref.read(authProfileProvider.notifier).update((state) => success);
+
+                          context.pushReplacementNamed(AppRoutes.selectPINorBiometricScreen);
+                        });
+                  },
                   label: Strings.contn,
                 ),
                 SizedBox(height: 16.h),
@@ -180,8 +182,16 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
       onTap: () {
         ActionSheetHelper.showSignatureSourceActionSheet(
           context,
-          onPressed: () {
-            pickImage();
+          onDigitalSignaturePressed: () {
+            context.pop();
+            context.pushNamed(AppRoutes.signatureScreen);
+          },
+          onPickSignatureImagePressed: () {
+            pickSignature(
+              context: context,
+              ref: ref,
+              onSuccess: () {},
+            );
           },
         );
       },
@@ -222,54 +232,6 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  void pickImage() async {
-    XFile? result = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 1500,
-      maxWidth: 1500,
-    );
-
-    if (result != null) {
-      final list = await result.readAsBytes();
-      ref.read(signatureProvider.notifier).update((state) => list);
-
-      context.pop();
-    }
-  }
-
-  void _uploadSignature() async {
-    final signatureBytes = ref.watch(signatureProvider) as List<int>;
-    final String signatureBase64 = base64Encode(signatureBytes);
-
-    final SaveFileRequestModel request = SaveFileRequestModel(
-      fileName: "${FileType.SIGNATURE.toString().split('.').last}.png",
-      fileString: signatureBase64,
-      allowedFileId: 9,
-    );
-
-    final response = await getIt<SaveFile>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-      },
-      (SaveFileResponseModel success) async {
-        debugPrint("success in auth profile screen: $success");
-
-        if (success.status?.isSuccess == true) {
-          ref.read(authProfileProvider.notifier).update((state) => success);
-
-          context.pushReplacementNamed(AppRoutes.selectPINorBiometricScreen);
-        } else {
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
-      },
     );
   }
 }
