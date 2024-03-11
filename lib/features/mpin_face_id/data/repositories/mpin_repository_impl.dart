@@ -21,8 +21,7 @@ class MPINRepositoryImpl implements MPINRepository {
   MPINRepositoryImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(
-      SetAgentMpinRequestModel request) async {
+  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(SetAgentMpinRequestModel request) async {
     try {
       final response = await apiService.setAgentMPIN(request);
 
@@ -35,8 +34,7 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
-      LoginbyMpinRequestModel request) async {
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request) async {
     try {
       final response = await apiService.loginByMpin(request);
       // final response = await apiService.loginByMpin(authToken, sessionId, request);
@@ -48,8 +46,7 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(
-      LoginByFpRequestModel request) async {
+  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(LoginByFpRequestModel request) async {
     try {
       final response = await apiService.loginByFP(request);
 
@@ -71,12 +68,9 @@ class MPINRepositoryImpl implements MPINRepository {
   }
 
   @override
-  Future<Either<Failure, VerifyMPINResponseModel>> verifyMPIN(
-      VerifyMPINRequestModel request) async {
+  Future<Either<Failure, VerifyMPINResponseModel>> verifyMPIN(VerifyMPINRequestModel request) async {
     try {
       final response = await apiService.verifyMPIN(request);
-
-      // final response = SetAgentMpinResponseModel.fromJson(SetAgentMPINResponseMocked.jsonResponse);
 
       return Right(response);
     } on DioException catch (e) {

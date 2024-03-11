@@ -1,10 +1,7 @@
 import 'dart:ui' as ui;
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/helpers/signature_upload_confirmation_dialog_helper.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
-import 'package:ekyc/features/profile/presentation/mixins/signature_mixin.dart';
+import 'package:ekyc/features/signature/presentation/mixins/signature_mixin.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +11,11 @@ import 'package:go_router/go_router.dart';
 import 'package:syncfusion_flutter_signaturepad/signaturepad.dart';
 
 class SignatureScreen extends ConsumerStatefulWidget {
-  final bool? uploadFunction;
+  final Function? uploadFunction;
 
   const SignatureScreen({
     super.key,
-    this.uploadFunction = false,
+    this.uploadFunction,
   });
 
   @override
@@ -103,22 +100,9 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> with Signatur
 
     ref.read(signatureProvider.notifier).update((state) => list);
 
-    if (widget.uploadFunction == true) {
+    if (widget.uploadFunction != null) {
       // upload Signature api call
-      SignatureUploadConfirmationDialogHelper.showSignatureUploadDialog(
-        context,
-        onConfirm: () async {
-          await uploadSignature(
-            context: context,
-            ref: ref,
-            onSuccess: (SaveFileResponseModel success) {
-              context.showSnackBar(message: success.status?.message ?? "");
-              context.pop();
-              context.pop();
-            },
-          );
-        },
-      );
+      widget.uploadFunction!();
     } else {
       context.pop();
     }

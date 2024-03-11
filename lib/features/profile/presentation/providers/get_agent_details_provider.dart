@@ -2,3 +2,4 @@ import 'package:ekyc/features/profile/data/models/get_agent_details/response/get
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final agentDetailsResponseProvider = StateProvider<GetAgentDetailsResponseModel?>((ref) => null);
+final agentSignaturePathProvider = StateProvider<String?>((ref) => null);

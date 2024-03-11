@@ -1,4 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/date_time_formatter.dart';
+import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
@@ -6,10 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ApplicantCard extends StatelessWidget {
-  const ApplicantCard({super.key});
+  final AgentApplicationsModel application;
+
+  const ApplicantCard({super.key, required this.application});
 
   @override
   Widget build(BuildContext context) {
+    final String fullName = "${application.idDocFirstName ?? ""} ${application.idDocOtherName ?? ""}";
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.sp),
@@ -24,7 +30,7 @@ class ApplicantCard extends StatelessWidget {
             child: Row(
               children: [
                 CustomProfileImageWidget(
-                  userName: "Arjun Kumar",
+                  userName: fullName,
                   size: 50.w,
                   fontSize: 18.sp,
                   primary: false,
@@ -35,7 +41,7 @@ class ApplicantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Arjun Kumar",
+                        fullName,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: black,
@@ -43,7 +49,7 @@ class ApplicantCard extends StatelessWidget {
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        "10/06/23 • 10:40pm",
+                        DateTimeFormatter.getApplicationCardDateTime(application.crd),
                         style: TextStyle(
                           color: textGrayColor2,
                           fontSize: 12.sp,
@@ -66,7 +72,7 @@ class ApplicantCard extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const StatusChip(),
+                StatusChip(status: application.applicationStatus),
                 _resumeWidget(context),
               ],
             ),
@@ -77,24 +83,29 @@ class ApplicantCard extends StatelessWidget {
   }
 
   Widget _referenceNumberWidget() {
-    return Column(
-      children: [
-        Text(
-          Strings.referenceNo,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: textGrayColor2,
+    return SizedBox(
+      width: 85.w,
+      child: Column(
+        children: [
+          Text(
+            Strings.referenceNo,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: textGrayColor2,
+            ),
           ),
-        ),
-        SizedBox(height: 4.h),
-        Text(
-          "MUA2346654",
-          style: TextStyle(
-            color: black,
-            fontSize: 12.sp,
+          SizedBox(height: 4.h),
+          Text(
+            application.applicationRefNo ?? "-",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: black,
+              fontSize: 12.sp,
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

@@ -7,14 +7,12 @@ import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.d
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class VerifyMPIN
-    implements UseCase<VerifyMPINResponseModel, VerifyMPINRequestModel> {
+class VerifyMPIN implements UseCase<VerifyMPINResponseModel, VerifyMPINRequestModel> {
   final MPINRepository mpinRepository;
   VerifyMPIN(this.mpinRepository);
 
   @override
-  Future<Either<Failure, VerifyMPINResponseModel>> call(
-      VerifyMPINRequestModel params) async {
+  Future<Either<Failure, VerifyMPINResponseModel>> call(VerifyMPINRequestModel params) async {
     return await mpinRepository.verifyMPIN(params);
   }
 }
