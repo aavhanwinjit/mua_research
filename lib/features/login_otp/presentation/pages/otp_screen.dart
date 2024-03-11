@@ -5,15 +5,20 @@ import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
+import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/response/resend_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validate_otp_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/change_mpin.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/widgets/timer_widget.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -27,7 +32,7 @@ class OTPScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _OTPScreenState();
 }
 
-class _OTPScreenState extends ConsumerState<OTPScreen> {
+class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   TextEditingController otpController = TextEditingController();
 
   int retryCount = 0;
@@ -51,7 +56,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+            padding: EdgeInsets.only(
+                left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(
@@ -94,7 +100,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
                   //   final String sId = ProviderContainer().read(sessionIdProvider);
                   //   debugPrint("sid: $sId");
                   // },
-                  onTap: _verifyOTP,
+                  onTap: () => ref.watch(userLoggedInProvider)
+                      ? _changeMPIN()
+                      : _verifyOTP(),
                   label: Strings.contn,
                 ),
                 SizedBox(height: 18.h),
@@ -221,14 +229,67 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
       },
       (ValidateOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
+          ref
+              .read(validateOTPResponseProvider.notifier)
+              .update((state) => success);
 
           context.pushReplacementNamed(AppRoutes.successScreen);
-        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
+        } else if (success.status?.isSuccess == false &&
+            success.status?.statusCode == ApiErrorCodes.notFount) {
           context.pushReplacementNamed(AppRoutes.failureScreen);
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
+    );
+  }
+
+  void _changeMPIN() async {
+    final String? refCode = ref.watch(refCodeProvider);
+    ChangeMPINRequestModel request = ChangeMPINRequestModel(
+      mPIN: MPIN(
+        oldMPIN: ref.watch(oldPINProvider),
+        newMPIN: ref.watch(createPINProvider),
+        confirmNewMPIN: ref.watch(confirmPINProvider),
+      ),
+      otp: OTP(
+        refCode: refCode ?? "",
+        otpNumber: ref.watch(otpProvider).trim(),
+      ),
+    );
+
+    final response = await getIt<ChangeMPIN>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (ChangeMPINResponseModel success) async {
+        debugPrint("success in login screen : $success");
+        if (success.status?.isSuccess == true) {
+          ref
+              .read(changeMPINResponseProvider.notifier)
+              .update((state) => success);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
+
+          // await _setData(
+          //   authToken: success.body?.responseBody?.tokenData?.token,
+          //   sessionId: success.body?.responseBody?.tokenData?.sessionId,
+          // );
+
+          context.showSnackBar(message: Strings.mpinChangeSuccess);
+          ref.watch(userLoggedInProvider.notifier).update((state) => false);
+          context.go(AppRoutes.mpinLoginScreen);
+        } else {
+          context.showErrorSnackBar(
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -244,7 +305,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
 
     final String? refCode = ref.watch(refCodeProvider);
 
-    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
+    final ResendOtpRequestModel request =
+        ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
@@ -260,9 +322,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
 
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
-          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
-
-          await LocalDataHelper.storeAuthToken(success.body?.responseBody?.tokenData?.token);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 
@@ -271,7 +333,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> {
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

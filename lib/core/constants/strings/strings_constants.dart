@@ -305,4 +305,6 @@ class Strings {
   static const String biometricAuthenticationFailed =
       "Biometric Authentication Failed";
   static const String noBiometricsAvailable = "No Biometrics Available";
+  static const String mpinChangeSuccess =
+      "Your PIN has been updated successfully";
 }

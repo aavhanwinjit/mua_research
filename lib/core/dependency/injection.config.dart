@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i7;
-import 'package:ekyc/core/dependency/injection.dart' as _i35;
+import 'package:ekyc/core/dependency/injection.dart' as _i36;
 import 'package:ekyc/core/helpers/device_information_helper.dart' as _i6;
 import 'package:ekyc/core/helpers/request_generator.dart' as _i10;
 import 'package:ekyc/core/network/network_info.dart' as _i9;
@@ -17,50 +17,52 @@ import 'package:ekyc/core/network/services/api_service.dart' as _i11;
 import 'package:ekyc/core/storage/storage_manager.dart' as _i4;
 import 'package:ekyc/core/storage/storage_manager_impl.dart' as _i5;
 import 'package:ekyc/features/auth_profile/data/repositories/save_file_repository_impl.dart'
-    as _i20;
+    as _i21;
 import 'package:ekyc/features/auth_profile/domain/repositories/save_file_repository.dart'
-    as _i19;
+    as _i20;
 import 'package:ekyc/features/auth_profile/domain/usecases/save_file.dart'
-    as _i34;
+    as _i35;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
     as _i13;
 import 'package:ekyc/features/login_otp/domain/repositories/auth_repository.dart'
     as _i12;
-import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart'
-    as _i18;
-import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart'
-    as _i25;
-import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart'
-    as _i27;
-import 'package:ekyc/features/mpin_face_id/data/repositories/mpin_repository_impl.dart'
-    as _i15;
-import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart'
+import 'package:ekyc/features/login_otp/domain/usecases/change_mpin.dart'
     as _i14;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart'
-    as _i31;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart'
-    as _i32;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart'
-    as _i21;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/set_fingerprint.dart'
-    as _i22;
-import 'package:ekyc/features/mpin_face_id/domain/usecases/verify_mpin.dart'
+import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart'
+    as _i19;
+import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart'
     as _i26;
-import 'package:ekyc/features/profile/data/repositories/profile_repository_impl.dart'
-    as _i17;
-import 'package:ekyc/features/profile/domain/repositories/profile_repository.dart'
-    as _i16;
-import 'package:ekyc/features/profile/domain/usecases/de_register_fingerprint.dart'
+import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart'
     as _i28;
-import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart'
-    as _i29;
-import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i33;
-import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
-    as _i24;
-import 'package:ekyc/features/splash_screen/domain/repositories/splash_screen_repository.dart'
+import 'package:ekyc/features/mpin_face_id/data/repositories/mpin_repository_impl.dart'
+    as _i16;
+import 'package:ekyc/features/mpin_face_id/domain/repositories/mpin_repository.dart'
+    as _i15;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart'
+    as _i32;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart'
+    as _i33;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/set_agent_mpin.dart'
+    as _i22;
+import 'package:ekyc/features/mpin_face_id/domain/usecases/set_fingerprint.dart'
     as _i23;
-import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
+import 'package:ekyc/features/mpin_face_id/domain/usecases/verify_mpin.dart'
+    as _i27;
+import 'package:ekyc/features/profile/data/repositories/profile_repository_impl.dart'
+    as _i18;
+import 'package:ekyc/features/profile/domain/repositories/profile_repository.dart'
+    as _i17;
+import 'package:ekyc/features/profile/domain/usecases/de_register_fingerprint.dart'
+    as _i29;
+import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart'
     as _i30;
+import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i34;
+import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
+    as _i25;
+import 'package:ekyc/features/splash_screen/domain/repositories/splash_screen_repository.dart'
+    as _i24;
+import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart'
+    as _i31;
 import 'package:ekyc/models/app_config/app_config.dart' as _i3;
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
@@ -96,42 +98,44 @@ extension GetItInjectableX on _i1.GetIt {
         ));
     gh.lazySingleton<_i12.AuthRepository>(
         () => _i13.AuthRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i14.MPINRepository>(
-        () => _i15.MPINRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i16.ProfileRepository>(
-        () => _i17.ProfileRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i18.ResendOTP>(
-        () => _i18.ResendOTP(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i19.SaveFileRepository>(
-        () => _i20.SaveFileRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i21.SetAgentMPIN>(
-        () => _i21.SetAgentMPIN(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i22.SetFingerPrint>(
-        () => _i22.SetFingerPrint(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i23.SplashScreenRepository>(() =>
-        _i24.SplashScreenRepositoryImpl(apiService: gh<_i11.ApiService>()));
-    gh.lazySingleton<_i25.ValidateOTP>(
-        () => _i25.ValidateOTP(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i26.VerifyMPIN>(
-        () => _i26.VerifyMPIN(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i27.VerifyMobileNumber>(
-        () => _i27.VerifyMobileNumber(gh<_i12.AuthRepository>()));
-    gh.lazySingleton<_i28.DeRegisterFingerprint>(
-        () => _i28.DeRegisterFingerprint(gh<_i16.ProfileRepository>()));
-    gh.lazySingleton<_i29.GetAgentDetails>(
-        () => _i29.GetAgentDetails(gh<_i16.ProfileRepository>()));
-    gh.lazySingleton<_i30.LaunchDetails>(
-        () => _i30.LaunchDetails(gh<_i23.SplashScreenRepository>()));
-    gh.lazySingleton<_i31.LoginByFP>(
-        () => _i31.LoginByFP(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i32.LoginByMpin>(
-        () => _i32.LoginByMpin(gh<_i14.MPINRepository>()));
-    gh.lazySingleton<_i33.Logout>(
-        () => _i33.Logout(gh<_i16.ProfileRepository>()));
-    gh.lazySingleton<_i34.SaveFile>(
-        () => _i34.SaveFile(gh<_i19.SaveFileRepository>()));
+    gh.lazySingleton<_i14.ChangeMPIN>(
+        () => _i14.ChangeMPIN(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i15.MPINRepository>(
+        () => _i16.MPINRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i17.ProfileRepository>(
+        () => _i18.ProfileRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i19.ResendOTP>(
+        () => _i19.ResendOTP(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i20.SaveFileRepository>(
+        () => _i21.SaveFileRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i22.SetAgentMPIN>(
+        () => _i22.SetAgentMPIN(gh<_i15.MPINRepository>()));
+    gh.lazySingleton<_i23.SetFingerPrint>(
+        () => _i23.SetFingerPrint(gh<_i15.MPINRepository>()));
+    gh.lazySingleton<_i24.SplashScreenRepository>(() =>
+        _i25.SplashScreenRepositoryImpl(apiService: gh<_i11.ApiService>()));
+    gh.lazySingleton<_i26.ValidateOTP>(
+        () => _i26.ValidateOTP(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i27.VerifyMPIN>(
+        () => _i27.VerifyMPIN(gh<_i15.MPINRepository>()));
+    gh.lazySingleton<_i28.VerifyMobileNumber>(
+        () => _i28.VerifyMobileNumber(gh<_i12.AuthRepository>()));
+    gh.lazySingleton<_i29.DeRegisterFingerprint>(
+        () => _i29.DeRegisterFingerprint(gh<_i17.ProfileRepository>()));
+    gh.lazySingleton<_i30.GetAgentDetails>(
+        () => _i30.GetAgentDetails(gh<_i17.ProfileRepository>()));
+    gh.lazySingleton<_i31.LaunchDetails>(
+        () => _i31.LaunchDetails(gh<_i24.SplashScreenRepository>()));
+    gh.lazySingleton<_i32.LoginByFP>(
+        () => _i32.LoginByFP(gh<_i15.MPINRepository>()));
+    gh.lazySingleton<_i33.LoginByMpin>(
+        () => _i33.LoginByMpin(gh<_i15.MPINRepository>()));
+    gh.lazySingleton<_i34.Logout>(
+        () => _i34.Logout(gh<_i17.ProfileRepository>()));
+    gh.lazySingleton<_i35.SaveFile>(
+        () => _i35.SaveFile(gh<_i20.SaveFileRepository>()));
     return this;
   }
 }
 
-class _$MAUEngineModule extends _i35.MAUEngineModule {}
+class _$MAUEngineModule extends _i36.MAUEngineModule {}

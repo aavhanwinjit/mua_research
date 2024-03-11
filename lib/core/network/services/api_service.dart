@@ -3,6 +3,8 @@ import 'package:ekyc/core/helpers/http_api_service_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/request/save_file_request_model.dart';
 import 'package:ekyc/features/auth_profile/data/models/save_file/response/save_file_response_model.dart';
+import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/response/resend_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validate_otp_request_model.dart';
@@ -40,6 +42,7 @@ class ApiService {
       "/AgentAPI/Login/DeRegisterFingerPrint";
   static const GET_AGENT_DETAILS = "/AgentAPI/Agent/GetAgentDetails";
   static const VERIFY_MPIN = "/AgentAPI/Registration/ValidateMPIN";
+  static const CHANGE_MPIN = "/AgentAPI/Registration/ChangeMPIN";
 
   ApiService(Dio dio, {String? baseUrl});
 
@@ -187,6 +190,19 @@ class ApiService {
         VERIFY_MPIN, request.toJson(), headers);
 
     return VerifyMPINResponseModel.fromJson(response);
+  }
+
+  Future<ChangeMPINResponseModel> changeMPIN(
+      ChangeMPINRequestModel request) async {
+    final token = await LocalDataHelper.getAuthToken();
+
+    final headers = {
+      "Authorization": token,
+    };
+    final response = await HttpApiServiceHelper.postMethod(
+        CHANGE_MPIN, request.toJson(), headers);
+
+    return ChangeMPINResponseModel.fromJson(response);
   }
 }
 

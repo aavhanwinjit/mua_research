@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
@@ -14,14 +15,23 @@ mixin AgentDetailsMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (GetAgentDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.watch(agentDetailsResponseProvider.notifier).update((state) => success);
+          ref
+              .watch(agentDetailsResponseProvider.notifier)
+              .update((state) => success);
+          print("----------------------------------------");
+          print(success.body!.responseBody!.mobileNumber);
+          print("----------------------------------------");
+          ref.watch(phoneNumberProvider.notifier).update(
+              (state) => success.body!.responseBody!.mobileNumber!.toString());
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
