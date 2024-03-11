@@ -13,9 +13,9 @@ import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/request/verif
 import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/response/verify_mpin_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/domain/usecases/verify_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/registration_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/masked_pin_textfield.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/pin_keypad.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/mixins/registration_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
@@ -30,8 +30,7 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
-    with BiometricAuthMixin, RegistrationMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin, RegistrationMixin {
   bool successVal = false;
 
   @override
@@ -123,7 +122,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
         successVal = true;
         setState(() {});
       },
-      successNavigation: () {
+      successNavigation: () async {
         ref.watch(isFPLoginProvider.notifier).update((state) => true);
 
         context.pushNamed(AppRoutes.onboardSuccessScreen);
@@ -185,8 +184,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
           context.pushNamed(AppRoutes.otpScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

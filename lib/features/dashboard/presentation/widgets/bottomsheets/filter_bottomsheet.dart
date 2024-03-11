@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/dashboard/presentation/providers/filter_status_provider.dart';
+import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/application_filters_providers.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,14 +13,32 @@ class FilterBottomsheet extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _FilterBottomsheetState();
 }
 
-class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
+class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with AgentApplicationsMixin {
+  bool idMissing = false;
+  bool porMissing = false;
+  bool poaMissing = false;
+  bool completed = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setData();
+    });
+  }
+
+  void setData() {
+    idMissing = ref.watch(filterIncompleteIdProvider);
+    porMissing = ref.watch(filterIncompletePORProvider);
+    poaMissing = ref.watch(filterIncompletePOAProvider);
+    completed = ref.watch(filterCompleteProvider);
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
-    final filterIncompleteId = ref.watch(filterIncompleteIdProvider);
-    final filterIncompletePOR = ref.watch(filterIncompletePORProvider);
-    final filterIncompletePOA = ref.watch(filterIncompletePOAProvider);
-    final filterComplete = ref.watch(filterCompleteProvider);
-
     return Container(
       color: white,
       child: Column(
@@ -30,30 +49,34 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
           SizedBox(height: 10.h),
           _headingWidget(),
           CustomCheckboxTile(
-            value: filterIncompleteId,
+            value: idMissing,
             onChanged: (value) {
-              ref.watch(filterIncompleteIdProvider.notifier).update((state) => !state);
+              idMissing = !idMissing;
+              setState(() {});
             },
             title: Strings.chipStatusIDMissing,
           ),
           CustomCheckboxTile(
-            value: filterIncompletePOR,
+            value: porMissing,
             onChanged: (value) {
-              ref.watch(filterIncompletePORProvider.notifier).update((state) => !state);
+              porMissing = !porMissing;
+              setState(() {});
             },
             title: Strings.chipStatusPORMissing,
           ),
           CustomCheckboxTile(
-            value: filterIncompletePOA,
+            value: poaMissing,
             onChanged: (value) {
-              ref.watch(filterIncompletePOAProvider.notifier).update((state) => !state);
+              poaMissing = !poaMissing;
+              setState(() {});
             },
             title: Strings.chipStatusPOAMissing,
           ),
           CustomCheckboxTile(
-            value: filterComplete,
+            value: completed,
             onChanged: (value) {
-              ref.watch(filterCompleteProvider.notifier).update((state) => !state);
+              completed = !completed;
+              setState(() {});
             },
             title: Strings.chipStatusCompleted,
           ),
@@ -86,7 +109,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
             flex: 2,
             child: CustomOutlineButton(
               disable: false,
-              onTap: () {},
+              onTap: _clearFilters,
               label: Strings.clearAll,
             ),
           ),
@@ -95,13 +118,40 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> {
             flex: 3,
             child: CustomPrimaryButton(
               disable: false,
-              onTap: () {},
+              onTap: _applyFilter,
               label: Strings.apply,
             ),
           ),
         ],
       ),
     );
+  }
+
+  void _applyFilter() async {
+    ref.watch(filterIncompleteIdProvider.notifier).update((state) => idMissing);
+    ref.watch(filterIncompletePORProvider.notifier).update((state) => porMissing);
+    ref.watch(filterIncompletePOAProvider.notifier).update((state) => poaMissing);
+    ref.watch(filterCompleteProvider.notifier).update((state) => completed);
+
+    await getAgentApplications(context: context, ref: ref);
+
+    context.pop();
+  }
+
+  void _clearFilters() async {
+    idMissing = false;
+    porMissing = false;
+    poaMissing = false;
+    completed = false;
+
+    setState(() {});
+
+    ref.watch(filterIncompleteIdProvider.notifier).update((state) => false);
+    ref.watch(filterIncompletePORProvider.notifier).update((state) => false);
+    ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
+    ref.watch(filterCompleteProvider.notifier).update((state) => false);
+
+    await getAgentApplications(context: context, ref: ref);
   }
 
   Widget _titleWithCloseButton() {

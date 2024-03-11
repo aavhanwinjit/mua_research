@@ -11,17 +11,13 @@ import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/request/verif
 import 'package:ekyc/features/mpin_face_id/data/models/verify_mpin/response/verify_mpin_response_model.dart';
 
 abstract class MPINRepository {
-  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(
-      SetAgentMpinRequestModel request);
+  Future<Either<Failure, SetAgentMpinResponseModel>> setAgentMPIN(SetAgentMpinRequestModel request);
 
-  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(
-      LoginbyMpinRequestModel request);
+  Future<Either<Failure, LoginbyMpinResponseModel>> loginByMPIN(LoginbyMpinRequestModel request);
 
-  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(
-      LoginByFpRequestModel request);
+  Future<Either<Failure, LoginByFpResponseModel>> loginByFP(LoginByFpRequestModel request);
 
   Future<Either<Failure, SetFingerprintResponseModel>> setFingerPrint();
 
-  Future<Either<Failure, VerifyMPINResponseModel>> verifyMPIN(
-      VerifyMPINRequestModel request);
+  Future<Either<Failure, VerifyMPINResponseModel>> verifyMPIN(VerifyMPINRequestModel request);
 }

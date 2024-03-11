@@ -7,7 +7,7 @@ import 'package:ekyc/features/profile/data/models/get_agent_details/response/get
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/profile/presentation/widgets/biometric_switch_tile.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
-import 'package:ekyc/features/profile/presentation/widgets/signature_widget.dart';
+import 'package:ekyc/features/signature/presentation/widgets/signature_container.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

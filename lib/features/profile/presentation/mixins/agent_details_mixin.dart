@@ -4,12 +4,12 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart';
-import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 mixin AgentDetailsMixin {
-  Future<void> getAgentDetails(BuildContext context, WidgetRef ref) async {
+  Future<void> getAgentDetails(BuildContext context, WidgetRef ref,
+      {required Function(GetAgentDetailsResponseModel? agentDetails) onSuccess}) async {
     final response = await getIt<GetAgentDetails>().call(null);
 
     response.fold(
@@ -20,14 +20,12 @@ mixin AgentDetailsMixin {
       },
       (GetAgentDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .watch(agentDetailsResponseProvider.notifier)
-              .update((state) => success);
           print("----------------------------------------");
           print(success.body!.responseBody!.mobileNumber);
           print("----------------------------------------");
           ref.watch(phoneNumberProvider.notifier).update(
               (state) => success.body!.responseBody!.mobileNumber!.toString());
+          onSuccess(success);
         } else {
           context.showErrorSnackBar(
             message:

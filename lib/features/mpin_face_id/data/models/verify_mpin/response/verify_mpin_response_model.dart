@@ -15,8 +15,7 @@ part 'verify_mpin_response_model.g.dart';
 VerifyMPINResponseModel verifyMPINResponseModelFromJson(String str) =>
     VerifyMPINResponseModel.fromJson(json.decode(str));
 
-String verifyMPINResponseModelToJson(VerifyMPINResponseModel data) =>
-    json.encode(data.toJson());
+String verifyMPINResponseModelToJson(VerifyMPINResponseModel data) => json.encode(data.toJson());
 
 @freezed
 class VerifyMPINResponseModel with _$VerifyMPINResponseModel {
@@ -26,8 +25,7 @@ class VerifyMPINResponseModel with _$VerifyMPINResponseModel {
     @JsonKey(name: "s") StatusModel? status,
   }) = _VerifyMPINResponseModel;
 
-  factory VerifyMPINResponseModel.fromJson(Map<String, dynamic> json) =>
-      _$VerifyMPINResponseModelFromJson(json);
+  factory VerifyMPINResponseModel.fromJson(Map<String, dynamic> json) => _$VerifyMPINResponseModelFromJson(json);
 }
 
 @freezed
@@ -37,8 +35,7 @@ class VerifyMPINData with _$VerifyMPINData {
     @JsonKey(name: "checkSum") String? checkSum,
   }) = _VerifyMPINData;
 
-  factory VerifyMPINData.fromJson(Map<String, dynamic> json) =>
-      _$VerifyMPINDataFromJson(json);
+  factory VerifyMPINData.fromJson(Map<String, dynamic> json) => _$VerifyMPINDataFromJson(json);
 }
 
 @freezed
@@ -48,6 +45,5 @@ class VerifyMPINResponseBody with _$VerifyMPINResponseBody {
     @JsonKey(name: "tokenData") TokenData? tokenData,
   }) = _VerifyMPINResponseBody;
 
-  factory VerifyMPINResponseBody.fromJson(Map<String, dynamic> json) =>
-      _$VerifyMPINResponseBodyFromJson(json);
+  factory VerifyMPINResponseBody.fromJson(Map<String, dynamic> json) => _$VerifyMPINResponseBodyFromJson(json);
 }

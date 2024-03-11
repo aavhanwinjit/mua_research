@@ -1,10 +1,15 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
+import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/agent_applications_notifier.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/dashboard_providers.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/kyc_type_bottomsheet.dart';
+import 'package:ekyc/features/dashboard/presentation/widgets/dashboard_loading_widget.dart';
+import 'package:ekyc/features/dashboard/presentation/widgets/no_data_body.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
-import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +25,25 @@ class DashboardScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentDetailsMixin {
+class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApplicationsMixin {
   final ScrollController _scrollController = ScrollController();
-  final bool _listEmpty = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getAgentDetails(context, ref);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getAgentApplications(context: context, ref: ref);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    ref.watch(agentApplicationsNotifierProvider);
+
+    final applicationListLoading = ref.watch(applicationListLoadingProvider);
+
     return GestureDetector(
       onTap: () {
         KeyboardHelper.onScreenTap(context);
@@ -40,10 +51,13 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentDet
       child: Scaffold(
         backgroundColor: disabledButtonColor,
         appBar: _appBar(),
-        floatingActionButton: _fab(),
-        bottomNavigationBar: _listEmpty ? _bottomNavBarWidget() : null,
-        body: _bodyWidget(),
-        // body: NoDataBody(),
+        floatingActionButton: agentApplicationNotifier.haveApplications() ? _fab() : null,
+        bottomNavigationBar: agentApplicationNotifier.haveNoApplications() ? _bottomNavBarWidget() : null,
+        body: applicationListLoading == true
+            ? const DashboardLoadingWidget()
+            : agentApplicationNotifier.haveApplications()
+                ? _bodyWidget()
+                : const NoDataBody(),
       ),
     );
   }
@@ -62,15 +76,25 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentDet
   }
 
   Widget _listView() {
+    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    ref.watch(agentApplicationsNotifierProvider);
+
     return Expanded(
-      child: ListView.separated(
-        controller: _scrollController,
-        padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
-        itemBuilder: (context, index) {
-          return const ApplicantCard();
+      child: RefreshIndicator(
+        onRefresh: () async {
+          getAgentApplications(context: context, ref: ref);
         },
-        separatorBuilder: (context, index) => SizedBox(height: 16.h),
-        itemCount: 10,
+        child: ListView.separated(
+          controller: _scrollController,
+          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
+          itemBuilder: (context, index) {
+            final AgentApplicationsModel application = agentApplicationNotifier.applications()[index];
+
+            return ApplicantCard(application: application);
+          },
+          separatorBuilder: (context, index) => SizedBox(height: 16.h),
+          itemCount: agentApplicationNotifier.applications().length,
+        ),
       ),
     );
   }
