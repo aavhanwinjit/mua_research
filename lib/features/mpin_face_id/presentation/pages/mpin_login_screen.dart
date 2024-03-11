@@ -1,22 +1,15 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/helpers/device_information_helper.dart';
-import 'package:ekyc/core/helpers/local_data_helper.dart';
-import 'package:ekyc/core/providers/session_id_provider.dart';
-import 'package:ekyc/core/utils/api_error_codes.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
-import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/response/login_by_mpin_response_model.dart';
-import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_fp.dart';
-import 'package:ekyc/features/mpin_face_id/domain/usecases/login_by_mpin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/pages/mixins/login_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/masked_pin_textfield.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/pin_keypad.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
+import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
+import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
+import 'package:ekyc/models/agent_login_details/agent_login_details_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +23,7 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
 }
 
 class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
-    with BiometricAuthMixin {
+    with BiometricAuthMixin, LoginMixin, AgentDetailsMixin {
   bool wrongPin = false;
 
   @override
@@ -59,9 +52,25 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
               ),
               child: PinKeypad(
                 provider: loginPINProvider,
-                callback: () => Future.delayed(const Duration(seconds: 2), () {
-                  _loginByMPIN();
-                }),
+                callback: () => Future.delayed(
+                  const Duration(seconds: 2),
+                  () {
+                    loginByMPIN(
+                      context: context,
+                      ref: ref,
+                      onSuccess: onLoginSuccess,
+                      onWrongPin: () {
+                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        wrongPin = true;
+                        setState(() {});
+                      },
+                      onFailure: () {
+                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        setState(() {});
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -72,8 +81,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _title() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final name =
-        launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
+    final name = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
 
     return Text(
       "${Strings.hi} ${name ?? "-"}",
@@ -102,7 +110,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _forgotPinButton() {
     return TextButton(
-      onPressed: _forgotPin,
+      onPressed: () {
+        forgotPin(context: context, ref: ref);
+      },
       child: const Text(
         Strings.forgotPin,
         style: TextStyle(
@@ -114,9 +124,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _useBiometricButton() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final isFPLogin = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.isFpLogin ??
-        false;
+    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
 
     return isFPLogin
         ? TextButton(
@@ -151,78 +159,20 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
     );
   }
 
-  void _loginByMPIN() async {
-    final deviceInfo =
-        await DeviceInformationHelper().generateDeviceInformation();
-
-    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-
-    final String mobileNo = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
-        "";
-
-    final String deviceToken = await LocalDataHelper.getDeviceToken();
-
-    LoginbyMpinRequestModel request = LoginbyMpinRequestModel(
-      deviceId: deviceInfo.deviceId,
-      deviceToken: deviceToken,
-      mPin: ref.watch(loginPINProvider),
-      mobileNo: mobileNo,
-    );
-
-    final response = await getIt<LoginByMpin>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
-      },
-      (LoginbyMpinResponseModel success) async {
-        if (success.status?.isSuccess == true) {
-          // ref.read(loginByMpinResponseProvider.notifier).update((state) => success);
-          ref
-              .read(agentLoginDetailsProvider.notifier)
-              .update((state) => success.body?.responseBody);
-
-          debugPrint(
-              "success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
-
-          await _setData(
-            deviceToken: success.body?.responseBody?.deviceToken,
-            authToken: success.body?.responseBody?.authToken?.token,
-            sessionId: success.body?.responseBody?.authToken?.sessionId,
-          );
-
-          ref.watch(userLoggedInProvider.notifier).update((state) => true);
-
-          context.go(AppRoutes.dashboardScreen);
-        } else if (success.status?.isSuccess == false &&
-            success.status?.statusCode == ApiErrorCodes.inValidPin) {
-          context.showErrorSnackBar(
-            message: Strings.pinAuthenticationFailed,
-          );
-          ref.watch(loginPINProvider.notifier).update((state) => "");
-          wrongPin = true;
-          setState(() {});
-        } else {
-          context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-          ref.watch(loginPINProvider.notifier).update((state) => "");
-
-          setState(() {});
-        }
-      },
-    );
-  }
-
   Future<void> _biometricAuthentication() async {
-    _loginByFP();
+    loginByFP(
+      context: context,
+      ref: ref,
+      onSuccess: onLoginSuccess,
+    );
+
     // await authenticateWithBiometric(
     //   onAuthenticated: () {
-    //     _loginByFP();
+    //     loginByFP(
+    //       context: context,
+    //       ref: ref,
+    //       onSuccess: onLoginSuccess,
+    //     );
     //   },
     //   onAuthenticationFailure: (String error) {
     //     context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
@@ -230,85 +180,20 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
     // );
   }
 
-  void _loginByFP() async {
-    final deviceInfo =
-        await DeviceInformationHelper().generateDeviceInformation();
+  void onLoginSuccess(AgentLoginDetailsResponseModel? agentDetails) async {
+    ref.read(agentLoginDetailsProvider.notifier).update((state) => agentDetails);
 
-    final String deviceToken = await LocalDataHelper.getDeviceToken();
-    final String fpToken = await LocalDataHelper.getFPToken();
+    ref.watch(userLoggedInProvider.notifier).update((state) => true);
 
-    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final String mobileNo = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
-        "";
+    await getAgentDetails(
+      context,
+      ref,
+      onSuccess: (GetAgentDetailsResponseModel? agentDetails) {
+        ref.watch(agentDetailsResponseProvider.notifier).update((state) => agentDetails);
+        ref.watch(agentSignaturePathProvider.notifier).update((state) => agentDetails?.body?.responseBody?.signaturePath);
 
-    LoginByFpRequestModel request = LoginByFpRequestModel(
-      deviceId: deviceInfo.deviceId,
-      deviceToken: deviceToken,
-      biometricStatus: true,
-      fpDeviceToken: fpToken,
-      mobileNo: mobileNo,
-    );
-
-    final response = await getIt<LoginByFP>().call(request);
-
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
-      },
-      (LoginByFpResponseModel success) async {
-        if (success.status?.isSuccess == true) {
-          ref
-              .read(agentLoginDetailsProvider.notifier)
-              .update((state) => success.body?.responseBody);
-
-          debugPrint(
-              "success.body?.responseBody?.isFpLogin: ${success.body?.responseBody?.isFpLogin}");
-
-          await _setData(
-            deviceToken: success.body?.responseBody?.deviceToken,
-            authToken: success.body?.responseBody?.authToken?.token,
-            sessionId: success.body?.responseBody?.authToken?.sessionId,
-            fpDeviceToken: success.body?.responseBody?.fpDeviceToken,
-          );
-
-          debugPrint("Token: ${success.body?.responseBody?.authToken?.token}");
-          debugPrint(
-              "Session ID: ${success.body?.responseBody?.authToken?.sessionId}");
-
-          context.go(AppRoutes.dashboardScreen);
-        } else {
-          context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
+        context.go(AppRoutes.dashboardScreen);
       },
     );
-  }
-
-  Future<void> _forgotPin() async {
-    ref.watch(forgotPasswordSelectedProvider.notifier).update((state) => true);
-
-    context.pushNamed(AppRoutes.loginScreen);
-  }
-
-  Future<void> _setData({
-    required String? deviceToken,
-    required String? authToken,
-    required String? sessionId,
-    String? fpDeviceToken,
-  }) async {
-    await LocalDataHelper.storeDeviceToken(deviceToken);
-    await LocalDataHelper.storeAuthToken(authToken);
-    await LocalDataHelper.storeSessionId(sessionId);
-
-    if (fpDeviceToken != null) {
-      await LocalDataHelper.storeFPToken(fpDeviceToken);
-    }
-
-    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }
 }

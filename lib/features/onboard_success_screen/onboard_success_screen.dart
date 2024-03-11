@@ -1,10 +1,13 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
+import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
+import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class OnboardSuccessScreen extends ConsumerWidget {
+class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
   const OnboardSuccessScreen({super.key});
 
   @override
@@ -52,7 +55,20 @@ class OnboardSuccessScreen extends ConsumerWidget {
             child: CustomPrimaryButton(
               label: "Go to Dashboard",
               disable: false,
-              onTap: () => context.go(AppRoutes.dashboardScreen),
+              onTap: () async {
+                await getAgentDetails(
+                  context,
+                  ref,
+                  onSuccess: (GetAgentDetailsResponseModel? agentDetails) {
+                    ref.watch(agentDetailsResponseProvider.notifier).update((state) => agentDetails);
+                    ref
+                        .watch(agentSignaturePathProvider.notifier)
+                        .update((state) => agentDetails?.body?.responseBody?.signaturePath);
+
+                    context.go(AppRoutes.dashboardScreen);
+                  },
+                );
+              },
             ),
           ),
         ],

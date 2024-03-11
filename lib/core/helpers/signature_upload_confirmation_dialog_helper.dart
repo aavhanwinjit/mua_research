@@ -1,5 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/profile/presentation/mixins/signature_mixin.dart';
+import 'package:ekyc/features/signature/presentation/mixins/signature_mixin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
