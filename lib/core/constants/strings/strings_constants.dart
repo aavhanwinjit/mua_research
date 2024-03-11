@@ -269,4 +269,6 @@ class Strings {
   static const String biometricDialogBoxSubtitle = "This allows you to log in to MUA using Face ID";
   static const String biometricAuthenticationFailed = "Biometric Authentication Failed";
   static const String noBiometricsAvailable = "No Biometrics Available";
+  static const String mpinChangeSuccess =
+      "Your PIN has been updated successfully";
 }
