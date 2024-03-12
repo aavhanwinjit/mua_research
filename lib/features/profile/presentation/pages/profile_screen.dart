@@ -2,8 +2,8 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
-import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
+import 'package:ekyc/features/profile/presentation/dialogs/logout_dialog.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/profile/presentation/widgets/biometric_switch_tile.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
@@ -21,7 +21,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
 }
 
-class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutMixin {
+class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -104,7 +104,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
-              logout(context);
+              LogoutDialogHelper().showLogoutDialog(context);
             },
           ),
           SizedBox(height: 8.h),

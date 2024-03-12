@@ -15,21 +15,18 @@ mixin AgentDetailsMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (GetAgentDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          print("----------------------------------------");
-          print(success.body!.responseBody!.mobileNumber);
-          print("----------------------------------------");
-          ref.watch(phoneNumberProvider.notifier).update(
-              (state) => success.body!.responseBody!.mobileNumber!.toString());
+          ref
+              .watch(phoneNumberProvider.notifier)
+              .update((state) => success.body!.responseBody!.mobileNumber!.toString());
+
           onSuccess(success);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

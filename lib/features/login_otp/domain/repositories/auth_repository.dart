@@ -10,15 +10,11 @@ import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
 
 abstract class AuthRepository {
-  Future<Either<Failure, VerifyMobileNumberResponseModel>> verifyMobileNumber(
-      VerifyMobileNumberRequestModel request);
+  Future<Either<Failure, VerifyMobileNumberResponseModel>> verifyMobileNumber(VerifyMobileNumberRequestModel request);
 
-  Future<Either<Failure, ValidateOtpResponseModel>> validateOTP(
-      ValidateOtpRequestModel request);
+  Future<Either<Failure, ValidateOtpResponseModel>> validateOTP(ValidateOtpRequestModel request);
 
-  Future<Either<Failure, ChangeMPINResponseModel>> changeMPIN(
-      ChangeMPINRequestModel request);
+  Future<Either<Failure, ChangeMPINResponseModel>> changeMPIN(ChangeMPINRequestModel request);
 
-  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(
-      ResendOtpRequestModel request);
+  Future<Either<Failure, ResendOtpResponseModel>> resendOTP(ResendOtpRequestModel request);
 }
