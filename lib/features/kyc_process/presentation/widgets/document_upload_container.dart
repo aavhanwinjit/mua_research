@@ -48,6 +48,7 @@ class DocumentUploadContainer extends ConsumerWidget {
                 ImageConstants.cameraImage,
                 height: 20.h,
                 width: 20.w,
+                fit: BoxFit.cover,
               ),
               const SizedBox(height: 10),
               Text(

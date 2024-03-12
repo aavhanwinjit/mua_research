@@ -11,7 +11,8 @@ class AddressDetailsScreen extends ConsumerStatefulWidget {
   const AddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddressDetailsScreenState();
 }
 
 class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
@@ -96,7 +97,12 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
       items: items.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(
+            value,
+            style: TextStyle(
+              fontSize: 14.sp,
+            ),
+          ),
         );
       }).toList(),
     );
