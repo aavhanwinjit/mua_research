@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
@@ -21,7 +18,6 @@ import 'package:ekyc/features/splash_screen/presentation/providers/launch_detail
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:pointycastle/export.dart' as pointycastle;
 
 class ConfirmPINScreen extends ConsumerStatefulWidget {
   const ConfirmPINScreen({super.key});
@@ -171,12 +167,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
       (VerifyMPINResponseModel success) async {
         debugPrint("success in login screen : $success");
         if (success.status?.isSuccess == true) {
-          ref
-              .read(verifyMPINResponseProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(verifyMPINResponseProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -195,8 +187,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
     );
   }
 
-  Future<void> _setData(
-      {required String? authToken, required String? sessionId}) async {
+  Future<void> _setData({required String? authToken, required String? sessionId}) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
 

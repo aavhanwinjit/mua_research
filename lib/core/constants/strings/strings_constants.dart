@@ -50,6 +50,8 @@ class Strings {
   static const String technicalError = "Technical error. Please try again.";
   static const String hi = "Hi";
   static const String version = "Version";
+  static const String yes = "Yes";
+  static const String no = "No";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -90,6 +92,7 @@ class Strings {
 
   //Signature Screen
   static const String signHere = "Sign Here";
+  static const String updateSignatureText = "Are you sure you want to proceed to update the signature?";
 
   //Dashboard
   static const String emptyDashboardText = "No data to display!\nClick the labelLarge below\nto start KYC.";
@@ -239,6 +242,7 @@ class Strings {
   static const String helpContact = "+230 207 5500";
   static const String helpEmail = "info@mua.mu";
   static const String updateSignature = "Update Signature";
+  static const String logoutConfirmationText = "Are you sure you want to Logout?";
 
   static const String kycSubmittedSuccessfully = "KYC Submitted\nSuccessfully";
   static const String kycCompleted1 = "You have completed your KYC Application Process. Your request Id is ";
@@ -265,10 +269,11 @@ class Strings {
   static const String forgotPin = "Forget PIN/Re-register";
   static const String useTouchId = "Use touch ID";
   static const String pinAuthenticationFailed = "Your PIN authentication failed. Please retry.";
+  static const String pinValidationFailed =
+      "Sequential and repeated numbers not allowed. Please enter valid PIN to proceed.";
 
   static const String biometricDialogBoxSubtitle = "This allows you to log in to MUA using Face ID";
   static const String biometricAuthenticationFailed = "Biometric Authentication Failed";
   static const String noBiometricsAvailable = "No Biometrics Available";
-  static const String mpinChangeSuccess =
-      "Your PIN has been updated successfully";
+  static const String mpinChangeSuccess = "Your PIN has been updated successfully";
 }

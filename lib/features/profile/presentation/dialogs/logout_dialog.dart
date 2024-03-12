@@ -1,15 +1,15 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/signature/presentation/mixins/signature_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-class SignatureUploadConfirmationDialogHelper with SignatureMixin {
-  static void showSignatureUploadDialog(BuildContext context, {required Function onConfirm}) {
+class LogoutDialogHelper with LogoutMixin {
+  void showLogoutDialog(BuildContext context) {
     showCupertinoModalPopup<void>(
       context: context,
       builder: (BuildContext context) => CupertinoAlertDialog(
-        title: const Text(Strings.updateSignature),
-        content: const Text(Strings.updateSignatureText),
+        title: const Text(Strings.logout),
+        content: const Text(Strings.logoutConfirmationText),
         actions: <CupertinoDialogAction>[
           CupertinoDialogAction(
             isDestructiveAction: true,
@@ -21,7 +21,7 @@ class SignatureUploadConfirmationDialogHelper with SignatureMixin {
           CupertinoDialogAction(
             isDefaultAction: true,
             onPressed: () async {
-              onConfirm();
+              logout(context);
             },
             child: const Text(Strings.yes),
           ),

@@ -1,5 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/core/utils/extensions/string_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/masked_pin_textfield.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/widgets/pin_keypad.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
@@ -60,12 +62,23 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
               ),
               child: PinKeypad(
                 provider: createPINProvider,
-                callback: () => context.pushNamed(AppRoutes.confirmPINScreen),
+                callback: _validatePin,
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _validatePin() {
+    final bool isValid = ref.watch(createPINProvider).validatePin();
+
+    if (!isValid) {
+      context.showErrorSnackBar(message: Strings.pinValidationFailed);
+      ref.watch(createPINProvider.notifier).update((state) => "");
+    } else {
+      context.pushNamed(AppRoutes.confirmPINScreen);
+    }
   }
 }

@@ -24,7 +24,7 @@ mixin LogoutMixin {
       (LogoutResponseModel success) async {
         if (success.status?.isSuccess == true) {
           getIt<AppStorageManager>().clearStorage();
-          sessionID = "";
+          await LocalDataHelper.storeSessionId("");
 
           context.go(AppRoutes.loginScreen);
         } else {
