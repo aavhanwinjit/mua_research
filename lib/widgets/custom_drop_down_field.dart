@@ -27,7 +27,10 @@ class CustomDrowDownField extends StatelessWidget {
         dropdownColor: white,
         borderRadius: BorderRadius.circular(16),
         value: value,
-        icon: const Icon(Icons.keyboard_arrow_down),
+        icon: Icon(
+          Icons.keyboard_arrow_down,
+          size: 20.sp,
+        ),
         items: items,
         validator: validator,
         onChanged: onChanged,
@@ -35,8 +38,9 @@ class CustomDrowDownField extends StatelessWidget {
           filled: true,
           fillColor: white,
           labelText: labelText,
-          labelStyle: const TextStyle(
+          labelStyle: TextStyle(
             color: textGrayColor,
+            fontSize: 12.sp,
           ),
           border: CustomBorderStyle.customTextFieldBorder,
           focusedBorder: CustomBorderStyle.customTextFieldFocusedBorder,

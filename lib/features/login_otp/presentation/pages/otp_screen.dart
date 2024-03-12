@@ -65,9 +65,10 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                     children: [
                       Text(
                         phoneNumber.maskMobileNumber(),
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontWeight: FontWeight.w700,
                           color: black,
+                          fontSize: 16.sp,
                         ),
                       ),
                       TextButton(
@@ -117,8 +118,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       length: 6,
       controller: otpController,
       defaultPinTheme: PinTheme(
-        height: 50,
-        width: 50,
+        height: 50.h,
+        width: 50.w,
+        textStyle: TextStyle(
+          fontSize: 16.sp,
+        ),
         decoration: BoxDecoration(
             border: Border.all(
               color: borderColor,
@@ -126,8 +130,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
             borderRadius: BorderRadius.circular(12)),
       ),
       focusedPinTheme: PinTheme(
-        height: 50,
-        width: 50,
+        height: 50.h,
+        width: 50.w,
+        textStyle: TextStyle(
+          fontSize: 16.sp,
+        ),
         decoration: BoxDecoration(
             border: Border.all(
               color: primaryColor,
@@ -135,8 +142,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
             borderRadius: BorderRadius.circular(12)),
       ),
       submittedPinTheme: PinTheme(
-        height: 50,
-        width: 50,
+        height: 50.h,
+        width: 50.w,
+        textStyle: TextStyle(
+          fontSize: 16.sp,
+        ),
         decoration: BoxDecoration(
             border: Border.all(
               color: primaryGreenColor,
@@ -188,11 +198,16 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
             : TextButton.icon(
                 // onPressed: () {},
                 onPressed: _resendOTP,
-                icon: const Icon(Icons.timer_outlined, color: black),
-                label: const Text(
+                icon: Icon(
+                  Icons.timer_outlined,
+                  color: black,
+                  size: 20.sp,
+                ),
+                label: Text(
                   "Resend OTP",
                   style: TextStyle(
                     color: black,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),

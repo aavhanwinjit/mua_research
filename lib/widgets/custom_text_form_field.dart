@@ -74,12 +74,14 @@ class CustomTextFormField extends StatelessWidget {
         suffixIcon: suffixIcon,
         counterText: "",
         hintText: hint,
-        hintStyle: const TextStyle(
+        hintStyle: TextStyle(
           color: textGrayColor,
+          fontSize: 14.sp,
         ),
         labelText: label,
-        labelStyle: const TextStyle(
+        labelStyle: TextStyle(
           color: textGrayColor,
+          fontSize: 14.sp,
         ),
         floatingLabelStyle: const TextStyle(
           color: textGrayColor,

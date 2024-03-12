@@ -11,7 +11,10 @@ class AddDocumentButton extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: TextButton.icon(
         onPressed: onPressed,
-        icon: const Icon(Icons.add),
+        icon: Icon(
+          Icons.add,
+          size: 20.sp,
+        ),
         label: Text(
           Strings.addMoreDocuments,
           style: TextStyle(

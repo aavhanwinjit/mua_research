@@ -1,4 +1,4 @@
-import 'package:ekyc/core/constants/color/color_constants.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,8 +9,8 @@ class BackspaceButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 70,
-      width: 70,
+      height: 70.sp,
+      width: 70.sp,
       decoration: BoxDecoration(
         color: primaryBlueColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(100),
@@ -31,9 +31,10 @@ class BackspaceButton extends ConsumerWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(100),
         ),
-        child: const Icon(
+        child: Icon(
           Icons.backspace,
           color: primaryBlueColor,
+          size: 20.sp,
         ),
       ),
     );

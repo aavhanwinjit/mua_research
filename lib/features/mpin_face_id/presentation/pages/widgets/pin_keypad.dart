@@ -26,8 +26,8 @@ class PinKeypad extends ConsumerWidget {
                   vertical: 20,
                 ),
                 child: Container(
-                  height: 70,
-                  width: 70,
+                  height: 70.sp,
+                  width: 70.sp,
                   decoration: BoxDecoration(
                     color: primaryBlueColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(100),
@@ -74,8 +74,8 @@ class PinKeypad extends ConsumerWidget {
                 vertical: 20,
               ),
               child: SizedBox(
-                height: 70,
-                width: 70,
+                height: 70.sp,
+                width: 70.sp,
                 child: Container(),
               ),
             ),
@@ -113,8 +113,8 @@ class ZeroButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 70,
-      width: 70,
+      height: 70.sp,
+      width: 70.sp,
       decoration: BoxDecoration(
         color: primaryBlueColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(100),

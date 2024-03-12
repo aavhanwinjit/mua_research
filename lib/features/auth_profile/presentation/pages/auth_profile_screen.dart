@@ -220,11 +220,12 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with Sign
                         color: primaryBlueColor.withOpacity(0.16),
                         borderRadius: BorderRadius.circular(100),
                       ),
-                      child: const Text(
+                      child: Text(
                         Strings.addSignature,
                         style: TextStyle(
                           color: primaryBlueColor,
                           fontWeight: FontWeight.bold,
+                          fontSize: 12.sp,
                         ),
                       ),
                     ),

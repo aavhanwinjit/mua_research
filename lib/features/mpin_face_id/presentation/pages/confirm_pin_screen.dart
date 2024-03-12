@@ -26,7 +26,8 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin, RegistrationMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
+    with BiometricAuthMixin, RegistrationMixin {
   bool successVal = false;
 
   @override
@@ -53,13 +54,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
             ),
             const SizedBox(height: 10),
             //Subtitle
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Text(
                 Strings.createPinSubtitle,
-                style: TextStyle(),
+                style: TextStyle(
+                  fontSize: 14.sp,
+                ),
               ),
             ),
             const SizedBox(height: 50),
@@ -176,7 +179,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           context.pushNamed(AppRoutes.otpScreen);
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
