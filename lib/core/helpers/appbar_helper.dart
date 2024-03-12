@@ -26,6 +26,7 @@ class AppBarHelper {
               context.pop();
             },
         color: blueBackground == true ? white : black,
+        
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         // statusBarColor: Colors.red,

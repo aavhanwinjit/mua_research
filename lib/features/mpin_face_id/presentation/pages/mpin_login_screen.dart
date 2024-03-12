@@ -98,9 +98,11 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   }
 
   Widget _subHeading() {
-    return const Text(
+    return Text(
       Strings.verifypin,
-      style: TextStyle(),
+      style: TextStyle(
+        fontSize: 14.sp,
+      ),
     );
   }
 
@@ -136,12 +138,13 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
     return isFPLogin
         ? TextButton(
             onPressed: _biometricAuthentication,
-            child: const Text(
+            child: Text(
               Strings.useTouchId,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
                 decorationColor: primaryColor,
+                fontSize: 12.sp,
               ),
             ),
           )

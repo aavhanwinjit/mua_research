@@ -72,9 +72,10 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.keyIcon,
             title: Strings.changePin,
             subtitle: Strings.resetAppPin,
-            trailing: const Icon(
+            trailing: Icon(
               Icons.chevron_right,
               color: textGrayColor2,
+              size: 20.sp,
             ),
             onTap: () {
               context.pushNamed(AppRoutes.oldPINScreen);
@@ -88,9 +89,10 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> with LogoutM
             icon: ImageConstants.callIcon,
             title: Strings.contactUs,
             subtitle: Strings.faq,
-            trailing: const Icon(
+            trailing:  Icon(
               Icons.chevron_right,
               color: textGrayColor2,
+              size: 20.sp,
             ),
             onTap: () {
               ActionSheetHelper.showContactUsActionSheet(context);

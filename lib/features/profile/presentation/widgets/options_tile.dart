@@ -24,6 +24,7 @@ class OptionsTile extends StatelessWidget {
       contentPadding: EdgeInsets.zero,
       leading: ImageIcon(
         AssetImage(icon),
+        size: 20.sp,
       ),
       title: Text(
         title,

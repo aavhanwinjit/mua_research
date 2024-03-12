@@ -28,8 +28,12 @@ class DocumentUploadContainer extends ConsumerWidget {
       radius: const Radius.circular(16),
       child: InkWell(
         onTap: () {
-          ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
-          ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => reviewScreenTitle);
+          ref
+              .read(cameraScreenSubtitle.notifier)
+              .update((state) => cameraScreenDescription);
+          ref
+              .read(reviewUploadedDocScreenTitle.notifier)
+              .update((state) => reviewScreenTitle);
 
           context.pushNamed(AppRoutes.cameraScreen);
         },
@@ -42,11 +46,16 @@ class DocumentUploadContainer extends ConsumerWidget {
             children: [
               Image.asset(
                 ImageConstants.cameraImage,
+                height: 20.h,
+                width: 20.w,
               ),
               const SizedBox(height: 10),
               Text(
                 label,
                 textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.sp,
+                ),
               ),
             ],
           ),

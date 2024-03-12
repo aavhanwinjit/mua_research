@@ -39,13 +39,15 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
             ),
             const SizedBox(height: 10),
             //subtitle
-            const Padding(
-              padding: EdgeInsets.symmetric(
+            Padding(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 20,
               ),
               child: Text(
                 Strings.createPinSubtitle,
-                style: TextStyle(),
+                style: TextStyle(
+                  fontSize: 14.sp,
+                ),
               ),
             ),
             const SizedBox(height: 50),

@@ -1,4 +1,4 @@
-import 'package:ekyc/core/constants/color/color_constants.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,8 +16,8 @@ class MaskedPinTextfield extends ConsumerWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 12,
-              width: 12,
+              height: 12.sp,
+              width: 12.sp,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: index + 1 <= ref.watch(provider).length

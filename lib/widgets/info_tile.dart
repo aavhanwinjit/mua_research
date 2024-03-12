@@ -15,15 +15,17 @@ class InfoTile extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(
+          style: TextStyle(
             color: textGrayColor2,
+            fontSize: 12.sp,
           ),
         ),
         const SizedBox(height: 5),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w700,
+            fontSize: 14.sp,
           ),
         ),
       ],
