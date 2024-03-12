@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
@@ -272,10 +273,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           // );
 
           context.showSnackBar(message: Strings.mpinChangeSuccess);
+
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
-          context.go(AppRoutes.mpinLoginScreen);
+
           await LocalDataHelper.storeSessionId("");
-          print(await LocalDataHelper.getSessionId());
+
+          context.go(AppRoutes.mpinLoginScreen);
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
