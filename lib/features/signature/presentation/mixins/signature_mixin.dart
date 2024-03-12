@@ -129,7 +129,6 @@ mixin SignatureMixin {
       },
       (ViewFileResponseModel success) {
         if (success.status?.isSuccess == true) {
-          debugPrint("success.body?.responseBod: ${success.body?.responseBody}");
           ref.watch(signatureBase64Provider.notifier).update((state) => success.body?.responseBody);
         } else {
           context.showErrorSnackBar(

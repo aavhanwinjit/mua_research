@@ -1,7 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
@@ -56,8 +55,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.only(
-                left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(
@@ -100,9 +98,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                   //   final String sId = ProviderContainer().read(sessionIdProvider);
                   //   debugPrint("sid: $sId");
                   // },
-                  onTap: () => ref.watch(userLoggedInProvider)
-                      ? _changeMPIN()
-                      : _verifyOTP(),
+                  onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
                   label: Strings.contn,
                 ),
                 SizedBox(height: 18.h),
@@ -229,18 +225,14 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       },
       (ValidateOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .read(validateOTPResponseProvider.notifier)
-              .update((state) => success);
+          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
 
           context.pushReplacementNamed(AppRoutes.successScreen);
-        } else if (success.status?.isSuccess == false &&
-            success.status?.statusCode == ApiErrorCodes.notFount) {
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
           context.pushReplacementNamed(AppRoutes.failureScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -271,12 +263,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       (ChangeMPINResponseModel success) async {
         debugPrint("success in login screen : $success");
         if (success.status?.isSuccess == true) {
-          ref
-              .read(changeMPINResponseProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(changeMPINResponseProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -288,8 +276,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           context.go(AppRoutes.mpinLoginScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -305,8 +292,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
 
     final String? refCode = ref.watch(refCodeProvider);
 
-    final ResendOtpRequestModel request =
-        ResendOtpRequestModel(refCode: refCode);
+    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
@@ -322,9 +308,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
 
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 
@@ -333,8 +317,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

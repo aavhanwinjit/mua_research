@@ -6,8 +6,7 @@ final createPINProvider = StateProvider<String>((ref) => '');
 
 final confirmPINProvider = StateProvider<String>((ref) => '');
 
-final agentLoginDetailsProvider =
-    StateProvider<AgentLoginDetailsResponseModel?>((ref) => null);
+final agentLoginDetailsProvider = StateProvider<AgentLoginDetailsResponseModel?>((ref) => null);
 
 final loginPINProvider = StateProvider<String>((ref) => '');
 
@@ -17,5 +16,4 @@ final forgotPasswordSelectedProvider = StateProvider<bool>((ref) => false);
 
 final oldPINProvider = StateProvider<String>((ref) => '');
 
-final verifyMPINResponseProvider =
-    StateProvider<VerifyMPINResponseModel?>((ref) => null);
+final verifyMPINResponseProvider = StateProvider<VerifyMPINResponseModel?>((ref) => null);
