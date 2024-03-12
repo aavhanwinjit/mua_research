@@ -50,9 +50,9 @@ class _OldPinScreenState extends ConsumerState<OldPinScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            SizedBox(height: 20.h),
             MaskedPinTextfield(provider: oldPINProvider),
-            const SizedBox(height: 80),
+            SizedBox(height: 40.h),
             //PIN keypad
             Padding(
               padding: const EdgeInsets.symmetric(

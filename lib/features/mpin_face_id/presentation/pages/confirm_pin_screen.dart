@@ -65,9 +65,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            SizedBox(height: 20.h),
             MaskedPinTextfield(provider: confirmPINProvider),
-            const SizedBox(height: 30),
+            SizedBox(height: successVal ? 10.h : 40.h),
             successVal
                 ? Container(
                     color: primaryGreenColor,
@@ -83,7 +83,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
                       ),
                     ),
                   )
-                : const SizedBox(height: 10),
+                : const SizedBox(height: 0),
             const SizedBox(height: 10),
             //PIN keypad
             Padding(
@@ -165,10 +165,14 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (VerifyMPINResponseModel success) async {
-        debugPrint("success in login screen : $success");
+        debugPrint("success in confirm pin screen : $success");
         if (success.status?.isSuccess == true) {
-          ref.read(verifyMPINResponseProvider.notifier).update((state) => success);
-          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref
+              .read(verifyMPINResponseProvider.notifier)
+              .update((state) => success);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -187,7 +191,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
     );
   }
 
-  Future<void> _setData({required String? authToken, required String? sessionId}) async {
+  Future<void> _setData(
+      {required String? authToken, required String? sessionId}) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
 
