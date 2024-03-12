@@ -52,9 +52,9 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 50),
+            SizedBox(height: 20.h),
             MaskedPinTextfield(provider: createPINProvider),
-            const SizedBox(height: 80),
+            SizedBox(height: 40.h),
             //PIN keypad
             Padding(
               padding: const EdgeInsets.symmetric(
