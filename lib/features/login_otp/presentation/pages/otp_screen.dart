@@ -274,6 +274,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           context.showSnackBar(message: Strings.mpinChangeSuccess);
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
           context.go(AppRoutes.mpinLoginScreen);
+          await LocalDataHelper.storeSessionId("");
+          print(await LocalDataHelper.getSessionId());
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
