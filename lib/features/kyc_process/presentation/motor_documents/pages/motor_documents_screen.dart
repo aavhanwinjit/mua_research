@@ -12,7 +12,8 @@ class MotorDocumentScreen extends ConsumerStatefulWidget {
   const MotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PolicyDocumentsScreenState();
 }
 
 class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
@@ -99,7 +100,15 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
       items: items.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
+            ),
+          ),
         );
       }).toList(),
     );
