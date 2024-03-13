@@ -72,7 +72,7 @@ class InsuranceTypeCard extends ConsumerWidget {
                 title,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: screenWidth > 480 ? 10.sp : 14.sp,
+                  fontSize: screenWidth > 480 ? 9.sp : 14.sp,
                   color: kycType == valueType ? primaryBlueColor : black,
                   fontWeight: FontWeight.w600,
                 ),
