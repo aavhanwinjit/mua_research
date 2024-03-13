@@ -52,9 +52,9 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20.h),
+            const Spacer(),
             MaskedPinTextfield(provider: createPINProvider),
-            SizedBox(height: 40.h),
+            const Spacer(),
             //PIN keypad
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -65,6 +65,7 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
                 callback: _validatePin,
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),

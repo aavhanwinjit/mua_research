@@ -37,10 +37,10 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
           children: [
             _title(),
             _subHeading(),
-            SizedBox(height: 24.h),
+            const Spacer(),
             MaskedPinTextfield(provider: loginPINProvider),
+            const Spacer(),
             if (wrongPin) ...[
-              SizedBox(height: 12.h),
               _wrongPinText(),
               _forgotPinButton(),
             ],
@@ -60,12 +60,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
                       ref: ref,
                       onSuccess: onLoginSuccess,
                       onWrongPin: () {
-                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        ref
+                            .watch(loginPINProvider.notifier)
+                            .update((state) => "");
                         wrongPin = true;
                         setState(() {});
                       },
                       onFailure: () {
-                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        ref
+                            .watch(loginPINProvider.notifier)
+                            .update((state) => "");
                         setState(() {});
                       },
                     );
@@ -73,6 +77,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
                 ),
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),
@@ -81,7 +86,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _title() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final name = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
+    final name =
+        launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
 
     return Text(
       "${Strings.hi} ${name ?? "-"}",
@@ -102,10 +108,11 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   }
 
   Widget _wrongPinText() {
-    return const Text(
+    return Text(
       Strings.wrongPin,
       style: TextStyle(
         color: errorTextRed,
+        fontSize: 14.sp,
       ),
     );
   }
@@ -115,10 +122,11 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       onPressed: () {
         forgotPin(context: context, ref: ref);
       },
-      child: const Text(
+      child: Text(
         Strings.forgotPin,
         style: TextStyle(
           color: primaryBlueColor,
+          fontSize: 14.sp,
         ),
       ),
     );
@@ -126,7 +134,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _useBiometricButton() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
+    final isFPLogin = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.isFpLogin ??
+        false;
 
     return isFPLogin
         ? TextButton(
@@ -184,7 +194,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   }
 
   void onLoginSuccess(AgentLoginDetailsResponseModel? agentDetails) async {
-    ref.read(agentLoginDetailsProvider.notifier).update((state) => agentDetails);
+    ref
+        .read(agentLoginDetailsProvider.notifier)
+        .update((state) => agentDetails);
 
     ref.watch(userLoggedInProvider.notifier).update((state) => true);
 
@@ -193,7 +205,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       ref,
       onSuccess: (GetAgentDetailsResponseModel? agentDetails) {
         ref.watch(loginPINProvider.notifier).update((state) => "");
-        ref.watch(agentDetailsResponseProvider.notifier).update((state) => agentDetails);
+        ref
+            .watch(agentDetailsResponseProvider.notifier)
+            .update((state) => agentDetails);
         ref
             .watch(agentSignaturePathProvider.notifier)
             .update((state) => agentDetails?.body?.responseBody?.signaturePath);

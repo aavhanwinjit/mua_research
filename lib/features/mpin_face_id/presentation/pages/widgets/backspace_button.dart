@@ -9,8 +9,12 @@ class BackspaceButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 70.sp,
-      width: 70.sp,
+      height: 50.sp,
+      width: 50.sp,
+      constraints: const BoxConstraints(
+        maxHeight: 90,
+        maxWidth: 90,
+      ),
       decoration: BoxDecoration(
         color: primaryBlueColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(100),

@@ -10,7 +10,8 @@ class KYCTypeBottomsheet extends ConsumerStatefulWidget {
   const KYCTypeBottomsheet({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _FilterBottomsheetState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _FilterBottomsheetState();
 }
 
 class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
@@ -24,7 +25,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
         children: [
           _titleWithCloseButton(),
           _headingWidget(),
-          SizedBox(height: 32.h),
+          SizedBox(height: 30.h),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
@@ -101,7 +102,10 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> {
             onPressed: () {
               context.pop();
             },
-            icon: const Icon(Icons.close),
+            icon: Icon(
+              Icons.close,
+              size: 20.sp,
+            ),
           ),
         ],
       ),
