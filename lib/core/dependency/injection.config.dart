@@ -97,7 +97,7 @@ extension GetItInjectableX on _i1.GetIt {
       environmentFilter,
     );
     final mAUEngineModule = _$MAUEngineModule();
-    gh.singleton<_i3.AppConfig>(mAUEngineModule.getAppConfig());
+    gh.singleton<_i3.AppConfig>(() => mAUEngineModule.getAppConfig());
     gh.lazySingleton<_i4.AppStorageManager>(() => _i5.StorageManagerImpl());
     gh.lazySingleton<_i6.DeviceInformationHelper>(
         () => _i6.DeviceInformationHelper());
