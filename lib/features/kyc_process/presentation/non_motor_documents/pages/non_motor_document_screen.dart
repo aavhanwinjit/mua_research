@@ -12,10 +12,12 @@ class NonMotorDocumentScreen extends ConsumerStatefulWidget {
   const NonMotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> {
+class _PolicyDocumentsScreenState
+    extends ConsumerState<NonMotorDocumentScreen> {
   String? dropdownValue;
 
   List<String> items = [
@@ -100,7 +102,15 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
       items: items.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
+            ),
+          ),
         );
       }).toList(),
     );
