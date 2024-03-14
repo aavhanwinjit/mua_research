@@ -9,11 +9,11 @@ class BackspaceButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 50.sp,
-      width: 50.sp,
-      constraints: const BoxConstraints(
-        maxHeight: 90,
-        maxWidth: 90,
+      height: MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+      width: MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.width > 480 ? 90 : 120,
+        maxWidth: MediaQuery.of(context).size.width > 480 ? 90 : 120,
       ),
       decoration: BoxDecoration(
         color: primaryBlueColor.withOpacity(0.1),
@@ -38,7 +38,7 @@ class BackspaceButton extends ConsumerWidget {
         child: Icon(
           Icons.backspace,
           color: primaryBlueColor,
-          size: 20.sp,
+          size: MediaQuery.of(context).size.width > 480 ? 18.sp : 28.sp,
         ),
       ),
     );

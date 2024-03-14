@@ -16,6 +16,8 @@ class CustomTextFormField extends StatelessWidget {
   final String? prefixText;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final Color? labelTextColor;
+  final double? labelTextSize;
   final TextInputType? keyboardType;
   final bool? readOnly;
   final void Function()? onTap;
@@ -38,6 +40,8 @@ class CustomTextFormField extends StatelessWidget {
     this.prefixText,
     this.prefixIcon,
     this.suffixIcon,
+    this.labelTextColor,
+    this.labelTextSize,
     this.keyboardType,
     this.readOnly,
     this.onTap,
@@ -80,8 +84,8 @@ class CustomTextFormField extends StatelessWidget {
         ),
         labelText: label,
         labelStyle: TextStyle(
-          color: textGrayColor,
-          fontSize: 14.sp,
+          color: labelTextColor ?? textGrayColor,
+          fontSize: labelTextSize ?? 14.sp,
         ),
         floatingLabelStyle: const TextStyle(
           color: textGrayColor,
