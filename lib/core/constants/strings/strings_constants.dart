@@ -52,6 +52,7 @@ class Strings {
   static const String version = "Version";
   static const String yes = "Yes";
   static const String no = "No";
+  static const String selectMinOneFilter = "Select minimum one filter";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";

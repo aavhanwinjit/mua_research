@@ -117,7 +117,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
           Flexible(
             flex: 3,
             child: CustomPrimaryButton(
-              disable: false,
+              disable: !_isAnyFilterApplied(),
               onTap: _applyFilter,
               label: Strings.apply,
             ),
@@ -125,6 +125,10 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
         ],
       ),
     );
+  }
+
+  bool _isAnyFilterApplied() {
+    return idMissing || porMissing || poaMissing || completed;
   }
 
   void _applyFilter() async {
