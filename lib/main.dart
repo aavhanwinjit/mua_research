@@ -28,28 +28,43 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(360, 844),
-      builder: (_, child) {
-        return MaterialApp.router(
-          title: 'MUA KYC',
-          debugShowCheckedModeBanner: false,
-          localizationsDelegates: const [
-            AppLocalizationDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          theme: AppTheme.lightTheme,
-          supportedLocales: const [
-            Locale(
-              'en',
-              '',
-            ),
-          ],
-          routeInformationParser: router.routeInformationParser,
-          routerDelegate: router.routerDelegate,
-          routeInformationProvider: router.routeInformationProvider,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return ScreenUtilInit(
+          designSize: Size(constraints.maxWidth, constraints.maxHeight),
+          // minTextAdapt: constraints.maxWidth.isDesktop() ? true : false, // enable only for web
+          // fontSizeResolver: (fontSize, instance) {
+          //   // Adjust the font size based on screenWidth or any other criteria
+          //   if (instance.screenWidth.isDesktop() || instance.scaleWidth.isTablet()) {
+          //     return fontSize * 0.9; // keep the original font size for larger screens
+          //   } else {
+          //     return fontSize * 0.8; // decrease font size for smaller screens
+          //   }
+          // },
+
+          // designSize: const Size(360, 844),
+          builder: (_, child) {
+            return MaterialApp.router(
+              title: 'MUA KYC',
+              debugShowCheckedModeBanner: false,
+              localizationsDelegates: const [
+                AppLocalizationDelegate(),
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              theme: AppTheme.lightTheme,
+              supportedLocales: const [
+                Locale(
+                  'en',
+                  '',
+                ),
+              ],
+              routeInformationParser: router.routeInformationParser,
+              routerDelegate: router.routerDelegate,
+              routeInformationProvider: router.routeInformationProvider,
+            );
+          },
         );
       },
     );
