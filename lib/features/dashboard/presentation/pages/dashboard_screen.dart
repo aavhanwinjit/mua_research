@@ -163,7 +163,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
 
   Widget _fab() {
     return ScrollingFabAnimated(
-      width: 125.w,
+      width: MediaQuery.of(context).size.width > 480 ? 125.w : 170.w,
       icon: Icon(
         Icons.add,
         color: Colors.white,
