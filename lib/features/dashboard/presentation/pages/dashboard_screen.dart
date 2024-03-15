@@ -121,29 +121,39 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
               color: black,
             ),
           ),
-          SizedBox(height: 16.h),
+          const SizedBox(height: 15),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: CustomTextFormField(
                   label: Strings.searchApplicants,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: ImageIcon(
-                      AssetImage(ImageConstants.searchIcon),
+                      const AssetImage(ImageConstants.searchIcon),
                       color: iconColor,
+                      size: MediaQuery.of(context).size.width > 480
+                          ? 16.sp
+                          : 20.sp,
                     ),
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: showFilterBottomSheet,
-                icon: ImageIcon(
-                  const AssetImage(ImageConstants.sortIcon),
-                  color: iconColor,
-                  size: 20.sp,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: IconButton(
+                  onPressed: showFilterBottomSheet,
+                  icon: ImageIcon(
+                    const AssetImage(ImageConstants.sortIcon),
+                    color: iconColor,
+                    size:
+                        MediaQuery.of(context).size.width > 480 ? 25.sp : 20.sp,
+                  ),
                 ),
               ),
+              const SizedBox(width: 40),
             ],
           ),
         ],
@@ -153,7 +163,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
 
   Widget _fab() {
     return ScrollingFabAnimated(
-      width: 170,
+      width: 125.w,
       icon: Icon(
         Icons.add,
         color: Colors.white,
@@ -164,7 +174,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
         style: TextStyle(
           color: white,
           fontSize: 16.sp,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
         ),
       ),
       onPress: showKYCStartBottomSheet,
@@ -193,13 +203,14 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen>
 
     return AppBar(
       scrolledUnderElevation: 0,
+      toolbarHeight: 60.h,
       title: InkWell(
         onTap: () {
           context.pushNamed(AppRoutes.profileScreen);
         },
         child: CustomProfileImageWidget(
           userName: agentName,
-          size: 32.w,
+          size: 32.sp,
           fontSize: 12.sp,
         ),
       ),

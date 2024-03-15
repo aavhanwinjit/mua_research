@@ -52,14 +52,14 @@ class ApplicantCard extends StatelessWidget {
                         DateTimeFormatter.getApplicationCardDateTime(application.crd),
                         style: TextStyle(
                           color: textGrayColor2,
-                          fontSize: 12.sp,
+                          fontSize: MediaQuery.of(context).size.width>480?10.sp: 12.sp,
                         ),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(width: 12.w),
-                _referenceNumberWidget(),
+                _referenceNumberWidget(context),
               ],
             ),
           ),
@@ -82,7 +82,7 @@ class ApplicantCard extends StatelessWidget {
     );
   }
 
-  Widget _referenceNumberWidget() {
+  Widget _referenceNumberWidget(context) {
     return SizedBox(
       width: 85.w,
       child: Column(
@@ -101,7 +101,7 @@ class ApplicantCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: black,
-              fontSize: 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ? 9.sp : 12.sp,
             ),
           ),
         ],

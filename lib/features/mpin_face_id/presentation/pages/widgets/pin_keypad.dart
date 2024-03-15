@@ -15,8 +15,8 @@ class PinKeypad extends ConsumerWidget {
       children: [
         Center(
           child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: 400,
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width > 480 ? 400 : 600,
             ),
             child: Wrap(
               alignment: WrapAlignment.center,
@@ -30,11 +30,15 @@ class PinKeypad extends ConsumerWidget {
                     vertical: 20,
                   ),
                   child: Container(
-                    height: 50.sp,
-                    width: 50.sp,
-                    constraints: const BoxConstraints(
-                      maxHeight: 90,
-                      maxWidth: 90,
+                    height:
+                        MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                    width:
+                        MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                    constraints: BoxConstraints(
+                      maxHeight:
+                          MediaQuery.of(context).size.width > 480 ? 90 : 120,
+                      maxWidth:
+                          MediaQuery.of(context).size.width > 480 ? 90 : 120,
                     ),
                     decoration: BoxDecoration(
                       color: primaryBlueColor.withOpacity(0.1),
@@ -62,7 +66,9 @@ class PinKeypad extends ConsumerWidget {
                         "${index + 1}",
                         style: TextStyle(
                           color: primaryBlueColor,
-                          fontSize: 24.sp,
+                          fontSize: MediaQuery.of(context).size.width > 480
+                              ? 18.sp
+                              : 36.sp,
                         ),
                       ),
                     ),
@@ -87,11 +93,15 @@ class PinKeypad extends ConsumerWidget {
                   vertical: 20,
                 ),
                 child: Container(
-                  height: 50.sp,
-                  width: 50.sp,
-                  constraints: const BoxConstraints(
-                    maxHeight: 90,
-                    maxWidth: 90,
+                  height:
+                      MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                  width:
+                      MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                  constraints: BoxConstraints(
+                    maxHeight:
+                        MediaQuery.of(context).size.width > 480 ? 90 : 120,
+                    maxWidth:
+                        MediaQuery.of(context).size.width > 480 ? 90 : 120,
                   ),
                   child: Container(),
                 ),
@@ -128,11 +138,11 @@ class ZeroButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
-      height: 50.sp,
-      width: 50.sp,
-      constraints: const BoxConstraints(
-        maxHeight: 90,
-        maxWidth: 90,
+      height: MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+      width: MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.width > 480 ? 90 : 120,
+        maxWidth: MediaQuery.of(context).size.width > 480 ? 90 : 120,
       ),
       decoration: BoxDecoration(
         color: primaryBlueColor.withOpacity(0.1),
@@ -160,7 +170,7 @@ class ZeroButton extends ConsumerWidget {
           "0",
           style: TextStyle(
             color: primaryBlueColor,
-            fontSize: 24.sp,
+            fontSize: MediaQuery.of(context).size.width > 480 ? 18.sp : 36.sp,
           ),
         ),
       ),
