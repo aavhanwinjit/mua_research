@@ -1,20 +1,20 @@
 name: ekyc
-
+ 
 description: A new Flutter project.
-
+ 
 # Production
 # version: 1.0.0+1
-
+ 
 # Development
 version: 2.0.0+2
-
-environment: 
+ 
+environment:
   sdk: ">=2.19.3 <3.0.0"
-
-dependencies: 
-  flutter: 
+ 
+dependencies:
+  flutter:
     sdk: flutter
-  flutter_localizations: 
+  flutter_localizations:
     sdk: flutter
   flutter_riverpod: ^2.4.10
   riverpod_annotation: ^2.3.4
@@ -50,9 +50,9 @@ dependencies:
   local_auth: ^2.1.8
   url_launcher: ^6.1.14
   shimmer: ^3.0.0
-
-dev_dependencies: 
-  flutter_test: 
+ 
+dev_dependencies:
+  flutter_test:
     sdk: flutter
   build_runner: ^2.4.8
   riverpod_generator: ^2.3.11
@@ -61,21 +61,21 @@ dev_dependencies:
   json_serializable: ^6.7.1
   injectable_generator: ^2.4.1
   flutter_lints: ^3.0.1
-
-dependency_overrides: 
+ 
+dependency_overrides:
   analyzer:
-
-    
-flutter: 
+ 
+   
+flutter:
   uses-material-design: true
-  
-  assets: 
+ 
+  assets:
     - assets/
     - assets/images/
-
-  fonts: 
+ 
+  fonts:
     - family: Nunito Sans
-      fonts: 
+      fonts:
         - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf
           weight: 900
         - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraBold.ttf
@@ -92,9 +92,9 @@ flutter:
           weight: 300
         - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraLight.ttf
           weight: 200
-
+ 
     - family: Isidora Sans
-      fonts: 
+      fonts:
         # - asset: assets/fonts/Isidora-Sans/isidorasans-black.otf
         #   weight: 900
         - asset: assets/fonts/Isidora-Sans/Isidora-Bold.otf
@@ -109,7 +109,3 @@ flutter:
         #   weight: 300
         # - asset: assets/fonts/Isidora-Sans/isidorasans-thin.otf
         #   weight: 200
-  
-      
-      
-  
