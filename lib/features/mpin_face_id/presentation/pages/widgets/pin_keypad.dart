@@ -15,61 +15,59 @@ class PinKeypad extends ConsumerWidget {
       children: [
         Center(
           child: Container(
+            height: MediaQuery.of(context).size.width > 480 ? 410 : 350,
             constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width > 480 ? 400 : 600,
             ),
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              runAlignment: WrapAlignment.spaceBetween,
-              crossAxisAlignment: WrapCrossAlignment.center,
-              children: List.generate(
-                9,
-                (index) => Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              itemCount: 9,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: Container(
+                  height:
+                      MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                  width:
+                      MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
+                  constraints: BoxConstraints(
+                    maxHeight:
+                        MediaQuery.of(context).size.width > 480 ? 90 : 120,
+                    maxWidth:
+                        MediaQuery.of(context).size.width > 480 ? 90 : 120,
                   ),
-                  child: Container(
-                    height:
-                        MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
-                    width:
-                        MediaQuery.of(context).size.width > 480 ? 50.sp : 70.sp,
-                    constraints: BoxConstraints(
-                      maxHeight:
-                          MediaQuery.of(context).size.width > 480 ? 90 : 120,
-                      maxWidth:
-                          MediaQuery.of(context).size.width > 480 ? 90 : 120,
-                    ),
-                    decoration: BoxDecoration(
-                      color: primaryBlueColor.withOpacity(0.1),
+                  decoration: BoxDecoration(
+                    color: primaryBlueColor.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: MaterialButton(
+                    onPressed: (ref.watch(provider).length == 6)
+                        ? () {}
+                        : () {
+                            if (ref.watch(provider).length < 6) {
+                              ref.watch(provider.notifier).update((state) =>
+                                  "${ref.watch(provider)}${index + 1}");
+
+                              debugPrint(ref.watch(provider));
+                            }
+
+                            if (ref.watch(provider).length == 6) {
+                              callback();
+                            }
+                          },
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: MaterialButton(
-                      onPressed: (ref.watch(provider).length == 6)
-                          ? () {}
-                          : () {
-                              if (ref.watch(provider).length < 6) {
-                                ref.watch(provider.notifier).update((state) =>
-                                    "${ref.watch(provider)}${index + 1}");
-
-                                debugPrint(ref.watch(provider));
-                              }
-
-                              if (ref.watch(provider).length == 6) {
-                                callback();
-                              }
-                            },
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Text(
-                        "${index + 1}",
-                        style: TextStyle(
-                          color: primaryBlueColor,
-                          fontSize: MediaQuery.of(context).size.width > 480
-                              ? 18.sp
-                              : 36.sp,
-                        ),
+                    child: Text(
+                      "${index + 1}",
+                      style: TextStyle(
+                        color: primaryBlueColor,
+                        fontSize: MediaQuery.of(context).size.width > 480
+                            ? 18.sp
+                            : 36.sp,
                       ),
                     ),
                   ),
