@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/network/interceptors/authorization_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/encryption_interceptor.dart';
-import 'package:ekyc/core/network/interceptors/header_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -23,8 +23,12 @@ class NetworkHelper {
     //   ConnectionCheckerInterceptor(),
     // );
 
+    // dio.interceptors.add(
+    //   HeaderInterceptor(),
+    // );
+
     dio.interceptors.add(
-      HeaderInterceptor(),
+      AuthorizationInterceptor(),
     );
 
     dio.interceptors.add(

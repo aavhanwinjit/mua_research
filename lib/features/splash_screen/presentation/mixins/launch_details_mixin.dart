@@ -13,8 +13,7 @@ import 'package:go_router/go_router.dart';
 import 'package:safe_device/safe_device.dart';
 
 mixin LaunchDetailsMixin {
-  void callLaunchDetailsApi(
-      {required BuildContext context, required WidgetRef ref}) async {
+  void callLaunchDetailsApi({required BuildContext context, required WidgetRef ref}) async {
     final bool isRootedDevice = await _detectRootOrJailbreak();
 
     final String deviceToken = await _getDeviceToken();
@@ -23,8 +22,6 @@ mixin LaunchDetailsMixin {
       rootedDevice: isRootedDevice,
       deviceToken: deviceToken,
     );
-
-    debugPrint("request in launch details.json: ${request.toJson()}");
 
     final result = await getIt<LaunchDetails>().call(request);
 
@@ -35,24 +32,21 @@ mixin LaunchDetailsMixin {
       },
       (LaunchDetailsResponse success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .watch(launchDetailsResponseProvider.notifier)
-              .update((state) => success);
+          ref.watch(launchDetailsResponseProvider.notifier).update((state) => success);
 
           if (success.body?.responseBody?.agentData != null) {
             if (success.body?.responseBody?.tokenData != null) {
               await _setData(
                 authToken: success.body?.responseBody?.tokenData?.token,
                 sessionId: success.body?.responseBody?.tokenData?.sessionId,
-                deviceToken: success
-                    .body?.responseBody?.agentData?.loginData?.deviceToken,
+                deviceToken: success.body?.responseBody?.agentData?.loginData?.deviceToken,
                 ref: ref,
               );
             }
 
-            ref.watch(isFPLoginProvider.notifier).update((state) =>
-                success.body?.responseBody?.agentData?.loginData?.isFpLogin ??
-                false);
+            ref
+                .watch(isFPLoginProvider.notifier)
+                .update((state) => success.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false);
 
             context.go(AppRoutes.mpinLoginScreen);
           } else {
@@ -60,8 +54,7 @@ mixin LaunchDetailsMixin {
           }
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
