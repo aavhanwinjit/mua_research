@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/registration_mixin.dart';
@@ -39,26 +40,29 @@ class _BiometricSwitchTileState extends ConsumerState<BiometricSwitchTile>
   }
 
   Future<void> _biometricAuthentication() async {
-    await setFingerPrint(
-      context: context,
-      ref: ref,
-      onSuccess: () {},
-      successNavigation: () {
-        ref.watch(isFPLoginProvider.notifier).update((state) => true);
-      },
-    );
-
-    // await authenticateWithBiometric(
-    //   onAuthenticated: () async {
-    //     await setFingerPrint(
-    //       context: context,
-    //       ref: ref,
-    //       onSuccess: () {},
-    //     );
-    //   },
-    //   onAuthenticationFailure: (String error) {
-    //     context.showErrorSnackBar(message: error);
+    // await setFingerPrint(
+    //   context: context,
+    //   ref: ref,
+    //   onSuccess: () {},
+    //   successNavigation: () {
+    //     ref.watch(isFPLoginProvider.notifier).update((state) => true);
     //   },
     // );
+
+    await authenticateWithBiometric(
+      onAuthenticated: () async {
+        await setFingerPrint(
+          context: context,
+          ref: ref,
+          onSuccess: () {},
+          successNavigation: () {
+            ref.watch(isFPLoginProvider.notifier).update((state) => true);
+          },
+        );
+      },
+      onAuthenticationFailure: (String error) {
+        context.showErrorSnackBar(message: error);
+      },
+    );
   }
 }
