@@ -51,7 +51,7 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
       agentId: json['agentId'] as int?,
       agentName: json['agentName'] as String?,
       address: json['address'] as String?,
-      companyId: json['companyId'] as int?,
+      companyIds: json['companyIds'] as String?,
       signaturePath: json['signaturePath'] as String?,
       mpin: json['mpin'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
@@ -72,7 +72,9 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
       status: json['status'],
       reviewByUser: json['reviewByUser'],
       apiUniqueKey: json['apiUniqueKey'],
-      companies: json['companies'],
+      companies: (json['companies'] as List<dynamic>?)
+          ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
+          .toList(),
       agencyName: json['agencyName'] as String?,
       designation: json['designation'],
       isDisabled: json['isDisabled'] as bool?,
@@ -88,7 +90,7 @@ Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
       'agentId': instance.agentId,
       'agentName': instance.agentName,
       'address': instance.address,
-      'companyId': instance.companyId,
+      'companyIds': instance.companyIds,
       'signaturePath': instance.signaturePath,
       'mpin': instance.mpin,
       'mobileNumber': instance.mobileNumber,
@@ -110,6 +112,28 @@ Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
       'companies': instance.companies,
       'agencyName': instance.agencyName,
       'designation': instance.designation,
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+    };
+
+_$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
+    _$CompanyImpl(
+      companyId: json['companyId'] as int?,
+      companyName: json['companyName'] as String?,
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+    );
+
+Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>
+    <String, dynamic>{
+      'companyId': instance.companyId,
+      'companyName': instance.companyName,
       'isDisabled': instance.isDisabled,
       'crd': instance.crd?.toIso8601String(),
       'crdBy': instance.crdBy,

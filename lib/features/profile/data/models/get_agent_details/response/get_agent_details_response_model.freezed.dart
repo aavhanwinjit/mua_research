@@ -466,8 +466,8 @@ mixin _$GetAgentDetailsResponseBody {
   String? get agentName => throw _privateConstructorUsedError;
   @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
-  @JsonKey(name: "companyId")
-  int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: "companyIds")
+  String? get companyIds => throw _privateConstructorUsedError;
   @JsonKey(name: "signaturePath")
   String? get signaturePath => throw _privateConstructorUsedError;
   @JsonKey(name: "mpin")
@@ -505,7 +505,7 @@ mixin _$GetAgentDetailsResponseBody {
   @JsonKey(name: "apiUniqueKey")
   dynamic get apiUniqueKey => throw _privateConstructorUsedError;
   @JsonKey(name: "companies")
-  dynamic get companies => throw _privateConstructorUsedError;
+  List<Company>? get companies => throw _privateConstructorUsedError;
   @JsonKey(name: "agencyName")
   String? get agencyName => throw _privateConstructorUsedError;
   @JsonKey(name: "designation")
@@ -539,7 +539,7 @@ abstract class $GetAgentDetailsResponseBodyCopyWith<$Res> {
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyId") int? companyId,
+      @JsonKey(name: "companyIds") String? companyIds,
       @JsonKey(name: "signaturePath") String? signaturePath,
       @JsonKey(name: "mpin") String? mpin,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
@@ -558,7 +558,7 @@ abstract class $GetAgentDetailsResponseBodyCopyWith<$Res> {
       @JsonKey(name: "status") dynamic status,
       @JsonKey(name: "reviewByUser") dynamic reviewByUser,
       @JsonKey(name: "apiUniqueKey") dynamic apiUniqueKey,
-      @JsonKey(name: "companies") dynamic companies,
+      @JsonKey(name: "companies") List<Company>? companies,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "designation") dynamic designation,
       @JsonKey(name: "isDisabled") bool? isDisabled,
@@ -585,7 +585,7 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
     Object? agentId = freezed,
     Object? agentName = freezed,
     Object? address = freezed,
-    Object? companyId = freezed,
+    Object? companyIds = freezed,
     Object? signaturePath = freezed,
     Object? mpin = freezed,
     Object? mobileNumber = freezed,
@@ -626,10 +626,10 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      companyId: freezed == companyId
-          ? _value.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      companyIds: freezed == companyIds
+          ? _value.companyIds
+          : companyIds // ignore: cast_nullable_to_non_nullable
+              as String?,
       signaturePath: freezed == signaturePath
           ? _value.signaturePath
           : signaturePath // ignore: cast_nullable_to_non_nullable
@@ -705,7 +705,7 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
       companies: freezed == companies
           ? _value.companies
           : companies // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<Company>?,
       agencyName: freezed == agencyName
           ? _value.agencyName
           : agencyName // ignore: cast_nullable_to_non_nullable
@@ -751,7 +751,7 @@ abstract class _$$GetAgentDetailsResponseBodyImplCopyWith<$Res>
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyId") int? companyId,
+      @JsonKey(name: "companyIds") String? companyIds,
       @JsonKey(name: "signaturePath") String? signaturePath,
       @JsonKey(name: "mpin") String? mpin,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
@@ -770,7 +770,7 @@ abstract class _$$GetAgentDetailsResponseBodyImplCopyWith<$Res>
       @JsonKey(name: "status") dynamic status,
       @JsonKey(name: "reviewByUser") dynamic reviewByUser,
       @JsonKey(name: "apiUniqueKey") dynamic apiUniqueKey,
-      @JsonKey(name: "companies") dynamic companies,
+      @JsonKey(name: "companies") List<Company>? companies,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "designation") dynamic designation,
       @JsonKey(name: "isDisabled") bool? isDisabled,
@@ -796,7 +796,7 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
     Object? agentId = freezed,
     Object? agentName = freezed,
     Object? address = freezed,
-    Object? companyId = freezed,
+    Object? companyIds = freezed,
     Object? signaturePath = freezed,
     Object? mpin = freezed,
     Object? mobileNumber = freezed,
@@ -837,10 +837,10 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
               as String?,
-      companyId: freezed == companyId
-          ? _value.companyId
-          : companyId // ignore: cast_nullable_to_non_nullable
-              as int?,
+      companyIds: freezed == companyIds
+          ? _value.companyIds
+          : companyIds // ignore: cast_nullable_to_non_nullable
+              as String?,
       signaturePath: freezed == signaturePath
           ? _value.signaturePath
           : signaturePath // ignore: cast_nullable_to_non_nullable
@@ -914,9 +914,9 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
           : apiUniqueKey // ignore: cast_nullable_to_non_nullable
               as dynamic,
       companies: freezed == companies
-          ? _value.companies
+          ? _value._companies
           : companies // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as List<Company>?,
       agencyName: freezed == agencyName
           ? _value.agencyName
           : agencyName // ignore: cast_nullable_to_non_nullable
@@ -957,7 +957,7 @@ class _$GetAgentDetailsResponseBodyImpl
       {@JsonKey(name: "agentId") this.agentId,
       @JsonKey(name: "agentName") this.agentName,
       @JsonKey(name: "address") this.address,
-      @JsonKey(name: "companyId") this.companyId,
+      @JsonKey(name: "companyIds") this.companyIds,
       @JsonKey(name: "signaturePath") this.signaturePath,
       @JsonKey(name: "mpin") this.mpin,
       @JsonKey(name: "mobileNumber") this.mobileNumber,
@@ -976,14 +976,15 @@ class _$GetAgentDetailsResponseBodyImpl
       @JsonKey(name: "status") this.status,
       @JsonKey(name: "reviewByUser") this.reviewByUser,
       @JsonKey(name: "apiUniqueKey") this.apiUniqueKey,
-      @JsonKey(name: "companies") this.companies,
+      @JsonKey(name: "companies") final List<Company>? companies,
       @JsonKey(name: "agencyName") this.agencyName,
       @JsonKey(name: "designation") this.designation,
       @JsonKey(name: "isDisabled") this.isDisabled,
       @JsonKey(name: "crd") this.crd,
       @JsonKey(name: "crdBy") this.crdBy,
       @JsonKey(name: "lmd") this.lmd,
-      @JsonKey(name: "lmdBy") this.lmdBy});
+      @JsonKey(name: "lmdBy") this.lmdBy})
+      : _companies = companies;
 
   factory _$GetAgentDetailsResponseBodyImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -999,8 +1000,8 @@ class _$GetAgentDetailsResponseBodyImpl
   @JsonKey(name: "address")
   final String? address;
   @override
-  @JsonKey(name: "companyId")
-  final int? companyId;
+  @JsonKey(name: "companyIds")
+  final String? companyIds;
   @override
   @JsonKey(name: "signaturePath")
   final String? signaturePath;
@@ -1055,9 +1056,17 @@ class _$GetAgentDetailsResponseBodyImpl
   @override
   @JsonKey(name: "apiUniqueKey")
   final dynamic apiUniqueKey;
+  final List<Company>? _companies;
   @override
   @JsonKey(name: "companies")
-  final dynamic companies;
+  List<Company>? get companies {
+    final value = _companies;
+    if (value == null) return null;
+    if (_companies is EqualUnmodifiableListView) return _companies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   @JsonKey(name: "agencyName")
   final String? agencyName;
@@ -1082,7 +1091,7 @@ class _$GetAgentDetailsResponseBodyImpl
 
   @override
   String toString() {
-    return 'GetAgentDetailsResponseBody(agentId: $agentId, agentName: $agentName, address: $address, companyId: $companyId, signaturePath: $signaturePath, mpin: $mpin, mobileNumber: $mobileNumber, isApproved: $isApproved, remark: $remark, dateOfApproved: $dateOfApproved, approvedBy: $approvedBy, city: $city, countryId: $countryId, emailId: $emailId, authorized: $authorized, isMpinExpired: $isMpinExpired, mpinExpiry: $mpinExpiry, profileImagePath: $profileImagePath, birthDate: $birthDate, status: $status, reviewByUser: $reviewByUser, apiUniqueKey: $apiUniqueKey, companies: $companies, agencyName: $agencyName, designation: $designation, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
+    return 'GetAgentDetailsResponseBody(agentId: $agentId, agentName: $agentName, address: $address, companyIds: $companyIds, signaturePath: $signaturePath, mpin: $mpin, mobileNumber: $mobileNumber, isApproved: $isApproved, remark: $remark, dateOfApproved: $dateOfApproved, approvedBy: $approvedBy, city: $city, countryId: $countryId, emailId: $emailId, authorized: $authorized, isMpinExpired: $isMpinExpired, mpinExpiry: $mpinExpiry, profileImagePath: $profileImagePath, birthDate: $birthDate, status: $status, reviewByUser: $reviewByUser, apiUniqueKey: $apiUniqueKey, companies: $companies, agencyName: $agencyName, designation: $designation, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
   }
 
   @override
@@ -1094,8 +1103,8 @@ class _$GetAgentDetailsResponseBodyImpl
             (identical(other.agentName, agentName) ||
                 other.agentName == agentName) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.companyId, companyId) ||
-                other.companyId == companyId) &&
+            (identical(other.companyIds, companyIds) ||
+                other.companyIds == companyIds) &&
             (identical(other.signaturePath, signaturePath) ||
                 other.signaturePath == signaturePath) &&
             (identical(other.mpin, mpin) || other.mpin == mpin) &&
@@ -1125,7 +1134,8 @@ class _$GetAgentDetailsResponseBodyImpl
                 .equals(other.reviewByUser, reviewByUser) &&
             const DeepCollectionEquality()
                 .equals(other.apiUniqueKey, apiUniqueKey) &&
-            const DeepCollectionEquality().equals(other.companies, companies) &&
+            const DeepCollectionEquality()
+                .equals(other._companies, _companies) &&
             (identical(other.agencyName, agencyName) ||
                 other.agencyName == agencyName) &&
             const DeepCollectionEquality()
@@ -1145,7 +1155,7 @@ class _$GetAgentDetailsResponseBodyImpl
         agentId,
         agentName,
         address,
-        companyId,
+        companyIds,
         signaturePath,
         mpin,
         mobileNumber,
@@ -1164,7 +1174,7 @@ class _$GetAgentDetailsResponseBodyImpl
         const DeepCollectionEquality().hash(status),
         const DeepCollectionEquality().hash(reviewByUser),
         const DeepCollectionEquality().hash(apiUniqueKey),
-        const DeepCollectionEquality().hash(companies),
+        const DeepCollectionEquality().hash(_companies),
         agencyName,
         const DeepCollectionEquality().hash(designation),
         isDisabled,
@@ -1195,7 +1205,7 @@ abstract class _GetAgentDetailsResponseBody
           {@JsonKey(name: "agentId") final int? agentId,
           @JsonKey(name: "agentName") final String? agentName,
           @JsonKey(name: "address") final String? address,
-          @JsonKey(name: "companyId") final int? companyId,
+          @JsonKey(name: "companyIds") final String? companyIds,
           @JsonKey(name: "signaturePath") final String? signaturePath,
           @JsonKey(name: "mpin") final String? mpin,
           @JsonKey(name: "mobileNumber") final String? mobileNumber,
@@ -1214,7 +1224,7 @@ abstract class _GetAgentDetailsResponseBody
           @JsonKey(name: "status") final dynamic status,
           @JsonKey(name: "reviewByUser") final dynamic reviewByUser,
           @JsonKey(name: "apiUniqueKey") final dynamic apiUniqueKey,
-          @JsonKey(name: "companies") final dynamic companies,
+          @JsonKey(name: "companies") final List<Company>? companies,
           @JsonKey(name: "agencyName") final String? agencyName,
           @JsonKey(name: "designation") final dynamic designation,
           @JsonKey(name: "isDisabled") final bool? isDisabled,
@@ -1237,8 +1247,8 @@ abstract class _GetAgentDetailsResponseBody
   @JsonKey(name: "address")
   String? get address;
   @override
-  @JsonKey(name: "companyId")
-  int? get companyId;
+  @JsonKey(name: "companyIds")
+  String? get companyIds;
   @override
   @JsonKey(name: "signaturePath")
   String? get signaturePath;
@@ -1295,7 +1305,7 @@ abstract class _GetAgentDetailsResponseBody
   dynamic get apiUniqueKey;
   @override
   @JsonKey(name: "companies")
-  dynamic get companies;
+  List<Company>? get companies;
   @override
   @JsonKey(name: "agencyName")
   String? get agencyName;
@@ -1321,4 +1331,285 @@ abstract class _GetAgentDetailsResponseBody
   @JsonKey(ignore: true)
   _$$GetAgentDetailsResponseBodyImplCopyWith<_$GetAgentDetailsResponseBodyImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+Company _$CompanyFromJson(Map<String, dynamic> json) {
+  return _Company.fromJson(json);
+}
+
+/// @nodoc
+mixin _$Company {
+  @JsonKey(name: "companyId")
+  int? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: "companyName")
+  String? get companyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "isDisabled")
+  bool? get isDisabled => throw _privateConstructorUsedError;
+  @JsonKey(name: "crd")
+  DateTime? get crd => throw _privateConstructorUsedError;
+  @JsonKey(name: "crdBy")
+  int? get crdBy => throw _privateConstructorUsedError;
+  @JsonKey(name: "lmd")
+  DateTime? get lmd => throw _privateConstructorUsedError;
+  @JsonKey(name: "lmdBy")
+  int? get lmdBy => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CompanyCopyWith<Company> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CompanyCopyWith<$Res> {
+  factory $CompanyCopyWith(Company value, $Res Function(Company) then) =
+      _$CompanyCopyWithImpl<$Res, Company>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: "companyId") int? companyId,
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "isDisabled") bool? isDisabled,
+      @JsonKey(name: "crd") DateTime? crd,
+      @JsonKey(name: "crdBy") int? crdBy,
+      @JsonKey(name: "lmd") DateTime? lmd,
+      @JsonKey(name: "lmdBy") int? lmdBy});
+}
+
+/// @nodoc
+class _$CompanyCopyWithImpl<$Res, $Val extends Company>
+    implements $CompanyCopyWith<$Res> {
+  _$CompanyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? companyId = freezed,
+    Object? companyName = freezed,
+    Object? isDisabled = freezed,
+    Object? crd = freezed,
+    Object? crdBy = freezed,
+    Object? lmd = freezed,
+    Object? lmdBy = freezed,
+  }) {
+    return _then(_value.copyWith(
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDisabled: freezed == isDisabled
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      crd: freezed == crd
+          ? _value.crd
+          : crd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      crdBy: freezed == crdBy
+          ? _value.crdBy
+          : crdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lmd: freezed == lmd
+          ? _value.lmd
+          : lmd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lmdBy: freezed == lmdBy
+          ? _value.lmdBy
+          : lmdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$CompanyImplCopyWith<$Res> implements $CompanyCopyWith<$Res> {
+  factory _$$CompanyImplCopyWith(
+          _$CompanyImpl value, $Res Function(_$CompanyImpl) then) =
+      __$$CompanyImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: "companyId") int? companyId,
+      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "isDisabled") bool? isDisabled,
+      @JsonKey(name: "crd") DateTime? crd,
+      @JsonKey(name: "crdBy") int? crdBy,
+      @JsonKey(name: "lmd") DateTime? lmd,
+      @JsonKey(name: "lmdBy") int? lmdBy});
+}
+
+/// @nodoc
+class __$$CompanyImplCopyWithImpl<$Res>
+    extends _$CompanyCopyWithImpl<$Res, _$CompanyImpl>
+    implements _$$CompanyImplCopyWith<$Res> {
+  __$$CompanyImplCopyWithImpl(
+      _$CompanyImpl _value, $Res Function(_$CompanyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? companyId = freezed,
+    Object? companyName = freezed,
+    Object? isDisabled = freezed,
+    Object? crd = freezed,
+    Object? crdBy = freezed,
+    Object? lmd = freezed,
+    Object? lmdBy = freezed,
+  }) {
+    return _then(_$CompanyImpl(
+      companyId: freezed == companyId
+          ? _value.companyId
+          : companyId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      companyName: freezed == companyName
+          ? _value.companyName
+          : companyName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isDisabled: freezed == isDisabled
+          ? _value.isDisabled
+          : isDisabled // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      crd: freezed == crd
+          ? _value.crd
+          : crd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      crdBy: freezed == crdBy
+          ? _value.crdBy
+          : crdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+      lmd: freezed == lmd
+          ? _value.lmd
+          : lmd // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      lmdBy: freezed == lmdBy
+          ? _value.lmdBy
+          : lmdBy // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CompanyImpl implements _Company {
+  const _$CompanyImpl(
+      {@JsonKey(name: "companyId") this.companyId,
+      @JsonKey(name: "companyName") this.companyName,
+      @JsonKey(name: "isDisabled") this.isDisabled,
+      @JsonKey(name: "crd") this.crd,
+      @JsonKey(name: "crdBy") this.crdBy,
+      @JsonKey(name: "lmd") this.lmd,
+      @JsonKey(name: "lmdBy") this.lmdBy});
+
+  factory _$CompanyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CompanyImplFromJson(json);
+
+  @override
+  @JsonKey(name: "companyId")
+  final int? companyId;
+  @override
+  @JsonKey(name: "companyName")
+  final String? companyName;
+  @override
+  @JsonKey(name: "isDisabled")
+  final bool? isDisabled;
+  @override
+  @JsonKey(name: "crd")
+  final DateTime? crd;
+  @override
+  @JsonKey(name: "crdBy")
+  final int? crdBy;
+  @override
+  @JsonKey(name: "lmd")
+  final DateTime? lmd;
+  @override
+  @JsonKey(name: "lmdBy")
+  final int? lmdBy;
+
+  @override
+  String toString() {
+    return 'Company(companyId: $companyId, companyName: $companyName, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CompanyImpl &&
+            (identical(other.companyId, companyId) ||
+                other.companyId == companyId) &&
+            (identical(other.companyName, companyName) ||
+                other.companyName == companyName) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
+            (identical(other.crd, crd) || other.crd == crd) &&
+            (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
+            (identical(other.lmd, lmd) || other.lmd == lmd) &&
+            (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, companyId, companyName, isDisabled, crd, crdBy, lmd, lmdBy);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>
+      __$$CompanyImplCopyWithImpl<_$CompanyImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CompanyImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Company implements Company {
+  const factory _Company(
+      {@JsonKey(name: "companyId") final int? companyId,
+      @JsonKey(name: "companyName") final String? companyName,
+      @JsonKey(name: "isDisabled") final bool? isDisabled,
+      @JsonKey(name: "crd") final DateTime? crd,
+      @JsonKey(name: "crdBy") final int? crdBy,
+      @JsonKey(name: "lmd") final DateTime? lmd,
+      @JsonKey(name: "lmdBy") final int? lmdBy}) = _$CompanyImpl;
+
+  factory _Company.fromJson(Map<String, dynamic> json) = _$CompanyImpl.fromJson;
+
+  @override
+  @JsonKey(name: "companyId")
+  int? get companyId;
+  @override
+  @JsonKey(name: "companyName")
+  String? get companyName;
+  @override
+  @JsonKey(name: "isDisabled")
+  bool? get isDisabled;
+  @override
+  @JsonKey(name: "crd")
+  DateTime? get crd;
+  @override
+  @JsonKey(name: "crdBy")
+  int? get crdBy;
+  @override
+  @JsonKey(name: "lmd")
+  DateTime? get lmd;
+  @override
+  @JsonKey(name: "lmdBy")
+  int? get lmdBy;
+  @override
+  @JsonKey(ignore: true)
+  _$$CompanyImplCopyWith<_$CompanyImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
