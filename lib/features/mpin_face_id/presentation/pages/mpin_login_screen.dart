@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/pages/mixins/login_mixin.dart';
@@ -173,24 +174,24 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   }
 
   Future<void> _biometricAuthentication() async {
-    loginByFP(
-      context: context,
-      ref: ref,
-      onSuccess: onLoginSuccess,
-    );
-
-    // await authenticateWithBiometric(
-    //   onAuthenticated: () {
-    //     loginByFP(
-    //       context: context,
-    //       ref: ref,
-    //       onSuccess: onLoginSuccess,
-    //     );
-    //   },
-    //   onAuthenticationFailure: (String error) {
-    //     context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
-    //   },
+    // loginByFP(
+    //   context: context,
+    //   ref: ref,
+    //   onSuccess: onLoginSuccess,
     // );
+
+    await authenticateWithBiometric(
+      onAuthenticated: () {
+        loginByFP(
+          context: context,
+          ref: ref,
+          onSuccess: onLoginSuccess,
+        );
+      },
+      onAuthenticationFailure: (String error) {
+        context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
+      },
+    );
   }
 
   void onLoginSuccess(AgentLoginDetailsResponseModel? agentDetails) async {

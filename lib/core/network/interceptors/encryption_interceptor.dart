@@ -13,9 +13,11 @@ class EncryptionInterceptor extends Interceptor {
 
     String path = options.path;
 
-    debugPrint("request: ${options.data?.toJson()}");
+    debugPrint('\n******************* PLAIN REQUEST ***********************');
+    debugPrint(jsonEncode(options.data?.toJson()));
+    debugPrint('******************* ************* ***********************\n');
 
-    options.data = EncryptionHelper.encrypt(
+    options.data = await EncryptionHelper.encrypt(
       plainData: options.data?.toJson(),
       deviceInfoModel: deviceInfo,
       serviceRequestURL: path,
@@ -29,8 +31,9 @@ class EncryptionInterceptor extends Interceptor {
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
-    debugPrint("response.data['b']:${response.data}");
-    debugPrint("response.data['b']:${response.data["b"]}");
+    debugPrint('\n******************* RESPONSE ***********************');
+    debugPrint('${response.data}');
+    debugPrint('******************* ******** ***********************\n');
 
     if (response.data["b"] != null) {
       Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
@@ -42,9 +45,9 @@ class EncryptionInterceptor extends Interceptor {
         index: int.parse(response.data["h"]["mk"]["i"]),
       );
 
-      debugPrint("decrypted Response: $decryptedResponse");
-      debugPrint("decrypted Response type: ${decryptedResponse.runtimeType}");
-      debugPrint("decrypted Response rb: ${decryptedResponse['rb']}");
+      debugPrint('\n******************* DECRYPTED RESPONSE ***********************');
+      debugPrint("$decryptedResponse");
+      debugPrint('******************* ****************** ***********************\n');
 
       decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
 
@@ -52,15 +55,6 @@ class EncryptionInterceptor extends Interceptor {
 
       handler.next(response);
     }
-
-    // debugPrint("response.data in interceptor: ${response.data}");
-    // debugPrint("response.data type in interceptor: ${response.data.runtimeType}");
-
-    // debugPrint("response.data['rb'] in interceptor: ${response.data['b']['rb'].runtimeType}");
-
-    // final LaunchDetailsResponse responseModel = LaunchDetailsResponse.fromJson(response.data);
-
-    // debugPrint("responseModel: $responseModel");
   }
 
   @override

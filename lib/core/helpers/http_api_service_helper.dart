@@ -36,6 +36,10 @@ class HttpApiServiceHelper {
       serviceRequestURL: endpoint,
     );
 
+    debugPrint('******************* ENCRYPTED REQUEST ***********************');
+    debugPrint(jsonEncode(encryptedRequest));
+    debugPrint('******************* ***************** ***********************');
+
     var response = await http.post(
       Uri.parse(baseURL),
       body: json.encode(encryptedRequest),
