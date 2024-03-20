@@ -12,7 +12,8 @@ class InsuredDocumentsScreen extends ConsumerStatefulWidget {
   const InsuredDocumentsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _AddressDetailsScreenState();
 }
 
 class _AddressDetailsScreenState extends ConsumerState<InsuredDocumentsScreen> {
@@ -108,7 +109,15 @@ class _AddressDetailsScreenState extends ConsumerState<InsuredDocumentsScreen> {
       items: items.map((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
+            ),
+          ),
         );
       }).toList(),
     );

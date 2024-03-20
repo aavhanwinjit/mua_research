@@ -22,10 +22,12 @@ class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _DashboardScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DashboardScreenState();
 }
 
-class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApplicationsMixin {
+class _DashboardScreenState extends ConsumerState<DashboardScreen>
+    with AgentApplicationsMixin {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -39,7 +41,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
 
   @override
   Widget build(BuildContext context) {
-    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    final agentApplicationNotifier =
+        ref.watch(agentApplicationsNotifierProvider.notifier);
     ref.watch(agentApplicationsNotifierProvider);
 
     final applicationListLoading = ref.watch(applicationListLoadingProvider);
@@ -51,8 +54,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
       child: Scaffold(
         backgroundColor: disabledButtonColor,
         appBar: _appBar(),
-        floatingActionButton: agentApplicationNotifier.haveApplications() ? _fab() : null,
-        bottomNavigationBar: agentApplicationNotifier.haveNoApplications() ? _bottomNavBarWidget() : null,
+        floatingActionButton:
+            agentApplicationNotifier.haveApplications() ? _fab() : null,
+        bottomNavigationBar: agentApplicationNotifier.haveNoApplications()
+            ? _bottomNavBarWidget()
+            : null,
         body: applicationListLoading == true
             ? const DashboardLoadingWidget()
             : agentApplicationNotifier.haveApplications()
@@ -76,7 +82,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   Widget _listView() {
-    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    final agentApplicationNotifier =
+        ref.watch(agentApplicationsNotifierProvider.notifier);
     ref.watch(agentApplicationsNotifierProvider);
 
     return Expanded(
@@ -88,7 +95,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
           controller: _scrollController,
           padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
           itemBuilder: (context, index) {
-            final AgentApplicationsModel application = agentApplicationNotifier.applications()[index];
+            final AgentApplicationsModel application =
+                agentApplicationNotifier.applications()[index];
 
             return ApplicantCard(application: application);
           },
@@ -113,28 +121,39 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
               color: black,
             ),
           ),
-          SizedBox(height: 16.h),
+          const SizedBox(height: 15),
           Row(
             children: [
-              const Expanded(
+              Expanded(
                 child: CustomTextFormField(
                   label: Strings.searchApplicants,
                   suffixIcon: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: ImageIcon(
-                      AssetImage(ImageConstants.searchIcon),
+                      const AssetImage(ImageConstants.searchIcon),
                       color: iconColor,
+                      size: MediaQuery.of(context).size.width > 480
+                          ? 16.sp
+                          : 20.sp,
                     ),
                   ),
                 ),
               ),
-              IconButton(
-                onPressed: showFilterBottomSheet,
-                icon: const ImageIcon(
-                  AssetImage(ImageConstants.sortIcon),
-                  color: iconColor,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: IconButton(
+                  onPressed: showFilterBottomSheet,
+                  icon: ImageIcon(
+                    const AssetImage(ImageConstants.sortIcon),
+                    color: iconColor,
+                    size:
+                        MediaQuery.of(context).size.width > 480 ? 25.sp : 20.sp,
+                  ),
                 ),
               ),
+              const SizedBox(width: 40),
             ],
           ),
         ],
@@ -144,17 +163,18 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
 
   Widget _fab() {
     return ScrollingFabAnimated(
-      width: 170,
-      icon: const Icon(
+      width: MediaQuery.of(context).size.width > 480 ? 125.w : 170.w,
+      icon: Icon(
         Icons.add,
         color: Colors.white,
+        size: 20.sp,
       ),
       text: Text(
         Strings.startKyc,
         style: TextStyle(
           color: white,
           fontSize: 16.sp,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w700,
         ),
       ),
       onPress: showKYCStartBottomSheet,
@@ -176,19 +196,21 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   AppBar _appBar() {
-    final GetAgentDetailsResponseModel? agentDetails = ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseModel? agentDetails =
+        ref.watch(agentDetailsResponseProvider);
 
     String agentName = agentDetails?.body?.responseBody?.agentName ?? "NA";
 
     return AppBar(
       scrolledUnderElevation: 0,
+      toolbarHeight: 60.h,
       title: InkWell(
         onTap: () {
           context.pushNamed(AppRoutes.profileScreen);
         },
         child: CustomProfileImageWidget(
           userName: agentName,
-          size: 32.w,
+          size: 32.sp,
           fontSize: 12.sp,
         ),
       ),

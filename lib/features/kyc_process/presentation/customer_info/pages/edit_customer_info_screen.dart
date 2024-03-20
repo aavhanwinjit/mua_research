@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/customer_info_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/edit_customer_info_provider.dart';
 import 'package:flutter/material.dart';
@@ -8,41 +9,32 @@ class EditCustomerInfoScreen extends ConsumerStatefulWidget {
   const EditCustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _EditConstomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EditConstomerInfoScreenState();
 }
 
-class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen> {
+class _EditConstomerInfoScreenState
+    extends ConsumerState<EditCustomerInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        forceMaterialTransparency: true,
-        leading: const BackButton(
-          color: black,
-        ),
-        title: const Text(
-          "Edit Customer Information",
-          style: TextStyle(
-            color: black,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+      appBar: AppBarHelper.showCustomAppbar(
+        context: context,
+        title: Strings.editCustomerInfo,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
                 ),
                 child: Text(
-                  "Enter the following details from the customer's insurance documentation.",
-                  style: TextStyle(
-                    color: textGrayColor2,
-                  ),
+                  Strings.editCustomerInfoSubtitle,
+                  style: TextStyle(color: textGrayColor2, fontSize: 12.sp),
                 ),
               ),
               Padding(
@@ -51,7 +43,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                 ),
                 child: CustomTextFormField(
                   controller: ref.watch(surnameControllerProvider),
-                  label: 'Surname',
+                  label: Strings.surname,
                 ),
               ),
               Padding(
@@ -60,7 +52,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                   vertical: 5,
                 ),
                 child: Text(
-                  "Enter customer name as per NIC or Passport documents",
+                  Strings.enterNameAsPerDoc,
                   style: TextStyle(
                     color: textGrayColor2,
                     fontSize: 12.sp,
@@ -74,7 +66,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                 ),
                 child: CustomTextFormField(
                   controller: ref.watch(surnameControllerProvider),
-                  label: 'Other Name',
+                  label: Strings.otherName,
                 ),
               ),
               Padding(
@@ -83,7 +75,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                   vertical: 5,
                 ),
                 child: Text(
-                  "Enter customer name as per NIC or Passport documents",
+                  Strings.enterNameAsPerDoc,
                   style: TextStyle(
                     color: textGrayColor2,
                     fontSize: 12.sp,
@@ -97,18 +89,19 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                 ),
                 child: CustomTextFormField(
                   controller: ref.watch(surnameControllerProvider),
-                  label: 'Contact No',
+                  label: Strings.contactNo,
                 ),
               ),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.symmetric(
+              Padding(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                 ),
                 child: Text(
-                  "Maritial Status",
+                  Strings.maritalStatus,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
+                    fontSize: 14.sp,
                   ),
                 ),
               ),
@@ -125,7 +118,9 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                         value: MaritalStatus.SINGLE,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
+                          ref
+                              .watch(maritalStatusProvider.notifier)
+                              .update((state) => MaritalStatus.SINGLE);
                         },
                       ),
                     ),
@@ -135,7 +130,9 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                         value: MaritalStatus.MARRIED,
                         groupValue: ref.watch(maritalStatusProvider),
                         onChange: () {
-                          ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
+                          ref
+                              .watch(maritalStatusProvider.notifier)
+                              .update((state) => MaritalStatus.MARRIED);
                         },
                       ),
                     ),
@@ -169,7 +166,9 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                         value: NationalityType.MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
+                          ref
+                              .watch(nationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.MAURITIAN);
                         },
                       ),
                     ),
@@ -179,7 +178,9 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                         value: NationalityType.NON_MAURITIAN,
                         groupValue: ref.watch(nationalityTypeProvider),
                         onChange: () {
-                          ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.NON_MAURITIAN);
+                          ref
+                              .watch(nationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.NON_MAURITIAN);
                         },
                       ),
                     ),
@@ -194,7 +195,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                 ),
                 child: CustomTextFormField(
                   controller: ref.watch(surnameControllerProvider),
-                  label: 'NIC ID Number',
+                  label: Strings.nicIdNo,
                 ),
               ),
               Padding(
@@ -204,7 +205,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                 ),
                 child: CustomTextFormField(
                   controller: ref.watch(surnameControllerProvider),
-                  label: 'Policy ',
+                  label: Strings.policyNo,
                 ),
               ),
               Padding(
@@ -213,7 +214,7 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                   vertical: 40,
                 ),
                 child: CustomPrimaryButton(
-                  label: 'Update',
+                  label: Strings.update,
                   onTap: () {},
                 ),
               )

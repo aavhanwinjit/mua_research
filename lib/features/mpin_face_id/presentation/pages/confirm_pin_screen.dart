@@ -64,14 +64,14 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                 ),
               ),
             ),
-            SizedBox(height: 20.h),
+            const Spacer(),
             MaskedPinTextfield(provider: confirmPINProvider),
-            SizedBox(height: successVal ? 10.h : 40.h),
+            const Spacer(),
             successVal
                 ? Container(
                     color: primaryGreenColor,
                     padding: const EdgeInsets.symmetric(
-                      vertical: 10,
+                      vertical: 5,
                     ),
                     child: const Center(
                       child: Text(
@@ -83,7 +83,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                     ),
                   )
                 : const SizedBox(height: 0),
-            const SizedBox(height: 10),
+            const Spacer(),
             //PIN keypad
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -106,6 +106,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
                 }),
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),

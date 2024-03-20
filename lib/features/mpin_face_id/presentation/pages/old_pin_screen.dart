@@ -50,9 +50,9 @@ class _OldPinScreenState extends ConsumerState<OldPinScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 20.h),
+            const Spacer(),
             MaskedPinTextfield(provider: oldPINProvider),
-            SizedBox(height: 40.h),
+            const Spacer(),
             //PIN keypad
             Padding(
               padding: const EdgeInsets.symmetric(
@@ -63,6 +63,7 @@ class _OldPinScreenState extends ConsumerState<OldPinScreen> {
                 callback: () => context.pushNamed(AppRoutes.createPINScreen),
               ),
             ),
+            const Spacer(),
           ],
         ),
       ),

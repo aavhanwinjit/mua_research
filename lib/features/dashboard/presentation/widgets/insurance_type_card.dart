@@ -19,18 +19,29 @@ class InsuranceTypeCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final kycType = ref.watch(kycTypeProvider);
-
+    double screenWidth = MediaQuery.of(context).size.width;
+    print(screenWidth);
     return Expanded(
       child: InkWell(
         onTap: () {
           ref.watch(kycTypeProvider.notifier).update((state) => valueType);
         },
         child: Container(
-          padding: EdgeInsets.only(bottom: 12.h, top: 12.h, left: 8.w, right: 4.w),
+          padding: EdgeInsets.only(
+            bottom: 12.h,
+            top: 12.h,
+            left: 8.w,
+            right: 4.w,
+          ),
+          constraints: const BoxConstraints(
+            maxHeight: 280,
+          ),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.sp),
             border: Border.all(
-              color: kycType == valueType ? primaryBlueColor : borderColorSecondary,
+              color: kycType == valueType
+                  ? primaryBlueColor
+                  : borderColorSecondary,
               width: 1.5,
             ),
           ),
@@ -61,7 +72,7 @@ class InsuranceTypeCard extends ConsumerWidget {
                 title,
                 textAlign: TextAlign.start,
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: screenWidth > 480 ? 9.sp : 14.sp,
                   color: kycType == valueType ? primaryBlueColor : black,
                   fontWeight: FontWeight.w600,
                 ),

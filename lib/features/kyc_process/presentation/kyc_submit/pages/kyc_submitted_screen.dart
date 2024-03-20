@@ -24,7 +24,7 @@ class KYCSubmittedScreen extends StatelessWidget {
                 _cardWidget(),
                 const Spacer(),
                 _noteWidget(),
-                SizedBox(height: 40.h),
+                const Spacer(),
                 _buttons(context),
               ],
             ),
@@ -55,8 +55,8 @@ class KYCSubmittedScreen extends StatelessWidget {
 
   Widget _cardWidget() {
     return Container(
-      padding: EdgeInsets.all(20.w),
-      margin: EdgeInsets.all(20.w),
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: white,
         borderRadius: BorderRadius.circular(12),
