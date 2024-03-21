@@ -45,7 +45,20 @@ class PinKeypad extends ConsumerWidget {
               child: index == 9
                   ? Container()
                   : MaterialButton(
-                      onPressed: (ref.watch(provider).length == 6)
+                      onPressed: index == 11
+                          ? () {
+                              if (ref.watch(provider).isNotEmpty) {
+                                ref.watch(provider.notifier).update(
+                                      (state) => ref.watch(provider).substring(
+                                            0,
+                                            ref.watch(provider).length - 1,
+                                          ),
+                                    );
+
+                                debugPrint(ref.watch(provider));
+                              }
+                            }
+                          : (ref.watch(provider).length == 6)
                           ? () {}
                           : index == 10
                               ? () {
@@ -60,25 +73,7 @@ class PinKeypad extends ConsumerWidget {
                                     callback();
                                   }
                                 }
-                              : index == 11
-                                  ? () {
-                                      if (ref.watch(provider).isNotEmpty) {
-                                        ref.watch(provider.notifier).update(
-                                              (state) => ref
-                                                  .watch(provider)
-                                                  .substring(
-                                                    0,
-                                                    ref
-                                                            .watch(provider)
-                                                            .length -
-                                                        1,
-                                                  ),
-                                            );
-    
-                                        debugPrint(ref.watch(provider));
-                                      }
-                                    }
-                                  : () {
+                              :  () {
                                       if (ref.watch(provider).length < 6) {
                                         ref.watch(provider.notifier).update(
                                             (state) =>

@@ -32,17 +32,7 @@ class MyApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return ScreenUtilInit(
-          // designSize: Size(constraints.maxWidth, constraints.maxHeight),
           designSize: const Size(360, 844),
-          // minTextAdapt: constraints.maxWidth.isDesktop() ? true : false, // enable only for web
-          // fontSizeResolver: (fontSize, instance) {
-          //   // Adjust the font size based on screenWidth or any other criteria
-          //   if (instance.screenWidth.isDesktop() || instance.scaleWidth.isTablet()) {
-          //     return fontSize * 1; // keep the original font size for larger screens
-          //   } else {
-          //     return fontSize * 0.8; // decrease font size for smaller screens
-          //   }
-          // },
           builder: (_, child) {
             return MaterialApp.router(
               title: 'MUA KYC',
