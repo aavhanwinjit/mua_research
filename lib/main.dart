@@ -34,7 +34,6 @@ class MyApp extends StatelessWidget {
         return ScreenUtilInit(
           // designSize: Size(constraints.maxWidth, constraints.maxHeight),
           designSize: const Size(360, 844),
-
           // minTextAdapt: constraints.maxWidth.isDesktop() ? true : false, // enable only for web
           // fontSizeResolver: (fontSize, instance) {
           //   // Adjust the font size based on screenWidth or any other criteria
