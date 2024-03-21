@@ -1,5 +1,4 @@
 import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -32,18 +31,7 @@ class MyApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return ScreenUtilInit(
-          designSize: Size(constraints.maxWidth, constraints.maxHeight),
-          // designSize: const Size(360, 844),
-
-          minTextAdapt: constraints.maxWidth.isDesktop() ? true : false, // enable only for web
-          fontSizeResolver: (fontSize, instance) {
-            // Adjust the font size based on screenWidth or any other criteria
-            if (instance.screenWidth.isDesktop() || instance.scaleWidth.isTablet()) {
-              return fontSize * 1; // keep the original font size for larger screens
-            } else {
-              return fontSize * 0.8; // decrease font size for smaller screens
-            }
-          },
+          designSize: const Size(360, 844),
           builder: (_, child) {
             return MaterialApp.router(
               title: 'MUA KYC',
