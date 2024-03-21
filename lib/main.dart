@@ -1,5 +1,4 @@
 import 'package:ekyc/core/dependency/injection.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
