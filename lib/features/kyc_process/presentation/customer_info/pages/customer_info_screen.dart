@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/utils/extensions/string_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/customer_info_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,8 +11,7 @@ class CustomerInfoScreen extends ConsumerStatefulWidget {
   const CustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _CustomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
 }
 
 class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
@@ -41,50 +41,67 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                     ),
                   ),
                   SizedBox(height: 24.h),
+                  // CustomTextFormField(
+                  //   label: Strings.surname,
+                  //   onChanged: (value) {},
+                  //   validator: (value) {
+                  //     if (value!.trim().isEmpty) {
+                  //       return Strings.surnameValidationString;
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(height: 4.h),
+                  // Text(
+                  //   Strings.enterNameAsPerDoc,
+                  //   style: TextStyle(
+                  //     fontSize: 12.sp,
+                  //     color: textGrayColor,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 24.h),
+                  // CustomTextFormField(
+                  //   label: Strings.otherName,
+                  //   onChanged: (value) {},
+                  //   validator: (value) {
+                  //     if (value!.trim().isEmpty) {
+                  //       return Strings.otherNameValidationString;
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(height: 4.h),
+                  // Text(
+                  //   Strings.enterNameAsPerDoc,
+                  //   style: TextStyle(
+                  //     fontSize: 12.sp,
+                  //     color: textGrayColor,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 24.h),
                   CustomTextFormField(
-                    label: Strings.surname,
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isEmpty) {
-                        return Strings.surnameValidationString;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    Strings.enterNameAsPerDoc,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: textGrayColor,
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.otherName,
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isEmpty) {
-                        return Strings.otherNameValidationString;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 4.h),
-                  Text(
-                    Strings.enterNameAsPerDoc,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: textGrayColor,
-                    ),
-                  ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.contactNo,
-                    onChanged: (value) {},
+                    maxLength: 8,
                     validator: (value) {
                       if (value!.trim().isEmpty || value.trim().length < 8) {
                         return Strings.loginPhoneValidatorString;
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {},
+                    keyboardType: TextInputType.phone,
+                    hint: Strings.mobileNo,
+                    label: Strings.mobileNo,
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    prefixIcon: _prefix(context),
+                  ),
+
+                  SizedBox(height: 24.h),
+                  CustomTextFormField(
+                    label: Strings.emailOptional,
+                    onChanged: (value) {},
+                    validator: (value) {
+                      if (value!.trim().isValidEmail()) {
+                        return Strings.emailValidationString;
                       }
                       return null;
                     },
@@ -107,9 +124,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                           value: MaritalStatus.SINGLE,
                           groupValue: ref.watch(maritalStatusProvider),
                           onChange: () {
-                            ref
-                                .watch(maritalStatusProvider.notifier)
-                                .update((state) => MaritalStatus.SINGLE);
+                            ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
                           },
                         ),
                       ),
@@ -119,9 +134,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                           value: MaritalStatus.MARRIED,
                           groupValue: ref.watch(maritalStatusProvider),
                           onChange: () {
-                            ref
-                                .watch(maritalStatusProvider.notifier)
-                                .update((state) => MaritalStatus.MARRIED);
+                            ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
                           },
                         ),
                       ),
@@ -145,9 +158,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                           value: NationalityType.MAURITIAN,
                           groupValue: ref.watch(nationalityTypeProvider),
                           onChange: () {
-                            ref
-                                .watch(nationalityTypeProvider.notifier)
-                                .update((state) => NationalityType.MAURITIAN);
+                            ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
                           },
                         ),
                       ),
@@ -157,8 +168,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                           value: NationalityType.NON_MAURITIAN,
                           groupValue: ref.watch(nationalityTypeProvider),
                           onChange: () {
-                            ref.watch(nationalityTypeProvider.notifier).update(
-                                (state) => NationalityType.NON_MAURITIAN);
+                            ref
+                                .watch(nationalityTypeProvider.notifier)
+                                .update((state) => NationalityType.NON_MAURITIAN);
                           },
                         ),
                       ),
@@ -166,42 +178,42 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
                   ),
                   SizedBox(height: 24.h),
                   CustomTextFormField(
-                    label: Strings.nicIdNo,
+                    label: Strings.quoteNumber,
                     onChanged: (value) {},
                     validator: (value) {
                       if (value!.trim().isEmpty) {
-                        return Strings.nicIdNoValidationString;
+                        return Strings.quoteNumberValidationString;
                       }
                       return null;
                     },
                   ),
                   SizedBox(height: 24.h),
                   CustomTextFormField(
-                    label: Strings.policyNo,
+                    label: Strings.policyNoOptional,
                     onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isEmpty) {
-                        return Strings.policyNoValidationString;
-                      }
-                      return null;
-                    },
+                    // validator: (value) {
+                    //   if (value!.trim().isEmpty) {
+                    //     return Strings.policyNoValidationString;
+                    //   }
+                    //   return null;
+                    // },
                   ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.passportNo,
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isEmpty) {
-                        return Strings.passportNoValidationString;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.insuranceReferenceNo,
-                    onChanged: (value) {},
-                  ),
+                  // SizedBox(height: 24.h),
+                  // CustomTextFormField(
+                  //   label: Strings.passportNo,
+                  //   onChanged: (value) {},
+                  //   validator: (value) {
+                  //     if (value!.trim().isEmpty) {
+                  //       return Strings.passportNoValidationString;
+                  //     }
+                  //     return null;
+                  //   },
+                  // ),
+                  // SizedBox(height: 24.h),
+                  // CustomTextFormField(
+                  //   label: Strings.insuranceReferenceNo,
+                  //   onChanged: (value) {},
+                  // ),
                   SizedBox(height: 50.h),
                   CustomPrimaryButton(
                     label: Strings.next,
@@ -215,6 +227,37 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _prefix(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        RichText(
+          text: TextSpan(
+            text: "  +230",
+            // recognizer: TapGestureRecognizer()
+            //   ..onTap = () {
+            //     _showCountryCodePickerBottomsheet(context);
+            //   },
+            style: TextStyle(
+              color: black,
+              fontSize: 16.sp,
+            ),
+            children: [
+              TextSpan(
+                text: "  | ",
+                style: TextStyle(
+                  color: textGrayColor,
+                  fontSize: 16.sp,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }

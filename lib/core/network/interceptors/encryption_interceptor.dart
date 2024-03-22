@@ -26,6 +26,8 @@ class EncryptionInterceptor extends Interceptor {
     final String baseUrl = options.baseUrl;
     options.path = baseUrl;
 
+    // debugPrint("encrypted request: ${options.data}");
+
     handler.next(options);
   }
 
