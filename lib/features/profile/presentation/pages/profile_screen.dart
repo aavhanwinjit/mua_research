@@ -106,7 +106,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
-              LogoutDialogHelper().showLogoutDialog(context);
+              LogoutDialogHelper().showLogoutDialog(context, ref);
             },
           ),
           SizedBox(height: 8.h),

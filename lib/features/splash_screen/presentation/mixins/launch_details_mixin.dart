@@ -3,6 +3,7 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
 import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart';
@@ -50,6 +51,8 @@ mixin LaunchDetailsMixin {
 
             context.go(AppRoutes.mpinLoginScreen);
           } else {
+            ref.watch(userLoggedInProvider.notifier).update((state) => false);
+
             context.go(AppRoutes.loginScreen);
           }
         } else {

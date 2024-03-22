@@ -3,6 +3,7 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/storage/storage_manager.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/profile/data/models/de_register_fingerprint/request/de_register_fingerprint_response_model.dart';
 import 'package:ekyc/features/profile/data/models/logout/response/logout_response_model.dart';
 import 'package:ekyc/features/profile/domain/usecases/de_register_fingerprint.dart';
@@ -13,7 +14,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 mixin LogoutMixin {
-  Future<void> logout(BuildContext context) async {
+  Future<void> logout(BuildContext context, WidgetRef ref) async {
     final response = await getIt<Logout>().call(null);
 
     response.fold(
@@ -25,6 +26,7 @@ mixin LogoutMixin {
         if (success.status?.isSuccess == true) {
           getIt<AppStorageManager>().clearStorage();
           await LocalDataHelper.storeSessionId("");
+          ref.watch(userLoggedInProvider.notifier).update((state) => false);
 
           context.go(AppRoutes.loginScreen);
         } else {

@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/models/generic_header/header_model.dart';
 import 'package:ekyc/models/status/status_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -43,10 +44,11 @@ class ValidateOTPResponseBody with _$ValidateOTPResponseBody {
     @JsonKey(name: "agentName") String? agentName,
     @JsonKey(name: "mobileNumber") String? mobileNumber,
     @JsonKey(name: "address") String? address,
-    @JsonKey(name: "companyName") String? companyName,
+    @JsonKey(name: "companyName") dynamic companyName,
     @JsonKey(name: "emailId") String? emailId,
-    @JsonKey(name: "designation") String? designation,
+    @JsonKey(name: "designation") dynamic designation,
     @JsonKey(name: "agencyName") String? agencyName,
+    @JsonKey(name: "companies") List<Company>? companies,
   }) = _ValidateOTPResponseBody;
 
   factory ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) => _$ValidateOTPResponseBodyFromJson(json);

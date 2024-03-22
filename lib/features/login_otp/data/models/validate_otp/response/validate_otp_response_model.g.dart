@@ -51,10 +51,13 @@ _$ValidateOTPResponseBodyImpl _$$ValidateOTPResponseBodyImplFromJson(
       agentName: json['agentName'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
       address: json['address'] as String?,
-      companyName: json['companyName'] as String?,
+      companyName: json['companyName'],
       emailId: json['emailId'] as String?,
-      designation: json['designation'] as String?,
+      designation: json['designation'],
       agencyName: json['agencyName'] as String?,
+      companies: (json['companies'] as List<dynamic>?)
+          ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
@@ -67,4 +70,5 @@ Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
       'emailId': instance.emailId,
       'designation': instance.designation,
       'agencyName': instance.agencyName,
+      'companies': instance.companies,
     };

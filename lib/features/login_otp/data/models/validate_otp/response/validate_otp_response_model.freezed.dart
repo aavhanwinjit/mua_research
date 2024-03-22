@@ -460,13 +460,15 @@ mixin _$ValidateOTPResponseBody {
   @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: "companyName")
-  String? get companyName => throw _privateConstructorUsedError;
+  dynamic get companyName => throw _privateConstructorUsedError;
   @JsonKey(name: "emailId")
   String? get emailId => throw _privateConstructorUsedError;
   @JsonKey(name: "designation")
-  String? get designation => throw _privateConstructorUsedError;
+  dynamic get designation => throw _privateConstructorUsedError;
   @JsonKey(name: "agencyName")
   String? get agencyName => throw _privateConstructorUsedError;
+  @JsonKey(name: "companies")
+  List<Company>? get companies => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -484,10 +486,11 @@ abstract class $ValidateOTPResponseBodyCopyWith<$Res> {
       {@JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "companyName") dynamic companyName,
       @JsonKey(name: "emailId") String? emailId,
-      @JsonKey(name: "designation") String? designation,
-      @JsonKey(name: "agencyName") String? agencyName});
+      @JsonKey(name: "designation") dynamic designation,
+      @JsonKey(name: "agencyName") String? agencyName,
+      @JsonKey(name: "companies") List<Company>? companies});
 }
 
 /// @nodoc
@@ -511,6 +514,7 @@ class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
     Object? emailId = freezed,
     Object? designation = freezed,
     Object? agencyName = freezed,
+    Object? companies = freezed,
   }) {
     return _then(_value.copyWith(
       agentName: freezed == agentName
@@ -528,7 +532,7 @@ class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
       companyName: freezed == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       emailId: freezed == emailId
           ? _value.emailId
           : emailId // ignore: cast_nullable_to_non_nullable
@@ -536,11 +540,15 @@ class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
       designation: freezed == designation
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       agencyName: freezed == agencyName
           ? _value.agencyName
           : agencyName // ignore: cast_nullable_to_non_nullable
               as String?,
+      companies: freezed == companies
+          ? _value.companies
+          : companies // ignore: cast_nullable_to_non_nullable
+              as List<Company>?,
     ) as $Val);
   }
 }
@@ -558,10 +566,11 @@ abstract class _$$ValidateOTPResponseBodyImplCopyWith<$Res>
       {@JsonKey(name: "agentName") String? agentName,
       @JsonKey(name: "mobileNumber") String? mobileNumber,
       @JsonKey(name: "address") String? address,
-      @JsonKey(name: "companyName") String? companyName,
+      @JsonKey(name: "companyName") dynamic companyName,
       @JsonKey(name: "emailId") String? emailId,
-      @JsonKey(name: "designation") String? designation,
-      @JsonKey(name: "agencyName") String? agencyName});
+      @JsonKey(name: "designation") dynamic designation,
+      @JsonKey(name: "agencyName") String? agencyName,
+      @JsonKey(name: "companies") List<Company>? companies});
 }
 
 /// @nodoc
@@ -584,6 +593,7 @@ class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
     Object? emailId = freezed,
     Object? designation = freezed,
     Object? agencyName = freezed,
+    Object? companies = freezed,
   }) {
     return _then(_$ValidateOTPResponseBodyImpl(
       agentName: freezed == agentName
@@ -601,7 +611,7 @@ class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
       companyName: freezed == companyName
           ? _value.companyName
           : companyName // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       emailId: freezed == emailId
           ? _value.emailId
           : emailId // ignore: cast_nullable_to_non_nullable
@@ -609,11 +619,15 @@ class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
       designation: freezed == designation
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as dynamic,
       agencyName: freezed == agencyName
           ? _value.agencyName
           : agencyName // ignore: cast_nullable_to_non_nullable
               as String?,
+      companies: freezed == companies
+          ? _value._companies
+          : companies // ignore: cast_nullable_to_non_nullable
+              as List<Company>?,
     ));
   }
 }
@@ -628,7 +642,9 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
       @JsonKey(name: "companyName") this.companyName,
       @JsonKey(name: "emailId") this.emailId,
       @JsonKey(name: "designation") this.designation,
-      @JsonKey(name: "agencyName") this.agencyName});
+      @JsonKey(name: "agencyName") this.agencyName,
+      @JsonKey(name: "companies") final List<Company>? companies})
+      : _companies = companies;
 
   factory _$ValidateOTPResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$ValidateOTPResponseBodyImplFromJson(json);
@@ -644,20 +660,30 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
   final String? address;
   @override
   @JsonKey(name: "companyName")
-  final String? companyName;
+  final dynamic companyName;
   @override
   @JsonKey(name: "emailId")
   final String? emailId;
   @override
   @JsonKey(name: "designation")
-  final String? designation;
+  final dynamic designation;
   @override
   @JsonKey(name: "agencyName")
   final String? agencyName;
+  final List<Company>? _companies;
+  @override
+  @JsonKey(name: "companies")
+  List<Company>? get companies {
+    final value = _companies;
+    if (value == null) return null;
+    if (_companies is EqualUnmodifiableListView) return _companies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'ValidateOTPResponseBody(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, emailId: $emailId, designation: $designation, agencyName: $agencyName)';
+    return 'ValidateOTPResponseBody(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, emailId: $emailId, designation: $designation, agencyName: $agencyName, companies: $companies)';
   }
 
   @override
@@ -670,19 +696,29 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.address, address) || other.address == address) &&
-            (identical(other.companyName, companyName) ||
-                other.companyName == companyName) &&
+            const DeepCollectionEquality()
+                .equals(other.companyName, companyName) &&
             (identical(other.emailId, emailId) || other.emailId == emailId) &&
-            (identical(other.designation, designation) ||
-                other.designation == designation) &&
+            const DeepCollectionEquality()
+                .equals(other.designation, designation) &&
             (identical(other.agencyName, agencyName) ||
-                other.agencyName == agencyName));
+                other.agencyName == agencyName) &&
+            const DeepCollectionEquality()
+                .equals(other._companies, _companies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, agentName, mobileNumber, address,
-      companyName, emailId, designation, agencyName);
+  int get hashCode => Object.hash(
+      runtimeType,
+      agentName,
+      mobileNumber,
+      address,
+      const DeepCollectionEquality().hash(companyName),
+      emailId,
+      const DeepCollectionEquality().hash(designation),
+      agencyName,
+      const DeepCollectionEquality().hash(_companies));
 
   @JsonKey(ignore: true)
   @override
@@ -704,10 +740,11 @@ abstract class _ValidateOTPResponseBody implements ValidateOTPResponseBody {
           {@JsonKey(name: "agentName") final String? agentName,
           @JsonKey(name: "mobileNumber") final String? mobileNumber,
           @JsonKey(name: "address") final String? address,
-          @JsonKey(name: "companyName") final String? companyName,
+          @JsonKey(name: "companyName") final dynamic companyName,
           @JsonKey(name: "emailId") final String? emailId,
-          @JsonKey(name: "designation") final String? designation,
-          @JsonKey(name: "agencyName") final String? agencyName}) =
+          @JsonKey(name: "designation") final dynamic designation,
+          @JsonKey(name: "agencyName") final String? agencyName,
+          @JsonKey(name: "companies") final List<Company>? companies}) =
       _$ValidateOTPResponseBodyImpl;
 
   factory _ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) =
@@ -724,16 +761,19 @@ abstract class _ValidateOTPResponseBody implements ValidateOTPResponseBody {
   String? get address;
   @override
   @JsonKey(name: "companyName")
-  String? get companyName;
+  dynamic get companyName;
   @override
   @JsonKey(name: "emailId")
   String? get emailId;
   @override
   @JsonKey(name: "designation")
-  String? get designation;
+  dynamic get designation;
   @override
   @JsonKey(name: "agencyName")
   String? get agencyName;
+  @override
+  @JsonKey(name: "companies")
+  List<Company>? get companies;
   @override
   @JsonKey(ignore: true)
   _$$ValidateOTPResponseBodyImplCopyWith<_$ValidateOTPResponseBodyImpl>
