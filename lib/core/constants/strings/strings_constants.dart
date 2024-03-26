@@ -35,7 +35,9 @@ class Strings {
   static const String companyName = "Company Name";
   static const String cancel = "Cancel";
   static const String next = "Next";
+  static const String continueToUpload = "Continue to upload";
   static const String exit = "Exit";
+  static const String saveAndExit = "Save & Exit";
   static const String selectDocument = "Select Document";
   static const String addMoreDocuments = "Add More Documents";
   static const String reviewAndSubmit = "Review & Submit";
