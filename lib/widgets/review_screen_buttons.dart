@@ -16,7 +16,7 @@ class ReviewScreenButtons extends StatelessWidget {
           child: CustomOutlineButton(
             disable: false,
             onTap: onExit,
-            label: Strings.exit,
+            label: Strings.saveAndExit,
           ),
         ),
         SizedBox(width: 8.w),
@@ -25,7 +25,7 @@ class ReviewScreenButtons extends StatelessWidget {
           child: CustomPrimaryButton(
             disable: false,
             onTap: onNext,
-            label: Strings.next,
+            label: Strings.continueToUpload,
           ),
         ),
       ],
