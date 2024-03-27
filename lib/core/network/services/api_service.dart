@@ -3,6 +3,8 @@ import 'package:ekyc/features/dashboard/data/models/get_agent_application/reques
 import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/request/get_kyc_types_request_model.dart';
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/add_customer_information/request/add_customer_information_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/add_customer_information/response/add_customer_information_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
@@ -55,6 +57,7 @@ abstract class ApiService {
   static const CHANGE_MPIN = "/AgentAPI/Registration/ChangeMPIN";
   static const GET_AGENT_APPLICATIONS = "/AgentAPI/Agent/GetAgentApplications";
   static const GET_KYC_TYPES = "/AgentAPI/Data/GetKYCTypes";
+  static const ADD_CUSTOMER_INFORMATION = "/AgentAPI/Agent/AddCustomerInformation";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -124,4 +127,9 @@ abstract class ApiService {
   @POST(GET_KYC_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<GetKycTypesResponseModel> getKycTypes(@Body() GetKycTypesRequestModel request);
+
+  @POST(ADD_CUSTOMER_INFORMATION)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<AddCustomerInformationResponseModel> addCustomerInformation(
+      @Body() AddCustomerInformationRequestModel request);
 }

@@ -1,7 +1,11 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
+import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/customer_info/mixins/add_customer_info_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/customer_info_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,9 +18,27 @@ class CustomerInfoScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
 }
 
-class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
+class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
+    with AddCustomerInfoMixin, AgentApplicationsMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _resetTextFields();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final selectedKycType = ref.watch(kycTypeProvider);
+
+    final formKey = ref.watch(customerInfoFormKey);
+    ref.watch(customerInfoMobileNumberProvider);
+    ref.watch(customerInfoEmailProvider);
+    ref.watch(customerInfoQuoteNumberProvider);
+    ref.watch(customerInfoPolicyNumberProvider);
+
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
@@ -28,205 +50,211 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen> {
             KeyboardHelper.onScreenTap(context);
           },
           child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    Strings.enterFollowingDetails,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: textGrayColor2,
+            child: Form(
+              key: formKey,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      Strings.enterFollowingDetails,
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: textGrayColor2,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 24.h),
-                  // CustomTextFormField(
-                  //   label: Strings.surname,
-                  //   onChanged: (value) {},
-                  //   validator: (value) {
-                  //     if (value!.trim().isEmpty) {
-                  //       return Strings.surnameValidationString;
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
-                  // SizedBox(height: 4.h),
-                  // Text(
-                  //   Strings.enterNameAsPerDoc,
-                  //   style: TextStyle(
-                  //     fontSize: 12.sp,
-                  //     color: textGrayColor,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 24.h),
-                  // CustomTextFormField(
-                  //   label: Strings.otherName,
-                  //   onChanged: (value) {},
-                  //   validator: (value) {
-                  //     if (value!.trim().isEmpty) {
-                  //       return Strings.otherNameValidationString;
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
-                  // SizedBox(height: 4.h),
-                  // Text(
-                  //   Strings.enterNameAsPerDoc,
-                  //   style: TextStyle(
-                  //     fontSize: 12.sp,
-                  //     color: textGrayColor,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    maxLength: 8,
-                    validator: (value) {
-                      if (value!.trim().isEmpty || value.trim().length < 8) {
-                        return Strings.loginPhoneValidatorString;
-                      }
-                      return null;
-                    },
-                    onChanged: (value) {},
-                    keyboardType: TextInputType.phone,
-                    hint: Strings.mobileNo,
-                    label: Strings.mobileNo,
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    prefixIcon: _prefix(context),
-                  ),
+                    SizedBox(height: 24.h),
+                    CustomTextFormField(
+                      maxLength: 8,
+                      validator: (value) {
+                        if (value!.trim().isEmpty || value.trim().length < 8) {
+                          return Strings.loginPhoneValidatorString;
+                        }
+                        return null;
+                      },
+                      onChanged: (value) {
+                        ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => value.trim());
+                      },
+                      keyboardType: TextInputType.phone,
+                      hint: Strings.mobileNo,
+                      label: Strings.mobileNo,
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      prefixIcon: _prefix(context),
+                    ),
+                    SizedBox(height: 24.h),
+                    CustomTextFormField(
+                      label: Strings.emailOptional,
+                      onChanged: (value) {
+                        ref.watch(customerInfoEmailProvider.notifier).update((state) => value.trim());
+                      },
+                      validator: (value) {
+                        if (value?.trim() != null && value!.trim().isNotEmpty) {
+                          if (!value.trim().isValidEmail()) {
+                            return Strings.emailValidationString;
+                          }
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 24.h),
+                    Text(
+                      Strings.maritalStatus,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: black,
+                      ),
+                    ),
+                    SizedBox(height: 16.h),
+                    _maritalStatusRadioButtons(),
+                    SizedBox(height: 24.h),
+                    Text(
+                      Strings.whatIsNationality,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.bold,
+                        color: black,
+                      ),
+                    ),
+                    SizedBox(height: 16.h),
+                    _nationalityRadioButtons(),
+                    if (selectedKycType?.kycTypes?.toLowerCase().trim() ==
+                            KYCType.MOTOR_INSURANCE.toLowerCase().trim() ||
+                        selectedKycType?.kycTypes?.toLowerCase().trim() ==
+                            KYCType.NON_MOTOR_INSURANCE.toLowerCase().trim()) ...[
+                      SizedBox(height: 24.h),
+                      CustomTextFormField(
+                        label: Strings.quoteNumber,
+                        onChanged: (value) {
+                          ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => value.trim());
+                        },
+                        validator: (selectedKycType?.kycTypes?.toLowerCase().trim() ==
+                                    KYCType.MOTOR_INSURANCE.toLowerCase().trim() ||
+                                selectedKycType?.kycTypes?.toLowerCase().trim() ==
+                                    KYCType.NON_MOTOR_INSURANCE.toLowerCase().trim())
+                            ? (value) {
+                                if (value!.trim().isEmpty) {
+                                  return Strings.quoteNumberValidationString;
+                                }
+                                return null;
+                              }
+                            : null,
+                      ),
+                    ],
+                    if (selectedKycType?.kycTypes?.toLowerCase().trim() ==
+                        KYCType.LIFE_INSURANCE.toLowerCase().trim()) ...[
+                      SizedBox(height: 24.h),
+                      CustomTextFormField(
+                        label: Strings.policyNoOptional,
+                        onChanged: (value) {
+                          ref.watch(customerInfoPolicyNumberProvider.notifier).update((state) => value.trim());
+                        },
+                        // validator: (value) {
+                        //   if (value!.trim().isEmpty) {
+                        //     return Strings.policyNoValidationString;
+                        //   }
+                        //   return null;
+                        // },
+                      ),
+                    ],
+                    SizedBox(height: 50.h),
+                    CustomPrimaryButton(
+                      label: Strings.next,
+                      onTap: () async {
+                        await addCustomerInformation(
+                          context: context,
+                          ref: ref,
+                          onSuccess: () async {
+                            resetPageNumber(ref);
 
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.emailOptional,
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isValidEmail()) {
-                        return Strings.emailValidationString;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 24.h),
-                  Text(
-                    Strings.maritalStatus,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: black,
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomRadioTile(
-                          title: Strings.single,
-                          value: MaritalStatus.SINGLE,
-                          groupValue: ref.watch(maritalStatusProvider),
-                          onChange: () {
-                            ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
+                            await getAgentApplications(
+                              context: context,
+                              ref: ref,
+                            );
+
+                            ref.watch(customerInfoLoadingProvider.notifier).update((state) => false);
+                            ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
+
+                            context.pushReplacementNamed(AppRoutes.insuranceStagesScreen);
                           },
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomRadioTile(
-                          title: Strings.married,
-                          value: MaritalStatus.MARRIED,
-                          groupValue: ref.watch(maritalStatusProvider),
-                          onChange: () {
-                            ref.watch(maritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 24.h),
-                  Text(
-                    Strings.whatIsNationality,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: black,
-                    ),
-                  ),
-                  SizedBox(height: 16.h),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: CustomRadioTile(
-                          title: Strings.mauritian,
-                          value: NationalityType.MAURITIAN,
-                          groupValue: ref.watch(nationalityTypeProvider),
-                          onChange: () {
-                            ref.watch(nationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
-                          },
-                        ),
-                      ),
-                      Expanded(
-                        child: CustomRadioTile(
-                          title: Strings.nonMauritian,
-                          value: NationalityType.NON_MAURITIAN,
-                          groupValue: ref.watch(nationalityTypeProvider),
-                          onChange: () {
-                            ref
-                                .watch(nationalityTypeProvider.notifier)
-                                .update((state) => NationalityType.NON_MAURITIAN);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.quoteNumber,
-                    onChanged: (value) {},
-                    validator: (value) {
-                      if (value!.trim().isEmpty) {
-                        return Strings.quoteNumberValidationString;
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(height: 24.h),
-                  CustomTextFormField(
-                    label: Strings.policyNoOptional,
-                    onChanged: (value) {},
-                    // validator: (value) {
-                    //   if (value!.trim().isEmpty) {
-                    //     return Strings.policyNoValidationString;
-                    //   }
-                    //   return null;
-                    // },
-                  ),
-                  // SizedBox(height: 24.h),
-                  // CustomTextFormField(
-                  //   label: Strings.passportNo,
-                  //   onChanged: (value) {},
-                  //   validator: (value) {
-                  //     if (value!.trim().isEmpty) {
-                  //       return Strings.passportNoValidationString;
-                  //     }
-                  //     return null;
-                  //   },
-                  // ),
-                  // SizedBox(height: 24.h),
-                  // CustomTextFormField(
-                  //   label: Strings.insuranceReferenceNo,
-                  //   onChanged: (value) {},
-                  // ),
-                  SizedBox(height: 50.h),
-                  CustomPrimaryButton(
-                    label: Strings.next,
-                    onTap: () {
-                      context.pushNamed(AppRoutes.insuranceStagesScreen);
-                    },
-                  )
-                ],
+                        );
+                      },
+                    )
+                  ],
+                ),
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  void _resetTextFields() {
+    ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => null);
+    ref.watch(customerInfoEmailProvider.notifier).update((state) => null);
+    ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
+    ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
+    ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => null);
+    ref.watch(customerInfoPolicyNumberProvider.notifier).update((state) => null);
+  }
+
+  Widget _maritalStatusRadioButtons() {
+    ref.watch(customerInfoMaritalStatusProvider);
+
+    return Row(
+      children: [
+        Expanded(
+          child: CustomRadioTile(
+            title: Strings.single,
+            value: MaritalStatus.SINGLE,
+            groupValue: ref.watch(customerInfoMaritalStatusProvider),
+            onChange: () {
+              ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
+            },
+          ),
+        ),
+        Expanded(
+          child: CustomRadioTile(
+            title: Strings.married,
+            value: MaritalStatus.MARRIED,
+            groupValue: ref.watch(customerInfoMaritalStatusProvider),
+            onChange: () {
+              ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _nationalityRadioButtons() {
+    ref.watch(customerInfoNationalityTypeProvider);
+
+    return Row(
+      children: [
+        Expanded(
+          child: CustomRadioTile(
+            title: Strings.mauritian,
+            value: NationalityType.MAURITIAN,
+            groupValue: ref.watch(customerInfoNationalityTypeProvider),
+            onChange: () {
+              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
+            },
+          ),
+        ),
+        Expanded(
+          child: CustomRadioTile(
+            title: Strings.nonMauritian,
+            value: NationalityType.NON_MAURITIAN,
+            groupValue: ref.watch(customerInfoNationalityTypeProvider),
+            onChange: () {
+              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.NON_MAURITIAN);
+            },
+          ),
+        ),
+      ],
     );
   }
 

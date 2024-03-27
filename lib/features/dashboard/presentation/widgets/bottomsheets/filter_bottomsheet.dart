@@ -137,7 +137,10 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => poaMissing);
     ref.watch(filterCompleteProvider.notifier).update((state) => completed);
 
-    await getAgentApplications(context: context, ref: ref);
+    await getAgentApplications(
+      context: context,
+      ref: ref,
+    );
 
     context.pop();
   }
@@ -155,7 +158,10 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
     ref.watch(filterCompleteProvider.notifier).update((state) => false);
 
-    await getAgentApplications(context: context, ref: ref);
+    await getAgentApplications(
+      context: context,
+      ref: ref,
+    );
   }
 
   Widget _titleWithCloseButton() {
