@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/data/models/get_kyc_types/request/get_ky
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
 import 'package:ekyc/features/dashboard/domain/usecases/get_kyc_types.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_bottomsheet_providers.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_types_notifier.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
@@ -38,6 +39,8 @@ mixin KycTypesMixin {
           // onSuccess
           if (success.body?.responseBody != null) {
             final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
+
+            ref.watch(kycTypeProvider.notifier).update((state) => null);
 
             kycTypeNotifier.updateApplicationList(success.body?.responseBody ?? []);
 

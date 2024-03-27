@@ -1,8 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/agent_applications_notifier.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/dashboard_page_number_notifier.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/dashboard_providers.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/applicant_card.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/bottomsheets/filter_bottomsheet.dart';
@@ -11,6 +11,7 @@ import 'package:ekyc/features/dashboard/presentation/widgets/dashboard_loading_w
 import 'package:ekyc/features/dashboard/presentation/widgets/no_data_body.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,13 +34,26 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      getAgentApplications(context: context, ref: ref);
+      resetPageNumber(ref);
+
+      getAgentApplications(
+        context: context,
+        ref: ref,
+      );
     });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    final pageNumberNotifier = ref.watch(dashboardPageNumberNotifierProvider.notifier);
+
     ref.watch(agentApplicationsNotifierProvider);
 
     final applicationListLoading = ref.watch(applicationListLoadingProvider);
@@ -54,7 +68,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
         appBar: _appBar(),
         floatingActionButton: agentApplicationNotifier.haveApplications() ? _fab() : null,
         bottomNavigationBar: agentApplicationNotifier.haveNoApplications() ? _bottomNavBarWidget() : null,
-        body: applicationListLoading == true
+        body: pageNumberNotifier.isFirstPage && applicationListLoading == true
             ? const DashboardLoadingWidget()
             : agentApplicationNotifier.haveApplications()
                 ? _bodyWidget()
@@ -71,6 +85,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
           _headingAndSearchBarWidget(),
           SizedBox(height: 25.h),
           _listView(),
+          _paginationLoadingWidget(),
         ],
       ),
     );
@@ -83,21 +98,73 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
     return Expanded(
       child: RefreshIndicator(
         onRefresh: () async {
-          getAgentApplications(context: context, ref: ref);
-        },
-        child: ListView.separated(
-          controller: _scrollController,
-          padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
-          itemBuilder: (context, index) {
-            final AgentApplicationsModel application = agentApplicationNotifier.applications()[index];
+          resetPageNumber(ref);
 
-            return ApplicantCard(application: application);
-          },
-          separatorBuilder: (context, index) => SizedBox(height: 16.h),
-          itemCount: agentApplicationNotifier.applications().length,
+          await getAgentApplications(
+            context: context,
+            ref: ref,
+          );
+        },
+        child: NotificationListener<ScrollNotification>(
+          onNotification: _handleScrollNotification,
+          child: ListView.separated(
+            controller: _scrollController,
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 80.h),
+            itemBuilder: (context, index) {
+              // final pageNumberNotifier = ref.watch(dashboardPageNumberNotifierProvider.notifier);
+              // final applicationListLoading = ref.watch(applicationListLoadingProvider);
+
+              // if ((!pageNumberNotifier.isFirstPage && applicationListLoading == true)) {
+              //   return const Center(
+              //     child: CircularProgressIndicator(),
+              //   );
+              // } else {
+              final AgentApplicationModel application = agentApplicationNotifier.applications()[index];
+
+              return ApplicantCard(application: application);
+              // }
+            },
+            separatorBuilder: (context, index) => SizedBox(height: 16.h),
+            itemCount: agentApplicationNotifier.applications().length,
+          ),
         ),
       ),
     );
+  }
+
+  bool _handleScrollNotification(ScrollNotification notification) {
+    if (notification is ScrollEndNotification && _scrollController.position.extentAfter == 0) {
+      incrementPageNumber(ref);
+
+      getAgentApplications(
+        context: context,
+        ref: ref,
+      );
+    }
+
+    return false;
+  }
+
+  Widget _paginationLoadingWidget() {
+    final pageNumberNotifier = ref.watch(dashboardPageNumberNotifierProvider.notifier);
+
+    final applicationListLoading = ref.watch(applicationListLoadingProvider);
+
+    return (!pageNumberNotifier.isFirstPage && applicationListLoading == true)
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(height: 50.h),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ),
+              SizedBox(height: 50.h),
+            ],
+          )
+        : const SizedBox();
   }
 
   Widget _headingAndSearchBarWidget() {
