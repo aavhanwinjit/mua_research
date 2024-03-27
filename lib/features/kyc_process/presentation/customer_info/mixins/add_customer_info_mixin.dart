@@ -37,13 +37,11 @@ mixin AddCustomerInfoMixin {
       emailId: emailId,
       maritalStatus: maritalStatus.toString().split('.').last,
       nationality: nationalityType.toString().split('.').last,
-      quoteNumber: (selectedKycType?.kycTypes?.toLowerCase().trim() == KYCType.MOTOR_INSURANCE.toLowerCase().trim() ||
-              selectedKycType?.kycTypes?.toLowerCase().trim() == KYCType.NON_MOTOR_INSURANCE.toLowerCase().trim())
+      quoteNumber: (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
+              selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE)
           ? quoteNumber
           : null,
-      policyNumber: (selectedKycType?.kycTypes?.toLowerCase().trim() == KYCType.LIFE_INSURANCE.toLowerCase().trim())
-          ? policyNumber
-          : null,
+      policyNumber: (selectedKycType?.kycTypeId == KYCType.LIFE_INSURANCE) ? policyNumber : null,
       kycTypeId: selectedKycType?.kycTypeId,
     );
 

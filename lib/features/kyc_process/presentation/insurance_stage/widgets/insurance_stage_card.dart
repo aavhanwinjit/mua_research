@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/widgets/insurance_stage_card_button.dart';
 import 'package:flutter/material.dart';
 
 class InsuranceStageCard extends StatelessWidget {
@@ -43,31 +44,12 @@ class InsuranceStageCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                _continueWidget(),
+                const InsuranceStageCardButton.active(),
               ],
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _continueWidget() {
-    return Row(
-      children: [
-        Text(
-          Strings.contn,
-          style: TextStyle(
-            color: primaryColor,
-            fontWeight: FontWeight.w600,
-            fontSize: 12.sp,
-          ),
-        ),
-        const Icon(
-          Icons.chevron_right,
-          color: primaryColor,
-        ),
-      ],
     );
   }
 }
