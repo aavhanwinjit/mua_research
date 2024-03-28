@@ -8,7 +8,7 @@ import 'package:ekyc/features/kyc_process/presentation/address_details/pages/ins
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/document_review/pages/review_uploaded_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
@@ -33,6 +33,7 @@ import 'package:ekyc/features/profile/presentation/pages/profile_screen.dart';
 import 'package:ekyc/features/signature/presentation/screens/signature_screen.dart';
 import 'package:ekyc/features/splash_screen/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
@@ -190,7 +191,9 @@ final GoRouter router = GoRouter(
       path: AppRoutes.confirmUploadOrRetakeScreen,
       name: AppRoutes.confirmUploadOrRetakeScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const ReviewUploadedDocumentScreen();
+        StateProvider<String?> provider = state.extra as StateProvider<String?>;
+
+        return ReviewUploadedDocumentScreen(provider: provider);
       },
     ),
     GoRoute(
@@ -225,7 +228,9 @@ final GoRouter router = GoRouter(
       path: AppRoutes.cameraScreen,
       name: AppRoutes.cameraScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const CameraScreen();
+        StateProvider<String?> provider = state.extra as StateProvider<String?>;
+
+        return CameraScreen(provider: provider);
       },
     ),
     GoRoute(

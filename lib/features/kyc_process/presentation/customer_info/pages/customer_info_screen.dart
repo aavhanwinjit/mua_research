@@ -119,20 +119,16 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     ),
                     SizedBox(height: 16.h),
                     _nationalityRadioButtons(),
-                    if (selectedKycType?.kycTypes?.toLowerCase().trim() ==
-                            KYCType.MOTOR_INSURANCE.toLowerCase().trim() ||
-                        selectedKycType?.kycTypes?.toLowerCase().trim() ==
-                            KYCType.NON_MOTOR_INSURANCE.toLowerCase().trim()) ...[
+                    if (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
+                        selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
                         label: Strings.quoteNumber,
                         onChanged: (value) {
                           ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => value.trim());
                         },
-                        validator: (selectedKycType?.kycTypes?.toLowerCase().trim() ==
-                                    KYCType.MOTOR_INSURANCE.toLowerCase().trim() ||
-                                selectedKycType?.kycTypes?.toLowerCase().trim() ==
-                                    KYCType.NON_MOTOR_INSURANCE.toLowerCase().trim())
+                        validator: (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
+                                selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE)
                             ? (value) {
                                 if (value!.trim().isEmpty) {
                                   return Strings.quoteNumberValidationString;
@@ -142,8 +138,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                             : null,
                       ),
                     ],
-                    if (selectedKycType?.kycTypes?.toLowerCase().trim() ==
-                        KYCType.LIFE_INSURANCE.toLowerCase().trim()) ...[
+                    if (selectedKycType?.kycTypeId == KYCType.LIFE_INSURANCE) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
                         label: Strings.policyNoOptional,

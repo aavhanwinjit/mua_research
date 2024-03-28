@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/providers/non_motor_docs_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -12,12 +13,10 @@ class NonMotorDocumentScreen extends ConsumerStatefulWidget {
   const NonMotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState
-    extends ConsumerState<NonMotorDocumentScreen> {
+class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> {
   String? dropdownValue;
 
   List<String> items = [
@@ -57,8 +56,10 @@ class _PolicyDocumentsScreenState
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  const DocumentUploadContainer(
+                  DocumentUploadContainer(
+                    provider: nonMotorDocFilePathProvider,
                     label: Strings.nonMotorDocsContainerLabel,
+                    cameraScreenTitle: Strings.scanDocuments,
                     cameraScreenDescription: Strings.nonMotorDocCameraLabel,
                     reviewScreenTitle: Strings.nonMotorDocuments,
                   ),

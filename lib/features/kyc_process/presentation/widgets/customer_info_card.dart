@@ -1,13 +1,17 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomerInfoCard extends StatelessWidget {
+class CustomerInfoCard extends ConsumerWidget {
   const CustomerInfoCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -19,7 +23,7 @@ class CustomerInfoCard extends StatelessWidget {
         children: [
           //info box heading
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 4.h),
+            padding: EdgeInsets.only(left: 16.w, top: 16.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -30,42 +34,42 @@ class CustomerInfoCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                TextButton(
-                  onPressed: () => context.pushNamed(AppRoutes.editCustomerInfoScreen),
-                  child: Text(
-                    Strings.edit,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ),
+                // TextButton(
+                //   onPressed: () => context.pushNamed(AppRoutes.editCustomerInfoScreen),
+                //   child: Text(
+                //     Strings.edit,
+                //     style: TextStyle(
+                //       fontSize: 14.sp,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
           //information
           Padding(
             padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 16.h, top: 20),
-            child: const Row(
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      // InfoTile(
+                      //   title: Strings.surname,
+                      //   value: "Sharma",
+                      // ),
+                      // SizedBox(height: 24),
                       InfoTile(
-                        title: Strings.surname,
-                        value: "Sharma",
+                        title: Strings.mobileNo,
+                        value: "+230 ${selectedApplication?.mobileNumber}",
                       ),
-                      SizedBox(height: 24),
-                      InfoTile(
-                        title: Strings.contactNo,
-                        value: "+230 5 123 4567",
-                      ),
-                      SizedBox(height: 24),
-                      InfoTile(
-                        title: Strings.policyNo,
-                        value: "1234567",
-                      ),
+                      // SizedBox(height: 24),
+                      // InfoTile(
+                      //   title: Strings.policyNo,
+                      //   value: "1234567",
+                      // ),
                     ],
                   ),
                 ),
@@ -73,15 +77,27 @@ class CustomerInfoCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      InfoTile(
-                        title: Strings.otherName,
-                        value: "Devika",
-                      ),
-                      SizedBox(height: 24),
-                      InfoTile(
-                        title: Strings.nicNumber,
-                        value: "S0808739500254",
-                      ),
+                      // InfoTile(
+                      //   title: Strings.otherName,
+                      //   value: "Devika",
+                      // ),
+                      // SizedBox(height: 24),
+                      // InfoTile(
+                      //   title: Strings.nicNumber,
+                      //   value: "S0808739500254",
+                      // ),
+                      (selectedApplication?.kycTypeId == KYCType.MOTOR_INSURANCE ||
+                              selectedApplication?.kycTypeId == KYCType.NON_MOTOR_INSURANCE)
+                          ? InfoTile(
+                              title: Strings.quoteNumber,
+                              value: selectedApplication?.quoteNumber ?? "-",
+                            )
+                          : selectedApplication?.policyNumber != null && selectedApplication!.policyNumber!.isNotEmpty
+                              ? InfoTile(
+                                  title: Strings.policyNo,
+                                  value: selectedApplication.policyNumber ?? "-",
+                                )
+                              : const SizedBox(),
                     ],
                   ),
                 ),

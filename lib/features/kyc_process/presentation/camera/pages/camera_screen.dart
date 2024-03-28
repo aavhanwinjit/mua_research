@@ -9,7 +9,9 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraScreen extends ConsumerStatefulWidget {
-  const CameraScreen({super.key});
+  final StateProvider<String?> provider;
+
+  const CameraScreen({required this.provider, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CameraScreenState();
@@ -23,6 +25,11 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+    });
+
     _setupCamera();
   }
 
@@ -87,9 +94,11 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   Widget _appBar() {
+    final title = ref.watch(cameraScreenAppBarTitle);
+
     return AppBarHelper.showCustomAppbar(
       context: context,
-      title: Strings.uploadDocument,
+      title: title,
       blueBackground: true,
     );
   }
@@ -149,22 +158,16 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _navigateToReviewImageScreen() {
-    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen);
+    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
   }
 
   void onTakePictureButtonPressed() {
     takePicture().then((XFile? file) {
       if (mounted) {
-        _navigateToReviewImageScreen();
-        // setState(() {
-        //   imageFile = file;
-        //   videoController?.dispose();
-        //   videoController = null;
-        // });
-
-        // if (file != null) {
-        //   showInSnackBar('Picture saved to ${file.path}');
-        // }
+        if (file != null) {
+          ref.watch(capturedFilePathProvider.notifier).update((state) => file.path);
+          _navigateToReviewImageScreen();
+        }
       }
     });
   }
@@ -198,13 +201,10 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
     );
 
     if (result != null) {
+      ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+
       _navigateToReviewImageScreen();
     }
-
-    // final list = await result.readAsBytes();
-    // ref.read(signatureProvider.notifier).update((state) => list);
-
-    // context.pop();
   }
 
   void onSetFlashModeButtonPressed() {
