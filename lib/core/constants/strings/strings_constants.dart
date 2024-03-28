@@ -56,6 +56,7 @@ class Strings {
   static const String no = "No";
   static const String selectMinOneFilter = "Select minimum one filter";
   static const String completed = "Completed";
+  static const String scanDocuments = "Scan Documents";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -191,11 +192,23 @@ class Strings {
   static const String nicCard = "National ID Card (NIC)";
   static const String passport = "Passport";
   static const String idDocumentFrontContainerLabel = "Upload front side photo";
-  static const String idDocumentFrontCameraLabel =
-      "Please scan the front side of the NIC ID or\nPassport by adjusting it inside the frame";
-  static const String idDocumentBackCameraLabel =
+
+  static const String idCardCameraScreenTitleFront = "Scan front side";
+  static const String idCardCameraScreenTitleBack = "Scan back side";
+
+  static const String idDocumentNicFrontCameraLabel =
+      "Please scan the front side of the NIC ID \nby adjusting it inside the frame";
+  static const String idDocumentNicBackCameraLabel =
       "Please scan the Back side of the NIC ID\nby adjusting it inside the box";
+
+  static const String idDocumentPassportFrontCameraLabel =
+      "Please scan the front side of the Passport\nby adjusting it inside the frame";
+  static const String idDocumentPassportBackCameraLabel =
+      "Please scan the Back side of the Passport\nby adjusting it inside the box";
+
   static const String idDocumentBackContainerLabel = "Upload back side photo";
+
+  static const String uploadBothDocuments = "Upload both documents";
 
   //Address Details Screen
   static const String uploadAddressProof = "Upload address proof";

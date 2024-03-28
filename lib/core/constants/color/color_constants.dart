@@ -5,6 +5,7 @@ const Color primaryColor = Color(0xFFFF671D);
 
 const Color borderColor = Color(0xFFDDDDDD);
 const Color borderColorSecondary = Color(0xFFBBBBBB);
+const Color borderColorLightGreen = Color(0xFFB0D8BA);
 
 const Color disabledButtonColor = Color(0xFFF3F3F3);
 

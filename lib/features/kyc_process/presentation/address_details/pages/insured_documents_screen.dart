@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -12,8 +13,7 @@ class InsuredDocumentsScreen extends ConsumerStatefulWidget {
   const InsuredDocumentsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
 }
 
 class _AddressDetailsScreenState extends ConsumerState<InsuredDocumentsScreen> {
@@ -53,8 +53,10 @@ class _AddressDetailsScreenState extends ConsumerState<InsuredDocumentsScreen> {
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  const DocumentUploadContainer(
+                  DocumentUploadContainer(
+                    provider: insuredDocProofFilePathProvider,
                     label: Strings.insuredDocumentContainerLabel,
+                    cameraScreenTitle: Strings.scanDocuments,
                     cameraScreenDescription: Strings.insuredDocCameraLabel,
                     reviewScreenTitle: Strings.uploadInsuredDocuments,
                   ),
