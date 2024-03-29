@@ -290,6 +290,10 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           context.showSnackBar(message: Strings.mpinChangeSuccess);
 
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
+          // clear controller
+          ref.watch(oldPINProvider.notifier).update((state) => '');
+          ref.watch(createPINProvider.notifier).update((state) => '');
+          ref.watch(confirmPINProvider.notifier).update((state) => '');
 
           await LocalDataHelper.storeSessionId("");
 
