@@ -1,7 +1,8 @@
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/enums/id_proof_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +17,21 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
 
 class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(nicCardFrontFilePathProvider.notifier).update((state) => null);
+      ref.watch(passportFrontFilePathProvider.notifier).update((state) => null);
+      ref.watch(nicCardBackFilePathProvider.notifier).update((state) => null);
+      ref.watch(passportBackFilePathProvider.notifier).update((state) => null);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
@@ -34,33 +49,42 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
                 SizedBox(height: 8.h),
                 _subTitle(),
                 SizedBox(height: 20.h),
-                CustomRadioTile(
-                  title: Strings.nicCard,
-                  value: IdProofType.NIC_CARD,
-                  groupValue: ref.watch(idProofTypeProvider),
-                  onChange: () {
-                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.NIC_CARD);
-                  },
-                ),
-                SizedBox(height: 16.h),
-                CustomRadioTile(
-                  title: Strings.passport,
-                  value: IdProofType.PASSPORT,
-                  groupValue: ref.watch(idProofTypeProvider),
-                  onChange: () {
-                    ref.watch(idProofTypeProvider.notifier).update((state) => IdProofType.PASSPORT);
-                  },
-                ),
+                if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                  const CustomRadioTile(
+                    title: Strings.nicCard,
+                    value: true,
+                    groupValue: true,
+                  ),
+                if (selectedApplication?.nationality == NationalityType.NON_MAURITIAN.toString().split('.').last)
+                  const CustomRadioTile(
+                    title: Strings.passport,
+                    value: true,
+                    groupValue: true,
+                  ),
                 SizedBox(height: 24.h),
-                const DocumentUploadContainer(
+                DocumentUploadContainer(
+                  provider: (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                      ? nicCardFrontFilePathProvider
+                      : passportFrontFilePathProvider,
                   label: Strings.idDocumentFrontContainerLabel,
-                  cameraScreenDescription: Strings.idDocumentFrontCameraLabel,
+                  cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
+                  cameraScreenDescription:
+                      (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                          ? Strings.idDocumentNicFrontCameraLabel
+                          : Strings.idDocumentPassportFrontCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,
                 ),
                 SizedBox(height: 24.h),
-                const DocumentUploadContainer(
+                DocumentUploadContainer(
+                  provider: (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                      ? nicCardBackFilePathProvider
+                      : passportBackFilePathProvider,
                   label: Strings.idDocumentBackContainerLabel,
-                  cameraScreenDescription: Strings.idDocumentBackCameraLabel,
+                  cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
+                  cameraScreenDescription:
+                      (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                          ? Strings.idDocumentNicBackCameraLabel
+                          : Strings.idDocumentPassportBackCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,
                 ),
               ],
@@ -96,11 +120,39 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
+        disable: _disableNextButtonCondition(),
+        disabledOnTap: () {
+          context.showErrorSnackBar(message: Strings.uploadBothDocuments);
+        },
         onTap: () {
           context.pushNamed(AppRoutes.idReviewSubmitScreen);
         },
         label: Strings.next,
       ),
     );
+  }
+
+  bool _disableNextButtonCondition() {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last) {
+      final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
+      final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
+
+      if (nicCardFrontSide == null || nicCardBackSide == null) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      final passportFrontSide = ref.watch(passportFrontFilePathProvider);
+      final passportBackSide = ref.watch(passportBackFilePathProvider);
+
+      if (passportFrontSide == null || passportBackSide == null) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 }

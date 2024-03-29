@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/providers/additional_docs_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,10 @@ class _PolicyDocumentsScreenState extends ConsumerState<AdditionalDocumentsScree
                   SizedBox(height: 8.h),
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  const DocumentUploadContainer(
+                  DocumentUploadContainer(
+                    provider: additionalDocFilePathProvider,
                     label: Strings.additionalDocsContainerLabel,
+                    cameraScreenTitle: Strings.scanDocuments,
                     cameraScreenDescription: Strings.additionalDocCameraLabel,
                     reviewScreenTitle: Strings.additionalDocuments,
                   ),

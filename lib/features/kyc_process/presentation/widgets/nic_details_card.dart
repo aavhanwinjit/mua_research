@@ -1,12 +1,18 @@
+import 'dart:io';
+
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class NICDetailsCard extends StatelessWidget {
+class NICDetailsCard extends ConsumerWidget {
   const NICDetailsCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -19,7 +25,7 @@ class NICDetailsCard extends StatelessWidget {
         children: [
           //info box heading
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 16.h),
+            padding: EdgeInsets.only(left: 16.w, top: 4.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -30,15 +36,15 @@ class NICDetailsCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
+                TextButton(
+                  onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
+                  child: Text(
+                    Strings.edit,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -46,7 +52,7 @@ class NICDetailsCard extends StatelessWidget {
           _infoWidget(),
           SizedBox(height: 24.h),
           //NIC image
-          _imageRow(),
+          _imageRow(ref),
           SizedBox(height: 16.h),
         ],
       ),
@@ -91,7 +97,15 @@ class NICDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _imageRow() {
+  Widget _imageRow(WidgetRef ref) {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
+    final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
+
+    final passportFrontSide = ref.watch(passportFrontFilePathProvider);
+    final passportBackSide = ref.watch(passportBackFilePathProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
@@ -105,9 +119,13 @@ class NICDetailsCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _imageWidget(),
+              _imageWidget((selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                  ? nicCardFrontSide
+                  : passportFrontSide),
               SizedBox(width: 16.w),
-              _imageWidget(),
+              _imageWidget((selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                  ? nicCardBackSide
+                  : passportBackSide),
             ],
           ),
         ],
@@ -115,12 +133,12 @@ class NICDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageWidget(String? filePath) {
     return Expanded(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: Image.asset(
-          ImageConstants.idImage,
+        child: Image.file(
+          File(filePath ?? ""),
           height: 100.h,
           fit: BoxFit.cover,
         ),

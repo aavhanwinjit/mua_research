@@ -1,4 +1,7 @@
-import 'package:ekyc/core/constants/enums/id_proof_enums.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final idProofTypeProvider = StateProvider<IdProofType?>((ref) => null);
+final nicCardFrontFilePathProvider = StateProvider<String?>((ref) => null);
+final nicCardBackFilePathProvider = StateProvider<String?>((ref) => null);
+
+final passportFrontFilePathProvider = StateProvider<String?>((ref) => null);
+final passportBackFilePathProvider = StateProvider<String?>((ref) => null);

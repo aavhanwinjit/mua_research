@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +12,7 @@ class AddressDetailsScreen extends ConsumerStatefulWidget {
   const AddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
 }
 
 class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
@@ -48,7 +48,9 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> {
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  const DocumentUploadContainer(
+                  DocumentUploadContainer(
+                    provider: addressProofFilePathProvider,
+                    cameraScreenTitle: Strings.scanDocuments,
                     label: Strings.addressDocumentContainerLabel,
                     cameraScreenDescription: Strings.addressDocCameraLabel,
                     reviewScreenTitle: Strings.addressDetails,
