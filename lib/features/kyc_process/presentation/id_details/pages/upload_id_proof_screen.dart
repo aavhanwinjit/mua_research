@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/mixins/google_ml_kit_ocr_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
@@ -15,7 +16,7 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
   ConsumerState<UploadIDdetailsScreen> createState() => _UploadIDdetailsScreenState();
 }
 
-class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
+class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> with GoogleMLKitOCRMixin {
   @override
   void initState() {
     super.initState();
@@ -125,7 +126,20 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> {
           context.showErrorSnackBar(message: Strings.uploadBothDocuments);
         },
         onTap: () {
-          context.pushNamed(AppRoutes.idReviewSubmitScreen);
+          final selectedApplication = ref.watch(selectedApplicationProvider);
+
+          if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last) {
+            performNICCardOCR(
+              ref: ref,
+              context: context,
+              onSuccess: () {
+                context.pushNamed(AppRoutes.idReviewSubmitScreen);
+              },
+            );
+          } else {
+            // perform OCR on passport
+            context.showSnackBar(message: "OCR on passport is under development");
+          }
         },
         label: Strings.next,
       ),

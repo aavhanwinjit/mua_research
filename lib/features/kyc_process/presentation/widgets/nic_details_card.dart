@@ -49,7 +49,7 @@ class NICDetailsCard extends ConsumerWidget {
             ),
           ),
           //information
-          _infoWidget(),
+          _infoWidget(ref),
           SizedBox(height: 24.h),
           //NIC image
           _imageRow(ref),
@@ -59,10 +59,14 @@ class NICDetailsCard extends ConsumerWidget {
     );
   }
 
-  Widget _infoWidget() {
+  Widget _infoWidget(WidgetRef ref) {
+    String? firstName = ref.watch(extractedFirstNameProvider);
+    String? surName = ref.watch(extractedSurNameProvider);
+    String? idNumber = ref.watch(extractedNICIDNumberProvider);
+
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -71,12 +75,12 @@ class NICDetailsCard extends ConsumerWidget {
               children: [
                 InfoTile(
                   title: Strings.surname,
-                  value: "Sharma",
+                  value: surName ?? "NA",
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 InfoTile(
                   title: Strings.nicNumber,
-                  value: "S0808739500254",
+                  value: idNumber ?? "NA",
                 ),
               ],
             ),
@@ -87,7 +91,7 @@ class NICDetailsCard extends ConsumerWidget {
               children: [
                 InfoTile(
                   title: Strings.otherName,
-                  value: "Devika",
+                  value: firstName ?? "NA",
                 ),
               ],
             ),
