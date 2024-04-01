@@ -190,7 +190,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
     ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => null);
     ref.watch(customerInfoEmailProvider.notifier).update((state) => null);
     ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
-    ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
+    ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.Mauritian);
     ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => null);
     ref.watch(customerInfoPolicyNumberProvider.notifier).update((state) => null);
   }
@@ -232,20 +232,20 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
         Expanded(
           child: CustomRadioTile(
             title: Strings.mauritian,
-            value: NationalityType.MAURITIAN,
+            value: NationalityType.Mauritian,
             groupValue: ref.watch(customerInfoNationalityTypeProvider),
             onChange: () {
-              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.MAURITIAN);
+              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.Mauritian);
             },
           ),
         ),
         Expanded(
           child: CustomRadioTile(
             title: Strings.nonMauritian,
-            value: NationalityType.NON_MAURITIAN,
+            value: NationalityType.NonMauritian,
             groupValue: ref.watch(customerInfoNationalityTypeProvider),
             onChange: () {
-              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.NON_MAURITIAN);
+              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.NonMauritian);
             },
           ),
         ),

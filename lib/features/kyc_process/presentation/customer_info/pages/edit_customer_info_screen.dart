@@ -159,24 +159,24 @@ class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen
                     Expanded(
                       child: CustomRadioTile(
                         title: Strings.mauritian,
-                        value: NationalityType.MAURITIAN,
+                        value: NationalityType.Mauritian,
                         groupValue: ref.watch(customerInfoNationalityTypeProvider),
                         onChange: () {
                           ref
                               .watch(customerInfoNationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.MAURITIAN);
+                              .update((state) => NationalityType.Mauritian);
                         },
                       ),
                     ),
                     Expanded(
                       child: CustomRadioTile(
                         title: Strings.nonMauritian,
-                        value: NationalityType.NON_MAURITIAN,
+                        value: NationalityType.NonMauritian,
                         groupValue: ref.watch(customerInfoNationalityTypeProvider),
                         onChange: () {
                           ref
                               .watch(customerInfoNationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.NON_MAURITIAN);
+                              .update((state) => NationalityType.NonMauritian);
                         },
                       ),
                     ),

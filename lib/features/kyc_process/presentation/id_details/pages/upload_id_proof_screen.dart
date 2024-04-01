@@ -50,13 +50,13 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
                 SizedBox(height: 8.h),
                 _subTitle(),
                 SizedBox(height: 20.h),
-                if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                   const CustomRadioTile(
                     title: Strings.nicCard,
                     value: true,
                     groupValue: true,
                   ),
-                if (selectedApplication?.nationality == NationalityType.NON_MAURITIAN.toString().split('.').last)
+                if (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
                   const CustomRadioTile(
                     title: Strings.passport,
                     value: true,
@@ -64,26 +64,26 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
                   ),
                 SizedBox(height: 24.h),
                 DocumentUploadContainer(
-                  provider: (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                  provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                       ? nicCardFrontFilePathProvider
                       : passportFrontFilePathProvider,
                   label: Strings.idDocumentFrontContainerLabel,
                   cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
                   cameraScreenDescription:
-                      (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                      (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                           ? Strings.idDocumentNicFrontCameraLabel
                           : Strings.idDocumentPassportFrontCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,
                 ),
                 SizedBox(height: 24.h),
                 DocumentUploadContainer(
-                  provider: (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                  provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                       ? nicCardBackFilePathProvider
                       : passportBackFilePathProvider,
                   label: Strings.idDocumentBackContainerLabel,
                   cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
                   cameraScreenDescription:
-                      (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+                      (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                           ? Strings.idDocumentNicBackCameraLabel
                           : Strings.idDocumentPassportBackCameraLabel,
                   reviewScreenTitle: Strings.identityIdDetails,
@@ -128,7 +128,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
         onTap: () {
           final selectedApplication = ref.watch(selectedApplicationProvider);
 
-          if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last) {
+          if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
             performNICCardOCR(
               ref: ref,
               context: context,
@@ -149,7 +149,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
   bool _disableNextButtonCondition() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last) {
+    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
       final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
       final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
 

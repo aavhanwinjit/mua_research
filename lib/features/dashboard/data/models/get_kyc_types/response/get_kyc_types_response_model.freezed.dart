@@ -449,6 +449,8 @@ mixin _$KycTypesModel {
   String? get kycTypes => throw _privateConstructorUsedError;
   @JsonKey(name: "companyId")
   String? get companyId => throw _privateConstructorUsedError;
+  @JsonKey(name: "policyType")
+  String? get policyType => throw _privateConstructorUsedError;
   @JsonKey(name: "isDisabled")
   bool? get isDisabled => throw _privateConstructorUsedError;
   @JsonKey(name: "crd")
@@ -476,6 +478,7 @@ abstract class $KycTypesModelCopyWith<$Res> {
       {@JsonKey(name: "kycTypeId") int? kycTypeId,
       @JsonKey(name: "kycTypes") String? kycTypes,
       @JsonKey(name: "companyId") String? companyId,
+      @JsonKey(name: "policyType") String? policyType,
       @JsonKey(name: "isDisabled") bool? isDisabled,
       @JsonKey(name: "crd") DateTime? crd,
       @JsonKey(name: "crdBy") int? crdBy,
@@ -499,6 +502,7 @@ class _$KycTypesModelCopyWithImpl<$Res, $Val extends KycTypesModel>
     Object? kycTypeId = freezed,
     Object? kycTypes = freezed,
     Object? companyId = freezed,
+    Object? policyType = freezed,
     Object? isDisabled = freezed,
     Object? crd = freezed,
     Object? crdBy = freezed,
@@ -517,6 +521,10 @@ class _$KycTypesModelCopyWithImpl<$Res, $Val extends KycTypesModel>
       companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      policyType: freezed == policyType
+          ? _value.policyType
+          : policyType // ignore: cast_nullable_to_non_nullable
               as String?,
       isDisabled: freezed == isDisabled
           ? _value.isDisabled
@@ -554,6 +562,7 @@ abstract class _$$KycTypesModelImplCopyWith<$Res>
       {@JsonKey(name: "kycTypeId") int? kycTypeId,
       @JsonKey(name: "kycTypes") String? kycTypes,
       @JsonKey(name: "companyId") String? companyId,
+      @JsonKey(name: "policyType") String? policyType,
       @JsonKey(name: "isDisabled") bool? isDisabled,
       @JsonKey(name: "crd") DateTime? crd,
       @JsonKey(name: "crdBy") int? crdBy,
@@ -575,6 +584,7 @@ class __$$KycTypesModelImplCopyWithImpl<$Res>
     Object? kycTypeId = freezed,
     Object? kycTypes = freezed,
     Object? companyId = freezed,
+    Object? policyType = freezed,
     Object? isDisabled = freezed,
     Object? crd = freezed,
     Object? crdBy = freezed,
@@ -593,6 +603,10 @@ class __$$KycTypesModelImplCopyWithImpl<$Res>
       companyId: freezed == companyId
           ? _value.companyId
           : companyId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      policyType: freezed == policyType
+          ? _value.policyType
+          : policyType // ignore: cast_nullable_to_non_nullable
               as String?,
       isDisabled: freezed == isDisabled
           ? _value.isDisabled
@@ -625,6 +639,7 @@ class _$KycTypesModelImpl implements _KycTypesModel {
       {@JsonKey(name: "kycTypeId") this.kycTypeId,
       @JsonKey(name: "kycTypes") this.kycTypes,
       @JsonKey(name: "companyId") this.companyId,
+      @JsonKey(name: "policyType") this.policyType,
       @JsonKey(name: "isDisabled") this.isDisabled,
       @JsonKey(name: "crd") this.crd,
       @JsonKey(name: "crdBy") this.crdBy,
@@ -644,6 +659,9 @@ class _$KycTypesModelImpl implements _KycTypesModel {
   @JsonKey(name: "companyId")
   final String? companyId;
   @override
+  @JsonKey(name: "policyType")
+  final String? policyType;
+  @override
   @JsonKey(name: "isDisabled")
   final bool? isDisabled;
   @override
@@ -661,7 +679,7 @@ class _$KycTypesModelImpl implements _KycTypesModel {
 
   @override
   String toString() {
-    return 'KycTypesModel(kycTypeId: $kycTypeId, kycTypes: $kycTypes, companyId: $companyId, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
+    return 'KycTypesModel(kycTypeId: $kycTypeId, kycTypes: $kycTypes, companyId: $companyId, policyType: $policyType, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
   }
 
   @override
@@ -675,6 +693,8 @@ class _$KycTypesModelImpl implements _KycTypesModel {
                 other.kycTypes == kycTypes) &&
             (identical(other.companyId, companyId) ||
                 other.companyId == companyId) &&
+            (identical(other.policyType, policyType) ||
+                other.policyType == policyType) &&
             (identical(other.isDisabled, isDisabled) ||
                 other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
@@ -686,7 +706,7 @@ class _$KycTypesModelImpl implements _KycTypesModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, kycTypeId, kycTypes, companyId,
-      isDisabled, crd, crdBy, lmd, lmdBy);
+      policyType, isDisabled, crd, crdBy, lmd, lmdBy);
 
   @JsonKey(ignore: true)
   @override
@@ -707,6 +727,7 @@ abstract class _KycTypesModel implements KycTypesModel {
       {@JsonKey(name: "kycTypeId") final int? kycTypeId,
       @JsonKey(name: "kycTypes") final String? kycTypes,
       @JsonKey(name: "companyId") final String? companyId,
+      @JsonKey(name: "policyType") final String? policyType,
       @JsonKey(name: "isDisabled") final bool? isDisabled,
       @JsonKey(name: "crd") final DateTime? crd,
       @JsonKey(name: "crdBy") final int? crdBy,
@@ -725,6 +746,9 @@ abstract class _KycTypesModel implements KycTypesModel {
   @override
   @JsonKey(name: "companyId")
   String? get companyId;
+  @override
+  @JsonKey(name: "policyType")
+  String? get policyType;
   @override
   @JsonKey(name: "isDisabled")
   bool? get isDisabled;

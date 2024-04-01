@@ -243,6 +243,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         if (success.status?.isSuccess == true) {
           ref.read(validateOTPResponseProvider.notifier).update((state) => success);
 
+          // clear controllers
+          ref.watch(oldPINProvider.notifier).update((state) => '');
+          ref.watch(createPINProvider.notifier).update((state) => '');
+          ref.watch(confirmPINProvider.notifier).update((state) => '');
+
           context.pushReplacementNamed(AppRoutes.successScreen);
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
           context.pushReplacementNamed(AppRoutes.failureScreen);
@@ -290,6 +295,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           context.showSnackBar(message: Strings.mpinChangeSuccess);
 
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
+
           // clear controller
           ref.watch(oldPINProvider.notifier).update((state) => '');
           ref.watch(createPINProvider.notifier).update((state) => '');

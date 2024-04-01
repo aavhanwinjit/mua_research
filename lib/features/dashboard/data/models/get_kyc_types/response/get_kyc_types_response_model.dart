@@ -43,6 +43,7 @@ class KycTypesModel with _$KycTypesModel {
     @JsonKey(name: "kycTypeId") int? kycTypeId,
     @JsonKey(name: "kycTypes") String? kycTypes,
     @JsonKey(name: "companyId") String? companyId,
+    @JsonKey(name: "policyType") String? policyType,
     @JsonKey(name: "isDisabled") bool? isDisabled,
     @JsonKey(name: "crd") DateTime? crd,
     @JsonKey(name: "crdBy") int? crdBy,
