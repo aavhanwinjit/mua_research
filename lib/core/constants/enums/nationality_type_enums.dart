@@ -1,4 +1,4 @@
 enum NationalityType {
-  MAURITIAN,
-  NON_MAURITIAN,
+  Mauritian,
+  NonMauritian,
 }

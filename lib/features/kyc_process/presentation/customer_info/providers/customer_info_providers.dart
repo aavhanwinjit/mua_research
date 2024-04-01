@@ -11,7 +11,7 @@ final customerInfoEmailProvider = StateProvider<String?>((ref) => null);
 
 final customerInfoMaritalStatusProvider = StateProvider<MaritalStatus>((ref) => MaritalStatus.SINGLE);
 
-final customerInfoNationalityTypeProvider = StateProvider<NationalityType>((ref) => NationalityType.MAURITIAN);
+final customerInfoNationalityTypeProvider = StateProvider<NationalityType>((ref) => NationalityType.Mauritian);
 
 final customerInfoQuoteNumberProvider = StateProvider<String?>((ref) => null);
 

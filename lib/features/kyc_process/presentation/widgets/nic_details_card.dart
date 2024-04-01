@@ -123,11 +123,11 @@ class NICDetailsCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _imageWidget((selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+              _imageWidget((selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                   ? nicCardFrontSide
                   : passportFrontSide),
               SizedBox(width: 16.w),
-              _imageWidget((selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last)
+              _imageWidget((selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                   ? nicCardBackSide
                   : passportBackSide),
             ],

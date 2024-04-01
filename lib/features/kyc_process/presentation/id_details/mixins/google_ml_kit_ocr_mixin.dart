@@ -44,7 +44,7 @@ mixin GoogleMLKitOCRMixin {
   }) async {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.nationality == NationalityType.MAURITIAN.toString().split('.').last) {
+    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
       final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
 
       if (nicCardFrontSide == null) {

@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/data/models/get_kyc_types/request/get_ky
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/add_customer_information/request/add_customer_information_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/add_customer_information/response/add_customer_information_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
@@ -58,6 +59,7 @@ abstract class ApiService {
   static const GET_AGENT_APPLICATIONS = "/AgentAPI/Agent/GetAgentApplications";
   static const GET_KYC_TYPES = "/AgentAPI/Data/GetKYCTypes";
   static const ADD_CUSTOMER_INFORMATION = "/AgentAPI/Agent/AddCustomerInformation";
+  static const SAVE_IDENTITY_DETAILS = "/AgentAPI/Agent/SaveIdentityDetails";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -132,4 +134,8 @@ abstract class ApiService {
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<AddCustomerInformationResponseModel> addCustomerInformation(
       @Body() AddCustomerInformationRequestModel request);
+
+  @POST(SAVE_IDENTITY_DETAILS)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<AddCustomerInformationResponseModel> saveIdentityDetails(@Body() SaveIdentityDetailsRequestModel request);
 }
