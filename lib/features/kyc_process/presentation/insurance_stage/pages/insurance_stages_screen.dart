@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/insurance_button_type.dart';
 import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/mixins/get_document_category_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/widgets/insurance_stage_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/buttons/custom_outline_icon_button.dart';
@@ -16,7 +17,16 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => InsuranceStagesScreenState();
 }
 
-class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> {
+class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> with GetDocumentCategoryMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      getDocumentCategory(context: context, ref: ref, onSuccess: () {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedApplication = ref.watch(selectedApplicationProvider);

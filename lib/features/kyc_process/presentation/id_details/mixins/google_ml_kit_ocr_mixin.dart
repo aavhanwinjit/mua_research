@@ -59,6 +59,7 @@ mixin GoogleMLKitOCRMixin {
       if (loading) return;
 
       ref.watch(ocrLoadingProvider.notifier).update((state) => true);
+      
       ref.watch(extractedFirstNameProvider.notifier).update((state) => null);
       ref.watch(extractedSurNameProvider.notifier).update((state) => null);
       ref.watch(extractedNICIDNumberProvider.notifier).update((state) => null);

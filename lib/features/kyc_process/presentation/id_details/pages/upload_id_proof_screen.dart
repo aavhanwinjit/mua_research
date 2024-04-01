@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/mixins/get_id_details_doc_type_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/mixins/google_ml_kit_ocr_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
@@ -16,7 +17,8 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
   ConsumerState<UploadIDdetailsScreen> createState() => _UploadIDdetailsScreenState();
 }
 
-class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> with GoogleMLKitOCRMixin {
+class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
+    with GoogleMLKitOCRMixin, GetIDDetailsDocTypeMixin {
   @override
   void initState() {
     super.initState();
@@ -26,13 +28,13 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
       ref.watch(passportFrontFilePathProvider.notifier).update((state) => null);
       ref.watch(nicCardBackFilePathProvider.notifier).update((state) => null);
       ref.watch(passportBackFilePathProvider.notifier).update((state) => null);
+
+      getIdentityDocumentTypes(context: context, ref: ref, onSuccess: () {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
-
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
@@ -50,49 +52,71 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen> w
                 SizedBox(height: 8.h),
                 _subTitle(),
                 SizedBox(height: 20.h),
-                if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                  const CustomRadioTile(
-                    title: Strings.nicCard,
-                    value: true,
-                    groupValue: true,
-                  ),
-                if (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
-                  const CustomRadioTile(
-                    title: Strings.passport,
-                    value: true,
-                    groupValue: true,
-                  ),
+                _idDocTypesWidget(),
                 SizedBox(height: 24.h),
-                DocumentUploadContainer(
-                  provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                      ? nicCardFrontFilePathProvider
-                      : passportFrontFilePathProvider,
-                  label: Strings.idDocumentFrontContainerLabel,
-                  cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
-                  cameraScreenDescription:
-                      (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                          ? Strings.idDocumentNicFrontCameraLabel
-                          : Strings.idDocumentPassportFrontCameraLabel,
-                  reviewScreenTitle: Strings.identityIdDetails,
-                ),
-                SizedBox(height: 24.h),
-                DocumentUploadContainer(
-                  provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                      ? nicCardBackFilePathProvider
-                      : passportBackFilePathProvider,
-                  label: Strings.idDocumentBackContainerLabel,
-                  cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
-                  cameraScreenDescription:
-                      (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                          ? Strings.idDocumentNicBackCameraLabel
-                          : Strings.idDocumentPassportBackCameraLabel,
-                  reviewScreenTitle: Strings.identityIdDetails,
-                ),
+                _docContainer(),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _idDocTypesWidget() {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+          const CustomRadioTile(
+            title: Strings.nicCard,
+            value: true,
+            groupValue: true,
+          ),
+        if (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
+          const CustomRadioTile(
+            title: Strings.passport,
+            value: true,
+            groupValue: true,
+          ),
+      ],
+    );
+  }
+
+  Widget _docContainer() {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        DocumentUploadContainer(
+          provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+              ? nicCardFrontFilePathProvider
+              : passportFrontFilePathProvider,
+          label: Strings.idDocumentFrontContainerLabel,
+          cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
+          cameraScreenDescription:
+              (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+                  ? Strings.idDocumentNicFrontCameraLabel
+                  : Strings.idDocumentPassportFrontCameraLabel,
+          reviewScreenTitle: Strings.identityIdDetails,
+        ),
+        SizedBox(height: 24.h),
+        DocumentUploadContainer(
+          provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+              ? nicCardBackFilePathProvider
+              : passportBackFilePathProvider,
+          label: Strings.idDocumentBackContainerLabel,
+          cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
+          cameraScreenDescription:
+              (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+                  ? Strings.idDocumentNicBackCameraLabel
+                  : Strings.idDocumentPassportBackCameraLabel,
+          reviewScreenTitle: Strings.identityIdDetails,
+        ),
+      ],
     );
   }
 
