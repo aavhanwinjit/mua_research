@@ -14,7 +14,6 @@ mixin GetDocumentCategoryMixin {
   Future<void> getDocumentCategory({
     required BuildContext context,
     required WidgetRef ref,
-    required VoidCallback onSuccess,
   }) async {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 

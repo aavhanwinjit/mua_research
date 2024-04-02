@@ -30,7 +30,7 @@ class ApplicantCard extends ConsumerWidget {
             child: Row(
               children: [
                 CustomProfileImageWidget(
-                  userName: _getApplicantName(),
+                  userName: _getApplicantName().initials,
                   size: 50.w,
                   fontSize: 18.sp,
                   primary: false,
@@ -41,7 +41,9 @@ class ApplicantCard extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _getApplicantName(),
+                        _getApplicantName().name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: black,
@@ -82,12 +84,12 @@ class ApplicantCard extends ConsumerWidget {
     );
   }
 
-  String _getApplicantName() {
+  ({String name, String initials}) _getApplicantName() {
     if (application.idDocOtherName == null && application.idDocSurname == null) {
-      return application.mobileNumber ?? "";
+      return (name: application.mobileNumber ?? "", initials: "-");
     } else {
       final String fullName = "${application.idDocOtherName ?? ""} ${application.idDocSurname ?? ""}";
-      return fullName;
+      return (name: fullName, initials: fullName);
     }
   }
 

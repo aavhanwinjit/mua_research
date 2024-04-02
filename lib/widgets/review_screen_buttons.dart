@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class ReviewScreenButtons extends StatelessWidget {
   final Function() onNext;
   final Function() onExit;
+  final bool? disable;
 
-  const ReviewScreenButtons({super.key, required this.onNext, required this.onExit});
+  const ReviewScreenButtons({super.key, required this.onNext, required this.onExit, this.disable});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ReviewScreenButtons extends StatelessWidget {
         Flexible(
           flex: 2,
           child: CustomOutlineButton(
-            disable: false,
+            disable: disable ?? false,
             onTap: onExit,
             label: Strings.saveAndExit,
           ),
@@ -23,7 +24,7 @@ class ReviewScreenButtons extends StatelessWidget {
         Flexible(
           flex: 3,
           child: CustomPrimaryButton(
-            disable: false,
+            disable: disable ?? false,
             onTap: onNext,
             label: Strings.continueToUpload,
           ),

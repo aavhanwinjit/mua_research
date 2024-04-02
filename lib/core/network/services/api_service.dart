@@ -9,6 +9,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/requ
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
@@ -142,7 +143,7 @@ abstract class ApiService {
 
   @POST(SAVE_IDENTITY_DETAILS)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
-  Future<AddCustomerInformationResponseModel> saveIdentityDetails(@Body() SaveIdentityDetailsRequestModel request);
+  Future<SaveIdentityDetailsResponseModel> saveIdentityDetails(@Body() SaveIdentityDetailsRequestModel request);
 
   @POST(GET_IDENTITY_DOCUMENT_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})

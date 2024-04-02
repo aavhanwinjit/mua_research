@@ -162,9 +162,16 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void onTakePictureButtonPressed() {
-    takePicture().then((XFile? file) {
+    takePicture().then((XFile? file) async {
       if (mounted) {
         if (file != null) {
+          final fileSize = await file.length();
+
+          if (fileSize > 5000000) {
+            context.showErrorSnackBar(message: Strings.fileSizeErrorString);
+            return;
+          }
+
           ref.watch(capturedFilePathProvider.notifier).update((state) => file.path);
           _navigateToReviewImageScreen();
         }
@@ -201,8 +208,14 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
     );
 
     if (result != null) {
-      ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+      final fileSize = await result.length();
 
+      if (fileSize > 5000000) {
+        context.showErrorSnackBar(message: Strings.fileSizeErrorString);
+        return;
+      }
+
+      ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
       _navigateToReviewImageScreen();
     }
   }

@@ -7,7 +7,7 @@ part of 'document_category_notifier.dart';
 // **************************************************************************
 
 String _$documentCategoryNotifierHash() =>
-    r'b98efae92aa99cf24cf4d66d19173a67d3cc59c7';
+    r'a45dab892d75b623062b1e8d915d92900b3b40ec';
 
 /// See also [DocumentCategoryNotifier].
 @ProviderFor(DocumentCategoryNotifier)
