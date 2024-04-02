@@ -14,6 +14,9 @@ class DocumentUploadContainer extends ConsumerWidget {
   final String cameraScreenDescription;
   final String reviewScreenTitle;
   final StateProvider<String?> provider;
+  final bool? disable;
+  final Function()? disableCallback;
+  final bool? hideClearButton;
 
   const DocumentUploadContainer({
     required this.provider,
@@ -21,6 +24,9 @@ class DocumentUploadContainer extends ConsumerWidget {
     required this.cameraScreenDescription,
     required this.reviewScreenTitle,
     required this.label,
+    this.disable,
+    this.disableCallback,
+    this.hideClearButton,
     super.key,
   });
 
@@ -35,15 +41,17 @@ class DocumentUploadContainer extends ConsumerWidget {
       borderType: BorderType.RRect,
       radius: const Radius.circular(16),
       child: InkWell(
-        onTap: documentFilePath == null
-            ? () {
-                ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
-                ref.read(cameraScreenAppBarTitle.notifier).update((state) => cameraScreenTitle);
-                ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => reviewScreenTitle);
+        onTap: disable == true
+            ? disableCallback
+            : documentFilePath == null
+                ? () {
+                    ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
+                    ref.read(cameraScreenAppBarTitle.notifier).update((state) => cameraScreenTitle);
+                    ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => reviewScreenTitle);
 
-                context.pushNamed(AppRoutes.cameraScreen, extra: provider);
-              }
-            : null,
+                    context.pushNamed(AppRoutes.cameraScreen, extra: provider);
+                  }
+                : null,
         child: SizedBox(
           height: 157.h,
           width: double.infinity,
@@ -75,11 +83,12 @@ class DocumentUploadContainer extends ConsumerWidget {
                         File(documentFilePath),
                       ),
                     ),
-                    Positioned(
-                      top: 0,
-                      right: 0,
-                      child: _clearDocumentButton(ref),
-                    ),
+                    if (hideClearButton != true)
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: _clearDocumentButton(ref),
+                      ),
                   ],
                 ),
         ),

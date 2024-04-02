@@ -64,16 +64,34 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> with Kyc
       padding: EdgeInsets.only(left: 20.w, right: 8.w),
       child: Row(
         children: kycTypeNotifier.kycTypes().map((KycTypesModel element) {
-          return Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 12.w),
-              child: InsuranceTypeCard(
-                kycType: element,
-                imagePath: ImageConstants.lifeInsuranceImage,
-              ),
-            ),
-          );
+          return kycTypeNotifier.kycTypes().length < 3 ? _kycItem(element) : _kycItemExpanded(element);
         }).toList(),
+      ),
+    );
+  }
+
+  Widget _kycItem(KycTypesModel element) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.3,
+      child: Padding(
+        padding: EdgeInsets.only(right: 12.w),
+        child: InsuranceTypeCard(
+          kycType: element,
+          imagePath: ImageConstants.lifeInsuranceImage,
+        ),
+      ),
+    );
+  }
+
+  Widget _kycItemExpanded(KycTypesModel element) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * 0.3,
+      child: Padding(
+        padding: EdgeInsets.only(right: 12.w),
+        child: InsuranceTypeCard(
+          kycType: element,
+          imagePath: ImageConstants.lifeInsuranceImage,
+        ),
       ),
     );
   }

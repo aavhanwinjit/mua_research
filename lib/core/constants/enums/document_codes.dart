@@ -1,0 +1,4 @@
+enum DocumentCodes {
+  NIC,
+  PSP,
+}

@@ -10,7 +10,6 @@ import 'package:ekyc/core/helpers/generate_key_iv.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/helpers/request_generator.dart';
 import 'package:ekyc/models/device_info/device_info_model.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class EncryptionHelper {
@@ -58,7 +57,7 @@ class EncryptionHelper {
     // debugPrint("sId: $sId");
 
     String sessionId = await LocalDataHelper.getSessionId();
-    debugPrint("Session id in encryption: $sessionId");
+    // debugPrint("Session id in encryption: $sessionId");
 
     final String timeStamp = DateFormat("yyyyMMddhhmmss").format(DateTime.now().toUtc());
     final index = Random().nextInt(15);

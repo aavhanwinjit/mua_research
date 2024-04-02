@@ -57,6 +57,10 @@ class Strings {
   static const String selectMinOneFilter = "Select minimum one filter";
   static const String completed = "Completed";
   static const String scanDocuments = "Scan Documents";
+  static const String confirmDetails = "Confirm Details";
+  static const String documentUploadConfirmationDialogText =
+      "Do you confirm the details are correct as per the uploaded document? If No, you can edit the details before proceeding.";
+  static const String selectFrontImageFirst = "Select front image first";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -185,6 +189,7 @@ class Strings {
 
   //Camera Screen
   static const String cameraPermissionRequired = "Camera Permission Required to Scan the document";
+  static const String fileSizeErrorString = "You can upload a photo having maximum size as 5MB";
 
   //ID Details Screen
   static const String uploadIdentityProof = "Upload Identity Proof";
