@@ -40,9 +40,6 @@ mixin RegistrationMixin {
       (failure) {
         debugPrint("failure: $failure");
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-        // clear controller
-        ref.watch(createPINProvider.notifier).update((state) => '');
-        ref.watch(confirmPINProvider.notifier).update((state) => '');
       },
       (SetAgentMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -67,12 +64,15 @@ mixin RegistrationMixin {
           } else {
             context.go(AppRoutes.onboardSuccessScreen);
           }
+          // clear controller
+          ref.watch(createPINProvider.notifier).update((state) => '');
+          ref.watch(confirmPINProvider.notifier).update((state) => '');
         } else {
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
           // clear controller
-          // ref.watch(createPINProvider.notifier).update((state) => '');
+          ref.watch(createPINProvider.notifier).update((state) => '');
           ref.watch(confirmPINProvider.notifier).update((state) => '');
         }
       },
