@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
           // },
           builder: (_, child) {
             return MaterialApp.router(
-              title: 'MUA KYC',
+              title: 'MUA KYC App',
               debugShowCheckedModeBanner: false,
               localizationsDelegates: const [
                 AppLocalizationDelegate(),

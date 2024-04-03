@@ -61,11 +61,19 @@ dev_dependencies:
   json_serializable: ^6.7.1
   injectable_generator: ^2.6.0
   flutter_lints: ^3.0.1
+  icons_launcher: ^2.1.7
  
 dependency_overrides:
   analyzer:
   meta: ^1.12.0
 
+icons_launcher:
+  image_path: 'assets/images/launcher_icon/launcher_icon.png'
+  platforms:
+    android:
+      enable: true
+    ios:
+      enable: true
     
 flutter: 
   uses-material-design: true
@@ -73,6 +81,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/launcher_icon/
  
   fonts:
     - family: Nunito Sans
