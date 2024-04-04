@@ -3,10 +3,10 @@ import 'package:ekyc/theme/custom_border_style.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrowDownField extends StatelessWidget {
-  final String? Function(String?)? validator;
-  final Function(String?)? onChanged;
-  final List<DropdownMenuItem<String>>? items;
-  final String? value;
+  final String? Function(Object?)? validator;
+  final Function(Object?)? onChanged;
+  final List<DropdownMenuItem<Object>>? items;
+  final Object? value;
   final String? labelText;
 
   const CustomDrowDownField({
@@ -21,10 +21,11 @@ class CustomDrowDownField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
-      child: DropdownButtonFormField<String>(
+      child: DropdownButtonFormField(
         autovalidateMode: AutovalidateMode.onUserInteraction,
         menuMaxHeight: 300.0,
         dropdownColor: white,
+        isExpanded: true,
         borderRadius: BorderRadius.circular(16),
         value: value,
         icon: Icon(

@@ -90,7 +90,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        dropdownValue = value;
+        dropdownValue = value as String;
         setState(() {});
       },
       items: items.map((String value) {

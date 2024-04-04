@@ -225,6 +225,7 @@ class Strings {
   static const String addressDocCameraLabel =
       "Please scan the address proof document by\nadjusting it inside the frame.";
   static const String billDate = "Bill Date";
+  static const String selectDocumentType = "Select document type";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";
