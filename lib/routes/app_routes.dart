@@ -6,9 +6,10 @@ import 'package:ekyc/features/kyc_process/presentation/address_details/pages/add
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/pages/edit_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/id_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/upload_id_proof_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/pages/insurance_stages_screen.dart';
@@ -73,6 +74,7 @@ class AppRoutes {
   static const String oldPINScreen = '/old_pin_screen';
   static const String kycSubmittedScreen = '/kyc_submit_screen';
   static const String mpinLoginScreen = '/mpin_login_screen';
+  static const String editDetailsScreen = '/edit_details_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
@@ -322,6 +324,13 @@ final GoRouter router = GoRouter(
       name: AppRoutes.mpinLoginScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const MPINLoginScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.editDetailsScreen,
+      name: AppRoutes.editDetailsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EditDetailsScreen();
       },
     ),
   ],

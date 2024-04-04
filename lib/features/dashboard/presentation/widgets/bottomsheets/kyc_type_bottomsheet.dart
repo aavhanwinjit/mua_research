@@ -116,7 +116,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> with Kyc
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
-        disable: (ref.watch(kycTypeProvider) == null) || (kycTypeListLoading == true),
+        disable: (ref.watch(selectedKycTypeProvider) == null) || (kycTypeListLoading == true),
         onTap: () {
           context.pop();
           context.pushNamed(AppRoutes.customerInfoScreen);

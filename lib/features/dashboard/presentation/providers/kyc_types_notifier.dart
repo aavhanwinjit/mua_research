@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'kyc_types_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class KycTypesNotifier extends _$KycTypesNotifier {
   @override
   List<KycTypesModel> build() {

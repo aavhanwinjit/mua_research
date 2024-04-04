@@ -43,9 +43,9 @@ import 'package:ekyc/features/kyc_process/domain/repositories/save_document_info
 import 'package:ekyc/features/kyc_process/domain/usecases/add_customer_information.dart'
     as _i53;
 import 'package:ekyc/features/kyc_process/domain/usecases/get_document_category.dart'
-    as _i51;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_identity_document_types.dart'
     as _i50;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_identity_document_types.dart'
+    as _i51;
 import 'package:ekyc/features/kyc_process/domain/usecases/save_identity_details.dart'
     as _i52;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
@@ -191,10 +191,10 @@ extension GetItInjectableX on _i1.GetIt {
         _i48.GetAgentApplications(gh<_i11.AgentApplicationsRepository>()));
     gh.lazySingleton<_i49.GetKycTypes>(
         () => _i49.GetKycTypes(gh<_i21.KycTypesRepository>()));
-    gh.lazySingleton<_i50.GetIdentityDocumentTypes>(
-        () => _i50.GetIdentityDocumentTypes(gh<_i13.MasterDataRepository>()));
-    gh.lazySingleton<_i51.GetDocumentCategory>(
-        () => _i51.GetDocumentCategory(gh<_i13.MasterDataRepository>()));
+    gh.lazySingleton<_i50.GetDocumentCategory>(
+        () => _i50.GetDocumentCategory(gh<_i13.MasterDataRepository>()));
+    gh.lazySingleton<_i51.GetIdentityDocumentTypes>(
+        () => _i51.GetIdentityDocumentTypes(gh<_i13.MasterDataRepository>()));
     gh.lazySingleton<_i52.SaveIdentityDetails>(
         () => _i52.SaveIdentityDetails(gh<_i44.SaveDocumentInfoRepository>()));
     gh.lazySingleton<_i53.AddCustomerInformation>(() =>

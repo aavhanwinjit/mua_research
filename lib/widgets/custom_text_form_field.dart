@@ -26,6 +26,8 @@ class CustomTextFormField extends StatelessWidget {
   final bool? autofocus;
   final int? maxLength;
   final FloatingLabelBehavior? floatingLabelBehavior;
+  final String? initialValue;
+  final bool? enabled;
 
   const CustomTextFormField({
     super.key,
@@ -51,11 +53,15 @@ class CustomTextFormField extends StatelessWidget {
     this.autofocus,
     this.maxLength,
     this.floatingLabelBehavior,
+    this.initialValue,
+    this.enabled,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: enabled ?? true,
+      initialValue: initialValue,
       controller: controller,
       autofocus: autofocus ?? false,
       onChanged: onChanged,

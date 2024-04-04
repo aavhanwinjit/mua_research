@@ -37,7 +37,7 @@ class NICDetailsCard extends ConsumerWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
+                  onPressed: () => context.pushNamed(AppRoutes.editDetailsScreen),
                   child: Text(
                     Strings.edit,
                     style: TextStyle(

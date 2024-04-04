@@ -40,7 +40,7 @@ mixin KycTypesMixin {
           if (success.body?.responseBody != null) {
             final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
 
-            ref.watch(kycTypeProvider.notifier).update((state) => null);
+            ref.watch(selectedKycTypeProvider.notifier).update((state) => null);
 
             kycTypeNotifier.updateApplicationList(success.body?.responseBody ?? []);
 
