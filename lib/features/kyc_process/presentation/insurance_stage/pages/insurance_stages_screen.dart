@@ -3,6 +3,7 @@ import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/constants/enums/insurance_button_type.dart';
 import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/features/dashboard/presentation/mixins/kyc_types_mixin.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/mixins/get_document_category_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
@@ -22,13 +23,15 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => InsuranceStagesScreenState();
 }
 
-class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen> with GetDocumentCategoryMixin {
+class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
+    with GetDocumentCategoryMixin, KycTypesMixin {
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getDocumentCategory(context: context, ref: ref);
+      getKycTypes(context: context, ref: ref);
     });
   }
 

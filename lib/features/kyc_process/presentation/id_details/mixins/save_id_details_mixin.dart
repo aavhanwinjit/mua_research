@@ -5,7 +5,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
-import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/kyc_types_notifier.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
@@ -27,7 +27,12 @@ mixin SaveIDDetailsMixin {
   }) async {
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final KycTypesModel? selectedKycType = ref.watch(kycTypeProvider);
+    final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
+    final KycTypesModel selectedKycType = kycTypeNotifier
+        .kycTypes()
+        .where((element) => element.kycTypeId == selectedApplication?.kycTypeId)
+        .toList()
+        .first;
 
     final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
 
@@ -71,7 +76,7 @@ mixin SaveIDDetailsMixin {
     SaveIdentityDetailsRequestModel request = SaveIdentityDetailsRequestModel(
       applicationRefNo: selectedApplication?.applicationRefNo,
       applicantType: selectedApplication?.nationality,
-      policyType: selectedKycType?.policyType,
+      policyType: selectedKycType.policyType,
       documentCategory: selectedDocumentCategory?.documentCategory,
       documentSide: null,
       documentType: selectedIdDocType?.documentCode,
@@ -79,12 +84,12 @@ mixin SaveIDDetailsMixin {
       surname: surname,
       otherName: firstname,
       idDocNumber: idnumber,
-      idDocFrontImage: "frontBase64",
-      // idDocFrontImage: frontBase64,
-      idDocBackImage: "backBase64",
-      // idDocBackImage: backBase64,
+      // idDocFrontImage: "frontBase64",
+      idDocFrontImage: frontBase64,
+      // idDocBackImage: "backBase64",
+      idDocBackImage: backBase64,
       customerId: null,
-      fileExtension: ".png",
+      fileExtension: "png",
     );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);

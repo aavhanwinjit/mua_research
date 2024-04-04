@@ -138,8 +138,9 @@ class Strings {
   static const String editCustomerInfo = "Edit Customer Information";
   static const String editCustomerInfoSubtitle =
       "Enter the following details from the customer's insurance documentation.";
-  static const String enterFollowingDetails =
+  static const String enterFollowingDetailsCustomerInfoScreen =
       "Enter the following details from the customer's insurance documentation.";
+  static const String enterFollowingDetailsEditScreen = "Enter the following details from the ";
   static const String surname = "Surname";
   static const String surnameValidationString = "Enter surname";
   static const String enterNameAsPerDoc = "Enter customer name as per NIC or Passport documents";
@@ -197,6 +198,7 @@ class Strings {
   static const String nicCard = "National ID Card (NIC)";
   static const String passport = "Passport";
   static const String idDocumentFrontContainerLabel = "Upload front side photo";
+  static const String editIDDetailsScreenTitle = "Edit Identity/ID details";
 
   static const String idCardCameraScreenTitleFront = "Scan front side";
   static const String idCardCameraScreenTitleBack = "Scan back side";
@@ -223,6 +225,7 @@ class Strings {
   static const String addressDocCameraLabel =
       "Please scan the address proof document by\nadjusting it inside the frame.";
   static const String billDate = "Bill Date";
+  static const String selectDocumentType = "Select document type";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";

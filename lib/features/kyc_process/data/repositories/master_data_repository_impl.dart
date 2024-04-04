@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/errors/failure.dart';
 import 'package:ekyc/core/network/services/api_service.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/request/get_document_category_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
@@ -30,6 +31,17 @@ class MasterDataRepositoryImpl implements MasterDataRepository {
       GetDocumentCategoryRequestModel request) async {
     try {
       final response = await apiService.getDocumentCategory(request);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetAddressDocumentTypesResponseModel>> getAddressDocumentTypes() async {
+    try {
+      final response = await apiService.getAddressDocumentTypes();
 
       return Right(response);
     } on DioException catch (e) {

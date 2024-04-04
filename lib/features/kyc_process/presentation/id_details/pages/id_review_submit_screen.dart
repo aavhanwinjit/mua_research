@@ -23,6 +23,15 @@ class IDReviewSubmitScreen extends ConsumerStatefulWidget {
 class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
     with SaveIDDetailsMixin, AgentApplicationsMixin {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(confirmationProvider.notifier).update((state) => false);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
@@ -63,11 +72,12 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: ReviewScreenButtons(
                     disable: ref.watch(confirmationProvider) != true,
-                    onNext: () {
-                      _uploadDetails(false);
-                    },
+                    loadingProvider: saveIdentityDetailsLoading,
                     onExit: () {
                       _uploadDetails(true);
+                    },
+                    onNext: () {
+                      _uploadDetails(false);
                     },
                   ),
                 ),
@@ -85,6 +95,9 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
       title: Strings.confirmDetails,
       content: Strings.documentUploadConfirmationDialogText,
       onConfirm: () async {
+        // pop the confirmation dialog box
+        context.pop();
+
         await saveIdentityDetails(
             context: context,
             ref: ref,

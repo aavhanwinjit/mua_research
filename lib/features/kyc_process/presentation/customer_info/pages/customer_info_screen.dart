@@ -31,7 +31,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
 
   @override
   Widget build(BuildContext context) {
-    final selectedKycType = ref.watch(kycTypeProvider);
+    final selectedKycType = ref.watch(selectedKycTypeProvider);
 
     final formKey = ref.watch(customerInfoFormKey);
     ref.watch(customerInfoMobileNumberProvider);
@@ -58,7 +58,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Strings.enterFollowingDetails,
+                      Strings.enterFollowingDetailsCustomerInfoScreen,
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor2,

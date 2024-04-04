@@ -5,12 +5,12 @@ import 'package:local_auth/error_codes.dart' as error_code;
 import 'package:local_auth/local_auth.dart';
 
 mixin BiometricAuthMixin {
-  final LocalAuthentication auth = LocalAuthentication();
-
   Future<void> authenticateWithBiometric({
     required VoidCallback onAuthenticated,
     required ValueChanged<String> onAuthenticationFailure,
   }) async {
+    final LocalAuthentication auth = LocalAuthentication();
+
     try {
       final List<BiometricType> availableBiometrics = await auth.getAvailableBiometrics();
 

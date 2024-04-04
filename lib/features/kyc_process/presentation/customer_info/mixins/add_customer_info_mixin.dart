@@ -23,7 +23,7 @@ mixin AddCustomerInfoMixin {
       return;
     }
 
-    final selectedKycType = ref.watch(kycTypeProvider);
+    final selectedKycType = ref.watch(selectedKycTypeProvider);
 
     final mobileNumber = ref.watch(customerInfoMobileNumberProvider);
     final emailId = ref.watch(customerInfoEmailProvider);

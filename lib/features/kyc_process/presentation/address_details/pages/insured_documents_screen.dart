@@ -105,7 +105,7 @@ class _AddressDetailsScreenState extends ConsumerState<InsuredDocumentsScreen> {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        dropdownValue = value;
+        dropdownValue = value as String;
         setState(() {});
       },
       items: items.map((String value) {

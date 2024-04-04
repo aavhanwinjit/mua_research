@@ -16,12 +16,12 @@ class InsuranceTypeCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedKycType = ref.watch(kycTypeProvider);
+    final selectedKycType = ref.watch(selectedKycTypeProvider);
     double screenWidth = MediaQuery.of(context).size.width;
 
     return InkWell(
       onTap: () {
-        ref.watch(kycTypeProvider.notifier).update((state) => kycType);
+        ref.watch(selectedKycTypeProvider.notifier).update((state) => kycType);
       },
       child: Container(
         padding: EdgeInsets.only(
