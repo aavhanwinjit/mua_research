@@ -45,6 +45,9 @@ mixin AddCustomerInfoMixin {
       kycTypeId: selectedKycType?.kycTypeId,
     );
 
+    final bool loading = ref.watch(customerInfoLoadingProvider);
+    if (loading) return;
+
     ref.watch(customerInfoLoadingProvider.notifier).update((state) => true);
     ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
 

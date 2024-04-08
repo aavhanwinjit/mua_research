@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
@@ -89,8 +90,11 @@ mixin SaveIDDetailsMixin {
       // idDocBackImage: "backBase64",
       idDocBackImage: backBase64,
       customerId: null,
-      fileExtension: "png",
+      fileExtension: FileExtensionEnums.png.toString().split('.').last,
     );
+
+    final bool loading = ref.watch(saveIdentityDetailsLoading);
+    if (loading) return;
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
     // ref.watch(customerInfoErrorProvider.notifier).update((state) => false);

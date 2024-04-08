@@ -11,6 +11,8 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/resp
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan_document_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
@@ -68,6 +70,7 @@ abstract class ApiService {
   static const GET_IDENTITY_DOCUMENT_TYPES = "/AgentAPI/Data/GetIdentityDocumentTypes";
   static const GET_DOCUMENT_CATEGORY = "/AgentAPI/Data/GetDocumentCategories";
   static const GET_ADDRESS_DOCUMENT_TYPES = "/AgentAPI/Data/GetAddressDocumentTypes";
+  static const SCAN_DOCUMENT = "/AgentAPI/DocumentOCR/ScanDocument";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -158,4 +161,8 @@ abstract class ApiService {
   @POST(GET_ADDRESS_DOCUMENT_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<GetAddressDocumentTypesResponseModel> getAddressDocumentTypes();
+
+  @POST(SCAN_DOCUMENT)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<ScanDocumentResponseModel> scanDocument(@Body() ScanDocumentRequestModel request);
 }
