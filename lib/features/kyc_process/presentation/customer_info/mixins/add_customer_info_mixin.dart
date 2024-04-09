@@ -17,6 +17,9 @@ mixin AddCustomerInfoMixin {
       {required BuildContext context, required WidgetRef ref, required VoidCallback onSuccess}) async {
     KeyboardHelper.hideKeyboard(context);
 
+    final bool loading = ref.watch(customerInfoLoadingProvider);
+    if (loading) return;
+
     final formKey = ref.watch(customerInfoFormKey);
 
     if (!formKey.currentState!.validate()) {
@@ -44,9 +47,6 @@ mixin AddCustomerInfoMixin {
       policyNumber: (selectedKycType?.kycTypeId == KYCType.LIFE_INSURANCE) ? policyNumber : null,
       kycTypeId: selectedKycType?.kycTypeId,
     );
-
-    final bool loading = ref.watch(customerInfoLoadingProvider);
-    if (loading) return;
 
     ref.watch(customerInfoLoadingProvider.notifier).update((state) => true);
     ref.watch(customerInfoErrorProvider.notifier).update((state) => false);

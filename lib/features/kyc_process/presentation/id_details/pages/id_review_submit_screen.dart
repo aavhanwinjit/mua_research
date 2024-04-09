@@ -27,7 +27,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(confirmationProvider.notifier).update((state) => false);
+      ref.read(idReviewScreenConfirmationProvider.notifier).update((state) => false);
     });
   }
 
@@ -61,9 +61,9 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                 ),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
-                  value: ref.watch(confirmationProvider),
+                  value: ref.watch(idReviewScreenConfirmationProvider),
                   onChanged: (value) {
-                    ref.read(confirmationProvider.notifier).update((state) => value!);
+                    ref.read(idReviewScreenConfirmationProvider.notifier).update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,
@@ -71,7 +71,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: ReviewScreenButtons(
-                    disable: ref.watch(confirmationProvider) != true,
+                    disable: ref.watch(idReviewScreenConfirmationProvider) != true,
                     loadingProvider: saveIdentityDetailsLoading,
                     onExit: () {
                       _uploadDetails(true);

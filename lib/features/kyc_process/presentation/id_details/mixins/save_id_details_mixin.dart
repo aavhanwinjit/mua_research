@@ -26,6 +26,9 @@ mixin SaveIDDetailsMixin {
     required WidgetRef ref,
     required VoidCallback onSuccess,
   }) async {
+    final bool loading = ref.watch(saveIdentityDetailsLoading);
+    if (loading) return;
+
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
@@ -92,9 +95,6 @@ mixin SaveIDDetailsMixin {
       customerId: null,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
     );
-
-    final bool loading = ref.watch(saveIdentityDetailsLoading);
-    if (loading) return;
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
     // ref.watch(customerInfoErrorProvider.notifier).update((state) => false);

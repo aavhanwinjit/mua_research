@@ -12,3 +12,8 @@ final selectedAddressDocTypeProvider = StateProvider<AddressDocumentTypeModel?>(
 final addressDocOCRLoadingProvider = StateProvider<bool>((ref) => false);
 
 final addressDocOCRApiResponse = StateProvider<ScanDocumentResponseBody?>((ref) => null);
+
+final addressOtherNameProvider = StateProvider<String?>((ref) => null);
+final addressSurnameProvider = StateProvider<String?>((ref) => null);
+
+final ocrNameMatched = StateProvider<bool>((ref) => true);

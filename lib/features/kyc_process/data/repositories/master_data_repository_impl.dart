@@ -6,6 +6,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_address_document_types
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/request/get_document_category_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/repositories/master_data_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -42,6 +43,17 @@ class MasterDataRepositoryImpl implements MasterDataRepository {
   Future<Either<Failure, GetAddressDocumentTypesResponseModel>> getAddressDocumentTypes() async {
     try {
       final response = await apiService.getAddressDocumentTypes();
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, GetPorDocumentTypesResponseModel>> getPORDocumentType() async {
+    try {
+      final response = await apiService.getPORDocumentTypes();
 
       return Right(response);
     } on DioException catch (e) {

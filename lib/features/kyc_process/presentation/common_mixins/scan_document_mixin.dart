@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
@@ -11,7 +8,6 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/resp
 import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan_document_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/usecases/scan_document.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
@@ -25,7 +21,11 @@ mixin ScanDocumentMixin {
     required String? documentType,
     required StateProvider<bool> loadingProvider,
     required Function(ScanDocumentResponseBody?) onSuccess,
+    required String base64Image,
   }) async {
+    final loading = ref.watch(loadingProvider);
+    if (loading) return;
+
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
@@ -36,11 +36,6 @@ mixin ScanDocumentMixin {
         .first;
 
     final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
-
-    final String? addressProofFilePath = ref.watch(addressProofFilePathProvider);
-    File addressProofFile = File(addressProofFilePath ?? "");
-    final List<int> addressProofFileBytes = await addressProofFile.readAsBytes() as List<int>;
-    final String addressProofFileBase64 = base64Encode(addressProofFileBytes);
 
     ScanDocumentRequestModel request = ScanDocumentRequestModel(
       applicantType: selectedApplication?.nationality,
@@ -59,17 +54,16 @@ mixin ScanDocumentMixin {
           : null,
       quoteNumber: selectedApplication?.quoteNumber,
       verificationData: VerificationData(
-        firstName: "CALOWTEE",
-        // firstName: selectedApplication?.idDocOtherName,
-        surname: "MUSSAI",
-        // surname: selectedApplication?.idDocSurname,
+        // firstName: "CALOWTEE",
+        firstName: selectedApplication?.idDocOtherName,
+        // surname: "MUSSAI",
+        surname: selectedApplication?.idDocSurname,
         idNumber: selectedApplication?.idDocNumber,
         billDate: null,
         registrationMark: null,
         issueDate: null,
       ),
-      // base64Doc: "addressProofFileBase64",
-      base64Doc: addressProofFileBase64,
+      base64Doc: base64Image,
     );
 
     debugPrint(request.toJson().toString());
