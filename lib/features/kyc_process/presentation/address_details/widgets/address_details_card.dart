@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
@@ -53,7 +54,6 @@ class AddressDetailsCard extends ConsumerWidget {
           SizedBox(height: 24.h),
           _imageRow(ref),
           SizedBox(height: 24.h),
-          // _insuredDocWidget(),
         ],
       ),
     );
@@ -62,6 +62,7 @@ class AddressDetailsCard extends ConsumerWidget {
   Widget _infoWidget(WidgetRef ref) {
     final String? addressOtherName = ref.watch(addressOtherNameProvider);
     final String? addressSurname = ref.watch(addressSurnameProvider);
+    final String? addressText = ref.watch(addressTextProvider);
 
     final ScanDocumentResponseBody? addressOCRResponse = ref.watch(addressDocOCRApiResponse);
 
@@ -69,105 +70,49 @@ class AddressDetailsCard extends ConsumerWidget {
 
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: Row(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.surname,
-                  value: addressSurname ?? "-",
-                ),
-                if (selectedAddressDocType?.documentCode == "UTB") ...[
-                  const SizedBox(height: 24),
-                  InfoTile(
-                    title: Strings.billDate,
-                    value: addressOCRResponse?.ocrResponse?.documentdata?.billDate,
-                  ),
-                ],
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.otherName,
-                  value: addressOtherName ?? "-",
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _insuredDocWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: const Divider(
-            height: 0,
-            color: borderColor,
-          ),
-        ),
-        SizedBox(height: 24.h),
-        Padding(
-          padding: EdgeInsets.only(left: 16.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                Strings.insuredDocuments,
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w700,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoTile(
+                      title: Strings.surname,
+                      value: addressSurname ?? "-",
+                    ),
+                    if (selectedAddressDocType?.documentCode ==  DocumentCodes.UTB.toString().split('.').last) ...[
+                      const SizedBox(height: 24),
+                      InfoTile(
+                        title: Strings.billDate,
+                        value: addressOCRResponse?.ocrResponse?.documentdata?.billDate,
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoTile(
+                      title: Strings.otherName,
+                      value: addressOtherName ?? "-",
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-        ),
-        SizedBox(height: 24.h),
-        _infoWidget2(),
-        SizedBox(height: 24.h),
-        _imageRow2(),
-      ],
-    );
-  }
-
-  Widget _infoWidget2() {
-    return Padding(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w),
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.surname,
-                  value: "Sharma",
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.billDate,
-                  value: "21 Dec 2023",
-                ),
-              ],
-            ),
+          const SizedBox(height: 24),
+          InfoTile(
+            title: Strings.address,
+            value: addressText ?? "-",
           ),
         ],
       ),
@@ -190,29 +135,6 @@ class AddressDetailsCard extends ConsumerWidget {
           ),
           const SizedBox(height: 5),
           _imageWidget(addressProofImagePath),
-        ],
-      ),
-    );
-  }
-
-  Widget _imageRow2() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              _imageWidget(""),
-              SizedBox(width: 16.w),
-              _imageWidget(""),
-            ],
-          ),
         ],
       ),
     );

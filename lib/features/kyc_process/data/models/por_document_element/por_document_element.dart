@@ -6,11 +6,13 @@ class PORDocumentElement {
   // int index;
   ScanDocumentResponseBody? scanResponse;
   String? filePath;
+  String? extractedLastName;
 
   PORDocumentElement({
     required this.documentElement,
     // required this.index,
     required this.scanResponse,
     required this.filePath,
+    this.extractedLastName,
   });
 }

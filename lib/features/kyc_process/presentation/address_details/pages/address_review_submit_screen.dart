@@ -17,10 +17,10 @@ class AddressReviewSubmitScreen extends ConsumerStatefulWidget {
   const AddressReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<AddressReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
+  ConsumerState<AddressReviewSubmitScreen> createState() => _AddressReviewSubmitScreenState();
 }
 
-class _ReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitScreen>
+class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitScreen>
     with SaveAddressDetailsMixin, AgentApplicationsMixin {
   // @override
   // void initState() {
