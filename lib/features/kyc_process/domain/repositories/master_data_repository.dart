@@ -15,4 +15,6 @@ abstract class MasterDataRepository {
   Future<Either<Failure, GetAddressDocumentTypesResponseModel>> getAddressDocumentTypes();
 
   Future<Either<Failure, GetPorDocumentTypesResponseModel>> getPORDocumentType();
+
+  Future<Either<Failure, GetPorDocumentTypesResponseModel>> getPolicyDocumentTypes();
 }

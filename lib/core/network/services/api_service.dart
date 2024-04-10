@@ -13,6 +13,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/res
 import 'package:ekyc/features/kyc_process/data/models/save_address_details/request/save_address_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_insured_documents/request/save_insured_documents_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan_document_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
@@ -76,6 +77,7 @@ abstract class ApiService {
   static const SAVE_ADDRESS_DETAILS = "/AgentAPI/Agent/SaveAddressDetails";
   static const GET_POR_DOCUMENT_TYPES = "/AgentAPI/Data/GetPORDocumentTypes";
   static const SAVE_INSURED_DOCUMENTS = "/AgentAPI/Agent/SaveInsuredDocuments";
+  static const GET_POLICY_DOCUMENT_TYPES = "/AgentAPI/Data/GetPolicyDocumentTypes";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -178,4 +180,12 @@ abstract class ApiService {
   @POST(GET_POR_DOCUMENT_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<GetPorDocumentTypesResponseModel> getPORDocumentTypes();
+
+  @POST(SAVE_INSURED_DOCUMENTS)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<SaveIdentityDetailsResponseModel> saveInsuredDocuments(@Body() SaveInsuredDocumentsRequestModel request);
+
+  @POST(GET_POLICY_DOCUMENT_TYPES)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<GetPorDocumentTypesResponseModel> getPolicyDocumentTypes();
 }

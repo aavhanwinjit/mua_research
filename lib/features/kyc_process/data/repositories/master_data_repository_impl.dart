@@ -60,4 +60,15 @@ class MasterDataRepositoryImpl implements MasterDataRepository {
       return Left(ServerFailure(e));
     }
   }
+
+  @override
+  Future<Either<Failure, GetPorDocumentTypesResponseModel>> getPolicyDocumentTypes() async {
+    try {
+      final response = await apiService.getPolicyDocumentTypes();
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
 }

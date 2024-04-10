@@ -11,11 +11,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class InsuredDocDetailsCard extends ConsumerWidget {
+class InsuredDocDetailsCard extends ConsumerStatefulWidget {
   const InsuredDocDetailsCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _InsuredDocDetailsCardState();
+}
+
+class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -51,17 +56,17 @@ class InsuredDocDetailsCard extends ConsumerWidget {
               ],
             ),
           ),
-          _infoWidget(ref),
+          _infoWidget(),
           SizedBox(height: 24.h),
-          _imageRow(ref),
+          _imageRow(),
           SizedBox(height: 24.h),
-          _insuredDocWidget(context, ref),
+          _insuredDocWidget(context),
         ],
       ),
     );
   }
 
-  Widget _infoWidget(WidgetRef ref) {
+  Widget _infoWidget() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     return Padding(
@@ -115,7 +120,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
     );
   }
 
-  Widget _insuredDocWidget(BuildContext context, WidgetRef ref) {
+  Widget _insuredDocWidget(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -155,6 +160,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
         _infoWidget2(ref),
         SizedBox(height: 24.h),
         _imageRow2(),
+        SizedBox(height: 24.h),
       ],
     );
   }
@@ -183,43 +189,42 @@ class InsuredDocDetailsCard extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _surnameWidget(),
-          _billDateWidget(),
+          _surnameWidget(item),
+          _billDateWidget(item),
         ],
       ),
     );
   }
 
-  Widget _surnameWidget() {
-    // "KYC validation failed. Last name is not matching in the document.
-    return const Expanded(
+  Widget _surnameWidget(PORDocumentElement item) {
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
             title: Strings.surname,
-            value: "Sharma",
+            value: item.extractedLastName ?? "-",
           ),
         ],
       ),
     );
   }
 
-  Widget _billDateWidget() {
-    return const Expanded(
+  Widget _billDateWidget(PORDocumentElement item) {
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
             title: Strings.billDate,
-            value: "21 Dec 2023",
+            value: item.scanResponse?.ocrResponse?.documentdata?.billDate ?? "-",
           ),
         ],
       ),
     );
   }
 
-  Widget _imageRow(WidgetRef ref) {
+  Widget _imageRow() {
     final String? addressProofImagePath = ref.watch(addressProofFilePathProvider);
 
     final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
@@ -241,24 +246,27 @@ class InsuredDocDetailsCard extends ConsumerWidget {
   }
 
   Widget _imageRow2() {
+    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              _imageWidget(""),
-              SizedBox(width: 16.w),
-              _imageWidget(""),
-            ],
-          ),
-        ],
+      child: Row(
+        children: selectedDocsListProvider
+            .list()
+            .map((e) => Padding(
+                  padding: EdgeInsets.only(right: 16.w),
+                  child: Column(
+                    children: [
+                      Text(
+                        e.documentElement?.porDocType ?? "-",
+                        style: const TextStyle(color: textGrayColor2),
+                      ),
+                      const SizedBox(height: 5),
+                      _imageWidget(e.filePath),
+                    ],
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

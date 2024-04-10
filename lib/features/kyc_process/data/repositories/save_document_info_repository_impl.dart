@@ -5,6 +5,7 @@ import 'package:ekyc/core/network/services/api_service.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_address_details/request/save_address_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_insured_documents/request/save_insured_documents_request_model.dart';
 import 'package:ekyc/features/kyc_process/domain/repositories/save_document_info_repository.dart';
 import 'package:injectable/injectable.dart';
 
@@ -31,6 +32,18 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
       SaveAddressDetailsRequestModel request) async {
     try {
       final response = await apiService.saveAddressDetails(request);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SaveIdentityDetailsResponseModel>> saveInsuredDocuments(
+      SaveInsuredDocumentsRequestModel request) async {
+    try {
+      final response = await apiService.saveInsuredDocuments(request);
 
       return Right(response);
     } on DioException catch (e) {

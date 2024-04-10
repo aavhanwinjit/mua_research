@@ -275,29 +275,27 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
             }
           }
 
-          context.pushNamed(AppRoutes.insuredReviewSubmitScreen);
+          _saveInsuredDocDataAndNavigate();
         },
         label: Strings.next,
       ),
     );
   }
 
-  // void _saveInsuredDocData() {
-  //   final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+  void _saveInsuredDocDataAndNavigate() {
+    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-  //   // setting the bill data if received in any of the document's ocr
-  //   selectedDocsListProvider.list().forEach((element) {
-  //     if (element.scanResponse?.ocrResponse?.documentdata?.billDate != null) {
-  //       ref
-  //           .watch(insuredDocBillDateProvider.notifier)
-  //           .update((state) => element.scanResponse?.ocrResponse?.documentdata?.billDate);
-  //     }
-  //   });
+    selectedDocsListProvider.list().forEach((element) {
+      if ((element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last) &&
+          (element.scanResponse?.ocrResponse?.documentdata?.isLastNameAvailable == true)) {
+        final selectedApplication = ref.watch(selectedApplicationProvider);
 
-  //   selectedDocsListProvider.list().
+        element.extractedLastName = selectedApplication?.idDocSurname;
+      }
+    });
 
-  //   ref.watch(insuredDocSurnameProvider);
-  // }
+    context.pushNamed(AppRoutes.insuredReviewSubmitScreen);
+  }
 
   bool checkIfUserIsMarried() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
@@ -310,10 +308,6 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
 
   bool checkIfMarriageCertIsSelected() {
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
-
-    // selectedDocsListProvider.list().forEach((element) {
-    //   debugPrint(element.filePath);
-    // });
 
     return selectedDocsListProvider
         .list()

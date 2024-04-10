@@ -240,8 +240,11 @@ class Strings {
   static const String insuredDocumentContainerLabel = "Take a photo or upload\ninsured documents";
   static const String insuredDocCameraLabel = "Please scan the document by\nadjusting it inside the frame.";
   static const String insuredDocuments = "Insured Documents";
-  static const String uploadMarriageCertificate = "Uploading marriage certificate is compulsory in case of 'Married' users";
-  static const String uploadNICofLandlord = "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
+  static const String uploadMarriageCertificate =
+      "Uploading marriage certificate is compulsory in case of 'Married' users";
+  static const String uploadNICofLandlord =
+      "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
+  static const String surnamesForSelectedDocuments = "Please add surnames for selected documents";
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";
@@ -253,6 +256,7 @@ class Strings {
       "I hereby affirm that I have thoroughly examined and verified all the documents.";
 
   //Additional Documents Screen
+  static const String uploadAdditionalDocuments = "Upload Additional Documents";
   static const String additionalDocuments = "Additional Documents";
   static const String otherKYCDocs = "Other KYC Documents";
   static const String additionalDocsScreenSubtitle = "Kindly provide the required documents for the selected KYC type";

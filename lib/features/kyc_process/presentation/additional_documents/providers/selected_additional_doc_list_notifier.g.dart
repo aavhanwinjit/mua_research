@@ -1,27 +1,29 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'selected_por_doc_type_list_notifier.dart';
+part of 'selected_additional_doc_list_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$selectedPorDocTypeListNotifierHash() =>
-    r'5f71d46e52b25757a81535596245c39a664085b3';
+String _$selectedAdditionalDocListNotifierHash() =>
+    r'ad5d78287989a38145e29fcff2480d0dbd8da22e';
 
-/// See also [SelectedPorDocTypeListNotifier].
-@ProviderFor(SelectedPorDocTypeListNotifier)
-final selectedPorDocTypeListNotifierProvider = NotifierProvider<
-    SelectedPorDocTypeListNotifier, List<PORDocumentElement>>.internal(
-  SelectedPorDocTypeListNotifier.new,
-  name: r'selectedPorDocTypeListNotifierProvider',
+/// See also [SelectedAdditionalDocListNotifier].
+@ProviderFor(SelectedAdditionalDocListNotifier)
+final selectedAdditionalDocListNotifierProvider = NotifierProvider<
+    SelectedAdditionalDocListNotifier,
+    List<AdditionalDocumentElement>>.internal(
+  SelectedAdditionalDocListNotifier.new,
+  name: r'selectedAdditionalDocListNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$selectedPorDocTypeListNotifierHash,
+      : _$selectedAdditionalDocListNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$SelectedPorDocTypeListNotifier = Notifier<List<PORDocumentElement>>;
+typedef _$SelectedAdditionalDocListNotifier
+    = Notifier<List<AdditionalDocumentElement>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

@@ -1,7 +1,9 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/mixins/get_policy_docs_types_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/policy_documents_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -16,7 +18,7 @@ class PolicyDocumentsScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
+class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> with GetPolicyDocsTypesMixin {
   String? dropdownValue;
 
   List<String> items = [
@@ -25,6 +27,22 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
     'New Business Document',
     'Underwriting Document',
   ];
+
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(policyDocsTypesListLoading.notifier).update((state) => false);
+
+      // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+      // selectedDocsListProvider.clearList();
+
+      // selectedDocsListProvider.addElementToList();
+
+      getPolicyDocumentTypes(context: context, ref: ref);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
