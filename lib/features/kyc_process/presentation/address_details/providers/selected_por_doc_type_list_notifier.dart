@@ -82,6 +82,22 @@ class SelectedPorDocTypeListNotifier extends _$SelectedPorDocTypeListNotifier {
     state = newList;
   }
 
+  void updateElementOcrFirstNameAndLastName({
+    required int index,
+    required String? lastName,
+  }) {
+    PORDocumentElement item = state[index];
+
+    List<PORDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
+
+    item.extractedLastName = lastName;
+
+    newList.insert(index, item);
+
+    state = newList;
+  }
+
   void clearElementsFilePath({required int index}) {
     PORDocumentElement item = state[index];
 

@@ -173,6 +173,7 @@ class Strings {
   static const String update = "Update";
   static const String emailOptional = "Email ID (Optional)";
   static const String emailValidationString = "Enter valid email id";
+  static const String addressValidationString = "Enter valid address";
 
   //Insurance Stage Screen
   static const String kycSubmission = "KYC Submission";
@@ -239,6 +240,8 @@ class Strings {
   static const String insuredDocumentContainerLabel = "Take a photo or upload\ninsured documents";
   static const String insuredDocCameraLabel = "Please scan the document by\nadjusting it inside the frame.";
   static const String insuredDocuments = "Insured Documents";
+  static const String uploadMarriageCertificate = "Uploading marriage certificate is compulsory in case of 'Married' users";
+  static const String uploadNICofLandlord = "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";

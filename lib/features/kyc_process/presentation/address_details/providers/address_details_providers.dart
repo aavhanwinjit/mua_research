@@ -15,5 +15,6 @@ final addressDocOCRApiResponse = StateProvider<ScanDocumentResponseBody?>((ref) 
 
 final addressOtherNameProvider = StateProvider<String?>((ref) => null);
 final addressSurnameProvider = StateProvider<String?>((ref) => null);
+final addressTextProvider = StateProvider<String?>((ref) => null);
 
 final ocrNameMatched = StateProvider<bool>((ref) => true);

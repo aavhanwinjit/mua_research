@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
@@ -21,6 +22,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
 
   String? surname;
   String? otherName;
+  String? addressData;
 
   @override
   void initState() {
@@ -34,9 +36,11 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
   void setData() {
     final String? addressOtherName = ref.watch(addressOtherNameProvider);
     final String? addressSurname = ref.watch(addressSurnameProvider);
+    final String? addressText = ref.watch(addressTextProvider);
 
     surname = addressSurname;
     otherName = addressOtherName;
+    addressData = addressText;
     setState(() {});
   }
 
@@ -44,6 +48,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
   Widget build(BuildContext context) {
     String? addressOtherName = ref.watch(addressOtherNameProvider);
     String? addressSurname = ref.watch(addressSurnameProvider);
+    final String? addressText = ref.watch(addressTextProvider);
 
     ScanDocumentResponseBody? ocrResponse = ref.watch(addressDocOCRApiResponse);
 
@@ -120,7 +125,22 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                         color: textGrayColor,
                       ),
                     ),
-                    if (selectedAddressDocType?.documentCode == "UTB") ...[
+                    SizedBox(height: 24.h),
+                    CustomTextFormField(
+                      initialValue: addressText,
+                      label: Strings.address,
+                      onChanged: (value) {
+                        addressData = value.trim();
+                        setState(() {});
+                      },
+                      validator: (value) {
+                        if (value!.trim().isEmpty) {
+                          return Strings.addressValidationString;
+                        }
+                        return null;
+                      },
+                    ),
+                    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
                         initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
@@ -154,6 +174,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
 
     ref.watch(addressOtherNameProvider.notifier).update((state) => otherName);
     ref.watch(addressSurnameProvider.notifier).update((state) => surname);
+    ref.watch(addressTextProvider.notifier).update((state) => addressData);
 
     context.pop();
   }
