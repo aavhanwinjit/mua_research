@@ -16,3 +16,9 @@ final extractedNICIDNumberProvider = StateProvider<String?>((ref) => null);
 final idDocsTypesListLoading = StateProvider<bool>((ref) => false);
 
 final selectedIdDocTypeProvider = StateProvider<IdentityDocumentTypeModel?>((ref) => null);
+
+final passportFilePathProvider = StateProvider<String?>((ref) => null);
+
+final extractedPassportFirstNameProvider = StateProvider<String?>((ref) => null);
+final extractedPassportSurNameProvider = StateProvider<String?>((ref) => null);
+final extractedPassportNumberProvider = StateProvider<String?>((ref) => null);
