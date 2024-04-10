@@ -61,8 +61,6 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
                 disable: false,
                 label: Strings.upload,
                 onTap: () async {
-                  // ref.watch(provider.notifier).update((state) => capturedFilePath);
-
                   File file = File(capturedFilePath ?? "");
                   final List<int> fileBytes = await file.readAsBytes() as List<int>;
                   final String fileBase64 = base64Encode(fileBytes);
