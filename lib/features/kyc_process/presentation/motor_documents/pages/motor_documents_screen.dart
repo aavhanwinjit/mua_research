@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_docs_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -12,8 +13,7 @@ class MotorDocumentScreen extends ConsumerStatefulWidget {
   const MotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
 class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
@@ -55,8 +55,10 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
                   SizedBox(height: 20.h),
                   _dropdownWidget(),
                   SizedBox(height: 24.h),
-                  const DocumentUploadContainer(
+                  DocumentUploadContainer(
+                    provider: motorDocFilePathProvider,
                     label: Strings.motorDocsContainerLabel,
+                    cameraScreenTitle: Strings.scanDocuments,
                     cameraScreenDescription: Strings.motorDocCameraLabel,
                     reviewScreenTitle: Strings.motorDocuments,
                   ),
@@ -94,7 +96,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        dropdownValue = value;
+        dropdownValue = value as String;
         setState(() {});
       },
       items: items.map((String value) {

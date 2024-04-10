@@ -7,12 +7,12 @@ part of 'agent_applications_notifier.dart';
 // **************************************************************************
 
 String _$agentApplicationsNotifierHash() =>
-    r'7bacfc6e535be7a43a0e3582a1706abea88861a5';
+    r'b3628afb9c93f0fecbf89d734e0a652f0f6629e9';
 
 /// See also [AgentApplicationsNotifier].
 @ProviderFor(AgentApplicationsNotifier)
-final agentApplicationsNotifierProvider = AutoDisposeNotifierProvider<
-    AgentApplicationsNotifier, List<AgentApplicationsModel>>.internal(
+final agentApplicationsNotifierProvider = NotifierProvider<
+    AgentApplicationsNotifier, List<AgentApplicationModel>>.internal(
   AgentApplicationsNotifier.new,
   name: r'agentApplicationsNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -22,7 +22,6 @@ final agentApplicationsNotifierProvider = AutoDisposeNotifierProvider<
   allTransitiveDependencies: null,
 );
 
-typedef _$AgentApplicationsNotifier
-    = AutoDisposeNotifier<List<AgentApplicationsModel>>;
+typedef _$AgentApplicationsNotifier = Notifier<List<AgentApplicationModel>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, inference_failure_on_uninitialized_variable, inference_failure_on_function_return_type, inference_failure_on_untyped_parameter, deprecated_member_use_from_same_package

@@ -19,6 +19,7 @@ abstract class MAUEngineModule {
     return const AppConfig(
       appName: "MAU",
       baseUrl: "http://192.168.0.134:9890",
+      // baseUrl: "http://10.100.1.121/agentapi/",
     );
   }
 

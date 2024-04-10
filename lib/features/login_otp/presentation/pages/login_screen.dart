@@ -71,7 +71,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     disable: ref.watch(phoneNumberProvider).trim().length < 8,
                     onTap: () {
                       _verifyMobileNumber();
-                      // context.pushNamed(AppRoutes.otpScreen);
                     },
                     disabledOnTap: () {
                       context.showErrorSnackBar(message: Strings.loginPhoneValidatorString);
@@ -105,8 +104,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
         },
         (VerifyMobileNumberResponseModel success) async {
-          debugPrint("success in login screen : $success");
-
           if (success.status?.isSuccess == true) {
             ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
             ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);

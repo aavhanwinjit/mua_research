@@ -1,17 +1,21 @@
-import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'agent_applications_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class AgentApplicationsNotifier extends _$AgentApplicationsNotifier {
   @override
-  List<AgentApplicationsModel> build() {
+  List<AgentApplicationModel> build() {
     return [];
   }
 
-  void updateApplicationList(List<AgentApplicationsModel> list) {
+  void updateApplicationList(List<AgentApplicationModel> list) {
     state = list;
+  }
+
+  void appendDataToApplicationList(List<AgentApplicationModel> list) {
+    state = [...state, ...list];
   }
 
   bool haveApplications() {
@@ -22,7 +26,7 @@ class AgentApplicationsNotifier extends _$AgentApplicationsNotifier {
     return state.isEmpty;
   }
 
-  List<AgentApplicationsModel> applications() {
+  List<AgentApplicationModel> applications() {
     return state;
   }
 }

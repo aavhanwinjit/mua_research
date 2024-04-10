@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomOutlineButton extends StatelessWidget {
   final String label;
   final VoidCallback? onTap;
+  final VoidCallback? disabledOnTap;
   final double? height;
   final double? width;
   final bool? disable;
@@ -17,6 +18,7 @@ class CustomOutlineButton extends StatelessWidget {
     this.width,
     this.disable = false,
     this.primary = true,
+    this.disabledOnTap,
   });
 
   @override
@@ -27,15 +29,23 @@ class CustomOutlineButton extends StatelessWidget {
       minWidth: double.infinity,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: primary == true ? primaryColor : white,
+          color: disable == true
+              ? disabledButtonColor
+              : primary == true
+                  ? primaryColor
+                  : white,
         ),
         borderRadius: BorderRadius.circular(100),
       ),
-      onPressed: disable == false ? onTap : null,
+      onPressed: disable == false ? onTap : disabledOnTap ?? () {},
       child: Text(
         label,
         style: TextStyle(
-          color: primary == true ? primaryColor : white,
+          color: disable == true
+              ? textGrayColor
+              : primary == true
+                  ? primaryColor
+                  : white,
           fontSize: 16.sp,
           fontWeight: FontWeight.w700,
         ),

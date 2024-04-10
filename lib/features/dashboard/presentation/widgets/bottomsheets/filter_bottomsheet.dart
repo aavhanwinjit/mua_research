@@ -117,7 +117,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
           Flexible(
             flex: 3,
             child: CustomPrimaryButton(
-              disable: false,
+              disable: !_isAnyFilterApplied(),
               onTap: _applyFilter,
               label: Strings.apply,
             ),
@@ -127,13 +127,20 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     );
   }
 
+  bool _isAnyFilterApplied() {
+    return idMissing || porMissing || poaMissing || completed;
+  }
+
   void _applyFilter() async {
     ref.watch(filterIncompleteIdProvider.notifier).update((state) => idMissing);
     ref.watch(filterIncompletePORProvider.notifier).update((state) => porMissing);
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => poaMissing);
     ref.watch(filterCompleteProvider.notifier).update((state) => completed);
 
-    await getAgentApplications(context: context, ref: ref);
+    await getAgentApplications(
+      context: context,
+      ref: ref,
+    );
 
     context.pop();
   }
@@ -151,7 +158,10 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
     ref.watch(filterCompleteProvider.notifier).update((state) => false);
 
-    await getAgentApplications(context: context, ref: ref);
+    await getAgentApplications(
+      context: context,
+      ref: ref,
+    );
   }
 
   Widget _titleWithCloseButton() {

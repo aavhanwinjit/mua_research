@@ -9,12 +9,10 @@ class EditCustomerInfoScreen extends ConsumerStatefulWidget {
   const EditCustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EditConstomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditConstomerInfoScreenState();
 }
 
-class _EditConstomerInfoScreenState
-    extends ConsumerState<EditCustomerInfoScreen> {
+class _EditConstomerInfoScreenState extends ConsumerState<EditCustomerInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -116,11 +114,9 @@ class _EditConstomerInfoScreenState
                       child: CustomRadioTile(
                         title: Strings.single,
                         value: MaritalStatus.SINGLE,
-                        groupValue: ref.watch(maritalStatusProvider),
+                        groupValue: ref.watch(customerInfoMaritalStatusProvider),
                         onChange: () {
-                          ref
-                              .watch(maritalStatusProvider.notifier)
-                              .update((state) => MaritalStatus.SINGLE);
+                          ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
                         },
                       ),
                     ),
@@ -128,10 +124,10 @@ class _EditConstomerInfoScreenState
                       child: CustomRadioTile(
                         title: Strings.married,
                         value: MaritalStatus.MARRIED,
-                        groupValue: ref.watch(maritalStatusProvider),
+                        groupValue: ref.watch(customerInfoMaritalStatusProvider),
                         onChange: () {
                           ref
-                              .watch(maritalStatusProvider.notifier)
+                              .watch(customerInfoMaritalStatusProvider.notifier)
                               .update((state) => MaritalStatus.MARRIED);
                         },
                       ),
@@ -163,24 +159,24 @@ class _EditConstomerInfoScreenState
                     Expanded(
                       child: CustomRadioTile(
                         title: Strings.mauritian,
-                        value: NationalityType.MAURITIAN,
-                        groupValue: ref.watch(nationalityTypeProvider),
+                        value: NationalityType.Mauritian,
+                        groupValue: ref.watch(customerInfoNationalityTypeProvider),
                         onChange: () {
                           ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.MAURITIAN);
+                              .watch(customerInfoNationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.Mauritian);
                         },
                       ),
                     ),
                     Expanded(
                       child: CustomRadioTile(
                         title: Strings.nonMauritian,
-                        value: NationalityType.NON_MAURITIAN,
-                        groupValue: ref.watch(nationalityTypeProvider),
+                        value: NationalityType.NonMauritian,
+                        groupValue: ref.watch(customerInfoNationalityTypeProvider),
                         onChange: () {
                           ref
-                              .watch(nationalityTypeProvider.notifier)
-                              .update((state) => NationalityType.NON_MAURITIAN);
+                              .watch(customerInfoNationalityTypeProvider.notifier)
+                              .update((state) => NationalityType.NonMauritian);
                         },
                       ),
                     ),

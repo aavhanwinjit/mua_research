@@ -89,7 +89,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             icon: ImageConstants.callIcon,
             title: Strings.contactUs,
             subtitle: Strings.faq,
-            trailing:  Icon(
+            trailing: Icon(
               Icons.chevron_right,
               color: textGrayColor2,
               size: 20.sp,
@@ -106,7 +106,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             icon: ImageConstants.logoutIcon,
             title: Strings.logout,
             onTap: () {
-              LogoutDialogHelper().showLogoutDialog(context);
+              LogoutDialogHelper().showLogoutDialog(context, ref);
             },
           ),
           SizedBox(height: 8.h),
@@ -155,10 +155,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
             // value: "Head office",
           ),
           SizedBox(height: 16.h),
-          _infoTile(
-            title: Strings.companyName,
-            value: agentDetails?.companies ?? "-",
-            // value: "Mauritius Union Assurance Cy Ltd",
+          _companyNameTile(
+            companies: agentDetails?.companies,
             fontWeight: FontWeight.w600,
           ),
           SizedBox(height: 24.h),
@@ -230,10 +228,51 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
+  Widget _companyNameTile({required List<Company>? companies, FontWeight? fontWeight}) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          Strings.companyName,
+          style: TextStyle(
+            color: textGrayColor2,
+            fontSize: 14.sp,
+          ),
+        ),
+        const SizedBox(height: 5),
+        if (companies != null && companies.isNotEmpty) ...[
+          Text(
+            companies.first.companyName ?? "-",
+            style: TextStyle(
+              fontSize: 14.sp,
+              fontWeight: fontWeight,
+            ),
+          ),
+          if (companies.length > 1) ...[
+            Text(
+              "- - - - - - - - - - - - - - - - - - - - - - - ",
+              style: TextStyle(
+                color: black.withOpacity(0.2),
+              ),
+            ),
+            Text(
+              companies[1].companyName ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                fontWeight: fontWeight,
+              ),
+            ),
+          ],
+        ],
+      ],
+    );
+  }
+
   Widget _nameImageWidget(GetAgentDetailsResponseBody? agentDetails) {
     return InkWell(
       onTap: () {
-        _changeProfileImage();
+        // _changeProfileImage();
       },
       child: Row(
         children: [

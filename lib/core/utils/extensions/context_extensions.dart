@@ -71,3 +71,9 @@ extension SnackbarContextX on BuildContext {
     );
   }
 }
+
+extension LayoutExtensions on double {
+  bool isDesktop() => this >= 1100;
+  bool isTablet() => this >= 850 && this < 1100;
+  bool isMobile() => this >= 1100 || this >= 850 && this < 1100 ? false : true;
+}

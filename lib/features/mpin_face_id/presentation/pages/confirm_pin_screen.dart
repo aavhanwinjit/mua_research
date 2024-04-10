@@ -26,8 +26,7 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
-    with BiometricAuthMixin, RegistrationMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin, RegistrationMixin {
   bool successVal = false;
 
   @override
@@ -115,39 +114,41 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
   }
 
   Future<void> _biometricAuthentication() async {
-    await setFingerPrint(
-      context: context,
-      ref: ref,
-      onSuccess: () {
-        successVal = true;
-        setState(() {});
-      },
-      successNavigation: () async {
-        ref.watch(isFPLoginProvider.notifier).update((state) => true);
-
-        context.pushNamed(AppRoutes.onboardSuccessScreen);
-      },
-    );
-
-    // await authenticateWithBiometric(
-    //   onAuthenticated: () async {
-    //     await setFingerPrint(
-    //       context: context,
-    //       ref: ref,
-    //       onSuccess: () {
-    //         successVal = true;
-    //         setState(() {});
-    //       },
-    //       successNavigation: () {
-    //         context.pushNamed(AppRoutes.onboardSuccessScreen);
-    //       },
-    //     );
+    // await setFingerPrint(
+    //   context: context,
+    //   ref: ref,
+    //   onSuccess: () {
+    //     successVal = true;
+    //     setState(() {});
     //   },
-    //   onAuthenticationFailure: (String error) {
+    //   successNavigation: () async {
+    //     ref.watch(isFPLoginProvider.notifier).update((state) => true);
+
     //     context.pushNamed(AppRoutes.onboardSuccessScreen);
-    //     context.showErrorSnackBar(message: error);
     //   },
     // );
+
+    await authenticateWithBiometric(
+      onAuthenticated: () async {
+        await setFingerPrint(
+          context: context,
+          ref: ref,
+          onSuccess: () {
+            successVal = true;
+            setState(() {});
+          },
+          successNavigation: () async {
+            ref.watch(isFPLoginProvider.notifier).update((state) => true);
+
+            context.pushNamed(AppRoutes.onboardSuccessScreen);
+          },
+        );
+      },
+      onAuthenticationFailure: (String error) {
+        context.pushNamed(AppRoutes.onboardSuccessScreen);
+        context.showErrorSnackBar(message: error);
+      },
+    );
   }
 
   void _verifyMPIN() async {
@@ -168,12 +169,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
       (VerifyMPINResponseModel success) async {
         debugPrint("success in confirm pin screen : $success");
         if (success.status?.isSuccess == true) {
-          ref
-              .read(verifyMPINResponseProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(verifyMPINResponseProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -184,16 +181,14 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
           context.pushNamed(AppRoutes.otpScreen);
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> _setData(
-      {required String? authToken, required String? sessionId}) async {
+  Future<void> _setData({required String? authToken, required String? sessionId}) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
 
