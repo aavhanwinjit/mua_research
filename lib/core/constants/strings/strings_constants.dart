@@ -40,6 +40,7 @@ class Strings {
   static const String saveAndExit = "Save & Exit";
   static const String selectDocument = "Select Document";
   static const String addMoreDocuments = "Add More Documents";
+  static const String removeDocument = "Remove";
   static const String reviewAndSubmit = "Review & Submit";
   static const String retakePhoto = "Retake Photo";
   static const String upload = "Upload";
@@ -61,6 +62,9 @@ class Strings {
   static const String documentUploadConfirmationDialogText =
       "Do you confirm the details are correct as per the uploaded document? If No, you can edit the details before proceeding.";
   static const String selectFrontImageFirst = "Select front image first";
+  static const String back = "Back";
+  static const String changeDocument = "Change Document";
+  static const String only2Documents = "You can add only 2 documents";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -226,6 +230,7 @@ class Strings {
       "Please scan the address proof document by\nadjusting it inside the frame.";
   static const String billDate = "Bill Date";
   static const String selectDocumentType = "Select document type";
+  static const String kycFailed = "KYC Failed";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";

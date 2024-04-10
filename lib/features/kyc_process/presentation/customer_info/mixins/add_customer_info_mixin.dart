@@ -17,6 +17,9 @@ mixin AddCustomerInfoMixin {
       {required BuildContext context, required WidgetRef ref, required VoidCallback onSuccess}) async {
     KeyboardHelper.hideKeyboard(context);
 
+    final bool loading = ref.watch(customerInfoLoadingProvider);
+    if (loading) return;
+
     final formKey = ref.watch(customerInfoFormKey);
 
     if (!formKey.currentState!.validate()) {

@@ -1,3 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final confirmationProvider = StateProvider<bool>((ref) => false);
+final addreddScreenConfirmationProvider = StateProvider<bool>((ref) => false);
+
+final saveAddressDetailsLoading = StateProvider<bool>((ref) => false);

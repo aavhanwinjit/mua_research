@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
@@ -110,14 +111,16 @@ class NICDetailsCard extends ConsumerWidget {
     final passportFrontSide = ref.watch(passportFrontFilePathProvider);
     final passportBackSide = ref.watch(passportBackFilePathProvider);
 
+    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
+          Text(
+            selectedIdDocType?.identityDocType ?? "-",
+            style: const TextStyle(color: textGrayColor2),
           ),
           const SizedBox(height: 5),
           Row(

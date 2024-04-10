@@ -4,6 +4,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_address_document_types
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/request/get_document_category_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
 
 abstract class MasterDataRepository {
   Future<Either<Failure, GetIdentityDocumentTypesResponseModel>> getIdentityDocumentTypes();
@@ -12,4 +13,6 @@ abstract class MasterDataRepository {
       GetDocumentCategoryRequestModel request);
 
   Future<Either<Failure, GetAddressDocumentTypesResponseModel>> getAddressDocumentTypes();
+
+  Future<Either<Failure, GetPorDocumentTypesResponseModel>> getPORDocumentType();
 }

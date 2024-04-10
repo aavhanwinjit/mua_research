@@ -1,0 +1,1 @@
+enum FileExtensionEnums { png }

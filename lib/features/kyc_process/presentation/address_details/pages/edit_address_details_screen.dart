@@ -1,25 +1,26 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/disabled_fields_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class EditDetailsScreen extends ConsumerStatefulWidget {
-  const EditDetailsScreen({super.key});
+class EditAddressDetailsScreen extends ConsumerStatefulWidget {
+  const EditAddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _EditDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditAddressDetailsScreenState();
 }
 
-class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
+class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? surname;
   String? otherName;
-  String? idCardNumber;
 
   @override
   void initState() {
@@ -31,21 +32,22 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
   }
 
   void setData() {
-    String? extractedFirstName = ref.watch(extractedFirstNameProvider);
-    String? extractedSurName = ref.watch(extractedSurNameProvider);
-    String? extractedIdNumber = ref.watch(extractedNICIDNumberProvider);
+    final String? addressOtherName = ref.watch(addressOtherNameProvider);
+    final String? addressSurname = ref.watch(addressSurnameProvider);
 
-    surname = extractedSurName;
-    otherName = extractedFirstName;
-    idCardNumber = extractedIdNumber;
+    surname = addressSurname;
+    otherName = addressOtherName;
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
-    String? extractedFirstName = ref.watch(extractedFirstNameProvider);
-    String? extractedSurName = ref.watch(extractedSurNameProvider);
-    String? extractedIdNumber = ref.watch(extractedNICIDNumberProvider);
+    String? addressOtherName = ref.watch(addressOtherNameProvider);
+    String? addressSurname = ref.watch(addressSurnameProvider);
+
+    ScanDocumentResponseBody? ocrResponse = ref.watch(addressDocOCRApiResponse);
+
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
 
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
@@ -74,7 +76,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
-                      initialValue: extractedSurName,
+                      initialValue: addressSurname,
                       label: Strings.surname,
                       onChanged: (value) {
                         surname = value.trim();
@@ -97,7 +99,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
-                      initialValue: extractedFirstName,
+                      initialValue: addressOtherName,
                       label: Strings.otherName,
                       onChanged: (value) {
                         otherName = value.trim();
@@ -118,21 +120,14 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                         color: textGrayColor,
                       ),
                     ),
-                    SizedBox(height: 24.h),
-                    CustomTextFormField(
-                      initialValue: extractedIdNumber,
-                      label: Strings.nicIdNo,
-                      onChanged: (value) {
-                        idCardNumber = value.trim();
-                        setState(() {});
-                      },
-                      validator: (value) {
-                        if (value!.trim().isEmpty) {
-                          return Strings.nicIdNoValidationString;
-                        }
-                        return null;
-                      },
-                    ),
+                    if (selectedAddressDocType?.documentCode == "UTB") ...[
+                      SizedBox(height: 24.h),
+                      CustomTextFormField(
+                        initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
+                        label: Strings.billDate,
+                        enabled: false,
+                      ),
+                    ],
                     SizedBox(height: 24.h),
                     const DisabledFieldsWidget(),
                     SizedBox(height: 50.h),
@@ -157,9 +152,8 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
       return;
     }
 
-    ref.watch(extractedFirstNameProvider.notifier).update((state) => otherName);
-    ref.watch(extractedSurNameProvider.notifier).update((state) => surname);
-    ref.watch(extractedNICIDNumberProvider.notifier).update((state) => idCardNumber);
+    ref.watch(addressOtherNameProvider.notifier).update((state) => otherName);
+    ref.watch(addressSurnameProvider.notifier).update((state) => surname);
 
     context.pop();
   }

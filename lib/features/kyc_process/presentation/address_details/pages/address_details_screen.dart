@@ -1,13 +1,21 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/helpers/kyc_status_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/get_address_doc_types_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_docs_types_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_details_loading_widget.dart';
+import 'package:ekyc/features/kyc_process/presentation/common_mixins/scan_document_mixin.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,21 +28,21 @@ class AddressDetailsScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
 }
 
-class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> with GetAddressDocTypeMixin {
-  // String? dropdownValue;
-
-  // List<String> items = [
-  //   "Utility Bill",
-  //   "Light Bill",
-  // ];
-
+class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
+    with GetAddressDocTypeMixin, ScanDocumentMixin {
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(addressDocsTypesListLoading.notifier).update((state) => false);
       ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => null);
       ref.watch(addressProofFilePathProvider.notifier).update((state) => null);
+      ref.watch(addressDocOCRApiResponse.notifier).update((state) => null);
+      ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+      ref.watch(ocrNameMatched.notifier).update((state) => true);
+      ref.watch(addressOtherNameProvider.notifier).update((state) => null);
+      ref.watch(addressSurnameProvider.notifier).update((state) => null);
 
       getAddressDocumentTypes(context: context, ref: ref);
     });
@@ -68,7 +76,6 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> wit
                   SizedBox(height: 8.h),
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  // const AddressDetailsLoadingWidget(),
                   if (addressDocTypeLoading) const AddressDetailsLoadingWidget(),
                   if (!addressDocTypeLoading) ...[
                     if (addressDocTypesNotifier.haveList()) ...[
@@ -152,11 +159,83 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen> wit
         disabledOnTap: () {
           context.showErrorSnackBar(message: Strings.uploadAddressProof);
         },
-        onTap: () {
-          context.pushNamed(AppRoutes.insuredDocumentScreen);
+        onTap: () async {
+          final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
+
+          final String? addressProofFilePath = ref.watch(addressProofFilePathProvider);
+          File addressProofFile = File(addressProofFilePath ?? "");
+          final List<int> addressProofFileBytes = await addressProofFile.readAsBytes() as List<int>;
+          final String addressProofFileBase64 = base64Encode(addressProofFileBytes);
+
+          await scanDocument(
+            context: context,
+            ref: ref,
+            documentType: selectedAddressDocType?.documentCode,
+            loadingProvider: addressDocOCRLoadingProvider,
+            onSuccess: (ScanDocumentResponseBody? response) {
+              onSuccess(response);
+            },
+            base64Image: addressProofFileBase64,
+          );
         },
         label: Strings.next,
       ),
     );
+  }
+
+  void onSuccess(ScanDocumentResponseBody? response) {
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
+
+    if (selectedAddressDocType?.documentCode == "UTB") {
+      if (response?.ocrResponse != null) {
+        // check different conditions for ocr status
+
+        final Documentdata? documentData = response?.ocrResponse?.documentdata;
+
+        if (documentData?.kycStatus == "Success" &&
+            documentData?.billDate != null &&
+            documentData?.isFirstNameAvailable == true &&
+            documentData?.isLastNameAvailable == true) {
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName();
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+          context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+        } else if (documentData?.kycStatus == "Failed" &&
+            documentData?.billDate != null &&
+            documentData?.kycStatusMsg ==
+                "KYC validation failed.The uploaded bill should be of last 3 months only. Older documents are not allowed.") {
+          // Block the user here itself
+          KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData?.kycStatusMsg ?? "");
+          return;
+        } else if (documentData?.kycStatus == "Failed" &&
+            documentData?.billDate != null &&
+            documentData?.isFirstNameAvailable == false &&
+            documentData?.isLastNameAvailable == false &&
+            documentData?.kycStatusMsg ==
+                "KYC validation failed. First name did not match in the document. Last name did not match in the document.") {
+          //allow to navigate but tell agent that the name is not matched
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName();
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+          ref.watch(ocrNameMatched.notifier).update((state) => false);
+          context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+        }
+      }
+    } else {
+      ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+      _setCustomerName();
+      ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+      context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+    }
+  }
+
+  void _setCustomerName() {
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+    final String? firstName = selectedApplication?.idDocOtherName;
+    final String? surname = selectedApplication?.idDocSurname;
+
+    ref.watch(addressOtherNameProvider.notifier).update((state) => firstName);
+    ref.watch(addressSurnameProvider.notifier).update((state) => surname);
   }
 }

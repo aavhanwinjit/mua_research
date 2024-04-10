@@ -1,12 +1,16 @@
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_docs_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/pages/additional_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_review_submit_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edit_address_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen_2.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen_2.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/edit_customer_info_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/pages/edit_details_screen.dart';
@@ -75,6 +79,9 @@ class AppRoutes {
   static const String kycSubmittedScreen = '/kyc_submit_screen';
   static const String mpinLoginScreen = '/mpin_login_screen';
   static const String editDetailsScreen = '/edit_details_screen';
+  static const String editAddressDetailsScreen = '/edit_address_details_screen';
+  static const String cameraScreen2 = '/camera_screen_2';
+  static const String confirmUploadOrRetakeScreen2 = '/confirm_upload_or_retake_screen_2';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
@@ -331,6 +338,47 @@ final GoRouter router = GoRouter(
       name: AppRoutes.editDetailsScreen,
       builder: (BuildContext context, GoRouterState state) {
         return const EditDetailsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.editAddressDetailsScreen,
+      name: AppRoutes.editAddressDetailsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EditAddressDetailsScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.cameraScreen2,
+      name: AppRoutes.cameraScreen2,
+      builder: (BuildContext context, GoRouterState state) {
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+
+        final Function(String, ScanDocumentResponseBody?) onChange =
+            extra['onChange'] as Function(String, ScanDocumentResponseBody?);
+
+        final String documentCode = extra['documentCode'] as String;
+
+        return CameraScreen2(
+          onchange: onChange,
+          documentCode: documentCode,
+        );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.confirmUploadOrRetakeScreen2,
+      name: AppRoutes.confirmUploadOrRetakeScreen2,
+      builder: (BuildContext context, GoRouterState state) {
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+
+        final Function(String, ScanDocumentResponseBody?) onChange =
+            extra['onChange'] as Function(String, ScanDocumentResponseBody?);
+
+        final String documentCode = extra['documentCode'] as String;
+
+        return ReviewUploadedDocumentScreen2(
+          onChange: onChange,
+          documentCode: documentCode,
+        );
       },
     ),
   ],
