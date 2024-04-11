@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -93,7 +94,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<AdditionalDocumentsScree
       children: [
         DocumentUploadContainer2(
           filePath: item.filePath,
-          documentCode: "",
+          documentCode: DocumentCodes.ADD.toString().split('.').last,
           onChange: (String path, ScanDocumentResponseBody? response) async {
             selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
             selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);

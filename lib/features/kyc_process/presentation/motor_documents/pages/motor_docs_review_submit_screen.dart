@@ -47,9 +47,9 @@ class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen
                 ),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
-                  value: ref.watch(confirmationProvider),
+                  value: ref.watch(policyDocsReviewConfirmationProvider),
                   onChanged: (value) {
-                    ref.read(confirmationProvider.notifier).update((state) => value!);
+                    ref.read(policyDocsReviewConfirmationProvider.notifier).update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,

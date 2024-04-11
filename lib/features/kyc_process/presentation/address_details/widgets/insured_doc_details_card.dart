@@ -1,10 +1,9 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/por_document_element/por_document_element.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_proof_image_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
@@ -44,21 +43,12 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editAddressDetailsScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
           _infoWidget(),
           SizedBox(height: 24.h),
-          _imageRow(),
+          const AddressProofImageWidget(),
           SizedBox(height: 24.h),
           _insuredDocWidget(context),
         ],
@@ -91,7 +81,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                       const SizedBox(height: 24),
                       InfoTile(
                         title: Strings.billDate,
-                        value: selectedApplication?.addressDocBillDate,
+                        value: selectedApplication?.addressDocBillDate!.format() ?? "-",
                       ),
                     ],
                   ],
@@ -224,29 +214,9 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
     );
   }
 
-  Widget _imageRow() {
-    final String? addressProofImagePath = ref.watch(addressProofFilePathProvider);
-
-    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            selectedAddressDocType?.addressDocType ?? "-",
-            style: const TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(addressProofImagePath),
-        ],
-      ),
-    );
-  }
-
   Widget _imageRow2() {
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPorDocTypeListNotifierProvider);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),

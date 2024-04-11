@@ -18,6 +18,7 @@ import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -315,15 +316,11 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   bool checkIfLeaseAgreementIsSelected() {
-    // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    // return selectedDocsListProvider
-    //     .list()
-    //     .any((element) => element.documentElement?.documentCode == DocumentCodes.LAR.toString().split('.').last);
-
-    final selectedApplication = ref.watch(selectedApplicationProvider);
-
-    // selectedApplication.ad
+    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+      return true;
+    }
 
     return false;
   }

@@ -65,6 +65,11 @@ class Strings {
   static const String back = "Back";
   static const String changeDocument = "Change Document";
   static const String only2Documents = "You can add only 2 documents";
+  static const String addressDetailsConfirmationString = "Are the details are of same customer?";
+  static const String insuredDocsRequiredDialogTitleString = "Insured Document Required";
+  static const String insuredDocsRequiredDialogSubtitleString =
+      "The uploaded address proof doesn't match the customer details. Additional documents are needed to confirm the relationship.";
+  static const String saveAndUploadLater = "Save & Upload Later";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -232,6 +237,7 @@ class Strings {
   static const String billDate = "Bill Date";
   static const String selectDocumentType = "Select document type";
   static const String kycFailed = "KYC Failed";
+  static const String enterAddressInfo = "Make sure surname, other name & address are entered";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";
@@ -248,6 +254,7 @@ class Strings {
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";
+  static const String uploadPolicyDocuments = "Upload Policy Documents";
   static const String policyDocumentContainerLabel = "Take a photo or upload\nPolicy Documents";
   static const String policyDocCameraLabel =
       "Please scan the birth certificate document\nby adjusting it inside the frame.";

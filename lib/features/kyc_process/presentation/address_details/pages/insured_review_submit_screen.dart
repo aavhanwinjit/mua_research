@@ -4,7 +4,7 @@ import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/save_insured_docs_mixin.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/save_por_docs_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/insured_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/insured_doc_details_card.dart';
@@ -23,7 +23,17 @@ class InsuredReviewSubmitScreen extends ConsumerStatefulWidget {
 }
 
 class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitScreen>
-    with SaveInsuredDocsMixin, AgentApplicationsMixin {
+    with SavePORDocsMixin, AgentApplicationsMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(insuredReviewScreenConfirmationProvider.notifier).update((state) => false);
+      ref.watch(saveInsuredDetailsLoading.notifier).update((state) => false);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +108,7 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
         // pop the confirmation dialog box
         context.pop();
 
-        await saveInsuredDocuments(
+        await savePORDocuments(
           context: context,
           ref: ref,
           onSuccess: () async {
@@ -130,37 +140,4 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
         .list()
         .any((element) => element.extractedLastName == null || element.extractedLastName!.isEmpty);
   }
-
-  // void _uploadDetails(bool isExit) {
-  //   ConfirmationDialogHelper.showConfirmationDialog(
-  //     context,
-  //     title: Strings.confirmDetails,
-  //     content: Strings.documentUploadConfirmationDialogText,
-  //     onConfirm: () async {
-  //       // pop the confirmation dialog box
-  //       context.pop();
-
-  //       await saveAddressDetails(
-  //           context: context,
-  //           ref: ref,
-  //           onSuccess: () async {
-  //             resetPageNumber(ref);
-
-  //             await getAgentApplications(
-  //               context: context,
-  //               ref: ref,
-  //             );
-
-  //             ref.watch(saveAddressDetailsLoading.notifier).update((state) => false);
-
-  //             context.pop();
-  //             context.pop();
-
-  //             if (isExit) {
-  //               context.pop();
-  //             }
-  //           });
-  //     },
-  //   );
-  // }
 }

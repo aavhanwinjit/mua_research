@@ -703,7 +703,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SaveIdentityDetailsResponseModel> saveAddressDetails(
+  Future<SaveAddressDetailsResponseModel> saveAddressDetails(
       SaveAddressDetailsRequestModel request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -711,7 +711,7 @@ class _ApiService implements ApiService {
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveIdentityDetailsResponseModel>(Options(
+        _setStreamType<SaveAddressDetailsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -727,7 +727,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SaveIdentityDetailsResponseModel.fromJson(_result.data!);
+    final value = SaveAddressDetailsResponseModel.fromJson(_result.data!);
     return value;
   }
 
@@ -760,22 +760,22 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<SaveIdentityDetailsResponseModel> saveInsuredDocuments(
-      SaveInsuredDocumentsRequestModel request) async {
+  Future<SavePorDocumentsResponseModel> savePORDocuments(
+      SavePorDocumentsRequestModel request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveIdentityDetailsResponseModel>(Options(
+        _setStreamType<SavePorDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/AgentAPI/Agent/SaveInsuredDocuments',
+              '/AgentAPI/Agent/SavePORDocuments',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -784,19 +784,19 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SaveIdentityDetailsResponseModel.fromJson(_result.data!);
+    final value = SavePorDocumentsResponseModel.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<GetPorDocumentTypesResponseModel> getPolicyDocumentTypes() async {
+  Future<GetPolicyDocumentTypesResponseModel> getPolicyDocumentTypes() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetPorDocumentTypesResponseModel>(Options(
+        _setStreamType<GetPolicyDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -812,7 +812,65 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = GetPorDocumentTypesResponseModel.fromJson(_result.data!);
+    final value = GetPolicyDocumentTypesResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SavePolicyDocumentsResponseModel> savePolicyDocuments(
+      SavePolicyDocumentsRequestModel request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SavePolicyDocumentsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Agent/SavePolicyDocuments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SavePolicyDocumentsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SaveAdditionalDocumentsResponseModel> saveAdditionalDocuments(
+      SaveAdditionalDocumentsRequestModel request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SaveAdditionalDocumentsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Agent/SaveAdditionalDocuments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = SaveAdditionalDocumentsResponseModel.fromJson(_result.data!);
     return value;
   }
 

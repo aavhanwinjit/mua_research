@@ -9,11 +9,18 @@ import 'package:ekyc/features/kyc_process/data/models/get_address_document_types
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/request/get_document_category_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_policy_document_types/response/get_policy_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_additional_documents/request/save_additional_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_additional_documents/response/save_additional_documents_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_address_details/request/save_address_details_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_address_details/response/save_address_details_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
-import 'package:ekyc/features/kyc_process/data/models/save_insured_documents/request/save_insured_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_policy_documents/request/save_policy_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_policy_documents/response/save_policy_documents_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_por_documents/request/save_por_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_por_documents/response/save_por_documents_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan_document_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
@@ -76,8 +83,10 @@ abstract class ApiService {
   static const SCAN_DOCUMENT = "/AgentAPI/DocumentOCR/ScanDocument";
   static const SAVE_ADDRESS_DETAILS = "/AgentAPI/Agent/SaveAddressDetails";
   static const GET_POR_DOCUMENT_TYPES = "/AgentAPI/Data/GetPORDocumentTypes";
-  static const SAVE_INSURED_DOCUMENTS = "/AgentAPI/Agent/SaveInsuredDocuments";
+  static const SAVE_POR_DOCUMENTS = "/AgentAPI/Agent/SavePORDocuments";
   static const GET_POLICY_DOCUMENT_TYPES = "/AgentAPI/Data/GetPolicyDocumentTypes";
+  static const SAVE_POLICY_DOCUMENTS = "/AgentAPI/Agent/SavePolicyDocuments";
+  static const SAVE_ADDITIONAL_DOCUMENTS = "/AgentAPI/Agent/SaveAdditionalDocuments";
 
   factory ApiService(Dio dio, {String? baseUrl}) = _ApiService;
 
@@ -175,17 +184,26 @@ abstract class ApiService {
 
   @POST(SAVE_ADDRESS_DETAILS)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
-  Future<SaveIdentityDetailsResponseModel> saveAddressDetails(@Body() SaveAddressDetailsRequestModel request);
+  Future<SaveAddressDetailsResponseModel> saveAddressDetails(@Body() SaveAddressDetailsRequestModel request);
 
   @POST(GET_POR_DOCUMENT_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<GetPorDocumentTypesResponseModel> getPORDocumentTypes();
 
-  @POST(SAVE_INSURED_DOCUMENTS)
+  @POST(SAVE_POR_DOCUMENTS)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
-  Future<SaveIdentityDetailsResponseModel> saveInsuredDocuments(@Body() SaveInsuredDocumentsRequestModel request);
+  Future<SavePorDocumentsResponseModel> savePORDocuments(@Body() SavePorDocumentsRequestModel request);
 
   @POST(GET_POLICY_DOCUMENT_TYPES)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
-  Future<GetPorDocumentTypesResponseModel> getPolicyDocumentTypes();
+  Future<GetPolicyDocumentTypesResponseModel> getPolicyDocumentTypes();
+
+  @POST(SAVE_POLICY_DOCUMENTS)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<SavePolicyDocumentsResponseModel> savePolicyDocuments(@Body() SavePolicyDocumentsRequestModel request);
+
+  @POST(SAVE_ADDITIONAL_DOCUMENTS)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<SaveAdditionalDocumentsResponseModel> saveAdditionalDocuments(
+      @Body() SaveAdditionalDocumentsRequestModel request);
 }

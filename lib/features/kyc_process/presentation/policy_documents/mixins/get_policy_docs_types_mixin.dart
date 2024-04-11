@@ -1,8 +1,9 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_policy_document_types/response/get_policy_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/usecases/get_policy_document_types.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/policy_doc_type_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/policy_documents_screen_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -23,26 +24,15 @@ mixin GetPolicyDocsTypesMixin {
 
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
-      (GetPorDocumentTypesResponseModel success) async {
+      (GetPolicyDocumentTypesResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            // List<PORDocumentTypeModel>? documentList = [...success.body!.responseBody!];
+            final policyDocTypesNotifier = ref.watch(policyDocTypeNotifierProvider.notifier);
 
-            // final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
+            policyDocTypesNotifier.updateDocTypesList(success.body?.responseBody ?? []);
 
-            // final selectedApplication = ref.watch(selectedApplicationProvider);
-
-            // if (selectedApplication?.maritalStatus == MaritalStatus.SINGLE.toString().split('.').last) {
-            //   documentList
-            //       .removeWhere((element) => element.documentCode == DocumentCodes.MRC.toString().split('.').last);
-            //   documentList
-            //       .removeWhere((element) => element.documentCode == DocumentCodes.DRC.toString().split('.').last);
-            // }
-
-            // porDocTypesNotifier.updateDocTypesList(documentList);
-
-            // ref.watch(policyDocsTypesListLoading.notifier).update((state) => false);
+            ref.watch(policyDocsTypesListLoading.notifier).update((state) => false);
           }
         } else {
           ref.watch(policyDocsTypesListLoading.notifier).update((state) => false);

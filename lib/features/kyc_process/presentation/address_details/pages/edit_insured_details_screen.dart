@@ -20,33 +20,8 @@
 // class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScreen> {
 //   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-//   String? surname;
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     WidgetsBinding.instance.addPostFrameCallback((_) {
-//       setData();
-//     });
-//   }
-
-//   void setData() {
-//     final String? addressSurname = ref.watch(addressSurnameProvider);
-
-//     surname = addressSurname;
-
-//     setState(() {});
-//   }
-
 //   @override
 //   Widget build(BuildContext context) {
-//     String? addressSurname = ref.watch(addressSurnameProvider);
-
-//     ScanDocumentResponseBody? ocrResponse = ref.watch(addressDocOCRApiResponse);
-
-//     final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
-
 //     return Scaffold(
 //       appBar: AppBarHelper.showCustomAppbar(
 //         context: context,
@@ -73,6 +48,7 @@
 //                       ),
 //                     ),
 //                     SizedBox(height: 24.h),
+//                     //
 //                     CustomTextFormField(
 //                       initialValue: addressSurname,
 //                       label: Strings.surname,
@@ -96,51 +72,14 @@
 //                       ),
 //                     ),
 //                     SizedBox(height: 24.h),
+
 //                     CustomTextFormField(
-//                       initialValue: addressOtherName,
-//                       label: Strings.otherName,
-//                       onChanged: (value) {
-//                         otherName = value.trim();
-//                         setState(() {});
-//                       },
-//                       validator: (value) {
-//                         if (value!.trim().isEmpty) {
-//                           return Strings.otherNameValidationString;
-//                         }
-//                         return null;
-//                       },
+//                       initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
+//                       label: Strings.billDate,
+//                       enabled: false,
 //                     ),
-//                     SizedBox(height: 4.h),
-//                     Text(
-//                       Strings.enterNameAsPerDoc,
-//                       style: TextStyle(
-//                         fontSize: 12.sp,
-//                         color: textGrayColor,
-//                       ),
-//                     ),
-//                     SizedBox(height: 24.h),
-//                     CustomTextFormField(
-//                       initialValue: addressText,
-//                       label: Strings.address,
-//                       onChanged: (value) {
-//                         addressData = value.trim();
-//                         setState(() {});
-//                       },
-//                       validator: (value) {
-//                         if (value!.trim().isEmpty) {
-//                           return Strings.addressValidationString;
-//                         }
-//                         return null;
-//                       },
-//                     ),
-//                     if (selectedAddressDocType?.documentCode ==  DocumentCodes.UTB.toString().split('.').last) ...[
-//                       SizedBox(height: 24.h),
-//                       CustomTextFormField(
-//                         initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
-//                         label: Strings.billDate,
-//                         enabled: false,
-//                       ),
-//                     ],
+
+//                     //
 //                     SizedBox(height: 24.h),
 //                     const DisabledFieldsWidget(),
 //                     SizedBox(height: 50.h),
