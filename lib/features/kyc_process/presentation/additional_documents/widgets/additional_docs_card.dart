@@ -1,11 +1,15 @@
-import 'package:ekyc/core/app_export.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class AdditionalDocsCard extends StatelessWidget {
+import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/providers/selected_additional_doc_list_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class AdditionalDocsCard extends ConsumerWidget {
   const AdditionalDocsCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -34,14 +38,14 @@ class AdditionalDocsCard extends StatelessWidget {
           ),
 
           SizedBox(height: 24.h),
-          _imageRow(),
+          _imageRow(ref),
           SizedBox(height: 16.h),
         ],
       ),
     );
   }
 
-  Widget _imageRow() {
+  Widget _imageRow(WidgetRef ref) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
@@ -52,21 +56,31 @@ class AdditionalDocsCard extends StatelessWidget {
             style: TextStyle(color: textGrayColor2),
           ),
           const SizedBox(height: 5),
-          _imageWidget(),
+          _imageWidget(ref),
         ],
       ),
     );
   }
 
-  Widget _imageWidget() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: Image.asset(
-        ImageConstants.idImage,
-        height: 150.h,
-        width: 150.h,
-        fit: BoxFit.cover,
-      ),
+  Widget _imageWidget(WidgetRef ref) {
+    final selectedDocsListProvider = ref.watch(selectedAdditionalDocListNotifierProvider.notifier);
+    ref.watch(selectedAdditionalDocListNotifierProvider);
+
+    return Row(
+      children: selectedDocsListProvider.list().map((e) {
+        return Padding(
+          padding: EdgeInsets.only(right: 16.w),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Image.file(
+              File(e.filePath ?? ""),
+              height: 150.h,
+              width: 150.h,
+              fit: BoxFit.cover,
+            ),
+          ),
+        );
+      }).toList(),
     );
   }
 }

@@ -8,6 +8,9 @@ class ConfirmationDialogHelper {
     required String title,
     required String content,
     required Function onConfirm,
+    Function? onReject,
+    String? positiveButtonTitle,
+    String? negativeButtonTitle,
   }) {
     showCupertinoModalPopup<void>(
       context: context,
@@ -18,16 +21,20 @@ class ConfirmationDialogHelper {
           CupertinoDialogAction(
             isDestructiveAction: true,
             onPressed: () {
-              context.pop();
+              if (onReject != null) {
+                onReject();
+              } else {
+                context.pop();
+              }
             },
-            child: const Text(Strings.no),
+            child: Text(negativeButtonTitle ?? Strings.no),
           ),
           CupertinoDialogAction(
             isDefaultAction: true,
             onPressed: () async {
               onConfirm();
             },
-            child: const Text(Strings.yes),
+            child: Text(positiveButtonTitle ?? Strings.yes),
           ),
         ],
       ),

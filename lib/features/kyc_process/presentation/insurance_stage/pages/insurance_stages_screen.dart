@@ -157,9 +157,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           title: Strings.additionalDocsOptional,
           subTitle: Strings.additionalDocsSubtitle,
           buttonType: getAdditionalDocsCardStatus().buttonType,
-          onTap: () {
-            context.pushNamed(AppRoutes.additionalDocsScreen);
-          },
+          onTap: getAdditionalDocsCardStatus().onTap,
         ),
       ],
     );
@@ -225,26 +223,38 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
         buttonType: InsuranceButtonType.inactive,
         onTap: null,
       );
-    } else if (selectedApplication?.isAddressVerificationCompleted == false) {
-      return (
-        buttonType: InsuranceButtonType.active,
-        onTap: () {
-          setSelectedDocumentCategory(DocumentCategoryEnums.POA);
-
-          context.pushNamed(AppRoutes.addressDetailsScreen);
-        },
-      );
-    } else if (selectedApplication?.porRequired == true &&
+    } else if (selectedApplication?.isAddressVerificationCompleted == true &&
+        selectedApplication?.porRequired == true &&
         selectedApplication?.isPorDocVerificationCompleted == false) {
       return (
         buttonType: InsuranceButtonType.active,
         onTap: () {
+          setSelectedDocumentCategory(DocumentCategoryEnums.POR);
+
+          context.pushNamed(AppRoutes.insuredDocumentScreen);
+        },
+      );
+    } else if (selectedApplication?.isAddressVerificationCompleted == false &&
+        (selectedApplication?.porRequired == null || selectedApplication?.porRequired == false)) {
+      return (
+        buttonType: InsuranceButtonType.active,
+        onTap: () {
           setSelectedDocumentCategory(DocumentCategoryEnums.POA);
 
           context.pushNamed(AppRoutes.addressDetailsScreen);
         },
       );
-    } else if (selectedApplication?.isAddressVerificationCompleted == true) {
+    } else if (selectedApplication?.isAddressVerificationCompleted == true &&
+        selectedApplication?.porRequired == false &&
+        (selectedApplication?.isPorDocVerificationCompleted == null ||
+            selectedApplication?.isPorDocVerificationCompleted == false)) {
+      return (
+        buttonType: InsuranceButtonType.completed,
+        onTap: null,
+      );
+    } else if (selectedApplication?.isAddressVerificationCompleted == true &&
+        selectedApplication?.porRequired == true &&
+        selectedApplication?.isPorDocVerificationCompleted == true) {
       return (
         buttonType: InsuranceButtonType.completed,
         onTap: null,

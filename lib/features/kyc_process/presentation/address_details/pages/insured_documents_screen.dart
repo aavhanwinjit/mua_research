@@ -18,6 +18,7 @@ import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -275,29 +276,27 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
             }
           }
 
-          context.pushNamed(AppRoutes.insuredReviewSubmitScreen);
+          _saveInsuredDocDataAndNavigate();
         },
         label: Strings.next,
       ),
     );
   }
 
-  // void _saveInsuredDocData() {
-  //   final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+  void _saveInsuredDocDataAndNavigate() {
+    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-  //   // setting the bill data if received in any of the document's ocr
-  //   selectedDocsListProvider.list().forEach((element) {
-  //     if (element.scanResponse?.ocrResponse?.documentdata?.billDate != null) {
-  //       ref
-  //           .watch(insuredDocBillDateProvider.notifier)
-  //           .update((state) => element.scanResponse?.ocrResponse?.documentdata?.billDate);
-  //     }
-  //   });
+    selectedDocsListProvider.list().forEach((element) {
+      if ((element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last) &&
+          (element.scanResponse?.ocrResponse?.documentdata?.isLastNameAvailable == true)) {
+        final selectedApplication = ref.watch(selectedApplicationProvider);
 
-  //   selectedDocsListProvider.list().
+        element.extractedLastName = selectedApplication?.idDocSurname;
+      }
+    });
 
-  //   ref.watch(insuredDocSurnameProvider);
-  // }
+    context.pushNamed(AppRoutes.insuredReviewSubmitScreen);
+  }
 
   bool checkIfUserIsMarried() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
@@ -311,25 +310,17 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   bool checkIfMarriageCertIsSelected() {
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    // selectedDocsListProvider.list().forEach((element) {
-    //   debugPrint(element.filePath);
-    // });
-
     return selectedDocsListProvider
         .list()
         .any((element) => element.documentElement?.documentCode == DocumentCodes.MRC.toString().split('.').last);
   }
 
   bool checkIfLeaseAgreementIsSelected() {
-    // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    // return selectedDocsListProvider
-    //     .list()
-    //     .any((element) => element.documentElement?.documentCode == DocumentCodes.LAR.toString().split('.').last);
-
-    final selectedApplication = ref.watch(selectedApplicationProvider);
-
-    // selectedApplication.ad
+    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+      return true;
+    }
 
     return false;
   }
