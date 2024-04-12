@@ -1,4 +1,4 @@
-package mu.mua.kyc_app
+package mu.mua.kycApp
 
 import io.flutter.embedding.android.FlutterFragmentActivity
 
