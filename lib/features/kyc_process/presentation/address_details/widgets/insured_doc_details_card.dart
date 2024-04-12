@@ -135,7 +135,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                 ),
               ),
               TextButton(
-                onPressed: () => context.pushNamed(AppRoutes.editAddressDetailsScreen),
+                onPressed: () => context.pushNamed(AppRoutes.editInsuredDetailsScreen),
                 child: Text(
                   Strings.edit,
                   style: TextStyle(

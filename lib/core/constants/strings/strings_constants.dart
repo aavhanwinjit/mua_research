@@ -229,6 +229,7 @@ class Strings {
 
   //Address Details Screen
   static const String uploadAddressProof = "Upload address proof";
+  static const String editAddressDetails = "Edit Address Details";
   static const String addressDetailsScreenSubtitle =
       "Please specify the type of address proof document you are uploading.";
   static const String addressDocumentContainerLabel = "Take a photo or upload Address\nProof Document";
@@ -251,6 +252,7 @@ class Strings {
   static const String uploadNICofLandlord =
       "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
   static const String surnamesForSelectedDocuments = "Please add surnames for selected documents";
+  static const String enterNameAsPerInsuredDoc = "Enter surname as per selected insured document";
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";

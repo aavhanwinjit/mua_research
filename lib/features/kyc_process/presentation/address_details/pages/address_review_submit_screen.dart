@@ -221,10 +221,6 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
         context.pop();
         context.pop();
         context.pushNamed(AppRoutes.insuredDocumentScreen);
-
-        // if (isExit) {
-        //   context.pop();
-        // }
       },
     );
   }
