@@ -55,6 +55,10 @@ class AgentApplicationModel with _$AgentApplicationModel {
     @JsonKey(name: "policyDocumentTypeId") dynamic policyDocumentTypeId,
     @JsonKey(name: "policyDocImagePath") dynamic policyDocImagePath,
     @JsonKey(name: "isPolicyDocVerificationCompleted") bool? isPolicyDocVerificationCompleted,
+    @JsonKey(name: "motorInsuranceDocumentTypeId") dynamic motorInsuranceDocumentTypeId,
+    @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
+    @JsonKey(name: "isMotorDocVerificationCompleted")
+    bool? isMotorDocVerificationCompleted,
     @JsonKey(name: "additionalDocumentTypeId") dynamic additionalDocumentTypeId,
     @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
     @JsonKey(name: "isAdditionalDocVerificationCompleted") bool? isAdditionalDocVerificationCompleted,

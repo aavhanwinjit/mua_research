@@ -51,6 +51,10 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
       policyDocImagePath: json['policyDocImagePath'],
       isPolicyDocVerificationCompleted:
           json['isPolicyDocVerificationCompleted'] as bool?,
+      motorInsuranceDocumentTypeId: json['motorInsuranceDocumentTypeId'],
+      motorDocImagePath: json['motorDocuImagePath'],
+      isMotorDocVerificationCompleted:
+          json['isMotorDocVerificationCompleted'] as bool?,
       additionalDocumentTypeId: json['additionalDocumentTypeId'],
       additionalDocImagePath: json['additionalDocImagePath'],
       isAdditionalDocVerificationCompleted:
@@ -105,6 +109,10 @@ Map<String, dynamic> _$$AgentApplicationModelImplToJson(
       'policyDocImagePath': instance.policyDocImagePath,
       'isPolicyDocVerificationCompleted':
           instance.isPolicyDocVerificationCompleted,
+      'motorInsuranceDocumentTypeId': instance.motorInsuranceDocumentTypeId,
+      'motorDocuImagePath': instance.motorDocImagePath,
+      'isMotorDocVerificationCompleted':
+          instance.isMotorDocVerificationCompleted,
       'additionalDocumentTypeId': instance.additionalDocumentTypeId,
       'additionalDocImagePath': instance.additionalDocImagePath,
       'isAdditionalDocVerificationCompleted':

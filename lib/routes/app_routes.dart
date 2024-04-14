@@ -47,7 +47,8 @@ class AppRoutes {
   static const String successScreen = '/success_screen';
   static const String failureScreen = '/failure_screen';
   static const String loginScreen = '/login_screen';
-  static const String selectPINorBiometricScreen = '/select_pin_or_biometric_screen';
+  static const String selectPINorBiometricScreen =
+      '/select_pin_or_biometric_screen';
   static const String createPINScreen = '/create_pin_screen';
   static const String confirmPINScreen = '/confirm_pin_screen';
   static const String onboardSuccessScreen = '/onboard_success_screen';
@@ -57,23 +58,29 @@ class AppRoutes {
   static const String customerInfoScreen = '/customer_info_screen';
   static const String insuranceStagesScreen = '/insurance_stages_screen';
   static const String uploadIDproofScreen = '/upload_id_proof_screen';
-  static const String confirmUploadOrRetakeScreen = '/confirm_upload_or_retake_screen';
+  static const String confirmUploadOrRetakeScreen =
+      '/confirm_upload_or_retake_screen';
   static const String idReviewSubmitScreen = '/id_review_submit_screen';
   static const String editCustomerInfoScreen = '/edit_customer_info_screen';
   static const String editIDScreen = '/edit_id_screen';
   static const String policyDocumentScreen = '/policy_document_screen';
-  static const String pdReviewSubmitScreen = '/policy_document_review_submit_screen';
+  static const String pdReviewSubmitScreen =
+      '/policy_document_review_submit_screen';
   static const String reviewSubmitScreen = '/review_submit_screen';
   static const String cameraScreen = '/camera_screen';
   static const String addressDetailsScreen = '/address_details_screen';
   static const String insuredDocumentScreen = '/insured_document_screen';
-  static const String addressReviewSubmitScreen = '/address_review_submit_screen';
+  static const String addressReviewSubmitScreen =
+      '/address_review_submit_screen';
   static const String additionalDocsScreen = '/additional_docs_screen';
-  static const String additionalDocsReviewSubmitScreen = '/additional_docs_review_submit_screen';
+  static const String additionalDocsReviewSubmitScreen =
+      '/additional_docs_review_submit_screen';
   static const String motorDocsScreen = '/motor_docs_screen';
-  static const String motorDocsReviewSubmitScreen = '/motor_docs_review_submit_screen';
+  static const String motorDocsReviewSubmitScreen =
+      '/motor_docs_review_submit_screen';
   static const String nonMotorDocsScreen = '/non_motor_docs_screen';
-  static const String nonMotorDocsReviewSubmitScreen = '/non_motor_docs_review_submit_screen';
+  static const String nonMotorDocsReviewSubmitScreen =
+      '/non_motor_docs_review_submit_screen';
   static const String profileScreen = '/profile_screen';
   static const String oldPINScreen = '/old_pin_screen';
   static const String kycSubmittedScreen = '/kyc_submit_screen';
@@ -81,10 +88,12 @@ class AppRoutes {
   static const String editDetailsScreen = '/edit_details_screen';
   static const String editAddressDetailsScreen = '/edit_address_details_screen';
   static const String cameraScreen2 = '/camera_screen_2';
-  static const String confirmUploadOrRetakeScreen2 = '/confirm_upload_or_retake_screen_2';
+  static const String confirmUploadOrRetakeScreen2 =
+      '/confirm_upload_or_retake_screen_2';
 }
 
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
+final GlobalKey<NavigatorState> rootNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'rootNavigatorKey');
 
 final GoRouter router = GoRouter(
   // initialLocation: AppRoutes.mpinLoginScreen,

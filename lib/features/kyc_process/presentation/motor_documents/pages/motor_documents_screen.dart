@@ -1,7 +1,11 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_docs_providers.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_document_types/response/get_motor_insurance_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/mixins/get_motor_insurance_doc_types_mixin.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_doc_types_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/widgets/motor_insurance_loading_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
@@ -13,27 +17,51 @@ class MotorDocumentScreen extends ConsumerStatefulWidget {
   const MotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
+class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
+    with GetMotorInsuranceDocTypeMixin {
   String? dropdownValue;
 
-  List<String> items = [
-    'Deed of Sales Registered',
-    'Driving License',
-    'Horse Power',
-    'Proposal Form Motor',
-    'Survey Report',
-    'Claim History',
-    'Alteration Form',
-    'Renewal Notice Motor',
-    'Request for Cancellation',
-    'Credit Authorisation Form',
-  ];
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .watch(motorInsuranceDocsTypesListLoading.notifier)
+          .update((state) => false);
+      ref
+          .watch(selectedMotorInsuranceDocTypeProvider.notifier)
+          .update((state) => null);
+      ref
+          .watch(motorInsuranceProofFilePathProvider.notifier)
+          .update((state) => null);
+      ref
+          .watch(motorInsuranceDocOCRApiResponse.notifier)
+          .update((state) => null);
+      ref
+          .watch(motorInsuranceDocOCRLoadingProvider.notifier)
+          .update((state) => false);
+      ref.watch(ocrNameMatched.notifier).update((state) => true);
+      ref
+          .watch(motorInsuranceOtherNameProvider.notifier)
+          .update((state) => null);
+      ref.watch(motorInsuranceSurnameProvider.notifier).update((state) => null);
+
+      getMotorInsuranceDocumentTypes(context: context, ref: ref);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final bool motorInsuranceDocTypeLoading =
+        ref.watch(motorInsuranceDocsTypesListLoading);
+
+    final motorInsuranceDocTypesNotifier =
+        ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
+    ref.watch(motorInsuranceDocsTypesNotifierProvider);
     return GestureDetector(
       onTap: () {
         KeyboardHelper.onScreenTap(context);
@@ -53,22 +81,28 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
                 children: [
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  _dropdownWidget(),
-                  SizedBox(height: 24.h),
-                  DocumentUploadContainer(
-                    provider: motorDocFilePathProvider,
-                    label: Strings.motorDocsContainerLabel,
-                    cameraScreenTitle: Strings.scanDocuments,
-                    cameraScreenDescription: Strings.motorDocCameraLabel,
-                    reviewScreenTitle: Strings.motorDocuments,
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      AddDocumentButton(onPressed: () {}),
+                  if (motorInsuranceDocTypeLoading)
+                    const MotorInsuranceDetailsLoadingWidget(),
+                  if (!motorInsuranceDocTypeLoading) ...[
+                    if (motorInsuranceDocTypesNotifier.haveList()) ...[
+                      _dropdownWidget(),
+                      SizedBox(height: 24.h),
+                      DocumentUploadContainer(
+                        provider: motorInsuranceProofFilePathProvider,
+                        label: Strings.motorDocsContainerLabel,
+                        cameraScreenTitle: Strings.scanDocuments,
+                        cameraScreenDescription: Strings.motorDocCameraLabel,
+                        reviewScreenTitle: Strings.motorDocuments,
+                      ),
+                      SizedBox(height: 8.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          AddDocumentButton(onPressed: () {}),
+                        ],
+                      ),
                     ],
-                  ),
+                  ],
                 ],
               ),
             ),
@@ -89,26 +123,30 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen> {
   }
 
   Widget _dropdownWidget() {
+    final motorInsuranceDocTypesNotifier =
+        ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
+    ref.watch(motorInsuranceDocsTypesNotifierProvider);
+
     return CustomDrowDownField(
-      value: dropdownValue,
+      value: ref.watch(selectedMotorInsuranceDocTypeProvider),
       labelText: Strings.selectDocument,
       validator: (value) {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        dropdownValue = value as String;
-        setState(() {});
+        ref
+            .watch(selectedMotorInsuranceDocTypeProvider.notifier)
+            .update((state) => value as MotorInsuranceDocumentTypeModel);
       },
-      items: items.map((String value) {
-        return DropdownMenuItem<String>(
+      items: motorInsuranceDocTypesNotifier
+          .motorInsuranceDocsTypesList()
+          .map((MotorInsuranceDocumentTypeModel value) {
+        return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
           value: value,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 14.sp,
-              ),
+          child: Text(
+            value.motorInsuranceDocType?.trim() ?? "-",
+            style: TextStyle(
+              fontSize: 14.sp,
             ),
           ),
         );

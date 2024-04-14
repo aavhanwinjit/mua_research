@@ -759,6 +759,127 @@ class _ApiService implements ApiService {
     return value;
   }
 
+  @override
+  Future<GetMotorInsuranceDocumentTypesResponseModel>
+      getMotorInsuranceDocumentTypes() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetMotorInsuranceDocumentTypesResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Data/GetMotorInsuranceDocumentTypes',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        GetMotorInsuranceDocumentTypesResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SaveMotorInsuranceDocumentsResponseModel> saveMotorInsuranceDocuments(
+      SaveMotorInsuranceDocumentsRequestModel request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SaveMotorInsuranceDocumentsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Agent/SaveMotorInsuranceDocuments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        SaveMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetNonMotorInsuranceDocumentTypesResponseModel>
+      getNonMotorInsuranceDocumentTypes() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetNonMotorInsuranceDocumentTypesResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Data/GetNonMotorInsuranceDocumentTypes',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        GetNonMotorInsuranceDocumentTypesResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<SaveNonMotorInsuranceDocumentsResponseModel>
+      saveNonMotorInsuranceDocuments(
+          SaveNonMotorInsuranceDocumentsRequestModel request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'Authorization': true};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<SaveNonMotorInsuranceDocumentsResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Agent/SaveNonMotorInsuranceDocuments',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        SaveNonMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

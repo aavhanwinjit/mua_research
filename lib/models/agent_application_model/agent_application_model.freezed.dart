@@ -101,6 +101,14 @@ mixin _$AgentApplicationModel {
   @JsonKey(name: "isPolicyDocVerificationCompleted")
   bool? get isPolicyDocVerificationCompleted =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: "motorInsuranceDocumentTypeId")
+  dynamic get motorInsuranceDocumentTypeId =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "motorDocuImagePath")
+  dynamic get motorDocImagePath => throw _privateConstructorUsedError;
+  @JsonKey(name: "isMotorDocVerificationCompleted")
+  bool? get isMotorDocVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocumentTypeId")
   dynamic get additionalDocumentTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocImagePath")
@@ -175,6 +183,11 @@ abstract class $AgentApplicationModelCopyWith<$Res> {
       @JsonKey(name: "policyDocImagePath") dynamic policyDocImagePath,
       @JsonKey(name: "isPolicyDocVerificationCompleted")
       bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      bool? isMotorDocVerificationCompleted,
       @JsonKey(name: "additionalDocumentTypeId")
       dynamic additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
@@ -240,6 +253,9 @@ class _$AgentApplicationModelCopyWithImpl<$Res,
     Object? policyDocumentTypeId = freezed,
     Object? policyDocImagePath = freezed,
     Object? isPolicyDocVerificationCompleted = freezed,
+    Object? motorInsuranceDocumentTypeId = freezed,
+    Object? motorDocImagePath = freezed,
+    Object? isMotorDocVerificationCompleted = freezed,
     Object? additionalDocumentTypeId = freezed,
     Object? additionalDocImagePath = freezed,
     Object? isAdditionalDocVerificationCompleted = freezed,
@@ -407,6 +423,19 @@ class _$AgentApplicationModelCopyWithImpl<$Res,
           ? _value.isPolicyDocVerificationCompleted
           : isPolicyDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      motorInsuranceDocumentTypeId: freezed == motorInsuranceDocumentTypeId
+          ? _value.motorInsuranceDocumentTypeId
+          : motorInsuranceDocumentTypeId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      motorDocImagePath: freezed == motorDocImagePath
+          ? _value.motorDocImagePath
+          : motorDocImagePath // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isMotorDocVerificationCompleted: freezed ==
+              isMotorDocVerificationCompleted
+          ? _value.isMotorDocVerificationCompleted
+          : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       additionalDocumentTypeId: freezed == additionalDocumentTypeId
           ? _value.additionalDocumentTypeId
           : additionalDocumentTypeId // ignore: cast_nullable_to_non_nullable
@@ -497,6 +526,11 @@ abstract class _$$AgentApplicationModelImplCopyWith<$Res>
       @JsonKey(name: "policyDocImagePath") dynamic policyDocImagePath,
       @JsonKey(name: "isPolicyDocVerificationCompleted")
       bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      bool? isMotorDocVerificationCompleted,
       @JsonKey(name: "additionalDocumentTypeId")
       dynamic additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
@@ -560,6 +594,9 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
     Object? policyDocumentTypeId = freezed,
     Object? policyDocImagePath = freezed,
     Object? isPolicyDocVerificationCompleted = freezed,
+    Object? motorInsuranceDocumentTypeId = freezed,
+    Object? motorDocImagePath = freezed,
+    Object? isMotorDocVerificationCompleted = freezed,
     Object? additionalDocumentTypeId = freezed,
     Object? additionalDocImagePath = freezed,
     Object? isAdditionalDocVerificationCompleted = freezed,
@@ -727,6 +764,19 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
           ? _value.isPolicyDocVerificationCompleted
           : isPolicyDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
+      motorInsuranceDocumentTypeId: freezed == motorInsuranceDocumentTypeId
+          ? _value.motorInsuranceDocumentTypeId
+          : motorInsuranceDocumentTypeId // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      motorDocImagePath: freezed == motorDocImagePath
+          ? _value.motorDocImagePath
+          : motorDocImagePath // ignore: cast_nullable_to_non_nullable
+              as dynamic,
+      isMotorDocVerificationCompleted: freezed ==
+              isMotorDocVerificationCompleted
+          ? _value.isMotorDocVerificationCompleted
+          : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
+              as bool?,
       additionalDocumentTypeId: freezed == additionalDocumentTypeId
           ? _value.additionalDocumentTypeId
           : additionalDocumentTypeId // ignore: cast_nullable_to_non_nullable
@@ -811,6 +861,11 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
       @JsonKey(name: "policyDocImagePath") this.policyDocImagePath,
       @JsonKey(name: "isPolicyDocVerificationCompleted")
       this.isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      this.motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorDocuImagePath") this.motorDocImagePath,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      this.isMotorDocVerificationCompleted,
       @JsonKey(name: "additionalDocumentTypeId") this.additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath,
       @JsonKey(name: "isAdditionalDocVerificationCompleted")
@@ -942,6 +997,15 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   @JsonKey(name: "isPolicyDocVerificationCompleted")
   final bool? isPolicyDocVerificationCompleted;
   @override
+  @JsonKey(name: "motorInsuranceDocumentTypeId")
+  final dynamic motorInsuranceDocumentTypeId;
+  @override
+  @JsonKey(name: "motorDocuImagePath")
+  final dynamic motorDocImagePath;
+  @override
+  @JsonKey(name: "isMotorDocVerificationCompleted")
+  final bool? isMotorDocVerificationCompleted;
+  @override
   @JsonKey(name: "additionalDocumentTypeId")
   final dynamic additionalDocumentTypeId;
   @override
@@ -968,7 +1032,7 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
 
   @override
   String toString() {
-    return 'AgentApplicationModel(agentApplicationId: $agentApplicationId, applicationRefNo: $applicationRefNo, agentId: $agentId, applicationStatus: $applicationStatus, mobileNumber: $mobileNumber, emailId: $emailId, maritalStatus: $maritalStatus, nationality: $nationality, kycTypeId: $kycTypeId, quoteNumber: $quoteNumber, policyNumber: $policyNumber, idDocumentTypeId: $idDocumentTypeId, idDocFrontImagePath: $idDocFrontImagePath, idDocBackImagePath: $idDocBackImagePath, idDocSurname: $idDocSurname, idDocOtherName: $idDocOtherName, idDocNumber: $idDocNumber, idDocPolicyNumber: $idDocPolicyNumber, isIdVerificationCompleted: $isIdVerificationCompleted, addressDocumentTypeId: $addressDocumentTypeId, addressDocImagePath: $addressDocImagePath, addressDocSurname: $addressDocSurname, addressDocOtherName: $addressDocOtherName, addressDocBillDate: $addressDocBillDate, addressDocAddress: $addressDocAddress, isAddressVerificationCompleted: $isAddressVerificationCompleted, porRequired: $porRequired, insuredDocumentTypeId1: $insuredDocumentTypeId1, insuredDocumentTypeId2: $insuredDocumentTypeId2, insuredDocumentTypeId3: $insuredDocumentTypeId3, insuredDocLastName: $insuredDocLastName, insureDocIssueDate: $insureDocIssueDate, insuredDocImagePath1: $insuredDocImagePath1, insuredDocImagePath2: $insuredDocImagePath2, insuredDocImagePath3: $insuredDocImagePath3, isPorDocVerificationCompleted: $isPorDocVerificationCompleted, policyDocumentTypeId: $policyDocumentTypeId, policyDocImagePath: $policyDocImagePath, isPolicyDocVerificationCompleted: $isPolicyDocVerificationCompleted, additionalDocumentTypeId: $additionalDocumentTypeId, additionalDocImagePath: $additionalDocImagePath, isAdditionalDocVerificationCompleted: $isAdditionalDocVerificationCompleted, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
+    return 'AgentApplicationModel(agentApplicationId: $agentApplicationId, applicationRefNo: $applicationRefNo, agentId: $agentId, applicationStatus: $applicationStatus, mobileNumber: $mobileNumber, emailId: $emailId, maritalStatus: $maritalStatus, nationality: $nationality, kycTypeId: $kycTypeId, quoteNumber: $quoteNumber, policyNumber: $policyNumber, idDocumentTypeId: $idDocumentTypeId, idDocFrontImagePath: $idDocFrontImagePath, idDocBackImagePath: $idDocBackImagePath, idDocSurname: $idDocSurname, idDocOtherName: $idDocOtherName, idDocNumber: $idDocNumber, idDocPolicyNumber: $idDocPolicyNumber, isIdVerificationCompleted: $isIdVerificationCompleted, addressDocumentTypeId: $addressDocumentTypeId, addressDocImagePath: $addressDocImagePath, addressDocSurname: $addressDocSurname, addressDocOtherName: $addressDocOtherName, addressDocBillDate: $addressDocBillDate, addressDocAddress: $addressDocAddress, isAddressVerificationCompleted: $isAddressVerificationCompleted, porRequired: $porRequired, insuredDocumentTypeId1: $insuredDocumentTypeId1, insuredDocumentTypeId2: $insuredDocumentTypeId2, insuredDocumentTypeId3: $insuredDocumentTypeId3, insuredDocLastName: $insuredDocLastName, insureDocIssueDate: $insureDocIssueDate, insuredDocImagePath1: $insuredDocImagePath1, insuredDocImagePath2: $insuredDocImagePath2, insuredDocImagePath3: $insuredDocImagePath3, isPorDocVerificationCompleted: $isPorDocVerificationCompleted, policyDocumentTypeId: $policyDocumentTypeId, policyDocImagePath: $policyDocImagePath, isPolicyDocVerificationCompleted: $isPolicyDocVerificationCompleted, motorInsuranceDocumentTypeId: $motorInsuranceDocumentTypeId, motorDocImagePath: $motorDocImagePath, isMotorDocVerificationCompleted: $isMotorDocVerificationCompleted, additionalDocumentTypeId: $additionalDocumentTypeId, additionalDocImagePath: $additionalDocImagePath, isAdditionalDocVerificationCompleted: $isAdditionalDocVerificationCompleted, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
   }
 
   @override
@@ -1051,6 +1115,9 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
             const DeepCollectionEquality().equals(other.policyDocumentTypeId, policyDocumentTypeId) &&
             const DeepCollectionEquality().equals(other.policyDocImagePath, policyDocImagePath) &&
             (identical(other.isPolicyDocVerificationCompleted, isPolicyDocVerificationCompleted) || other.isPolicyDocVerificationCompleted == isPolicyDocVerificationCompleted) &&
+            const DeepCollectionEquality().equals(other.motorInsuranceDocumentTypeId, motorInsuranceDocumentTypeId) &&
+            const DeepCollectionEquality().equals(other.motorDocImagePath, motorDocImagePath) &&
+            (identical(other.isMotorDocVerificationCompleted, isMotorDocVerificationCompleted) || other.isMotorDocVerificationCompleted == isMotorDocVerificationCompleted) &&
             const DeepCollectionEquality().equals(other.additionalDocumentTypeId, additionalDocumentTypeId) &&
             const DeepCollectionEquality().equals(other.additionalDocImagePath, additionalDocImagePath) &&
             (identical(other.isAdditionalDocVerificationCompleted, isAdditionalDocVerificationCompleted) || other.isAdditionalDocVerificationCompleted == isAdditionalDocVerificationCompleted) &&
@@ -1104,6 +1171,9 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
         const DeepCollectionEquality().hash(policyDocumentTypeId),
         const DeepCollectionEquality().hash(policyDocImagePath),
         isPolicyDocVerificationCompleted,
+        const DeepCollectionEquality().hash(motorInsuranceDocumentTypeId),
+        const DeepCollectionEquality().hash(motorDocImagePath),
+        isMotorDocVerificationCompleted,
         const DeepCollectionEquality().hash(additionalDocumentTypeId),
         const DeepCollectionEquality().hash(additionalDocImagePath),
         isAdditionalDocVerificationCompleted,
@@ -1178,6 +1248,11 @@ abstract class _AgentApplicationModel implements AgentApplicationModel {
       @JsonKey(name: "policyDocImagePath") final dynamic policyDocImagePath,
       @JsonKey(name: "isPolicyDocVerificationCompleted")
       final bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      final dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorDocuImagePath") final dynamic motorDocImagePath,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      final bool? isMotorDocVerificationCompleted,
       @JsonKey(name: "additionalDocumentTypeId")
       final dynamic additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath")
@@ -1311,6 +1386,15 @@ abstract class _AgentApplicationModel implements AgentApplicationModel {
   @override
   @JsonKey(name: "isPolicyDocVerificationCompleted")
   bool? get isPolicyDocVerificationCompleted;
+  @override
+  @JsonKey(name: "motorInsuranceDocumentTypeId")
+  dynamic get motorInsuranceDocumentTypeId;
+  @override
+  @JsonKey(name: "motorDocuImagePath")
+  dynamic get motorDocImagePath;
+  @override
+  @JsonKey(name: "isMotorDocVerificationCompleted")
+  bool? get isMotorDocVerificationCompleted;
   @override
   @JsonKey(name: "additionalDocumentTypeId")
   dynamic get additionalDocumentTypeId;
