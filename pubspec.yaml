@@ -3,10 +3,10 @@ name: ekyc
 description: A new Flutter project.
  
 # Production
-# version: 1.0.0+1
+version: 1.0.1+2
  
 # Development
-version: 2.0.6+4
+# version: 2.0.6+4
 
 environment: 
   sdk: '>=3.3.3 <4.0.0'
