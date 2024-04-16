@@ -12,7 +12,6 @@ _$SetAgentMpinRequestModelImpl _$$SetAgentMpinRequestModelImplFromJson(
       mPIN: json['mPIN'] as String?,
       confirmMpin: json['confirmMPIN'] as String?,
       mobileNo: json['mobileNo'] as String?,
-      signaturePath: json['signaturePath'] as String?,
     );
 
 Map<String, dynamic> _$$SetAgentMpinRequestModelImplToJson(
@@ -21,5 +20,4 @@ Map<String, dynamic> _$$SetAgentMpinRequestModelImplToJson(
       'mPIN': instance.mPIN,
       'confirmMPIN': instance.confirmMpin,
       'mobileNo': instance.mobileNo,
-      'signaturePath': instance.signaturePath,
     };
