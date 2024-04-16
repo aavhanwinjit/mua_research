@@ -1,21 +1,25 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/por_document_element/por_document_element.dart';
-import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_proof_image_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class InsuredDocDetailsCard extends ConsumerWidget {
+class InsuredDocDetailsCard extends ConsumerStatefulWidget {
   const InsuredDocDetailsCard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _InsuredDocDetailsCardState();
+}
+
+class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
+  @override
+  Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -39,29 +43,20 @@ class InsuredDocDetailsCard extends ConsumerWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editAddressDetailsScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
-          _infoWidget(ref),
+          _infoWidget(),
           SizedBox(height: 24.h),
-          _imageRow(ref),
+          const AddressProofImageWidget(),
           SizedBox(height: 24.h),
-          _insuredDocWidget(context, ref),
+          _insuredDocWidget(context),
         ],
       ),
     );
   }
 
-  Widget _infoWidget(WidgetRef ref) {
+  Widget _infoWidget() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     return Padding(
@@ -86,7 +81,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
                       const SizedBox(height: 24),
                       InfoTile(
                         title: Strings.billDate,
-                        value: selectedApplication?.addressDocBillDate,
+                        value: selectedApplication?.addressDocBillDate!.format() ?? "-",
                       ),
                     ],
                   ],
@@ -115,7 +110,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
     );
   }
 
-  Widget _insuredDocWidget(BuildContext context, WidgetRef ref) {
+  Widget _insuredDocWidget(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -140,7 +135,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
                 ),
               ),
               TextButton(
-                onPressed: () => context.pushNamed(AppRoutes.editAddressDetailsScreen),
+                onPressed: () => context.pushNamed(AppRoutes.editInsuredDetailsScreen),
                 child: Text(
                   Strings.edit,
                   style: TextStyle(
@@ -155,6 +150,7 @@ class InsuredDocDetailsCard extends ConsumerWidget {
         _infoWidget2(ref),
         SizedBox(height: 24.h),
         _imageRow2(),
+        SizedBox(height: 24.h),
       ],
     );
   }
@@ -183,82 +179,64 @@ class InsuredDocDetailsCard extends ConsumerWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _surnameWidget(),
-          _billDateWidget(),
+          _surnameWidget(item),
+          _billDateWidget(item),
         ],
       ),
     );
   }
 
-  Widget _surnameWidget() {
-    // "KYC validation failed. Last name is not matching in the document.
-    return const Expanded(
+  Widget _surnameWidget(PORDocumentElement item) {
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
             title: Strings.surname,
-            value: "Sharma",
+            value: item.extractedLastName ?? "-",
           ),
         ],
       ),
     );
   }
 
-  Widget _billDateWidget() {
-    return const Expanded(
+  Widget _billDateWidget(PORDocumentElement item) {
+    return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
             title: Strings.billDate,
-            value: "21 Dec 2023",
+            value: item.scanResponse?.ocrResponse?.documentdata?.billDate ?? "-",
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _imageRow(WidgetRef ref) {
-    final String? addressProofImagePath = ref.watch(addressProofFilePathProvider);
-
-    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            selectedAddressDocType?.addressDocType ?? "-",
-            style: const TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(addressProofImagePath),
         ],
       ),
     );
   }
 
   Widget _imageRow2() {
+    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPorDocTypeListNotifierProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          Row(
-            children: [
-              _imageWidget(""),
-              SizedBox(width: 16.w),
-              _imageWidget(""),
-            ],
-          ),
-        ],
+      child: Row(
+        children: selectedDocsListProvider
+            .list()
+            .map((e) => Padding(
+                  padding: EdgeInsets.only(right: 16.w),
+                  child: Column(
+                    children: [
+                      Text(
+                        e.documentElement?.porDocType ?? "-",
+                        style: const TextStyle(color: textGrayColor2),
+                      ),
+                      const SizedBox(height: 5),
+                      _imageWidget(e.filePath),
+                    ],
+                  ),
+                ))
+            .toList(),
       ),
     );
   }

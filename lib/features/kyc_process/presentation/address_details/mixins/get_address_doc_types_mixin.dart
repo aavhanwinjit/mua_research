@@ -29,6 +29,7 @@ mixin GetAddressDocTypeMixin {
           // onSuccess
           if (success.body?.responseBody != null) {
             final addressDocTypesNotifier = ref.watch(addressDocsTypesNotifierProvider.notifier);
+
             addressDocTypesNotifier.updateDocTypesList(success.body?.responseBody ?? []);
 
             ref.watch(addressDocsTypesListLoading.notifier).update((state) => false);

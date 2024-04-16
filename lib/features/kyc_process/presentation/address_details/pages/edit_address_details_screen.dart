@@ -57,7 +57,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
-        title: Strings.editIDDetailsScreenTitle,
+        title: Strings.editAddressDetails,
       ),
       body: SafeArea(
         child: GestureDetector(

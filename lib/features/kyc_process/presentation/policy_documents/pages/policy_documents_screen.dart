@@ -1,9 +1,18 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
-import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_policy_document_types/response/get_policy_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/policy_document_element.dart/policy_document_element.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_details_loading_widget.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/mixins/get_policy_docs_types_mixin.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/policy_doc_type_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/policy_documents_screen_providers.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/selected_policy_doc_type_list_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
+import 'package:ekyc/widgets/buttons/remove_document_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,18 +25,30 @@ class PolicyDocumentsScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
-  String? dropdownValue;
+class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> with GetPolicyDocsTypesMixin {
+  @override
+  void initState() {
+    super.initState();
 
-  List<String> items = [
-    'Policy Document',
-    'Claim Document',
-    'New Business Document',
-    'Underwriting Document',
-  ];
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(policyDocsTypesListLoading.notifier).update((state) => false);
+
+      final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+      selectedDocsListProvider.clearList();
+
+      selectedDocsListProvider.addElementToList();
+
+      getPolicyDocumentTypes(context: context, ref: ref);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final bool policyDocTypeLoading = ref.watch(policyDocsTypesListLoading);
+
+    final policyDocTypesNotifier = ref.watch(policyDocTypeNotifierProvider.notifier);
+    ref.watch(policyDocTypeNotifierProvider);
+
     return GestureDetector(
       onTap: () {
         KeyboardHelper.onScreenTap(context);
@@ -37,7 +58,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
           context: context,
           title: Strings.policyDocuments,
         ),
-        bottomNavigationBar: _bottomNavBarWidget(),
+        bottomNavigationBar: !policyDocTypeLoading ? _bottomNavBarWidget() : null,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -47,28 +68,96 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
                 children: [
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  _dropdownWidget(),
-                  SizedBox(height: 24.h),
-                  DocumentUploadContainer(
-                    provider: policyDocFilePathProvider,
-                    label: Strings.policyDocumentContainerLabel,
-                    cameraScreenTitle: Strings.scanDocuments,
-                    cameraScreenDescription: Strings.policyDocCameraLabel,
-                    reviewScreenTitle: Strings.policyDocuments,
-                  ),
-                  SizedBox(height: 8.h),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      AddDocumentButton(onPressed: () {}),
+                  if (policyDocTypeLoading) const AddressDetailsLoadingWidget(),
+                  if (!policyDocTypeLoading) ...[
+                    if (policyDocTypesNotifier.haveList()) ...[
+                      _documentWidgetList(),
                     ],
-                  ),
+                  ],
                 ],
               ),
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _documentWidgetList() {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPolicyDocTypeListNotifierProvider);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: selectedDocsListProvider.list().length,
+      itemBuilder: (context, index) {
+        PolicyDocumentElement item = selectedDocsListProvider.list()[index];
+
+        return _documentElement(item, index);
+      },
+      separatorBuilder: (context, index) {
+        return SizedBox(height: 36.h);
+      },
+    );
+  }
+
+  Widget _documentElement(PolicyDocumentElement item, int index) {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPolicyDocTypeListNotifierProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _dropdownWidget(item, index),
+        SizedBox(height: 24.h),
+        DocumentUploadContainer2(
+          filePath: item.filePath,
+          documentCode: item.documentElement?.documentCode ?? "",
+          onChange: (String path, ScanDocumentResponseBody? response) async {
+            selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
+            selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
+
+            context.pop();
+          },
+          clearFile: () {
+            selectedDocsListProvider.clearElementsFilePath(index: index);
+          },
+          label: Strings.insuredDocumentContainerLabel,
+          cameraScreenTitle: Strings.scanDocuments,
+          cameraScreenDescription: Strings.insuredDocCameraLabel,
+          reviewScreenTitle: Strings.uploadInsuredDocuments,
+          disable: item.documentElement == null,
+          disableCallback: () {
+            context.showErrorSnackBar(message: Strings.selectDocumentType);
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (index != 0)
+              RemoveDocumentButton(
+                onPressed: () {
+                  selectedDocsListProvider.removeElementFromList(index);
+                },
+              ),
+            const SizedBox(),
+
+            // show add doc button only for the last element in the list
+            if ((selectedDocsListProvider.list().length - 1) == index)
+              AddDocumentButton(
+                onPressed: () {
+                  // only 2 docs are allowed to add
+                  if (selectedDocsListProvider.list().length < 2) {
+                    selectedDocsListProvider.addElementToList();
+                  } else {
+                    context.showErrorSnackBar(message: Strings.only2Documents);
+                  }
+                },
+              ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -82,27 +171,29 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
     );
   }
 
-  Widget _dropdownWidget() {
+  Widget _dropdownWidget(PolicyDocumentElement item, int index) {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPolicyDocTypeListNotifierProvider);
+
+    final policyDocTypesNotifier = ref.watch(policyDocTypeNotifierProvider.notifier);
+    ref.watch(policyDocTypeNotifierProvider);
+
     return CustomDrowDownField(
-      value: dropdownValue,
+      value: item.documentElement,
       labelText: Strings.selectDocument,
       validator: (value) {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        dropdownValue = value as String;
-        setState(() {});
+        selectedDocsListProvider.updateElementsSelectedDocType(index: index, element: value as PolicyDocumentTypeModel);
       },
-      items: items.map((String value) {
-        return DropdownMenuItem<String>(
+      items: policyDocTypesNotifier.list().map((PolicyDocumentTypeModel value) {
+        return DropdownMenuItem<PolicyDocumentTypeModel>(
           value: value,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 14.sp,
-              ),
+          child: Text(
+            value.policyDocTypes ?? "-",
+            style: TextStyle(
+              fontSize: 14.sp,
             ),
           ),
         );
@@ -114,11 +205,31 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> {
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
+        disable: buttonDisableCheck(),
+        disabledOnTap: () {
+          context.showErrorSnackBar(message: Strings.uploadPolicyDocuments);
+        },
         onTap: () {
           context.pushNamed(AppRoutes.pdReviewSubmitScreen);
         },
         label: Strings.next,
       ),
     );
+  }
+
+  bool buttonDisableCheck() {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+
+    if (selectedDocsListProvider.list().isEmpty) {
+      return true;
+    }
+
+    return selectedDocsListProvider.list().any((element) {
+      if (element.filePath == null || element.scanResponse == null || element.documentElement == null) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

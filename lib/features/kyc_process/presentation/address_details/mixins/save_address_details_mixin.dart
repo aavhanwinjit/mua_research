@@ -3,7 +3,7 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_address_details/request/save_address_details_request_model.dart';
-import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_address_details/response/save_address_details_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/usecases/save_address_details.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
@@ -18,6 +18,7 @@ mixin SaveAddressDetailsMixin {
     required BuildContext context,
     required WidgetRef ref,
     required VoidCallback onSuccess,
+    required bool porRequired,
   }) async {
     final bool loading = ref.watch(saveAddressDetailsLoading);
     if (loading) return;
@@ -30,6 +31,7 @@ mixin SaveAddressDetailsMixin {
 
     final String? addressOtherName = ref.watch(addressOtherNameProvider);
     final String? addressSurname = ref.watch(addressSurnameProvider);
+    final String? addressText = ref.watch(addressTextProvider);
 
     SaveAddressDetailsRequestModel request = SaveAddressDetailsRequestModel(
       applicationRefNo: selectedApplication?.applicationRefNo,
@@ -38,10 +40,10 @@ mixin SaveAddressDetailsMixin {
       docSurname: addressSurname,
       docOtherName: addressOtherName,
       docBillDate: ocrResponse?.ocrResponse?.documentdata?.billDate,
-      docAddress: "",
+      docAddress: addressText,
       uploadedDocumentId: ocrResponse?.uploadedDocumentId,
-      isAddressVerificationCompleted: false,
-      porRequired: false,
+      isAddressVerificationCompleted: true,
+      porRequired: porRequired,
     );
 
     ref.watch(saveAddressDetailsLoading.notifier).update((state) => true);
@@ -57,7 +59,7 @@ mixin SaveAddressDetailsMixin {
 
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
-      (SaveIdentityDetailsResponseModel success) async {
+      (SaveAddressDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {

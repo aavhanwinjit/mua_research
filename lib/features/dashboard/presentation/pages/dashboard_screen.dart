@@ -23,10 +23,12 @@ class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _DashboardScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _DashboardScreenState();
 }
 
-class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApplicationsMixin {
+class _DashboardScreenState extends ConsumerState<DashboardScreen>
+    with AgentApplicationsMixin {
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -51,8 +53,10 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
 
   @override
   Widget build(BuildContext context) {
-    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
-    final pageNumberNotifier = ref.watch(dashboardPageNumberNotifierProvider.notifier);
+    final agentApplicationNotifier =
+        ref.watch(agentApplicationsNotifierProvider.notifier);
+    final pageNumberNotifier =
+        ref.watch(dashboardPageNumberNotifierProvider.notifier);
 
     ref.watch(agentApplicationsNotifierProvider);
 
@@ -66,8 +70,11 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
       child: Scaffold(
         backgroundColor: disabledButtonColor,
         appBar: _appBar(),
-        floatingActionButton: agentApplicationNotifier.haveApplications() ? _fab() : null,
-        bottomNavigationBar: agentApplicationNotifier.haveNoApplications() ? _bottomNavBarWidget() : null,
+        floatingActionButton:
+            agentApplicationNotifier.haveApplications() ? _fab() : null,
+        bottomNavigationBar: agentApplicationNotifier.haveNoApplications()
+            ? _bottomNavBarWidget()
+            : null,
         body: pageNumberNotifier.isFirstPage && applicationListLoading == true
             ? const DashboardLoadingWidget()
             : agentApplicationNotifier.haveApplications()
@@ -92,7 +99,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   Widget _listView() {
-    final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+    final agentApplicationNotifier =
+        ref.watch(agentApplicationsNotifierProvider.notifier);
     ref.watch(agentApplicationsNotifierProvider);
 
     return Expanded(
@@ -119,7 +127,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
               //     child: CircularProgressIndicator(),
               //   );
               // } else {
-              final AgentApplicationModel application = agentApplicationNotifier.applications()[index];
+              final AgentApplicationModel application =
+                  agentApplicationNotifier.applications()[index];
 
               return ApplicantCard(application: application);
               // }
@@ -133,7 +142,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   bool _handleScrollNotification(ScrollNotification notification) {
-    if (notification is ScrollEndNotification && _scrollController.position.extentAfter == 0) {
+    if (notification is ScrollEndNotification &&
+        _scrollController.position.extentAfter == 0) {
       incrementPageNumber(ref);
 
       getAgentApplications(
@@ -146,7 +156,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   Widget _paginationLoadingWidget() {
-    final pageNumberNotifier = ref.watch(dashboardPageNumberNotifierProvider.notifier);
+    final pageNumberNotifier =
+        ref.watch(dashboardPageNumberNotifierProvider.notifier);
 
     final applicationListLoading = ref.watch(applicationListLoadingProvider);
 
@@ -186,13 +197,40 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
             children: [
               Expanded(
                 child: CustomTextFormField(
+                  controller:
+                      ref.watch(searchKeywordTextEditingControllerProvider),
                   label: Strings.searchApplicants,
+                  onChanged: (String value) {
+                    ref
+                        .watch(searchKeywordProvider.notifier)
+                        .update((state) => value);
+                    if(ref.watch(searchKeywordProvider).isEmpty){
+                      resetPageNumber(ref);
+
+                      getAgentApplications(
+                        context: context,
+                        ref: ref,
+                      );
+                    }
+                  },
                   suffixIcon: Padding(
                     padding: const EdgeInsets.all(15.0),
-                    child: ImageIcon(
-                      const AssetImage(ImageConstants.searchIcon),
-                      color: iconColor,
-                      size: MediaQuery.of(context).size.width > 480 ? 16.sp : 20.sp,
+                    child: InkWell(
+                      onTap: () {
+                        resetPageNumber(ref);
+
+                        getAgentApplications(
+                          context: context,
+                          ref: ref,
+                        );
+                      },
+                      child: ImageIcon(
+                        const AssetImage(ImageConstants.searchIcon),
+                        color: iconColor,
+                        size: MediaQuery.of(context).size.width > 480
+                            ? 16.sp
+                            : 20.sp,
+                      ),
                     ),
                   ),
                 ),
@@ -206,7 +244,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
                   size: MediaQuery.of(context).size.width > 480 ? 25.sp : 20.sp,
                 ),
               ),
-              SizedBox(width: MediaQuery.of(context).size.width > 480 ? 40 : 10),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width > 480 ? 40 : 10),
             ],
           ),
         ],
@@ -250,7 +289,8 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
   }
 
   AppBar _appBar() {
-    final GetAgentDetailsResponseModel? agentDetails = ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseModel? agentDetails =
+        ref.watch(agentDetailsResponseProvider);
 
     String agentName = agentDetails?.body?.responseBody?.agentName ?? "NA";
 
