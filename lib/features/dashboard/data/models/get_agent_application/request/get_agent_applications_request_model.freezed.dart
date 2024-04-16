@@ -25,6 +25,8 @@ mixin _$GetAgentApplicationsRequestModel {
   int? get agentId => throw _privateConstructorUsedError;
   @JsonKey(name: "status")
   String? get status => throw _privateConstructorUsedError;
+  @JsonKey(name: "applicationSearch")
+  String? get applicationSearch => throw _privateConstructorUsedError;
   @JsonKey(name: "rowsPerPage")
   int? get rowsPerPage => throw _privateConstructorUsedError;
   @JsonKey(name: "pageNo")
@@ -47,6 +49,7 @@ abstract class $GetAgentApplicationsRequestModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "status") String? status,
+      @JsonKey(name: "applicationSearch") String? applicationSearch,
       @JsonKey(name: "rowsPerPage") int? rowsPerPage,
       @JsonKey(name: "pageNo") int? pageNo});
 }
@@ -67,6 +70,7 @@ class _$GetAgentApplicationsRequestModelCopyWithImpl<$Res,
   $Res call({
     Object? agentId = freezed,
     Object? status = freezed,
+    Object? applicationSearch = freezed,
     Object? rowsPerPage = freezed,
     Object? pageNo = freezed,
   }) {
@@ -78,6 +82,10 @@ class _$GetAgentApplicationsRequestModelCopyWithImpl<$Res,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      applicationSearch: freezed == applicationSearch
+          ? _value.applicationSearch
+          : applicationSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       rowsPerPage: freezed == rowsPerPage
           ? _value.rowsPerPage
@@ -103,6 +111,7 @@ abstract class _$$GetAgentApplicationsRequestModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "status") String? status,
+      @JsonKey(name: "applicationSearch") String? applicationSearch,
       @JsonKey(name: "rowsPerPage") int? rowsPerPage,
       @JsonKey(name: "pageNo") int? pageNo});
 }
@@ -122,6 +131,7 @@ class __$$GetAgentApplicationsRequestModelImplCopyWithImpl<$Res>
   $Res call({
     Object? agentId = freezed,
     Object? status = freezed,
+    Object? applicationSearch = freezed,
     Object? rowsPerPage = freezed,
     Object? pageNo = freezed,
   }) {
@@ -133,6 +143,10 @@ class __$$GetAgentApplicationsRequestModelImplCopyWithImpl<$Res>
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      applicationSearch: freezed == applicationSearch
+          ? _value.applicationSearch
+          : applicationSearch // ignore: cast_nullable_to_non_nullable
               as String?,
       rowsPerPage: freezed == rowsPerPage
           ? _value.rowsPerPage
@@ -153,6 +167,7 @@ class _$GetAgentApplicationsRequestModelImpl
   const _$GetAgentApplicationsRequestModelImpl(
       {@JsonKey(name: "agentId") this.agentId,
       @JsonKey(name: "status") this.status,
+      @JsonKey(name: "applicationSearch") this.applicationSearch,
       @JsonKey(name: "rowsPerPage") this.rowsPerPage,
       @JsonKey(name: "pageNo") this.pageNo});
 
@@ -167,6 +182,9 @@ class _$GetAgentApplicationsRequestModelImpl
   @JsonKey(name: "status")
   final String? status;
   @override
+  @JsonKey(name: "applicationSearch")
+  final String? applicationSearch;
+  @override
   @JsonKey(name: "rowsPerPage")
   final int? rowsPerPage;
   @override
@@ -175,7 +193,7 @@ class _$GetAgentApplicationsRequestModelImpl
 
   @override
   String toString() {
-    return 'GetAgentApplicationsRequestModel(agentId: $agentId, status: $status, rowsPerPage: $rowsPerPage, pageNo: $pageNo)';
+    return 'GetAgentApplicationsRequestModel(agentId: $agentId, status: $status, applicationSearch: $applicationSearch, rowsPerPage: $rowsPerPage, pageNo: $pageNo)';
   }
 
   @override
@@ -185,6 +203,8 @@ class _$GetAgentApplicationsRequestModelImpl
             other is _$GetAgentApplicationsRequestModelImpl &&
             (identical(other.agentId, agentId) || other.agentId == agentId) &&
             (identical(other.status, status) || other.status == status) &&
+            (identical(other.applicationSearch, applicationSearch) ||
+                other.applicationSearch == applicationSearch) &&
             (identical(other.rowsPerPage, rowsPerPage) ||
                 other.rowsPerPage == rowsPerPage) &&
             (identical(other.pageNo, pageNo) || other.pageNo == pageNo));
@@ -192,8 +212,8 @@ class _$GetAgentApplicationsRequestModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, agentId, status, rowsPerPage, pageNo);
+  int get hashCode => Object.hash(
+      runtimeType, agentId, status, applicationSearch, rowsPerPage, pageNo);
 
   @JsonKey(ignore: true)
   @override
@@ -216,6 +236,7 @@ abstract class _GetAgentApplicationsRequestModel
   const factory _GetAgentApplicationsRequestModel(
           {@JsonKey(name: "agentId") final int? agentId,
           @JsonKey(name: "status") final String? status,
+          @JsonKey(name: "applicationSearch") final String? applicationSearch,
           @JsonKey(name: "rowsPerPage") final int? rowsPerPage,
           @JsonKey(name: "pageNo") final int? pageNo}) =
       _$GetAgentApplicationsRequestModelImpl;
@@ -230,6 +251,9 @@ abstract class _GetAgentApplicationsRequestModel
   @override
   @JsonKey(name: "status")
   String? get status;
+  @override
+  @JsonKey(name: "applicationSearch")
+  String? get applicationSearch;
   @override
   @JsonKey(name: "rowsPerPage")
   int? get rowsPerPage;

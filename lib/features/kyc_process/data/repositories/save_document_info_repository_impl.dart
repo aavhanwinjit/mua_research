@@ -8,6 +8,10 @@ import 'package:ekyc/features/kyc_process/data/models/save_address_details/reque
 import 'package:ekyc/features/kyc_process/data/models/save_address_details/response/save_address_details_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/request/save_identity_details_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_identity_details/response/save_identity_details_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_motor_insurance_documents/request/save_motor_insurance_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_motor_insurance_documents/response/save_motor_insurance_documents_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_non_motor_insurance_documents/request/save_non_motor_insurance_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/save_non_motor_insurance_documents/response/save_non_motor_insurance_documents_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_policy_documents/request/save_policy_documents_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_policy_documents/response/save_policy_documents_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/save_por_documents/request/save_por_documents_request_model.dart';
@@ -46,7 +50,8 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(SavePorDocumentsRequestModel request) async {
+  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(
+      SavePorDocumentsRequestModel request) async {
     try {
       final response = await apiService.savePORDocuments(request);
 
@@ -57,8 +62,9 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>> saveAdditionalDocuments(
-      SaveAdditionalDocumentsRequestModel request) async {
+  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>>
+      saveAdditionalDocuments(
+          SaveAdditionalDocumentsRequestModel request) async {
     try {
       final response = await apiService.saveAdditionalDocuments(request);
 
@@ -73,6 +79,32 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
       SavePolicyDocumentsRequestModel request) async {
     try {
       final response = await apiService.savePolicyDocuments(request);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SaveMotorInsuranceDocumentsResponseModel>>
+      saveMotorInsuranceDocuments(
+          SaveMotorInsuranceDocumentsRequestModel request) async {
+    try {
+      final response = await apiService.saveMotorInsuranceDocuments(request);
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e));
+    }
+  }
+
+  @override
+  Future<Either<Failure, SaveNonMotorInsuranceDocumentsResponseModel>>
+      saveNonMotorInsuranceDocuments(
+          SaveNonMotorInsuranceDocumentsRequestModel request) async {
+    try {
+      final response = await apiService.saveNonMotorInsuranceDocuments(request);
 
       return Right(response);
     } on DioException catch (e) {

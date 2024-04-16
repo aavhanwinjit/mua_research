@@ -9,9 +9,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'agent_application_model.freezed.dart';
 part 'agent_application_model.g.dart';
 
-AgentApplicationModel agentApplicationModelFromJson(String str) => AgentApplicationModel.fromJson(json.decode(str));
+AgentApplicationModel agentApplicationModelFromJson(String str) =>
+    AgentApplicationModel.fromJson(json.decode(str));
 
-String agentApplicationModelToJson(AgentApplicationModel data) => json.encode(data.toJson());
+String agentApplicationModelToJson(AgentApplicationModel data) =>
+    json.encode(data.toJson());
 
 @freezed
 class AgentApplicationModel with _$AgentApplicationModel {
@@ -39,8 +41,10 @@ class AgentApplicationModel with _$AgentApplicationModel {
     @JsonKey(name: "idDocOtherName") String? idDocOtherName,
     @JsonKey(name: "idDocNumber") String? idDocNumber,
     @JsonKey(name: "idDocPolicyNumber") String? idDocPolicyNumber,
-    @JsonKey(name: "idDocFrontUploadedDocumentId") int? idDocFrontUploadedDocumentId,
-    @JsonKey(name: "idDocBackUploadedDocumentId") int? idDocBackUploadedDocumentId,
+    @JsonKey(name: "idDocFrontUploadedDocumentId")
+    int? idDocFrontUploadedDocumentId,
+    @JsonKey(name: "idDocBackUploadedDocumentId")
+    int? idDocBackUploadedDocumentId,
     @JsonKey(name: "isIDVerificationCompleted") bool? isIdVerificationCompleted,
     @JsonKey(name: "addressDocumentTypeId") int? addressDocumentTypeId,
     @JsonKey(name: "addressDocImagePath") String? addressDocImagePath,
@@ -48,24 +52,42 @@ class AgentApplicationModel with _$AgentApplicationModel {
     @JsonKey(name: "addressDocOtherName") String? addressDocOtherName,
     @JsonKey(name: "addressDocBillDate") DateTime? addressDocBillDate,
     @JsonKey(name: "addressDocAddress") String? addressDocAddress,
-    @JsonKey(name: "addressDocUploadedDocumentId") int? addressDocUploadedDocumentId,
-    @JsonKey(name: "isAddressVerificationCompleted") bool? isAddressVerificationCompleted,
+    @JsonKey(name: "addressDocUploadedDocumentId")
+    int? addressDocUploadedDocumentId,
+    @JsonKey(name: "isAddressVerificationCompleted")
+    bool? isAddressVerificationCompleted,
     @JsonKey(name: "porRequired") bool? porRequired,
-    @JsonKey(name: "isPORDocVerificationCompleted") bool? isPorDocVerificationCompleted,
-    @JsonKey(name: "isPolicyDocVerificationCompleted") bool? isPolicyDocVerificationCompleted,
-    @JsonKey(name: "isAdditionalDocVerificationCompleted") bool? isAdditionalDocVerificationCompleted,
-    @JsonKey(name: "isMotorDocVerificationCompleted") bool? isMotorDocVerificationCompleted,
-    @JsonKey(name: "isNonMotorDocVerificationCompleted") bool? isNonMotorDocVerificationCompleted,
-    @JsonKey(name: "addressDocumentTypes") AddressDocumentTypes? addressDocumentTypes,
-    @JsonKey(name: "porDocumentDetails") List<PorDocumentDetail>? porDocumentDetails,
-    @JsonKey(name: "policyDocumentDetails") List<PolicyDocumentDetail>? policyDocumentDetails,
-    @JsonKey(name: "additionalDoumentDetails") List<AdditionalDoumentDetail>? additionalDoumentDetails,
-    @JsonKey(name: "motorInsuranceDocumentDetails") List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
+    @JsonKey(name: "isPORDocVerificationCompleted")
+    bool? isPorDocVerificationCompleted,
+    @JsonKey(name: "isPolicyDocVerificationCompleted")
+    bool? isPolicyDocVerificationCompleted,
+    @JsonKey(name: "motorInsuranceDocumentTypeId")
+    dynamic motorInsuranceDocumentTypeId,
+    @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
+    @JsonKey(name: "isMotorDocVerificationCompleted")
+    bool? isMotorDocVerificationCompleted,
+    @JsonKey(name: "additionalDocumentTypeId") dynamic additionalDocumentTypeId,
+    @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
+    @JsonKey(name: "isAdditionalDocVerificationCompleted")
+    bool? isAdditionalDocVerificationCompleted,
+    @JsonKey(name: "isNonMotorDocVerificationCompleted")
+    bool? isNonMotorDocVerificationCompleted,
+    @JsonKey(name: "addressDocumentTypes")
+    AddressDocumentTypes? addressDocumentTypes,
+    @JsonKey(name: "porDocumentDetails")
+    List<PorDocumentDetail>? porDocumentDetails,
+    @JsonKey(name: "policyDocumentDetails")
+    List<PolicyDocumentDetail>? policyDocumentDetails,
+    @JsonKey(name: "additionalDoumentDetails")
+    List<AdditionalDoumentDetail>? additionalDoumentDetails,
+    @JsonKey(name: "motorInsuranceDocumentDetails")
+    List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
     @JsonKey(name: "nonMotorInsuranceDocumentDetails")
     List<NonMotorInsuranceDocumentDetail>? nonMotorInsuranceDocumentDetails,
   }) = _AgentApplicationModel;
 
-  factory AgentApplicationModel.fromJson(Map<String, dynamic> json) => _$AgentApplicationModelFromJson(json);
+  factory AgentApplicationModel.fromJson(Map<String, dynamic> json) =>
+      _$AgentApplicationModelFromJson(json);
 }
 
 @freezed
@@ -83,7 +105,8 @@ class AdditionalDoumentDetail with _$AdditionalDoumentDetail {
     @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
   }) = _AdditionalDoumentDetail;
 
-  factory AdditionalDoumentDetail.fromJson(Map<String, dynamic> json) => _$AdditionalDoumentDetailFromJson(json);
+  factory AdditionalDoumentDetail.fromJson(Map<String, dynamic> json) =>
+      _$AdditionalDoumentDetailFromJson(json);
 }
 
 @freezed
@@ -99,7 +122,8 @@ class AddressDocumentTypes with _$AddressDocumentTypes {
     @JsonKey(name: "documentCode") String? documentCode,
   }) = _AddressDocumentTypes;
 
-  factory AddressDocumentTypes.fromJson(Map<String, dynamic> json) => _$AddressDocumentTypesFromJson(json);
+  factory AddressDocumentTypes.fromJson(Map<String, dynamic> json) =>
+      _$AddressDocumentTypesFromJson(json);
 }
 
 @freezed
@@ -110,10 +134,12 @@ class MotorInsuranceDocumentDetail with _$MotorInsuranceDocumentDetail {
     @JsonKey(name: "crdBy") int? crdBy,
     @JsonKey(name: "lmd") DateTime? lmd,
     @JsonKey(name: "lmdBy") int? lmdBy,
-    @JsonKey(name: "motorInsuranceDoumentDetailId") int? motorInsuranceDoumentDetailId,
+    @JsonKey(name: "motorInsuranceDoumentDetailId")
+    int? motorInsuranceDoumentDetailId,
     @JsonKey(name: "agentApplicationId") int? agentApplicationId,
     @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-    @JsonKey(name: "motorInsuranceDocumentTypeId") int? motorInsuranceDocumentTypeId,
+    @JsonKey(name: "motorInsuranceDocumentTypeId")
+    int? motorInsuranceDocumentTypeId,
     @JsonKey(name: "motorDocuImagePath") String? motorDocuImagePath,
   }) = _MotorInsuranceDocumentDetail;
 
@@ -129,10 +155,12 @@ class NonMotorInsuranceDocumentDetail with _$NonMotorInsuranceDocumentDetail {
     @JsonKey(name: "crdBy") int? crdBy,
     @JsonKey(name: "lmd") DateTime? lmd,
     @JsonKey(name: "lmdBy") int? lmdBy,
-    @JsonKey(name: "nonMotorInsuranceDoumentDetailId") int? nonMotorInsuranceDoumentDetailId,
+    @JsonKey(name: "nonMotorInsuranceDoumentDetailId")
+    int? nonMotorInsuranceDoumentDetailId,
     @JsonKey(name: "agentApplicationId") int? agentApplicationId,
     @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-    @JsonKey(name: "nonMotorInsuranceDocumentTypeId") int? nonMotorInsuranceDocumentTypeId,
+    @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
+    int? nonMotorInsuranceDocumentTypeId,
     @JsonKey(name: "nonMotorDocImagePath") String? nonMotorDocImagePath,
   }) = _NonMotorInsuranceDocumentDetail;
 
@@ -155,7 +183,8 @@ class PolicyDocumentDetail with _$PolicyDocumentDetail {
     @JsonKey(name: "policyDouImagePath") String? policyDouImagePath,
   }) = _PolicyDocumentDetail;
 
-  factory PolicyDocumentDetail.fromJson(Map<String, dynamic> json) => _$PolicyDocumentDetailFromJson(json);
+  factory PolicyDocumentDetail.fromJson(Map<String, dynamic> json) =>
+      _$PolicyDocumentDetailFromJson(json);
 }
 
 @freezed
@@ -175,5 +204,6 @@ class PorDocumentDetail with _$PorDocumentDetail {
     @JsonKey(name: "porDocImagePath") String? porDocImagePath,
   }) = _PorDocumentDetail;
 
-  factory PorDocumentDetail.fromJson(Map<String, dynamic> json) => _$PorDocumentDetailFromJson(json);
+  factory PorDocumentDetail.fromJson(Map<String, dynamic> json) =>
+      _$PorDocumentDetailFromJson(json);
 }
