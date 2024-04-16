@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
@@ -8,6 +11,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/resp
 import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_document_types/response/get_motor_insurance_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_element/motor_insurance_document_element.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/common_mixins/scan_document_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/mixins/get_motor_insurance_doc_types_mixin.dart';
@@ -34,7 +38,7 @@ class MotorDocumentScreen extends ConsumerStatefulWidget {
 }
 
 class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
-    with GetMotorInsuranceDocTypeMixin {
+    with GetMotorInsuranceDocTypeMixin, ScanDocumentMixin {
   String? dropdownValue;
 
   @override
@@ -276,22 +280,101 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
     );
   }
 
-  void _saveInsuredDocDataAndNavigate() {
+  void _saveInsuredDocDataAndNavigate() async {
     final selectedDocsListProvider =
         ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
 
-    selectedDocsListProvider.list().forEach((element) {
-      if ((element.documentElement?.documentCode !=
-              DocumentCodes.NIL.toString().split('.').last) &&
-          (element.scanResponse?.ocrResponse?.documentdata
-                  ?.isLastNameAvailable ==
-              true)) {
-        final selectedApplication = ref.watch(selectedApplicationProvider);
-        
-      }
+    selectedDocsListProvider.list().forEach((element) async {
+      // if ((element.documentElement?.documentCode !=
+      //         DocumentCodes.NIL.toString().split('.').last) &&
+      //     (element.scanResponse?.ocrResponse?.documentdata
+      //             ?.isLastNameAvailable ==
+      //         true)) {
+      // final selectedApplication = ref.watch(selectedApplicationProvider);
+      final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
+          ref.watch(selectedMotorInsuranceDocTypeProvider);
+
+      final String? motorInsuranceProofFilePath =
+          ref.watch(motorInsuranceProofFilePathProvider);
+      File motorInsuranceProofFile = File(motorInsuranceProofFilePath ?? "");
+      final List<int> motorInsuranceProofFileBytes =
+          await motorInsuranceProofFile.readAsBytes() as List<int>;
+      final String motorInsuranceProofFileBase64 =
+          base64Encode(motorInsuranceProofFileBytes);
+      await scanDocument(
+        context: context,
+        ref: ref,
+        documentType: element.documentElement!.documentCode,
+        loadingProvider: motorInsuranceDocOCRLoadingProvider,
+        onSuccess: (ScanDocumentResponseBody? response) {
+          onSuccess(response);
+        },
+        base64Image: motorInsuranceProofFileBase64,
+      );
+      // }
     });
 
     context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+  }
+
+  void onSuccess(ScanDocumentResponseBody? response) {
+    final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
+        ref.watch(selectedMotorInsuranceDocTypeProvider);
+
+    if (selectedMotorInsuranceDocType?.documentCode ==
+        DocumentCodes.UTB.toString().split('.').last) {
+      // if (response?.ocrResponse != null) {
+      //   // check different conditions for ocr status
+
+      //   final Documentdata? documentData = response?.ocrResponse?.documentdata;
+
+      //   if (documentData?.kycStatus == "Success" &&
+      //       documentData?.billDate != null &&
+      //       documentData?.isFirstNameAvailable == true &&
+      //       documentData?.isLastNameAvailable == true) {
+      //     ref
+      //         .watch(motorInsuranceDocOCRApiResponse.notifier)
+      //         .update((state) => response);
+      //     _setCustomerName(response);
+      //     ref
+      //         .watch(addressDocOCRLoadingProvider.notifier)
+      //         .update((state) => false);
+      //     context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+      //   } else if (documentData?.kycStatus == "Failed" &&
+      //       documentData?.billDate != null &&
+      //       documentData?.kycStatusMsg ==
+      //           "KYC validation failed.The uploaded bill should be of last 3 months only. Older documents are not allowed.") {
+      //     // Block the user here itself
+      //     KycStatusDialogHelper.showOldBillDateDialog(context,
+      //         content: documentData?.kycStatusMsg ?? "");
+      //     return;
+      //   } else if (documentData?.kycStatus == "Failed" &&
+      //       documentData?.billDate != null &&
+      //       documentData?.isFirstNameAvailable == false &&
+      //       documentData?.isLastNameAvailable == false &&
+      //       documentData?.kycStatusMsg ==
+      //           "KYC validation failed. First name did not match in the document. Last name did not match in the document.") {
+      //     //allow to navigate but tell agent that the name is not matched
+      //     ref
+      //         .watch(addressDocOCRApiResponse.notifier)
+      //         .update((state) => response);
+      //     _setCustomerName(response);
+      //     ref
+      //         .watch(addressDocOCRLoadingProvider.notifier)
+      //         .update((state) => false);
+      //     ref.watch(ocrNameMatched.notifier).update((state) => false);
+      //     context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+      //   }
+      // }
+    } else {
+      ref
+          .watch(motorInsuranceDocOCRApiResponse.notifier)
+          .update((state) => response);
+      ref
+          .watch(motorInsuranceDocOCRLoadingProvider.notifier)
+          .update((state) => false);
+      context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+    }
   }
 
   bool buttonDisableCheck() {
