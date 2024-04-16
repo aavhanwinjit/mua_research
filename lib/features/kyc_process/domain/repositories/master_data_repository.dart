@@ -6,6 +6,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/requ
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_non_motor_insurance_document_types/response/get_non_motor_insurance_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_policy_document_types/response/get_policy_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
 
 abstract class MasterDataRepository {
@@ -26,4 +27,6 @@ abstract class MasterDataRepository {
 
   Future<Either<Failure, GetNonMotorInsuranceDocumentTypesResponseModel>>
       getNonMotorInsuranceDocumentTypes();
+
+  Future<Either<Failure, GetPolicyDocumentTypesResponseModel>> getPolicyDocumentTypes();
 }

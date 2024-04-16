@@ -12,6 +12,7 @@ _$GetAgentApplicationsRequestModelImpl
         _$GetAgentApplicationsRequestModelImpl(
           agentId: json['agentId'] as int?,
           status: json['status'] as String?,
+          applicationSearch: json['applicationSearch'] as String?,
           rowsPerPage: json['rowsPerPage'] as int?,
           pageNo: json['pageNo'] as int?,
         );
@@ -21,6 +22,7 @@ Map<String, dynamic> _$$GetAgentApplicationsRequestModelImplToJson(
     <String, dynamic>{
       'agentId': instance.agentId,
       'status': instance.status,
+      'applicationSearch': instance.applicationSearch,
       'rowsPerPage': instance.rowsPerPage,
       'pageNo': instance.pageNo,
     };

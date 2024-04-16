@@ -1,11 +1,16 @@
-import 'package:ekyc/core/app_export.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class PolicyDocsCard extends StatelessWidget {
+import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/data/models/policy_document_element.dart/policy_document_element.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/selected_policy_doc_type_list_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class PolicyDocsCard extends ConsumerWidget {
   const PolicyDocsCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -29,50 +34,50 @@ class PolicyDocsCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
               ],
             ),
           ),
 
           SizedBox(height: 24.h),
-          //NIC image
-          _imageRow(),
+          _imageRow(ref),
           SizedBox(height: 16.h),
         ],
       ),
     );
   }
 
-  Widget _imageRow() {
+  Widget _imageRow(WidgetRef ref) {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPolicyDocTypeListNotifierProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(),
-        ],
+      child: Row(
+        children: selectedDocsListProvider
+            .list()
+            .map(
+              (PolicyDocumentElement e) => Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    e.documentElement?.policyDocTypes ?? "-",
+                    style: const TextStyle(color: textGrayColor2),
+                  ),
+                  const SizedBox(height: 5),
+                  _imageWidget(e),
+                ],
+              ),
+            )
+            .toList(),
       ),
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageWidget(PolicyDocumentElement element) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: Image.asset(
-        ImageConstants.idImage,
+      child: Image.file(
+        File(element.filePath ?? ""),
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,

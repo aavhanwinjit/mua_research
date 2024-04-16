@@ -6,7 +6,9 @@ import 'package:ekyc/features/kyc_process/presentation/additional_documents/page
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/address_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edit_address_details_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edit_insured_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_review_submit_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen_2.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
@@ -88,8 +90,9 @@ class AppRoutes {
   static const String editDetailsScreen = '/edit_details_screen';
   static const String editAddressDetailsScreen = '/edit_address_details_screen';
   static const String cameraScreen2 = '/camera_screen_2';
-  static const String confirmUploadOrRetakeScreen2 =
-      '/confirm_upload_or_retake_screen_2';
+  static const String confirmUploadOrRetakeScreen2 = '/confirm_upload_or_retake_screen_2';
+  static const String insuredReviewSubmitScreen = '/insured_review_submit_screen';
+  static const String editInsuredDetailsScreen = '/edit_insured_details_screen';
 }
 
 final GlobalKey<NavigatorState> rootNavigatorKey =
@@ -388,6 +391,20 @@ final GoRouter router = GoRouter(
           onChange: onChange,
           documentCode: documentCode,
         );
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.insuredReviewSubmitScreen,
+      name: AppRoutes.insuredReviewSubmitScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const InsuredReviewSubmitScreen();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.editInsuredDetailsScreen,
+      name: AppRoutes.editInsuredDetailsScreen,
+      builder: (BuildContext context, GoRouterState state) {
+        return const EditInsuredDetailsScreen();
       },
     ),
   ],

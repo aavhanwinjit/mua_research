@@ -9,6 +9,11 @@ part of 'agent_application_model.dart';
 _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AgentApplicationModelImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
       agentApplicationId: json['agentApplicationId'] as int?,
       applicationRefNo: json['applicationRefNo'] as String?,
       agentId: json['agentId'] as int?,
@@ -20,35 +25,32 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
       kycTypeId: json['kycTypeId'] as int?,
       quoteNumber: json['quoteNumber'] as String?,
       policyNumber: json['policyNumber'] as String?,
-      idDocumentTypeId: json['idDocumentTypeId'],
-      idDocFrontImagePath: json['idDocFrontImagePath'],
-      idDocBackImagePath: json['idDocBackImagePath'],
-      idDocSurname: json['idDocSurname'],
-      idDocOtherName: json['idDocOtherName'],
-      idDocNumber: json['idDocNumber'],
-      idDocPolicyNumber: json['idDocPolicyNumber'],
+      idDocumentTypeId: json['idDocumentTypeId'] as int?,
+      idDocFrontImagePath: json['idDocFrontImagePath'] as String?,
+      idDocBackImagePath: json['idDocBackImagePath'] as String?,
+      idDocSurname: json['idDocSurname'] as String?,
+      idDocOtherName: json['idDocOtherName'] as String?,
+      idDocNumber: json['idDocNumber'] as String?,
+      idDocPolicyNumber: json['idDocPolicyNumber'] as String?,
+      idDocFrontUploadedDocumentId:
+          json['idDocFrontUploadedDocumentId'] as int?,
+      idDocBackUploadedDocumentId: json['idDocBackUploadedDocumentId'] as int?,
       isIdVerificationCompleted: json['isIDVerificationCompleted'] as bool?,
-      addressDocumentTypeId: json['addressDocumentTypeId'],
-      addressDocImagePath: json['addressDocImagePath'],
-      addressDocSurname: json['addressDocSurname'],
-      addressDocOtherName: json['addressDocOtherName'],
-      addressDocBillDate: json['addressDocBillDate'],
-      addressDocAddress: json['addressDocAddress'],
+      addressDocumentTypeId: json['addressDocumentTypeId'] as int?,
+      addressDocImagePath: json['addressDocImagePath'] as String?,
+      addressDocSurname: json['addressDocSurname'] as String?,
+      addressDocOtherName: json['addressDocOtherName'] as String?,
+      addressDocBillDate: json['addressDocBillDate'] == null
+          ? null
+          : DateTime.parse(json['addressDocBillDate'] as String),
+      addressDocAddress: json['addressDocAddress'] as String?,
+      addressDocUploadedDocumentId:
+          json['addressDocUploadedDocumentId'] as int?,
       isAddressVerificationCompleted:
           json['isAddressVerificationCompleted'] as bool?,
       porRequired: json['porRequired'] as bool?,
-      insuredDocumentTypeId1: json['insuredDocumentTypeId1'],
-      insuredDocumentTypeId2: json['insuredDocumentTypeId2'],
-      insuredDocumentTypeId3: json['insuredDocumentTypeId3'],
-      insuredDocLastName: json['insuredDocLastName'],
-      insureDocIssueDate: json['insureDocIssueDate'],
-      insuredDocImagePath1: json['insuredDocImagePath1'],
-      insuredDocImagePath2: json['insuredDocImagePath2'],
-      insuredDocImagePath3: json['insuredDocImagePath3'],
       isPorDocVerificationCompleted:
           json['isPORDocVerificationCompleted'] as bool?,
-      policyDocumentTypeId: json['policyDocumentTypeId'],
-      policyDocImagePath: json['policyDocImagePath'],
       isPolicyDocVerificationCompleted:
           json['isPolicyDocVerificationCompleted'] as bool?,
       motorInsuranceDocumentTypeId: json['motorInsuranceDocumentTypeId'],
@@ -59,16 +61,43 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
       additionalDocImagePath: json['additionalDocImagePath'],
       isAdditionalDocVerificationCompleted:
           json['isAdditionalDocVerificationCompleted'] as bool?,
-      isDisabled: json['isDisabled'] as bool?,
-      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'],
-      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'],
+      isNonMotorDocVerificationCompleted:
+          json['isNonMotorDocVerificationCompleted'] as bool?,
+      addressDocumentTypes: json['addressDocumentTypes'] == null
+          ? null
+          : AddressDocumentTypes.fromJson(
+              json['addressDocumentTypes'] as Map<String, dynamic>),
+      porDocumentDetails: (json['porDocumentDetails'] as List<dynamic>?)
+          ?.map((e) => PorDocumentDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      policyDocumentDetails: (json['policyDocumentDetails'] as List<dynamic>?)
+          ?.map((e) => PolicyDocumentDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      additionalDoumentDetails:
+          (json['additionalDoumentDetails'] as List<dynamic>?)
+              ?.map((e) =>
+                  AdditionalDoumentDetail.fromJson(e as Map<String, dynamic>))
+              .toList(),
+      motorInsuranceDocumentDetails: (json['motorInsuranceDocumentDetails']
+              as List<dynamic>?)
+          ?.map((e) =>
+              MotorInsuranceDocumentDetail.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      nonMotorInsuranceDocumentDetails:
+          (json['nonMotorInsuranceDocumentDetails'] as List<dynamic>?)
+              ?.map((e) => NonMotorInsuranceDocumentDetail.fromJson(
+                  e as Map<String, dynamic>))
+              .toList(),
     );
 
 Map<String, dynamic> _$$AgentApplicationModelImplToJson(
         _$AgentApplicationModelImpl instance) =>
     <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
       'agentApplicationId': instance.agentApplicationId,
       'applicationRefNo': instance.applicationRefNo,
       'agentId': instance.agentId,
@@ -87,26 +116,19 @@ Map<String, dynamic> _$$AgentApplicationModelImplToJson(
       'idDocOtherName': instance.idDocOtherName,
       'idDocNumber': instance.idDocNumber,
       'idDocPolicyNumber': instance.idDocPolicyNumber,
+      'idDocFrontUploadedDocumentId': instance.idDocFrontUploadedDocumentId,
+      'idDocBackUploadedDocumentId': instance.idDocBackUploadedDocumentId,
       'isIDVerificationCompleted': instance.isIdVerificationCompleted,
       'addressDocumentTypeId': instance.addressDocumentTypeId,
       'addressDocImagePath': instance.addressDocImagePath,
       'addressDocSurname': instance.addressDocSurname,
       'addressDocOtherName': instance.addressDocOtherName,
-      'addressDocBillDate': instance.addressDocBillDate,
+      'addressDocBillDate': instance.addressDocBillDate?.toIso8601String(),
       'addressDocAddress': instance.addressDocAddress,
+      'addressDocUploadedDocumentId': instance.addressDocUploadedDocumentId,
       'isAddressVerificationCompleted': instance.isAddressVerificationCompleted,
       'porRequired': instance.porRequired,
-      'insuredDocumentTypeId1': instance.insuredDocumentTypeId1,
-      'insuredDocumentTypeId2': instance.insuredDocumentTypeId2,
-      'insuredDocumentTypeId3': instance.insuredDocumentTypeId3,
-      'insuredDocLastName': instance.insuredDocLastName,
-      'insureDocIssueDate': instance.insureDocIssueDate,
-      'insuredDocImagePath1': instance.insuredDocImagePath1,
-      'insuredDocImagePath2': instance.insuredDocImagePath2,
-      'insuredDocImagePath3': instance.insuredDocImagePath3,
       'isPORDocVerificationCompleted': instance.isPorDocVerificationCompleted,
-      'policyDocumentTypeId': instance.policyDocumentTypeId,
-      'policyDocImagePath': instance.policyDocImagePath,
       'isPolicyDocVerificationCompleted':
           instance.isPolicyDocVerificationCompleted,
       'motorInsuranceDocumentTypeId': instance.motorInsuranceDocumentTypeId,
@@ -117,9 +139,205 @@ Map<String, dynamic> _$$AgentApplicationModelImplToJson(
       'additionalDocImagePath': instance.additionalDocImagePath,
       'isAdditionalDocVerificationCompleted':
           instance.isAdditionalDocVerificationCompleted,
+      'isNonMotorDocVerificationCompleted':
+          instance.isNonMotorDocVerificationCompleted,
+      'addressDocumentTypes': instance.addressDocumentTypes,
+      'porDocumentDetails': instance.porDocumentDetails,
+      'policyDocumentDetails': instance.policyDocumentDetails,
+      'additionalDoumentDetails': instance.additionalDoumentDetails,
+      'motorInsuranceDocumentDetails': instance.motorInsuranceDocumentDetails,
+      'nonMotorInsuranceDocumentDetails':
+          instance.nonMotorInsuranceDocumentDetails,
+    };
+
+_$AdditionalDoumentDetailImpl _$$AdditionalDoumentDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AdditionalDoumentDetailImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+      additionalDoumentDetailId: json['additionalDoumentDetailId'] as int?,
+      agentApplicationId: json['agentApplicationId'] as int?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
+      additionalDocumentTypeId: json['additionalDocumentTypeId'] as int?,
+      additionalDocImagePath: json['additionalDocImagePath'] as String?,
+    );
+
+Map<String, dynamic> _$$AdditionalDoumentDetailImplToJson(
+        _$AdditionalDoumentDetailImpl instance) =>
+    <String, dynamic>{
       'isDisabled': instance.isDisabled,
       'crd': instance.crd?.toIso8601String(),
       'crdBy': instance.crdBy,
       'lmd': instance.lmd?.toIso8601String(),
       'lmdBy': instance.lmdBy,
+      'additionalDoumentDetailId': instance.additionalDoumentDetailId,
+      'agentApplicationId': instance.agentApplicationId,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'additionalDocumentTypeId': instance.additionalDocumentTypeId,
+      'additionalDocImagePath': instance.additionalDocImagePath,
+    };
+
+_$AddressDocumentTypesImpl _$$AddressDocumentTypesImplFromJson(
+        Map<String, dynamic> json) =>
+    _$AddressDocumentTypesImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+      addressDocumentTypeId: json['addressDocumentTypeId'] as int?,
+      addressDocType: json['addressDocType'] as String?,
+      documentCode: json['documentCode'] as String?,
+    );
+
+Map<String, dynamic> _$$AddressDocumentTypesImplToJson(
+        _$AddressDocumentTypesImpl instance) =>
+    <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+      'addressDocumentTypeId': instance.addressDocumentTypeId,
+      'addressDocType': instance.addressDocType,
+      'documentCode': instance.documentCode,
+    };
+
+_$MotorInsuranceDocumentDetailImpl _$$MotorInsuranceDocumentDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MotorInsuranceDocumentDetailImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+      motorInsuranceDoumentDetailId:
+          json['motorInsuranceDoumentDetailId'] as int?,
+      agentApplicationId: json['agentApplicationId'] as int?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
+      motorInsuranceDocumentTypeId:
+          json['motorInsuranceDocumentTypeId'] as int?,
+      motorDocuImagePath: json['motorDocuImagePath'] as String?,
+    );
+
+Map<String, dynamic> _$$MotorInsuranceDocumentDetailImplToJson(
+        _$MotorInsuranceDocumentDetailImpl instance) =>
+    <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+      'motorInsuranceDoumentDetailId': instance.motorInsuranceDoumentDetailId,
+      'agentApplicationId': instance.agentApplicationId,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'motorInsuranceDocumentTypeId': instance.motorInsuranceDocumentTypeId,
+      'motorDocuImagePath': instance.motorDocuImagePath,
+    };
+
+_$NonMotorInsuranceDocumentDetailImpl
+    _$$NonMotorInsuranceDocumentDetailImplFromJson(Map<String, dynamic> json) =>
+        _$NonMotorInsuranceDocumentDetailImpl(
+          isDisabled: json['isDisabled'] as bool?,
+          crd: json['crd'] == null
+              ? null
+              : DateTime.parse(json['crd'] as String),
+          crdBy: json['crdBy'] as int?,
+          lmd: json['lmd'] == null
+              ? null
+              : DateTime.parse(json['lmd'] as String),
+          lmdBy: json['lmdBy'] as int?,
+          nonMotorInsuranceDoumentDetailId:
+              json['nonMotorInsuranceDoumentDetailId'] as int?,
+          agentApplicationId: json['agentApplicationId'] as int?,
+          uploadDocumentId: json['uploadDocumentId'] as int?,
+          nonMotorInsuranceDocumentTypeId:
+              json['nonMotorInsuranceDocumentTypeId'] as int?,
+          nonMotorDocImagePath: json['nonMotorDocImagePath'] as String?,
+        );
+
+Map<String, dynamic> _$$NonMotorInsuranceDocumentDetailImplToJson(
+        _$NonMotorInsuranceDocumentDetailImpl instance) =>
+    <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+      'nonMotorInsuranceDoumentDetailId':
+          instance.nonMotorInsuranceDoumentDetailId,
+      'agentApplicationId': instance.agentApplicationId,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'nonMotorInsuranceDocumentTypeId':
+          instance.nonMotorInsuranceDocumentTypeId,
+      'nonMotorDocImagePath': instance.nonMotorDocImagePath,
+    };
+
+_$PolicyDocumentDetailImpl _$$PolicyDocumentDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PolicyDocumentDetailImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+      policyDoumentDetailId: json['policyDoumentDetailId'] as int?,
+      agentApplicationId: json['agentApplicationId'] as int?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
+      policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
+      policyDouImagePath: json['policyDouImagePath'] as String?,
+    );
+
+Map<String, dynamic> _$$PolicyDocumentDetailImplToJson(
+        _$PolicyDocumentDetailImpl instance) =>
+    <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+      'policyDoumentDetailId': instance.policyDoumentDetailId,
+      'agentApplicationId': instance.agentApplicationId,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'policyDocumentTypeId': instance.policyDocumentTypeId,
+      'policyDouImagePath': instance.policyDouImagePath,
+    };
+
+_$PorDocumentDetailImpl _$$PorDocumentDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PorDocumentDetailImpl(
+      isDisabled: json['isDisabled'] as bool?,
+      crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
+      crdBy: json['crdBy'] as int?,
+      lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
+      lmdBy: json['lmdBy'] as int?,
+      porDocumentDetailId: json['porDocumentDetailId'] as int?,
+      porDocumentTypeId: json['porDocumentTypeId'] as int?,
+      agentApplicationId: json['agentApplicationId'] as int?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
+      lastName: json['lastName'] as String?,
+      issueDate: json['issueDate'] == null
+          ? null
+          : DateTime.parse(json['issueDate'] as String),
+      porDocImagePath: json['porDocImagePath'] as String?,
+    );
+
+Map<String, dynamic> _$$PorDocumentDetailImplToJson(
+        _$PorDocumentDetailImpl instance) =>
+    <String, dynamic>{
+      'isDisabled': instance.isDisabled,
+      'crd': instance.crd?.toIso8601String(),
+      'crdBy': instance.crdBy,
+      'lmd': instance.lmd?.toIso8601String(),
+      'lmdBy': instance.lmdBy,
+      'porDocumentDetailId': instance.porDocumentDetailId,
+      'porDocumentTypeId': instance.porDocumentTypeId,
+      'agentApplicationId': instance.agentApplicationId,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'lastName': instance.lastName,
+      'issueDate': instance.issueDate?.toIso8601String(),
+      'porDocImagePath': instance.porDocImagePath,
     };

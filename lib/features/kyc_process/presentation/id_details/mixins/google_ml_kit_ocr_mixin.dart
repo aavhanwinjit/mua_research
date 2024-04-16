@@ -97,6 +97,25 @@ mixin GoogleMLKitOCRMixin {
     }
   }
 
+  Future<({String? firstName, String? lastName})> performLandlordNICCardOCR({
+    required WidgetRef ref,
+    required BuildContext context,
+    // required VoidCallback onSuccess,
+    required String filePath,
+  }) async {
+    final inputImage = InputImage.fromFilePath(filePath);
+
+    final recognizedText = await _textRecognizer.processImage(inputImage);
+
+    final String? firstName = _extractStringValue(recognizedText, firstNameKeySet);
+    debugPrint("First Name: $firstName");
+
+    final String? surname = _extractStringValue(recognizedText, surNameKeySet);
+    debugPrint("Surname: $surname");
+
+    return Future.value((firstName: firstName, lastName: surname));
+  }
+
   String? _extractNICIDNumber(RecognizedText visionText) {
     final List<String> lines = visionText.text.split("\n");
     debugPrint("Lines: $lines");

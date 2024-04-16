@@ -28,6 +28,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(idReviewScreenConfirmationProvider.notifier).update((state) => false);
+      ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
     });
   }
 

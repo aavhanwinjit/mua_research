@@ -3,5 +3,6 @@ enum DocumentCategoryEnums {
   POA,
   POR,
   Policy,
+  Motor,
   Additional,
 }

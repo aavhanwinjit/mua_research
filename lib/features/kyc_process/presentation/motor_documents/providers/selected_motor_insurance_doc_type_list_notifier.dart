@@ -1,5 +1,6 @@
-import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
-import 'package:ekyc/features/kyc_process/data/models/save_motor_insurance_documents/request/save_motor_insurance_documents_request_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_document_types/response/get_motor_insurance_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_element/motor_insurance_document_element.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -9,16 +10,16 @@ part 'selected_motor_insurance_doc_type_list_notifier.g.dart';
 class SelectedMotorInsuranceDocTypeListNotifier
     extends _$SelectedMotorInsuranceDocTypeListNotifier {
   @override
-  List<MotorDocDetail> build() {
+  List<MotorInsuranceDocumentElement> build() {
     return [];
   }
 
-  void updateDocTypesList(List<MotorDocDetail> list) {
+  void updateDocTypesList(List<MotorInsuranceDocumentElement> list) {
     state = list;
   }
 
   // void addFirstElementToList() {
-  //   MotorDocDetail element = MotorDocDetail(documentElement: null, scanResponse: null);
+  //   MotorInsuranceDocumentElement element = MotorInsuranceDocumentElement(documentElement: null, scanResponse: null);
 
   //   state = [...state, element];
   // }
@@ -26,61 +27,76 @@ class SelectedMotorInsuranceDocTypeListNotifier
   void addElementToList() {
     // final length = state.length;
 
-    MotorDocDetail element = const MotorDocDetail(
-        uploadDocumentId: null,
-        motorDocumentTypeId: null,
-        motorDocImagePath: null);
+    MotorInsuranceDocumentElement element = MotorInsuranceDocumentElement(
+      documentElement: null,
+      scanResponse: null,
+      motorDocImagePath: null,
+    );
 
     state = [...state, element];
   }
 
   void removeElementFromList(int index) {
     debugPrint("index: $index");
-    List<MotorDocDetail> newList = List.from(state);
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
     newList.removeAt(index);
 
     state = newList;
   }
 
   void updateElementsSelectedDocType(
-      {required int index, required PORDocumentTypeModel element}) {
-    MotorDocDetail item = state[index];
+      {required int index, required MotorInsuranceDocumentTypeModel element}) {
+    MotorInsuranceDocumentElement item = state[index];
 
-    List<MotorDocDetail> newList = List.from(state);
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
     newList.removeAt(index);
 
-    // item.documentElement = element;
+    item.documentElement = element;
 
     newList.insert(index, item);
 
     state = newList;
   }
 
-  // void updateElementsFilePath({required int index, required String filePath}) {
-  //   MotorDocDetail item = state[index];
+  void updateElementsFilePath({required int index, required String filePath}) {
+    MotorInsuranceDocumentElement item = state[index];
 
-  //   List<MotorDocDetail> newList = List.from(state);
-  //   newList.removeAt(index);
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
 
-  //   item.motorDocImagePath = filePath;
+    item.motorDocImagePath = filePath;
 
-  //   newList.insert(index, item);
+    newList.insert(index, item);
 
-  //   state = newList;
-  // }
+    state = newList;
+  }
 
-  // void clearElementsFilePath({required int index}) {
-  //   MotorDocDetail item = state[index];
+  void updateElementScanResponse(
+      {required int index, required ScanDocumentResponseBody? scanResponse}) {
+    MotorInsuranceDocumentElement item = state[index];
 
-  //   List<MotorDocDetail> newList = List.from(state);
-  //   newList.removeAt(index);
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
 
-  //   item.motorDocImagePath = null;
+    item.scanResponse = scanResponse;
 
-  //   newList.insert(index, item);
+    newList.insert(index, item);
 
-  //   state = newList;
-  // }
+    state = newList;
+  }
+
+  void clearElementsFilePath({required int index}) {
+    MotorInsuranceDocumentElement item = state[index];
+
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
+
+    item.motorDocImagePath = null;
+
+    newList.insert(index, item);
+
+    state = newList;
+  }
 
   void clearList() {
     state = [];
@@ -94,7 +110,7 @@ class SelectedMotorInsuranceDocTypeListNotifier
     return state.isEmpty;
   }
 
-  List<MotorDocDetail> list() {
+  List<MotorInsuranceDocumentElement> list() {
     return state;
   }
 }

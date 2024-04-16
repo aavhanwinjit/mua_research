@@ -29,6 +29,7 @@ mixin AgentApplicationsMixin {
     final GetAgentApplicationsRequestModel request = GetAgentApplicationsRequestModel(
       agentId: agentDetails?.agentId,
       rowsPerPage: 10,
+      applicationSearch: ref.watch(searchKeywordProvider),
       pageNo: pageNumber,
       status: status,
     );
@@ -68,9 +69,9 @@ mixin AgentApplicationsMixin {
           ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
           ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
+          // context.showErrorSnackBar(
+          //   message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          // );
         }
       },
     );

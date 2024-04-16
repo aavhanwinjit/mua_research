@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/kyc_status_dialog_helper.dart';
@@ -46,6 +47,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
       ref.watch(ocrNameMatched.notifier).update((state) => true);
       ref.watch(addressOtherNameProvider.notifier).update((state) => null);
       ref.watch(addressSurnameProvider.notifier).update((state) => null);
+      ref.watch(addressTextProvider.notifier).update((state) => null);
 
       getAddressDocumentTypes(context: context, ref: ref);
     });
@@ -204,7 +206,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
     final AddressDocumentTypeModel? selectedAddressDocType =
         ref.watch(selectedAddressDocTypeProvider);
 
-    if (selectedAddressDocType?.documentCode == "UTB") {
+    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
       if (response?.ocrResponse != null) {
         // check different conditions for ocr status
 
@@ -214,13 +216,9 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
             documentData?.billDate != null &&
             documentData?.isFirstNameAvailable == true &&
             documentData?.isLastNameAvailable == true) {
-          ref
-              .watch(addressDocOCRApiResponse.notifier)
-              .update((state) => response);
-          _setCustomerName();
-          ref
-              .watch(addressDocOCRLoadingProvider.notifier)
-              .update((state) => false);
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName(response);
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           context.pushNamed(AppRoutes.addressReviewSubmitScreen);
         } else if (documentData?.kycStatus == "Failed" &&
             documentData?.billDate != null &&
@@ -237,33 +235,33 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
             documentData?.kycStatusMsg ==
                 "KYC validation failed. First name did not match in the document. Last name did not match in the document.") {
           //allow to navigate but tell agent that the name is not matched
-          ref
-              .watch(addressDocOCRApiResponse.notifier)
-              .update((state) => response);
-          _setCustomerName();
-          ref
-              .watch(addressDocOCRLoadingProvider.notifier)
-              .update((state) => false);
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName(response);
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           ref.watch(ocrNameMatched.notifier).update((state) => false);
           context.pushNamed(AppRoutes.addressReviewSubmitScreen);
         }
       }
     } else {
       ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
-      _setCustomerName();
+      _setCustomerName(response);
       ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
       context.pushNamed(AppRoutes.addressReviewSubmitScreen);
     }
   }
 
-  void _setCustomerName() {
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+  void _setCustomerName(ScanDocumentResponseBody? response) {
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final String? firstName = selectedApplication?.idDocOtherName;
     final String? surname = selectedApplication?.idDocSurname;
 
-    ref.watch(addressOtherNameProvider.notifier).update((state) => firstName);
-    ref.watch(addressSurnameProvider.notifier).update((state) => surname);
+    if (response?.ocrResponse?.documentdata?.isFirstNameAvailable == true) {
+      ref.watch(addressOtherNameProvider.notifier).update((state) => firstName);
+    }
+
+    if (response?.ocrResponse?.documentdata?.isLastNameAvailable == true) {
+      ref.watch(addressSurnameProvider.notifier).update((state) => surname);
+    }
   }
 }
