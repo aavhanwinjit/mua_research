@@ -53,10 +53,14 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
           json['isPORDocVerificationCompleted'] as bool?,
       isPolicyDocVerificationCompleted:
           json['isPolicyDocVerificationCompleted'] as bool?,
-      isAdditionalDocVerificationCompleted:
-          json['isAdditionalDocVerificationCompleted'] as bool?,
+      motorInsuranceDocumentTypeId: json['motorInsuranceDocumentTypeId'],
+      motorDocImagePath: json['motorDocuImagePath'],
       isMotorDocVerificationCompleted:
           json['isMotorDocVerificationCompleted'] as bool?,
+      additionalDocumentTypeId: json['additionalDocumentTypeId'],
+      additionalDocImagePath: json['additionalDocImagePath'],
+      isAdditionalDocVerificationCompleted:
+          json['isAdditionalDocVerificationCompleted'] as bool?,
       isNonMotorDocVerificationCompleted:
           json['isNonMotorDocVerificationCompleted'] as bool?,
       addressDocumentTypes: json['addressDocumentTypes'] == null
@@ -127,10 +131,14 @@ Map<String, dynamic> _$$AgentApplicationModelImplToJson(
       'isPORDocVerificationCompleted': instance.isPorDocVerificationCompleted,
       'isPolicyDocVerificationCompleted':
           instance.isPolicyDocVerificationCompleted,
-      'isAdditionalDocVerificationCompleted':
-          instance.isAdditionalDocVerificationCompleted,
+      'motorInsuranceDocumentTypeId': instance.motorInsuranceDocumentTypeId,
+      'motorDocuImagePath': instance.motorDocImagePath,
       'isMotorDocVerificationCompleted':
           instance.isMotorDocVerificationCompleted,
+      'additionalDocumentTypeId': instance.additionalDocumentTypeId,
+      'additionalDocImagePath': instance.additionalDocImagePath,
+      'isAdditionalDocVerificationCompleted':
+          instance.isAdditionalDocVerificationCompleted,
       'isNonMotorDocVerificationCompleted':
           instance.isNonMotorDocVerificationCompleted,
       'addressDocumentTypes': instance.addressDocumentTypes,
