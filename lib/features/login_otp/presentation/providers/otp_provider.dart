@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final otpProvider = StateProvider<String>((ref) => '');
 
+final otpScreenLoadingProvider = StateProvider<bool>((ref) => false);
+
 final validateOTPResponseProvider = StateProvider<ValidateOtpResponseModel?>((ref) => null);
 
 final userLoggedInProvider = StateProvider<bool>((ref) => false);

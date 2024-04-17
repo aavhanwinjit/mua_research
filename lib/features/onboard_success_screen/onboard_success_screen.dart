@@ -53,6 +53,7 @@ class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: CustomPrimaryButton(
+              loading: ref.watch(agentDetailsLoadingProvider),
               label: "Go to Dashboard",
               disable: false,
               onTap: () async {
@@ -64,6 +65,8 @@ class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
                     ref
                         .watch(agentSignaturePathProvider.notifier)
                         .update((state) => agentDetails?.body?.responseBody?.signaturePath);
+
+                    ref.watch(agentDetailsLoadingProvider.notifier).update((state) => false);
 
                     context.go(AppRoutes.dashboardScreen);
                   },

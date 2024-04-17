@@ -9,6 +9,7 @@ class CustomPrimaryButton extends StatelessWidget {
   final double? height;
   final double? width;
   final bool? disable;
+  final bool? loading;
 
   const CustomPrimaryButton({
     super.key,
@@ -18,10 +19,15 @@ class CustomPrimaryButton extends StatelessWidget {
     this.width,
     this.disable = false,
     this.disabledOnTap,
+    this.loading = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    return _button();
+  }
+
+  Widget _button() {
     return MaterialButton(
       elevation: 0,
       height: 60.h,
@@ -30,28 +36,57 @@ class CustomPrimaryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(100),
       ),
       color: disable == false ? primaryColor : disabledButtonColor,
-      onPressed: disable == false ? onTap : disabledOnTap ?? () {},
-      child: Text(
-        label,
-        style: TextStyle(
-          color: disable == false ? white : textGrayColor,
-          fontSize: 16.sp,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
+      onPressed: loading == true
+          ? () {}
+          : disable == false
+              ? onTap
+              : disabledOnTap ?? () {},
+      child: _animatedButton(),
     );
   }
 
-  // Widget _loadingWidget() {
-  //   return AnimatedSwitcher(
-  //     duration: duration,
-  //     transitionBuilder: (Widget child, Animation<double> animation) {
-  //       return SizeTransition(
-  //         sizeFactor: animation,
-  //         child: child,
-  //       );
-  //     },
-  //     child: showChild ? child : switchedChild ?? const SizedBox.shrink(),
-  //   );
-  // }
+  Widget _buttonTitle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            color: disable == false ? white : textGrayColor,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _animatedButton() {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          child: child,
+        );
+      },
+      child: loading == true ? _loader() : _buttonTitle(),
+    );
+  }
+
+  Widget _loader() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: white,
+          ),
+        ),
+      ],
+    );
+  }
 }

@@ -228,6 +228,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
+        loading: ref.watch(ocrLoadingProvider),
         disable: _disableNextButtonCondition(),
         disabledOnTap: () {
           context.showErrorSnackBar(message: Strings.uploadBothDocuments);

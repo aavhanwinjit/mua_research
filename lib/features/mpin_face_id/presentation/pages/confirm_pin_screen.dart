@@ -66,6 +66,10 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
             ),
             const Spacer(),
             MaskedPinTextfield(provider: confirmPINProvider),
+            if (ref.watch(mpinLoadingProvider)) ...[
+              const Spacer(),
+              _loader(),
+            ],
             const Spacer(),
             successVal
                 ? Container(
@@ -113,6 +117,22 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
     );
   }
 
+  Widget _loader() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: white,
+          ),
+        ),
+      ],
+    );
+  }
+
   Future<void> _biometricAuthentication() async {
     // await setFingerPrint(
     //   context: context,
@@ -140,6 +160,8 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           successNavigation: () async {
             ref.watch(isFPLoginProvider.notifier).update((state) => true);
 
+            ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
             context.pushNamed(AppRoutes.onboardSuccessScreen);
           },
         );
@@ -152,6 +174,9 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   }
 
   void _verifyMPIN() async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
     VerifyMPINRequestModel request = VerifyMPINRequestModel(
       isExistingCustomer: true,
       oldMPIN: ref.read(oldPINProvider),
@@ -159,11 +184,15 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
       confirmNewMPIN: ref.read(confirmPINProvider),
     );
 
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<VerifyMPIN>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (VerifyMPINResponseModel success) async {
@@ -176,10 +205,13 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           //   authToken: success.body?.responseBody?.tokenData?.token,
           //   sessionId: success.body?.responseBody?.tokenData?.sessionId,
           // );
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
           context.pushNamed(AppRoutes.otpScreen);
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );

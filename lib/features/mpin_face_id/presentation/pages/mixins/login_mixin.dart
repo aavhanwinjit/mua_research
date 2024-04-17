@@ -26,6 +26,9 @@ mixin LoginMixin {
     required Function() onWrongPin,
     required Function() onFailure,
   }) async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
     final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
@@ -41,11 +44,15 @@ mixin LoginMixin {
       mobileNo: mobileNo,
     );
 
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<LoginByMpin>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (LoginbyMpinResponseModel success) async {
@@ -59,12 +66,16 @@ mixin LoginMixin {
 
           onSuccess(success.body?.responseBody);
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.inValidPin) {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: Strings.pinAuthenticationFailed,
           );
 
           onWrongPin();
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
@@ -80,6 +91,9 @@ mixin LoginMixin {
     required WidgetRef ref,
     required Function(AgentLoginDetailsResponseModel? agentDetails) onSuccess,
   }) async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
     final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
@@ -96,11 +110,15 @@ mixin LoginMixin {
       mobileNo: mobileNo,
     );
 
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<LoginByFP>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (LoginByFpResponseModel success) async {
@@ -115,6 +133,8 @@ mixin LoginMixin {
 
           onSuccess(success.body?.responseBody);
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );

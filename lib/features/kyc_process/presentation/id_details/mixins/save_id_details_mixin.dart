@@ -83,8 +83,6 @@ mixin SaveIDDetailsMixin {
       // idDocBackImage: idCardBackScanResult?.fileName,
       customerId: null,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
-      // idDocFrontUploadedDocumentId: idCardFrontScanResult?.uploadedDocumentId,
-      // idDocBackUploadedDocumentId: idCardBackScanResult?.uploadedDocumentId,
     );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
