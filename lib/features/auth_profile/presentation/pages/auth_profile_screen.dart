@@ -41,7 +41,7 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with Sign
                   // context.go(AppRoutes.selectPINorBiometricScreen);
                   // },
                   onTap: () async {
-                    await uploadSignature(
+                    await saveSignature(
                         context: context,
                         ref: ref,
                         onSuccess: (SaveFileResponseModel success) {

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
-import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -103,13 +102,8 @@ class NICDetailsCard extends ConsumerWidget {
   }
 
   Widget _imageRow(WidgetRef ref) {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
-
-    final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
-    final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
-
-    final passportFrontSide = ref.watch(passportFrontFilePathProvider);
-    final passportBackSide = ref.watch(passportBackFilePathProvider);
+    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
 
     final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
 
@@ -126,13 +120,9 @@ class NICDetailsCard extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _imageWidget((selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                  ? nicCardFrontSide
-                  : passportFrontSide),
+              _imageWidget(idCardFrontSide),
               SizedBox(width: 16.w),
-              _imageWidget((selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                  ? nicCardBackSide
-                  : passportBackSide),
+              _imageWidget(idCardBackSide),
             ],
           ),
         ],

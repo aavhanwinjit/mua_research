@@ -20,7 +20,6 @@ class SetAgentMpinRequestModel with _$SetAgentMpinRequestModel {
     @JsonKey(name: "mPIN") String? mPIN,
     @JsonKey(name: "confirmMPIN") String? confirmMpin,
     @JsonKey(name: "mobileNo") String? mobileNo,
-    @JsonKey(name: "signaturePath") String? signaturePath,
   }) = _SetAgentMpinRequestModel;
 
   factory SetAgentMpinRequestModel.fromJson(Map<String, dynamic> json) => _$SetAgentMpinRequestModelFromJson(json);

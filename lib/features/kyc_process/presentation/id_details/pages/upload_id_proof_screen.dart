@@ -28,10 +28,13 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.watch(nicCardFrontFilePathProvider.notifier).update((state) => null);
-      ref.watch(passportFrontFilePathProvider.notifier).update((state) => null);
-      ref.watch(nicCardBackFilePathProvider.notifier).update((state) => null);
-      ref.watch(passportBackFilePathProvider.notifier).update((state) => null);
+      ref.watch(idDocFrontFilePathProvider.notifier).update((state) => null);
+      ref.watch(idDocBackFilePathProvider.notifier).update((state) => null);
+
+      // ref.watch(nicCardFrontFilePathProvider.notifier).update((state) => null);
+      // ref.watch(passportFrontFilePathProvider.notifier).update((state) => null);
+      // ref.watch(nicCardBackFilePathProvider.notifier).update((state) => null);
+      // ref.watch(passportBackFilePathProvider.notifier).update((state) => null);
 
       getIdentityDocumentTypes(context: context, ref: ref);
     });
@@ -119,9 +122,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         DocumentUploadContainer(
-          provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-              ? nicCardFrontFilePathProvider
-              : passportFrontFilePathProvider,
+          provider: idDocFrontFilePathProvider,
           label: Strings.idDocumentFrontContainerLabel,
           cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
           cameraScreenDescription:
@@ -131,11 +132,35 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
           reviewScreenTitle: Strings.identityIdDetails,
           hideClearButton: !_checkIfBackImageIsUploaded(),
         ),
+        // DocumentUploadContainer2(
+        //   filePath: ref.watch(idDocFrontFilePathProvider),
+        //   documentCode: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+        //       ? DocumentCodes.NIC.toString().split('.').last
+        //       : DocumentCodes.PSP.toString().split('.').last,
+        //   onChange: (String path, ScanDocumentResponseBody? response) async {
+        //     ref.watch(idDocFrontFilePathProvider.notifier).update((state) => path);
+        //     ref.watch(idDocFrontScanDocResultProvider.notifier).update((state) => response);
+
+        //     // call ml kit ocr after scan docs
+        //     await _performOCR(onSuccess: () {
+        //       context.pop();
+        //     });
+        //   },
+        //   clearFile: () {
+        //     ref.watch(idDocFrontFilePathProvider.notifier).update((state) => null);
+        //   },
+        //   label: Strings.idDocumentFrontContainerLabel,
+        //   cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
+        //   cameraScreenDescription:
+        //       (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+        //           ? Strings.idDocumentNicFrontCameraLabel
+        //           : Strings.idDocumentPassportFrontCameraLabel,
+        //   reviewScreenTitle: Strings.identityIdDetails,
+        //   hideClearButton: !_checkIfBackImageIsUploaded(),
+        // ),
         SizedBox(height: 24.h),
         DocumentUploadContainer(
-          provider: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-              ? nicCardBackFilePathProvider
-              : passportBackFilePathProvider,
+          provider: idDocBackFilePathProvider,
           label: Strings.idDocumentBackContainerLabel,
           cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
           cameraScreenDescription:
@@ -148,6 +173,32 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
             context.showErrorSnackBar(message: Strings.selectFrontImageFirst);
           },
         ),
+        // DocumentUploadContainer2(
+        //   filePath: ref.watch(idDocBackFilePathProvider),
+        //   documentCode: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+        //       ? DocumentCodes.NIC.toString().split('.').last
+        //       : DocumentCodes.PSP.toString().split('.').last,
+        //   onChange: (String path, ScanDocumentResponseBody? response) async {
+        //     ref.watch(idDocBackFilePathProvider.notifier).update((state) => path);
+        //     ref.watch(idDocBackScanDocResultProvider.notifier).update((state) => response);
+
+        //     context.pop();
+        //   },
+        //   clearFile: () {
+        //     ref.watch(idDocBackFilePathProvider.notifier).update((state) => null);
+        //   },
+        //   label: Strings.idDocumentBackContainerLabel,
+        //   cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
+        //   cameraScreenDescription:
+        //       (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+        //           ? Strings.idDocumentNicBackCameraLabel
+        //           : Strings.idDocumentPassportBackCameraLabel,
+        //   reviewScreenTitle: Strings.identityIdDetails,
+        //   disable: _checkIfFrontImageIsUploaded(),
+        //   disableCallback: () {
+        //     context.showErrorSnackBar(message: Strings.selectFrontImageFirst);
+        //   },
+        // ),
       ],
     );
   }
@@ -181,92 +232,61 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
         disabledOnTap: () {
           context.showErrorSnackBar(message: Strings.uploadBothDocuments);
         },
-        onTap: () {
-          final selectedApplication = ref.watch(selectedApplicationProvider);
-
-          if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-            performNICCardOCR(
-              ref: ref,
-              context: context,
-              onSuccess: () {
-                context.pushNamed(AppRoutes.idReviewSubmitScreen);
-              },
-            );
-          } else {
-            // perform OCR on passport
-            context.showSnackBar(message: "OCR on passport is under development");
-          }
+        onTap: () async {
+          await _performOCR(onSuccess: () {
+            context.pushNamed(AppRoutes.idReviewSubmitScreen);
+          });
         },
         label: Strings.next,
       ),
     );
   }
 
-  bool _disableNextButtonCondition() {
+  Future<void> _performOCR({required Function onSuccess}) async {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-      final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
-      final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
-
-      if (nicCardFrontSide == null || nicCardBackSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+      await performNICCardOCR(
+        ref: ref,
+        context: context,
+        onSuccess: () {
+          onSuccess();
+        },
+      );
     } else {
-      final passportFrontSide = ref.watch(passportFrontFilePathProvider);
-      final passportBackSide = ref.watch(passportBackFilePathProvider);
+      // perform OCR on passport
+      context.showSnackBar(message: "OCR on passport is under development");
+    }
+  }
 
-      if (passportFrontSide == null || passportBackSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+  bool _disableNextButtonCondition() {
+    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
+
+    if (idCardFrontSide == null || idCardBackSide == null) {
+      return true;
+    } else {
+      return false;
     }
   }
 
   bool _checkIfFrontImageIsUploaded() {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
+    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
 
-    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-      final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
-
-      if (nicCardFrontSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+    if (idCardFrontSide == null) {
+      return true;
     } else {
-      final passportFrontSide = ref.watch(passportFrontFilePathProvider);
-
-      if (passportFrontSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     }
   }
 
   bool _checkIfBackImageIsUploaded() {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
+    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
 
-    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-      final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
-
-      if (nicCardBackSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+    if (idCardBackSide == null) {
+      return true;
     } else {
-      final passportBackSide = ref.watch(passportBackFilePathProvider);
-
-      if (passportBackSide == null) {
-        return true;
-      } else {
-        return false;
-      }
+      return false;
     }
   }
 }

@@ -46,36 +46,25 @@ mixin SaveIDDetailsMixin {
     final String? surname = ref.watch(extractedSurNameProvider);
     final String? idnumber = ref.watch(extractedNICIDNumberProvider);
 
-    final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
-    final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
+    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
 
-    final passportFrontSide = ref.watch(passportFrontFilePathProvider);
-    final passportBackSide = ref.watch(passportBackFilePathProvider);
+    // final idCardFrontScanResult = ref.watch(idDocFrontScanDocResultProvider);
+    // final idCardBackScanResult = ref.watch(idDocBackScanDocResultProvider);
 
-    String? frontBase64;
-    String? backBase64;
+    // final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
+    // final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
 
-    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-      File frontFile = File(nicCardFrontSide ?? "");
-      final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
-      frontBase64 = base64Encode(frontFileBytes);
+    // final passportFrontSide = ref.watch(passportFrontFilePathProvider);
+    // final passportBackSide = ref.watch(passportBackFilePathProvider);
 
-      File backFile = File(nicCardBackSide ?? "");
-      final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
-      backBase64 = base64Encode(backFileBytes);
-    } else {
-      File frontFile = File(passportFrontSide ?? "");
-      final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
-      frontBase64 = base64Encode(frontFileBytes);
+    File frontFile = File(idCardFrontSide ?? "");
+    final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
+    String frontBase64 = base64Encode(frontFileBytes);
 
-      File backFile = File(passportBackSide ?? "");
-      final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
-      backBase64 = base64Encode(backFileBytes);
-    }
-
-    // final list = await result.readAsBytes();
-    //       final signatureBytes = ref.watch(signatureProvider) as List<int>;
-    // final String signatureBase64 = base64Encode(signatureBytes);
+    File backFile = File(idCardBackSide ?? "");
+    final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
+    String backBase64 = base64Encode(backFileBytes);
 
     SaveIdentityDetailsRequestModel request = SaveIdentityDetailsRequestModel(
       applicationRefNo: selectedApplication?.applicationRefNo,
@@ -88,12 +77,14 @@ mixin SaveIDDetailsMixin {
       surname: surname,
       otherName: firstname,
       idDocNumber: idnumber,
-      // idDocFrontImage: "frontBase64",
       idDocFrontImage: frontBase64,
-      // idDocBackImage: "backBase64",
+      // idDocFrontImage: idCardFrontScanResult?.fileName,
       idDocBackImage: backBase64,
+      // idDocBackImage: idCardBackScanResult?.fileName,
       customerId: null,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
+      // idDocFrontUploadedDocumentId: idCardFrontScanResult?.uploadedDocumentId,
+      // idDocBackUploadedDocumentId: idCardBackScanResult?.uploadedDocumentId,
     );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
