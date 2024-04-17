@@ -36,6 +36,7 @@ extension SnackbarContextX on BuildContext {
       SnackBar(
         key: ValueKey(message),
         behavior: behavior ?? SnackBarBehavior.fixed,
+        backgroundColor: primaryGreenColor,
         margin: behavior == SnackBarBehavior.fixed ? const EdgeInsets.only(left: 16, right: 16, bottom: 4) : null,
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),

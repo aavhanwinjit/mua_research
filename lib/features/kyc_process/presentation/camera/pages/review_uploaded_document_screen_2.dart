@@ -58,6 +58,7 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
               ),
               const Spacer(),
               CustomPrimaryButton(
+                loading: ref.watch(reviewScreen2LoadingProvider),
                 disable: false,
                 label: Strings.upload,
                 onTap: () async {
@@ -71,6 +72,8 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
                     documentType: documentCode,
                     loadingProvider: reviewScreen2LoadingProvider,
                     onSuccess: (ScanDocumentResponseBody? response) {
+                      ref.watch(reviewScreen2LoadingProvider.notifier).update((state) => false);
+
                       onChange(capturedFilePath ?? "", response);
                     },
                     base64Image: fileBase64,
@@ -79,7 +82,7 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
               ),
               SizedBox(height: 16.h),
               CustomOutlineButton(
-                disable: false,
+                disable: ref.watch(reviewScreen2LoadingProvider) == true ? false : false,
                 primary: true,
                 label: Strings.retakePhoto,
                 onTap: () {

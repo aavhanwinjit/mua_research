@@ -68,6 +68,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   SizedBox(height: 24.h),
                   CustomPrimaryButton(
+                    loading: ref.watch(verifyMobileNumberLoadingProvider),
                     disable: ref.watch(phoneNumberProvider).trim().length < 8,
                     onTap: () {
                       _verifyMobileNumber();
@@ -91,16 +92,25 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void _verifyMobileNumber() async {
     KeyboardHelper.hideKeyboard(context);
 
+    final bool loading = ref.watch(verifyMobileNumberLoadingProvider);
+    if (loading) {
+      return;
+    }
+
     if (formKey.currentState!.validate()) {
       final String phoneNumber = ref.read(phoneNumberProvider);
 
       final body = VerifyMobileNumberRequestModel(mobileNumber: phoneNumber);
+
+      ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => true);
 
       final response = await getIt<VerifyMobileNumber>().call(body);
 
       response.fold(
         (failure) {
           debugPrint("failure: $failure");
+          ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
           context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
         },
         (VerifyMobileNumberResponseModel success) async {
@@ -113,9 +123,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               sessionId: success.body?.responseBody?.tokenData?.sessionId,
             );
 
+            ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
             context.showSnackBar(message: Strings.otpSentSuccessfully);
             context.pushNamed(AppRoutes.otpScreen);
           } else {
+            ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
             context.showErrorSnackBar(
               message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
             );

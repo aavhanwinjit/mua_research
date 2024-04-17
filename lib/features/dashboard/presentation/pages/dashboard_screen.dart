@@ -290,12 +290,9 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> with AgentApp
         ),
       ),
       actions: [
-        InkWell(
-          // onTap: () => throw Exception(),
-          child: Image.asset(
-            ImageConstants.pngLogo,
-            width: 68.w,
-          ),
+        Image.asset(
+          ImageConstants.pngLogo,
+          width: 68.w,
         ),
         SizedBox(width: 20.w),
       ],

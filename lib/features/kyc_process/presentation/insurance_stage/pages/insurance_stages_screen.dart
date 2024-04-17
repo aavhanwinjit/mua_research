@@ -5,6 +5,7 @@ import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/kyc_types_mixin.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/mixins/download_pdf_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/mixins/get_document_category_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
@@ -24,7 +25,7 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
 }
 
 class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
-    with GetDocumentCategoryMixin, KycTypesMixin {
+    with GetDocumentCategoryMixin, KycTypesMixin, DownloadPdfMixin {
   @override
   void initState() {
     super.initState();
@@ -168,14 +169,27 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
   }
 
   Widget _buttons(BuildContext context) {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
     return Column(
       children: [
         CustomOutlineIconButton(
           label: Strings.downloadPDF,
           iconString: ImageConstants.pdfIcon,
-          onTap: () {},
+          onTap: () async {
+            await downloadPdf(context);
+          },
         ),
         SizedBox(height: 16.h),
+        if (selectedApplication?.applicationStatus == Strings.chipStatusCompleted) ...[
+          CustomPrimaryButton(
+            label: Strings.done,
+            onTap: () {
+              context.go(AppRoutes.kycSubmittedScreen);
+            },
+          ),
+          SizedBox(height: 16.h),
+        ],
         CustomPrimaryButton(
           label: Strings.goToDashboard,
           onTap: () {

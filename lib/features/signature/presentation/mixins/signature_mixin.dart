@@ -79,7 +79,11 @@ mixin SignatureMixin {
     required BuildContext context,
     required WidgetRef ref,
     required Function(SaveFileResponseModel success) onSuccess,
+    required StateProvider<bool> loadingProvider,
   }) async {
+    final loading = ref.read(loadingProvider);
+    if (loading) return;
+
     final signatureBytes = ref.watch(signatureProvider) as List<int>;
     final String signatureBase64 = base64Encode(signatureBytes);
 
@@ -90,17 +94,23 @@ mixin SignatureMixin {
       fileString: signatureBase64,
     );
 
+    ref.read(loadingProvider.notifier).update((state) => true);
+
     final response = await getIt<SaveSignature>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.read(loadingProvider.notifier).update((state) => false);
+
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SaveFileResponseModel success) async {
         if (success.status?.isSuccess == true) {
           onSuccess(success);
         } else {
+          ref.read(loadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
