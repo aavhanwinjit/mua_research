@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final phoneNumberProvider = StateProvider<String>((ref) => '');
 
+final verifyMobileNumberLoadingProvider = StateProvider<bool>((ref) => false);
+
 final verifyMobileNumberProvider = StateProvider<VerifyMobileNumberResponseModel?>((ref) => null);
 
 final resendOTPProvider = StateProvider<ResendOtpResponseModel?>((ref) => null);

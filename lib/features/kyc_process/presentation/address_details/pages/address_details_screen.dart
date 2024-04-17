@@ -26,8 +26,7 @@ class AddressDetailsScreen extends ConsumerStatefulWidget {
   const AddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _AddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AddressDetailsScreenState();
 }
 
 class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
@@ -38,9 +37,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.watch(addressDocsTypesListLoading.notifier).update((state) => false);
-      ref
-          .watch(selectedAddressDocTypeProvider.notifier)
-          .update((state) => null);
+      ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => null);
       ref.watch(addressProofFilePathProvider.notifier).update((state) => null);
       ref.watch(addressDocOCRApiResponse.notifier).update((state) => null);
       ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
@@ -57,8 +54,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
   Widget build(BuildContext context) {
     final bool addressDocTypeLoading = ref.watch(addressDocsTypesListLoading);
 
-    final addressDocTypesNotifier =
-        ref.watch(addressDocsTypesNotifierProvider.notifier);
+    final addressDocTypesNotifier = ref.watch(addressDocsTypesNotifierProvider.notifier);
     ref.watch(addressDocsTypesNotifierProvider);
 
     return GestureDetector(
@@ -70,8 +66,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
           context: context,
           title: Strings.addressDetails,
         ),
-        bottomNavigationBar:
-            !addressDocTypeLoading ? _bottomNavBarWidget() : null,
+        bottomNavigationBar: !addressDocTypeLoading ? _bottomNavBarWidget() : null,
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -83,19 +78,16 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
                   SizedBox(height: 8.h),
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  if (addressDocTypeLoading)
-                    const AddressDetailsLoadingWidget(),
+                  if (addressDocTypeLoading) const AddressDetailsLoadingWidget(),
                   if (!addressDocTypeLoading) ...[
                     if (addressDocTypesNotifier.haveList()) ...[
                       _dropdownWidget(),
                       SizedBox(height: 24.h),
                       DocumentUploadContainer(
                         provider: addressProofFilePathProvider,
-                        disable:
-                            ref.watch(selectedAddressDocTypeProvider) == null,
+                        disable: ref.watch(selectedAddressDocTypeProvider) == null,
                         disableCallback: () {
-                          context.showErrorSnackBar(
-                              message: Strings.selectDocumentType);
+                          context.showErrorSnackBar(message: Strings.selectDocumentType);
                         },
                         cameraScreenTitle: Strings.scanDocuments,
                         label: Strings.addressDocumentContainerLabel,
@@ -135,8 +127,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
   }
 
   Widget _dropdownWidget() {
-    final addressDocTypesNotifier =
-        ref.watch(addressDocsTypesNotifierProvider.notifier);
+    final addressDocTypesNotifier = ref.watch(addressDocsTypesNotifierProvider.notifier);
     ref.watch(addressDocsTypesNotifierProvider);
 
     return CustomDrowDownField(
@@ -146,13 +137,9 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        ref
-            .watch(selectedAddressDocTypeProvider.notifier)
-            .update((state) => value as AddressDocumentTypeModel);
+        ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => value as AddressDocumentTypeModel);
       },
-      items: addressDocTypesNotifier
-          .addressDocsTypesList()
-          .map((AddressDocumentTypeModel value) {
+      items: addressDocTypesNotifier.addressDocsTypesList().map((AddressDocumentTypeModel value) {
         return DropdownMenuItem<AddressDocumentTypeModel>(
           value: value,
           child: Text(
@@ -170,21 +157,18 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
+        loading: ref.watch(addressDocOCRLoadingProvider),
         disable: ref.watch(addressProofFilePathProvider) == null,
         disabledOnTap: () {
           context.showErrorSnackBar(message: Strings.uploadAddressProof);
         },
         onTap: () async {
-          final AddressDocumentTypeModel? selectedAddressDocType =
-              ref.watch(selectedAddressDocTypeProvider);
+          final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
 
-          final String? addressProofFilePath =
-              ref.watch(addressProofFilePathProvider);
+          final String? addressProofFilePath = ref.watch(addressProofFilePathProvider);
           File addressProofFile = File(addressProofFilePath ?? "");
-          final List<int> addressProofFileBytes =
-              await addressProofFile.readAsBytes() as List<int>;
-          final String addressProofFileBase64 =
-              base64Encode(addressProofFileBytes);
+          final List<int> addressProofFileBytes = await addressProofFile.readAsBytes() as List<int>;
+          final String addressProofFileBase64 = base64Encode(addressProofFileBytes);
 
           await scanDocument(
             context: context,
@@ -203,8 +187,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
   }
 
   void onSuccess(ScanDocumentResponseBody? response) {
-    final AddressDocumentTypeModel? selectedAddressDocType =
-        ref.watch(selectedAddressDocTypeProvider);
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
 
     if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
       if (response?.ocrResponse != null) {
@@ -224,9 +207,9 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
             documentData?.billDate != null &&
             documentData?.kycStatusMsg ==
                 "KYC validation failed.The uploaded bill should be of last 3 months only. Older documents are not allowed.") {
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           // Block the user here itself
-          KycStatusDialogHelper.showOldBillDateDialog(context,
-              content: documentData?.kycStatusMsg ?? "");
+          KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData?.kycStatusMsg ?? "");
           return;
         } else if (documentData?.kycStatus == "Failed" &&
             documentData?.billDate != null &&

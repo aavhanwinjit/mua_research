@@ -92,15 +92,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                 _pinInputField(),
                 SizedBox(height: 24.h),
                 CustomPrimaryButton(
+                  loading: ref.watch(otpScreenLoadingProvider),
                   disable: ref.watch(otpProvider).trim().length < 6,
-                  // onTap: () {
-                  //   context.pushReplacementNamed(AppRoutes.successScreen);
-                  // },
-                  // onTap: () {
-                  //   final container = ProviderContainer();
-                  //   final String sId = ProviderContainer().read(sessionIdProvider);
-                  //   debugPrint("sid: $sId");
-                  // },
                   onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
                   label: Strings.contn,
                 ),
@@ -219,6 +212,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   void _verifyOTP() async {
     KeyboardHelper.hideKeyboard(context);
 
+    final bool loading = ref.watch(otpScreenLoadingProvider);
+    if (loading) {
+      return;
+    }
+
     final String phoneNumber = ref.read(phoneNumberProvider);
 
     final String? refCode = ref.watch(refCodeProvider);
@@ -233,11 +231,15 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       mobileNumber: phoneNumber,
     );
 
+    ref.watch(otpScreenLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<ValidateOTP>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (ValidateOtpResponseModel success) async {
@@ -253,10 +255,16 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
             authToken: success.body?.responseBody?.tokenData?.token,
             sessionId: success.body?.responseBody?.tokenData?.sessionId,
           );
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
           context.pushReplacementNamed(AppRoutes.successScreen);
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
           context.pushReplacementNamed(AppRoutes.failureScreen);
         } else {
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
@@ -266,6 +274,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   }
 
   void _changeMPIN() async {
+    final bool loading = ref.watch(otpScreenLoadingProvider);
+    if (loading) {
+      return;
+    }
+
     final String? refCode = ref.watch(refCodeProvider);
     ChangeMPINRequestModel request = ChangeMPINRequestModel(
       mPIN: MPIN(
@@ -279,11 +292,15 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       ),
     );
 
+    ref.watch(otpScreenLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<ChangeMPIN>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (ChangeMPINResponseModel success) async {
@@ -308,8 +325,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
 
           await LocalDataHelper.storeSessionId("");
 
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
           context.go(AppRoutes.splashScreen);
         } else {
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );

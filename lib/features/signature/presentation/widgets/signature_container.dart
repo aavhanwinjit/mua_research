@@ -92,8 +92,12 @@ class SignatureWidgetState extends ConsumerState<SignatureContainer> with Signat
                 await saveSignature(
                   context: context,
                   ref: ref,
+                  loadingProvider: signatureLoadingProvider,
                   onSuccess: (SaveFileResponseModel success) async {
                     context.showSnackBar(message: success.status?.message ?? "");
+
+                    ref.watch(signatureLoadingProvider.notifier).update((state) => false);
+
                     context.pop();
                     context.pop();
 
@@ -115,10 +119,13 @@ class SignatureWidgetState extends ConsumerState<SignatureContainer> with Signat
               context,
               onConfirm: () async {
                 await saveSignature(
+                  loadingProvider: signatureLoadingProvider,
                   context: context,
                   ref: ref,
                   onSuccess: (SaveFileResponseModel success) async {
                     context.showSnackBar(message: success.status?.message ?? "");
+
+                    ref.watch(signatureLoadingProvider.notifier).update((state) => false);
 
                     context.pop();
 

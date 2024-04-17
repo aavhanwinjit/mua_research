@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
@@ -36,16 +37,20 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with Sign
                 _profileCard(),
                 SizedBox(height: 40.h),
                 CustomPrimaryButton(
+                  loading: ref.watch(authProfileScreenLoadingProvider),
                   disable: ref.watch(signatureProvider) == null,
-                  // onTap: () {
-                  // context.go(AppRoutes.selectPINorBiometricScreen);
-                  // },
+                  disabledOnTap: () {
+                    context.showErrorSnackBar(message: Strings.uploadSignature);
+                  },
                   onTap: () async {
                     await saveSignature(
                         context: context,
                         ref: ref,
+                        loadingProvider: authProfileScreenLoadingProvider,
                         onSuccess: (SaveFileResponseModel success) {
                           ref.read(authProfileProvider.notifier).update((state) => success);
+
+                          ref.read(authProfileScreenLoadingProvider.notifier).update((state) => false);
 
                           context.pushReplacementNamed(AppRoutes.selectPINorBiometricScreen);
                         });

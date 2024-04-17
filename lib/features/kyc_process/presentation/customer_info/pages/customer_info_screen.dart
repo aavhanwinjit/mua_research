@@ -155,6 +155,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     ],
                     SizedBox(height: 50.h),
                     CustomPrimaryButton(
+                      loading: ref.watch(customerInfoLoadingProvider),
                       label: Strings.next,
                       onTap: () async {
                         await addCustomerInformation(

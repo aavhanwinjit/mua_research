@@ -21,6 +21,9 @@ mixin RegistrationMixin {
     required Function onSuccess,
     required Function biometricAuth,
   }) async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
     final validateOTPResponse = ref.read(validateOTPResponseProvider);
     // final authProfileResponse = ref.read(authProfileProvider);
 
@@ -33,11 +36,15 @@ mixin RegistrationMixin {
 
     debugPrint("request in set agent mpin.to json: ${request.toJson()}");
 
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<SetAgentMPIN>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SetAgentMpinResponseModel success) async {
@@ -58,6 +65,8 @@ mixin RegistrationMixin {
 
           final biometricSelected = ref.watch(biometricSelectedProvider);
 
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           if (biometricSelected) {
             biometricAuth();
           } else {
@@ -67,6 +76,8 @@ mixin RegistrationMixin {
           ref.watch(createPINProvider.notifier).update((state) => '');
           ref.watch(confirmPINProvider.notifier).update((state) => '');
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
@@ -84,11 +95,18 @@ mixin RegistrationMixin {
     required Function onSuccess,
     required Function successNavigation,
   }) async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<SetFingerPrint>().call(null);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SetFingerprintResponseModel success) async {
@@ -108,6 +126,8 @@ mixin RegistrationMixin {
 
           successNavigation();
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
