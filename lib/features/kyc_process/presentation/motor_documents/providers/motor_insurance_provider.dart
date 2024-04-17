@@ -2,14 +2,14 @@ import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_docume
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final motorInsuranceProofFilePathProvider =
-    StateProvider<String?>((ref) => null);
+// final motorInsuranceProofFilePathProvider =
+//     StateProvider<String?>((ref) => null);
 final insuredDocProofFilePathProvider = StateProvider<String?>((ref) => null);
 
 final motorInsuranceDocsTypesListLoading = StateProvider<bool>((ref) => false);
 
-final selectedMotorInsuranceDocTypeProvider =
-    StateProvider<MotorInsuranceDocumentTypeModel?>((ref) => null);
+// final selectedMotorInsuranceDocTypeProvider =
+//     StateProvider<MotorInsuranceDocumentTypeModel?>((ref) => null);
 
 final motorInsuranceDocOCRLoadingProvider = StateProvider<bool>((ref) => false);
 

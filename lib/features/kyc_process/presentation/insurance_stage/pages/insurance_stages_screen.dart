@@ -20,8 +20,7 @@ class InsuranceStagesScreen extends ConsumerStatefulWidget {
   const InsuranceStagesScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      InsuranceStagesScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => InsuranceStagesScreenState();
 }
 
 class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
@@ -42,8 +41,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
 
     final bool documentCategoryLoading = ref.watch(documentCategoryListLoading);
 
-    final documentCategoryNotifier =
-        ref.watch(documentCategoryNotifierProvider.notifier);
+    final documentCategoryNotifier = ref.watch(documentCategoryNotifierProvider.notifier);
     ref.watch(documentCategoryNotifierProvider);
 
     return Scaffold(
@@ -93,8 +91,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
                     if (documentCategoryNotifier.haveList()) _stageCards(),
                   ],
                   SizedBox(height: 24.h),
-                  if (selectedApplication?.isIdVerificationCompleted == true &&
-                      !documentCategoryLoading)
+                  if (selectedApplication?.isIdVerificationCompleted == true && !documentCategoryLoading)
                     _buttons(context),
                 ],
               ),
@@ -140,8 +137,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           InsuranceStageCard(
             title: Strings.motorDocuments,
             subTitle: Strings.motorDocSubtitle,
-            buttonType: InsuranceButtonType.active,
-            // buttonType: getPolicyDocsCardStatus().buttonType,
+            // buttonType: InsuranceButtonType.active,
+            buttonType: getMotorInsuranceDocsCardStatus().buttonType,
             onTap: () {
               context.pushNamed(AppRoutes.motorDocsScreen);
             },
@@ -152,7 +149,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           InsuranceStageCard(
             title: Strings.nonMotorDocuments,
             subTitle: Strings.nonMotorDocSubtitle,
-            buttonType: InsuranceButtonType.active,
+            // buttonType: InsuranceButtonType.active,
+            buttonType: getNonMotorInsuranceDocsCardStatus().buttonType,
             onTap: () {
               context.pushNamed(AppRoutes.nonMotorDocsScreen);
             },
@@ -189,28 +187,20 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     );
   }
 
-  void setSelectedDocumentCategory(
-      DocumentCategoryEnums documentCategoryEnums) {
-    final documentCategoryNotifier =
-        ref.watch(documentCategoryNotifierProvider.notifier);
+  void setSelectedDocumentCategory(DocumentCategoryEnums documentCategoryEnums) {
+    final documentCategoryNotifier = ref.watch(documentCategoryNotifierProvider.notifier);
     ref.watch(documentCategoryNotifierProvider);
 
-    final List<DocumentCategoryModel> documentCategoryList =
-        documentCategoryNotifier.documentCattegoryList();
+    final List<DocumentCategoryModel> documentCategoryList = documentCategoryNotifier.documentCattegoryList();
     final DocumentCategoryModel documentCategory = documentCategoryList
-        .where((element) =>
-            element.documentCategory ==
-            documentCategoryEnums.toString().split('.').last)
+        .where((element) => element.documentCategory == documentCategoryEnums.toString().split('.').last)
         .toList()
         .first;
 
-    ref
-        .read(selectedDocumentCategoryProvider.notifier)
-        .update((state) => documentCategory);
+    ref.read(selectedDocumentCategoryProvider.notifier).update((state) => documentCategory);
   }
 
-  ({InsuranceButtonType buttonType, Function()? onTap})
-      getIDDetailsCardStatus() {
+  ({InsuranceButtonType buttonType, Function()? onTap}) getIDDetailsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.isIdVerificationCompleted == false) {
@@ -229,8 +219,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     }
   }
 
-  ({InsuranceButtonType buttonType, Function()? onTap})
-      getAddressDetailsCardStatus() {
+  ({InsuranceButtonType buttonType, Function()? onTap}) getAddressDetailsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.isIdVerificationCompleted == false) {
@@ -282,8 +271,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     }
   }
 
-  ({InsuranceButtonType buttonType, Function()? onTap})
-      getPolicyDocsCardStatus() {
+  ({InsuranceButtonType buttonType, Function()? onTap}) getPolicyDocsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.kycTypeId == KYCType.LIFE_INSURANCE) {
@@ -292,8 +280,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           buttonType: InsuranceButtonType.inactive,
           onTap: null,
         );
-      } else if (selectedApplication?.isPolicyDocVerificationCompleted ==
-          false) {
+      } else if (selectedApplication?.isPolicyDocVerificationCompleted == false) {
         return (
           buttonType: InsuranceButtonType.active,
           onTap: () {
@@ -302,8 +289,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
             context.pushNamed(AppRoutes.policyDocumentScreen);
           },
         );
-      } else if (selectedApplication?.isPolicyDocVerificationCompleted ==
-          true) {
+      } else if (selectedApplication?.isPolicyDocVerificationCompleted == true) {
         return (
           buttonType: InsuranceButtonType.completed,
           onTap: null,
@@ -322,8 +308,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     }
   }
 
-  ({InsuranceButtonType buttonType, Function()? onTap})
-      getMotorInsuranceDocsCardStatus() {
+  ({InsuranceButtonType buttonType, Function()? onTap}) getMotorInsuranceDocsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.kycTypeId == KYCType.MOTOR_INSURANCE) {
@@ -332,18 +317,16 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           buttonType: InsuranceButtonType.inactive,
           onTap: null,
         );
-      } else if (selectedApplication?.isMotorDocVerificationCompleted ==
-          false) {
+      } else if (selectedApplication?.isMotorDocVerificationCompleted == false) {
         return (
           buttonType: InsuranceButtonType.active,
           onTap: () {
-            // setSelectedDocumentCategory(DocumentCategoryEnums.Policy);
+            setSelectedDocumentCategory(DocumentCategoryEnums.Motor);
 
-            // context.pushNamed(AppRoutes.motorDocsScreen);
+            context.pushNamed(AppRoutes.motorDocsScreen);
           },
         );
-      } else if (selectedApplication?.isMotorDocVerificationCompleted ==
-          true) {
+      } else if (selectedApplication?.isMotorDocVerificationCompleted == true) {
         return (
           buttonType: InsuranceButtonType.completed,
           onTap: null,
@@ -362,8 +345,44 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     }
   }
 
-  ({InsuranceButtonType buttonType, Function()? onTap})
-      getAdditionalDocsCardStatus() {
+  ({InsuranceButtonType buttonType, Function()? onTap}) getNonMotorInsuranceDocsCardStatus() {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    if (selectedApplication?.kycTypeId == KYCType.MOTOR_INSURANCE) {
+      if (selectedApplication?.isIdVerificationCompleted == false) {
+        return (
+          buttonType: InsuranceButtonType.inactive,
+          onTap: null,
+        );
+      } else if (selectedApplication?.isNonMotorDocVerificationCompleted == false) {
+        return (
+          buttonType: InsuranceButtonType.active,
+          onTap: () {
+            setSelectedDocumentCategory(DocumentCategoryEnums.NonMotor);
+
+            context.pushNamed(AppRoutes.nonMotorDocsScreen);
+          },
+        );
+      } else if (selectedApplication?.isNonMotorDocVerificationCompleted == true) {
+        return (
+          buttonType: InsuranceButtonType.completed,
+          onTap: null,
+        );
+      } else {
+        return (
+          buttonType: InsuranceButtonType.inactive,
+          onTap: null,
+        );
+      }
+    } else {
+      return (
+        buttonType: InsuranceButtonType.inactive,
+        onTap: null,
+      );
+    }
+  }
+
+  ({InsuranceButtonType buttonType, Function()? onTap}) getAdditionalDocsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
     if (selectedApplication?.isIdVerificationCompleted == false) {
@@ -371,8 +390,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
         buttonType: InsuranceButtonType.inactive,
         onTap: null,
       );
-    } else if (selectedApplication?.isAdditionalDocVerificationCompleted ==
-        false) {
+    } else if (selectedApplication?.isAdditionalDocVerificationCompleted == false) {
       return (
         buttonType: InsuranceButtonType.active,
         onTap: () {
@@ -381,8 +399,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           context.pushNamed(AppRoutes.additionalDocsScreen);
         },
       );
-    } else if (selectedApplication?.isAdditionalDocVerificationCompleted ==
-        true) {
+    } else if (selectedApplication?.isAdditionalDocVerificationCompleted == true) {
       return (
         buttonType: InsuranceButtonType.completed,
         onTap: null,

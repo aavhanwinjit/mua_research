@@ -3,7 +3,6 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
-import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/request/set_agent_mpin_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/set_agent_mpin/response/set_agent_mpin_response_model.dart';
@@ -23,13 +22,13 @@ mixin RegistrationMixin {
     required Function biometricAuth,
   }) async {
     final validateOTPResponse = ref.read(validateOTPResponseProvider);
-    final authProfileResponse = ref.read(authProfileProvider);
+    // final authProfileResponse = ref.read(authProfileProvider);
 
     SetAgentMpinRequestModel request = SetAgentMpinRequestModel(
       confirmMpin: ref.read(confirmPINProvider),
       mobileNo: validateOTPResponse?.body?.responseBody?.mobileNumber,
       mPIN: ref.read(createPINProvider),
-      signaturePath: authProfileResponse?.body?.responseBody?.fileName,
+      // signaturePath: authProfileResponse?.body?.responseBody?.fileName,
     );
 
     debugPrint("request in set agent mpin.to json: ${request.toJson()}");

@@ -86,6 +86,7 @@ mixin SignatureMixin {
     final SaveSignatureRequestModel request = SaveSignatureRequestModel(
       fileName: "${FileType.SIGNATURE.toString().split('.').last}.png",
       allowedFileId: 9,
+      editFileName: true,
       fileString: signatureBase64,
     );
 

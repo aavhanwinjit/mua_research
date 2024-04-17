@@ -11,34 +11,36 @@ _$SaveNonMotorInsuranceDocumentsRequestModelImpl
             Map<String, dynamic> json) =>
         _$SaveNonMotorInsuranceDocumentsRequestModelImpl(
           agentApplicationId: json['agentApplicationId'] as int?,
-          isMotorDocVerificationCompleted:
-              json['isMotorDocVerificationCompleted'] as bool?,
-          motorDocumentDetailsModel: (json['motorDoumentDetailsModel']
-                  as List<dynamic>?)
-              ?.map((e) => MotorDocDetail.fromJson(e as Map<String, dynamic>))
-              .toList(),
+          isNonMotorDocVerificationCompleted:
+              json['isNonMotorDocVerificationCompleted'] as bool?,
+          nonMotorDocumentDetailsModel:
+              (json['nonMotorInsuranceDocDetailsModel'] as List<dynamic>?)
+                  ?.map((e) =>
+                      NonMotorDocDetail.fromJson(e as Map<String, dynamic>))
+                  .toList(),
         );
 
 Map<String, dynamic> _$$SaveNonMotorInsuranceDocumentsRequestModelImplToJson(
         _$SaveNonMotorInsuranceDocumentsRequestModelImpl instance) =>
     <String, dynamic>{
       'agentApplicationId': instance.agentApplicationId,
-      'isMotorDocVerificationCompleted':
-          instance.isMotorDocVerificationCompleted,
-      'motorDoumentDetailsModel': instance.motorDocumentDetailsModel,
+      'isNonMotorDocVerificationCompleted':
+          instance.isNonMotorDocVerificationCompleted,
+      'nonMotorInsuranceDocDetailsModel': instance.nonMotorDocumentDetailsModel,
     };
 
-_$MotorDocDetailImpl _$$MotorDocDetailImplFromJson(Map<String, dynamic> json) =>
-    _$MotorDocDetailImpl(
+_$NonMotorDocDetailImpl _$$NonMotorDocDetailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$NonMotorDocDetailImpl(
       uploadDocumentId: json['uploadDocumentId'] as int?,
-      motorDocumentTypeId: json['motorDocumentTypeId'] as int?,
-      motorDocuImagePath: json['motorDocuImagePath'] as String?,
+      nonMotorDocumentTypeId: json['nonMotorInsuranceDocumentTypeId'] as int?,
+      nonMotorDocImagePath: json['nonMotorDocImagePath'] as String?,
     );
 
-Map<String, dynamic> _$$MotorDocDetailImplToJson(
-        _$MotorDocDetailImpl instance) =>
+Map<String, dynamic> _$$NonMotorDocDetailImplToJson(
+        _$NonMotorDocDetailImpl instance) =>
     <String, dynamic>{
       'uploadDocumentId': instance.uploadDocumentId,
-      'motorDocumentTypeId': instance.motorDocumentTypeId,
-      'motorDocuImagePath': instance.motorDocuImagePath,
+      'nonMotorInsuranceDocumentTypeId': instance.nonMotorDocumentTypeId,
+      'nonMotorDocImagePath': instance.nonMotorDocImagePath,
     };

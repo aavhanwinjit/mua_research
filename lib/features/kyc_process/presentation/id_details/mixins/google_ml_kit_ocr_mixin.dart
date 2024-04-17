@@ -44,11 +44,13 @@ mixin GoogleMLKitOCRMixin {
     required BuildContext context,
     required VoidCallback onSuccess,
   }) async {
+    final bool loading = ref.watch(ocrLoadingProvider);
+    if (loading) return;
+
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.nationality ==
-        NationalityType.Mauritian.toString().split('.').last) {
-      final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
+    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+      final nicCardFrontSide = ref.watch(idDocFrontFilePathProvider);
 
       if (nicCardFrontSide == null) {
         context.showErrorSnackBar(message: Strings.uploadBothDocuments);
@@ -56,10 +58,6 @@ mixin GoogleMLKitOCRMixin {
       }
 
       final inputImage = InputImage.fromFilePath(nicCardFrontSide);
-
-      final bool loading = ref.watch(ocrLoadingProvider);
-
-      if (loading) return;
 
       ref.watch(ocrLoadingProvider.notifier).update((state) => true);
 
@@ -72,24 +70,18 @@ mixin GoogleMLKitOCRMixin {
       debugPrint("RecognizedText.text: ${recognizedText.text}");
       debugPrint("RecognizedText.blocks: ${recognizedText.blocks}");
 
-      final String? firstName =
-          _extractStringValue(recognizedText, firstNameKeySet);
+      final String? firstName = _extractStringValue(recognizedText, firstNameKeySet);
       debugPrint("First Name: $firstName");
 
-      final String? surName =
-          _extractStringValue(recognizedText, surNameKeySet);
+      final String? surName = _extractStringValue(recognizedText, surNameKeySet);
       debugPrint("Surname: $surName");
 
       final String? idNumber = _extractNICIDNumber(recognizedText);
       debugPrint("idNumber: $idNumber");
 
-      ref
-          .watch(extractedFirstNameProvider.notifier)
-          .update((state) => firstName);
+      ref.watch(extractedFirstNameProvider.notifier).update((state) => firstName);
       ref.watch(extractedSurNameProvider.notifier).update((state) => surName);
-      ref
-          .watch(extractedNICIDNumberProvider.notifier)
-          .update((state) => idNumber);
+      ref.watch(extractedNICIDNumberProvider.notifier).update((state) => idNumber);
 
       ref.watch(ocrLoadingProvider.notifier).update((state) => false);
 
@@ -143,14 +135,12 @@ mixin GoogleMLKitOCRMixin {
     return null;
   }
 
-  String? _extractStringValue(
-      RecognizedText visionText, List<String> keyWordsList) {
+  String? _extractStringValue(RecognizedText visionText, List<String> keyWordsList) {
     final List<String> lines = visionText.text.split("\n");
     debugPrint("Lines: $lines");
 
     for (String keyword in keyWordsList) {
-      final String value =
-          lines.firstWhere((line) => line == keyword, orElse: () => "");
+      final String value = lines.firstWhere((line) => line == keyword, orElse: () => "");
 
       if (value.isNotEmpty) {
         final int indexOfValue = lines.indexOf(value);
@@ -171,28 +161,23 @@ mixin GoogleMLKitOCRMixin {
     required BuildContext context,
     required VoidCallback onSuccess,
   }) async {
-    final passportFile = ref.watch(nicCardFrontFilePathProvider);
+    final bool loading = ref.watch(ocrLoadingProvider);
+    if (loading) return;
+
+    final passportFile = ref.watch(idDocFrontFilePathProvider);
     if (passportFile == null) {
       context.showErrorSnackBar(message: Strings.uploadBothDocuments);
       return;
     }
     final inputImage = InputImage.fromFilePath(passportFile);
-    final bool loading = ref.watch(ocrLoadingProvider);
-
-    if (loading) return;
 
     ref.watch(ocrLoadingProvider.notifier).update((state) => true);
-    ref
-        .watch(extractedPassportFirstNameProvider.notifier)
-        .update((state) => null);
-    ref
-        .watch(extractedPassportSurNameProvider.notifier)
-        .update((state) => null);
+    ref.watch(extractedPassportFirstNameProvider.notifier).update((state) => null);
+    ref.watch(extractedPassportSurNameProvider.notifier).update((state) => null);
     ref.watch(extractedPassportNumberProvider.notifier).update((state) => null);
 
     final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
-    final RecognizedText recognizedText =
-        await textRecognizer.processImage(inputImage);
+    final RecognizedText recognizedText = await textRecognizer.processImage(inputImage);
     String text = recognizedText.text;
 
     textRecognizer.close();
@@ -205,15 +190,9 @@ mixin GoogleMLKitOCRMixin {
     // String passportNo = details.passportNumber;
     // String fullname = "${details.firstname} ${details.surname}";
 
-    ref
-        .watch(extractedFirstNameProvider.notifier)
-        .update((state) => details.firstname);
-    ref
-        .watch(extractedSurNameProvider.notifier)
-        .update((state) => details.surname);
-    ref
-        .watch(extractedNICIDNumberProvider.notifier)
-        .update((state) => details.passportNumber);
+    ref.watch(extractedFirstNameProvider.notifier).update((state) => details.firstname);
+    ref.watch(extractedSurNameProvider.notifier).update((state) => details.surname);
+    ref.watch(extractedNICIDNumberProvider.notifier).update((state) => details.passportNumber);
 
     ref.watch(ocrLoadingProvider.notifier).update((state) => false);
 
@@ -222,8 +201,7 @@ mixin GoogleMLKitOCRMixin {
 
   PassportDetails extractPassportDetails(List<String> textLines) {
     // Define the regular expression pattern for a passport number
-    RegExp passportNumberRegex =
-        RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$');
+    RegExp passportNumberRegex = RegExp(r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$');
 
     List<String> firstNameKeySet = [
       "first name",
@@ -277,8 +255,7 @@ mixin GoogleMLKitOCRMixin {
       // }
 
       // Check if it's a Pakistani passport
-      if (line.toLowerCase().contains('islamic republic o') ||
-          textLines[i].toLowerCase().contains('pakistan')) {
+      if (line.toLowerCase().contains('islamic republic o') || textLines[i].toLowerCase().contains('pakistan')) {
         isPakistaniPassport = true;
       }
 
@@ -304,9 +281,7 @@ mixin GoogleMLKitOCRMixin {
       }
 
       // Check if passport number has been found
-      if (!foundPassportNumber &&
-          isPakistaniPassport == false &&
-          passportNumberRegex.hasMatch(line)) {
+      if (!foundPassportNumber && isPakistaniPassport == false && passportNumberRegex.hasMatch(line)) {
         // Extract passport number from the current line
         passportNumber = line.trim();
         foundPassportNumber = true;
@@ -315,8 +290,7 @@ mixin GoogleMLKitOCRMixin {
       // Check if surname has been found
       if (!foundFirstname &&
           isPakistaniPassport == false &&
-          surNameKeySet
-              .any((keyword) => line.toLowerCase().contains(keyword))) {
+          surNameKeySet.any((keyword) => line.toLowerCase().contains(keyword))) {
         // Extract surname from the next line
         surname = textLines[i + 1].trim();
         foundSurname = true;
@@ -325,8 +299,7 @@ mixin GoogleMLKitOCRMixin {
       // Check if given name(s) has been found
       if (!foundFirstname &&
           isPakistaniPassport == false &&
-          firstNameKeySet
-              .any((keyword) => line.toLowerCase().contains(keyword))) {
+          firstNameKeySet.any((keyword) => line.toLowerCase().contains(keyword))) {
         // Extract given name(s) from the next line
         List<String> nameParts = textLines[i + 1].split(',');
         firstname = nameParts.map((part) => part.trim()).join(' ');
@@ -352,8 +325,5 @@ class PassportDetails {
   String firstname;
   String surname;
 
-  PassportDetails(
-      {required this.passportNumber,
-      required this.firstname,
-      required this.surname});
+  PassportDetails({required this.passportNumber, required this.firstname, required this.surname});
 }
