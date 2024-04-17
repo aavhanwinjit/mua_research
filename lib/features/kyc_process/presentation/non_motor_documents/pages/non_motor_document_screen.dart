@@ -1,16 +1,26 @@
 import 'dart:math';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_non_motor_insurance_document_types/response/get_non_motor_insurance_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/non_motor_insurance_document_element/non_motor_insurance_document_element.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/mixins/get_non_motor_insurance_doc_types_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/non_motor_insurance_doc_types_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/non_motor_insurance_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/selected_non_motor_insurance_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/providers/non_motor_docs_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_insurance_loading_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
+import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
+import 'package:ekyc/widgets/buttons/remove_document_button.dart';
 import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,15 +42,16 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      setSelectedDocumentCategory();
       ref
           .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
           .update((state) => false);
-      ref
-          .watch(selectedNonMotorInsuranceDocTypeProvider.notifier)
-          .update((state) => null);
-      ref
-          .watch(nonMotorInsuranceProofFilePathProvider.notifier)
-          .update((state) => null);
+      // ref
+      //     .watch(selectedMotorInsuranceDocTypeProvider.notifier)
+      //     .update((state) => null);
+      // ref
+      //     .watch(motorInsuranceProofFilePathProvider.notifier)
+      //     .update((state) => null);
       ref
           .watch(nonMotorInsuranceDocOCRApiResponse.notifier)
           .update((state) => null);
@@ -55,8 +66,33 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
           .watch(nonMotorInsuranceSurnameProvider.notifier)
           .update((state) => null);
 
+      final selectedDocsListProvider = ref
+          .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+      selectedDocsListProvider.clearList();
+
+      selectedDocsListProvider.addElementToList();
+
       getNonMotorInsuranceDocumentTypes(context: context, ref: ref);
     });
+  }
+
+  void setSelectedDocumentCategory() {
+    final documentCategoryNotifier =
+        ref.watch(documentCategoryNotifierProvider.notifier);
+    ref.watch(documentCategoryNotifierProvider);
+
+    final List<DocumentCategoryModel> documentCategoryList =
+        documentCategoryNotifier.documentCattegoryList();
+    final DocumentCategoryModel documentCategory = documentCategoryList
+        .where((element) =>
+            element.documentCategory ==
+            DocumentCategoryEnums.NonMotor.toString().split('.').last)
+        .toList()
+        .first;
+
+    ref
+        .read(selectedDocumentCategoryProvider.notifier)
+        .update((state) => documentCategory);
   }
 
   @override
@@ -90,22 +126,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
                     const NonMotorInsuranceDetailsLoadingWidget(),
                   if (!nonMotorInsuranceDocTypeLoading) ...[
                     if (nonMotorInsuranceDocTypesNotifier.haveList()) ...[
-                      _dropdownWidget(),
-                      SizedBox(height: 24.h),
-                      DocumentUploadContainer(
-                        provider: nonMotorDocFilePathProvider,
-                        label: Strings.nonMotorDocsContainerLabel,
-                        cameraScreenTitle: Strings.scanDocuments,
-                        cameraScreenDescription: Strings.nonMotorDocCameraLabel,
-                        reviewScreenTitle: Strings.nonMotorDocuments,
-                      ),
-                      SizedBox(height: 8.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          AddDocumentButton(onPressed: () {}),
-                        ],
-                      ),
+                      _documentWidgetList(),
                     ],
                   ],
                 ],
@@ -127,21 +148,104 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
     );
   }
 
-  Widget _dropdownWidget() {
+  Widget _documentWidgetList() {
+    final selectedDocsListProvider = ref
+        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
+    return ListView.separated(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: selectedDocsListProvider.list().length,
+      itemBuilder: (context, index) {
+        NonMotorInsuranceDocumentElement item =
+            selectedDocsListProvider.list()[index];
+        return _documentElement(item, index);
+      },
+      separatorBuilder: (context, index) {
+        return SizedBox(height: 36.h);
+      },
+    );
+  }
+
+  Widget _documentElement(NonMotorInsuranceDocumentElement item, int index) {
+    final selectedDocsListProvider = ref
+        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _dropdownWidget(item, index),
+        SizedBox(height: 24.h),
+        DocumentUploadContainer2(
+          filePath: item.nonMotorDocImagePath,
+          documentCode: item.documentElement?.documentCode ?? "",
+          onChange: (String path, ScanDocumentResponseBody? response) async {
+            selectedDocsListProvider.updateElementsFilePath(
+                filePath: path, index: index);
+            selectedDocsListProvider.updateElementScanResponse(
+                scanResponse: response, index: index);
+
+            context.pop();
+          },
+          clearFile: () {
+            selectedDocsListProvider.clearElementsFilePath(index: index);
+          },
+          label: Strings.insuredDocumentContainerLabel,
+          cameraScreenTitle: Strings.scanDocuments,
+          cameraScreenDescription: Strings.insuredDocCameraLabel,
+          reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
+          disable: item.documentElement == null,
+          disableCallback: () {
+            context.showErrorSnackBar(message: Strings.selectDocumentType);
+          },
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (index != 0)
+              RemoveDocumentButton(
+                onPressed: () {
+                  selectedDocsListProvider.removeElementFromList(index);
+                },
+              ),
+            const SizedBox(),
+            // show add doc button only for the last element in the list
+            if ((selectedDocsListProvider.list().length - 1) == index)
+              AddDocumentButton(
+                onPressed: () {
+                  // only 2 docs are allowed to add
+                  if (selectedDocsListProvider.list().length < 2) {
+                    selectedDocsListProvider.addElementToList();
+                  } else {
+                    context.showErrorSnackBar(message: Strings.only2Documents);
+                  }
+                },
+              ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _dropdownWidget(NonMotorInsuranceDocumentElement item, int index) {
+    final selectedDocsListProvider = ref
+        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
+
     final nonMotorInsuranceDocTypesNotifier =
         ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
 
     return CustomDrowDownField(
-      value: ref.watch(selectedNonMotorInsuranceDocTypeProvider),
+      value: item.documentElement,
       labelText: Strings.selectDocument,
       validator: (value) {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        ref
-            .watch(selectedNonMotorInsuranceDocTypeProvider.notifier)
-            .update((state) => value as NonMotorInsuranceDocumentTypeModel);
+        selectedDocsListProvider.updateElementsSelectedDocType(
+            index: index, element: value as NonMotorInsuranceDocumentTypeModel);
       },
       items: nonMotorInsuranceDocTypesNotifier
           .nonMotorInsuranceDocsTypesList()
@@ -149,7 +253,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
         return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
           value: value,
           child: Text(
-            value.nonMotorInsuranceDocType?.trim() ?? "-",
+            value.nonMotorInsuranceDocType ?? "-",
             style: TextStyle(
               fontSize: 14.sp,
             ),

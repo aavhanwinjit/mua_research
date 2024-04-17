@@ -140,8 +140,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           InsuranceStageCard(
             title: Strings.motorDocuments,
             subTitle: Strings.motorDocSubtitle,
-            buttonType: InsuranceButtonType.active,
-            // buttonType: getPolicyDocsCardStatus().buttonType,
+            // buttonType: InsuranceButtonType.active,
+            buttonType: getMotorInsuranceDocsCardStatus().buttonType,
             onTap: () {
               context.pushNamed(AppRoutes.motorDocsScreen);
             },
@@ -152,7 +152,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           InsuranceStageCard(
             title: Strings.nonMotorDocuments,
             subTitle: Strings.nonMotorDocSubtitle,
-            buttonType: InsuranceButtonType.active,
+            // buttonType: InsuranceButtonType.active,
+            buttonType: getNonMotorInsuranceDocsCardStatus().buttonType,
             onTap: () {
               context.pushNamed(AppRoutes.nonMotorDocsScreen);
             },
@@ -250,7 +251,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
         },
       );
     } else if (selectedApplication?.isAddressVerificationCompleted == false &&
-        (selectedApplication?.porRequired == null || selectedApplication?.porRequired == false)) {
+        (selectedApplication?.porRequired == null ||
+            selectedApplication?.porRequired == false)) {
       return (
         buttonType: InsuranceButtonType.active,
         onTap: () {
@@ -337,12 +339,51 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
         return (
           buttonType: InsuranceButtonType.active,
           onTap: () {
-            // setSelectedDocumentCategory(DocumentCategoryEnums.Policy);
+            setSelectedDocumentCategory(DocumentCategoryEnums.Motor);
 
-            // context.pushNamed(AppRoutes.motorDocsScreen);
+            context.pushNamed(AppRoutes.motorDocsScreen);
           },
         );
-      } else if (selectedApplication?.isMotorDocVerificationCompleted ==
+      } else if (selectedApplication?.isMotorDocVerificationCompleted == true) {
+        return (
+          buttonType: InsuranceButtonType.completed,
+          onTap: null,
+        );
+      } else {
+        return (
+          buttonType: InsuranceButtonType.inactive,
+          onTap: null,
+        );
+      }
+    } else {
+      return (
+        buttonType: InsuranceButtonType.inactive,
+        onTap: null,
+      );
+    }
+  }
+
+  ({InsuranceButtonType buttonType, Function()? onTap})
+      getNonMotorInsuranceDocsCardStatus() {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    if (selectedApplication?.kycTypeId == KYCType.MOTOR_INSURANCE) {
+      if (selectedApplication?.isIdVerificationCompleted == false) {
+        return (
+          buttonType: InsuranceButtonType.inactive,
+          onTap: null,
+        );
+      } else if (selectedApplication?.isNonMotorDocVerificationCompleted ==
+          false) {
+        return (
+          buttonType: InsuranceButtonType.active,
+          onTap: () {
+            setSelectedDocumentCategory(DocumentCategoryEnums.NonMotor);
+
+            context.pushNamed(AppRoutes.nonMotorDocsScreen);
+          },
+        );
+      } else if (selectedApplication?.isNonMotorDocVerificationCompleted ==
           true) {
         return (
           buttonType: InsuranceButtonType.completed,

@@ -7,12 +7,14 @@ import 'package:ekyc/features/kyc_process/domain/repositories/ocr_api_repository
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class ScanDocument implements UseCase<ScanDocumentResponseModel, ScanDocumentRequestModel> {
+class ScanDocument
+    implements UseCase<ScanDocumentResponseModel, ScanDocumentRequestModel> {
   final OCRApiRepository ocrApiRepository;
   ScanDocument(this.ocrApiRepository);
 
   @override
-  Future<Either<Failure, ScanDocumentResponseModel>> call(ScanDocumentRequestModel params) async {
+  Future<Either<Failure, ScanDocumentResponseModel>> call(
+      ScanDocumentRequestModel params) async {
     return await ocrApiRepository.scanDocument(params);
   }
 }
