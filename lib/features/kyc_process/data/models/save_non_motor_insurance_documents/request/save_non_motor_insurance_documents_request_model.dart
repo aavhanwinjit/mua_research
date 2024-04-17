@@ -22,10 +22,10 @@ class SaveNonMotorInsuranceDocumentsRequestModel
     with _$SaveNonMotorInsuranceDocumentsRequestModel {
   const factory SaveNonMotorInsuranceDocumentsRequestModel({
     @JsonKey(name: 'agentApplicationId') int? agentApplicationId,
-    @JsonKey(name: 'isMotorDocVerificationCompleted')
-    bool? isMotorDocVerificationCompleted,
-    @JsonKey(name: 'motorDoumentDetailsModel')
-    List<MotorDocDetail>? motorDocumentDetailsModel,
+    @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+    bool? isNonMotorDocVerificationCompleted,
+    @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+    List<NonMotorDocDetail>? nonMotorDocumentDetailsModel,
   }) = _SaveNonMotorInsuranceDocumentsRequestModel;
 
   factory SaveNonMotorInsuranceDocumentsRequestModel.fromJson(
@@ -34,13 +34,14 @@ class SaveNonMotorInsuranceDocumentsRequestModel
 }
 
 @freezed
-class MotorDocDetail with _$MotorDocDetail {
-  const factory MotorDocDetail({
+class NonMotorDocDetail with _$NonMotorDocDetail {
+  const factory NonMotorDocDetail({
     @JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
-    @JsonKey(name: 'motorDocumentTypeId') int? motorDocumentTypeId,
-    @JsonKey(name: 'motorDocuImagePath') String? motorDocuImagePath,
-  }) = _MotorDocDetail;
+    @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+    int? nonMotorDocumentTypeId,
+    @JsonKey(name: 'nonMotorDocImagePath') String? nonMotorDocImagePath,
+  }) = _NonMotorDocDetail;
 
-  factory MotorDocDetail.fromJson(Map<String, dynamic> json) =>
-      _$MotorDocDetailFromJson(json);
+  factory NonMotorDocDetail.fromJson(Map<String, dynamic> json) =>
+      _$NonMotorDocDetailFromJson(json);
 }

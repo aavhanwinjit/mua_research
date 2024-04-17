@@ -24,11 +24,11 @@ SaveNonMotorInsuranceDocumentsRequestModel
 mixin _$SaveNonMotorInsuranceDocumentsRequestModel {
   @JsonKey(name: 'agentApplicationId')
   int? get agentApplicationId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'isMotorDocVerificationCompleted')
-  bool? get isMotorDocVerificationCompleted =>
+  @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+  bool? get isNonMotorDocVerificationCompleted =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'motorDoumentDetailsModel')
-  List<MotorDocDetail>? get motorDocumentDetailsModel =>
+  @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+  List<NonMotorDocDetail>? get nonMotorDocumentDetailsModel =>
       throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,10 +48,10 @@ abstract class $SaveNonMotorInsuranceDocumentsRequestModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'agentApplicationId') int? agentApplicationId,
-      @JsonKey(name: 'isMotorDocVerificationCompleted')
-      bool? isMotorDocVerificationCompleted,
-      @JsonKey(name: 'motorDoumentDetailsModel')
-      List<MotorDocDetail>? motorDocumentDetailsModel});
+      @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+      bool? isNonMotorDocVerificationCompleted,
+      @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+      List<NonMotorDocDetail>? nonMotorDocumentDetailsModel});
 }
 
 /// @nodoc
@@ -70,23 +70,23 @@ class _$SaveNonMotorInsuranceDocumentsRequestModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? agentApplicationId = freezed,
-    Object? isMotorDocVerificationCompleted = freezed,
-    Object? motorDocumentDetailsModel = freezed,
+    Object? isNonMotorDocVerificationCompleted = freezed,
+    Object? nonMotorDocumentDetailsModel = freezed,
   }) {
     return _then(_value.copyWith(
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
           : agentApplicationId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isMotorDocVerificationCompleted: freezed ==
-              isMotorDocVerificationCompleted
-          ? _value.isMotorDocVerificationCompleted
-          : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
+      isNonMotorDocVerificationCompleted: freezed ==
+              isNonMotorDocVerificationCompleted
+          ? _value.isNonMotorDocVerificationCompleted
+          : isNonMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      motorDocumentDetailsModel: freezed == motorDocumentDetailsModel
-          ? _value.motorDocumentDetailsModel
-          : motorDocumentDetailsModel // ignore: cast_nullable_to_non_nullable
-              as List<MotorDocDetail>?,
+      nonMotorDocumentDetailsModel: freezed == nonMotorDocumentDetailsModel
+          ? _value.nonMotorDocumentDetailsModel
+          : nonMotorDocumentDetailsModel // ignore: cast_nullable_to_non_nullable
+              as List<NonMotorDocDetail>?,
     ) as $Val);
   }
 }
@@ -103,10 +103,10 @@ abstract class _$$SaveNonMotorInsuranceDocumentsRequestModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'agentApplicationId') int? agentApplicationId,
-      @JsonKey(name: 'isMotorDocVerificationCompleted')
-      bool? isMotorDocVerificationCompleted,
-      @JsonKey(name: 'motorDoumentDetailsModel')
-      List<MotorDocDetail>? motorDocumentDetailsModel});
+      @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+      bool? isNonMotorDocVerificationCompleted,
+      @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+      List<NonMotorDocDetail>? nonMotorDocumentDetailsModel});
 }
 
 /// @nodoc
@@ -123,23 +123,23 @@ class __$$SaveNonMotorInsuranceDocumentsRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? agentApplicationId = freezed,
-    Object? isMotorDocVerificationCompleted = freezed,
-    Object? motorDocumentDetailsModel = freezed,
+    Object? isNonMotorDocVerificationCompleted = freezed,
+    Object? nonMotorDocumentDetailsModel = freezed,
   }) {
     return _then(_$SaveNonMotorInsuranceDocumentsRequestModelImpl(
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
           : agentApplicationId // ignore: cast_nullable_to_non_nullable
               as int?,
-      isMotorDocVerificationCompleted: freezed ==
-              isMotorDocVerificationCompleted
-          ? _value.isMotorDocVerificationCompleted
-          : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
+      isNonMotorDocVerificationCompleted: freezed ==
+              isNonMotorDocVerificationCompleted
+          ? _value.isNonMotorDocVerificationCompleted
+          : isNonMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      motorDocumentDetailsModel: freezed == motorDocumentDetailsModel
-          ? _value._motorDocumentDetailsModel
-          : motorDocumentDetailsModel // ignore: cast_nullable_to_non_nullable
-              as List<MotorDocDetail>?,
+      nonMotorDocumentDetailsModel: freezed == nonMotorDocumentDetailsModel
+          ? _value._nonMotorDocumentDetailsModel
+          : nonMotorDocumentDetailsModel // ignore: cast_nullable_to_non_nullable
+              as List<NonMotorDocDetail>?,
     ));
   }
 }
@@ -150,11 +150,11 @@ class _$SaveNonMotorInsuranceDocumentsRequestModelImpl
     implements _SaveNonMotorInsuranceDocumentsRequestModel {
   const _$SaveNonMotorInsuranceDocumentsRequestModelImpl(
       {@JsonKey(name: 'agentApplicationId') this.agentApplicationId,
-      @JsonKey(name: 'isMotorDocVerificationCompleted')
-      this.isMotorDocVerificationCompleted,
-      @JsonKey(name: 'motorDoumentDetailsModel')
-      final List<MotorDocDetail>? motorDocumentDetailsModel})
-      : _motorDocumentDetailsModel = motorDocumentDetailsModel;
+      @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+      this.isNonMotorDocVerificationCompleted,
+      @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+      final List<NonMotorDocDetail>? nonMotorDocumentDetailsModel})
+      : _nonMotorDocumentDetailsModel = nonMotorDocumentDetailsModel;
 
   factory _$SaveNonMotorInsuranceDocumentsRequestModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -164,23 +164,23 @@ class _$SaveNonMotorInsuranceDocumentsRequestModelImpl
   @JsonKey(name: 'agentApplicationId')
   final int? agentApplicationId;
   @override
-  @JsonKey(name: 'isMotorDocVerificationCompleted')
-  final bool? isMotorDocVerificationCompleted;
-  final List<MotorDocDetail>? _motorDocumentDetailsModel;
+  @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+  final bool? isNonMotorDocVerificationCompleted;
+  final List<NonMotorDocDetail>? _nonMotorDocumentDetailsModel;
   @override
-  @JsonKey(name: 'motorDoumentDetailsModel')
-  List<MotorDocDetail>? get motorDocumentDetailsModel {
-    final value = _motorDocumentDetailsModel;
+  @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+  List<NonMotorDocDetail>? get nonMotorDocumentDetailsModel {
+    final value = _nonMotorDocumentDetailsModel;
     if (value == null) return null;
-    if (_motorDocumentDetailsModel is EqualUnmodifiableListView)
-      return _motorDocumentDetailsModel;
+    if (_nonMotorDocumentDetailsModel is EqualUnmodifiableListView)
+      return _nonMotorDocumentDetailsModel;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'SaveNonMotorInsuranceDocumentsRequestModel(agentApplicationId: $agentApplicationId, isMotorDocVerificationCompleted: $isMotorDocVerificationCompleted, motorDocumentDetailsModel: $motorDocumentDetailsModel)';
+    return 'SaveNonMotorInsuranceDocumentsRequestModel(agentApplicationId: $agentApplicationId, isNonMotorDocVerificationCompleted: $isNonMotorDocVerificationCompleted, nonMotorDocumentDetailsModel: $nonMotorDocumentDetailsModel)';
   }
 
   @override
@@ -190,12 +190,13 @@ class _$SaveNonMotorInsuranceDocumentsRequestModelImpl
             other is _$SaveNonMotorInsuranceDocumentsRequestModelImpl &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.isMotorDocVerificationCompleted,
-                    isMotorDocVerificationCompleted) ||
-                other.isMotorDocVerificationCompleted ==
-                    isMotorDocVerificationCompleted) &&
+            (identical(other.isNonMotorDocVerificationCompleted,
+                    isNonMotorDocVerificationCompleted) ||
+                other.isNonMotorDocVerificationCompleted ==
+                    isNonMotorDocVerificationCompleted) &&
             const DeepCollectionEquality().equals(
-                other._motorDocumentDetailsModel, _motorDocumentDetailsModel));
+                other._nonMotorDocumentDetailsModel,
+                _nonMotorDocumentDetailsModel));
   }
 
   @JsonKey(ignore: true)
@@ -203,8 +204,8 @@ class _$SaveNonMotorInsuranceDocumentsRequestModelImpl
   int get hashCode => Object.hash(
       runtimeType,
       agentApplicationId,
-      isMotorDocVerificationCompleted,
-      const DeepCollectionEquality().hash(_motorDocumentDetailsModel));
+      isNonMotorDocVerificationCompleted,
+      const DeepCollectionEquality().hash(_nonMotorDocumentDetailsModel));
 
   @JsonKey(ignore: true)
   @override
@@ -228,10 +229,10 @@ abstract class _SaveNonMotorInsuranceDocumentsRequestModel
     implements SaveNonMotorInsuranceDocumentsRequestModel {
   const factory _SaveNonMotorInsuranceDocumentsRequestModel(
           {@JsonKey(name: 'agentApplicationId') final int? agentApplicationId,
-          @JsonKey(name: 'isMotorDocVerificationCompleted')
-          final bool? isMotorDocVerificationCompleted,
-          @JsonKey(name: 'motorDoumentDetailsModel')
-          final List<MotorDocDetail>? motorDocumentDetailsModel}) =
+          @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+          final bool? isNonMotorDocVerificationCompleted,
+          @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+          final List<NonMotorDocDetail>? nonMotorDocumentDetailsModel}) =
       _$SaveNonMotorInsuranceDocumentsRequestModelImpl;
 
   factory _SaveNonMotorInsuranceDocumentsRequestModel.fromJson(
@@ -242,11 +243,11 @@ abstract class _SaveNonMotorInsuranceDocumentsRequestModel
   @JsonKey(name: 'agentApplicationId')
   int? get agentApplicationId;
   @override
-  @JsonKey(name: 'isMotorDocVerificationCompleted')
-  bool? get isMotorDocVerificationCompleted;
+  @JsonKey(name: 'isNonMotorDocVerificationCompleted')
+  bool? get isNonMotorDocVerificationCompleted;
   @override
-  @JsonKey(name: 'motorDoumentDetailsModel')
-  List<MotorDocDetail>? get motorDocumentDetailsModel;
+  @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
+  List<NonMotorDocDetail>? get nonMotorDocumentDetailsModel;
   @override
   @JsonKey(ignore: true)
   _$$SaveNonMotorInsuranceDocumentsRequestModelImplCopyWith<
@@ -254,41 +255,42 @@ abstract class _SaveNonMotorInsuranceDocumentsRequestModel
       get copyWith => throw _privateConstructorUsedError;
 }
 
-MotorDocDetail _$MotorDocDetailFromJson(Map<String, dynamic> json) {
-  return _MotorDocDetail.fromJson(json);
+NonMotorDocDetail _$NonMotorDocDetailFromJson(Map<String, dynamic> json) {
+  return _NonMotorDocDetail.fromJson(json);
 }
 
 /// @nodoc
-mixin _$MotorDocDetail {
+mixin _$NonMotorDocDetail {
   @JsonKey(name: 'uploadDocumentId')
   int? get uploadDocumentId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'motorDocumentTypeId')
-  int? get motorDocumentTypeId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'motorDocuImagePath')
-  String? get motorDocuImagePath => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+  int? get nonMotorDocumentTypeId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nonMotorDocImagePath')
+  String? get nonMotorDocImagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MotorDocDetailCopyWith<MotorDocDetail> get copyWith =>
+  $NonMotorDocDetailCopyWith<NonMotorDocDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $MotorDocDetailCopyWith<$Res> {
-  factory $MotorDocDetailCopyWith(
-          MotorDocDetail value, $Res Function(MotorDocDetail) then) =
-      _$MotorDocDetailCopyWithImpl<$Res, MotorDocDetail>;
+abstract class $NonMotorDocDetailCopyWith<$Res> {
+  factory $NonMotorDocDetailCopyWith(
+          NonMotorDocDetail value, $Res Function(NonMotorDocDetail) then) =
+      _$NonMotorDocDetailCopyWithImpl<$Res, NonMotorDocDetail>;
   @useResult
   $Res call(
       {@JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
-      @JsonKey(name: 'motorDocumentTypeId') int? motorDocumentTypeId,
-      @JsonKey(name: 'motorDocuImagePath') String? motorDocuImagePath});
+      @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+      int? nonMotorDocumentTypeId,
+      @JsonKey(name: 'nonMotorDocImagePath') String? nonMotorDocImagePath});
 }
 
 /// @nodoc
-class _$MotorDocDetailCopyWithImpl<$Res, $Val extends MotorDocDetail>
-    implements $MotorDocDetailCopyWith<$Res> {
-  _$MotorDocDetailCopyWithImpl(this._value, this._then);
+class _$NonMotorDocDetailCopyWithImpl<$Res, $Val extends NonMotorDocDetail>
+    implements $NonMotorDocDetailCopyWith<$Res> {
+  _$NonMotorDocDetailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -299,67 +301,68 @@ class _$MotorDocDetailCopyWithImpl<$Res, $Val extends MotorDocDetail>
   @override
   $Res call({
     Object? uploadDocumentId = freezed,
-    Object? motorDocumentTypeId = freezed,
-    Object? motorDocuImagePath = freezed,
+    Object? nonMotorDocumentTypeId = freezed,
+    Object? nonMotorDocImagePath = freezed,
   }) {
     return _then(_value.copyWith(
       uploadDocumentId: freezed == uploadDocumentId
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorDocumentTypeId: freezed == motorDocumentTypeId
-          ? _value.motorDocumentTypeId
-          : motorDocumentTypeId // ignore: cast_nullable_to_non_nullable
+      nonMotorDocumentTypeId: freezed == nonMotorDocumentTypeId
+          ? _value.nonMotorDocumentTypeId
+          : nonMotorDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorDocuImagePath: freezed == motorDocuImagePath
-          ? _value.motorDocuImagePath
-          : motorDocuImagePath // ignore: cast_nullable_to_non_nullable
+      nonMotorDocImagePath: freezed == nonMotorDocImagePath
+          ? _value.nonMotorDocImagePath
+          : nonMotorDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$MotorDocDetailImplCopyWith<$Res>
-    implements $MotorDocDetailCopyWith<$Res> {
-  factory _$$MotorDocDetailImplCopyWith(_$MotorDocDetailImpl value,
-          $Res Function(_$MotorDocDetailImpl) then) =
-      __$$MotorDocDetailImplCopyWithImpl<$Res>;
+abstract class _$$NonMotorDocDetailImplCopyWith<$Res>
+    implements $NonMotorDocDetailCopyWith<$Res> {
+  factory _$$NonMotorDocDetailImplCopyWith(_$NonMotorDocDetailImpl value,
+          $Res Function(_$NonMotorDocDetailImpl) then) =
+      __$$NonMotorDocDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {@JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
-      @JsonKey(name: 'motorDocumentTypeId') int? motorDocumentTypeId,
-      @JsonKey(name: 'motorDocuImagePath') String? motorDocuImagePath});
+      @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+      int? nonMotorDocumentTypeId,
+      @JsonKey(name: 'nonMotorDocImagePath') String? nonMotorDocImagePath});
 }
 
 /// @nodoc
-class __$$MotorDocDetailImplCopyWithImpl<$Res>
-    extends _$MotorDocDetailCopyWithImpl<$Res, _$MotorDocDetailImpl>
-    implements _$$MotorDocDetailImplCopyWith<$Res> {
-  __$$MotorDocDetailImplCopyWithImpl(
-      _$MotorDocDetailImpl _value, $Res Function(_$MotorDocDetailImpl) _then)
+class __$$NonMotorDocDetailImplCopyWithImpl<$Res>
+    extends _$NonMotorDocDetailCopyWithImpl<$Res, _$NonMotorDocDetailImpl>
+    implements _$$NonMotorDocDetailImplCopyWith<$Res> {
+  __$$NonMotorDocDetailImplCopyWithImpl(_$NonMotorDocDetailImpl _value,
+      $Res Function(_$NonMotorDocDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? uploadDocumentId = freezed,
-    Object? motorDocumentTypeId = freezed,
-    Object? motorDocuImagePath = freezed,
+    Object? nonMotorDocumentTypeId = freezed,
+    Object? nonMotorDocImagePath = freezed,
   }) {
-    return _then(_$MotorDocDetailImpl(
+    return _then(_$NonMotorDocDetailImpl(
       uploadDocumentId: freezed == uploadDocumentId
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorDocumentTypeId: freezed == motorDocumentTypeId
-          ? _value.motorDocumentTypeId
-          : motorDocumentTypeId // ignore: cast_nullable_to_non_nullable
+      nonMotorDocumentTypeId: freezed == nonMotorDocumentTypeId
+          ? _value.nonMotorDocumentTypeId
+          : nonMotorDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorDocuImagePath: freezed == motorDocuImagePath
-          ? _value.motorDocuImagePath
-          : motorDocuImagePath // ignore: cast_nullable_to_non_nullable
+      nonMotorDocImagePath: freezed == nonMotorDocImagePath
+          ? _value.nonMotorDocImagePath
+          : nonMotorDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -367,84 +370,86 @@ class __$$MotorDocDetailImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MotorDocDetailImpl implements _MotorDocDetail {
-  const _$MotorDocDetailImpl(
+class _$NonMotorDocDetailImpl implements _NonMotorDocDetail {
+  const _$NonMotorDocDetailImpl(
       {@JsonKey(name: 'uploadDocumentId') this.uploadDocumentId,
-      @JsonKey(name: 'motorDocumentTypeId') this.motorDocumentTypeId,
-      @JsonKey(name: 'motorDocuImagePath') this.motorDocuImagePath});
+      @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+      this.nonMotorDocumentTypeId,
+      @JsonKey(name: 'nonMotorDocImagePath') this.nonMotorDocImagePath});
 
-  factory _$MotorDocDetailImpl.fromJson(Map<String, dynamic> json) =>
-      _$$MotorDocDetailImplFromJson(json);
+  factory _$NonMotorDocDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$NonMotorDocDetailImplFromJson(json);
 
   @override
   @JsonKey(name: 'uploadDocumentId')
   final int? uploadDocumentId;
   @override
-  @JsonKey(name: 'motorDocumentTypeId')
-  final int? motorDocumentTypeId;
+  @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+  final int? nonMotorDocumentTypeId;
   @override
-  @JsonKey(name: 'motorDocuImagePath')
-  final String? motorDocuImagePath;
+  @JsonKey(name: 'nonMotorDocImagePath')
+  final String? nonMotorDocImagePath;
 
   @override
   String toString() {
-    return 'MotorDocDetail(uploadDocumentId: $uploadDocumentId, motorDocumentTypeId: $motorDocumentTypeId, motorDocuImagePath: $motorDocuImagePath)';
+    return 'NonMotorDocDetail(uploadDocumentId: $uploadDocumentId, nonMotorDocumentTypeId: $nonMotorDocumentTypeId, nonMotorDocImagePath: $nonMotorDocImagePath)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$MotorDocDetailImpl &&
+            other is _$NonMotorDocDetailImpl &&
             (identical(other.uploadDocumentId, uploadDocumentId) ||
                 other.uploadDocumentId == uploadDocumentId) &&
-            (identical(other.motorDocumentTypeId, motorDocumentTypeId) ||
-                other.motorDocumentTypeId == motorDocumentTypeId) &&
-            (identical(other.motorDocuImagePath, motorDocuImagePath) ||
-                other.motorDocuImagePath == motorDocuImagePath));
+            (identical(other.nonMotorDocumentTypeId, nonMotorDocumentTypeId) ||
+                other.nonMotorDocumentTypeId == nonMotorDocumentTypeId) &&
+            (identical(other.nonMotorDocImagePath, nonMotorDocImagePath) ||
+                other.nonMotorDocImagePath == nonMotorDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, uploadDocumentId, motorDocumentTypeId, motorDocuImagePath);
+  int get hashCode => Object.hash(runtimeType, uploadDocumentId,
+      nonMotorDocumentTypeId, nonMotorDocImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MotorDocDetailImplCopyWith<_$MotorDocDetailImpl> get copyWith =>
-      __$$MotorDocDetailImplCopyWithImpl<_$MotorDocDetailImpl>(
+  _$$NonMotorDocDetailImplCopyWith<_$NonMotorDocDetailImpl> get copyWith =>
+      __$$NonMotorDocDetailImplCopyWithImpl<_$NonMotorDocDetailImpl>(
           this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$MotorDocDetailImplToJson(
+    return _$$NonMotorDocDetailImplToJson(
       this,
     );
   }
 }
 
-abstract class _MotorDocDetail implements MotorDocDetail {
-  const factory _MotorDocDetail(
+abstract class _NonMotorDocDetail implements NonMotorDocDetail {
+  const factory _NonMotorDocDetail(
       {@JsonKey(name: 'uploadDocumentId') final int? uploadDocumentId,
-      @JsonKey(name: 'motorDocumentTypeId') final int? motorDocumentTypeId,
-      @JsonKey(name: 'motorDocuImagePath')
-      final String? motorDocuImagePath}) = _$MotorDocDetailImpl;
+      @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+      final int? nonMotorDocumentTypeId,
+      @JsonKey(name: 'nonMotorDocImagePath')
+      final String? nonMotorDocImagePath}) = _$NonMotorDocDetailImpl;
 
-  factory _MotorDocDetail.fromJson(Map<String, dynamic> json) =
-      _$MotorDocDetailImpl.fromJson;
+  factory _NonMotorDocDetail.fromJson(Map<String, dynamic> json) =
+      _$NonMotorDocDetailImpl.fromJson;
 
   @override
   @JsonKey(name: 'uploadDocumentId')
   int? get uploadDocumentId;
   @override
-  @JsonKey(name: 'motorDocumentTypeId')
-  int? get motorDocumentTypeId;
+  @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
+  int? get nonMotorDocumentTypeId;
   @override
-  @JsonKey(name: 'motorDocuImagePath')
-  String? get motorDocuImagePath;
+  @JsonKey(name: 'nonMotorDocImagePath')
+  String? get nonMotorDocImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$MotorDocDetailImplCopyWith<_$MotorDocDetailImpl> get copyWith =>
+  _$$NonMotorDocDetailImplCopyWith<_$NonMotorDocDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
