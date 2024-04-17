@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:flutter/material.dart';
 
 class AuthorizationInterceptor extends Interceptor {
   @override
@@ -13,6 +14,7 @@ class AuthorizationInterceptor extends Interceptor {
       final token = await LocalDataHelper.getAuthToken();
 
       headers["Authorization"] = token;
+      debugPrint("Auth: $token");
     }
 
     handler.next(options);

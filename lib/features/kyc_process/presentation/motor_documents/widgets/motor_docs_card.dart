@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_document_types/response/get_motor_insurance_document_types_response_model.dart';
-import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_provider.dart';
+import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_element/motor_insurance_document_element.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/selected_motor_insurance_doc_type_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -50,24 +50,36 @@ class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
   }
 
   Widget _imageRow(WidgetRef ref) {
-    final String? motorInsuranceProofImagePath =
-        ref.watch(motorInsuranceProofFilePathProvider);
+    // final String? motorInsuranceProofImagePath =
+    //     ref.watch(motorInsuranceProofFilePathProvider);
 
-    final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
-        ref.watch(selectedMotorInsuranceDocTypeProvider);
+    // final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
+    //     ref.watch(selectedMotorInsuranceDocTypeProvider);
 
+    final selectedDocsListProvider =
+        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            selectedMotorInsuranceDocType?.motorInsuranceDocType ?? "-",
-            style: const TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(motorInsuranceProofImagePath),
-        ],
+        children: List.generate(
+          selectedDocsListProvider.list().length,
+          (index) {
+            MotorInsuranceDocumentElement item =
+                selectedDocsListProvider.list()[index];
+            return Column(
+              children: [
+                Text(
+                  item.documentElement!.motorInsuranceDocType ?? "-",
+                  style: const TextStyle(color: textGrayColor2),
+                ),
+                const SizedBox(height: 5),
+                _imageWidget(item.motorDocImagePath),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
