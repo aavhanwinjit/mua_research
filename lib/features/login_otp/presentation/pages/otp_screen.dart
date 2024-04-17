@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
@@ -248,6 +249,10 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(createPINProvider.notifier).update((state) => '');
           ref.watch(confirmPINProvider.notifier).update((state) => '');
 
+          await _setData(
+            authToken: success.body?.responseBody?.tokenData?.token,
+            sessionId: success.body?.responseBody?.tokenData?.sessionId,
+          );
           context.pushReplacementNamed(AppRoutes.successScreen);
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
           context.pushReplacementNamed(AppRoutes.failureScreen);
@@ -350,5 +355,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         }
       },
     );
+  }
+
+  Future<void> _setData({required String? authToken, required String? sessionId}) async {
+    await LocalDataHelper.storeAuthToken(authToken);
+    await LocalDataHelper.storeSessionId(sessionId);
+
+    ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }
 }

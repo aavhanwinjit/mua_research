@@ -47,31 +47,31 @@ import 'package:ekyc/features/kyc_process/domain/repositories/save_document_info
 import 'package:ekyc/features/kyc_process/domain/usecases/add_customer_information.dart'
     as _i66;
 import 'package:ekyc/features/kyc_process/domain/usecases/get_address_document_types.dart'
-    as _i53;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_document_category.dart'
-    as _i54;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_identity_document_types.dart'
     as _i55;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_document_category.dart'
+    as _i53;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_identity_document_types.dart'
+    as _i54;
 import 'package:ekyc/features/kyc_process/domain/usecases/get_motor_insurance_document_types.dart'
-    as _i56;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_non_motor_insurance_document_types.dart'
-    as _i57;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_policy_document_types.dart'
-    as _i59;
-import 'package:ekyc/features/kyc_process/domain/usecases/get_por_document_types.dart'
     as _i58;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_non_motor_insurance_document_types.dart'
+    as _i59;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_policy_document_types.dart'
+    as _i57;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_por_document_types.dart'
+    as _i56;
 import 'package:ekyc/features/kyc_process/domain/usecases/save_additional_documents.dart'
-    as _i63;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_address_details.dart'
-    as _i60;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_identity_details.dart'
-    as _i61;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_motor_insurance_documents.dart'
     as _i62;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_policy_documents.dart'
-    as _i64;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_por_documents.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_address_details.dart'
+    as _i61;
+import 'package:ekyc/features/kyc_process/domain/usecases/save_identity_details.dart'
+    as _i60;
+import 'package:ekyc/features/kyc_process/domain/usecases/save_motor_insurance_documents.dart'
     as _i65;
+import 'package:ekyc/features/kyc_process/domain/usecases/save_policy_documents.dart'
+    as _i63;
+import 'package:ekyc/features/kyc_process/domain/usecases/save_por_documents.dart'
+    as _i64;
 import 'package:ekyc/features/kyc_process/domain/usecases/scan_document.dart'
     as _i29;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
@@ -221,34 +221,34 @@ extension GetItInjectableX on _i1.GetIt {
         _i51.GetAgentApplications(gh<_i11.AgentApplicationsRepository>()));
     gh.lazySingleton<_i52.GetKycTypes>(
         () => _i52.GetKycTypes(gh<_i23.KycTypesRepository>()));
-    gh.lazySingleton<_i53.GetAddressDocumentTypes>(
-        () => _i53.GetAddressDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i54.GetDocumentCategory>(
-        () => _i54.GetDocumentCategory(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i55.GetIdentityDocumentTypes>(
-        () => _i55.GetIdentityDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i56.GetMotorInsuranceDocumentTypes>(() =>
-        _i56.GetMotorInsuranceDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i57.GetNonMotorInsuranceDocumentTypes>(() =>
-        _i57.GetNonMotorInsuranceDocumentTypes(
+    gh.lazySingleton<_i53.GetDocumentCategory>(
+        () => _i53.GetDocumentCategory(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i54.GetIdentityDocumentTypes>(
+        () => _i54.GetIdentityDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i55.GetAddressDocumentTypes>(
+        () => _i55.GetAddressDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i56.GetPORDocumentTypes>(
+        () => _i56.GetPORDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i57.GetPolicyDocumentTypes>(
+        () => _i57.GetPolicyDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i58.GetMotorInsuranceDocumentTypes>(() =>
+        _i58.GetMotorInsuranceDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i59.GetNonMotorInsuranceDocumentTypes>(() =>
+        _i59.GetNonMotorInsuranceDocumentTypes(
             gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i58.GetPORDocumentTypes>(
-        () => _i58.GetPORDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i59.GetPolicyDocumentTypes>(
-        () => _i59.GetPolicyDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i60.SaveAddressDetails>(
-        () => _i60.SaveAddressDetails(gh<_i47.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i61.SaveIdentityDetails>(
-        () => _i61.SaveIdentityDetails(gh<_i47.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i62.SaveMotorInsuranceDocuments>(() =>
-        _i62.SaveMotorInsuranceDocuments(
+    gh.lazySingleton<_i60.SaveIdentityDetails>(
+        () => _i60.SaveIdentityDetails(gh<_i47.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i61.SaveAddressDetails>(
+        () => _i61.SaveAddressDetails(gh<_i47.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i62.SaveAdditionalDocuments>(() =>
+        _i62.SaveAdditionalDocuments(gh<_i47.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i63.SavePolicyDocuments>(
+        () => _i63.SavePolicyDocuments(gh<_i47.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i64.SavePORDocuments>(
+        () => _i64.SavePORDocuments(gh<_i47.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i65.SaveMotorInsuranceDocuments>(() =>
+        _i65.SaveMotorInsuranceDocuments(
             gh<_i47.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i63.SaveAdditionalDocuments>(() =>
-        _i63.SaveAdditionalDocuments(gh<_i47.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i64.SavePolicyDocuments>(
-        () => _i64.SavePolicyDocuments(gh<_i47.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i65.SavePORDocuments>(
-        () => _i65.SavePORDocuments(gh<_i47.SaveDocumentInfoRepository>()));
     gh.lazySingleton<_i66.AddCustomerInformation>(() =>
         _i66.AddCustomerInformation(gh<_i33.AddCustomerInfoRepository>()));
     gh.lazySingleton<_i67.SaveSignature>(
