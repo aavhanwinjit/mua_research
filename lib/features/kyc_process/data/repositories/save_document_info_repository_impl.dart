@@ -50,8 +50,7 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(
-      SavePorDocumentsRequestModel request) async {
+  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(SavePorDocumentsRequestModel request) async {
     try {
       final response = await apiService.savePORDocuments(request);
 
@@ -62,9 +61,8 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>>
-      saveAdditionalDocuments(
-          SaveAdditionalDocumentsRequestModel request) async {
+  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>> saveAdditionalDocuments(
+      SaveAdditionalDocumentsRequestModel request) async {
     try {
       final response = await apiService.saveAdditionalDocuments(request);
 
@@ -87,9 +85,8 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SaveMotorInsuranceDocumentsResponseModel>>
-      saveMotorInsuranceDocuments(
-          SaveMotorInsuranceDocumentsRequestModel request) async {
+  Future<Either<Failure, SaveMotorInsuranceDocumentsResponseModel>> saveMotorInsuranceDocuments(
+      SaveMotorInsuranceDocumentsRequestModel request) async {
     try {
       final response = await apiService.saveMotorInsuranceDocuments(request);
 
@@ -100,9 +97,8 @@ class SaveDocumentInfoRepositoryImpl implements SaveDocumentInfoRepository {
   }
 
   @override
-  Future<Either<Failure, SaveNonMotorInsuranceDocumentsResponseModel>>
-      saveNonMotorInsuranceDocuments(
-          SaveNonMotorInsuranceDocumentsRequestModel request) async {
+  Future<Either<Failure, SaveNonMotorInsuranceDocumentsResponseModel>> saveNonMotorInsuranceDocuments(
+      SaveNonMotorInsuranceDocumentsRequestModel request) async {
     try {
       final response = await apiService.saveNonMotorInsuranceDocuments(request);
 
