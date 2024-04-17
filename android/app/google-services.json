@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "320482918179",
+    "project_id": "mua-kyc-app",
+    "storage_bucket": "mua-kyc-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320482918179:android:10cd6ea7b76129c0b4d696",
+        "android_client_info": {
+          "package_name": "mu.mua.kycApp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmf0GvioSzqbZIpZlfIEfzOB7SzJQ3Kuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320482918179:android:cfedcf875dbcf922b4d696",
+        "android_client_info": {
+          "package_name": "mu.mua.kyc_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmf0GvioSzqbZIpZlfIEfzOB7SzJQ3Kuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
