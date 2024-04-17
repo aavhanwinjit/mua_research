@@ -27,8 +27,6 @@ mixin _$SetAgentMpinRequestModel {
   String? get confirmMpin => throw _privateConstructorUsedError;
   @JsonKey(name: "mobileNo")
   String? get mobileNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "signaturePath")
-  String? get signaturePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,8 +43,7 @@ abstract class $SetAgentMpinRequestModelCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "mPIN") String? mPIN,
       @JsonKey(name: "confirmMPIN") String? confirmMpin,
-      @JsonKey(name: "mobileNo") String? mobileNo,
-      @JsonKey(name: "signaturePath") String? signaturePath});
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -66,7 +63,6 @@ class _$SetAgentMpinRequestModelCopyWithImpl<$Res,
     Object? mPIN = freezed,
     Object? confirmMpin = freezed,
     Object? mobileNo = freezed,
-    Object? signaturePath = freezed,
   }) {
     return _then(_value.copyWith(
       mPIN: freezed == mPIN
@@ -80,10 +76,6 @@ class _$SetAgentMpinRequestModelCopyWithImpl<$Res,
       mobileNo: freezed == mobileNo
           ? _value.mobileNo
           : mobileNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      signaturePath: freezed == signaturePath
-          ? _value.signaturePath
-          : signaturePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -101,8 +93,7 @@ abstract class _$$SetAgentMpinRequestModelImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "mPIN") String? mPIN,
       @JsonKey(name: "confirmMPIN") String? confirmMpin,
-      @JsonKey(name: "mobileNo") String? mobileNo,
-      @JsonKey(name: "signaturePath") String? signaturePath});
+      @JsonKey(name: "mobileNo") String? mobileNo});
 }
 
 /// @nodoc
@@ -121,7 +112,6 @@ class __$$SetAgentMpinRequestModelImplCopyWithImpl<$Res>
     Object? mPIN = freezed,
     Object? confirmMpin = freezed,
     Object? mobileNo = freezed,
-    Object? signaturePath = freezed,
   }) {
     return _then(_$SetAgentMpinRequestModelImpl(
       mPIN: freezed == mPIN
@@ -136,10 +126,6 @@ class __$$SetAgentMpinRequestModelImplCopyWithImpl<$Res>
           ? _value.mobileNo
           : mobileNo // ignore: cast_nullable_to_non_nullable
               as String?,
-      signaturePath: freezed == signaturePath
-          ? _value.signaturePath
-          : signaturePath // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -150,8 +136,7 @@ class _$SetAgentMpinRequestModelImpl implements _SetAgentMpinRequestModel {
   const _$SetAgentMpinRequestModelImpl(
       {@JsonKey(name: "mPIN") this.mPIN,
       @JsonKey(name: "confirmMPIN") this.confirmMpin,
-      @JsonKey(name: "mobileNo") this.mobileNo,
-      @JsonKey(name: "signaturePath") this.signaturePath});
+      @JsonKey(name: "mobileNo") this.mobileNo});
 
   factory _$SetAgentMpinRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SetAgentMpinRequestModelImplFromJson(json);
@@ -165,13 +150,10 @@ class _$SetAgentMpinRequestModelImpl implements _SetAgentMpinRequestModel {
   @override
   @JsonKey(name: "mobileNo")
   final String? mobileNo;
-  @override
-  @JsonKey(name: "signaturePath")
-  final String? signaturePath;
 
   @override
   String toString() {
-    return 'SetAgentMpinRequestModel(mPIN: $mPIN, confirmMpin: $confirmMpin, mobileNo: $mobileNo, signaturePath: $signaturePath)';
+    return 'SetAgentMpinRequestModel(mPIN: $mPIN, confirmMpin: $confirmMpin, mobileNo: $mobileNo)';
   }
 
   @override
@@ -183,15 +165,12 @@ class _$SetAgentMpinRequestModelImpl implements _SetAgentMpinRequestModel {
             (identical(other.confirmMpin, confirmMpin) ||
                 other.confirmMpin == confirmMpin) &&
             (identical(other.mobileNo, mobileNo) ||
-                other.mobileNo == mobileNo) &&
-            (identical(other.signaturePath, signaturePath) ||
-                other.signaturePath == signaturePath));
+                other.mobileNo == mobileNo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, mPIN, confirmMpin, mobileNo, signaturePath);
+  int get hashCode => Object.hash(runtimeType, mPIN, confirmMpin, mobileNo);
 
   @JsonKey(ignore: true)
   @override
@@ -212,8 +191,7 @@ abstract class _SetAgentMpinRequestModel implements SetAgentMpinRequestModel {
   const factory _SetAgentMpinRequestModel(
           {@JsonKey(name: "mPIN") final String? mPIN,
           @JsonKey(name: "confirmMPIN") final String? confirmMpin,
-          @JsonKey(name: "mobileNo") final String? mobileNo,
-          @JsonKey(name: "signaturePath") final String? signaturePath}) =
+          @JsonKey(name: "mobileNo") final String? mobileNo}) =
       _$SetAgentMpinRequestModelImpl;
 
   factory _SetAgentMpinRequestModel.fromJson(Map<String, dynamic> json) =
@@ -228,9 +206,6 @@ abstract class _SetAgentMpinRequestModel implements SetAgentMpinRequestModel {
   @override
   @JsonKey(name: "mobileNo")
   String? get mobileNo;
-  @override
-  @JsonKey(name: "signaturePath")
-  String? get signaturePath;
   @override
   @JsonKey(ignore: true)
   _$$SetAgentMpinRequestModelImplCopyWith<_$SetAgentMpinRequestModelImpl>

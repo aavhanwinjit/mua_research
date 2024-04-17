@@ -10,14 +10,16 @@ _$SaveSignatureRequestModelImpl _$$SaveSignatureRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SaveSignatureRequestModelImpl(
       fileName: json['fileName'] as String?,
-      fileString: json['fileString'] as String?,
       allowedFileId: json['allowedFileId'] as int?,
+      editFileName: json['editFileName'] as bool?,
+      fileString: json['fileString'] as String?,
     );
 
 Map<String, dynamic> _$$SaveSignatureRequestModelImplToJson(
         _$SaveSignatureRequestModelImpl instance) =>
     <String, dynamic>{
       'fileName': instance.fileName,
-      'fileString': instance.fileString,
       'allowedFileId': instance.allowedFileId,
+      'editFileName': instance.editFileName,
+      'fileString': instance.fileString,
     };

@@ -58,6 +58,9 @@ _$ValidateOTPResponseBodyImpl _$$ValidateOTPResponseBodyImplFromJson(
       companies: (json['companies'] as List<dynamic>?)
           ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
           .toList(),
+      tokenData: json['tokenData'] == null
+          ? null
+          : TokenData.fromJson(json['tokenData'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
@@ -71,4 +74,5 @@ Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
       'designation': instance.designation,
       'agencyName': instance.agencyName,
       'companies': instance.companies,
+      'tokenData': instance.tokenData,
     };
