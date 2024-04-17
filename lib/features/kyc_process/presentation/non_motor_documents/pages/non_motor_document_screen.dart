@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
@@ -15,9 +13,7 @@ import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/mixin
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/non_motor_insurance_doc_types_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/non_motor_insurance_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/selected_non_motor_insurance_doc_type_list_notifier.dart';
-import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/providers/non_motor_docs_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_insurance_loading_widget.dart';
-import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
@@ -30,12 +26,10 @@ class NonMotorDocumentScreen extends ConsumerStatefulWidget {
   const NonMotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
-    with GetNonMotorInsuranceDocTypeMixin {
+class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> with GetNonMotorInsuranceDocTypeMixin {
   String? dropdownValue;
 
   @override
@@ -43,31 +37,20 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setSelectedDocumentCategory();
-      ref
-          .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
-          .update((state) => false);
+      ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => false);
       // ref
       //     .watch(selectedMotorInsuranceDocTypeProvider.notifier)
       //     .update((state) => null);
       // ref
       //     .watch(motorInsuranceProofFilePathProvider.notifier)
       //     .update((state) => null);
-      ref
-          .watch(nonMotorInsuranceDocOCRApiResponse.notifier)
-          .update((state) => null);
-      ref
-          .watch(nonMotorInsuranceDocOCRLoadingProvider.notifier)
-          .update((state) => false);
+      ref.watch(nonMotorInsuranceDocOCRApiResponse.notifier).update((state) => null);
+      ref.watch(nonMotorInsuranceDocOCRLoadingProvider.notifier).update((state) => false);
       ref.watch(ocrNameMatched.notifier).update((state) => true);
-      ref
-          .watch(nonMotorInsuranceOtherNameProvider.notifier)
-          .update((state) => null);
-      ref
-          .watch(nonMotorInsuranceSurnameProvider.notifier)
-          .update((state) => null);
+      ref.watch(nonMotorInsuranceOtherNameProvider.notifier).update((state) => null);
+      ref.watch(nonMotorInsuranceSurnameProvider.notifier).update((state) => null);
 
-      final selectedDocsListProvider = ref
-          .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+      final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
       selectedDocsListProvider.clearList();
 
       selectedDocsListProvider.addElementToList();
@@ -77,31 +60,23 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
   }
 
   void setSelectedDocumentCategory() {
-    final documentCategoryNotifier =
-        ref.watch(documentCategoryNotifierProvider.notifier);
+    final documentCategoryNotifier = ref.watch(documentCategoryNotifierProvider.notifier);
     ref.watch(documentCategoryNotifierProvider);
 
-    final List<DocumentCategoryModel> documentCategoryList =
-        documentCategoryNotifier.documentCattegoryList();
+    final List<DocumentCategoryModel> documentCategoryList = documentCategoryNotifier.documentCattegoryList();
     final DocumentCategoryModel documentCategory = documentCategoryList
-        .where((element) =>
-            element.documentCategory ==
-            DocumentCategoryEnums.NonMotor.toString().split('.').last)
+        .where((element) => element.documentCategory == DocumentCategoryEnums.NonMotor.toString().split('.').last)
         .toList()
         .first;
 
-    ref
-        .read(selectedDocumentCategoryProvider.notifier)
-        .update((state) => documentCategory);
+    ref.read(selectedDocumentCategoryProvider.notifier).update((state) => documentCategory);
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool nonMotorInsuranceDocTypeLoading =
-        ref.watch(nonMotorInsuranceDocsTypesListLoading);
+    final bool nonMotorInsuranceDocTypeLoading = ref.watch(nonMotorInsuranceDocsTypesListLoading);
 
-    final nonMotorInsuranceDocTypesNotifier =
-        ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
+    final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
     return GestureDetector(
       onTap: () {
@@ -122,8 +97,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
                 children: [
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  if (nonMotorInsuranceDocTypeLoading)
-                    const NonMotorInsuranceDetailsLoadingWidget(),
+                  if (nonMotorInsuranceDocTypeLoading) const NonMotorInsuranceDetailsLoadingWidget(),
                   if (!nonMotorInsuranceDocTypeLoading) ...[
                     if (nonMotorInsuranceDocTypesNotifier.haveList()) ...[
                       _documentWidgetList(),
@@ -149,16 +123,14 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
   }
 
   Widget _documentWidgetList() {
-    final selectedDocsListProvider = ref
-        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: selectedDocsListProvider.list().length,
       itemBuilder: (context, index) {
-        NonMotorInsuranceDocumentElement item =
-            selectedDocsListProvider.list()[index];
+        NonMotorInsuranceDocumentElement item = selectedDocsListProvider.list()[index];
         return _documentElement(item, index);
       },
       separatorBuilder: (context, index) {
@@ -168,8 +140,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
   }
 
   Widget _documentElement(NonMotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider = ref
-        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
 
     return Column(
@@ -181,10 +152,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
           filePath: item.nonMotorDocImagePath,
           documentCode: item.documentElement?.documentCode ?? "",
           onChange: (String path, ScanDocumentResponseBody? response) async {
-            selectedDocsListProvider.updateElementsFilePath(
-                filePath: path, index: index);
-            selectedDocsListProvider.updateElementScanResponse(
-                scanResponse: response, index: index);
+            selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
+            selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
 
             context.pop();
           },
@@ -229,12 +198,10 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen>
   }
 
   Widget _dropdownWidget(NonMotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider = ref
-        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
 
-    final nonMotorInsuranceDocTypesNotifier =
-        ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
+    final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
 
     return CustomDrowDownField(

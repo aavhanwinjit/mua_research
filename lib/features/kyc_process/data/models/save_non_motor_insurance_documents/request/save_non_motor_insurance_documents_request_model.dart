@@ -9,27 +9,21 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'save_non_motor_insurance_documents_request_model.freezed.dart';
 part 'save_non_motor_insurance_documents_request_model.g.dart';
 
-SaveNonMotorInsuranceDocumentsRequestModel
-    saveNonMotorInsuranceDocumentsRequestModelFromJson(String str) =>
-        SaveNonMotorInsuranceDocumentsRequestModel.fromJson(json.decode(str));
+SaveNonMotorInsuranceDocumentsRequestModel saveNonMotorInsuranceDocumentsRequestModelFromJson(String str) =>
+    SaveNonMotorInsuranceDocumentsRequestModel.fromJson(json.decode(str));
 
-String saveNonMotorInsuranceDocumentsRequestModelToJson(
-        SaveNonMotorInsuranceDocumentsRequestModel data) =>
+String saveNonMotorInsuranceDocumentsRequestModelToJson(SaveNonMotorInsuranceDocumentsRequestModel data) =>
     json.encode(data.toJson());
 
 @freezed
-class SaveNonMotorInsuranceDocumentsRequestModel
-    with _$SaveNonMotorInsuranceDocumentsRequestModel {
+class SaveNonMotorInsuranceDocumentsRequestModel with _$SaveNonMotorInsuranceDocumentsRequestModel {
   const factory SaveNonMotorInsuranceDocumentsRequestModel({
     @JsonKey(name: 'agentApplicationId') int? agentApplicationId,
-    @JsonKey(name: 'isNonMotorDocVerificationCompleted')
-    bool? isNonMotorDocVerificationCompleted,
-    @JsonKey(name: 'nonMotorInsuranceDocDetailsModel')
-    List<NonMotorDocDetail>? nonMotorDocumentDetailsModel,
+    @JsonKey(name: 'isNonMotorDocVerificationCompleted') bool? isNonMotorDocVerificationCompleted,
+    @JsonKey(name: 'nonMotorInsuranceDocDetailsModel') List<NonMotorDocDetail>? nonMotorDocumentDetailsModel,
   }) = _SaveNonMotorInsuranceDocumentsRequestModel;
 
-  factory SaveNonMotorInsuranceDocumentsRequestModel.fromJson(
-          Map<String, dynamic> json) =>
+  factory SaveNonMotorInsuranceDocumentsRequestModel.fromJson(Map<String, dynamic> json) =>
       _$SaveNonMotorInsuranceDocumentsRequestModelFromJson(json);
 }
 
@@ -37,11 +31,9 @@ class SaveNonMotorInsuranceDocumentsRequestModel
 class NonMotorDocDetail with _$NonMotorDocDetail {
   const factory NonMotorDocDetail({
     @JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
-    @JsonKey(name: 'nonMotorInsuranceDocumentTypeId')
-    int? nonMotorDocumentTypeId,
+    @JsonKey(name: 'nonMotorInsuranceDocumentTypeId') int? nonMotorDocumentTypeId,
     @JsonKey(name: 'nonMotorDocImagePath') String? nonMotorDocImagePath,
   }) = _NonMotorDocDetail;
 
-  factory NonMotorDocDetail.fromJson(Map<String, dynamic> json) =>
-      _$NonMotorDocDetailFromJson(json);
+  factory NonMotorDocDetail.fromJson(Map<String, dynamic> json) => _$NonMotorDocDetailFromJson(json);
 }

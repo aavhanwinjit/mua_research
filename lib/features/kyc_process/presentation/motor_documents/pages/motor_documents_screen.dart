@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
@@ -30,8 +27,7 @@ class MotorDocumentScreen extends ConsumerStatefulWidget {
   const MotorDocumentScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
 }
 
 class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
@@ -43,29 +39,20 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setSelectedDocumentCategory();
-      ref
-          .watch(motorInsuranceDocsTypesListLoading.notifier)
-          .update((state) => false);
+      ref.watch(motorInsuranceDocsTypesListLoading.notifier).update((state) => false);
       // ref
       //     .watch(selectedMotorInsuranceDocTypeProvider.notifier)
       //     .update((state) => null);
       // ref
       //     .watch(motorInsuranceProofFilePathProvider.notifier)
       //     .update((state) => null);
-      ref
-          .watch(motorInsuranceDocOCRApiResponse.notifier)
-          .update((state) => null);
-      ref
-          .watch(motorInsuranceDocOCRLoadingProvider.notifier)
-          .update((state) => false);
+      ref.watch(motorInsuranceDocOCRApiResponse.notifier).update((state) => null);
+      ref.watch(motorInsuranceDocOCRLoadingProvider.notifier).update((state) => false);
       ref.watch(ocrNameMatched.notifier).update((state) => true);
-      ref
-          .watch(motorInsuranceOtherNameProvider.notifier)
-          .update((state) => null);
+      ref.watch(motorInsuranceOtherNameProvider.notifier).update((state) => null);
       ref.watch(motorInsuranceSurnameProvider.notifier).update((state) => null);
 
-      final selectedDocsListProvider =
-          ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+      final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
       selectedDocsListProvider.clearList();
 
       selectedDocsListProvider.addElementToList();
@@ -75,30 +62,22 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
   }
 
   void setSelectedDocumentCategory() {
-    final documentCategoryNotifier =
-        ref.watch(documentCategoryNotifierProvider.notifier);
+    final documentCategoryNotifier = ref.watch(documentCategoryNotifierProvider.notifier);
     ref.watch(documentCategoryNotifierProvider);
 
-    final List<DocumentCategoryModel> documentCategoryList =
-        documentCategoryNotifier.documentCattegoryList();
+    final List<DocumentCategoryModel> documentCategoryList = documentCategoryNotifier.documentCattegoryList();
     final DocumentCategoryModel documentCategory = documentCategoryList
-        .where((element) =>
-            element.documentCategory ==
-            DocumentCategoryEnums.Motor.toString().split('.').last)
+        .where((element) => element.documentCategory == DocumentCategoryEnums.Motor.toString().split('.').last)
         .toList()
         .first;
 
-    ref
-        .read(selectedDocumentCategoryProvider.notifier)
-        .update((state) => documentCategory);
+    ref.read(selectedDocumentCategoryProvider.notifier).update((state) => documentCategory);
   }
 
   @override
   Widget build(BuildContext context) {
-    final bool motorInsuranceDocTypeLoading =
-        ref.watch(motorInsuranceDocsTypesListLoading);
-    final motorInsuranceDocTypesNotifier =
-        ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
+    final bool motorInsuranceDocTypeLoading = ref.watch(motorInsuranceDocsTypesListLoading);
+    final motorInsuranceDocTypesNotifier = ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(motorInsuranceDocsTypesNotifierProvider);
 
     return GestureDetector(
@@ -120,8 +99,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
                 children: [
                   _subTitle(),
                   SizedBox(height: 20.h),
-                  if (motorInsuranceDocTypeLoading)
-                    const MotorInsuranceDetailsLoadingWidget(),
+                  if (motorInsuranceDocTypeLoading) const MotorInsuranceDetailsLoadingWidget(),
                   if (!motorInsuranceDocTypeLoading) ...[
                     if (motorInsuranceDocTypesNotifier.haveList()) ...[
                       _documentWidgetList(),
@@ -147,16 +125,14 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
   }
 
   Widget _documentWidgetList() {
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: selectedDocsListProvider.list().length,
       itemBuilder: (context, index) {
-        MotorInsuranceDocumentElement item =
-            selectedDocsListProvider.list()[index];
+        MotorInsuranceDocumentElement item = selectedDocsListProvider.list()[index];
         return _documentElement(item, index);
       },
       separatorBuilder: (context, index) {
@@ -166,8 +142,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
   }
 
   Widget _documentElement(MotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
 
     return Column(
@@ -179,10 +154,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
           filePath: item.motorDocImagePath,
           documentCode: item.documentElement?.documentCode ?? "",
           onChange: (String path, ScanDocumentResponseBody? response) async {
-            selectedDocsListProvider.updateElementsFilePath(
-                filePath: path, index: index);
-            selectedDocsListProvider.updateElementScanResponse(
-                scanResponse: response, index: index);
+            selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
+            selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
 
             context.pop();
           },
@@ -227,12 +200,10 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
   }
 
   Widget _dropdownWidget(MotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
 
-    final motorInsuranceDocTypesNotifier =
-        ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
+    final motorInsuranceDocTypesNotifier = ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(motorInsuranceDocsTypesNotifierProvider);
 
     return CustomDrowDownField(
@@ -245,9 +216,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
         selectedDocsListProvider.updateElementsSelectedDocType(
             index: index, element: value as MotorInsuranceDocumentTypeModel);
       },
-      items: motorInsuranceDocTypesNotifier
-          .motorInsuranceDocsTypesList()
-          .map((MotorInsuranceDocumentTypeModel value) {
+      items: motorInsuranceDocTypesNotifier.motorInsuranceDocsTypesList().map((MotorInsuranceDocumentTypeModel value) {
         return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
           value: value,
           child: Text(
@@ -278,17 +247,14 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
   }
 
   bool buttonDisableCheck() {
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
 
     if (selectedDocsListProvider.list().isEmpty) {
       return true;
     }
 
     return selectedDocsListProvider.list().any((element) {
-      if (element.motorDocImagePath == null ||
-          element.scanResponse == null ||
-          element.documentElement == null) {
+      if (element.motorDocImagePath == null || element.scanResponse == null || element.documentElement == null) {
         return true;
       } else {
         return false;

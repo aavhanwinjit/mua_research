@@ -19,23 +19,19 @@ abstract class SaveDocumentInfoRepository {
   Future<Either<Failure, SaveIdentityDetailsResponseModel>> saveIdentityDetails(
       SaveIdentityDetailsRequestModel request);
 
-  Future<Either<Failure, SaveAddressDetailsResponseModel>> saveAddressDetails(
-      SaveAddressDetailsRequestModel request);
+  Future<Either<Failure, SaveAddressDetailsResponseModel>> saveAddressDetails(SaveAddressDetailsRequestModel request);
 
-  Future<Either<Failure, SaveMotorInsuranceDocumentsResponseModel>>
-      saveMotorInsuranceDocuments(
-          SaveMotorInsuranceDocumentsRequestModel request);
+  Future<Either<Failure, SaveMotorInsuranceDocumentsResponseModel>> saveMotorInsuranceDocuments(
+      SaveMotorInsuranceDocumentsRequestModel request);
 
-  Future<Either<Failure, SaveNonMotorInsuranceDocumentsResponseModel>>
-      saveNonMotorInsuranceDocuments(
-          SaveNonMotorInsuranceDocumentsRequestModel request);
+  Future<Either<Failure, SaveNonMotorInsuranceDocumentsResponseModel>> saveNonMotorInsuranceDocuments(
+      SaveNonMotorInsuranceDocumentsRequestModel request);
 
-  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(
-      SavePorDocumentsRequestModel request);
+  Future<Either<Failure, SavePorDocumentsResponseModel>> savePORDocuments(SavePorDocumentsRequestModel request);
 
   Future<Either<Failure, SavePolicyDocumentsResponseModel>> savePolicyDocuments(
       SavePolicyDocumentsRequestModel request);
 
-  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>>
-      saveAdditionalDocuments(SaveAdditionalDocumentsRequestModel request);
+  Future<Either<Failure, SaveAdditionalDocumentsResponseModel>> saveAdditionalDocuments(
+      SaveAdditionalDocumentsRequestModel request);
 }
