@@ -50,6 +50,7 @@ class KYCSubmittedScreen extends ConsumerWidget {
           label: Strings.done,
           onTap: () {
             context.go(AppRoutes.dashboardScreen);
+            // context.pop();
           },
         ),
       ],

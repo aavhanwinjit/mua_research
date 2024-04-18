@@ -7,11 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
+class OnboardSuccessScreen extends ConsumerStatefulWidget {
   const OnboardSuccessScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _OnboardSuccessScreenState();
+}
+
+class _OnboardSuccessScreenState extends ConsumerState<OnboardSuccessScreen> with AgentDetailsMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(agentDetailsLoadingProvider.notifier).update((state) => false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final agentLoginDetails = ref.watch(agentLoginDetailsProvider);
 
     return Scaffold(

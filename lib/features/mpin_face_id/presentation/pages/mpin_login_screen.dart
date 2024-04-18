@@ -28,6 +28,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   bool wrongPin = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(mpinLoadingProvider.notifier).update((state) => false);
+      ref.read(agentDetailsLoadingProvider.notifier).update((state) => false);
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
