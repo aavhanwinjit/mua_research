@@ -30,6 +30,12 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   bool successVal = false;
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(mpinLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,

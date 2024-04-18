@@ -26,6 +26,8 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _resetTextFields();
+
+      ref.read(customerInfoLoadingProvider.notifier).update((state) => false);
     });
   }
 

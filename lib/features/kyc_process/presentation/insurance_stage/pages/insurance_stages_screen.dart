@@ -169,7 +169,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
   }
 
   Widget _buttons(BuildContext context) {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
+    // final selectedApplication = ref.watch(selectedApplicationProvider);
 
     return Column(
       children: [
@@ -181,15 +181,15 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
           },
         ),
         SizedBox(height: 16.h),
-        if (selectedApplication?.applicationStatus == Strings.chipStatusCompleted) ...[
-          CustomPrimaryButton(
-            label: Strings.done,
-            onTap: () {
-              context.go(AppRoutes.kycSubmittedScreen);
-            },
-          ),
-          SizedBox(height: 16.h),
-        ],
+        // if (selectedApplication?.applicationStatus == Strings.chipStatusCompleted) ...[
+        //   CustomPrimaryButton(
+        //     label: Strings.done,
+        //     onTap: () {
+        //       context.go(AppRoutes.kycSubmittedScreen);
+        //     },
+        //   ),
+        //   SizedBox(height: 16.h),
+        // ],
         CustomPrimaryButton(
           label: Strings.goToDashboard,
           onTap: () {

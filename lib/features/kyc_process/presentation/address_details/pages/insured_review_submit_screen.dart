@@ -123,10 +123,11 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
 
             context.pop();
             context.pop();
+            context.go(AppRoutes.kycSubmittedScreen);
 
-            if (isExit) {
-              context.pop();
-            }
+            // if (isExit) {
+            //   context.pop();
+            // }
           },
         );
       },
