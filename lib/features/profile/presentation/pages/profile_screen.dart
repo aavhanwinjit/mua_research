@@ -18,7 +18,8 @@ class ProfileScreen extends ConsumerStatefulWidget {
   const ProfileScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _CustomerInfoScreenState();
 }
 
 class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
@@ -116,8 +117,10 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Widget _profileWidget() {
-    final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
-    final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
+    final GetAgentDetailsResponseModel? getAgentDetailsResponse =
+        ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseBody? agentDetails =
+        getAgentDetailsResponse?.body?.responseBody;
 
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.w),
@@ -139,7 +142,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.mobileNo,
-            value: agentDetails?.mobileNumber ?? "-",
+            value: "+230 ${agentDetails?.mobileNumber ?? "-"}",
             // value: "+230 5 123 4567",
           ),
           SizedBox(height: 16.h),
@@ -204,7 +207,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
     }
   }
 
-  Widget _infoTile({required String title, required String value, FontWeight? fontWeight}) {
+  Widget _infoTile(
+      {required String title, required String value, FontWeight? fontWeight}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -228,7 +232,8 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
     );
   }
 
-  Widget _companyNameTile({required List<Company>? companies, FontWeight? fontWeight}) {
+  Widget _companyNameTile(
+      {required List<Company>? companies, FontWeight? fontWeight}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
