@@ -26,7 +26,7 @@ class StatusChip extends StatelessWidget {
             style: TextStyle(
               color: _getTextColor(),
               fontWeight: FontWeight.bold,
-              fontSize: 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ? 10.sp : 12.sp,
             ),
           ),
         ],
