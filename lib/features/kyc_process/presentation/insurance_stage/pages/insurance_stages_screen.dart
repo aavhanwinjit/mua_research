@@ -31,6 +31,8 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(pdfLoadingProvider.notifier).update((state) => false);
+
       getDocumentCategory(context: context, ref: ref);
       getKycTypes(context: context, ref: ref);
     });
@@ -176,20 +178,12 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
         CustomOutlineIconButton(
           label: Strings.downloadPDF,
           iconString: ImageConstants.pdfIcon,
+          loading: ref.watch(pdfLoadingProvider),
           onTap: () async {
-            await downloadPdf(context);
+            await generatePdf(context: context, ref: ref);
           },
         ),
         SizedBox(height: 16.h),
-        // if (selectedApplication?.applicationStatus == Strings.chipStatusCompleted) ...[
-        //   CustomPrimaryButton(
-        //     label: Strings.done,
-        //     onTap: () {
-        //       context.go(AppRoutes.kycSubmittedScreen);
-        //     },
-        //   ),
-        //   SizedBox(height: 16.h),
-        // ],
         CustomPrimaryButton(
           label: Strings.goToDashboard,
           onTap: () {

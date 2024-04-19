@@ -9,6 +9,7 @@ class CustomOutlineIconButton extends StatelessWidget {
   final bool? disable;
   final bool? primary;
   final String iconString;
+  final bool? loading;
 
   const CustomOutlineIconButton({
     super.key,
@@ -19,10 +20,15 @@ class CustomOutlineIconButton extends StatelessWidget {
     this.disable = false,
     this.primary = true,
     required this.iconString,
+    this.loading = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    return _button();
+  }
+
+  Widget _button() {
     return MaterialButton(
       elevation: 0,
       height: 60.h,
@@ -33,25 +39,62 @@ class CustomOutlineIconButton extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(100),
       ),
-      onPressed: disable == false ? onTap : null,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ImageIcon(
-            AssetImage(iconString),
-            color: primaryColor,
+      onPressed: loading == true
+          ? () {}
+          : disable == false
+              ? onTap
+              : null,
+      child: _animatedButton(),
+    );
+  }
+
+  Widget _animatedButton() {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 200),
+      transitionBuilder: (Widget child, Animation<double> animation) {
+        return SizeTransition(
+          sizeFactor: animation,
+          child: child,
+        );
+      },
+      child: loading == true ? _loader() : _buttonTitle(),
+    );
+  }
+
+  Widget _buttonTitle() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ImageIcon(
+          AssetImage(iconString),
+          color: primaryColor,
+        ),
+        const SizedBox(width: 5),
+        Text(
+          label,
+          style: TextStyle(
+            color: primary == true ? primaryColor : white,
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w700,
           ),
-          const SizedBox(width: 5),
-          Text(
-            label,
-            style: TextStyle(
-              color: primary == true ? primaryColor : white,
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w700,
-            ),
+        ),
+      ],
+    );
+  }
+
+  Widget _loader() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: white,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
