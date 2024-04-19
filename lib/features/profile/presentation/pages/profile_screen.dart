@@ -139,7 +139,7 @@ class _CustomerInfoScreenState extends ConsumerState<ProfileScreen> {
           SizedBox(height: 16.h),
           _infoTile(
             title: Strings.mobileNo,
-            value: agentDetails?.mobileNumber ?? "-",
+            value: "+230 ${agentDetails?.mobileNumber ?? "-"}",
             // value: "+230 5 123 4567",
           ),
           SizedBox(height: 16.h),
