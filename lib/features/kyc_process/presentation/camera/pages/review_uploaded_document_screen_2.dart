@@ -11,14 +11,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixin {
+class ReviewUploadedDocumentScreen2 extends ConsumerStatefulWidget {
   final Function(String, ScanDocumentResponseBody?) onChange;
   final String documentCode;
 
   const ReviewUploadedDocumentScreen2({required this.onChange, required this.documentCode, super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _ReviewUploadedDocumentScreen2State();
+}
+
+class _ReviewUploadedDocumentScreen2State extends ConsumerState<ReviewUploadedDocumentScreen2> with ScanDocumentMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(reviewScreen2LoadingProvider.notifier).update((state) => false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final String? screenTitle = ref.watch(reviewUploadedDocScreenTitle);
     final String? capturedFilePath = ref.watch(capturedFilePathProvider);
 
@@ -69,12 +83,12 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
                   await scanDocument(
                     context: context,
                     ref: ref,
-                    documentType: documentCode,
+                    documentType: widget.documentCode,
                     loadingProvider: reviewScreen2LoadingProvider,
                     onSuccess: (ScanDocumentResponseBody? response) {
                       ref.watch(reviewScreen2LoadingProvider.notifier).update((state) => false);
 
-                      onChange(capturedFilePath ?? "", response);
+                      widget.onChange(capturedFilePath ?? "", response);
                     },
                     base64Image: fileBase64,
                   );
@@ -82,15 +96,17 @@ class ReviewUploadedDocumentScreen2 extends ConsumerWidget with ScanDocumentMixi
               ),
               SizedBox(height: 16.h),
               CustomOutlineButton(
-                disable: ref.watch(reviewScreen2LoadingProvider) == true ? false : false,
+                disable: false,
                 primary: true,
                 label: Strings.retakePhoto,
-                onTap: () {
-                  context.pushReplacementNamed(
-                    AppRoutes.cameraScreen2,
-                    extra: {'onChange': onChange, 'documentCode': documentCode},
-                  );
-                },
+                onTap: ref.watch(reviewScreen2LoadingProvider) == true
+                    ? () {}
+                    : () {
+                        context.pushReplacementNamed(
+                          AppRoutes.cameraScreen2,
+                          extra: {'onChange': widget.onChange, 'documentCode': widget.documentCode},
+                        );
+                      },
               ),
             ],
           ),

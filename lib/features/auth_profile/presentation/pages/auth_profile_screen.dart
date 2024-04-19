@@ -23,6 +23,12 @@ class AuthProfileScreen extends ConsumerStatefulWidget {
 
 class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with SignatureMixin {
   @override
+  void initState() {
+    super.initState();
+    ref.read(authProfileScreenLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,

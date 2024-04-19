@@ -170,10 +170,11 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
 
         context.pop();
         context.pop();
+        context.go(AppRoutes.kycSubmittedScreen);
 
-        if (isExit) {
-          context.pop();
-        }
+        // if (isExit) {
+        //   context.pop();
+        // }
       },
     );
   }

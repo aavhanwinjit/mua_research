@@ -25,6 +25,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,

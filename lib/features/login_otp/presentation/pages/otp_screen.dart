@@ -40,6 +40,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   bool showResendOption = false;
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(otpScreenLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   void dispose() {
     otpController.dispose();
     super.dispose();
