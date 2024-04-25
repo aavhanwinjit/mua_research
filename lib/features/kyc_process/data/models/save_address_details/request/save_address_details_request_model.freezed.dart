@@ -32,7 +32,7 @@ mixin _$SaveAddressDetailsRequestModel {
   @JsonKey(name: "docOtherName")
   String? get docOtherName => throw _privateConstructorUsedError;
   @JsonKey(name: "docBillDate")
-  DateTime? get docBillDate => throw _privateConstructorUsedError;
+  String? get docBillDate => throw _privateConstructorUsedError;
   @JsonKey(name: "docAddress")
   String? get docAddress => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadedDocumentId")
@@ -63,7 +63,7 @@ abstract class $SaveAddressDetailsRequestModelCopyWith<$Res> {
       @JsonKey(name: "docImagePath") String? docImagePath,
       @JsonKey(name: "docSurname") String? docSurname,
       @JsonKey(name: "docOtherName") String? docOtherName,
-      @JsonKey(name: "docBillDate") DateTime? docBillDate,
+      @JsonKey(name: "docBillDate") String? docBillDate,
       @JsonKey(name: "docAddress") String? docAddress,
       @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
       @JsonKey(name: "isAddressVerificationCompleted")
@@ -120,7 +120,7 @@ class _$SaveAddressDetailsRequestModelCopyWithImpl<$Res,
       docBillDate: freezed == docBillDate
           ? _value.docBillDate
           : docBillDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       docAddress: freezed == docAddress
           ? _value.docAddress
           : docAddress // ignore: cast_nullable_to_non_nullable
@@ -156,7 +156,7 @@ abstract class _$$SaveAddressDetailsRequestModelImplCopyWith<$Res>
       @JsonKey(name: "docImagePath") String? docImagePath,
       @JsonKey(name: "docSurname") String? docSurname,
       @JsonKey(name: "docOtherName") String? docOtherName,
-      @JsonKey(name: "docBillDate") DateTime? docBillDate,
+      @JsonKey(name: "docBillDate") String? docBillDate,
       @JsonKey(name: "docAddress") String? docAddress,
       @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
       @JsonKey(name: "isAddressVerificationCompleted")
@@ -212,7 +212,7 @@ class __$$SaveAddressDetailsRequestModelImplCopyWithImpl<$Res>
       docBillDate: freezed == docBillDate
           ? _value.docBillDate
           : docBillDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       docAddress: freezed == docAddress
           ? _value.docAddress
           : docAddress // ignore: cast_nullable_to_non_nullable
@@ -271,7 +271,7 @@ class _$SaveAddressDetailsRequestModelImpl
   final String? docOtherName;
   @override
   @JsonKey(name: "docBillDate")
-  final DateTime? docBillDate;
+  final String? docBillDate;
   @override
   @JsonKey(name: "docAddress")
   final String? docAddress;
@@ -358,7 +358,7 @@ abstract class _SaveAddressDetailsRequestModel
           @JsonKey(name: "docImagePath") final String? docImagePath,
           @JsonKey(name: "docSurname") final String? docSurname,
           @JsonKey(name: "docOtherName") final String? docOtherName,
-          @JsonKey(name: "docBillDate") final DateTime? docBillDate,
+          @JsonKey(name: "docBillDate") final String? docBillDate,
           @JsonKey(name: "docAddress") final String? docAddress,
           @JsonKey(name: "uploadedDocumentId") final int? uploadedDocumentId,
           @JsonKey(name: "isAddressVerificationCompleted")
@@ -386,7 +386,7 @@ abstract class _SaveAddressDetailsRequestModel
   String? get docOtherName;
   @override
   @JsonKey(name: "docBillDate")
-  DateTime? get docBillDate;
+  String? get docBillDate;
   @override
   @JsonKey(name: "docAddress")
   String? get docAddress;

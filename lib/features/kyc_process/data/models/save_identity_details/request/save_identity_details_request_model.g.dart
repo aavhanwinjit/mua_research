@@ -23,6 +23,7 @@ _$SaveIdentityDetailsRequestModelImpl
           idDocBackImage: json['idDocBackImage'] as String?,
           customerId: json['customerId'] as String?,
           fileExtension: json['fileExtension'] as String?,
+          quoteNumber: json['quoteNumber'] as String?,
         );
 
 Map<String, dynamic> _$$SaveIdentityDetailsRequestModelImplToJson(
@@ -42,4 +43,5 @@ Map<String, dynamic> _$$SaveIdentityDetailsRequestModelImplToJson(
       'idDocBackImage': instance.idDocBackImage,
       'customerId': instance.customerId,
       'fileExtension': instance.fileExtension,
+      'quoteNumber': instance.quoteNumber,
     };

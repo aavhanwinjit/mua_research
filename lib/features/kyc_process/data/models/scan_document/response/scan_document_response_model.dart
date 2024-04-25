@@ -64,7 +64,7 @@ class Documentdata with _$Documentdata {
   const factory Documentdata({
     @JsonKey(name: "kyc_status") String? kycStatus,
     @JsonKey(name: "kyc_status_msg") String? kycStatusMsg,
-    @JsonKey(name: "billDate") dynamic billDate,
+    @JsonKey(name: "billDate") String? billDate,
     @JsonKey(name: "isFirstNameAvailable") bool? isFirstNameAvailable,
     @JsonKey(name: "isLastNameAvailable") bool? isLastNameAvailable,
     @JsonKey(name: "isIdNumberAvailable") bool? isIdNumberAvailable,

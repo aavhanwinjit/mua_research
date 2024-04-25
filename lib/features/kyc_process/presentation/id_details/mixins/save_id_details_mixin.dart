@@ -77,12 +77,15 @@ mixin SaveIDDetailsMixin {
       surname: surname,
       otherName: firstname,
       idDocNumber: idnumber,
+      // idDocFrontImage: "frontBase64",
       idDocFrontImage: frontBase64,
       // idDocFrontImage: idCardFrontScanResult?.fileName,
+      // idDocBackImage: "backBase64",
       idDocBackImage: backBase64,
       // idDocBackImage: idCardBackScanResult?.fileName,
-      customerId: null,
+      customerId: "",
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
+      quoteNumber: selectedApplication?.quoteNumber,
     );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
