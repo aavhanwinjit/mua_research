@@ -207,8 +207,17 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
         } else if (documentData?.kycStatus == "Failed" &&
             documentData?.billDate != null &&
             documentData!.billDate!.isNotEmpty &&
-            documentData.kycStatusMsg ==
-                "KYC validation failed.The uploaded bill should be of last 3 months only. Older documents are not allowed.") {
+            documentData.kycStatusMsg != null &&
+            documentData.kycStatusMsg!.contains("The uploaded bill should be of last 3 months only")) {
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+          // Block the user here itself
+          KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData.kycStatusMsg ?? "");
+          return;
+        } else if (documentData?.kycStatus == "Failed" &&
+            documentData?.billDate != null &&
+            documentData!.billDate!.isNotEmpty &&
+            documentData.kycStatusMsg != null &&
+            documentData.kycStatusMsg!.contains("Could not detect any bill date")) {
           ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           // Block the user here itself
           KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData.kycStatusMsg ?? "");
