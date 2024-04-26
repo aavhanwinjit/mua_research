@@ -31,6 +31,7 @@ class SaveIdentityDetailsRequestModel with _$SaveIdentityDetailsRequestModel {
     @JsonKey(name: "idDocBackImage") String? idDocBackImage,
     @JsonKey(name: "customerId") String? customerId,
     @JsonKey(name: "fileExtension") String? fileExtension,
+    @JsonKey(name: "quoteNumber") String? quoteNumber,
     // @JsonKey(name: "idDocFrontUploadedDocumentId") int? idDocFrontUploadedDocumentId,
     // @JsonKey(name: "idDocBackUploadedDocumentId") int? idDocBackUploadedDocumentId,
   }) = _SaveIdentityDetailsRequestModel;

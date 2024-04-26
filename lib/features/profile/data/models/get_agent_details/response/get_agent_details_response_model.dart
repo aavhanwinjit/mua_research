@@ -65,6 +65,7 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
     @JsonKey(name: "apiUniqueKey") dynamic apiUniqueKey,
     @JsonKey(name: "companies") List<Company>? companies,
     @JsonKey(name: "agencyName") String? agencyName,
+    @JsonKey(name: "signatureUploadDate") DateTime? signatureUploadDate,
     @JsonKey(name: "designation") dynamic designation,
     @JsonKey(name: "isDisabled") bool? isDisabled,
     @JsonKey(name: "crd") DateTime? crd,

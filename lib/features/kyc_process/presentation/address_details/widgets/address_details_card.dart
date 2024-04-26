@@ -86,11 +86,11 @@ class AddressDetailsCard extends ConsumerWidget {
                       title: Strings.surname,
                       value: addressSurname ?? "-",
                     ),
-                    if (selectedAddressDocType?.documentCode ==  DocumentCodes.UTB.toString().split('.').last) ...[
+                    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) ...[
                       const SizedBox(height: 24),
                       InfoTile(
                         title: Strings.billDate,
-                        value: addressOCRResponse?.ocrResponse?.documentdata?.billDate,
+                        value: addressOCRResponse?.ocrResponse?.documentdata?.billDate ?? "-",
                       ),
                     ],
                   ],

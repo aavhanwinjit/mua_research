@@ -32,7 +32,7 @@ class PorDocumentDetailsModel with _$PorDocumentDetailsModel {
     @JsonKey(name: "porDocumentTypeId") int? porDocumentTypeId,
     @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
     @JsonKey(name: "lastName") String? lastName,
-    @JsonKey(name: "issueDate") DateTime? issueDate,
+    @JsonKey(name: "issueDate") String? issueDate,
     @JsonKey(name: "porDocImagePath") String? porDocImagePath,
   }) = _PorDocumentDetailsModel;
 

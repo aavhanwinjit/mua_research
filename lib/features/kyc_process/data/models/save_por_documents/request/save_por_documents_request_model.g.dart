@@ -33,9 +33,7 @@ _$PorDocumentDetailsModelImpl _$$PorDocumentDetailsModelImplFromJson(
       porDocumentTypeId: json['porDocumentTypeId'] as int?,
       uploadDocumentId: json['uploadDocumentId'] as int?,
       lastName: json['lastName'] as String?,
-      issueDate: json['issueDate'] == null
-          ? null
-          : DateTime.parse(json['issueDate'] as String),
+      issueDate: json['issueDate'] as String?,
       porDocImagePath: json['porDocImagePath'] as String?,
     );
 
@@ -45,6 +43,6 @@ Map<String, dynamic> _$$PorDocumentDetailsModelImplToJson(
       'porDocumentTypeId': instance.porDocumentTypeId,
       'uploadDocumentId': instance.uploadDocumentId,
       'lastName': instance.lastName,
-      'issueDate': instance.issueDate?.toIso8601String(),
+      'issueDate': instance.issueDate,
       'porDocImagePath': instance.porDocImagePath,
     };

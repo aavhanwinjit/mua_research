@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +15,8 @@ class NICDetailsCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -30,7 +34,8 @@ class NICDetailsCard extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  Strings.nicCard,
+                  // Strings.nicCard,
+                  selectedIdDocType?.identityDocType ?? "-",
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -64,6 +69,8 @@ class NICDetailsCard extends ConsumerWidget {
     String? surName = ref.watch(extractedSurNameProvider);
     String? idNumber = ref.watch(extractedNICIDNumberProvider);
 
+    AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
       child: Row(
@@ -79,7 +86,9 @@ class NICDetailsCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 24),
                 InfoTile(
-                  title: Strings.nicNumber,
+                  title: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+                      ? Strings.nicNumber
+                      : Strings.passportNo,
                   value: idNumber ?? "NA",
                 ),
               ],

@@ -52,7 +52,8 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
             ),
           ),
           Text(
-            "Tue Jan 18 11:55:50 IST 2023",
+            agentDetails?.signatureUploadDate.toString() ?? "",
+            // "Tue Jan 18 11:55:50 IST 2023",
             style: TextStyle(
               color: textGrayColor2,
               fontSize: 12.sp,

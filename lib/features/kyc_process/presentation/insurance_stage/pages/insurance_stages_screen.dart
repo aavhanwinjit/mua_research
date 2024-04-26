@@ -142,9 +142,10 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
             subTitle: Strings.motorDocSubtitle,
             // buttonType: InsuranceButtonType.active,
             buttonType: getMotorInsuranceDocsCardStatus().buttonType,
-            onTap: () {
-              context.pushNamed(AppRoutes.motorDocsScreen);
-            },
+            // onTap: () {
+            //   context.pushNamed(AppRoutes.motorDocsScreen);
+            // },
+            onTap: getMotorInsuranceDocsCardStatus().onTap,
           ),
 
         // // Show Policy Docs Card only if application is of type Non-Motor Insurance
@@ -154,9 +155,10 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
             subTitle: Strings.nonMotorDocSubtitle,
             // buttonType: InsuranceButtonType.active,
             buttonType: getNonMotorInsuranceDocsCardStatus().buttonType,
-            onTap: () {
-              context.pushNamed(AppRoutes.nonMotorDocsScreen);
-            },
+            // onTap: () {
+            //   context.pushNamed(AppRoutes.nonMotorDocsScreen);
+            // },
+            onTap: getNonMotorInsuranceDocsCardStatus().onTap,
           ),
 
         SizedBox(height: 16.h),
@@ -356,7 +358,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
   ({InsuranceButtonType buttonType, Function()? onTap}) getNonMotorInsuranceDocsCardStatus() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.kycTypeId == KYCType.MOTOR_INSURANCE) {
+    if (selectedApplication?.kycTypeId == KYCType.NON_MOTOR_INSURANCE) {
       if (selectedApplication?.isIdVerificationCompleted == false) {
         return (
           buttonType: InsuranceButtonType.inactive,

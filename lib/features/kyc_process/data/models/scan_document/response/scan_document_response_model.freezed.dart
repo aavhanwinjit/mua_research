@@ -886,7 +886,7 @@ mixin _$Documentdata {
   @JsonKey(name: "kyc_status_msg")
   String? get kycStatusMsg => throw _privateConstructorUsedError;
   @JsonKey(name: "billDate")
-  dynamic get billDate => throw _privateConstructorUsedError;
+  String? get billDate => throw _privateConstructorUsedError;
   @JsonKey(name: "isFirstNameAvailable")
   bool? get isFirstNameAvailable => throw _privateConstructorUsedError;
   @JsonKey(name: "isLastNameAvailable")
@@ -911,7 +911,7 @@ abstract class $DocumentdataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "kyc_status") String? kycStatus,
       @JsonKey(name: "kyc_status_msg") String? kycStatusMsg,
-      @JsonKey(name: "billDate") dynamic billDate,
+      @JsonKey(name: "billDate") String? billDate,
       @JsonKey(name: "isFirstNameAvailable") bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") bool? isIdNumberAvailable,
@@ -951,7 +951,7 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
       billDate: freezed == billDate
           ? _value.billDate
           : billDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isFirstNameAvailable: freezed == isFirstNameAvailable
           ? _value.isFirstNameAvailable
           : isFirstNameAvailable // ignore: cast_nullable_to_non_nullable
@@ -983,7 +983,7 @@ abstract class _$$DocumentdataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "kyc_status") String? kycStatus,
       @JsonKey(name: "kyc_status_msg") String? kycStatusMsg,
-      @JsonKey(name: "billDate") dynamic billDate,
+      @JsonKey(name: "billDate") String? billDate,
       @JsonKey(name: "isFirstNameAvailable") bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") bool? isIdNumberAvailable,
@@ -1021,7 +1021,7 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
       billDate: freezed == billDate
           ? _value.billDate
           : billDate // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isFirstNameAvailable: freezed == isFirstNameAvailable
           ? _value.isFirstNameAvailable
           : isFirstNameAvailable // ignore: cast_nullable_to_non_nullable
@@ -1065,7 +1065,7 @@ class _$DocumentdataImpl implements _Documentdata {
   final String? kycStatusMsg;
   @override
   @JsonKey(name: "billDate")
-  final dynamic billDate;
+  final String? billDate;
   @override
   @JsonKey(name: "isFirstNameAvailable")
   final bool? isFirstNameAvailable;
@@ -1093,7 +1093,8 @@ class _$DocumentdataImpl implements _Documentdata {
                 other.kycStatus == kycStatus) &&
             (identical(other.kycStatusMsg, kycStatusMsg) ||
                 other.kycStatusMsg == kycStatusMsg) &&
-            const DeepCollectionEquality().equals(other.billDate, billDate) &&
+            (identical(other.billDate, billDate) ||
+                other.billDate == billDate) &&
             (identical(other.isFirstNameAvailable, isFirstNameAvailable) ||
                 other.isFirstNameAvailable == isFirstNameAvailable) &&
             (identical(other.isLastNameAvailable, isLastNameAvailable) ||
@@ -1110,7 +1111,7 @@ class _$DocumentdataImpl implements _Documentdata {
       runtimeType,
       kycStatus,
       kycStatusMsg,
-      const DeepCollectionEquality().hash(billDate),
+      billDate,
       isFirstNameAvailable,
       isLastNameAvailable,
       isIdNumberAvailable,
@@ -1134,7 +1135,7 @@ abstract class _Documentdata implements Documentdata {
   const factory _Documentdata(
       {@JsonKey(name: "kyc_status") final String? kycStatus,
       @JsonKey(name: "kyc_status_msg") final String? kycStatusMsg,
-      @JsonKey(name: "billDate") final dynamic billDate,
+      @JsonKey(name: "billDate") final String? billDate,
       @JsonKey(name: "isFirstNameAvailable") final bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") final bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") final bool? isIdNumberAvailable,
@@ -1152,7 +1153,7 @@ abstract class _Documentdata implements Documentdata {
   String? get kycStatusMsg;
   @override
   @JsonKey(name: "billDate")
-  dynamic get billDate;
+  String? get billDate;
   @override
   @JsonKey(name: "isFirstNameAvailable")
   bool? get isFirstNameAvailable;

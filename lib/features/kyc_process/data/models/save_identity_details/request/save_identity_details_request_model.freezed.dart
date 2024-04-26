@@ -49,6 +49,8 @@ mixin _$SaveIdentityDetailsRequestModel {
   String? get customerId => throw _privateConstructorUsedError;
   @JsonKey(name: "fileExtension")
   String? get fileExtension => throw _privateConstructorUsedError;
+  @JsonKey(name: "quoteNumber")
+  String? get quoteNumber => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,7 +80,8 @@ abstract class $SaveIdentityDetailsRequestModelCopyWith<$Res> {
       @JsonKey(name: "idDocFrontImage") String? idDocFrontImage,
       @JsonKey(name: "idDocBackImage") String? idDocBackImage,
       @JsonKey(name: "customerId") String? customerId,
-      @JsonKey(name: "fileExtension") String? fileExtension});
+      @JsonKey(name: "fileExtension") String? fileExtension,
+      @JsonKey(name: "quoteNumber") String? quoteNumber});
 }
 
 /// @nodoc
@@ -109,6 +112,7 @@ class _$SaveIdentityDetailsRequestModelCopyWithImpl<$Res,
     Object? idDocBackImage = freezed,
     Object? customerId = freezed,
     Object? fileExtension = freezed,
+    Object? quoteNumber = freezed,
   }) {
     return _then(_value.copyWith(
       applicationRefNo: freezed == applicationRefNo
@@ -167,6 +171,10 @@ class _$SaveIdentityDetailsRequestModelCopyWithImpl<$Res,
           ? _value.fileExtension
           : fileExtension // ignore: cast_nullable_to_non_nullable
               as String?,
+      quoteNumber: freezed == quoteNumber
+          ? _value.quoteNumber
+          : quoteNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -194,7 +202,8 @@ abstract class _$$SaveIdentityDetailsRequestModelImplCopyWith<$Res>
       @JsonKey(name: "idDocFrontImage") String? idDocFrontImage,
       @JsonKey(name: "idDocBackImage") String? idDocBackImage,
       @JsonKey(name: "customerId") String? customerId,
-      @JsonKey(name: "fileExtension") String? fileExtension});
+      @JsonKey(name: "fileExtension") String? fileExtension,
+      @JsonKey(name: "quoteNumber") String? quoteNumber});
 }
 
 /// @nodoc
@@ -224,6 +233,7 @@ class __$$SaveIdentityDetailsRequestModelImplCopyWithImpl<$Res>
     Object? idDocBackImage = freezed,
     Object? customerId = freezed,
     Object? fileExtension = freezed,
+    Object? quoteNumber = freezed,
   }) {
     return _then(_$SaveIdentityDetailsRequestModelImpl(
       applicationRefNo: freezed == applicationRefNo
@@ -282,6 +292,10 @@ class __$$SaveIdentityDetailsRequestModelImplCopyWithImpl<$Res>
           ? _value.fileExtension
           : fileExtension // ignore: cast_nullable_to_non_nullable
               as String?,
+      quoteNumber: freezed == quoteNumber
+          ? _value.quoteNumber
+          : quoteNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -304,7 +318,8 @@ class _$SaveIdentityDetailsRequestModelImpl
       @JsonKey(name: "idDocFrontImage") this.idDocFrontImage,
       @JsonKey(name: "idDocBackImage") this.idDocBackImage,
       @JsonKey(name: "customerId") this.customerId,
-      @JsonKey(name: "fileExtension") this.fileExtension});
+      @JsonKey(name: "fileExtension") this.fileExtension,
+      @JsonKey(name: "quoteNumber") this.quoteNumber});
 
   factory _$SaveIdentityDetailsRequestModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -352,10 +367,13 @@ class _$SaveIdentityDetailsRequestModelImpl
   @override
   @JsonKey(name: "fileExtension")
   final String? fileExtension;
+  @override
+  @JsonKey(name: "quoteNumber")
+  final String? quoteNumber;
 
   @override
   String toString() {
-    return 'SaveIdentityDetailsRequestModel(applicationRefNo: $applicationRefNo, applicantType: $applicantType, policyType: $policyType, documentCategory: $documentCategory, documentSide: $documentSide, documentType: $documentType, idDocTypeId: $idDocTypeId, surname: $surname, otherName: $otherName, idDocNumber: $idDocNumber, idDocFrontImage: $idDocFrontImage, idDocBackImage: $idDocBackImage, customerId: $customerId, fileExtension: $fileExtension)';
+    return 'SaveIdentityDetailsRequestModel(applicationRefNo: $applicationRefNo, applicantType: $applicantType, policyType: $policyType, documentCategory: $documentCategory, documentSide: $documentSide, documentType: $documentType, idDocTypeId: $idDocTypeId, surname: $surname, otherName: $otherName, idDocNumber: $idDocNumber, idDocFrontImage: $idDocFrontImage, idDocBackImage: $idDocBackImage, customerId: $customerId, fileExtension: $fileExtension, quoteNumber: $quoteNumber)';
   }
 
   @override
@@ -389,7 +407,9 @@ class _$SaveIdentityDetailsRequestModelImpl
             (identical(other.customerId, customerId) ||
                 other.customerId == customerId) &&
             (identical(other.fileExtension, fileExtension) ||
-                other.fileExtension == fileExtension));
+                other.fileExtension == fileExtension) &&
+            (identical(other.quoteNumber, quoteNumber) ||
+                other.quoteNumber == quoteNumber));
   }
 
   @JsonKey(ignore: true)
@@ -409,7 +429,8 @@ class _$SaveIdentityDetailsRequestModelImpl
       idDocFrontImage,
       idDocBackImage,
       customerId,
-      fileExtension);
+      fileExtension,
+      quoteNumber);
 
   @JsonKey(ignore: true)
   @override
@@ -443,7 +464,8 @@ abstract class _SaveIdentityDetailsRequestModel
           @JsonKey(name: "idDocFrontImage") final String? idDocFrontImage,
           @JsonKey(name: "idDocBackImage") final String? idDocBackImage,
           @JsonKey(name: "customerId") final String? customerId,
-          @JsonKey(name: "fileExtension") final String? fileExtension}) =
+          @JsonKey(name: "fileExtension") final String? fileExtension,
+          @JsonKey(name: "quoteNumber") final String? quoteNumber}) =
       _$SaveIdentityDetailsRequestModelImpl;
 
   factory _SaveIdentityDetailsRequestModel.fromJson(Map<String, dynamic> json) =
@@ -491,6 +513,9 @@ abstract class _SaveIdentityDetailsRequestModel
   @override
   @JsonKey(name: "fileExtension")
   String? get fileExtension;
+  @override
+  @JsonKey(name: "quoteNumber")
+  String? get quoteNumber;
   @override
   @JsonKey(ignore: true)
   _$$SaveIdentityDetailsRequestModelImplCopyWith<
