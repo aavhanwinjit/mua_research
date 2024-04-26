@@ -234,9 +234,11 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
           context.showErrorSnackBar(message: Strings.uploadBothDocuments);
         },
         onTap: () async {
-          await _performOCR(onSuccess: () {
-            context.pushNamed(AppRoutes.idReviewSubmitScreen);
-          });
+          await _performOCR(
+            onSuccess: () {
+              context.pushNamed(AppRoutes.idReviewSubmitScreen);
+            },
+          );
         },
         label: Strings.next,
       ),
@@ -256,7 +258,14 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
       );
     } else {
       // perform OCR on passport
-      context.showSnackBar(message: "OCR on passport is under development");
+      await performPassportOCR(
+        ref: ref,
+        context: context,
+        onSuccess: () {
+          onSuccess();
+        },
+      );
+      // context.showSnackBar(message: "OCR on passport is under development");
     }
   }
 

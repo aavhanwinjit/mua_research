@@ -258,7 +258,7 @@ mixin _$PorDocumentDetailsModel {
   @JsonKey(name: "lastName")
   String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "issueDate")
-  DateTime? get issueDate => throw _privateConstructorUsedError;
+  String? get issueDate => throw _privateConstructorUsedError;
   @JsonKey(name: "porDocImagePath")
   String? get porDocImagePath => throw _privateConstructorUsedError;
 
@@ -278,7 +278,7 @@ abstract class $PorDocumentDetailsModelCopyWith<$Res> {
       {@JsonKey(name: "porDocumentTypeId") int? porDocumentTypeId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "lastName") String? lastName,
-      @JsonKey(name: "issueDate") DateTime? issueDate,
+      @JsonKey(name: "issueDate") String? issueDate,
       @JsonKey(name: "porDocImagePath") String? porDocImagePath});
 }
 
@@ -318,7 +318,7 @@ class _$PorDocumentDetailsModelCopyWithImpl<$Res,
       issueDate: freezed == issueDate
           ? _value.issueDate
           : issueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       porDocImagePath: freezed == porDocImagePath
           ? _value.porDocImagePath
           : porDocImagePath // ignore: cast_nullable_to_non_nullable
@@ -340,7 +340,7 @@ abstract class _$$PorDocumentDetailsModelImplCopyWith<$Res>
       {@JsonKey(name: "porDocumentTypeId") int? porDocumentTypeId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "lastName") String? lastName,
-      @JsonKey(name: "issueDate") DateTime? issueDate,
+      @JsonKey(name: "issueDate") String? issueDate,
       @JsonKey(name: "porDocImagePath") String? porDocImagePath});
 }
 
@@ -379,7 +379,7 @@ class __$$PorDocumentDetailsModelImplCopyWithImpl<$Res>
       issueDate: freezed == issueDate
           ? _value.issueDate
           : issueDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       porDocImagePath: freezed == porDocImagePath
           ? _value.porDocImagePath
           : porDocImagePath // ignore: cast_nullable_to_non_nullable
@@ -412,7 +412,7 @@ class _$PorDocumentDetailsModelImpl implements _PorDocumentDetailsModel {
   final String? lastName;
   @override
   @JsonKey(name: "issueDate")
-  final DateTime? issueDate;
+  final String? issueDate;
   @override
   @JsonKey(name: "porDocImagePath")
   final String? porDocImagePath;
@@ -464,7 +464,7 @@ abstract class _PorDocumentDetailsModel implements PorDocumentDetailsModel {
           {@JsonKey(name: "porDocumentTypeId") final int? porDocumentTypeId,
           @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
           @JsonKey(name: "lastName") final String? lastName,
-          @JsonKey(name: "issueDate") final DateTime? issueDate,
+          @JsonKey(name: "issueDate") final String? issueDate,
           @JsonKey(name: "porDocImagePath") final String? porDocImagePath}) =
       _$PorDocumentDetailsModelImpl;
 
@@ -482,7 +482,7 @@ abstract class _PorDocumentDetailsModel implements PorDocumentDetailsModel {
   String? get lastName;
   @override
   @JsonKey(name: "issueDate")
-  DateTime? get issueDate;
+  String? get issueDate;
   @override
   @JsonKey(name: "porDocImagePath")
   String? get porDocImagePath;

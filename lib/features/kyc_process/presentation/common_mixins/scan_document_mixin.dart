@@ -26,8 +26,7 @@ mixin ScanDocumentMixin {
     final loading = ref.watch(loadingProvider);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
     final KycTypesModel selectedKycType = kycTypeNotifier
@@ -36,8 +35,7 @@ mixin ScanDocumentMixin {
         .toList()
         .first;
 
-    final DocumentCategoryModel? selectedDocumentCategory =
-        ref.watch(selectedDocumentCategoryProvider);
+    final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
 
     ScanDocumentRequestModel request = ScanDocumentRequestModel(
       applicantType: selectedApplication?.nationality,
@@ -45,24 +43,22 @@ mixin ScanDocumentMixin {
       documentCategory: selectedDocumentCategory?.documentCategory,
       documentType: documentType,
       documentSide: "FRONT",
-      customerId: null,
+      customerId: "",
       policyNumber: selectedApplication?.policyNumber,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
-      nicNumber: (selectedApplication?.nationality ==
-              NationalityType.Mauritian.toString().split('.').last)
+      nicNumber: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
           : null,
-      passportNumber: (selectedApplication?.nationality ==
-              NationalityType.NonMauritian.toString().split('.').last)
+      passportNumber: (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
           : null,
-      quoteNumber: "252248",
-      // selectedApplication?.quoteNumber,
+      quoteNumber: selectedApplication?.quoteNumber,
+      //  "252248",
       verificationData: VerificationData(
-        firstName: "CALOWTEE",
-        // firstName: selectedApplication?.idDocOtherName,
-        surname: "MUSSAI",
-        // surname: selectedApplication?.idDocSurname,
+        // firstName: "CALOWTEE",
+        firstName: selectedApplication?.idDocOtherName,
+        // surname: "MUSSAI",
+        surname: selectedApplication?.idDocSurname,
         idNumber: selectedApplication?.idDocNumber,
         billDate: null,
         registrationMark: null,
@@ -82,8 +78,7 @@ mixin ScanDocumentMixin {
         debugPrint("failure: $failure");
         ref.watch(loadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (ScanDocumentResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -95,8 +90,7 @@ mixin ScanDocumentMixin {
           ref.watch(loadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

@@ -22,7 +22,7 @@ class SaveAddressDetailsRequestModel with _$SaveAddressDetailsRequestModel {
     @JsonKey(name: "docImagePath") String? docImagePath,
     @JsonKey(name: "docSurname") String? docSurname,
     @JsonKey(name: "docOtherName") String? docOtherName,
-    @JsonKey(name: "docBillDate") DateTime? docBillDate,
+    @JsonKey(name: "docBillDate") String? docBillDate,
     @JsonKey(name: "docAddress") String? docAddress,
     @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
     @JsonKey(name: "isAddressVerificationCompleted") bool? isAddressVerificationCompleted,

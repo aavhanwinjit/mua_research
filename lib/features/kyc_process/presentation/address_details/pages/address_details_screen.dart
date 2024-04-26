@@ -197,25 +197,28 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
 
         if (documentData?.kycStatus == "Success" &&
             documentData?.billDate != null &&
-            documentData?.isFirstNameAvailable == true &&
-            documentData?.isLastNameAvailable == true) {
+            documentData!.billDate!.isNotEmpty &&
+            documentData.isFirstNameAvailable == true &&
+            documentData.isLastNameAvailable == true) {
           ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
           _setCustomerName(response);
           ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           context.pushNamed(AppRoutes.addressReviewSubmitScreen);
         } else if (documentData?.kycStatus == "Failed" &&
             documentData?.billDate != null &&
-            documentData?.kycStatusMsg ==
+            documentData!.billDate!.isNotEmpty &&
+            documentData.kycStatusMsg ==
                 "KYC validation failed.The uploaded bill should be of last 3 months only. Older documents are not allowed.") {
           ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
           // Block the user here itself
-          KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData?.kycStatusMsg ?? "");
+          KycStatusDialogHelper.showOldBillDateDialog(context, content: documentData.kycStatusMsg ?? "");
           return;
         } else if (documentData?.kycStatus == "Failed" &&
             documentData?.billDate != null &&
-            documentData?.isFirstNameAvailable == false &&
-            documentData?.isLastNameAvailable == false &&
-            documentData?.kycStatusMsg ==
+            documentData!.billDate!.isNotEmpty &&
+            documentData.isFirstNameAvailable == false &&
+            documentData.isLastNameAvailable == false &&
+            documentData.kycStatusMsg ==
                 "KYC validation failed. First name did not match in the document. Last name did not match in the document.") {
           //allow to navigate but tell agent that the name is not matched
           ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);

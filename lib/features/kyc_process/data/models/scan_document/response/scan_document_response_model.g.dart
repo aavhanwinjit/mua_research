@@ -84,7 +84,7 @@ _$DocumentdataImpl _$$DocumentdataImplFromJson(Map<String, dynamic> json) =>
     _$DocumentdataImpl(
       kycStatus: json['kyc_status'] as String?,
       kycStatusMsg: json['kyc_status_msg'] as String?,
-      billDate: json['billDate'],
+      billDate: json['billDate'] as String?,
       isFirstNameAvailable: json['isFirstNameAvailable'] as bool?,
       isLastNameAvailable: json['isLastNameAvailable'] as bool?,
       isIdNumberAvailable: json['isIdNumberAvailable'] as bool?,

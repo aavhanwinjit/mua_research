@@ -14,9 +14,7 @@ _$SaveAddressDetailsRequestModelImpl
           docImagePath: json['docImagePath'] as String?,
           docSurname: json['docSurname'] as String?,
           docOtherName: json['docOtherName'] as String?,
-          docBillDate: json['docBillDate'] == null
-              ? null
-              : DateTime.parse(json['docBillDate'] as String),
+          docBillDate: json['docBillDate'] as String?,
           docAddress: json['docAddress'] as String?,
           uploadedDocumentId: json['uploadedDocumentId'] as int?,
           isAddressVerificationCompleted:
@@ -32,7 +30,7 @@ Map<String, dynamic> _$$SaveAddressDetailsRequestModelImplToJson(
       'docImagePath': instance.docImagePath,
       'docSurname': instance.docSurname,
       'docOtherName': instance.docOtherName,
-      'docBillDate': instance.docBillDate?.toIso8601String(),
+      'docBillDate': instance.docBillDate,
       'docAddress': instance.docAddress,
       'uploadedDocumentId': instance.uploadedDocumentId,
       'isAddressVerificationCompleted': instance.isAddressVerificationCompleted,
