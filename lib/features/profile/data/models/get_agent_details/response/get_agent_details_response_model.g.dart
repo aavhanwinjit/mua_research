@@ -76,6 +76,9 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
           ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
           .toList(),
       agencyName: json['agencyName'] as String?,
+      signatureUploadDate: json['signatureUploadDate'] == null
+          ? null
+          : DateTime.parse(json['signatureUploadDate'] as String),
       designation: json['designation'],
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
@@ -111,6 +114,7 @@ Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
       'apiUniqueKey': instance.apiUniqueKey,
       'companies': instance.companies,
       'agencyName': instance.agencyName,
+      'signatureUploadDate': instance.signatureUploadDate?.toIso8601String(),
       'designation': instance.designation,
       'isDisabled': instance.isDisabled,
       'crd': instance.crd?.toIso8601String(),
