@@ -94,12 +94,14 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> with Signatur
   }
 
   void _handleSaveButtonPressed() async {
+    LoadingDialog.show(context);
     final data = await signatureGlobalKey.currentState!.toImage(pixelRatio: 3.0);
     final bytes = await data.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List list = bytes!.buffer.asUint8List();
 
     ref.read(signatureProvider.notifier).update((state) => list);
 
+    LoadingDialog.hide(context);
     if (widget.uploadFunction != null) {
       // upload Signature api call
       widget.uploadFunction!();
@@ -135,6 +137,37 @@ class _SignatureScreenState extends ConsumerState<SignatureScreen> with Signatur
         statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
         statusBarBrightness: Brightness.dark, // For iOS (dark icons)
       ),
+    );
+  }
+}
+
+class LoadingDialog extends StatelessWidget {
+  static void show(BuildContext context, {Key? key}) => showDialog<void>(
+        context: context,
+        useRootNavigator: false,
+        barrierColor: Colors.black45,
+        barrierDismissible: false,
+        builder: (_) => LoadingDialog(key: key),
+      ).then((_) => FocusScope.of(context).requestFocus(FocusNode()));
+
+  static void hide(BuildContext context) => Navigator.pop(context);
+
+  const LoadingDialog({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: white,
+          ),
+        ),
+      ],
     );
   }
 }
