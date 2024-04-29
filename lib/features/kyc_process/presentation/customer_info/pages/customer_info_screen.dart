@@ -15,7 +15,8 @@ class CustomerInfoScreen extends ConsumerStatefulWidget {
   const CustomerInfoScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _CustomerInfoScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _CustomerInfoScreenState();
 }
 
 class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
@@ -70,13 +71,17 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     CustomTextFormField(
                       maxLength: 8,
                       validator: (value) {
-                        if (value!.trim().isEmpty || value.trim().length < 8) {
+                        if (value!.trim().isEmpty ||
+                            value.trim().length < 8 ||
+                            RegExp(r'^\d{8}$').hasMatch(value.trim())) {
                           return Strings.loginPhoneValidatorString;
                         }
                         return null;
                       },
                       onChanged: (value) {
-                        ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => value.trim());
+                        ref
+                            .watch(customerInfoMobileNumberProvider.notifier)
+                            .update((state) => value.trim());
                       },
                       keyboardType: TextInputType.phone,
                       hint: Strings.mobileNo,
@@ -88,7 +93,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     CustomTextFormField(
                       label: Strings.emailOptional,
                       onChanged: (value) {
-                        ref.watch(customerInfoEmailProvider.notifier).update((state) => value.trim());
+                        ref
+                            .watch(customerInfoEmailProvider.notifier)
+                            .update((state) => value.trim());
                       },
                       validator: (value) {
                         if (value?.trim() != null && value!.trim().isNotEmpty) {
@@ -122,15 +129,21 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     SizedBox(height: 16.h),
                     _nationalityRadioButtons(),
                     if (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
-                        selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE) ...[
+                        selectedKycType?.kycTypeId ==
+                            KYCType.NON_MOTOR_INSURANCE) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
                         label: Strings.quoteNumber,
+                        keyboardType: TextInputType.phone,
                         onChanged: (value) {
-                          ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => value.trim());
+                          ref
+                              .watch(customerInfoQuoteNumberProvider.notifier)
+                              .update((state) => value.trim());
                         },
-                        validator: (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
-                                selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE)
+                        validator: (selectedKycType?.kycTypeId ==
+                                    KYCType.MOTOR_INSURANCE ||
+                                selectedKycType?.kycTypeId ==
+                                    KYCType.NON_MOTOR_INSURANCE)
                             ? (value) {
                                 if (value!.trim().isEmpty) {
                                   return Strings.quoteNumberValidationString;
@@ -140,12 +153,15 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                             : null,
                       ),
                     ],
-                    if (selectedKycType?.kycTypeId == KYCType.LIFE_INSURANCE) ...[
+                    if (selectedKycType?.kycTypeId ==
+                        KYCType.LIFE_INSURANCE) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
                         label: Strings.policyNoOptional,
                         onChanged: (value) {
-                          ref.watch(customerInfoPolicyNumberProvider.notifier).update((state) => value.trim());
+                          ref
+                              .watch(customerInfoPolicyNumberProvider.notifier)
+                              .update((state) => value.trim());
                         },
                         // validator: (value) {
                         //   if (value!.trim().isEmpty) {
@@ -171,10 +187,15 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                               ref: ref,
                             );
 
-                            ref.watch(customerInfoLoadingProvider.notifier).update((state) => false);
-                            ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
+                            ref
+                                .watch(customerInfoLoadingProvider.notifier)
+                                .update((state) => false);
+                            ref
+                                .watch(customerInfoErrorProvider.notifier)
+                                .update((state) => false);
 
-                            context.pushReplacementNamed(AppRoutes.insuranceStagesScreen);
+                            context.pushReplacementNamed(
+                                AppRoutes.insuranceStagesScreen);
                           },
                         );
                       },
@@ -190,12 +211,20 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
   }
 
   void _resetTextFields() {
-    ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => null);
+    ref
+        .watch(customerInfoMobileNumberProvider.notifier)
+        .update((state) => null);
     ref.watch(customerInfoEmailProvider.notifier).update((state) => null);
-    ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
-    ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.Mauritian);
+    ref
+        .watch(customerInfoMaritalStatusProvider.notifier)
+        .update((state) => MaritalStatus.SINGLE);
+    ref
+        .watch(customerInfoNationalityTypeProvider.notifier)
+        .update((state) => NationalityType.Mauritian);
     ref.watch(customerInfoQuoteNumberProvider.notifier).update((state) => null);
-    ref.watch(customerInfoPolicyNumberProvider.notifier).update((state) => null);
+    ref
+        .watch(customerInfoPolicyNumberProvider.notifier)
+        .update((state) => null);
   }
 
   Widget _maritalStatusRadioButtons() {
@@ -209,7 +238,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
             value: MaritalStatus.SINGLE,
             groupValue: ref.watch(customerInfoMaritalStatusProvider),
             onChange: () {
-              ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.SINGLE);
+              ref
+                  .watch(customerInfoMaritalStatusProvider.notifier)
+                  .update((state) => MaritalStatus.SINGLE);
             },
           ),
         ),
@@ -219,7 +250,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
             value: MaritalStatus.MARRIED,
             groupValue: ref.watch(customerInfoMaritalStatusProvider),
             onChange: () {
-              ref.watch(customerInfoMaritalStatusProvider.notifier).update((state) => MaritalStatus.MARRIED);
+              ref
+                  .watch(customerInfoMaritalStatusProvider.notifier)
+                  .update((state) => MaritalStatus.MARRIED);
             },
           ),
         ),
@@ -238,7 +271,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
             value: NationalityType.Mauritian,
             groupValue: ref.watch(customerInfoNationalityTypeProvider),
             onChange: () {
-              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.Mauritian);
+              ref
+                  .watch(customerInfoNationalityTypeProvider.notifier)
+                  .update((state) => NationalityType.Mauritian);
             },
           ),
         ),
@@ -248,7 +283,9 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
             value: NationalityType.NonMauritian,
             groupValue: ref.watch(customerInfoNationalityTypeProvider),
             onChange: () {
-              ref.watch(customerInfoNationalityTypeProvider.notifier).update((state) => NationalityType.NonMauritian);
+              ref
+                  .watch(customerInfoNationalityTypeProvider.notifier)
+                  .update((state) => NationalityType.NonMauritian);
             },
           ),
         ),
