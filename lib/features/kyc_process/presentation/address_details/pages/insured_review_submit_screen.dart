@@ -8,7 +8,9 @@ import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/sa
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/insured_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/insured_doc_details_card.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
 import 'package:ekyc/widgets/signature_widget.dart';
 import 'package:flutter/material.dart';
@@ -19,17 +21,21 @@ class InsuredReviewSubmitScreen extends ConsumerStatefulWidget {
   const InsuredReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _InsuredReviewSubmitScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _InsuredReviewSubmitScreenState();
 }
 
-class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitScreen>
+class _InsuredReviewSubmitScreenState
+    extends ConsumerState<InsuredReviewSubmitScreen>
     with SavePORDocsMixin, AgentApplicationsMixin {
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(insuredReviewScreenConfirmationProvider.notifier).update((state) => false);
+      ref
+          .read(insuredReviewScreenConfirmationProvider.notifier)
+          .update((state) => false);
       ref.watch(saveInsuredDetailsLoading.notifier).update((state) => false);
     });
   }
@@ -66,7 +72,9 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
                 CustomCheckboxTile(
                   value: ref.watch(insuredReviewScreenConfirmationProvider),
                   onChanged: (value) {
-                    ref.read(insuredReviewScreenConfirmationProvider.notifier).update((state) => value!);
+                    ref
+                        .read(insuredReviewScreenConfirmationProvider.notifier)
+                        .update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,
@@ -74,7 +82,9 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: ReviewScreenButtons(
-                    disable: ref.watch(insuredReviewScreenConfirmationProvider) != true,
+                    disable:
+                        ref.watch(insuredReviewScreenConfirmationProvider) !=
+                            true,
                     loadingProvider: saveInsuredDetailsLoading,
                     onNext: () {
                       _uploadDetails(false);
@@ -119,11 +129,19 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
               ref: ref,
             );
 
-            ref.watch(saveInsuredDetailsLoading.notifier).update((state) => false);
+            ref
+                .watch(saveInsuredDetailsLoading.notifier)
+                .update((state) => false);
 
+            // pop back to upload insured documents screen
             context.pop();
+            // pop back to insurance stage screen
             context.pop();
-            context.go(AppRoutes.kycSubmittedScreen);
+            AgentApplicationModel? selectedApplication =
+                ref.watch(selectedApplicationProvider);
+            if (selectedApplication!.kycTypeId == 1) {
+              context.go(AppRoutes.kycSubmittedScreen);
+            }
 
             // if (isExit) {
             //   context.pop();
@@ -135,10 +153,11 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
   }
 
   bool _checkIfSurnameMissingInAnyDocuments() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    return selectedDocsListProvider
-        .list()
-        .any((element) => element.extractedLastName == null || element.extractedLastName!.isEmpty);
+    return selectedDocsListProvider.list().any((element) =>
+        element.extractedLastName == null ||
+        element.extractedLastName!.isEmpty);
   }
 }

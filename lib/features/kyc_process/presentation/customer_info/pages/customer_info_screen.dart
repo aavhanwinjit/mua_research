@@ -71,10 +71,12 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     CustomTextFormField(
                       maxLength: 8,
                       validator: (value) {
-                        if (value!.trim().isEmpty ||
-                            value.trim().length < 8 ||
-                            RegExp(r'^\d{8}$').hasMatch(value.trim())) {
+                        if ((value!.trim().isEmpty ||
+                            value.trim().length < 8)) {
                           return Strings.loginPhoneValidatorString;
+                        }
+                        else if(!RegExp(r'^\d{8}$').hasMatch(value.trim())){
+                          return Strings.enterValidPhoneNumberString;
                         }
                         return null;
                       },

@@ -108,26 +108,26 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
                     if (documentCategoryNotifier.haveList()) _stageCards(),
                   ],
                   SizedBox(height: 24.h),
-                  if (selectedApplication.kycTypeId == 1) ...[
+                  // if (selectedApplication.kycTypeId == 1) ...[
                     if (selectedApplication.isIdVerificationCompleted == true &&
                         !documentCategoryLoading)
                       _buttons(context)
-                  ],
-                  if (selectedApplication.kycTypeId == 2) ...[
-                    if (selectedApplication.isIdVerificationCompleted == true &&
-                        selectedApplication.isMotorDocVerificationCompleted ==
-                            true &&
-                        !documentCategoryLoading)
-                      _buttons(context)
-                  ],
-                  if (selectedApplication.kycTypeId == 3) ...[
-                    if (selectedApplication.isIdVerificationCompleted == true &&
-                        selectedApplication
-                                .isNonMotorDocVerificationCompleted ==
-                            true &&
-                        !documentCategoryLoading)
-                      _buttons(context)
-                  ]
+                  // ],
+                  // if (selectedApplication.kycTypeId == 2) ...[
+                  //   if (selectedApplication.isIdVerificationCompleted == true &&
+                  //       selectedApplication.isMotorDocVerificationCompleted ==
+                  //           true &&
+                  //       !documentCategoryLoading)
+                  //     _buttons(context)
+                  // ],
+                  // if (selectedApplication.kycTypeId == 3) ...[
+                  //   if (selectedApplication.isIdVerificationCompleted == true &&
+                  //       selectedApplication
+                  //               .isNonMotorDocVerificationCompleted ==
+                  //           true &&
+                  //       !documentCategoryLoading)
+                  //     _buttons(context)
+                  // ]
                 ],
               ),
             ),
