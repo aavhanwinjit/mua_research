@@ -14,7 +14,7 @@ class AuthorizationInterceptor extends Interceptor {
       final token = await LocalDataHelper.getAuthToken();
 
       headers["Authorization"] = token;
-      debugPrint("Auth: $token");
+      // debugPrint("Auth: $token");
     }
 
     handler.next(options);

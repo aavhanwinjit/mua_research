@@ -47,7 +47,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            context.showErrorSnackBar(message: Strings.cameraPermissionRequired);
+            context.showErrorSnackBar(
+                message: Strings.cameraPermissionRequired);
             break;
           default:
             // Handle other errors here.
@@ -158,7 +159,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _navigateToReviewImageScreen() {
-    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen,
+        extra: widget.provider);
   }
 
   void onTakePictureButtonPressed() {
@@ -172,7 +174,9 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
             return;
           }
 
-          ref.watch(capturedFilePathProvider.notifier).update((state) => file.path);
+          ref
+              .watch(capturedFilePathProvider.notifier)
+              .update((state) => file.path);
           _navigateToReviewImageScreen();
         }
       }
@@ -201,27 +205,33 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void pickImage() async {
-    XFile? result = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 1500,
-      maxWidth: 1500,
-    );
+    try {
+      XFile? result = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 1500,
+        maxWidth: 1500,
+      );
 
-    if (result != null) {
-      final fileSize = await result.length();
+      if (result != null) {
+        final fileSize = await result.length();
 
-      if (fileSize > 5000000) {
-        context.showErrorSnackBar(message: Strings.fileSizeErrorString);
-        return;
+        if (fileSize > 5000000) {
+          context.showErrorSnackBar(message: Strings.fileSizeErrorString);
+          return;
+        }
+
+        ref
+            .watch(capturedFilePathProvider.notifier)
+            .update((state) => result.path);
+        _navigateToReviewImageScreen();
       }
-
-      ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
-      _navigateToReviewImageScreen();
-    }
+    } catch (e) {}
   }
 
   void onSetFlashModeButtonPressed() {
-    FlashMode mode = controller?.value.flashMode == FlashMode.off ? FlashMode.always : FlashMode.off;
+    FlashMode mode = controller?.value.flashMode == FlashMode.off
+        ? FlashMode.always
+        : FlashMode.off;
 
     setFlashMode(mode).then((_) {
       if (mounted) {
@@ -244,7 +254,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _showCameraException(CameraException e) {
-    debugPrint('Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
+    debugPrint(
+        'Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
     context.showErrorSnackBar(message: 'Error: ${e.code}\n${e.description}');
   }
 

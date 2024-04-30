@@ -29,7 +29,8 @@ mixin SaveIDDetailsMixin {
     final bool loading = ref.watch(saveIdentityDetailsLoading);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication =
+        ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
     final KycTypesModel selectedKycType = kycTypeNotifier
@@ -38,9 +39,11 @@ mixin SaveIDDetailsMixin {
         .toList()
         .first;
 
-    final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
+    final DocumentCategoryModel? selectedDocumentCategory =
+        ref.watch(selectedDocumentCategoryProvider);
 
-    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
+    final IdentityDocumentTypeModel? selectedIdDocType =
+        ref.watch(selectedIdDocTypeProvider);
 
     final String? firstname = ref.watch(extractedFirstNameProvider);
     final String? surname = ref.watch(extractedSurNameProvider);
@@ -99,22 +102,28 @@ mixin SaveIDDetailsMixin {
         ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
         // ref.watch(customerInfoErrorProvider.notifier).update((state) => true);
 
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (SaveIdentityDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
+            ref
+                .watch(selectedApplicationProvider.notifier)
+                .update((state) => success.body?.responseBody);
 
             onSuccess.call();
           }
         } else {
-          ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
+          ref
+              .watch(saveIdentityDetailsLoading.notifier)
+              .update((state) => false);
           // ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

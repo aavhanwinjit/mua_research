@@ -1,9 +1,11 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/mixins/save_id_details_mixin.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/nic_details_card.dart';
@@ -17,7 +19,8 @@ class IDReviewSubmitScreen extends ConsumerStatefulWidget {
   const IDReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<IDReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
+  ConsumerState<IDReviewSubmitScreen> createState() =>
+      _ReviewSubmitScreenState();
 }
 
 class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
@@ -27,7 +30,9 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(idReviewScreenConfirmationProvider.notifier).update((state) => false);
+      ref
+          .read(idReviewScreenConfirmationProvider.notifier)
+          .update((state) => false);
       ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
     });
   }
@@ -64,7 +69,9 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                 CustomCheckboxTile(
                   value: ref.watch(idReviewScreenConfirmationProvider),
                   onChanged: (value) {
-                    ref.read(idReviewScreenConfirmationProvider.notifier).update((state) => value!);
+                    ref
+                        .read(idReviewScreenConfirmationProvider.notifier)
+                        .update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,
@@ -72,7 +79,8 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: ReviewScreenButtons(
-                    disable: ref.watch(idReviewScreenConfirmationProvider) != true,
+                    disable:
+                        ref.watch(idReviewScreenConfirmationProvider) != true,
                     loadingProvider: saveIdentityDetailsLoading,
                     onExit: () {
                       _uploadDetails(true);
@@ -99,26 +107,40 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
         // pop the confirmation dialog box
         context.pop();
 
-        await saveIdentityDetails(
-            context: context,
-            ref: ref,
-            onSuccess: () async {
-              resetPageNumber(ref);
+        String firstname = ref.watch(extractedFirstNameProvider) ?? "";
+        String surname = ref.watch(extractedSurNameProvider) ?? "";
 
-              await getAgentApplications(
-                context: context,
-                ref: ref,
-              );
+        print("-----------------------------------------");
+        print(firstname);
+        print(surname);
 
-              ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
+        RegExp regex = RegExp(r'^[a-zA-Z\s]+$');
+        if (regex.hasMatch(firstname) && regex.hasMatch(surname)) {
+          await saveIdentityDetails(
+              context: context,
+              ref: ref,
+              onSuccess: () async {
+                resetPageNumber(ref);
 
-              context.pop();
-              context.pop();
+                await getAgentApplications(
+                  context: context,
+                  ref: ref,
+                );
 
-              if (isExit) {
+                ref
+                    .watch(saveIdentityDetailsLoading.notifier)
+                    .update((state) => false);
+
                 context.pop();
-              }
-            });
+                context.pop();
+
+                if (isExit) {
+                  context.pop();
+                }
+              });
+        } else {
+          context.showErrorSnackBar(message: Strings.errorInFullnameInDoc);
+        }
       },
     );
   }
