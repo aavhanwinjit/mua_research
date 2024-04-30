@@ -76,7 +76,7 @@ class Strings {
   static const String saveAndUploadLater = "Save & Upload Later";
   static const String uploadSignature = "Upload signature";
   static const String errorInFullnameInDoc =
-      "Invalid characters in name or more than 30 characters";
+      "Invalid characters present in name";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";

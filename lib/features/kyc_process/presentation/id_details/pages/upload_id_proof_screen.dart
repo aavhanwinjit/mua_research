@@ -18,7 +18,8 @@ class UploadIDdetailsScreen extends ConsumerStatefulWidget {
   const UploadIDdetailsScreen({super.key});
 
   @override
-  ConsumerState<UploadIDdetailsScreen> createState() => _UploadIDdetailsScreenState();
+  ConsumerState<UploadIDdetailsScreen> createState() =>
+      _UploadIDdetailsScreenState();
 }
 
 class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
@@ -92,16 +93,21 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
       itemBuilder: (context, index) {
         IdentityDocumentTypeModel item;
 
-        if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+        if (selectedApplication?.nationality ==
+            NationalityType.Mauritian.toString().split('.').last) {
           item = idDocTypesNotifier
               .idDocsTypesList()
-              .where((element) => element.documentCode == DocumentCodes.NIC.toString().split('.').last)
+              .where((element) =>
+                  element.documentCode ==
+                  DocumentCodes.NIC.toString().split('.').last)
               .toList()
               .first;
         } else {
           item = idDocTypesNotifier
               .idDocsTypesList()
-              .where((element) => element.documentCode != DocumentCodes.NIC.toString().split('.').last)
+              .where((element) =>
+                  element.documentCode !=
+                  DocumentCodes.NIC.toString().split('.').last)
               .toList()
               .first;
         }
@@ -125,10 +131,10 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
           provider: idDocFrontFilePathProvider,
           label: Strings.idDocumentFrontContainerLabel,
           cameraScreenTitle: Strings.idCardCameraScreenTitleFront,
-          cameraScreenDescription:
-              (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                  ? Strings.idDocumentNicFrontCameraLabel
-                  : Strings.idDocumentPassportFrontCameraLabel,
+          cameraScreenDescription: (selectedApplication?.nationality ==
+                  NationalityType.Mauritian.toString().split('.').last)
+              ? Strings.idDocumentNicFrontCameraLabel
+              : Strings.idDocumentPassportFrontCameraLabel,
           reviewScreenTitle: Strings.identityIdDetails,
           hideClearButton: !_checkIfBackImageIsUploaded(),
         ),
@@ -159,20 +165,24 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
         //   hideClearButton: !_checkIfBackImageIsUploaded(),
         // ),
         SizedBox(height: 24.h),
-        DocumentUploadContainer(
-          provider: idDocBackFilePathProvider,
-          label: Strings.idDocumentBackContainerLabel,
-          cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
-          cameraScreenDescription:
-              (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-                  ? Strings.idDocumentNicBackCameraLabel
-                  : Strings.idDocumentPassportBackCameraLabel,
-          reviewScreenTitle: Strings.identityIdDetails,
-          disable: _checkIfFrontImageIsUploaded(),
-          disableCallback: () {
-            context.showErrorSnackBar(message: Strings.selectFrontImageFirst);
-          },
-        ),
+        (selectedApplication?.nationality ==
+                NationalityType.Mauritian.toString().split('.').last)
+            ? DocumentUploadContainer(
+                provider: idDocBackFilePathProvider,
+                label: Strings.idDocumentBackContainerLabel,
+                cameraScreenTitle: Strings.idCardCameraScreenTitleBack,
+                cameraScreenDescription: (selectedApplication?.nationality ==
+                        NationalityType.Mauritian.toString().split('.').last)
+                    ? Strings.idDocumentNicBackCameraLabel
+                    : Strings.idDocumentPassportBackCameraLabel,
+                reviewScreenTitle: Strings.identityIdDetails,
+                disable: _checkIfFrontImageIsUploaded(),
+                disableCallback: () {
+                  context.showErrorSnackBar(
+                      message: Strings.selectFrontImageFirst);
+                },
+              )
+            : Container(),
         // DocumentUploadContainer2(
         //   filePath: ref.watch(idDocBackFilePathProvider),
         //   documentCode: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
@@ -248,7 +258,8 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
   Future<void> _performOCR({required Function onSuccess}) async {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+    if (selectedApplication?.nationality ==
+        NationalityType.Mauritian.toString().split('.').last) {
       await performNICCardOCR(
         ref: ref,
         context: context,
@@ -272,11 +283,21 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
   bool _disableNextButtonCondition() {
     final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
     final idCardBackSide = ref.watch(idDocBackFilePathProvider);
+    final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (idCardFrontSide == null || idCardBackSide == null) {
-      return true;
+    if (selectedApplication?.nationality ==
+        NationalityType.Mauritian.toString().split('.').last) {
+      if (idCardFrontSide == null || idCardBackSide == null) {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      return false;
+      if (idCardFrontSide == null) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

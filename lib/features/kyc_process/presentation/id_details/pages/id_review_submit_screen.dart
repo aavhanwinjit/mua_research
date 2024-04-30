@@ -107,9 +107,15 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
         // pop the confirmation dialog box
         context.pop();
 
-        if (RegExp(r'^[a-zA-Z]{1,30}$')
-            .hasMatch(ref.watch(extractedFirstNameProvider) ?? "") && RegExp(r'^[a-zA-Z]{1,30}$')
-                .hasMatch(ref.watch(extractedSurNameProvider) ?? "")) {
+        String firstname = ref.watch(extractedFirstNameProvider) ?? "";
+        String surname = ref.watch(extractedSurNameProvider) ?? "";
+
+        print("-----------------------------------------");
+        print(firstname);
+        print(surname);
+
+        RegExp regex = RegExp(r'^[a-zA-Z\s]+$');
+        if (regex.hasMatch(firstname) && regex.hasMatch(surname)) {
           await saveIdentityDetails(
               context: context,
               ref: ref,
