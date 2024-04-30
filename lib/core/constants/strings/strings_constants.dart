@@ -75,6 +75,8 @@ class Strings {
       "The uploaded address proof doesn't match the customer details. Additional documents are needed to confirm the relationship.";
   static const String saveAndUploadLater = "Save & Upload Later";
   static const String uploadSignature = "Upload signature";
+  static const String errorInFullnameInDoc =
+      "Invalid characters in name or more than 30 characters";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";

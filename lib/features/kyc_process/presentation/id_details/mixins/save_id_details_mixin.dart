@@ -70,32 +70,26 @@ mixin SaveIDDetailsMixin {
     String backBase64 = base64Encode(backFileBytes);
 
     SaveIdentityDetailsRequestModel request = SaveIdentityDetailsRequestModel(
-        applicationRefNo: selectedApplication?.applicationRefNo,
-        applicantType: selectedApplication?.nationality,
-        policyType: selectedKycType.policyType,
-        documentCategory: selectedDocumentCategory?.documentCategory,
-        documentSide: null,
-        documentType: selectedIdDocType?.documentCode,
-        idDocTypeId: selectedIdDocType?.identityDocumentTypeId,
-        surname: surname,
-        otherName: firstname,
-        idDocNumber: idnumber,
-        // idDocFrontImage: "frontBase64",
-        idDocFrontImage: frontBase64,
-        // idDocFrontImage: idCardFrontScanResult?.fileName,
-        // idDocBackImage: "backBase64",
-        idDocBackImage: backBase64,
-        // idDocBackImage: idCardBackScanResult?.fileName,
-        customerId: "",
-        fileExtension: FileExtensionEnums.png.toString().split('.').last,
-        quoteNumber: "252248"
-        // selectedApplication?.quoteNumber,
-        );
-
-    debugPrint("------------------------------");
-    debugPrint("quote number sent to backend:");
-    debugPrint(selectedApplication?.quoteNumber);
-    debugPrint("------------------------------");
+      applicationRefNo: selectedApplication?.applicationRefNo,
+      applicantType: selectedApplication?.nationality,
+      policyType: selectedKycType.policyType,
+      documentCategory: selectedDocumentCategory?.documentCategory,
+      documentSide: null,
+      documentType: selectedIdDocType?.documentCode,
+      idDocTypeId: selectedIdDocType?.identityDocumentTypeId,
+      surname: surname,
+      otherName: firstname,
+      idDocNumber: idnumber,
+      // idDocFrontImage: "frontBase64",
+      idDocFrontImage: frontBase64,
+      // idDocFrontImage: idCardFrontScanResult?.fileName,
+      // idDocBackImage: "backBase64",
+      idDocBackImage: backBase64,
+      // idDocBackImage: idCardBackScanResult?.fileName,
+      customerId: "",
+      fileExtension: FileExtensionEnums.png.toString().split('.').last,
+      quoteNumber: selectedApplication?.quoteNumber,
+    );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);
     // ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
