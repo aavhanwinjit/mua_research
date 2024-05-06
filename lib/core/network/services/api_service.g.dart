@@ -132,6 +132,34 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<RegisterDeviceResponseModel> registerDevice(
+      RegisterDeviceRequestModel request) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = request;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<RegisterDeviceResponseModel>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/AgentAPI/Registration/RegisterDevice',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = RegisterDeviceResponseModel.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<SaveFileResponseModel> saveFile(SaveFileRequestModel request) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

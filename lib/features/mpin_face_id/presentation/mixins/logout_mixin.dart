@@ -20,40 +20,47 @@ mixin LogoutMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LogoutResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          getIt<AppStorageManager>().clearStorage();
-          await LocalDataHelper.storeSessionId("");
+          // await LocalDataHelper.removeDeviceToken();
+          await LocalDataHelper.removeAuthToken();
+          await LocalDataHelper.removeSessionId();
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
 
-          context.go(AppRoutes.loginScreen);
+          context.go(AppRoutes.mpinLoginScreen);
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> deRegisterFingerprint({required BuildContext context, required WidgetRef ref}) async {
+  Future<void> deRegisterFingerprint(
+      {required BuildContext context, required WidgetRef ref}) async {
     final response = await getIt<DeRegisterFingerprint>().call(null);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (DeRegisterFingerprintResponseModel success) async {
         if (success.status?.isSuccess == true) {
           ref.watch(isFPLoginProvider.notifier).update((state) => false);
 
-          context.showSnackBar(message: success.body?.responseBody?.message ?? "");
+          context.showSnackBar(
+              message: success.body?.responseBody?.message ?? "");
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

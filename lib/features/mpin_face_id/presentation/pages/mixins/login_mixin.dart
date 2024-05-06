@@ -29,11 +29,14 @@ mixin LoginMixin {
     final loading = ref.watch(mpinLoadingProvider);
     if (loading) return;
 
-    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo =
+        await DeviceInformationHelper().generateDeviceInformation();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
 
-    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
+    final String mobileNo = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
+       await LocalDataHelper.getMobileNumber();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
 
@@ -53,7 +56,8 @@ mixin LoginMixin {
         debugPrint("failure: $failure");
         ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LoginbyMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -62,10 +66,13 @@ mixin LoginMixin {
             authToken: success.body?.responseBody?.authToken?.token,
             sessionId: success.body?.responseBody?.authToken?.sessionId,
             ref: ref,
+            mobileNumber: success.body?.responseBody?.mobileNumber,
+            agentName: success.body?.responseBody?.agentName,
           );
 
           onSuccess(success.body?.responseBody);
-        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.inValidPin) {
+        } else if (success.status?.isSuccess == false &&
+            success.status?.statusCode == ApiErrorCodes.inValidPin) {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
@@ -77,7 +84,8 @@ mixin LoginMixin {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
 
           onFailure();
@@ -94,13 +102,16 @@ mixin LoginMixin {
     final loading = ref.watch(mpinLoadingProvider);
     if (loading) return;
 
-    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo =
+        await DeviceInformationHelper().generateDeviceInformation();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
     final String fpToken = await LocalDataHelper.getFPToken();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
+    final String mobileNo = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
+        "";
 
     LoginByFpRequestModel request = LoginByFpRequestModel(
       deviceId: deviceInfo.deviceId,
@@ -119,7 +130,8 @@ mixin LoginMixin {
         debugPrint("failure: $failure");
         ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(
+            message: Strings.globalErrorGenericMessageOne);
       },
       (LoginByFpResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -129,6 +141,8 @@ mixin LoginMixin {
             sessionId: success.body?.responseBody?.authToken?.sessionId,
             fpDeviceToken: success.body?.responseBody?.fpDeviceToken,
             ref: ref,
+            mobileNumber: success.body?.responseBody?.mobileNumber,
+            agentName: success.body?.responseBody?.agentName,
           );
 
           onSuccess(success.body?.responseBody);
@@ -136,29 +150,34 @@ mixin LoginMixin {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> forgotPin({required BuildContext context, required WidgetRef ref}) async {
+  Future<void> forgotPin(
+      {required BuildContext context, required WidgetRef ref}) async {
     ref.watch(forgotPasswordSelectedProvider.notifier).update((state) => true);
 
     context.pushNamed(AppRoutes.loginScreen);
   }
 
-  Future<void> _setData({
-    required String? deviceToken,
-    required String? authToken,
-    required String? sessionId,
-    String? fpDeviceToken,
-    required WidgetRef ref,
-  }) async {
+  Future<void> _setData(
+      {required String? deviceToken,
+      required String? authToken,
+      required String? sessionId,
+      String? fpDeviceToken,
+      required WidgetRef ref,
+      required String? mobileNumber,
+      required String? agentName}) async {
     await LocalDataHelper.storeDeviceToken(deviceToken);
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
+    await LocalDataHelper.storeMobileNumber(mobileNumber);
+    await LocalDataHelper.storeAgentName(agentName);
 
     if (fpDeviceToken != null) {
       await LocalDataHelper.storeFPToken(fpDeviceToken);

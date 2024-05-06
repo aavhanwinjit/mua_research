@@ -16,7 +16,8 @@ part 'validate_otp_response_model.g.dart';
 ValidateOtpResponseModel validateOtpResponseModelFromJson(String str) =>
     ValidateOtpResponseModel.fromJson(json.decode(str));
 
-String validateOtpResponseModelToJson(ValidateOtpResponseModel data) => json.encode(data.toJson());
+String validateOtpResponseModelToJson(ValidateOtpResponseModel data) =>
+    json.encode(data.toJson());
 
 @freezed
 class ValidateOtpResponseModel with _$ValidateOtpResponseModel {
@@ -26,7 +27,8 @@ class ValidateOtpResponseModel with _$ValidateOtpResponseModel {
     @JsonKey(name: "s") StatusModel? status,
   }) = _ValidateOtpResponseModel;
 
-  factory ValidateOtpResponseModel.fromJson(Map<String, dynamic> json) => _$ValidateOtpResponseModelFromJson(json);
+  factory ValidateOtpResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$ValidateOtpResponseModelFromJson(json);
 }
 
 @freezed
@@ -36,7 +38,8 @@ class ValidateOTPData with _$ValidateOTPData {
     @JsonKey(name: "checkSum") String? checkSum,
   }) = _ValidateOTPData;
 
-  factory ValidateOTPData.fromJson(Map<String, dynamic> json) => _$ValidateOTPDataFromJson(json);
+  factory ValidateOTPData.fromJson(Map<String, dynamic> json) =>
+      _$ValidateOTPDataFromJson(json);
 }
 
 @freezed
@@ -51,7 +54,9 @@ class ValidateOTPResponseBody with _$ValidateOTPResponseBody {
     @JsonKey(name: "agencyName") String? agencyName,
     @JsonKey(name: "companies") List<Company>? companies,
     @JsonKey(name: "tokenData") TokenData? tokenData,
+    @Default(false) @JsonKey(name: "isMPINSet") bool isMPINSet,
   }) = _ValidateOTPResponseBody;
 
-  factory ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) => _$ValidateOTPResponseBodyFromJson(json);
+  factory ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) =>
+      _$ValidateOTPResponseBodyFromJson(json);
 }
