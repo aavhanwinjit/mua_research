@@ -8,11 +8,14 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/core/utils/extensions/string_extensions.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/request/change_mpin_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/change_mpin/response/change_mpin_response_model.dart';
+import 'package:ekyc/features/login_otp/data/models/regsiter_device/request/register_device_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/regsiter_device/response/register_device_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/request/resend_otp_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/resend_otp/response/resend_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/request/validate_otp_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/change_mpin.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/register_device.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/resend_otp.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/validate_otp.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
@@ -63,7 +66,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+            padding: EdgeInsets.only(
+                left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(
@@ -100,7 +104,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                 CustomPrimaryButton(
                   loading: ref.watch(otpScreenLoadingProvider),
                   disable: ref.watch(otpProvider).trim().length < 6,
-                  onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
+                  onTap: () => ref.watch(userLoggedInProvider)
+                      ? _changeMPIN()
+                      : _verifyOTP(),
                   label: Strings.contn,
                 ),
                 SizedBox(height: 18.h),
@@ -250,7 +256,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       },
       (ValidateOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
+          ref
+              .read(validateOTPResponseProvider.notifier)
+              .update((state) => success);
 
           // clear controllers
           ref.watch(oldPINProvider.notifier).update((state) => '');
@@ -260,11 +268,33 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           await _setData(
             authToken: success.body?.responseBody?.tokenData?.token,
             sessionId: success.body?.responseBody?.tokenData?.sessionId,
+            mobileNumber: success.body?.responseBody?.mobileNumber,
+            agentName: success.body?.responseBody?.agentName,
           );
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
-          context.pushReplacementNamed(AppRoutes.successScreen);
-        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
+          if (success.body?.responseBody?.isMPINSet == true) {
+            await LocalDataHelper.storeMobileNumber(phoneNumber);
+            final request =
+                RegisterDeviceRequestModel(mobileNumber: phoneNumber);
+
+            final response = await getIt<RegisterDevice>().call(request);
+
+            response.fold((failure) {
+              context.showSnackBar(
+                  message: Strings.globalErrorGenericMessageOne);
+            }, (RegisterDeviceResponseModel success) async {
+              if (success.status?.isSuccess == true) {
+                await LocalDataHelper.storeDeviceToken(
+                    success.body!.responseBody!.deviceToken);
+                context.pushReplacementNamed(AppRoutes.mpinLoginScreen);
+              }
+            });
+          } else {
+            context.pushReplacementNamed(AppRoutes.successScreen);
+          }
+        } else if (success.status?.isSuccess == false &&
+            success.status?.statusCode == ApiErrorCodes.notFount) {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.pushReplacementNamed(AppRoutes.failureScreen);
@@ -272,7 +302,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -312,8 +343,12 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       (ChangeMPINResponseModel success) async {
         debugPrint("success in otp screen : $success");
         if (success.status?.isSuccess == true) {
-          ref.read(changeMPINResponseProvider.notifier).update((state) => success);
-          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref
+              .read(changeMPINResponseProvider.notifier)
+              .update((state) => success);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -338,7 +373,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -354,7 +390,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
 
     final String? refCode = ref.watch(refCodeProvider);
 
-    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
+    final ResendOtpRequestModel request =
+        ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
@@ -368,7 +405,9 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       (ResendOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
-          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 
@@ -377,16 +416,23 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> _setData({required String? authToken, required String? sessionId}) async {
+  Future<void> _setData(
+      {required String? authToken,
+      required String? sessionId,
+      required String? mobileNumber,
+      required String? agentName}) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
+    await LocalDataHelper.storeMobileNumber(mobileNumber);
+    await LocalDataHelper.storeAgentName(agentName);
 
     ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }

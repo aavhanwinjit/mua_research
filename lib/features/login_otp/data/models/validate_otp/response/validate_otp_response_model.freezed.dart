@@ -471,6 +471,8 @@ mixin _$ValidateOTPResponseBody {
   List<Company>? get companies => throw _privateConstructorUsedError;
   @JsonKey(name: "tokenData")
   TokenData? get tokenData => throw _privateConstructorUsedError;
+  @JsonKey(name: "isMPINSet")
+  bool get isMPINSet => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -493,7 +495,8 @@ abstract class $ValidateOTPResponseBodyCopyWith<$Res> {
       @JsonKey(name: "designation") dynamic designation,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "companies") List<Company>? companies,
-      @JsonKey(name: "tokenData") TokenData? tokenData});
+      @JsonKey(name: "tokenData") TokenData? tokenData,
+      @JsonKey(name: "isMPINSet") bool isMPINSet});
 
   $TokenDataCopyWith<$Res>? get tokenData;
 }
@@ -521,6 +524,7 @@ class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
     Object? agencyName = freezed,
     Object? companies = freezed,
     Object? tokenData = freezed,
+    Object? isMPINSet = null,
   }) {
     return _then(_value.copyWith(
       agentName: freezed == agentName
@@ -559,6 +563,10 @@ class _$ValidateOTPResponseBodyCopyWithImpl<$Res,
           ? _value.tokenData
           : tokenData // ignore: cast_nullable_to_non_nullable
               as TokenData?,
+      isMPINSet: null == isMPINSet
+          ? _value.isMPINSet
+          : isMPINSet // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
@@ -593,7 +601,8 @@ abstract class _$$ValidateOTPResponseBodyImplCopyWith<$Res>
       @JsonKey(name: "designation") dynamic designation,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "companies") List<Company>? companies,
-      @JsonKey(name: "tokenData") TokenData? tokenData});
+      @JsonKey(name: "tokenData") TokenData? tokenData,
+      @JsonKey(name: "isMPINSet") bool isMPINSet});
 
   @override
   $TokenDataCopyWith<$Res>? get tokenData;
@@ -621,6 +630,7 @@ class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
     Object? agencyName = freezed,
     Object? companies = freezed,
     Object? tokenData = freezed,
+    Object? isMPINSet = null,
   }) {
     return _then(_$ValidateOTPResponseBodyImpl(
       agentName: freezed == agentName
@@ -659,6 +669,10 @@ class __$$ValidateOTPResponseBodyImplCopyWithImpl<$Res>
           ? _value.tokenData
           : tokenData // ignore: cast_nullable_to_non_nullable
               as TokenData?,
+      isMPINSet: null == isMPINSet
+          ? _value.isMPINSet
+          : isMPINSet // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -675,7 +689,8 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
       @JsonKey(name: "designation") this.designation,
       @JsonKey(name: "agencyName") this.agencyName,
       @JsonKey(name: "companies") final List<Company>? companies,
-      @JsonKey(name: "tokenData") this.tokenData})
+      @JsonKey(name: "tokenData") this.tokenData,
+      @JsonKey(name: "isMPINSet") this.isMPINSet = false})
       : _companies = companies;
 
   factory _$ValidateOTPResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
@@ -716,10 +731,13 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
   @override
   @JsonKey(name: "tokenData")
   final TokenData? tokenData;
+  @override
+  @JsonKey(name: "isMPINSet")
+  final bool isMPINSet;
 
   @override
   String toString() {
-    return 'ValidateOTPResponseBody(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, emailId: $emailId, designation: $designation, agencyName: $agencyName, companies: $companies, tokenData: $tokenData)';
+    return 'ValidateOTPResponseBody(agentName: $agentName, mobileNumber: $mobileNumber, address: $address, companyName: $companyName, emailId: $emailId, designation: $designation, agencyName: $agencyName, companies: $companies, tokenData: $tokenData, isMPINSet: $isMPINSet)';
   }
 
   @override
@@ -742,7 +760,9 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
             const DeepCollectionEquality()
                 .equals(other._companies, _companies) &&
             (identical(other.tokenData, tokenData) ||
-                other.tokenData == tokenData));
+                other.tokenData == tokenData) &&
+            (identical(other.isMPINSet, isMPINSet) ||
+                other.isMPINSet == isMPINSet));
   }
 
   @JsonKey(ignore: true)
@@ -757,7 +777,8 @@ class _$ValidateOTPResponseBodyImpl implements _ValidateOTPResponseBody {
       const DeepCollectionEquality().hash(designation),
       agencyName,
       const DeepCollectionEquality().hash(_companies),
-      tokenData);
+      tokenData,
+      isMPINSet);
 
   @JsonKey(ignore: true)
   @override
@@ -784,7 +805,8 @@ abstract class _ValidateOTPResponseBody implements ValidateOTPResponseBody {
           @JsonKey(name: "designation") final dynamic designation,
           @JsonKey(name: "agencyName") final String? agencyName,
           @JsonKey(name: "companies") final List<Company>? companies,
-          @JsonKey(name: "tokenData") final TokenData? tokenData}) =
+          @JsonKey(name: "tokenData") final TokenData? tokenData,
+          @JsonKey(name: "isMPINSet") final bool isMPINSet}) =
       _$ValidateOTPResponseBodyImpl;
 
   factory _ValidateOTPResponseBody.fromJson(Map<String, dynamic> json) =
@@ -817,6 +839,9 @@ abstract class _ValidateOTPResponseBody implements ValidateOTPResponseBody {
   @override
   @JsonKey(name: "tokenData")
   TokenData? get tokenData;
+  @override
+  @JsonKey(name: "isMPINSet")
+  bool get isMPINSet;
   @override
   @JsonKey(ignore: true)
   _$$ValidateOTPResponseBodyImplCopyWith<_$ValidateOTPResponseBodyImpl>

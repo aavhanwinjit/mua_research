@@ -61,6 +61,7 @@ _$ValidateOTPResponseBodyImpl _$$ValidateOTPResponseBodyImplFromJson(
       tokenData: json['tokenData'] == null
           ? null
           : TokenData.fromJson(json['tokenData'] as Map<String, dynamic>),
+      isMPINSet: json['isMPINSet'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
@@ -75,4 +76,5 @@ Map<String, dynamic> _$$ValidateOTPResponseBodyImplToJson(
       'agencyName': instance.agencyName,
       'companies': instance.companies,
       'tokenData': instance.tokenData,
+      'isMPINSet': instance.isMPINSet,
     };

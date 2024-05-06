@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
@@ -26,6 +27,7 @@ class MPINLoginScreen extends ConsumerStatefulWidget {
 class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
     with BiometricAuthMixin, LoginMixin, AgentDetailsMixin {
   bool wrongPin = false;
+  String name = "";
 
   @override
   void initState() {
@@ -35,6 +37,13 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       ref.read(mpinLoadingProvider.notifier).update((state) => false);
       ref.read(agentDetailsLoadingProvider.notifier).update((state) => false);
     });
+
+    getAgentName();
+  }
+
+  getAgentName() async {
+    name = await LocalDataHelper.getAgentName();
+    setState(() {});
   }
 
   @override
@@ -51,7 +60,8 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
             const Spacer(),
             MaskedPinTextfield(provider: loginPINProvider),
 
-            if (ref.watch(mpinLoadingProvider) || ref.watch(agentDetailsLoadingProvider)) ...[
+            if (ref.watch(mpinLoadingProvider) ||
+                ref.watch(agentDetailsLoadingProvider)) ...[
               const Spacer(),
               _loader(),
             ],
@@ -77,12 +87,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
                       ref: ref,
                       onSuccess: onLoginSuccess,
                       onWrongPin: () {
-                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        ref
+                            .watch(loginPINProvider.notifier)
+                            .update((state) => "");
                         wrongPin = true;
                         setState(() {});
                       },
                       onFailure: () {
-                        ref.watch(loginPINProvider.notifier).update((state) => "");
+                        ref
+                            .watch(loginPINProvider.notifier)
+                            .update((state) => "");
                         setState(() {});
                       },
                     );
@@ -114,11 +128,11 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
   }
 
   Widget _title() {
-    final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final name = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
+    // final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
+    // final name = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.name;
 
     return Text(
-      "${Strings.hi} ${name ?? "-"}",
+      "${Strings.hi} $name",
       style: TextStyle(
         fontSize: 24.sp,
         fontWeight: FontWeight.w700,
@@ -162,7 +176,9 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _useBiometricButton() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
+    final isFPLogin = launchDetailsProvider
+            ?.body?.responseBody?.agentData?.loginData?.isFpLogin ??
+        false;
 
     return isFPLogin
         ? TextButton(
@@ -214,13 +230,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
         );
       },
       onAuthenticationFailure: (String error) {
-        context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
+        context.showErrorSnackBar(
+            message: Strings.biometricAuthenticationFailed);
       },
     );
   }
 
   void onLoginSuccess(AgentLoginDetailsResponseModel? agentDetails) async {
-    ref.read(agentLoginDetailsProvider.notifier).update((state) => agentDetails);
+    ref
+        .read(agentLoginDetailsProvider.notifier)
+        .update((state) => agentDetails);
 
     ref.watch(userLoggedInProvider.notifier).update((state) => true);
 
@@ -231,12 +250,16 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       ref,
       onSuccess: (GetAgentDetailsResponseModel? agentDetails) {
         ref.watch(loginPINProvider.notifier).update((state) => "");
-        ref.watch(agentDetailsResponseProvider.notifier).update((state) => agentDetails);
+        ref
+            .watch(agentDetailsResponseProvider.notifier)
+            .update((state) => agentDetails);
         ref
             .watch(agentSignaturePathProvider.notifier)
             .update((state) => agentDetails?.body?.responseBody?.signaturePath);
 
-        ref.watch(agentDetailsLoadingProvider.notifier).update((state) => false);
+        ref
+            .watch(agentDetailsLoadingProvider.notifier)
+            .update((state) => false);
 
         context.go(AppRoutes.dashboardScreen);
       },

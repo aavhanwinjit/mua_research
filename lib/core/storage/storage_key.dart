@@ -2,4 +2,6 @@ enum StorageKey {
   DEVICE_TOKEN,
   AUTH_TOKEN,
   FP_TOKEN,
+  MOBILE_NUMBER,
+  AGENT_NAME,
 }

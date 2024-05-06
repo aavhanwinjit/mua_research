@@ -272,6 +272,7 @@ class Strings {
   static const String kycFailed = "KYC Failed";
   static const String enterAddressInfo =
       "Make sure surname, other name & address are entered";
+  static const String addressProofDoc = "address proof document";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";
@@ -292,6 +293,7 @@ class Strings {
       "Please add surnames for selected documents";
   static const String enterNameAsPerInsuredDoc =
       "Enter surname as per selected insured document";
+  static const String insuredDoc = "insured document";
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";
