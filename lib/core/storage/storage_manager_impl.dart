@@ -18,7 +18,8 @@ class StorageManagerImpl implements AppStorageManager {
       final value = Future.value(json.decode(data));
       return data == null ? data : value;
     } catch (e) {
-      debugPrint("Error while extracting data from local storage: ${e.toString()}");
+      debugPrint(
+          "Error while extracting data from local storage: ${e.toString()}");
       throw CacheException();
     }
   }
@@ -32,6 +33,17 @@ class StorageManagerImpl implements AppStorageManager {
       key.name,
       jsonEncode(data),
     );
+  }
+
+  @override
+  Future<void> removeMap({required StorageKey key}) async {
+    try {
+      return box.remove(key.name);
+    } catch (e) {
+      debugPrint(
+          "Error while removing data from local storage: ${e.toString()}");
+      throw CacheException();
+    }
   }
 
   @override
@@ -54,7 +66,19 @@ class StorageManagerImpl implements AppStorageManager {
       final value = Future.value(data.toString());
       return data == null ? data : value;
     } catch (e) {
-      debugPrint("Error while extracting string from local storage: ${e.toString()}");
+      debugPrint(
+          "Error while extracting string from local storage: ${e.toString()}");
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> removeString({required StorageKey key}) {
+    try {
+      return box.remove(key.name);
+    } catch (e) {
+      debugPrint(
+          "Error while removing string from local storage: ${e.toString()}");
       throw CacheException();
     }
   }

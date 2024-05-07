@@ -14,10 +14,12 @@ class EditAddressDetailsScreen extends ConsumerStatefulWidget {
   const EditAddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _EditAddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EditAddressDetailsScreenState();
 }
 
-class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScreen> {
+class _EditAddressDetailsScreenState
+    extends ConsumerState<EditAddressDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? surname;
@@ -52,7 +54,8 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
 
     ScanDocumentResponseBody? ocrResponse = ref.watch(addressDocOCRApiResponse);
 
-    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
+    final AddressDocumentTypeModel? selectedAddressDocType =
+        ref.watch(selectedAddressDocTypeProvider);
 
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
@@ -73,7 +76,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Strings.enterFollowingDetailsEditScreen,
+                      "${Strings.enterFollowingDetailsEditScreen} ${Strings.addressProofDoc}",
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor2,
@@ -140,10 +143,12 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                         return null;
                       },
                     ),
-                    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) ...[
+                    if (selectedAddressDocType?.documentCode ==
+                        DocumentCodes.UTB.toString().split('.').last) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
-                        initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
+                        initialValue:
+                            ocrResponse?.ocrResponse?.documentdata?.billDate,
                         label: Strings.billDate,
                         enabled: false,
                       ),

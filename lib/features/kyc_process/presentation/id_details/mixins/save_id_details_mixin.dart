@@ -65,9 +65,12 @@ mixin SaveIDDetailsMixin {
     final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
     String frontBase64 = base64Encode(frontFileBytes);
 
-    File backFile = File(idCardBackSide ?? "");
-    final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
-    String backBase64 = base64Encode(backFileBytes);
+    String backBase64 = "";
+    if (idCardBackSide != null && idCardBackSide != "") {
+      File backFile = File(idCardBackSide ?? "");
+      final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
+      backBase64 = base64Encode(backFileBytes);
+    }
 
     SaveIdentityDetailsRequestModel request = SaveIdentityDetailsRequestModel(
       applicationRefNo: selectedApplication?.applicationRefNo,

@@ -71,7 +71,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Strings.enterFollowingDetailsEditScreen,
+                      "${Strings.enterFollowingDetailsEditScreen} ${Strings.nicCard}",
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor2,

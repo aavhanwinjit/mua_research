@@ -12,10 +12,12 @@ class EditInsuredDetailsScreen extends ConsumerStatefulWidget {
   const EditInsuredDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _EditInsuredDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _EditInsuredDetailsScreenState();
 }
 
-class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScreen> {
+class _EditInsuredDetailsScreenState
+    extends ConsumerState<EditInsuredDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -39,7 +41,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      Strings.enterFollowingDetailsEditScreen,
+                      "${Strings.enterFollowingDetailsEditScreen} ${Strings.insuredDoc}",
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor2,
@@ -64,16 +66,21 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
   }
 
   Widget _surnameWidgets() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: selectedDocsListProvider.list().map((PORDocumentElement e) => _surnameElement(e)).toList(),
+      children: selectedDocsListProvider
+          .list()
+          .map((PORDocumentElement e) => _surnameElement(e))
+          .toList(),
     );
   }
 
   Widget _surnameElement(PORDocumentElement element) {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     int index = selectedDocsListProvider.list().indexOf(element);
 
     return Column(
