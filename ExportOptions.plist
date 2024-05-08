@@ -7,20 +7,13 @@
 	<key>destination</key>
 	<string>export</string>
 	<key>method</key>
-	<string>development</string>
-	<key>provisioningProfiles</key>
-	<dict>
-		<key>com.winjit.</key>
-		<string>Winjit_Dev_Star_Profile</string>
-	</dict>
-	<key>signingCertificate</key>
-	<string>Apple Development</string>
+	<string>debugging</string>
 	<key>signingStyle</key>
-	<string>manual</string>
+	<string>automatic</string>
 	<key>stripSwiftSymbols</key>
 	<true/>
 	<key>teamID</key>
-	<string>6DS2GXGJY7</string>
+	<string>D62UZC2DBF</string>
 	<key>thinning</key>
 	<string>&lt;none&gt;</string>
 </dict>
