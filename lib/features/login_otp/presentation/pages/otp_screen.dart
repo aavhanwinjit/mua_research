@@ -273,7 +273,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           );
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
-          if (success.body?.responseBody?.isMPINSet == true) {
+          if (success.body?.responseBody?.isMPINSet == true && ref.watch(forgotPasswordSelectedProvider)==false) {
             await LocalDataHelper.storeMobileNumber(phoneNumber);
             final request =
                 RegisterDeviceRequestModel(mobileNumber: phoneNumber);
