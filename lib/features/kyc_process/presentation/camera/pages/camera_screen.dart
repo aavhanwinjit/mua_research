@@ -36,26 +36,30 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   void _setupCamera() async {
     _cameras = await availableCameras();
 
-    controller = CameraController(_cameras[0], ResolutionPreset.max);
+    if (_cameras.isNotEmpty) {
+      controller = CameraController(_cameras[0], ResolutionPreset.max);
 
-    controller!.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            context.showErrorSnackBar(
-                message: Strings.cameraPermissionRequired);
-            break;
-          default:
-            // Handle other errors here.
-            break;
+      controller!.initialize().then((_) {
+        if (!mounted) {
+          return;
         }
-      }
-    });
+        setState(() {});
+      }).catchError((Object e) {
+        if (e is CameraException) {
+          switch (e.code) {
+            case 'CameraAccessDenied':
+              context.showErrorSnackBar(
+                  message: Strings.cameraPermissionRequired);
+              break;
+            default:
+              // Handle other errors here.
+              break;
+          }
+        }
+      });
+    } else {
+      pickImage();
+    }
   }
 
   @override
