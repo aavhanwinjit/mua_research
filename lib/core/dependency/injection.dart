@@ -21,7 +21,7 @@ abstract class MAUEngineModule {
       // baseUrl: "http://192.168.10.222:9890",// !DIPAK SYSTEM
       baseUrl: "http://192.168.0.134:9890", // DEV
       // baseUrl: "http://10.100.1.121/agentapi/",
-      // baseUrl: "http://10.15.0.124/agentapi/", // UAT
+      // baseUrl: "https://dev-kycapi.mua.mu/agentapi/", // UAT
     );
   }
 
