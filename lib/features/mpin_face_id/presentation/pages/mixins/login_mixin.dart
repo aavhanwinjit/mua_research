@@ -5,6 +5,10 @@ import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
+import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
+import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
@@ -36,7 +40,7 @@ mixin LoginMixin {
 
     final String mobileNo = launchDetailsProvider
             ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
-       await LocalDataHelper.getMobileNumber();
+        await LocalDataHelper.getMobileNumber();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
 
@@ -160,9 +164,64 @@ mixin LoginMixin {
 
   Future<void> forgotPin(
       {required BuildContext context, required WidgetRef ref}) async {
-    ref.watch(forgotPasswordSelectedProvider.notifier).update((state) => true);
+    final String phoneNumber = await LocalDataHelper.getMobileNumber();
+    ref.watch(phoneNumberProvider.notifier).update((state) => phoneNumber);
 
-    context.pushNamed(AppRoutes.loginScreen);
+    final body = VerifyMobileNumberRequestModel(mobileNumber: phoneNumber);
+
+    ref
+        .watch(verifyMobileNumberLoadingProvider.notifier)
+        .update((state) => true);
+
+    final response = await getIt<VerifyMobileNumber>().call(body);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        ref
+            .watch(verifyMobileNumberLoadingProvider.notifier)
+            .update((state) => false);
+
+        context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (VerifyMobileNumberResponseModel success) async {
+        if (success.status?.isSuccess == true) {
+          ref
+              .read(verifyMobileNumberProvider.notifier)
+              .update((state) => success);
+          ref
+              .read(refCodeProvider.notifier)
+              .update((state) => success.body?.responseBody?.refCode);
+
+          await LocalDataHelper.storeAuthToken(
+              success.body?.responseBody?.tokenData?.token);
+          await LocalDataHelper.storeSessionId(
+              success.body?.responseBody?.tokenData?.sessionId);
+
+          ref.watch(sessionIdProvider.notifier).update((state) =>
+              success.body?.responseBody?.tokenData?.sessionId ?? "");
+
+          ref
+              .watch(verifyMobileNumberLoadingProvider.notifier)
+              .update((state) => false);
+
+          ref
+              .watch(forgotPasswordSelectedProvider.notifier)
+              .update((state) => true);
+          context.showSnackBar(message: Strings.otpSentSuccessfully);
+          context.pushNamed(AppRoutes.otpScreen);
+        } else {
+          ref
+              .watch(verifyMobileNumberLoadingProvider.notifier)
+              .update((state) => false);
+
+          context.showErrorSnackBar(
+            message:
+                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
+    );
   }
 
   Future<void> _setData(
