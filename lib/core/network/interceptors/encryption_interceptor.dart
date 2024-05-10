@@ -37,7 +37,9 @@ class EncryptionInterceptor extends Interceptor {
     debugPrint('${response.data}');
     debugPrint('******************* ******** ***********************\n');
 
-    if (response.data["b"] != null) {
+    if (response.data["s"]["statusCode"] == "ACCERR") {
+      handler.next(response);
+    } else if (response.data["b"] != null) {
       Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
         cipherText: response.data["b"],
         deviceID: response.data["h"]["di"]["d"],
