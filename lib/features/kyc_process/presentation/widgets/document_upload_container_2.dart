@@ -2,12 +2,15 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class DocumentUploadContainer2 extends ConsumerWidget {
   final String label;
@@ -50,13 +53,68 @@ class DocumentUploadContainer2 extends ConsumerWidget {
             ? disableCallback
             : filePath == null
                 ? () {
-                    ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
-                    ref.read(cameraScreenAppBarTitle.notifier).update((state) => cameraScreenTitle);
-                    ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => reviewScreenTitle);
+                    ref
+                        .read(cameraScreenSubtitle.notifier)
+                        .update((state) => cameraScreenDescription);
+                    ref
+                        .read(cameraScreenAppBarTitle.notifier)
+                        .update((state) => cameraScreenTitle);
+                    ref
+                        .read(reviewUploadedDocScreenTitle.notifier)
+                        .update((state) => reviewScreenTitle);
 
-                    context.pushNamed(
-                      AppRoutes.cameraScreen2,
-                      extra: {'onChange': onChange, 'documentCode': documentCode},
+                    void pickImage(ImageSource imageSource) async {
+                      try {
+                        XFile? result = await ImagePicker().pickImage(
+                          source: imageSource,
+                          maxHeight: 1500,
+                          maxWidth: 1500,
+                        );
+
+                        if (result != null) {
+                          final fileSize = await result.length();
+
+                          if (fileSize > 5000000) {
+                            context.showErrorSnackBar(
+                                message: Strings.fileSizeErrorString);
+                            return;
+                          }
+
+                          ref
+                              .watch(capturedFilePathProvider.notifier)
+                              .update((state) => result.path);
+
+                          context.pop();
+                          context.pushNamed(
+                            AppRoutes.confirmUploadOrRetakeScreen2,
+                            extra: {
+                              'onChange': onChange,
+                              'documentCode': documentCode
+                            },
+                          );
+                        }
+                      } catch (e) {}
+                    }
+
+                    showCupertinoModalPopup(
+                      context: context,
+                      builder: (BuildContext context) => CupertinoActionSheet(
+                        title: const Text('Select document from'),
+                        actions: <Widget>[
+                          CupertinoActionSheetAction(
+                            child: const Text('Camera'),
+                            onPressed: () {
+                              pickImage(ImageSource.camera);
+                            },
+                          ),
+                          CupertinoActionSheetAction(
+                            child: const Text('Gallery'),
+                            onPressed: () {
+                              pickImage(ImageSource.gallery);
+                            },
+                          )
+                        ],
+                      ),
                     );
                   }
                 : null,
@@ -113,7 +171,8 @@ class DocumentUploadContainer2 extends ConsumerWidget {
       constraints: const BoxConstraints(),
       icon: Container(
         padding: const EdgeInsets.all(4),
-        decoration: const BoxDecoration(color: errorTextRed, shape: BoxShape.circle),
+        decoration:
+            const BoxDecoration(color: errorTextRed, shape: BoxShape.circle),
         child: const Icon(
           Icons.close,
           color: white,
