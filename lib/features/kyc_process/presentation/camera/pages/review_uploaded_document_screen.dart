@@ -57,7 +57,9 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 disable: false,
                 label: Strings.upload,
                 onTap: () {
-                  ref.watch(provider.notifier).update((state) => capturedFilePath);
+                  ref
+                      .watch(provider.notifier)
+                      .update((state) => capturedFilePath);
                   context.pop();
                 },
               ),
@@ -67,7 +69,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 primary: true,
                 label: Strings.retakePhoto,
                 onTap: () {
-                  context.pushReplacementNamed(AppRoutes.cameraScreen, extra: provider);
+                  context.pop();
                 },
               ),
             ],

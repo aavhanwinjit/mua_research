@@ -13,7 +13,8 @@ class CameraScreen2 extends ConsumerStatefulWidget {
   final Function(String, ScanDocumentResponseBody?) onchange;
   final String documentCode;
 
-  const CameraScreen2({required this.onchange, required this.documentCode, super.key});
+  const CameraScreen2(
+      {required this.onchange, required this.documentCode, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CameraScreen2State();
@@ -49,7 +50,8 @@ class _CameraScreen2State extends ConsumerState<CameraScreen2> {
       if (e is CameraException) {
         switch (e.code) {
           case 'CameraAccessDenied':
-            context.showErrorSnackBar(message: Strings.cameraPermissionRequired);
+            context.showErrorSnackBar(
+                message: Strings.cameraPermissionRequired);
             break;
           default:
             // Handle other errors here.
@@ -177,7 +179,9 @@ class _CameraScreen2State extends ConsumerState<CameraScreen2> {
             return;
           }
 
-          ref.watch(capturedFilePathProvider.notifier).update((state) => file.path);
+          ref
+              .watch(capturedFilePathProvider.notifier)
+              .update((state) => file.path);
           _navigateToReviewImageScreen();
         }
       }
@@ -220,13 +224,17 @@ class _CameraScreen2State extends ConsumerState<CameraScreen2> {
         return;
       }
 
-      ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+      ref
+          .watch(capturedFilePathProvider.notifier)
+          .update((state) => result.path);
       _navigateToReviewImageScreen();
     }
   }
 
   void onSetFlashModeButtonPressed() {
-    FlashMode mode = controller?.value.flashMode == FlashMode.off ? FlashMode.always : FlashMode.off;
+    FlashMode mode = controller?.value.flashMode == FlashMode.off
+        ? FlashMode.always
+        : FlashMode.off;
 
     setFlashMode(mode).then((_) {
       if (mounted) {
@@ -249,7 +257,8 @@ class _CameraScreen2State extends ConsumerState<CameraScreen2> {
   }
 
   void _showCameraException(CameraException e) {
-    debugPrint('Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
+    debugPrint(
+        'Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
     context.showErrorSnackBar(message: 'Error: ${e.code}\n${e.description}');
   }
 
