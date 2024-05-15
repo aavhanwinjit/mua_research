@@ -7,6 +7,7 @@ import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_til
 import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/save_por_docs_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/insured_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/upload_por_docs_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/insured_doc_details_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
@@ -132,6 +133,7 @@ class _InsuredReviewSubmitScreenState
             ref
                 .watch(saveInsuredDetailsLoading.notifier)
                 .update((state) => false);
+            ref.watch(porDocUploadProcess.notifier).update((state) => false);
 
             // pop back to upload insured documents screen
             context.pop();
@@ -141,6 +143,8 @@ class _InsuredReviewSubmitScreenState
                 ref.watch(selectedApplicationProvider);
             if (selectedApplication!.kycTypeId == 1) {
               context.go(AppRoutes.kycSubmittedScreen);
+            } else {
+              context.pop();
             }
 
             // if (isExit) {

@@ -30,7 +30,8 @@ class InsuredDocumentsScreen extends ConsumerStatefulWidget {
   const InsuredDocumentsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _InsuredDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _InsuredDocumentsScreenState();
 }
 
 class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
@@ -43,8 +44,10 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
       setSelectedDocumentCategory();
 
       ref.watch(porDocsTypesListLoading.notifier).update((state) => false);
+      ref.watch(porDocUploadProcess.notifier).update((state) => true);
 
-      final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+      final selectedDocsListProvider =
+          ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
       selectedDocsListProvider.clearList();
 
       selectedDocsListProvider.addElementToList();
@@ -54,54 +57,74 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   void setSelectedDocumentCategory() {
-    final documentCategoryNotifier = ref.watch(documentCategoryNotifierProvider.notifier);
+    final documentCategoryNotifier =
+        ref.watch(documentCategoryNotifierProvider.notifier);
     ref.watch(documentCategoryNotifierProvider);
 
-    final List<DocumentCategoryModel> documentCategoryList = documentCategoryNotifier.documentCattegoryList();
+    final List<DocumentCategoryModel> documentCategoryList =
+        documentCategoryNotifier.documentCattegoryList();
     final DocumentCategoryModel documentCategory = documentCategoryList
-        .where((element) => element.documentCategory == DocumentCategoryEnums.POR.toString().split('.').last)
+        .where((element) =>
+            element.documentCategory ==
+            DocumentCategoryEnums.POR.toString().split('.').last)
         .toList()
         .first;
 
-    ref.read(selectedDocumentCategoryProvider.notifier).update((state) => documentCategory);
+    ref
+        .read(selectedDocumentCategoryProvider.notifier)
+        .update((state) => documentCategory);
   }
 
   @override
   Widget build(BuildContext context) {
     final bool porDocTypeLoading = ref.watch(porDocsTypesListLoading);
 
-    final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
+    final porDocTypesNotifier =
+        ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
+    print(" provider value:");
+    print(ref.watch(porDocUploadProcess));
 
     return GestureDetector(
       onTap: () {
         KeyboardHelper.onScreenTap(context);
       },
-      child: Scaffold(
-        appBar: AppBarHelper.showCustomAppbar(
-          context: context,
-          backIcon: Icons.close,
-          title: Strings.uploadInsuredDocuments,
-        ),
-        bottomNavigationBar: !porDocTypeLoading ? _bottomNavBarWidget() : null,
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  _title(),
-                  SizedBox(height: 8.h),
-                  _subTitle(),
-                  SizedBox(height: 20.h),
-                  if (porDocTypeLoading) const AddressDetailsLoadingWidget(),
-                  if (!porDocTypeLoading) ...[
-                    if (porDocTypesNotifier.haveList()) ...[
-                      _documentWidgetList(),
+      child: PopScope(
+        onPopInvoked: (didpop) {
+          if (didpop) {
+            return;
+          }
+          ref.watch(porDocUploadProcess.notifier).update((state) => false);
+          print(" provider value:");
+          print(ref.watch(porDocUploadProcess));
+        },
+        child: Scaffold(
+          appBar: AppBarHelper.showCustomAppbar(
+            context: context,
+            backIcon: Icons.close,
+            title: Strings.uploadInsuredDocuments,
+          ),
+          bottomNavigationBar:
+              !porDocTypeLoading ? _bottomNavBarWidget() : null,
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _title(),
+                    SizedBox(height: 8.h),
+                    _subTitle(),
+                    SizedBox(height: 20.h),
+                    if (porDocTypeLoading) const AddressDetailsLoadingWidget(),
+                    if (!porDocTypeLoading) ...[
+                      if (porDocTypesNotifier.haveList()) ...[
+                        _documentWidgetList(),
+                      ],
                     ],
                   ],
-                ],
+                ),
               ),
             ),
           ),
@@ -111,7 +134,8 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   Widget _documentWidgetList() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPorDocTypeListNotifierProvider);
 
     return ListView.separated(
@@ -130,7 +154,8 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   Widget _documentElement(PORDocumentElement item, int index) {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPorDocTypeListNotifierProvider);
 
     return Column(
@@ -142,15 +167,19 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
           filePath: item.filePath,
           documentCode: item.documentElement?.documentCode ?? "",
           onChange: (String path, ScanDocumentResponseBody? response) async {
-            selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
-            selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
-
+            selectedDocsListProvider.updateElementsFilePath(
+                filePath: path, index: index);
+            selectedDocsListProvider.updateElementScanResponse(
+                scanResponse: response, index: index);
             // do google ml kit if nic card selected
-            if (item.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last) {
+            if (item.documentElement?.documentCode ==
+                DocumentCodes.NIL.toString().split('.').last) {
               final ({String? firstName, String? lastName}) ocrResult =
-                  await performLandlordNICCardOCR(ref: ref, context: context, filePath: path);
+                  await performLandlordNICCardOCR(
+                      ref: ref, context: context, filePath: path);
 
-              selectedDocsListProvider.updateElementOcrFirstNameAndLastName(index: index, lastName: ocrResult.lastName);
+              selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
+                  index: index, lastName: ocrResult.lastName);
             }
 
             context.pop();
@@ -218,10 +247,12 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   Widget _dropdownWidget(PORDocumentElement item, int index) {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPorDocTypeListNotifierProvider);
 
-    final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
+    final porDocTypesNotifier =
+        ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
 
     return CustomDrowDownField(
@@ -231,9 +262,12 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        selectedDocsListProvider.updateElementsSelectedDocType(index: index, element: value as PORDocumentTypeModel);
+        selectedDocsListProvider.updateElementsSelectedDocType(
+            index: index, element: value as PORDocumentTypeModel);
       },
-      items: porDocTypesNotifier.porDocsTypesList().map((PORDocumentTypeModel value) {
+      items: porDocTypesNotifier
+          .porDocsTypesList()
+          .map((PORDocumentTypeModel value) {
         return DropdownMenuItem<PORDocumentTypeModel>(
           value: value,
           child: Text(
@@ -260,7 +294,8 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
             final marriageCertSelected = checkIfMarriageCertIsSelected();
 
             if (marriageCertSelected == false) {
-              context.showErrorSnackBar(message: Strings.uploadMarriageCertificate);
+              context.showErrorSnackBar(
+                  message: Strings.uploadMarriageCertificate);
               return;
             }
           }
@@ -284,11 +319,15 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   void _saveInsuredDocDataAndNavigate() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     selectedDocsListProvider.list().forEach((element) {
-      if ((element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last) &&
-          (element.scanResponse?.ocrResponse?.documentdata?.isLastNameAvailable == true)) {
+      if ((element.documentElement?.documentCode !=
+              DocumentCodes.NIL.toString().split('.').last) &&
+          (element.scanResponse?.ocrResponse?.documentdata
+                  ?.isLastNameAvailable ==
+              true)) {
         final selectedApplication = ref.watch(selectedApplicationProvider);
 
         element.extractedLastName = selectedApplication?.idDocSurname;
@@ -301,24 +340,28 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   bool checkIfUserIsMarried() {
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.maritalStatus == MaritalStatus.MARRIED.toString().split('.').last) {
+    if (selectedApplication?.maritalStatus ==
+        MaritalStatus.MARRIED.toString().split('.').last) {
       return true;
     }
     return false;
   }
 
   bool checkIfMarriageCertIsSelected() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    return selectedDocsListProvider
-        .list()
-        .any((element) => element.documentElement?.documentCode == DocumentCodes.MRC.toString().split('.').last);
+    return selectedDocsListProvider.list().any((element) =>
+        element.documentElement?.documentCode ==
+        DocumentCodes.MRC.toString().split('.').last);
   }
 
   bool checkIfLeaseAgreementIsSelected() {
-    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication =
+        ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+    if (selectedApplication?.addressDocumentTypes?.documentCode ==
+        DocumentCodes.LAA.toString().split('.').last) {
       return true;
     }
 
@@ -326,22 +369,26 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   }
 
   bool checkIfNICofLandlordIsSelected() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    return selectedDocsListProvider
-        .list()
-        .any((element) => element.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last);
+    return selectedDocsListProvider.list().any((element) =>
+        element.documentElement?.documentCode ==
+        DocumentCodes.NIL.toString().split('.').last);
   }
 
   bool buttonDisableCheck() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider =
+        ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     if (selectedDocsListProvider.list().isEmpty) {
       return true;
     }
 
     return selectedDocsListProvider.list().any((element) {
-      if (element.filePath == null || element.scanResponse == null || element.documentElement == null) {
+      if (element.filePath == null ||
+          element.scanResponse == null ||
+          element.documentElement == null) {
         return true;
       } else {
         return false;
