@@ -8,6 +8,7 @@ import 'package:ekyc/features/kyc_process/data/models/get_document_category/resp
 import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan_document_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/usecases/scan_document.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/upload_por_docs_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
@@ -61,8 +62,14 @@ mixin ScanDocumentMixin {
       verificationData: VerificationData(
         // firstName: "CALOWTEE",
         firstName: selectedApplication?.idDocOtherName,
+        // ref.watch(porDocUploadProcess)
+        // ? selectedApplication?.addressDocOtherName
+        // : selectedApplication?.idDocOtherName,
         // surname: "MUSSAI",
         surname: selectedApplication?.idDocSurname,
+        // ref.watch(porDocUploadProcess)
+        //     ? selectedApplication?.addressDocSurname
+        //     : selectedApplication?.idDocSurname,
         idNumber: selectedApplication?.idDocNumber,
         billDate: null,
         registrationMark: null,
@@ -89,19 +96,36 @@ mixin ScanDocumentMixin {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            if (success
-                    .body?.responseBody?.ocrResponse?.documentdata?.kycStatus ==
-                "Success") {
-              // Allow only if KYC status is success
+            if (success.body?.responseBody?.ocrResponse == null) {
+              // Allow ocr response is null
               onSuccess(success.body?.responseBody);
             } else {
-              ref.watch(loadingProvider.notifier).update((state) => false);
+              if (success.body?.responseBody?.ocrResponse?.documentdata
+                      ?.kycStatus ==
+                  "Success") {
+                // Allow only if KYC status is success
+                onSuccess(success.body?.responseBody);
+              } else {
+                if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg == "KYC validation failed. First name did not match in the document. Last name did not match in the document." ||
+                    success.body?.responseBody?.ocrResponse?.documentdata
+                            ?.kycStatusMsg ==
+                        "KYC validation failed. Last name did not match in the document." ||
+                    success.body?.responseBody?.ocrResponse?.documentdata
+                            ?.kycStatusMsg ==
+                        "KYC validation failed. First name did not match in the document.") {
+                  // Also allow if KYC status is failed due to first name and last name did not match as its Address document
+                  // and it will later on ask for POR document
+                  onSuccess(success.body?.responseBody);
+                } else {
+                  ref.watch(loadingProvider.notifier).update((state) => false);
 
-              context.showErrorSnackBar(
-                message: success.body?.responseBody?.ocrResponse?.documentdata
-                        ?.kycStatusMsg ??
-                    Strings.globalErrorGenericMessageOne,
-              );
+                  context.showErrorSnackBar(
+                    message: success.body?.responseBody?.ocrResponse
+                            ?.documentdata?.kycStatusMsg ??
+                        Strings.globalErrorGenericMessageOne,
+                  );
+                }
+              }
             }
           }
         } else {
