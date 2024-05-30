@@ -61,15 +61,17 @@ mixin ScanDocumentMixin {
       //  "252248",
       verificationData: VerificationData(
         // firstName: "CALOWTEE",
-        firstName: selectedApplication?.idDocOtherName,
-        // ref.watch(porDocUploadProcess)
-        // ? selectedApplication?.addressDocOtherName
-        // : selectedApplication?.idDocOtherName,
+        firstName: 
+        // selectedApplication?.idDocOtherName,
+        ref.watch(porDocUploadProcess)
+        ? selectedApplication?.addressDocOtherName
+        : selectedApplication?.idDocOtherName,
         // surname: "MUSSAI",
-        surname: selectedApplication?.idDocSurname,
-        // ref.watch(porDocUploadProcess)
-        //     ? selectedApplication?.addressDocSurname
-        //     : selectedApplication?.idDocSurname,
+        surname: 
+        // selectedApplication?.idDocSurname,
+        ref.watch(porDocUploadProcess)
+            ? selectedApplication?.addressDocSurname
+            : selectedApplication?.idDocSurname,
         idNumber: selectedApplication?.idDocNumber,
         billDate: null,
         registrationMark: null,

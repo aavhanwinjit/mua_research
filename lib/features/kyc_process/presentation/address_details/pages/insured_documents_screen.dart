@@ -45,6 +45,7 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
 
       ref.watch(porDocsTypesListLoading.notifier).update((state) => false);
       ref.watch(porDocUploadProcess.notifier).update((state) => true);
+      print("Updating POR document process provider");
 
       final selectedDocsListProvider =
           ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
@@ -82,27 +83,36 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
     final porDocTypesNotifier =
         ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
-    print(" provider value:");
+    print("provider value:");
     print(ref.watch(porDocUploadProcess));
 
-    return GestureDetector(
-      onTap: () {
-        KeyboardHelper.onScreenTap(context);
-      },
-      child: PopScope(
-        onPopInvoked: (didpop) {
-          if (didpop) {
-            return;
-          }
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) {
+        if (didPop) {
+          return;
+        } else {
           ref.watch(porDocUploadProcess.notifier).update((state) => false);
           print(" provider value:");
           print(ref.watch(porDocUploadProcess));
+          context.pop();
+        }
+      },
+      child: GestureDetector(
+        onTap: () {
+          KeyboardHelper.onScreenTap(context);
         },
         child: Scaffold(
           appBar: AppBarHelper.showCustomAppbar(
             context: context,
             backIcon: Icons.close,
             title: Strings.uploadInsuredDocuments,
+            onPressed: () {
+              ref.watch(porDocUploadProcess.notifier).update((state) => false);
+              print(" provider value:");
+              print(ref.watch(porDocUploadProcess));
+              context.pop();
+            },
           ),
           bottomNavigationBar:
               !porDocTypeLoading ? _bottomNavBarWidget() : null,

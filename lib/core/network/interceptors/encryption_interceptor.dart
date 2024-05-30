@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/helpers/encryption_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class EncryptionInterceptor extends Interceptor {
   @override
@@ -32,13 +37,20 @@ class EncryptionInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
     debugPrint('\n******************* RESPONSE ***********************');
     debugPrint('${response.data}');
     debugPrint('******************* ******** ***********************\n');
 
     if (response.data["s"]["statusCode"] == "ACCERR") {
-      handler.next(response);
+      // Session expired so logout
+      await LocalDataHelper.removeAuthToken();
+      await LocalDataHelper.removeSessionId();
+      final providerContainer = ProviderContainer();
+      providerContainer
+          .read(userLoggedInProvider.notifier)
+          .update((state) => false);
+      rootNavigatorKey.currentContext?.goNamed(AppRoutes.mpinLoginScreen);
     } else if (response.data["b"] != null) {
       Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
         cipherText: response.data["b"],
@@ -58,9 +70,8 @@ class EncryptionInterceptor extends Interceptor {
       decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
 
       response.data["b"] = decryptedResponse;
+      handler.next(response);
     }
-
-    handler.next(response);
   }
 
   @override
