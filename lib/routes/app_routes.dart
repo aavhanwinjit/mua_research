@@ -100,6 +100,7 @@ final GlobalKey<NavigatorState> rootNavigatorKey =
 
 final GoRouter router = GoRouter(
   // initialLocation: AppRoutes.mpinLoginScreen,
+  navigatorKey: rootNavigatorKey,
   initialLocation: AppRoutes.splashScreen,
   routes: <RouteBase>[
     GoRoute(
