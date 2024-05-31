@@ -1,4 +1,4 @@
-import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
+import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final kycTypeProvider = StateProvider<KYCType?>((ref) => null);
+final selectedKycTypeProvider = StateProvider<KycTypesModel?>((ref) => null);

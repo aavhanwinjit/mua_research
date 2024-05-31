@@ -1,9 +1,19 @@
-import 'package:ekyc/core/app_export.dart';
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class MotorDocsCard extends StatelessWidget {
+import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_element/motor_insurance_document_element.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/selected_motor_insurance_doc_type_list_notifier.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+class MotorDocsCard extends ConsumerStatefulWidget {
   const MotorDocsCard({super.key});
 
+  @override
+  ConsumerState<MotorDocsCard> createState() => _MotorDocsCardState();
+}
+
+class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,35 +42,53 @@ class MotorDocsCard extends StatelessWidget {
             ),
           ),
           SizedBox(height: 24.h),
-          _imageRow(),
+          _imageRow(ref),
           SizedBox(height: 16.h),
         ],
       ),
     );
   }
 
-  Widget _imageRow() {
+  Widget _imageRow(WidgetRef ref) {
+    // final String? motorInsuranceProofImagePath =
+    //     ref.watch(motorInsuranceProofFilePathProvider);
+
+    // final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
+    //     ref.watch(selectedMotorInsuranceDocTypeProvider);
+
+    final selectedDocsListProvider =
+        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(),
-        ],
+        children: List.generate(
+          selectedDocsListProvider.list().length,
+          (index) {
+            MotorInsuranceDocumentElement item =
+                selectedDocsListProvider.list()[index];
+            return Column(
+              children: [
+                Text(
+                  item.documentElement!.motorInsuranceDocType ?? "-",
+                  style: const TextStyle(color: textGrayColor2),
+                ),
+                const SizedBox(height: 5),
+                _imageWidget(item.motorDocImagePath),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageWidget(String? filePath) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: Image.asset(
-        ImageConstants.idImage,
+      child: Image.file(
+        File(filePath ?? ""),
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,

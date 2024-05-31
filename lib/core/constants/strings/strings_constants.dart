@@ -36,9 +36,12 @@ class Strings {
   static const String companyName = "Company Name";
   static const String cancel = "Cancel";
   static const String next = "Next";
+  static const String continueToUpload = "Continue to upload";
   static const String exit = "Exit";
+  static const String saveAndExit = "Save & Exit";
   static const String selectDocument = "Select Document";
   static const String addMoreDocuments = "Add More Documents";
+  static const String removeDocument = "Remove";
   static const String reviewAndSubmit = "Review & Submit";
   static const String retakePhoto = "Retake Photo";
   static const String upload = "Upload";
@@ -54,6 +57,26 @@ class Strings {
   static const String version = "Version";
   static const String yes = "Yes";
   static const String no = "No";
+  static const String selectMinOneFilter = "Select minimum one filter";
+  static const String completed = "Completed";
+  static const String scanDocuments = "Scan Documents";
+  static const String confirmDetails = "Confirm Details";
+  static const String documentUploadConfirmationDialogText =
+      "Do you confirm the details are correct as per the uploaded document? If No, you can edit the details before proceeding.";
+  static const String selectFrontImageFirst = "Select front image first";
+  static const String back = "Back";
+  static const String changeDocument = "Change Document";
+  static const String only2Documents = "You can add only 2 documents";
+  static const String addressDetailsConfirmationString =
+      "Are the details are of same customer?";
+  static const String insuredDocsRequiredDialogTitleString =
+      "Insured Document Required";
+  static const String insuredDocsRequiredDialogSubtitleString =
+      "The uploaded address proof doesn't match the customer details. Additional documents are needed to confirm the relationship.";
+  static const String saveAndUploadLater = "Save & Upload Later";
+  static const String uploadSignature = "Upload signature";
+  static const String errorInFullnameInDoc =
+      "Invalid characters present in name";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -63,6 +86,8 @@ class Strings {
   static const String loginPhoneLabel = "Mobile Number";
   static const String loginPhoneValidatorString =
       "Please enter 8-digit mobile number";
+  static const String enterValidPhoneNumberString =
+      "Please enter valid phone number";
   static const String loginButtonTitle = "Get Verification Code";
   static const String otpSentSuccessfully = "An OTP has been sent successfully";
 
@@ -103,7 +128,7 @@ class Strings {
 
   //Dashboard
   static const String emptyDashboardText =
-      "No data to display!\nClick the labelLarge below\nto start KYC.";
+      "No data to display!\nClick the button below\nto start KYC.";
   static const String startKyc = "Start KYC";
   static const String referenceNo = "Reference No.";
   static const String applications = "Applications";
@@ -139,8 +164,10 @@ class Strings {
   static const String editCustomerInfo = "Edit Customer Information";
   static const String editCustomerInfoSubtitle =
       "Enter the following details from the customer's insurance documentation.";
-  static const String enterFollowingDetails =
+  static const String enterFollowingDetailsCustomerInfoScreen =
       "Enter the following details from the customer's insurance documentation.";
+  static const String enterFollowingDetailsEditScreen =
+      "Enter the following details from the ";
   static const String surname = "Surname";
   static const String surnameValidationString = "Enter surname";
   static const String enterNameAsPerDoc =
@@ -151,7 +178,10 @@ class Strings {
   static const String contactNoValidationString = "Enter contact number";
   static const String nicIdNo = "NIC ID Number";
   static const String nicIdNoValidationString = "Enter valid number";
+  static const String quoteNumber = "Quote Number";
+  static const String quoteNumberValidationString = "Enter valid number";
   static const String policyNo = "Policy Number";
+  static const String policyNoOptional = "Policy Number (Optional)";
   static const String policyNoValidationString = "Enter valid number";
   static const String optional = "Optional";
   static const String passportNo = "Passport Number";
@@ -167,6 +197,9 @@ class Strings {
   static const String nonMauritian = "Non-Mauritian";
   static const String nicNumber = "NIC Number";
   static const String update = "Update";
+  static const String emailOptional = "Email ID (Optional)";
+  static const String emailValidationString = "Enter valid email id";
+  static const String addressValidationString = "Enter valid address";
 
   //Insurance Stage Screen
   static const String kycSubmission = "KYC Submission";
@@ -196,6 +229,8 @@ class Strings {
   //Camera Screen
   static const String cameraPermissionRequired =
       "Camera Permission Required to Scan the document";
+  static const String fileSizeErrorString =
+      "You can upload a photo having maximum size as 5MB";
 
   //ID Details Screen
   static const String uploadIdentityProof = "Upload Identity Proof";
@@ -204,14 +239,28 @@ class Strings {
   static const String nicCard = "National ID Card (NIC)";
   static const String passport = "Passport";
   static const String idDocumentFrontContainerLabel = "Upload front side photo";
-  static const String idDocumentFrontCameraLabel =
-      "Please scan the front side of the NIC ID or\nPassport by adjusting it inside the frame";
-  static const String idDocumentBackCameraLabel =
+  static const String editIDDetailsScreenTitle = "Edit Identity/ID details";
+
+  static const String idCardCameraScreenTitleFront = "Scan front side";
+  static const String idCardCameraScreenTitleBack = "Scan back side";
+
+  static const String idDocumentNicFrontCameraLabel =
+      "Please scan the front side of the NIC ID \nby adjusting it inside the frame";
+  static const String idDocumentNicBackCameraLabel =
       "Please scan the Back side of the NIC ID\nby adjusting it inside the box";
+
+  static const String idDocumentPassportFrontCameraLabel =
+      "Please scan the front side of the Passport\nby adjusting it inside the frame";
+  static const String idDocumentPassportBackCameraLabel =
+      "Please scan the Back side of the Passport\nby adjusting it inside the box";
+
   static const String idDocumentBackContainerLabel = "Upload back side photo";
+
+  static const String uploadBothDocuments = "Upload both documents";
 
   //Address Details Screen
   static const String uploadAddressProof = "Upload address proof";
+  static const String editAddressDetails = "Edit Address Details";
   static const String addressDetailsScreenSubtitle =
       "Please specify the type of address proof document you are uploading.";
   static const String addressDocumentContainerLabel =
@@ -219,6 +268,11 @@ class Strings {
   static const String addressDocCameraLabel =
       "Please scan the address proof document by\nadjusting it inside the frame.";
   static const String billDate = "Bill Date";
+  static const String selectDocumentType = "Select document type";
+  static const String kycFailed = "KYC Failed";
+  static const String enterAddressInfo =
+      "Make sure surname, other name & address are entered";
+  static const String addressProofDoc = "address proof document";
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";
@@ -231,9 +285,19 @@ class Strings {
   static const String insuredDocCameraLabel =
       "Please scan the document by\nadjusting it inside the frame.";
   static const String insuredDocuments = "Insured Documents";
+  static const String uploadMarriageCertificate =
+      "Uploading marriage certificate is compulsory in case of 'Married' users";
+  static const String uploadNICofLandlord =
+      "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
+  static const String surnamesForSelectedDocuments =
+      "Please add surnames for selected documents";
+  static const String enterNameAsPerInsuredDoc =
+      "Enter surname as per selected insured document";
+  static const String insuredDoc = "insured document";
 
   //Policy Documents Screen
   static const String policyDocuments = "Policy Documents";
+  static const String uploadPolicyDocuments = "Upload Policy Documents";
   static const String policyDocumentContainerLabel =
       "Take a photo or upload\nPolicy Documents";
   static const String policyDocCameraLabel =
@@ -243,6 +307,7 @@ class Strings {
       "I hereby affirm that I have thoroughly examined and verified all the documents.";
 
   //Additional Documents Screen
+  static const String uploadAdditionalDocuments = "Upload Additional Documents";
   static const String additionalDocuments = "Additional Documents";
   static const String otherKYCDocs = "Other KYC Documents";
   static const String additionalDocsScreenSubtitle =
@@ -259,6 +324,8 @@ class Strings {
       "Take a photo or upload\nmotor documents";
   static const String motorDocCameraLabel =
       "Please scan the motor document by\nadjusting it inside the frame.";
+  static const String uploadMotorInsuranceDocuments =
+      "Upload Motor Insurance Documents";
 
   //Non-Motor Documents Screen
   static const String nonMotorDocsScreenSubtitle =
@@ -284,11 +351,11 @@ class Strings {
   static const String logoutConfirmationText =
       "Are you sure you want to Logout?";
 
-  static const String kycSubmittedSuccessfully = "KYC Submitted\nSuccessfully";
-  static const String kycCompleted1 =
-      "You have completed your KYC Application Process. Your request Id is ";
+  static const String kycSubmittedSuccessfully =
+      "KYC Details Submitted\nSuccessfully";
+  static const String kycCompleted1 = "The KYC process of ";
   static const String kycCompleted2 =
-      ". We will verify and confirm your KYC details soon!";
+      " has been completed successfully with Reference number ";
   static const String kycNote1 =
       "Please note that an MUA team member will contact you within ";
   static const String kycNote2 = "one working day";

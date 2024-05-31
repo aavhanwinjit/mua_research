@@ -25,6 +25,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   final formKey = GlobalKey<FormState>();
 
   @override
+  void initState() {
+    super.initState();
+    ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
@@ -68,10 +74,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   ),
                   SizedBox(height: 24.h),
                   CustomPrimaryButton(
+                    loading: ref.watch(verifyMobileNumberLoadingProvider),
                     disable: ref.watch(phoneNumberProvider).trim().length < 8,
                     onTap: () {
                       _verifyMobileNumber();
-                      // context.pushNamed(AppRoutes.otpScreen);
                     },
                     disabledOnTap: () {
                       context.showErrorSnackBar(message: Strings.loginPhoneValidatorString);
@@ -92,21 +98,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void _verifyMobileNumber() async {
     KeyboardHelper.hideKeyboard(context);
 
+    final bool loading = ref.watch(verifyMobileNumberLoadingProvider);
+    if (loading) {
+      return;
+    }
+
     if (formKey.currentState!.validate()) {
       final String phoneNumber = ref.read(phoneNumberProvider);
 
       final body = VerifyMobileNumberRequestModel(mobileNumber: phoneNumber);
+
+      ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => true);
 
       final response = await getIt<VerifyMobileNumber>().call(body);
 
       response.fold(
         (failure) {
           debugPrint("failure: $failure");
+          ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
           context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
         },
         (VerifyMobileNumberResponseModel success) async {
-          debugPrint("success in login screen : $success");
-
           if (success.status?.isSuccess == true) {
             ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
             ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
@@ -116,9 +129,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               sessionId: success.body?.responseBody?.tokenData?.sessionId,
             );
 
+            ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
             context.showSnackBar(message: Strings.otpSentSuccessfully);
             context.pushNamed(AppRoutes.otpScreen);
           } else {
+            ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
             context.showErrorSnackBar(
               message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
             );

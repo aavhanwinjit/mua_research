@@ -1,21 +1,21 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
-import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class ApplicantCard extends StatelessWidget {
-  final AgentApplicationsModel application;
+class ApplicantCard extends ConsumerWidget {
+  final AgentApplicationModel application;
 
   const ApplicantCard({super.key, required this.application});
 
   @override
-  Widget build(BuildContext context) {
-    final String fullName = "${application.idDocFirstName ?? ""} ${application.idDocOtherName ?? ""}";
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.sp),
@@ -30,8 +30,8 @@ class ApplicantCard extends StatelessWidget {
             child: Row(
               children: [
                 CustomProfileImageWidget(
-                  userName: fullName,
-                  size: 50.w,
+                  userName: _getApplicantName().initials,
+                  size: MediaQuery.of(context).size.width > 480 ? 32.w : 50.w,
                   fontSize: 18.sp,
                   primary: false,
                 ),
@@ -41,18 +41,25 @@ class ApplicantCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        fullName,
+                        _getApplicantName().name,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: 16.sp,
+                          fontSize: MediaQuery.of(context).size.width > 480
+                              ? 13.sp
+                              : 16.sp,
                           color: black,
                         ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        DateTimeFormatter.getApplicationCardDateTime(application.crd),
+                        DateTimeFormatter.getApplicationCardDateTime(
+                            application.crd),
                         style: TextStyle(
                           color: textGrayColor2,
-                          fontSize: MediaQuery.of(context).size.width>480?10.sp: 12.sp,
+                          fontSize: MediaQuery.of(context).size.width > 480
+                              ? 10.sp
+                              : 12.sp,
                         ),
                       ),
                     ],
@@ -73,13 +80,24 @@ class ApplicantCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 StatusChip(status: application.applicationStatus),
-                _resumeWidget(context),
+                _resumeWidget(context, ref),
               ],
             ),
           ),
         ],
       ),
     );
+  }
+
+  ({String name, String initials}) _getApplicantName() {
+    if (application.idDocOtherName == null &&
+        application.idDocSurname == null) {
+      return (name: application.mobileNumber ?? "", initials: "-");
+    } else {
+      final String fullName =
+          "${application.idDocOtherName ?? ""} ${application.idDocSurname ?? ""}";
+      return (name: fullName, initials: fullName);
+    }
   }
 
   Widget _referenceNumberWidget(context) {
@@ -91,7 +109,7 @@ class ApplicantCard extends StatelessWidget {
             Strings.referenceNo,
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ? 10.sp : 12.sp,
               color: textGrayColor2,
             ),
           ),
@@ -101,7 +119,7 @@ class ApplicantCard extends StatelessWidget {
             textAlign: TextAlign.center,
             style: TextStyle(
               color: black,
-              fontSize: MediaQuery.of(context).size.width > 480 ? 9.sp : 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ? 7.sp : 12.sp,
             ),
           ),
         ],
@@ -109,9 +127,13 @@ class ApplicantCard extends StatelessWidget {
     );
   }
 
-  Widget _resumeWidget(BuildContext context) {
+  Widget _resumeWidget(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
+        ref
+            .watch(selectedApplicationProvider.notifier)
+            .update((state) => application);
+
         context.pushNamed(AppRoutes.insuranceStagesScreen);
       },
       child: Row(
@@ -121,7 +143,7 @@ class ApplicantCard extends StatelessWidget {
             style: TextStyle(
               color: primaryColor,
               fontWeight: FontWeight.w600,
-              fontSize: 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ?10.sp: 12.sp,
             ),
           ),
           const Icon(

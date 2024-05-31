@@ -18,8 +18,9 @@ String saveSignatureRequestModelToJson(SaveSignatureRequestModel data) => json.e
 class SaveSignatureRequestModel with _$SaveSignatureRequestModel {
   const factory SaveSignatureRequestModel({
     @JsonKey(name: "fileName") String? fileName,
-    @JsonKey(name: "fileString") String? fileString,
     @JsonKey(name: "allowedFileId") int? allowedFileId,
+    @JsonKey(name: "editFileName") bool? editFileName,
+    @JsonKey(name: "fileString") String? fileString,
   }) = _SaveSignatureRequestModel;
 
   factory SaveSignatureRequestModel.fromJson(Map<String, dynamic> json) => _$SaveSignatureRequestModelFromJson(json);

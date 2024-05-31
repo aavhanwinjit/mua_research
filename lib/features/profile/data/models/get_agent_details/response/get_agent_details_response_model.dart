@@ -44,7 +44,7 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
     @JsonKey(name: "agentId") int? agentId,
     @JsonKey(name: "agentName") String? agentName,
     @JsonKey(name: "address") String? address,
-    @JsonKey(name: "companyId") int? companyId,
+    @JsonKey(name: "companyIds") String? companyIds,
     @JsonKey(name: "signaturePath") String? signaturePath,
     @JsonKey(name: "mpin") String? mpin,
     @JsonKey(name: "mobileNumber") String? mobileNumber,
@@ -63,8 +63,9 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
     @JsonKey(name: "status") dynamic status,
     @JsonKey(name: "reviewByUser") dynamic reviewByUser,
     @JsonKey(name: "apiUniqueKey") dynamic apiUniqueKey,
-    @JsonKey(name: "companies") dynamic companies,
+    @JsonKey(name: "companies") List<Company>? companies,
     @JsonKey(name: "agencyName") String? agencyName,
+    @JsonKey(name: "signatureUploadDate") DateTime? signatureUploadDate,
     @JsonKey(name: "designation") dynamic designation,
     @JsonKey(name: "isDisabled") bool? isDisabled,
     @JsonKey(name: "crd") DateTime? crd,
@@ -75,4 +76,19 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
 
   factory GetAgentDetailsResponseBody.fromJson(Map<String, dynamic> json) =>
       _$GetAgentDetailsResponseBodyFromJson(json);
+}
+
+@freezed
+class Company with _$Company {
+  const factory Company({
+    @JsonKey(name: "companyId") int? companyId,
+    @JsonKey(name: "companyName") String? companyName,
+    @JsonKey(name: "isDisabled") bool? isDisabled,
+    @JsonKey(name: "crd") DateTime? crd,
+    @JsonKey(name: "crdBy") int? crdBy,
+    @JsonKey(name: "lmd") DateTime? lmd,
+    @JsonKey(name: "lmdBy") int? lmdBy,
+  }) = _Company;
+
+  factory Company.fromJson(Map<String, dynamic> json) => _$CompanyFromJson(json);
 }

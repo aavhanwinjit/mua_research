@@ -1,11 +1,12 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/signature_source_actionsheet_helper.dart';
-import 'package:ekyc/features/signature/data/models/save_file/response/save_file_response_model.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/auth_profile/presentation/providers/auth_profile_provider.dart';
 import 'package:ekyc/features/auth_profile/presentation/widgets/info_widget.dart';
 import 'package:ekyc/features/login_otp/data/models/validate_otp/response/validate_otp_response_model.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
+import 'package:ekyc/features/signature/data/models/save_file/response/save_file_response_model.dart';
 import 'package:ekyc/features/signature/presentation/mixins/signature_mixin.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_provider.dart';
 import 'package:ekyc/widgets/custom_profile_image_widget.dart';
@@ -22,6 +23,12 @@ class AuthProfileScreen extends ConsumerStatefulWidget {
 
 class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with SignatureMixin {
   @override
+  void initState() {
+    super.initState();
+    ref.read(authProfileScreenLoadingProvider.notifier).update((state) => false);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
@@ -36,16 +43,20 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with Sign
                 _profileCard(),
                 SizedBox(height: 40.h),
                 CustomPrimaryButton(
+                  loading: ref.watch(authProfileScreenLoadingProvider),
                   disable: ref.watch(signatureProvider) == null,
-                  // onTap: () {
-                  // context.go(AppRoutes.selectPINorBiometricScreen);
-                  // },
+                  disabledOnTap: () {
+                    context.showErrorSnackBar(message: Strings.uploadSignature);
+                  },
                   onTap: () async {
-                    await uploadSignature(
+                    await saveSignature(
                         context: context,
                         ref: ref,
+                        loadingProvider: authProfileScreenLoadingProvider,
                         onSuccess: (SaveFileResponseModel success) {
                           ref.read(authProfileProvider.notifier).update((state) => success);
+
+                          ref.read(authProfileScreenLoadingProvider.notifier).update((state) => false);
 
                           context.pushReplacementNamed(AppRoutes.selectPINorBiometricScreen);
                         });
@@ -130,8 +141,9 @@ class _AuthProfileScreenState extends ConsumerState<AuthProfileScreen> with Sign
           InfoWidget(
               title: Strings.agencyName, value: validateOtpResponseProvider?.body?.responseBody?.agencyName ?? "-"),
           SizedBox(height: 16.h),
-          InfoWidget(
-              title: Strings.companyName, value: validateOtpResponseProvider?.body?.responseBody?.companyName ?? "-"),
+          CompanyInfoWidget(companies: validateOtpResponseProvider?.body?.responseBody?.companies),
+          // InfoWidget(
+          //     title: Strings.companyName, value: validateOtpResponseProvider?.body?.responseBody?.companyName ?? "-"),
           SizedBox(height: 24.h),
           _signatureBox(),
           SizedBox(height: 24.h),

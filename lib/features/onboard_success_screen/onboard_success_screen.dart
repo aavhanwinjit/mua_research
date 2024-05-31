@@ -7,11 +7,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
+class OnboardSuccessScreen extends ConsumerStatefulWidget {
   const OnboardSuccessScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _OnboardSuccessScreenState();
+}
+
+class _OnboardSuccessScreenState extends ConsumerState<OnboardSuccessScreen> with AgentDetailsMixin {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(agentDetailsLoadingProvider.notifier).update((state) => false);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final agentLoginDetails = ref.watch(agentLoginDetailsProvider);
 
     return Scaffold(
@@ -53,6 +67,7 @@ class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: CustomPrimaryButton(
+              loading: ref.watch(agentDetailsLoadingProvider),
               label: "Go to Dashboard",
               disable: false,
               onTap: () async {
@@ -64,6 +79,8 @@ class OnboardSuccessScreen extends ConsumerWidget with AgentDetailsMixin {
                     ref
                         .watch(agentSignaturePathProvider.notifier)
                         .update((state) => agentDetails?.body?.responseBody?.signaturePath);
+
+                    ref.watch(agentDetailsLoadingProvider.notifier).update((state) => false);
 
                     context.go(AppRoutes.dashboardScreen);
                   },

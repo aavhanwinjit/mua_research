@@ -1,12 +1,20 @@
+import 'dart:io';
+
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class AddressDetailsCard extends StatelessWidget {
+class AddressDetailsCard extends ConsumerWidget {
   const AddressDetailsCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -19,7 +27,7 @@ class AddressDetailsCard extends StatelessWidget {
         children: [
           //info box heading
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 16.h),
+            padding: EdgeInsets.only(left: 16.w, top: 4.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -30,170 +38,113 @@ class AddressDetailsCard extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
-              ],
-            ),
-          ),
-          _infoWidget(),
-          SizedBox(height: 24.h),
-          _imageRow(),
-          SizedBox(height: 24.h),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: const Divider(
-              height: 0,
-              color: borderColor,
-            ),
-          ),
-          SizedBox(height: 24.h),
-          Padding(
-            padding: EdgeInsets.only(left: 16.w),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  Strings.insuredDocuments,
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
+                TextButton(
+                  onPressed: () => context.pushNamed(AppRoutes.editAddressDetailsScreen),
+                  child: Text(
+                    Strings.edit,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
+          _infoWidget(ref),
           SizedBox(height: 24.h),
-          _infoWidget2(),
+          _imageRow(ref),
           SizedBox(height: 24.h),
-          _imageRow2(),
         ],
       ),
     );
   }
 
-  Widget _infoWidget() {
+  Widget _infoWidget(WidgetRef ref) {
+    final String? addressOtherName = ref.watch(addressOtherNameProvider);
+    final String? addressSurname = ref.watch(addressSurnameProvider);
+    final String? addressText = ref.watch(addressTextProvider);
+
+    final ScanDocumentResponseBody? addressOCRResponse = ref.watch(addressDocOCRApiResponse);
+
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
+
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.surname,
-                  value: "Sharma",
-                ),
-                SizedBox(height: 24),
-                InfoTile(
-                  title: Strings.billDate,
-                  value: "21 Dec 2023",
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.otherName,
-                  value: "Devika",
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _infoWidget2() {
-    return Padding(
-      padding: EdgeInsets.only(left: 16.w, right: 16.w),
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.surname,
-                  value: "Sharma",
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InfoTile(
-                  title: Strings.billDate,
-                  value: "21 Dec 2023",
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _imageRow() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(),
-        ],
-      ),
-    );
-  }
-
-  Widget _imageRow2() {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
           Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _imageWidget(),
-              SizedBox(width: 16.w),
-              _imageWidget(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoTile(
+                      title: Strings.surname,
+                      value: addressSurname ?? "-",
+                    ),
+                    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) ...[
+                      const SizedBox(height: 24),
+                      InfoTile(
+                        title: Strings.billDate,
+                        value: addressOCRResponse?.ocrResponse?.documentdata?.billDate ?? "-",
+                      ),
+                    ],
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InfoTile(
+                      title: Strings.otherName,
+                      value: addressOtherName ?? "-",
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
+          const SizedBox(height: 24),
+          InfoTile(
+            title: Strings.address,
+            value: addressText ?? "-",
+          ),
         ],
       ),
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageRow(WidgetRef ref) {
+    final String? addressProofImagePath = ref.watch(addressProofFilePathProvider);
+
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            selectedAddressDocType?.addressDocType ?? "-",
+            style: const TextStyle(color: textGrayColor2),
+          ),
+          const SizedBox(height: 5),
+          _imageWidget(addressProofImagePath),
+        ],
+      ),
+    );
+  }
+
+  Widget _imageWidget(String? filePath) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
-      child: Image.asset(
-        ImageConstants.idImage,
+      child: Image.file(
+        File(filePath ?? ""),
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,

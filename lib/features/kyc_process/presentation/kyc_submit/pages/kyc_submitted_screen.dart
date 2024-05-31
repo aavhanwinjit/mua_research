@@ -1,14 +1,15 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
-import 'package:ekyc/widgets/buttons/custom_outline_icon_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class KYCSubmittedScreen extends StatelessWidget {
+class KYCSubmittedScreen extends ConsumerWidget {
   const KYCSubmittedScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Stack(
         children: [
@@ -19,12 +20,14 @@ class KYCSubmittedScreen extends StatelessWidget {
             width: double.infinity,
             child: Column(
               children: [
-                const Spacer(),
+                // const Spacer(),
+                SizedBox(height: 63.h),
                 _titleWidget(),
-                _cardWidget(),
+                SizedBox(height: 49.h),
+                _cardWidget(ref),
                 const Spacer(),
-                _noteWidget(),
-                const Spacer(),
+                // _noteWidget(),
+                // const Spacer(),
                 _buttons(context),
               ],
             ),
@@ -37,23 +40,26 @@ class KYCSubmittedScreen extends StatelessWidget {
   Widget _buttons(BuildContext context) {
     return Column(
       children: [
-        CustomOutlineIconButton(
-          label: Strings.downloadPDF,
-          iconString: ImageConstants.pdfIcon,
-          onTap: () {},
-        ),
-        SizedBox(height: 16.h),
+        // CustomOutlineIconButton(
+        //   label: Strings.downloadPDF,
+        //   iconString: ImageConstants.pdfIcon,
+        //   onTap: () {},
+        // ),
+        // SizedBox(height: 16.h),
         CustomPrimaryButton(
-          label: Strings.goToDashboard,
+          label: Strings.done,
           onTap: () {
             context.go(AppRoutes.dashboardScreen);
+            // context.pop();
           },
         ),
       ],
     );
   }
 
-  Widget _cardWidget() {
+  Widget _cardWidget(WidgetRef ref) {
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.all(20),
@@ -74,7 +80,7 @@ class KYCSubmittedScreen extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: "R1234",
+              text: "${selectedApplication?.idDocOtherName} ${selectedApplication?.idDocSurname}",
               style: TextStyle(
                 color: textGrayColor2,
                 fontSize: 14.sp,
@@ -88,6 +94,16 @@ class KYCSubmittedScreen extends StatelessWidget {
               style: TextStyle(
                 color: textGrayColor2,
                 fontSize: 14.sp,
+                fontFamily: Strings.nunitoFont,
+                height: 1.5,
+              ),
+            ),
+            TextSpan(
+              text: "${selectedApplication?.applicationRefNo}",
+              style: TextStyle(
+                color: textGrayColor2,
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold,
                 fontFamily: Strings.nunitoFont,
                 height: 1.5,
               ),

@@ -8,12 +8,16 @@ abstract class AppStorageManager {
     required Map<String, dynamic> data,
   });
 
+  Future<void> removeMap({required StorageKey key});
+
   Future<void> storeString({
     required StorageKey key,
     required String? data,
   });
 
   Future<String?>? getString({required StorageKey key});
+
+  Future<void> removeString({required StorageKey key});
 
   Future<void> clearStorage();
 }

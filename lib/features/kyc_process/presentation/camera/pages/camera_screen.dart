@@ -9,7 +9,9 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraScreen extends ConsumerStatefulWidget {
-  const CameraScreen({super.key});
+  final StateProvider<String?> provider;
+
+  const CameraScreen({required this.provider, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CameraScreenState();
@@ -23,31 +25,41 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   @override
   void initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+    });
+
     _setupCamera();
   }
 
   void _setupCamera() async {
     _cameras = await availableCameras();
 
-    controller = CameraController(_cameras[0], ResolutionPreset.max);
+    if (_cameras.isNotEmpty) {
+      controller = CameraController(_cameras[0], ResolutionPreset.max);
 
-    controller!.initialize().then((_) {
-      if (!mounted) {
-        return;
-      }
-      setState(() {});
-    }).catchError((Object e) {
-      if (e is CameraException) {
-        switch (e.code) {
-          case 'CameraAccessDenied':
-            context.showErrorSnackBar(message: Strings.cameraPermissionRequired);
-            break;
-          default:
-            // Handle other errors here.
-            break;
+      controller!.initialize().then((_) {
+        if (!mounted) {
+          return;
         }
-      }
-    });
+        setState(() {});
+      }).catchError((Object e) {
+        if (e is CameraException) {
+          switch (e.code) {
+            case 'CameraAccessDenied':
+              context.showErrorSnackBar(
+                  message: Strings.cameraPermissionRequired);
+              break;
+            default:
+              // Handle other errors here.
+              break;
+          }
+        }
+      });
+    } else {
+      pickImage();
+    }
   }
 
   @override
@@ -87,9 +99,11 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   Widget _appBar() {
+    final title = ref.watch(cameraScreenAppBarTitle);
+
     return AppBarHelper.showCustomAppbar(
       context: context,
-      title: Strings.uploadDocument,
+      title: title,
       blueBackground: true,
     );
   }
@@ -149,22 +163,26 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _navigateToReviewImageScreen() {
-    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen);
+    context.pushReplacementNamed(AppRoutes.confirmUploadOrRetakeScreen,
+        extra: widget.provider);
   }
 
   void onTakePictureButtonPressed() {
-    takePicture().then((XFile? file) {
+    takePicture().then((XFile? file) async {
       if (mounted) {
-        _navigateToReviewImageScreen();
-        // setState(() {
-        //   imageFile = file;
-        //   videoController?.dispose();
-        //   videoController = null;
-        // });
+        if (file != null) {
+          final fileSize = await file.length();
 
-        // if (file != null) {
-        //   showInSnackBar('Picture saved to ${file.path}');
-        // }
+          if (fileSize > 5000000) {
+            context.showErrorSnackBar(message: Strings.fileSizeErrorString);
+            return;
+          }
+
+          ref
+              .watch(capturedFilePathProvider.notifier)
+              .update((state) => file.path);
+          _navigateToReviewImageScreen();
+        }
       }
     });
   }
@@ -191,24 +209,33 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void pickImage() async {
-    XFile? result = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 1500,
-      maxWidth: 1500,
-    );
+    try {
+      XFile? result = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 1500,
+        maxWidth: 1500,
+      );
 
-    if (result != null) {
-      _navigateToReviewImageScreen();
-    }
+      if (result != null) {
+        final fileSize = await result.length();
 
-    // final list = await result.readAsBytes();
-    // ref.read(signatureProvider.notifier).update((state) => list);
+        if (fileSize > 5000000) {
+          context.showErrorSnackBar(message: Strings.fileSizeErrorString);
+          return;
+        }
 
-    // context.pop();
+        ref
+            .watch(capturedFilePathProvider.notifier)
+            .update((state) => result.path);
+        _navigateToReviewImageScreen();
+      }
+    } catch (e) {}
   }
 
   void onSetFlashModeButtonPressed() {
-    FlashMode mode = controller?.value.flashMode == FlashMode.off ? FlashMode.always : FlashMode.off;
+    FlashMode mode = controller?.value.flashMode == FlashMode.off
+        ? FlashMode.always
+        : FlashMode.off;
 
     setFlashMode(mode).then((_) {
       if (mounted) {
@@ -231,7 +258,8 @@ class _CameraScreenState extends ConsumerState<CameraScreen> {
   }
 
   void _showCameraException(CameraException e) {
-    debugPrint('Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
+    debugPrint(
+        'Error: ${e.code}${e.description == null ? '' : '\nError Message: ${e.description}'}');
     context.showErrorSnackBar(message: 'Error: ${e.code}\n${e.description}');
   }
 

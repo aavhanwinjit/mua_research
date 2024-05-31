@@ -6,6 +6,7 @@ import 'package:ekyc/features/dashboard/data/models/get_agent_application/respon
 import 'package:ekyc/features/dashboard/domain/usecases/get_agent_applications.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/agent_applications_notifier.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/application_filters_providers.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/dashboard_page_number_notifier.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/dashboard_providers.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
@@ -13,20 +14,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 mixin AgentApplicationsMixin {
-  Future<void> getAgentApplications({required BuildContext context, required WidgetRef ref}) async {
+  Future<void> getAgentApplications({
+    required BuildContext context,
+    required WidgetRef ref,
+  }) async {
     final agentDetailsProvider = ref.watch(agentDetailsResponseProvider);
     final GetAgentDetailsResponseBody? agentDetails = agentDetailsProvider?.body?.responseBody;
 
     final String status = getFilterStatus(ref);
 
+    final pageNumber = ref.watch(dashboardPageNumberNotifierProvider);
+    final pageNumberNotifier = ref.read(dashboardPageNumberNotifierProvider.notifier);
+
     final GetAgentApplicationsRequestModel request = GetAgentApplicationsRequestModel(
       agentId: agentDetails?.agentId,
       rowsPerPage: 10,
-      pageNo: 1,
+      applicationSearch: ref.watch(searchKeywordProvider),
+      pageNo: pageNumber,
       status: status,
     );
 
-    ref.watch(applicationListLoadingProvider.notifier).update((state) => true);
+    // if (pageNumberNotifier.isFirstPage) {
+      ref.watch(applicationListLoadingProvider.notifier).update((state) => true);
+    // }
     ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
     final response = await getIt<GetAgentApplications>().call(request);
@@ -43,9 +53,14 @@ mixin AgentApplicationsMixin {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody?.agentApplicationList != null) {
-            final agentApplicationNotifier = ref.watch(agentApplicationsNotifierProvider.notifier);
+            final agentApplicationNotifier = ref.read(agentApplicationsNotifierProvider.notifier);
 
-            agentApplicationNotifier.updateApplicationList(success.body?.responseBody?.agentApplicationList ?? []);
+            if (pageNumberNotifier.isFirstPage) {
+              agentApplicationNotifier.updateApplicationList(success.body?.responseBody?.agentApplicationList ?? []);
+            } else {
+              agentApplicationNotifier
+                  .appendDataToApplicationList(success.body?.responseBody?.agentApplicationList ?? []);
+            }
 
             ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
             ref.watch(applicationListErrorProvider.notifier).update((state) => false);
@@ -54,9 +69,9 @@ mixin AgentApplicationsMixin {
           ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
           ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
+          // context.showErrorSnackBar(
+          //   message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          // );
         }
       },
     );
@@ -84,5 +99,15 @@ mixin AgentApplicationsMixin {
     }
 
     return resultList.join(',');
+  }
+
+  void resetPageNumber(WidgetRef ref) {
+    final pageNumberProvider = ref.read(dashboardPageNumberNotifierProvider.notifier);
+    pageNumberProvider.resetPageNumber();
+  }
+
+  void incrementPageNumber(WidgetRef ref) {
+    final pageNumberProvider = ref.read(dashboardPageNumberNotifierProvider.notifier);
+    pageNumberProvider.incrementPageNumber();
   }
 }

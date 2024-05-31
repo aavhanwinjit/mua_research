@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Run 'flutter clean' to clean the Flutter project.
-flutter clean
+fvm flutter clean
 
 # Run 'flutter pub get' to get the project's dependencies.
-flutter pub get
+fvm flutter pub get
 
 # Navigate to the 'ios' directory.
 cd ios

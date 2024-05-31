@@ -1,21 +1,30 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/helpers/encryption_helper.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class EncryptionInterceptor extends Interceptor {
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
-    final deviceInfo = await getIt<DeviceInformationHelper>().generateDeviceInformation();
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
+    final deviceInfo =
+        await getIt<DeviceInformationHelper>().generateDeviceInformation();
 
     String path = options.path;
 
-    debugPrint("request: ${options.data?.toJson()}");
+    debugPrint('\n******************* PLAIN REQUEST ***********************');
+    debugPrint(jsonEncode(options.data?.toJson()));
+    debugPrint('******************* ************* ***********************\n');
 
-    options.data = EncryptionHelper.encrypt(
+    options.data = await EncryptionHelper.encrypt(
       plainData: options.data?.toJson(),
       deviceInfoModel: deviceInfo,
       serviceRequestURL: path,
@@ -28,11 +37,21 @@ class EncryptionInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    debugPrint("response.data['b']:${response.data}");
-    debugPrint("response.data['b']:${response.data["b"]}");
+  void onResponse(Response response, ResponseInterceptorHandler handler) async {
+    debugPrint('\n******************* RESPONSE ***********************');
+    debugPrint('${response.data}');
+    debugPrint('******************* ******** ***********************\n');
 
-    if (response.data["b"] != null) {
+    if (response.data["s"]["statusCode"] == "ACCERR") {
+      // Session expired so logout
+      await LocalDataHelper.removeAuthToken();
+      await LocalDataHelper.removeSessionId();
+      final providerContainer = ProviderContainer();
+      providerContainer
+          .read(userLoggedInProvider.notifier)
+          .update((state) => false);
+      rootNavigatorKey.currentContext?.goNamed(AppRoutes.mpinLoginScreen);
+    } else if (response.data["b"] != null) {
       Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
         cipherText: response.data["b"],
         deviceID: response.data["h"]["di"]["d"],
@@ -42,25 +61,17 @@ class EncryptionInterceptor extends Interceptor {
         index: int.parse(response.data["h"]["mk"]["i"]),
       );
 
-      debugPrint("decrypted Response: $decryptedResponse");
-      debugPrint("decrypted Response type: ${decryptedResponse.runtimeType}");
-      debugPrint("decrypted Response rb: ${decryptedResponse['rb']}");
+      debugPrint(
+          '\n******************* DECRYPTED RESPONSE ***********************');
+      debugPrint("$decryptedResponse");
+      debugPrint(
+          '******************* ****************** ***********************\n');
 
       decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
 
       response.data["b"] = decryptedResponse;
-
       handler.next(response);
     }
-
-    // debugPrint("response.data in interceptor: ${response.data}");
-    // debugPrint("response.data type in interceptor: ${response.data.runtimeType}");
-
-    // debugPrint("response.data['rb'] in interceptor: ${response.data['b']['rb'].runtimeType}");
-
-    // final LaunchDetailsResponse responseModel = LaunchDetailsResponse.fromJson(response.data);
-
-    // debugPrint("responseModel: $responseModel");
   }
 
   @override

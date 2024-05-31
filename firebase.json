@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"mua-kyc-app","appId":"1:320482918179:android:10cd6ea7b76129c0b4d696","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"mua-kyc-app","configurations":{"android":"1:320482918179:android:10cd6ea7b76129c0b4d696","ios":"1:320482918179:ios:33e7fc19efade821b4d696"}}}}}}

@@ -23,10 +23,12 @@ SaveSignatureRequestModel _$SaveSignatureRequestModelFromJson(
 mixin _$SaveSignatureRequestModel {
   @JsonKey(name: "fileName")
   String? get fileName => throw _privateConstructorUsedError;
-  @JsonKey(name: "fileString")
-  String? get fileString => throw _privateConstructorUsedError;
   @JsonKey(name: "allowedFileId")
   int? get allowedFileId => throw _privateConstructorUsedError;
+  @JsonKey(name: "editFileName")
+  bool? get editFileName => throw _privateConstructorUsedError;
+  @JsonKey(name: "fileString")
+  String? get fileString => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,8 +44,9 @@ abstract class $SaveSignatureRequestModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "fileName") String? fileName,
-      @JsonKey(name: "fileString") String? fileString,
-      @JsonKey(name: "allowedFileId") int? allowedFileId});
+      @JsonKey(name: "allowedFileId") int? allowedFileId,
+      @JsonKey(name: "editFileName") bool? editFileName,
+      @JsonKey(name: "fileString") String? fileString});
 }
 
 /// @nodoc
@@ -61,22 +64,27 @@ class _$SaveSignatureRequestModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? fileName = freezed,
-    Object? fileString = freezed,
     Object? allowedFileId = freezed,
+    Object? editFileName = freezed,
+    Object? fileString = freezed,
   }) {
     return _then(_value.copyWith(
       fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String?,
-      fileString: freezed == fileString
-          ? _value.fileString
-          : fileString // ignore: cast_nullable_to_non_nullable
-              as String?,
       allowedFileId: freezed == allowedFileId
           ? _value.allowedFileId
           : allowedFileId // ignore: cast_nullable_to_non_nullable
               as int?,
+      editFileName: freezed == editFileName
+          ? _value.editFileName
+          : editFileName // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      fileString: freezed == fileString
+          ? _value.fileString
+          : fileString // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -92,8 +100,9 @@ abstract class _$$SaveSignatureRequestModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "fileName") String? fileName,
-      @JsonKey(name: "fileString") String? fileString,
-      @JsonKey(name: "allowedFileId") int? allowedFileId});
+      @JsonKey(name: "allowedFileId") int? allowedFileId,
+      @JsonKey(name: "editFileName") bool? editFileName,
+      @JsonKey(name: "fileString") String? fileString});
 }
 
 /// @nodoc
@@ -110,22 +119,27 @@ class __$$SaveSignatureRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fileName = freezed,
-    Object? fileString = freezed,
     Object? allowedFileId = freezed,
+    Object? editFileName = freezed,
+    Object? fileString = freezed,
   }) {
     return _then(_$SaveSignatureRequestModelImpl(
       fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String?,
-      fileString: freezed == fileString
-          ? _value.fileString
-          : fileString // ignore: cast_nullable_to_non_nullable
-              as String?,
       allowedFileId: freezed == allowedFileId
           ? _value.allowedFileId
           : allowedFileId // ignore: cast_nullable_to_non_nullable
               as int?,
+      editFileName: freezed == editFileName
+          ? _value.editFileName
+          : editFileName // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      fileString: freezed == fileString
+          ? _value.fileString
+          : fileString // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -135,8 +149,9 @@ class __$$SaveSignatureRequestModelImplCopyWithImpl<$Res>
 class _$SaveSignatureRequestModelImpl implements _SaveSignatureRequestModel {
   const _$SaveSignatureRequestModelImpl(
       {@JsonKey(name: "fileName") this.fileName,
-      @JsonKey(name: "fileString") this.fileString,
-      @JsonKey(name: "allowedFileId") this.allowedFileId});
+      @JsonKey(name: "allowedFileId") this.allowedFileId,
+      @JsonKey(name: "editFileName") this.editFileName,
+      @JsonKey(name: "fileString") this.fileString});
 
   factory _$SaveSignatureRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$SaveSignatureRequestModelImplFromJson(json);
@@ -145,15 +160,18 @@ class _$SaveSignatureRequestModelImpl implements _SaveSignatureRequestModel {
   @JsonKey(name: "fileName")
   final String? fileName;
   @override
-  @JsonKey(name: "fileString")
-  final String? fileString;
-  @override
   @JsonKey(name: "allowedFileId")
   final int? allowedFileId;
+  @override
+  @JsonKey(name: "editFileName")
+  final bool? editFileName;
+  @override
+  @JsonKey(name: "fileString")
+  final String? fileString;
 
   @override
   String toString() {
-    return 'SaveSignatureRequestModel(fileName: $fileName, fileString: $fileString, allowedFileId: $allowedFileId)';
+    return 'SaveSignatureRequestModel(fileName: $fileName, allowedFileId: $allowedFileId, editFileName: $editFileName, fileString: $fileString)';
   }
 
   @override
@@ -163,16 +181,18 @@ class _$SaveSignatureRequestModelImpl implements _SaveSignatureRequestModel {
             other is _$SaveSignatureRequestModelImpl &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
-            (identical(other.fileString, fileString) ||
-                other.fileString == fileString) &&
             (identical(other.allowedFileId, allowedFileId) ||
-                other.allowedFileId == allowedFileId));
+                other.allowedFileId == allowedFileId) &&
+            (identical(other.editFileName, editFileName) ||
+                other.editFileName == editFileName) &&
+            (identical(other.fileString, fileString) ||
+                other.fileString == fileString));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, fileName, fileString, allowedFileId);
+  int get hashCode => Object.hash(
+      runtimeType, fileName, allowedFileId, editFileName, fileString);
 
   @JsonKey(ignore: true)
   @override
@@ -192,8 +212,9 @@ class _$SaveSignatureRequestModelImpl implements _SaveSignatureRequestModel {
 abstract class _SaveSignatureRequestModel implements SaveSignatureRequestModel {
   const factory _SaveSignatureRequestModel(
           {@JsonKey(name: "fileName") final String? fileName,
-          @JsonKey(name: "fileString") final String? fileString,
-          @JsonKey(name: "allowedFileId") final int? allowedFileId}) =
+          @JsonKey(name: "allowedFileId") final int? allowedFileId,
+          @JsonKey(name: "editFileName") final bool? editFileName,
+          @JsonKey(name: "fileString") final String? fileString}) =
       _$SaveSignatureRequestModelImpl;
 
   factory _SaveSignatureRequestModel.fromJson(Map<String, dynamic> json) =
@@ -203,11 +224,14 @@ abstract class _SaveSignatureRequestModel implements SaveSignatureRequestModel {
   @JsonKey(name: "fileName")
   String? get fileName;
   @override
-  @JsonKey(name: "fileString")
-  String? get fileString;
-  @override
   @JsonKey(name: "allowedFileId")
   int? get allowedFileId;
+  @override
+  @JsonKey(name: "editFileName")
+  bool? get editFileName;
+  @override
+  @JsonKey(name: "fileString")
+  String? get fileString;
   @override
   @JsonKey(ignore: true)
   _$$SaveSignatureRequestModelImplCopyWith<_$SaveSignatureRequestModelImpl>

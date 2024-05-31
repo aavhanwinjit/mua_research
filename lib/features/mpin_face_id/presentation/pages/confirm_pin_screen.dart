@@ -26,9 +26,14 @@ class ConfirmPINScreen extends ConsumerStatefulWidget {
   ConsumerState<ConfirmPINScreen> createState() => _ConfirmPINScreenState();
 }
 
-class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
-    with BiometricAuthMixin, RegistrationMixin {
+class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with BiometricAuthMixin, RegistrationMixin {
   bool successVal = false;
+
+  @override
+  void initState() {
+    super.initState();
+    ref.read(mpinLoadingProvider.notifier).update((state) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +72,10 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
             ),
             const Spacer(),
             MaskedPinTextfield(provider: confirmPINProvider),
+            if (ref.watch(mpinLoadingProvider)) ...[
+              const Spacer(),
+              _loader(),
+            ],
             const Spacer(),
             successVal
                 ? Container(
@@ -114,43 +123,66 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
     );
   }
 
-  Future<void> _biometricAuthentication() async {
-    await setFingerPrint(
-      context: context,
-      ref: ref,
-      onSuccess: () {
-        successVal = true;
-        setState(() {});
-      },
-      successNavigation: () async {
-        ref.watch(isFPLoginProvider.notifier).update((state) => true);
-
-        context.pushNamed(AppRoutes.onboardSuccessScreen);
-      },
+  Widget _loader() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 20,
+          width: 20,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            backgroundColor: white,
+          ),
+        ),
+      ],
     );
+  }
 
-    // await authenticateWithBiometric(
-    //   onAuthenticated: () async {
-    //     await setFingerPrint(
-    //       context: context,
-    //       ref: ref,
-    //       onSuccess: () {
-    //         successVal = true;
-    //         setState(() {});
-    //       },
-    //       successNavigation: () {
-    //         context.pushNamed(AppRoutes.onboardSuccessScreen);
-    //       },
-    //     );
+  Future<void> _biometricAuthentication() async {
+    // await setFingerPrint(
+    //   context: context,
+    //   ref: ref,
+    //   onSuccess: () {
+    //     successVal = true;
+    //     setState(() {});
     //   },
-    //   onAuthenticationFailure: (String error) {
+    //   successNavigation: () async {
+    //     ref.watch(isFPLoginProvider.notifier).update((state) => true);
+
     //     context.pushNamed(AppRoutes.onboardSuccessScreen);
-    //     context.showErrorSnackBar(message: error);
     //   },
     // );
+
+    await authenticateWithBiometric(
+      onAuthenticated: () async {
+        await setFingerPrint(
+          context: context,
+          ref: ref,
+          onSuccess: () {
+            successVal = true;
+            setState(() {});
+          },
+          successNavigation: () async {
+            ref.watch(isFPLoginProvider.notifier).update((state) => true);
+
+            ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
+            context.pushNamed(AppRoutes.onboardSuccessScreen);
+          },
+        );
+      },
+      onAuthenticationFailure: (String error) {
+        context.pushNamed(AppRoutes.onboardSuccessScreen);
+        context.showErrorSnackBar(message: error);
+      },
+    );
   }
 
   void _verifyMPIN() async {
+    final loading = ref.watch(mpinLoadingProvider);
+    if (loading) return;
+
     VerifyMPINRequestModel request = VerifyMPINRequestModel(
       isExistingCustomer: true,
       oldMPIN: ref.read(oldPINProvider),
@@ -158,42 +190,43 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen>
       confirmNewMPIN: ref.read(confirmPINProvider),
     );
 
+    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+
     final response = await getIt<VerifyMPIN>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (VerifyMPINResponseModel success) async {
         debugPrint("success in confirm pin screen : $success");
         if (success.status?.isSuccess == true) {
-          ref
-              .read(verifyMPINResponseProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(verifyMPINResponseProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
           //   sessionId: success.body?.responseBody?.tokenData?.sessionId,
           // );
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
           context.pushNamed(AppRoutes.otpScreen);
         } else {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> _setData(
-      {required String? authToken, required String? sessionId}) async {
+  Future<void> _setData({required String? authToken, required String? sessionId}) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
 

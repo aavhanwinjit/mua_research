@@ -1,12 +1,23 @@
+import 'dart:io';
+
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_identity_document_types/response/get_identity_document_types_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class NICDetailsCard extends StatelessWidget {
+class NICDetailsCard extends ConsumerWidget {
   const NICDetailsCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final IdentityDocumentTypeModel? selectedIdDocType =
+        ref.watch(selectedIdDocTypeProvider);
+
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
@@ -19,44 +30,53 @@ class NICDetailsCard extends StatelessWidget {
         children: [
           //info box heading
           Padding(
-            padding: EdgeInsets.only(left: 16.w, top: 16.h),
+            padding: EdgeInsets.only(left: 16.w, top: 4.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  Strings.nicCard,
+                  // Strings.nicCard,
+                  selectedIdDocType?.identityDocType ?? "-",
                   style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
-                // TextButton(
-                //   onPressed: () => context.pushNamed(AppRoutes.editIDScreen),
-                //   child: Text(
-                //     Strings.edit,
-                //     style: TextStyle(
-                //       fontSize: 14.sp,
-                //     ),
-                //   ),
-                // ),
+                TextButton(
+                  onPressed: () =>
+                      context.pushNamed(AppRoutes.editDetailsScreen),
+                  child: Text(
+                    Strings.edit,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           //information
-          _infoWidget(),
+          _infoWidget(ref),
           SizedBox(height: 24.h),
           //NIC image
-          _imageRow(),
+          _imageRow(ref),
           SizedBox(height: 16.h),
         ],
       ),
     );
   }
 
-  Widget _infoWidget() {
+  Widget _infoWidget(WidgetRef ref) {
+    String? firstName = ref.watch(extractedFirstNameProvider);
+    String? surName = ref.watch(extractedSurNameProvider);
+    String? idNumber = ref.watch(extractedNICIDNumberProvider);
+
+    AgentApplicationModel? selectedApplication =
+        ref.watch(selectedApplicationProvider);
+
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
-      child: const Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
@@ -65,12 +85,15 @@ class NICDetailsCard extends StatelessWidget {
               children: [
                 InfoTile(
                   title: Strings.surname,
-                  value: "Sharma",
+                  value: surName ?? "NA",
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 InfoTile(
-                  title: Strings.nicNumber,
-                  value: "S0808739500254",
+                  title: (selectedApplication?.nationality ==
+                          NationalityType.Mauritian.toString().split('.').last)
+                      ? Strings.nicNumber
+                      : Strings.passportNo,
+                  value: idNumber ?? "NA",
                 ),
               ],
             ),
@@ -81,7 +104,7 @@ class NICDetailsCard extends StatelessWidget {
               children: [
                 InfoTile(
                   title: Strings.otherName,
-                  value: "Devika",
+                  value: firstName ?? "NA",
                 ),
               ],
             ),
@@ -91,23 +114,36 @@ class NICDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _imageRow() {
+  Widget _imageRow(WidgetRef ref) {
+    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    final IdentityDocumentTypeModel? selectedIdDocType =
+        ref.watch(selectedIdDocTypeProvider);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            Strings.nicCard,
-            style: TextStyle(color: textGrayColor2),
+          Text(
+            selectedIdDocType?.identityDocType ?? "-",
+            style: const TextStyle(color: textGrayColor2),
           ),
           const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _imageWidget(),
+              _imageWidget(idCardFrontSide),
               SizedBox(width: 16.w),
-              _imageWidget(),
+              (selectedApplication?.nationality ==
+                      NationalityType.Mauritian.toString().split('.').last)
+                  ? _imageWidget(idCardBackSide)
+                  : Container(
+                      height: 100.h,
+                      width: 100.w,
+                    ),
             ],
           ),
         ],
@@ -115,12 +151,12 @@ class NICDetailsCard extends StatelessWidget {
     );
   }
 
-  Widget _imageWidget() {
+  Widget _imageWidget(String? filePath) {
     return Expanded(
       child: ClipRRect(
         borderRadius: BorderRadius.circular(12),
-        child: Image.asset(
-          ImageConstants.idImage,
+        child: Image.file(
+          File(filePath ?? ""),
           height: 100.h,
           fit: BoxFit.cover,
         ),
