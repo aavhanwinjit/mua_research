@@ -226,6 +226,30 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
             documentData?.billDate != null &&
             documentData!.billDate!.isNotEmpty &&
             documentData.isFirstNameAvailable == false &&
+            documentData.isLastNameAvailable == true &&
+            documentData.kycStatusMsg!.contains("First name did not match in the document")) {
+          //allow to navigate but tell agent that the name is not matched
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName(response);
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+          ref.watch(ocrNameMatched.notifier).update((state) => false);
+          context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+        } else if (documentData?.kycStatus == "Failed" &&
+            documentData?.billDate != null &&
+            documentData!.billDate!.isNotEmpty &&
+            documentData.isFirstNameAvailable == true &&
+            documentData.isLastNameAvailable == false &&
+            documentData.kycStatusMsg!.contains("KYC validation failed")) {
+          //allow to navigate but tell agent that the name is not matched
+          ref.watch(addressDocOCRApiResponse.notifier).update((state) => response);
+          _setCustomerName(response);
+          ref.watch(addressDocOCRLoadingProvider.notifier).update((state) => false);
+          ref.watch(ocrNameMatched.notifier).update((state) => false);
+          context.pushNamed(AppRoutes.addressReviewSubmitScreen);
+        } else if (documentData?.kycStatus == "Failed" &&
+            documentData?.billDate != null &&
+            documentData!.billDate!.isNotEmpty &&
+            documentData.isFirstNameAvailable == false &&
             documentData.isLastNameAvailable == false &&
             documentData.kycStatusMsg ==
                 "KYC validation failed. First name did not match in the document. Last name did not match in the document.") {

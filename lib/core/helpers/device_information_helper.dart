@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:ekyc/core/helpers/package_info_helper.dart';
 import 'package:ekyc/models/device_info/device_info_model.dart';
 import 'package:injectable/injectable.dart';
 import 'package:platform_device_id/platform_device_id.dart';
@@ -31,12 +32,15 @@ class DeviceInformationHelper {
 
     final String? deviceId = await PlatformDeviceId.getDeviceId;
 
+    String version = await PackageInfoHelper.getVersion();
+
     final DeviceInfoModel deviceInfoRequest = DeviceInfoModel(
       platform: platform,
       osVersion: osVersion,
       model: model,
       deviceId: deviceId ?? "",
-      appVersion: "1.0.0",
+      appVersion: version,
+      // appVersion: "1.0.0",
       ipAddress: ipAddress,
     );
 
