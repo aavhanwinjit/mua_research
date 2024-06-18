@@ -13,10 +13,8 @@ import 'package:go_router/go_router.dart';
 
 class EncryptionInterceptor extends Interceptor {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    final deviceInfo =
-        await getIt<DeviceInformationHelper>().generateDeviceInformation();
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    final deviceInfo = await getIt<DeviceInformationHelper>().generateDeviceInformation();
 
     String path = options.path;
 
@@ -47,9 +45,7 @@ class EncryptionInterceptor extends Interceptor {
       await LocalDataHelper.removeAuthToken();
       await LocalDataHelper.removeSessionId();
       final providerContainer = ProviderContainer();
-      providerContainer
-          .read(userLoggedInProvider.notifier)
-          .update((state) => false);
+      providerContainer.read(userLoggedInProvider.notifier).update((state) => false);
       rootNavigatorKey.currentContext?.goNamed(AppRoutes.mpinLoginScreen);
     } else if (response.data["b"] != null) {
       Map<String, dynamic> decryptedResponse = EncryptionHelper.decrypt(
@@ -61,13 +57,18 @@ class EncryptionInterceptor extends Interceptor {
         index: int.parse(response.data["h"]["mk"]["i"]),
       );
 
-      debugPrint(
-          '\n******************* DECRYPTED RESPONSE ***********************');
+      debugPrint('\n******************* DECRYPTED RESPONSE ***********************');
       debugPrint("$decryptedResponse");
-      debugPrint(
-          '******************* ****************** ***********************\n');
+      debugPrint('******************* ****************** ***********************\n');
 
-      decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
+      debugPrint("${decryptedResponse['rb']}");
+      debugPrint("${decryptedResponse['rb'].runtimeType}");
+
+      if (decryptedResponse['rb'] is String && decryptedResponse['rb'].length == 0) {
+        decryptedResponse['rb'] = null;
+      } else {
+        decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);
+      }
 
       response.data["b"] = decryptedResponse;
       handler.next(response);
