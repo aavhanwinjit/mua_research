@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/data/models/get_kyc_types/response/get_kyc_types_response_model.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/kyc_types_notifier.dart';
@@ -17,6 +18,7 @@ import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_r
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,12 +27,12 @@ mixin SaveIDDetailsMixin {
     required BuildContext context,
     required WidgetRef ref,
     required VoidCallback onSuccess,
+    required VoidCallback onError,
   }) async {
     final bool loading = ref.watch(saveIdentityDetailsLoading);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
     final KycTypesModel selectedKycType = kycTypeNotifier
@@ -39,11 +41,9 @@ mixin SaveIDDetailsMixin {
         .toList()
         .first;
 
-    final DocumentCategoryModel? selectedDocumentCategory =
-        ref.watch(selectedDocumentCategoryProvider);
+    final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
 
-    final IdentityDocumentTypeModel? selectedIdDocType =
-        ref.watch(selectedIdDocTypeProvider);
+    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
 
     final String? firstname = ref.watch(extractedFirstNameProvider);
     final String? surname = ref.watch(extractedSurNameProvider);
@@ -102,31 +102,32 @@ mixin SaveIDDetailsMixin {
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
+
         ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
         // ref.watch(customerInfoErrorProvider.notifier).update((state) => true);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SaveIdentityDetailsResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            ref
-                .watch(selectedApplicationProvider.notifier)
-                .update((state) => success.body?.responseBody);
+            ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
 
             onSuccess.call();
           }
         } else {
-          ref
-              .watch(saveIdentityDetailsLoading.notifier)
-              .update((state) => false);
+          ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
           // ref.watch(customerInfoErrorProvider.notifier).update((state) => false);
 
+          if (success.status?.statusCode == ApiErrorCodes.notFount &&
+              success.status!.message!.contains("Customer not found")) {
+            // show dialog
+            onError.call();
+          }
+
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
