@@ -41,7 +41,7 @@ class ErrorDialog extends ConsumerWidget {
                 label: "Back",
                 disable: false,
                 onTap: () {
-                  context.pushReplacementNamed(AppRoutes.dashboardScreen);
+                  context.go(AppRoutes.dashboardScreen);
                 },
               ),
             )
