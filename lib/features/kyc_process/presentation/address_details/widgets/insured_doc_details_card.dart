@@ -80,7 +80,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                     if (selectedApplication?.addressDocBillDate != null) ...[
                       const SizedBox(height: 24),
                       InfoTile(
-                        title: Strings.issueDate,
+                        title: Strings.billDate,
                         value: selectedApplication?.addressDocBillDate!.format() ?? "-",
                       ),
                     ],
@@ -206,7 +206,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
-            title: Strings.billDate,
+            title: Strings.issueDate,
             value: item.scanResponse?.ocrResponse?.documentdata?.billDate ?? "-",
           ),
         ],
