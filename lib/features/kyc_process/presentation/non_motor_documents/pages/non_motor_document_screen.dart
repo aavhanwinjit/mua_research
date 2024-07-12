@@ -4,7 +4,6 @@ import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_non_motor_insurance_document_types/response/get_non_motor_insurance_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/non_motor_insurance_document_element/non_motor_insurance_document_element.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
@@ -15,9 +14,9 @@ import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provi
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/selected_non_motor_insurance_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_insurance_loading_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
+import 'package:ekyc/features/kyc_process/presentation/widgets/dropdown_widget_non_motor.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
-import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -146,7 +145,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _dropdownWidget(item, index),
+        DropdownWidgetNonMotor(item: item, index: index),
         SizedBox(height: 24.h),
         DocumentUploadContainer2(
           filePath: item.nonMotorDocImagePath,
@@ -197,38 +196,38 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
     );
   }
 
-  Widget _dropdownWidget(NonMotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
-    ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
+  // Widget _dropdownWidget(NonMotorInsuranceDocumentElement item, int index) {
+  //   final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+  //   ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
 
-    final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
-    ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
+  //   final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
+  //   ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
 
-    return CustomDrowDownField(
-      value: item.documentElement,
-      labelText: Strings.selectDocument,
-      validator: (value) {
-        return value == null ? Strings.selectDocument : null;
-      },
-      onChanged: (value) {
-        selectedDocsListProvider.updateElementsSelectedDocType(
-            index: index, element: value as NonMotorInsuranceDocumentTypeModel);
-      },
-      items: nonMotorInsuranceDocTypesNotifier
-          .nonMotorInsuranceDocsTypesList()
-          .map((NonMotorInsuranceDocumentTypeModel value) {
-        return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
-          value: value,
-          child: Text(
-            value.nonMotorInsuranceDocType ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
+  //   return CustomDrowDownField(
+  //     value: item.documentElement,
+  //     labelText: Strings.selectDocument,
+  //     validator: (value) {
+  //       return value == null ? Strings.selectDocument : null;
+  //     },
+  //     onChanged: (value) {
+  //       selectedDocsListProvider.updateElementsSelectedDocType(
+  //           index: index, element: value as NonMotorInsuranceDocumentTypeModel);
+  //     },
+  //     items: nonMotorInsuranceDocTypesNotifier
+  //         .nonMotorInsuranceDocsTypesList()
+  //         .map((NonMotorInsuranceDocumentTypeModel value) {
+  //       return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
+  //         value: value,
+  //         child: Text(
+  //           value.nonMotorInsuranceDocType ?? "-",
+  //           style: TextStyle(
+  //             fontSize: 14.sp,
+  //           ),
+  //         ),
+  //       );
+  //     }).toList(),
+  //   );
+  // }
 
   Widget _bottomNavBarWidget() {
     return Padding(

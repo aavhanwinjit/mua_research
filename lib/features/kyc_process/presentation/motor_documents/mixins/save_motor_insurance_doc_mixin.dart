@@ -20,14 +20,11 @@ mixin SaveMotorInsuranceDocMixin {
     final bool loading = ref.watch(saveMotorInsuranceProofFileLoading);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
 
-    SaveMotorInsuranceDocumentsRequestModel request =
-        SaveMotorInsuranceDocumentsRequestModel(
+    SaveMotorInsuranceDocumentsRequestModel request = SaveMotorInsuranceDocumentsRequestModel(
       agentApplicationId: selectedApplication?.agentApplicationId,
       isMotorDocVerificationCompleted: true,
       motorDocumentDetailsModel: selectedDocsListProvider
@@ -36,46 +33,36 @@ mixin SaveMotorInsuranceDocMixin {
             (e) => MotorDocDetail(
               uploadDocumentId: e.documentElement?.mDocumentTypeId,
               motorDocumentTypeId: e.documentElement?.mDocumentTypeId,
-              motorDocImagePath: e.motorDocImagePath,
+              motorDocImagePath: e.scanResponse?.fileName ?? "",
             ),
           )
           .toList(),
     );
 
-    ref
-        .watch(saveMotorInsuranceProofFileLoading.notifier)
-        .update((state) => true);
+    ref.watch(saveMotorInsuranceProofFileLoading.notifier).update((state) => true);
 
     final response = await getIt<SaveMotorInsuranceDocuments>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        ref
-            .watch(saveMotorInsuranceProofFileLoading.notifier)
-            .update((state) => false);
+        ref.watch(saveMotorInsuranceProofFileLoading.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SaveMotorInsuranceDocumentsResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            ref
-                .watch(selectedApplicationProvider.notifier)
-                .update((state) => success.body?.responseBody);
+            ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
 
             onSuccess.call();
           }
         } else {
-          ref
-              .watch(saveMotorInsuranceProofFileLoading.notifier)
-              .update((state) => false);
+          ref.watch(saveMotorInsuranceProofFileLoading.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

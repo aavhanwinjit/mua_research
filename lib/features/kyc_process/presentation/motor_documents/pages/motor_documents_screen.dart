@@ -4,7 +4,6 @@ import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
-import 'package:ekyc/features/kyc_process/data/models/get_motor_insurance_document_types/response/get_motor_insurance_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_element/motor_insurance_document_element.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/common_mixins/scan_document_mixin.dart';
@@ -14,11 +13,11 @@ import 'package:ekyc/features/kyc_process/presentation/motor_documents/mixins/ge
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_doc_types_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/selected_motor_insurance_doc_type_list_notifier.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/widgets/dropdown_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/widgets/motor_insurance_loading_widget.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
-import 'package:ekyc/widgets/custom_drop_down_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -148,7 +147,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _dropdownWidget(item, index),
+        DropdownWidget(item: item, index: index),
         SizedBox(height: 24.h),
         DocumentUploadContainer2(
           filePath: item.motorDocImagePath,
@@ -199,36 +198,47 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
     );
   }
 
-  Widget _dropdownWidget(MotorInsuranceDocumentElement item, int index) {
-    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
-    ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
+  // Widget _dropdownWidget(MotorInsuranceDocumentElement item, int index) {
+  //   final selectedDocsListProvider = ref.read(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+  //   ref.read(selectedMotorInsuranceDocTypeListNotifierProvider);
 
-    final motorInsuranceDocTypesNotifier = ref.watch(motorInsuranceDocsTypesNotifierProvider.notifier);
-    ref.watch(motorInsuranceDocsTypesNotifierProvider);
+  //   final motorInsuranceDocTypesNotifier = ref.read(motorInsuranceDocsTypesNotifierProvider.notifier);
+  //   ref.read(motorInsuranceDocsTypesNotifierProvider);
 
-    return CustomDrowDownField(
-      value: item.documentElement,
-      labelText: Strings.selectDocument,
-      validator: (value) {
-        return value == null ? Strings.selectDocument : null;
-      },
-      onChanged: (value) {
-        selectedDocsListProvider.updateElementsSelectedDocType(
-            index: index, element: value as MotorInsuranceDocumentTypeModel);
-      },
-      items: motorInsuranceDocTypesNotifier.motorInsuranceDocsTypesList().map((MotorInsuranceDocumentTypeModel value) {
-        return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
-          value: value,
-          child: Text(
-            value.motorInsuranceDocType ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-            ),
-          ),
-        );
-      }).toList(),
-    );
-  }
+  //   List<MotorInsuranceDocumentTypeModel> list =
+  //       List.from(motorInsuranceDocTypesNotifier.motorInsuranceDocsTypesList());
+
+  //   // if (selectedDocsListProvider.haveList()) {
+  //   //   selectedDocsListProvider.list().forEach(
+  //   //     (element) {
+  //   //       list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
+  //   //     },
+  //   //   );
+  //   // }
+
+  //   // return CustomDrowDownField(
+  //   //   value: item.documentElement,
+  //   //   labelText: Strings.selectDocument,
+  //   //   validator: (value) {
+  //   //     return value == null ? Strings.selectDocument : null;
+  //   //   },
+  //   //   onChanged: (value) {
+  //   //     selectedDocsListProvider.updateElementsSelectedDocType(
+  //   //         index: index, element: value as MotorInsuranceDocumentTypeModel);
+  //   //   },
+  //   //   items: list.map((MotorInsuranceDocumentTypeModel value) {
+  //   //     return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
+  //   //       value: value,
+  //   //       child: Text(
+  //   //         value.motorInsuranceDocType ?? "-",
+  //   //         style: TextStyle(
+  //   //           fontSize: 14.sp,
+  //   //         ),
+  //   //       ),
+  //   //     );
+  //   //   }).toList(),
+  //   // );
+  // }
 
   Widget _bottomNavBarWidget() {
     return Padding(

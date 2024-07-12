@@ -239,6 +239,7 @@ class Strings {
   static const String addressDocCameraLabel =
       "Please scan the address proof document by\nadjusting it inside the frame.";
   static const String billDate = "Bill Date";
+  static const String issueDate = "Issue Date";
   static const String selectDocumentType = "Select document type";
   static const String kycFailed = "KYC Failed";
   static const String enterAddressInfo = "Make sure surname, other name & address are entered";

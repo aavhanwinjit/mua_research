@@ -20,14 +20,11 @@ mixin SaveNonMotorInsuranceDocMixin {
     final bool loading = ref.watch(saveNonMotorInsuranceProofFileLoading);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final selectedDocsListProvider = ref
-        .watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
 
-    SaveNonMotorInsuranceDocumentsRequestModel request =
-        SaveNonMotorInsuranceDocumentsRequestModel(
+    SaveNonMotorInsuranceDocumentsRequestModel request = SaveNonMotorInsuranceDocumentsRequestModel(
       agentApplicationId: selectedApplication?.agentApplicationId,
       isNonMotorDocVerificationCompleted: true,
       nonMotorDocumentDetailsModel: selectedDocsListProvider
@@ -36,47 +33,36 @@ mixin SaveNonMotorInsuranceDocMixin {
             (e) => NonMotorDocDetail(
               uploadDocumentId: e.documentElement?.mDocumentTypeId,
               nonMotorDocumentTypeId: e.documentElement?.mDocumentTypeId,
-              nonMotorDocImagePath: e.nonMotorDocImagePath,
+              nonMotorDocImagePath: e.scanResponse?.fileName ?? "",
             ),
           )
           .toList(),
     );
 
-    ref
-        .watch(saveNonMotorInsuranceProofFileLoading.notifier)
-        .update((state) => true);
+    ref.watch(saveNonMotorInsuranceProofFileLoading.notifier).update((state) => true);
 
-    final response =
-        await getIt<SaveNonMotorInsuranceDocuments>().call(request);
+    final response = await getIt<SaveNonMotorInsuranceDocuments>().call(request);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        ref
-            .watch(saveNonMotorInsuranceProofFileLoading.notifier)
-            .update((state) => false);
+        ref.watch(saveNonMotorInsuranceProofFileLoading.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (SaveNonMotorInsuranceDocumentsResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            ref
-                .watch(selectedApplicationProvider.notifier)
-                .update((state) => success.body?.responseBody);
+            ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
 
             onSuccess.call();
           }
         } else {
-          ref
-              .watch(saveNonMotorInsuranceProofFileLoading.notifier)
-              .update((state) => false);
+          ref.watch(saveNonMotorInsuranceProofFileLoading.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

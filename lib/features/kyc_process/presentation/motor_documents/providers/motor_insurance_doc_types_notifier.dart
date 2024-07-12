@@ -4,8 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'motor_insurance_doc_types_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-class MotorInsuranceDocsTypesNotifier
-    extends _$MotorInsuranceDocsTypesNotifier {
+class MotorInsuranceDocsTypesNotifier extends _$MotorInsuranceDocsTypesNotifier {
   @override
   List<MotorInsuranceDocumentTypeModel> build() {
     return [];
@@ -25,5 +24,17 @@ class MotorInsuranceDocsTypesNotifier
 
   List<MotorInsuranceDocumentTypeModel> motorInsuranceDocsTypesList() {
     return state;
+  }
+
+  void removeItemFromList(int? id) {
+    if (id != null) {
+      List<MotorInsuranceDocumentTypeModel> newList = [...state];
+
+      newList.removeWhere(
+        (element) => element.mDocumentTypeId == id,
+      );
+
+      state = newList;
+    }
   }
 }

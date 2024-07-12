@@ -206,7 +206,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           InfoTile(
-            title: Strings.billDate,
+            title: Strings.issueDate,
             value: item.scanResponse?.ocrResponse?.documentdata?.billDate ?? "-",
           ),
         ],
