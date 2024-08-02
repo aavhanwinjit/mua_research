@@ -14,12 +14,10 @@ class EditAddressDetailsScreen extends ConsumerStatefulWidget {
   const EditAddressDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EditAddressDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditAddressDetailsScreenState();
 }
 
-class _EditAddressDetailsScreenState
-    extends ConsumerState<EditAddressDetailsScreen> {
+class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? surname;
@@ -54,8 +52,7 @@ class _EditAddressDetailsScreenState
 
     ScanDocumentResponseBody? ocrResponse = ref.watch(addressDocOCRApiResponse);
 
-    final AddressDocumentTypeModel? selectedAddressDocType =
-        ref.watch(selectedAddressDocTypeProvider);
+    final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
 
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
@@ -143,12 +140,10 @@ class _EditAddressDetailsScreenState
                         return null;
                       },
                     ),
-                    if (selectedAddressDocType?.documentCode ==
-                        DocumentCodes.UTB.toString().split('.').last) ...[
+                    if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) ...[
                       SizedBox(height: 24.h),
                       CustomTextFormField(
-                        initialValue:
-                            ocrResponse?.ocrResponse?.documentdata?.billDate,
+                        initialValue: ocrResponse?.ocrResponse?.documentdata?.billDate,
                         label: Strings.billDate,
                         enabled: false,
                       ),

@@ -1,8 +1,4 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -49,11 +45,17 @@ mixin SaveIDDetailsMixin {
     final String? surname = ref.watch(extractedSurNameProvider);
     final String? idnumber = ref.watch(extractedNICIDNumberProvider);
 
-    final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
-    final idCardBackSide = ref.watch(idDocBackFilePathProvider);
+    // final idCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+    // final idCardBackSide = ref.watch(idDocBackFilePathProvider);
 
-    // final idCardFrontScanResult = ref.watch(idDocFrontScanDocResultProvider);
-    // final idCardBackScanResult = ref.watch(idDocBackScanDocResultProvider);
+    final idCardFrontScanResult = ref.watch(idDocFrontScanDocResultProvider);
+    final idCardBackScanResult = ref.watch(idDocBackScanDocResultProvider);
+
+    final String idDocFrontImage = idCardFrontScanResult?.fileName ?? "";
+    final String idDocBackImage = idCardBackScanResult?.fileName ?? "";
+
+    final String? idDocFrontDocId = idCardFrontScanResult?.uploadedDocumentId.toString();
+    final String? idDocBackDocId = idCardBackScanResult?.uploadedDocumentId.toString();
 
     // final nicCardFrontSide = ref.watch(nicCardFrontFilePathProvider);
     // final nicCardBackSide = ref.watch(nicCardBackFilePathProvider);
@@ -61,37 +63,41 @@ mixin SaveIDDetailsMixin {
     // final passportFrontSide = ref.watch(passportFrontFilePathProvider);
     // final passportBackSide = ref.watch(passportBackFilePathProvider);
 
-    File frontFile = File(idCardFrontSide ?? "");
-    final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
-    String frontBase64 = base64Encode(frontFileBytes);
+    // File frontFile = File(idCardFrontSide ?? "");
+    // final List<int> frontFileBytes = await frontFile.readAsBytes() as List<int>;
+    // String frontBase64 = base64Encode(frontFileBytes);
 
-    String backBase64 = "";
-    if (idCardBackSide != null && idCardBackSide != "") {
-      File backFile = File(idCardBackSide ?? "");
-      final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
-      backBase64 = base64Encode(backFileBytes);
-    }
+    // String backBase64 = "";
+    // if (idCardBackSide != null && idCardBackSide != "") {
+    //   File backFile = File(idCardBackSide ?? "");
+    //   final List<int> backFileBytes = await backFile.readAsBytes() as List<int>;
+    //   backBase64 = base64Encode(backFileBytes);
+    // }
 
     SaveIdentityDetailsRequestModel request = SaveIdentityDetailsRequestModel(
       applicationRefNo: selectedApplication?.applicationRefNo,
-      applicantType: selectedApplication?.nationality,
-      policyType: selectedKycType.policyType,
-      documentCategory: selectedDocumentCategory?.documentCategory,
-      documentSide: null,
-      documentType: selectedIdDocType?.documentCode,
+      // applicantType: selectedApplication?.nationality,
+      // policyType: selectedKycType.policyType,
+      // documentCategory: selectedDocumentCategory?.documentCategory,
+      // documentSide: null,
+      // documentType: selectedIdDocType?.documentCode,
       idDocTypeId: selectedIdDocType?.identityDocumentTypeId,
       surname: surname,
       otherName: firstname,
       idDocNumber: idnumber,
+      idDocFrontImage: idDocFrontImage,
       // idDocFrontImage: "frontBase64",
-      idDocFrontImage: frontBase64,
+      // idDocFrontImage: frontBase64,
       // idDocFrontImage: idCardFrontScanResult?.fileName,
+      idDocBackImage: idDocBackImage,
       // idDocBackImage: "backBase64",
-      idDocBackImage: backBase64,
+      // idDocBackImage: backBase64,
       // idDocBackImage: idCardBackScanResult?.fileName,
-      customerId: "",
-      fileExtension: FileExtensionEnums.png.toString().split('.').last,
-      quoteNumber: selectedApplication?.quoteNumber,
+      iDDocFrontUploadedDocumentId: idDocFrontDocId,
+      iDDocBackUploadedDocumentId: idDocBackDocId,
+      // customerId: "",
+      // fileExtension: FileExtensionEnums.png.toString().split('.').last,
+      // quoteNumber: selectedApplication?.quoteNumber,
     );
 
     ref.watch(saveIdentityDetailsLoading.notifier).update((state) => true);

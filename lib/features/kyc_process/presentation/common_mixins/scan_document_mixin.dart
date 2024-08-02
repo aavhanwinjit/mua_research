@@ -27,8 +27,7 @@ mixin ScanDocumentMixin {
     final loading = ref.watch(loadingProvider);
     if (loading) return;
 
-    final AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
     final KycTypesModel selectedKycType = kycTypeNotifier
@@ -37,8 +36,7 @@ mixin ScanDocumentMixin {
         .toList()
         .first;
 
-    final DocumentCategoryModel? selectedDocumentCategory =
-        ref.watch(selectedDocumentCategoryProvider);
+    final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
 
     ScanDocumentRequestModel request = ScanDocumentRequestModel(
       applicantType: selectedApplication?.nationality,
@@ -49,29 +47,25 @@ mixin ScanDocumentMixin {
       customerId: "",
       policyNumber: selectedApplication?.policyNumber,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
-      nicNumber: (selectedApplication?.nationality ==
-              NationalityType.Mauritian.toString().split('.').last)
+      nicNumber: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
           : null,
-      passportNumber: (selectedApplication?.nationality ==
-              NationalityType.NonMauritian.toString().split('.').last)
+      passportNumber: (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
           : null,
       quoteNumber: selectedApplication?.quoteNumber,
       //  "252248",
       verificationData: VerificationData(
         // firstName: "CALOWTEE",
-        firstName: 
-        // selectedApplication?.idDocOtherName,
-        ref.watch(porDocUploadProcess)
-        ? selectedApplication?.addressDocOtherName
-        : selectedApplication?.idDocOtherName,
+        firstName:
+            // selectedApplication?.idDocOtherName,
+            ref.watch(porDocUploadProcess)
+                ? selectedApplication?.addressDocOtherName
+                : selectedApplication?.idDocOtherName,
         // surname: "MUSSAI",
-        surname: 
-        // selectedApplication?.idDocSurname,
-        ref.watch(porDocUploadProcess)
-            ? selectedApplication?.addressDocSurname
-            : selectedApplication?.idDocSurname,
+        surname:
+            // selectedApplication?.idDocSurname,
+            ref.watch(porDocUploadProcess) ? selectedApplication?.addressDocSurname : selectedApplication?.idDocSurname,
         idNumber: selectedApplication?.idDocNumber,
         billDate: null,
         registrationMark: null,
@@ -91,8 +85,7 @@ mixin ScanDocumentMixin {
         debugPrint("failure: $failure");
         ref.watch(loadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (ScanDocumentResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -102,28 +95,26 @@ mixin ScanDocumentMixin {
               // Allow ocr response is null
               onSuccess(success.body?.responseBody);
             } else {
-              if (success.body?.responseBody?.ocrResponse?.documentdata
-                      ?.kycStatus ==
-                  "Success") {
+              if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatus == "Success") {
                 // Allow only if KYC status is success
                 onSuccess(success.body?.responseBody);
               } else {
-                if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg == "KYC validation failed. First name did not match in the document. Last name did not match in the document." ||
-                    success.body?.responseBody?.ocrResponse?.documentdata
-                            ?.kycStatusMsg ==
+                if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg ==
+                        "KYC validation failed. First name did not match in the document. Last name did not match in the document." ||
+                    success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg ==
                         "KYC validation failed. Last name did not match in the document." ||
-                    success.body?.responseBody?.ocrResponse?.documentdata
-                            ?.kycStatusMsg ==
+                    success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg ==
                         "KYC validation failed. First name did not match in the document.") {
                   // Also allow if KYC status is failed due to first name and last name did not match as its Address document
                   // and it will later on ask for POR document
+                  onSuccess(success.body?.responseBody);
+                } else if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg == "") {
                   onSuccess(success.body?.responseBody);
                 } else {
                   ref.watch(loadingProvider.notifier).update((state) => false);
 
                   context.showErrorSnackBar(
-                    message: success.body?.responseBody?.ocrResponse
-                            ?.documentdata?.kycStatusMsg ??
+                    message: success.body?.responseBody?.ocrResponse?.documentdata?.kycStatusMsg ??
                         Strings.globalErrorGenericMessageOne,
                   );
                 }
@@ -134,8 +125,7 @@ mixin ScanDocumentMixin {
           ref.watch(loadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

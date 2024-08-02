@@ -84,10 +84,15 @@ _$DocumentdataImpl _$$DocumentdataImplFromJson(Map<String, dynamic> json) =>
     _$DocumentdataImpl(
       kycStatus: json['kyc_status'] as String?,
       kycStatusMsg: json['kyc_status_msg'] as String?,
-      billDate: json['billDate'] as String?,
       isFirstNameAvailable: json['isFirstNameAvailable'] as bool?,
       isLastNameAvailable: json['isLastNameAvailable'] as bool?,
       isIdNumberAvailable: json['isIdNumberAvailable'] as bool?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      idNumber: json['id_number'] as String?,
+      billDate: json['billDate'] as String?,
+      issueDate: json['issueDate'] as String?,
+      isRegistrationMarkAvailable: json['isRegistrationMarkAvailable'] as bool?,
       registrationMark: json['registrationMark'],
     );
 
@@ -95,9 +100,14 @@ Map<String, dynamic> _$$DocumentdataImplToJson(_$DocumentdataImpl instance) =>
     <String, dynamic>{
       'kyc_status': instance.kycStatus,
       'kyc_status_msg': instance.kycStatusMsg,
-      'billDate': instance.billDate,
       'isFirstNameAvailable': instance.isFirstNameAvailable,
       'isLastNameAvailable': instance.isLastNameAvailable,
       'isIdNumberAvailable': instance.isIdNumberAvailable,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
+      'id_number': instance.idNumber,
+      'billDate': instance.billDate,
+      'issueDate': instance.issueDate,
+      'isRegistrationMarkAvailable': instance.isRegistrationMarkAvailable,
       'registrationMark': instance.registrationMark,
     };

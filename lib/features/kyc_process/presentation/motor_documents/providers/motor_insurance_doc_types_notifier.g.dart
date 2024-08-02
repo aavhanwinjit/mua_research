@@ -7,7 +7,7 @@ part of 'motor_insurance_doc_types_notifier.dart';
 // **************************************************************************
 
 String _$motorInsuranceDocsTypesNotifierHash() =>
-    r'7b43f64bd6b124ab7bcdaa69508b208942e09599';
+    r'a1e2163746d9eda63f86a5ea80033416f62b8bec';
 
 /// See also [MotorInsuranceDocsTypesNotifier].
 @ProviderFor(MotorInsuranceDocsTypesNotifier)

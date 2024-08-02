@@ -53,15 +53,9 @@ class DocumentUploadContainer2 extends ConsumerWidget {
             ? disableCallback
             : filePath == null
                 ? () {
-                    ref
-                        .read(cameraScreenSubtitle.notifier)
-                        .update((state) => cameraScreenDescription);
-                    ref
-                        .read(cameraScreenAppBarTitle.notifier)
-                        .update((state) => cameraScreenTitle);
-                    ref
-                        .read(reviewUploadedDocScreenTitle.notifier)
-                        .update((state) => reviewScreenTitle);
+                    ref.read(cameraScreenSubtitle.notifier).update((state) => cameraScreenDescription);
+                    ref.read(cameraScreenAppBarTitle.notifier).update((state) => cameraScreenTitle);
+                    ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => reviewScreenTitle);
 
                     void pickImage(ImageSource imageSource) async {
                       try {
@@ -75,22 +69,16 @@ class DocumentUploadContainer2 extends ConsumerWidget {
                           final fileSize = await result.length();
 
                           if (fileSize > 5000000) {
-                            context.showErrorSnackBar(
-                                message: Strings.fileSizeErrorString);
+                            context.showErrorSnackBar(message: Strings.fileSizeErrorString);
                             return;
                           }
 
-                          ref
-                              .watch(capturedFilePathProvider.notifier)
-                              .update((state) => result.path);
+                          ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
                           context.pop();
                           context.pushNamed(
                             AppRoutes.confirmUploadOrRetakeScreen2,
-                            extra: {
-                              'onChange': onChange,
-                              'documentCode': documentCode
-                            },
+                            extra: {'onChange': onChange, 'documentCode': documentCode},
                           );
                         }
                       } catch (e) {}
@@ -171,8 +159,7 @@ class DocumentUploadContainer2 extends ConsumerWidget {
       constraints: const BoxConstraints(),
       icon: Container(
         padding: const EdgeInsets.all(4),
-        decoration:
-            const BoxDecoration(color: errorTextRed, shape: BoxShape.circle),
+        decoration: const BoxDecoration(color: errorTextRed, shape: BoxShape.circle),
         child: const Icon(
           Icons.close,
           color: white,

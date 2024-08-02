@@ -1,1 +1,1 @@
-enum FileExtensionEnums { png }
+enum FileExtensionEnums { png, pdf }
