@@ -266,38 +266,38 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
           context.showErrorSnackBar(message: Strings.uploadBothDocuments);
         },
         onTap: () async {
-          // final selectedApplication = ref.watch(selectedApplicationProvider);
+          final selectedApplication = ref.watch(selectedApplicationProvider);
 
-          // if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-          //   // check if the id number recieved from front ocr and back ocr are same
+          if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+            // check if the id number recieved from front ocr and back ocr are same
 
-          //   ScanDocumentResponseBody? frontOCR = ref.read(idDocFrontScanDocResultProvider);
-          //   ScanDocumentResponseBody? backOCR = ref.read(idDocBackScanDocResultProvider);
+            ScanDocumentResponseBody? frontOCR = ref.read(idDocFrontScanDocResultProvider);
+            ScanDocumentResponseBody? backOCR = ref.read(idDocBackScanDocResultProvider);
 
-          //   String? frontNICNumber = frontOCR?.ocrResponse?.documentdata?.idNumber;
-          //   String? backNICNumber = backOCR?.ocrResponse?.documentdata?.idNumber;
+            String? frontNICNumber = frontOCR?.ocrResponse?.documentdata?.idNumber;
+            String? backNICNumber = backOCR?.ocrResponse?.documentdata?.idNumber;
 
-          //   if ((frontNICNumber != null && backNICNumber != null) &&
-          //       (frontNICNumber.isNotEmpty || backNICNumber.isNotEmpty)) {
-          //     if (frontNICNumber == backNICNumber) {
-          //       context.pushNamed(AppRoutes.idReviewSubmitScreen);
-          //     } else {
-          //       context.showErrorSnackBar(message: Strings.idNumberNotMatching);
-          //     }
-          //   } else {
-          //     context.showErrorSnackBar(message: Strings.idNumberNotFound);
-          //     return;
-          //   }
-          // } else {
-          //   ScanDocumentResponseBody? passportOCR = ref.read(idDocFrontScanDocResultProvider);
-          //   String? passportNumber = passportOCR?.ocrResponse?.documentdata?.idNumber;
+            if ((frontNICNumber != null && backNICNumber != null) &&
+                (frontNICNumber.isNotEmpty || backNICNumber.isNotEmpty)) {
+              if (frontNICNumber == backNICNumber) {
+                context.pushNamed(AppRoutes.idReviewSubmitScreen);
+              } else {
+                context.showErrorSnackBar(message: Strings.idNumberNotMatching);
+              }
+            } else {
+              context.showErrorSnackBar(message: Strings.idNumberNotFound);
+              return;
+            }
+          } else {
+            ScanDocumentResponseBody? passportOCR = ref.read(idDocFrontScanDocResultProvider);
+            String? passportNumber = passportOCR?.ocrResponse?.documentdata?.idNumber;
 
-          //   if (passportNumber != null && passportNumber.isNotEmpty) {
-          //     context.pushNamed(AppRoutes.idReviewSubmitScreen);
-          //   } else {
-          //     context.showErrorSnackBar(message: Strings.idNumberNotFound);
-          //   }
-          // }
+            if (passportNumber != null && passportNumber.isNotEmpty) {
+              context.pushNamed(AppRoutes.idReviewSubmitScreen);
+            } else {
+              context.showErrorSnackBar(message: Strings.idNumberNotFound);
+            }
+          }
 
           context.pushNamed(AppRoutes.idReviewSubmitScreen);
 
