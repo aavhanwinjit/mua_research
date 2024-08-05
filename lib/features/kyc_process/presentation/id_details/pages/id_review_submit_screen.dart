@@ -127,6 +127,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
 
               context.pop();
               context.pop();
+              context.pop();
 
               if (isExit) {
                 context.pop();

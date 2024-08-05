@@ -6,7 +6,7 @@ description: A new Flutter project.
 # version: 1.0.1+2
  
 # Development
-version: 2.0.26+13
+version: 2.0.27+14
 
 environment: 
   sdk: '>=3.4.0 <4.0.0'
@@ -52,6 +52,7 @@ dependencies:
   google_mlkit_text_recognition: ^0.11.0
   # google_mlkit_document_scanner: ^0.2.0
   docscan: ^1.1.6
+  # cunning_document_scanner: ^1.2.3
   firebase_core: ^2.30.0
   firebase_crashlytics: ^3.5.2
   firebase_analytics: ^10.10.2

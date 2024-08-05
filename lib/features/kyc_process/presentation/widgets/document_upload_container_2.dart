@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
@@ -6,11 +7,13 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/widgets/image_cropper_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 
 class DocumentUploadContainer2 extends ConsumerWidget {
   final String label;
@@ -73,7 +76,17 @@ class DocumentUploadContainer2 extends ConsumerWidget {
                             return;
                           }
 
-                          ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+                          final bytes = await result.readAsBytes();
+                          final croppedImage = await Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) {
+                              return CropImagePage(imageBytes: bytes);
+                            },
+                          ));
+                          final savedFile = await _saveImageToTempStorage(croppedImage);
+
+                          ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
+
+                          // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
                           context.pop();
                           context.pushNamed(
@@ -148,6 +161,23 @@ class DocumentUploadContainer2 extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<File> _saveImageToTempStorage(Uint8List imageBytes) async {
+    String? dir;
+    if (Platform.isIOS) {
+      dir = (await getApplicationDocumentsDirectory()).path;
+    } else {
+      dir = (await getExternalStorageDirectories())![0].path;
+    }
+
+    final currentTimeMillisecond = DateTime.now().millisecondsSinceEpoch.toString();
+
+    File file = File("$dir/${currentTimeMillisecond.substring(currentTimeMillisecond.length - 6)}_image.png");
+
+    await file.writeAsBytes(imageBytes);
+
+    return file;
   }
 
   Widget _clearDocumentButton(WidgetRef ref) {

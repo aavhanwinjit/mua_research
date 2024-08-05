@@ -146,27 +146,27 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
               // if no values are recieved from scan document then show retry option
             }
 
-            if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-              ref
-                  .watch(extractedFirstNameProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.firstName);
-              ref
-                  .watch(extractedSurNameProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.lastName);
-              ref
-                  .watch(extractedNICIDNumberProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.idNumber);
-            } else {
-              ref
-                  .watch(extractedPassportFirstNameProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.firstName);
-              ref
-                  .watch(extractedPassportSurNameProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.lastName);
-              ref
-                  .watch(extractedPassportNumberProvider.notifier)
-                  .update((state) => response?.ocrResponse?.documentdata?.idNumber);
-            }
+            // if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+            ref
+                .watch(extractedFirstNameProvider.notifier)
+                .update((state) => response?.ocrResponse?.documentdata?.firstName);
+            ref
+                .watch(extractedSurNameProvider.notifier)
+                .update((state) => response?.ocrResponse?.documentdata?.lastName);
+            ref
+                .watch(extractedNICIDNumberProvider.notifier)
+                .update((state) => response?.ocrResponse?.documentdata?.idNumber);
+            // } else {
+            //   ref
+            //       .watch(extractedFirstNameProvider.notifier)
+            //       .update((state) => response?.ocrResponse?.documentdata?.firstName);
+            //   ref
+            //       .watch(extractedSurNameProvider.notifier)
+            //       .update((state) => response?.ocrResponse?.documentdata?.lastName);
+            //   ref
+            //       .watch(extractedNICIDNumberProvider.notifier)
+            //       .update((state) => response?.ocrResponse?.documentdata?.idNumber);
+            // }
 
             // call ml kit ocr after scan docs
             // await _performOCR(onSuccess: () {

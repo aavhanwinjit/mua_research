@@ -15,8 +15,7 @@ class NICDetailsCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final IdentityDocumentTypeModel? selectedIdDocType =
-        ref.watch(selectedIdDocTypeProvider);
+    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
 
     return Container(
       decoration: BoxDecoration(
@@ -43,8 +42,7 @@ class NICDetailsCard extends ConsumerWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () =>
-                      context.pushNamed(AppRoutes.editDetailsScreen),
+                  onPressed: () => context.pushNamed(AppRoutes.editDetailsScreen),
                   child: Text(
                     Strings.edit,
                     style: TextStyle(
@@ -71,8 +69,7 @@ class NICDetailsCard extends ConsumerWidget {
     String? surName = ref.watch(extractedSurNameProvider);
     String? idNumber = ref.watch(extractedNICIDNumberProvider);
 
-    AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 20),
@@ -89,8 +86,7 @@ class NICDetailsCard extends ConsumerWidget {
                 ),
                 const SizedBox(height: 24),
                 InfoTile(
-                  title: (selectedApplication?.nationality ==
-                          NationalityType.Mauritian.toString().split('.').last)
+                  title: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                       ? Strings.nicNumber
                       : Strings.passportNo,
                   value: idNumber ?? "NA",
@@ -119,8 +115,7 @@ class NICDetailsCard extends ConsumerWidget {
     final idCardBackSide = ref.watch(idDocBackFilePathProvider);
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final IdentityDocumentTypeModel? selectedIdDocType =
-        ref.watch(selectedIdDocTypeProvider);
+    final IdentityDocumentTypeModel? selectedIdDocType = ref.watch(selectedIdDocTypeProvider);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -137,10 +132,9 @@ class NICDetailsCard extends ConsumerWidget {
             children: [
               _imageWidget(idCardFrontSide),
               SizedBox(width: 16.w),
-              (selectedApplication?.nationality ==
-                      NationalityType.Mauritian.toString().split('.').last)
+              (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
                   ? _imageWidget(idCardBackSide)
-                  : Container(
+                  : SizedBox(
                       height: 100.h,
                       width: 100.w,
                     ),
