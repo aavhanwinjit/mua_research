@@ -72,6 +72,8 @@ class EncryptionInterceptor extends Interceptor {
 
       response.data["b"] = decryptedResponse;
       handler.next(response);
+    } else if (response.data["b"] == null) {
+      handler.next(response);
     }
   }
 

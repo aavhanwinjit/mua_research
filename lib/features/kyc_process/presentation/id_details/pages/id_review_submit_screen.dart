@@ -1,7 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
-import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/dialogs/error_dialog.dart';
@@ -111,34 +110,34 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
         print(firstname);
         print(surname);
 
-        RegExp regex = RegExp(r'^[a-zA-Z\s]+$');
-        if (regex.hasMatch(firstname) && regex.hasMatch(surname)) {
-          await saveIdentityDetails(
-              context: context,
-              ref: ref,
-              onSuccess: () async {
-                resetPageNumber(ref);
+        // RegExp regex = RegExp(r'^[a-zA-Z\s]+$');
+        // if (regex.hasMatch(firstname) && regex.hasMatch(surname)) {
+        await saveIdentityDetails(
+            context: context,
+            ref: ref,
+            onSuccess: () async {
+              resetPageNumber(ref);
 
-                await getAgentApplications(
-                  context: context,
-                  ref: ref,
-                );
+              await getAgentApplications(
+                context: context,
+                ref: ref,
+              );
 
-                ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
+              ref.watch(saveIdentityDetailsLoading.notifier).update((state) => false);
 
+              context.pop();
+              context.pop();
+
+              if (isExit) {
                 context.pop();
-                context.pop();
-
-                if (isExit) {
-                  context.pop();
-                }
-              },
-              onError: () {
-                showDialogError(context);
-              });
-        } else {
-          context.showErrorSnackBar(message: Strings.errorInFullnameInDoc);
-        }
+              }
+            },
+            onError: () {
+              showDialogError(context);
+            });
+        // } else {
+        //   context.showErrorSnackBar(message: Strings.errorInFullnameInDoc);
+        // }
       },
     );
   }

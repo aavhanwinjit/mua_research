@@ -885,14 +885,24 @@ mixin _$Documentdata {
   String? get kycStatus => throw _privateConstructorUsedError;
   @JsonKey(name: "kyc_status_msg")
   String? get kycStatusMsg => throw _privateConstructorUsedError;
-  @JsonKey(name: "billDate")
-  String? get billDate => throw _privateConstructorUsedError;
   @JsonKey(name: "isFirstNameAvailable")
   bool? get isFirstNameAvailable => throw _privateConstructorUsedError;
   @JsonKey(name: "isLastNameAvailable")
   bool? get isLastNameAvailable => throw _privateConstructorUsedError;
   @JsonKey(name: "isIdNumberAvailable")
   bool? get isIdNumberAvailable => throw _privateConstructorUsedError;
+  @JsonKey(name: "first_name")
+  String? get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: "last_name")
+  String? get lastName => throw _privateConstructorUsedError;
+  @JsonKey(name: "id_number")
+  String? get idNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "billDate")
+  String? get billDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "issueDate")
+  String? get issueDate => throw _privateConstructorUsedError;
+  @JsonKey(name: "isRegistrationMarkAvailable")
+  bool? get isRegistrationMarkAvailable => throw _privateConstructorUsedError;
   @JsonKey(name: "registrationMark")
   dynamic get registrationMark => throw _privateConstructorUsedError;
 
@@ -911,10 +921,16 @@ abstract class $DocumentdataCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "kyc_status") String? kycStatus,
       @JsonKey(name: "kyc_status_msg") String? kycStatusMsg,
-      @JsonKey(name: "billDate") String? billDate,
       @JsonKey(name: "isFirstNameAvailable") bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") bool? isIdNumberAvailable,
+      @JsonKey(name: "first_name") String? firstName,
+      @JsonKey(name: "last_name") String? lastName,
+      @JsonKey(name: "id_number") String? idNumber,
+      @JsonKey(name: "billDate") String? billDate,
+      @JsonKey(name: "issueDate") String? issueDate,
+      @JsonKey(name: "isRegistrationMarkAvailable")
+      bool? isRegistrationMarkAvailable,
       @JsonKey(name: "registrationMark") dynamic registrationMark});
 }
 
@@ -933,10 +949,15 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
   $Res call({
     Object? kycStatus = freezed,
     Object? kycStatusMsg = freezed,
-    Object? billDate = freezed,
     Object? isFirstNameAvailable = freezed,
     Object? isLastNameAvailable = freezed,
     Object? isIdNumberAvailable = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? idNumber = freezed,
+    Object? billDate = freezed,
+    Object? issueDate = freezed,
+    Object? isRegistrationMarkAvailable = freezed,
     Object? registrationMark = freezed,
   }) {
     return _then(_value.copyWith(
@@ -947,10 +968,6 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
       kycStatusMsg: freezed == kycStatusMsg
           ? _value.kycStatusMsg
           : kycStatusMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      billDate: freezed == billDate
-          ? _value.billDate
-          : billDate // ignore: cast_nullable_to_non_nullable
               as String?,
       isFirstNameAvailable: freezed == isFirstNameAvailable
           ? _value.isFirstNameAvailable
@@ -963,6 +980,30 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
       isIdNumberAvailable: freezed == isIdNumberAvailable
           ? _value.isIdNumberAvailable
           : isIdNumberAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idNumber: freezed == idNumber
+          ? _value.idNumber
+          : idNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      billDate: freezed == billDate
+          ? _value.billDate
+          : billDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      issueDate: freezed == issueDate
+          ? _value.issueDate
+          : issueDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRegistrationMarkAvailable: freezed == isRegistrationMarkAvailable
+          ? _value.isRegistrationMarkAvailable
+          : isRegistrationMarkAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
       registrationMark: freezed == registrationMark
           ? _value.registrationMark
@@ -983,10 +1024,16 @@ abstract class _$$DocumentdataImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "kyc_status") String? kycStatus,
       @JsonKey(name: "kyc_status_msg") String? kycStatusMsg,
-      @JsonKey(name: "billDate") String? billDate,
       @JsonKey(name: "isFirstNameAvailable") bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") bool? isIdNumberAvailable,
+      @JsonKey(name: "first_name") String? firstName,
+      @JsonKey(name: "last_name") String? lastName,
+      @JsonKey(name: "id_number") String? idNumber,
+      @JsonKey(name: "billDate") String? billDate,
+      @JsonKey(name: "issueDate") String? issueDate,
+      @JsonKey(name: "isRegistrationMarkAvailable")
+      bool? isRegistrationMarkAvailable,
       @JsonKey(name: "registrationMark") dynamic registrationMark});
 }
 
@@ -1003,10 +1050,15 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
   $Res call({
     Object? kycStatus = freezed,
     Object? kycStatusMsg = freezed,
-    Object? billDate = freezed,
     Object? isFirstNameAvailable = freezed,
     Object? isLastNameAvailable = freezed,
     Object? isIdNumberAvailable = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? idNumber = freezed,
+    Object? billDate = freezed,
+    Object? issueDate = freezed,
+    Object? isRegistrationMarkAvailable = freezed,
     Object? registrationMark = freezed,
   }) {
     return _then(_$DocumentdataImpl(
@@ -1017,10 +1069,6 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
       kycStatusMsg: freezed == kycStatusMsg
           ? _value.kycStatusMsg
           : kycStatusMsg // ignore: cast_nullable_to_non_nullable
-              as String?,
-      billDate: freezed == billDate
-          ? _value.billDate
-          : billDate // ignore: cast_nullable_to_non_nullable
               as String?,
       isFirstNameAvailable: freezed == isFirstNameAvailable
           ? _value.isFirstNameAvailable
@@ -1033,6 +1081,30 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
       isIdNumberAvailable: freezed == isIdNumberAvailable
           ? _value.isIdNumberAvailable
           : isIdNumberAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      idNumber: freezed == idNumber
+          ? _value.idNumber
+          : idNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      billDate: freezed == billDate
+          ? _value.billDate
+          : billDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      issueDate: freezed == issueDate
+          ? _value.issueDate
+          : issueDate // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isRegistrationMarkAvailable: freezed == isRegistrationMarkAvailable
+          ? _value.isRegistrationMarkAvailable
+          : isRegistrationMarkAvailable // ignore: cast_nullable_to_non_nullable
               as bool?,
       registrationMark: freezed == registrationMark
           ? _value.registrationMark
@@ -1048,10 +1120,16 @@ class _$DocumentdataImpl implements _Documentdata {
   const _$DocumentdataImpl(
       {@JsonKey(name: "kyc_status") this.kycStatus,
       @JsonKey(name: "kyc_status_msg") this.kycStatusMsg,
-      @JsonKey(name: "billDate") this.billDate,
       @JsonKey(name: "isFirstNameAvailable") this.isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") this.isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") this.isIdNumberAvailable,
+      @JsonKey(name: "first_name") this.firstName,
+      @JsonKey(name: "last_name") this.lastName,
+      @JsonKey(name: "id_number") this.idNumber,
+      @JsonKey(name: "billDate") this.billDate,
+      @JsonKey(name: "issueDate") this.issueDate,
+      @JsonKey(name: "isRegistrationMarkAvailable")
+      this.isRegistrationMarkAvailable,
       @JsonKey(name: "registrationMark") this.registrationMark});
 
   factory _$DocumentdataImpl.fromJson(Map<String, dynamic> json) =>
@@ -1064,9 +1142,6 @@ class _$DocumentdataImpl implements _Documentdata {
   @JsonKey(name: "kyc_status_msg")
   final String? kycStatusMsg;
   @override
-  @JsonKey(name: "billDate")
-  final String? billDate;
-  @override
   @JsonKey(name: "isFirstNameAvailable")
   final bool? isFirstNameAvailable;
   @override
@@ -1076,12 +1151,30 @@ class _$DocumentdataImpl implements _Documentdata {
   @JsonKey(name: "isIdNumberAvailable")
   final bool? isIdNumberAvailable;
   @override
+  @JsonKey(name: "first_name")
+  final String? firstName;
+  @override
+  @JsonKey(name: "last_name")
+  final String? lastName;
+  @override
+  @JsonKey(name: "id_number")
+  final String? idNumber;
+  @override
+  @JsonKey(name: "billDate")
+  final String? billDate;
+  @override
+  @JsonKey(name: "issueDate")
+  final String? issueDate;
+  @override
+  @JsonKey(name: "isRegistrationMarkAvailable")
+  final bool? isRegistrationMarkAvailable;
+  @override
   @JsonKey(name: "registrationMark")
   final dynamic registrationMark;
 
   @override
   String toString() {
-    return 'Documentdata(kycStatus: $kycStatus, kycStatusMsg: $kycStatusMsg, billDate: $billDate, isFirstNameAvailable: $isFirstNameAvailable, isLastNameAvailable: $isLastNameAvailable, isIdNumberAvailable: $isIdNumberAvailable, registrationMark: $registrationMark)';
+    return 'Documentdata(kycStatus: $kycStatus, kycStatusMsg: $kycStatusMsg, isFirstNameAvailable: $isFirstNameAvailable, isLastNameAvailable: $isLastNameAvailable, isIdNumberAvailable: $isIdNumberAvailable, firstName: $firstName, lastName: $lastName, idNumber: $idNumber, billDate: $billDate, issueDate: $issueDate, isRegistrationMarkAvailable: $isRegistrationMarkAvailable, registrationMark: $registrationMark)';
   }
 
   @override
@@ -1093,14 +1186,26 @@ class _$DocumentdataImpl implements _Documentdata {
                 other.kycStatus == kycStatus) &&
             (identical(other.kycStatusMsg, kycStatusMsg) ||
                 other.kycStatusMsg == kycStatusMsg) &&
-            (identical(other.billDate, billDate) ||
-                other.billDate == billDate) &&
             (identical(other.isFirstNameAvailable, isFirstNameAvailable) ||
                 other.isFirstNameAvailable == isFirstNameAvailable) &&
             (identical(other.isLastNameAvailable, isLastNameAvailable) ||
                 other.isLastNameAvailable == isLastNameAvailable) &&
             (identical(other.isIdNumberAvailable, isIdNumberAvailable) ||
                 other.isIdNumberAvailable == isIdNumberAvailable) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.idNumber, idNumber) ||
+                other.idNumber == idNumber) &&
+            (identical(other.billDate, billDate) ||
+                other.billDate == billDate) &&
+            (identical(other.issueDate, issueDate) ||
+                other.issueDate == issueDate) &&
+            (identical(other.isRegistrationMarkAvailable,
+                    isRegistrationMarkAvailable) ||
+                other.isRegistrationMarkAvailable ==
+                    isRegistrationMarkAvailable) &&
             const DeepCollectionEquality()
                 .equals(other.registrationMark, registrationMark));
   }
@@ -1111,10 +1216,15 @@ class _$DocumentdataImpl implements _Documentdata {
       runtimeType,
       kycStatus,
       kycStatusMsg,
-      billDate,
       isFirstNameAvailable,
       isLastNameAvailable,
       isIdNumberAvailable,
+      firstName,
+      lastName,
+      idNumber,
+      billDate,
+      issueDate,
+      isRegistrationMarkAvailable,
       const DeepCollectionEquality().hash(registrationMark));
 
   @JsonKey(ignore: true)
@@ -1135,10 +1245,16 @@ abstract class _Documentdata implements Documentdata {
   const factory _Documentdata(
       {@JsonKey(name: "kyc_status") final String? kycStatus,
       @JsonKey(name: "kyc_status_msg") final String? kycStatusMsg,
-      @JsonKey(name: "billDate") final String? billDate,
       @JsonKey(name: "isFirstNameAvailable") final bool? isFirstNameAvailable,
       @JsonKey(name: "isLastNameAvailable") final bool? isLastNameAvailable,
       @JsonKey(name: "isIdNumberAvailable") final bool? isIdNumberAvailable,
+      @JsonKey(name: "first_name") final String? firstName,
+      @JsonKey(name: "last_name") final String? lastName,
+      @JsonKey(name: "id_number") final String? idNumber,
+      @JsonKey(name: "billDate") final String? billDate,
+      @JsonKey(name: "issueDate") final String? issueDate,
+      @JsonKey(name: "isRegistrationMarkAvailable")
+      final bool? isRegistrationMarkAvailable,
       @JsonKey(name: "registrationMark")
       final dynamic registrationMark}) = _$DocumentdataImpl;
 
@@ -1152,9 +1268,6 @@ abstract class _Documentdata implements Documentdata {
   @JsonKey(name: "kyc_status_msg")
   String? get kycStatusMsg;
   @override
-  @JsonKey(name: "billDate")
-  String? get billDate;
-  @override
   @JsonKey(name: "isFirstNameAvailable")
   bool? get isFirstNameAvailable;
   @override
@@ -1163,6 +1276,24 @@ abstract class _Documentdata implements Documentdata {
   @override
   @JsonKey(name: "isIdNumberAvailable")
   bool? get isIdNumberAvailable;
+  @override
+  @JsonKey(name: "first_name")
+  String? get firstName;
+  @override
+  @JsonKey(name: "last_name")
+  String? get lastName;
+  @override
+  @JsonKey(name: "id_number")
+  String? get idNumber;
+  @override
+  @JsonKey(name: "billDate")
+  String? get billDate;
+  @override
+  @JsonKey(name: "issueDate")
+  String? get issueDate;
+  @override
+  @JsonKey(name: "isRegistrationMarkAvailable")
+  bool? get isRegistrationMarkAvailable;
   @override
   @JsonKey(name: "registrationMark")
   dynamic get registrationMark;

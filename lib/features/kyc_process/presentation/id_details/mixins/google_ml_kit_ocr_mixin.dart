@@ -39,6 +39,56 @@ mixin GoogleMLKitOCRMixin {
     "Surnamę",
   ];
 
+  Future<void> performNICCardOCR2({
+    required WidgetRef ref,
+    required BuildContext context,
+    required VoidCallback onSuccess,
+  }) async {
+    // final bool loading = ref.watch(ocrLoadingProvider);
+    // if (loading) return;
+
+    // final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    // if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+    final nicCardFrontSide = ref.watch(idDocFrontFilePathProvider);
+
+    if (nicCardFrontSide == null) {
+      context.showErrorSnackBar(message: Strings.uploadBothDocuments);
+      return;
+    }
+
+    final inputImage = InputImage.fromFilePath(nicCardFrontSide);
+
+    ref.watch(ocrLoadingProvider.notifier).update((state) => true);
+
+    ref.watch(extractedFirstNameProvider.notifier).update((state) => null);
+    ref.watch(extractedSurNameProvider.notifier).update((state) => null);
+    ref.watch(extractedNICIDNumberProvider.notifier).update((state) => null);
+
+    final recognizedText = await _textRecognizer.processImage(inputImage);
+
+    debugPrint("RecognizedText.text: ${recognizedText.text}");
+    debugPrint("RecognizedText.blocks: ${recognizedText.blocks}");
+
+    final String? firstName = _extractStringValue(recognizedText, firstNameKeySet);
+    debugPrint("First Name: $firstName");
+
+    final String? surName = _extractStringValue(recognizedText, surNameKeySet);
+    debugPrint("Surname: $surName");
+
+    final String? idNumber = _extractNICIDNumber(recognizedText);
+    debugPrint("idNumber: $idNumber");
+
+    ref.watch(extractedFirstNameProvider.notifier).update((state) => firstName);
+    ref.watch(extractedSurNameProvider.notifier).update((state) => surName);
+    ref.watch(extractedNICIDNumberProvider.notifier).update((state) => idNumber);
+
+    ref.watch(ocrLoadingProvider.notifier).update((state) => false);
+
+    onSuccess.call();
+    // }
+  }
+
   Future<void> performNICCardOCR({
     required WidgetRef ref,
     required BuildContext context,

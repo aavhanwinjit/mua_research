@@ -23,16 +23,6 @@ SaveIdentityDetailsRequestModel _$SaveIdentityDetailsRequestModelFromJson(
 mixin _$SaveIdentityDetailsRequestModel {
   @JsonKey(name: "applicationRefNo")
   String? get applicationRefNo => throw _privateConstructorUsedError;
-  @JsonKey(name: "applicantType")
-  String? get applicantType => throw _privateConstructorUsedError;
-  @JsonKey(name: "policyType")
-  String? get policyType => throw _privateConstructorUsedError;
-  @JsonKey(name: "documentCategory")
-  String? get documentCategory => throw _privateConstructorUsedError;
-  @JsonKey(name: "documentSide")
-  String? get documentSide => throw _privateConstructorUsedError;
-  @JsonKey(name: "documentType")
-  String? get documentType => throw _privateConstructorUsedError;
   @JsonKey(name: "idDocTypeId")
   int? get idDocTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: "surname")
@@ -45,12 +35,11 @@ mixin _$SaveIdentityDetailsRequestModel {
   String? get idDocFrontImage => throw _privateConstructorUsedError;
   @JsonKey(name: "idDocBackImage")
   String? get idDocBackImage => throw _privateConstructorUsedError;
-  @JsonKey(name: "customerId")
-  String? get customerId => throw _privateConstructorUsedError;
-  @JsonKey(name: "fileExtension")
-  String? get fileExtension => throw _privateConstructorUsedError;
-  @JsonKey(name: "quoteNumber")
-  String? get quoteNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: "IDDocFrontUploadedDocumentId")
+  String? get iDDocFrontUploadedDocumentId =>
+      throw _privateConstructorUsedError;
+  @JsonKey(name: "IDDocBackUploadedDocumentId")
+  String? get iDDocBackUploadedDocumentId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,20 +57,16 @@ abstract class $SaveIdentityDetailsRequestModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "applicationRefNo") String? applicationRefNo,
-      @JsonKey(name: "applicantType") String? applicantType,
-      @JsonKey(name: "policyType") String? policyType,
-      @JsonKey(name: "documentCategory") String? documentCategory,
-      @JsonKey(name: "documentSide") String? documentSide,
-      @JsonKey(name: "documentType") String? documentType,
       @JsonKey(name: "idDocTypeId") int? idDocTypeId,
       @JsonKey(name: "surname") String? surname,
       @JsonKey(name: "otherName") String? otherName,
       @JsonKey(name: "idDocNumber") String? idDocNumber,
       @JsonKey(name: "idDocFrontImage") String? idDocFrontImage,
       @JsonKey(name: "idDocBackImage") String? idDocBackImage,
-      @JsonKey(name: "customerId") String? customerId,
-      @JsonKey(name: "fileExtension") String? fileExtension,
-      @JsonKey(name: "quoteNumber") String? quoteNumber});
+      @JsonKey(name: "IDDocFrontUploadedDocumentId")
+      String? iDDocFrontUploadedDocumentId,
+      @JsonKey(name: "IDDocBackUploadedDocumentId")
+      String? iDDocBackUploadedDocumentId});
 }
 
 /// @nodoc
@@ -99,45 +84,19 @@ class _$SaveIdentityDetailsRequestModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? applicationRefNo = freezed,
-    Object? applicantType = freezed,
-    Object? policyType = freezed,
-    Object? documentCategory = freezed,
-    Object? documentSide = freezed,
-    Object? documentType = freezed,
     Object? idDocTypeId = freezed,
     Object? surname = freezed,
     Object? otherName = freezed,
     Object? idDocNumber = freezed,
     Object? idDocFrontImage = freezed,
     Object? idDocBackImage = freezed,
-    Object? customerId = freezed,
-    Object? fileExtension = freezed,
-    Object? quoteNumber = freezed,
+    Object? iDDocFrontUploadedDocumentId = freezed,
+    Object? iDDocBackUploadedDocumentId = freezed,
   }) {
     return _then(_value.copyWith(
       applicationRefNo: freezed == applicationRefNo
           ? _value.applicationRefNo
           : applicationRefNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      applicantType: freezed == applicantType
-          ? _value.applicantType
-          : applicantType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      policyType: freezed == policyType
-          ? _value.policyType
-          : policyType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentCategory: freezed == documentCategory
-          ? _value.documentCategory
-          : documentCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentSide: freezed == documentSide
-          ? _value.documentSide
-          : documentSide // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentType: freezed == documentType
-          ? _value.documentType
-          : documentType // ignore: cast_nullable_to_non_nullable
               as String?,
       idDocTypeId: freezed == idDocTypeId
           ? _value.idDocTypeId
@@ -163,17 +122,13 @@ class _$SaveIdentityDetailsRequestModelCopyWithImpl<$Res,
           ? _value.idDocBackImage
           : idDocBackImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerId: freezed == customerId
-          ? _value.customerId
-          : customerId // ignore: cast_nullable_to_non_nullable
+      iDDocFrontUploadedDocumentId: freezed == iDDocFrontUploadedDocumentId
+          ? _value.iDDocFrontUploadedDocumentId
+          : iDDocFrontUploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fileExtension: freezed == fileExtension
-          ? _value.fileExtension
-          : fileExtension // ignore: cast_nullable_to_non_nullable
-              as String?,
-      quoteNumber: freezed == quoteNumber
-          ? _value.quoteNumber
-          : quoteNumber // ignore: cast_nullable_to_non_nullable
+      iDDocBackUploadedDocumentId: freezed == iDDocBackUploadedDocumentId
+          ? _value.iDDocBackUploadedDocumentId
+          : iDDocBackUploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -190,20 +145,16 @@ abstract class _$$SaveIdentityDetailsRequestModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "applicationRefNo") String? applicationRefNo,
-      @JsonKey(name: "applicantType") String? applicantType,
-      @JsonKey(name: "policyType") String? policyType,
-      @JsonKey(name: "documentCategory") String? documentCategory,
-      @JsonKey(name: "documentSide") String? documentSide,
-      @JsonKey(name: "documentType") String? documentType,
       @JsonKey(name: "idDocTypeId") int? idDocTypeId,
       @JsonKey(name: "surname") String? surname,
       @JsonKey(name: "otherName") String? otherName,
       @JsonKey(name: "idDocNumber") String? idDocNumber,
       @JsonKey(name: "idDocFrontImage") String? idDocFrontImage,
       @JsonKey(name: "idDocBackImage") String? idDocBackImage,
-      @JsonKey(name: "customerId") String? customerId,
-      @JsonKey(name: "fileExtension") String? fileExtension,
-      @JsonKey(name: "quoteNumber") String? quoteNumber});
+      @JsonKey(name: "IDDocFrontUploadedDocumentId")
+      String? iDDocFrontUploadedDocumentId,
+      @JsonKey(name: "IDDocBackUploadedDocumentId")
+      String? iDDocBackUploadedDocumentId});
 }
 
 /// @nodoc
@@ -220,45 +171,19 @@ class __$$SaveIdentityDetailsRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? applicationRefNo = freezed,
-    Object? applicantType = freezed,
-    Object? policyType = freezed,
-    Object? documentCategory = freezed,
-    Object? documentSide = freezed,
-    Object? documentType = freezed,
     Object? idDocTypeId = freezed,
     Object? surname = freezed,
     Object? otherName = freezed,
     Object? idDocNumber = freezed,
     Object? idDocFrontImage = freezed,
     Object? idDocBackImage = freezed,
-    Object? customerId = freezed,
-    Object? fileExtension = freezed,
-    Object? quoteNumber = freezed,
+    Object? iDDocFrontUploadedDocumentId = freezed,
+    Object? iDDocBackUploadedDocumentId = freezed,
   }) {
     return _then(_$SaveIdentityDetailsRequestModelImpl(
       applicationRefNo: freezed == applicationRefNo
           ? _value.applicationRefNo
           : applicationRefNo // ignore: cast_nullable_to_non_nullable
-              as String?,
-      applicantType: freezed == applicantType
-          ? _value.applicantType
-          : applicantType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      policyType: freezed == policyType
-          ? _value.policyType
-          : policyType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentCategory: freezed == documentCategory
-          ? _value.documentCategory
-          : documentCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentSide: freezed == documentSide
-          ? _value.documentSide
-          : documentSide // ignore: cast_nullable_to_non_nullable
-              as String?,
-      documentType: freezed == documentType
-          ? _value.documentType
-          : documentType // ignore: cast_nullable_to_non_nullable
               as String?,
       idDocTypeId: freezed == idDocTypeId
           ? _value.idDocTypeId
@@ -284,17 +209,13 @@ class __$$SaveIdentityDetailsRequestModelImplCopyWithImpl<$Res>
           ? _value.idDocBackImage
           : idDocBackImage // ignore: cast_nullable_to_non_nullable
               as String?,
-      customerId: freezed == customerId
-          ? _value.customerId
-          : customerId // ignore: cast_nullable_to_non_nullable
+      iDDocFrontUploadedDocumentId: freezed == iDDocFrontUploadedDocumentId
+          ? _value.iDDocFrontUploadedDocumentId
+          : iDDocFrontUploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as String?,
-      fileExtension: freezed == fileExtension
-          ? _value.fileExtension
-          : fileExtension // ignore: cast_nullable_to_non_nullable
-              as String?,
-      quoteNumber: freezed == quoteNumber
-          ? _value.quoteNumber
-          : quoteNumber // ignore: cast_nullable_to_non_nullable
+      iDDocBackUploadedDocumentId: freezed == iDDocBackUploadedDocumentId
+          ? _value.iDDocBackUploadedDocumentId
+          : iDDocBackUploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -306,20 +227,16 @@ class _$SaveIdentityDetailsRequestModelImpl
     implements _SaveIdentityDetailsRequestModel {
   const _$SaveIdentityDetailsRequestModelImpl(
       {@JsonKey(name: "applicationRefNo") this.applicationRefNo,
-      @JsonKey(name: "applicantType") this.applicantType,
-      @JsonKey(name: "policyType") this.policyType,
-      @JsonKey(name: "documentCategory") this.documentCategory,
-      @JsonKey(name: "documentSide") this.documentSide,
-      @JsonKey(name: "documentType") this.documentType,
       @JsonKey(name: "idDocTypeId") this.idDocTypeId,
       @JsonKey(name: "surname") this.surname,
       @JsonKey(name: "otherName") this.otherName,
       @JsonKey(name: "idDocNumber") this.idDocNumber,
       @JsonKey(name: "idDocFrontImage") this.idDocFrontImage,
       @JsonKey(name: "idDocBackImage") this.idDocBackImage,
-      @JsonKey(name: "customerId") this.customerId,
-      @JsonKey(name: "fileExtension") this.fileExtension,
-      @JsonKey(name: "quoteNumber") this.quoteNumber});
+      @JsonKey(name: "IDDocFrontUploadedDocumentId")
+      this.iDDocFrontUploadedDocumentId,
+      @JsonKey(name: "IDDocBackUploadedDocumentId")
+      this.iDDocBackUploadedDocumentId});
 
   factory _$SaveIdentityDetailsRequestModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -328,21 +245,6 @@ class _$SaveIdentityDetailsRequestModelImpl
   @override
   @JsonKey(name: "applicationRefNo")
   final String? applicationRefNo;
-  @override
-  @JsonKey(name: "applicantType")
-  final String? applicantType;
-  @override
-  @JsonKey(name: "policyType")
-  final String? policyType;
-  @override
-  @JsonKey(name: "documentCategory")
-  final String? documentCategory;
-  @override
-  @JsonKey(name: "documentSide")
-  final String? documentSide;
-  @override
-  @JsonKey(name: "documentType")
-  final String? documentType;
   @override
   @JsonKey(name: "idDocTypeId")
   final int? idDocTypeId;
@@ -362,18 +264,15 @@ class _$SaveIdentityDetailsRequestModelImpl
   @JsonKey(name: "idDocBackImage")
   final String? idDocBackImage;
   @override
-  @JsonKey(name: "customerId")
-  final String? customerId;
+  @JsonKey(name: "IDDocFrontUploadedDocumentId")
+  final String? iDDocFrontUploadedDocumentId;
   @override
-  @JsonKey(name: "fileExtension")
-  final String? fileExtension;
-  @override
-  @JsonKey(name: "quoteNumber")
-  final String? quoteNumber;
+  @JsonKey(name: "IDDocBackUploadedDocumentId")
+  final String? iDDocBackUploadedDocumentId;
 
   @override
   String toString() {
-    return 'SaveIdentityDetailsRequestModel(applicationRefNo: $applicationRefNo, applicantType: $applicantType, policyType: $policyType, documentCategory: $documentCategory, documentSide: $documentSide, documentType: $documentType, idDocTypeId: $idDocTypeId, surname: $surname, otherName: $otherName, idDocNumber: $idDocNumber, idDocFrontImage: $idDocFrontImage, idDocBackImage: $idDocBackImage, customerId: $customerId, fileExtension: $fileExtension, quoteNumber: $quoteNumber)';
+    return 'SaveIdentityDetailsRequestModel(applicationRefNo: $applicationRefNo, idDocTypeId: $idDocTypeId, surname: $surname, otherName: $otherName, idDocNumber: $idDocNumber, idDocFrontImage: $idDocFrontImage, idDocBackImage: $idDocBackImage, iDDocFrontUploadedDocumentId: $iDDocFrontUploadedDocumentId, iDDocBackUploadedDocumentId: $iDDocBackUploadedDocumentId)';
   }
 
   @override
@@ -383,16 +282,6 @@ class _$SaveIdentityDetailsRequestModelImpl
             other is _$SaveIdentityDetailsRequestModelImpl &&
             (identical(other.applicationRefNo, applicationRefNo) ||
                 other.applicationRefNo == applicationRefNo) &&
-            (identical(other.applicantType, applicantType) ||
-                other.applicantType == applicantType) &&
-            (identical(other.policyType, policyType) ||
-                other.policyType == policyType) &&
-            (identical(other.documentCategory, documentCategory) ||
-                other.documentCategory == documentCategory) &&
-            (identical(other.documentSide, documentSide) ||
-                other.documentSide == documentSide) &&
-            (identical(other.documentType, documentType) ||
-                other.documentType == documentType) &&
             (identical(other.idDocTypeId, idDocTypeId) ||
                 other.idDocTypeId == idDocTypeId) &&
             (identical(other.surname, surname) || other.surname == surname) &&
@@ -404,12 +293,14 @@ class _$SaveIdentityDetailsRequestModelImpl
                 other.idDocFrontImage == idDocFrontImage) &&
             (identical(other.idDocBackImage, idDocBackImage) ||
                 other.idDocBackImage == idDocBackImage) &&
-            (identical(other.customerId, customerId) ||
-                other.customerId == customerId) &&
-            (identical(other.fileExtension, fileExtension) ||
-                other.fileExtension == fileExtension) &&
-            (identical(other.quoteNumber, quoteNumber) ||
-                other.quoteNumber == quoteNumber));
+            (identical(other.iDDocFrontUploadedDocumentId,
+                    iDDocFrontUploadedDocumentId) ||
+                other.iDDocFrontUploadedDocumentId ==
+                    iDDocFrontUploadedDocumentId) &&
+            (identical(other.iDDocBackUploadedDocumentId,
+                    iDDocBackUploadedDocumentId) ||
+                other.iDDocBackUploadedDocumentId ==
+                    iDDocBackUploadedDocumentId));
   }
 
   @JsonKey(ignore: true)
@@ -417,20 +308,14 @@ class _$SaveIdentityDetailsRequestModelImpl
   int get hashCode => Object.hash(
       runtimeType,
       applicationRefNo,
-      applicantType,
-      policyType,
-      documentCategory,
-      documentSide,
-      documentType,
       idDocTypeId,
       surname,
       otherName,
       idDocNumber,
       idDocFrontImage,
       idDocBackImage,
-      customerId,
-      fileExtension,
-      quoteNumber);
+      iDDocFrontUploadedDocumentId,
+      iDDocBackUploadedDocumentId);
 
   @JsonKey(ignore: true)
   @override
@@ -452,20 +337,16 @@ abstract class _SaveIdentityDetailsRequestModel
     implements SaveIdentityDetailsRequestModel {
   const factory _SaveIdentityDetailsRequestModel(
           {@JsonKey(name: "applicationRefNo") final String? applicationRefNo,
-          @JsonKey(name: "applicantType") final String? applicantType,
-          @JsonKey(name: "policyType") final String? policyType,
-          @JsonKey(name: "documentCategory") final String? documentCategory,
-          @JsonKey(name: "documentSide") final String? documentSide,
-          @JsonKey(name: "documentType") final String? documentType,
           @JsonKey(name: "idDocTypeId") final int? idDocTypeId,
           @JsonKey(name: "surname") final String? surname,
           @JsonKey(name: "otherName") final String? otherName,
           @JsonKey(name: "idDocNumber") final String? idDocNumber,
           @JsonKey(name: "idDocFrontImage") final String? idDocFrontImage,
           @JsonKey(name: "idDocBackImage") final String? idDocBackImage,
-          @JsonKey(name: "customerId") final String? customerId,
-          @JsonKey(name: "fileExtension") final String? fileExtension,
-          @JsonKey(name: "quoteNumber") final String? quoteNumber}) =
+          @JsonKey(name: "IDDocFrontUploadedDocumentId")
+          final String? iDDocFrontUploadedDocumentId,
+          @JsonKey(name: "IDDocBackUploadedDocumentId")
+          final String? iDDocBackUploadedDocumentId}) =
       _$SaveIdentityDetailsRequestModelImpl;
 
   factory _SaveIdentityDetailsRequestModel.fromJson(Map<String, dynamic> json) =
@@ -474,21 +355,6 @@ abstract class _SaveIdentityDetailsRequestModel
   @override
   @JsonKey(name: "applicationRefNo")
   String? get applicationRefNo;
-  @override
-  @JsonKey(name: "applicantType")
-  String? get applicantType;
-  @override
-  @JsonKey(name: "policyType")
-  String? get policyType;
-  @override
-  @JsonKey(name: "documentCategory")
-  String? get documentCategory;
-  @override
-  @JsonKey(name: "documentSide")
-  String? get documentSide;
-  @override
-  @JsonKey(name: "documentType")
-  String? get documentType;
   @override
   @JsonKey(name: "idDocTypeId")
   int? get idDocTypeId;
@@ -508,14 +374,11 @@ abstract class _SaveIdentityDetailsRequestModel
   @JsonKey(name: "idDocBackImage")
   String? get idDocBackImage;
   @override
-  @JsonKey(name: "customerId")
-  String? get customerId;
+  @JsonKey(name: "IDDocFrontUploadedDocumentId")
+  String? get iDDocFrontUploadedDocumentId;
   @override
-  @JsonKey(name: "fileExtension")
-  String? get fileExtension;
-  @override
-  @JsonKey(name: "quoteNumber")
-  String? get quoteNumber;
+  @JsonKey(name: "IDDocBackUploadedDocumentId")
+  String? get iDDocBackUploadedDocumentId;
   @override
   @JsonKey(ignore: true)
   _$$SaveIdentityDetailsRequestModelImplCopyWith<

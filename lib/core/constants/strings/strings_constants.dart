@@ -230,6 +230,9 @@ class Strings {
 
   static const String uploadBothDocuments = "Upload both documents";
 
+  static const String idNumberNotFound = "ID number not found. Kindly re-upload the document";
+  static const String idNumberNotMatching = "ID number not matching";
+
   //Address Details Screen
   static const String uploadAddressProof = "Upload address proof";
   static const String editAddressDetails = "Edit Address Details";
