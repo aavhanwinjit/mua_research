@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-// import 'package:cunning_document_scanner/cunning_document_scanner.dart';
-import 'package:docscan/docscan.dart';
+import 'package:cunning_document_scanner/cunning_document_scanner.dart';
+// import 'package:docscan/docscan.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -145,15 +145,15 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           CupertinoActionSheetAction(
             child: const Text('Camera'),
             onPressed: () {
-              pickImage(ImageSource.camera, ref, context);
-              // openDocumentScanner(false);
+              // pickImage(ImageSource.camera, ref, context);
+              openDocumentScanner(false);
             },
           ),
           CupertinoActionSheetAction(
             child: const Text('Gallery'),
             onPressed: () {
-              pickImage(ImageSource.gallery, ref, context);
-              // openDocumentScanner(true);
+              // pickImage(ImageSource.gallery, ref, context);
+              openDocumentScanner(true);
             },
           )
         ],
@@ -164,26 +164,41 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
   void openDocumentScanner(bool gallery) async {
     debugPrint("inside doc scanner");
 
+    // try {
+    //   List<String>? imgPaths = await DocScan.scanDocument();
+
+    //   if (!mounted) return;
+    //   if (imgPaths != null && imgPaths.isEmpty) {
+    //     return;
+    //   }
+    //   // setState(() {
+    //   //   _imagePath = imgPaths[0];
+    //   // });
+    // } catch (e) {
+    //   print(e);
+    // }
+
     try {
-      List<String>? imgPaths = await DocScan.scanDocument();
+      final List<String>? imagesPath = await CunningDocumentScanner.getPictures(
+        noOfPages: 1,
+        isGalleryImportAllowed: gallery,
+      );
 
-      if (!mounted) return;
-      if (imgPaths != null && imgPaths.isEmpty) {
-        return;
+      debugPrint("imagePath: $imagesPath");
+
+      if (imagesPath != null && imagesPath.isNotEmpty) {
+        ref.watch(capturedFilePathProvider.notifier).update((state) => imagesPath.first);
+
+        // debugPrint("before popping");
+
+        context.pop();
+        // debugPrint("after popping");
+        context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
       }
-      // setState(() {
-      //   _imagePath = imgPaths[0];
-      // });
+      setState(() {});
     } catch (e) {
-      print(e);
+      debugPrint("error in document scanner function : $e");
     }
-
-    // final List<String>? imagesPath = await CunningDocumentScanner.getPictures(
-    //   noOfPages: 1,
-    //   isGalleryImportAllowed: gallery,
-    // );
-
-    // debugPrint("imagePath: $imagesPath");
 
     // DocumentScanningResult documentScanningResult = await documentScanner.scanDocument();
 
@@ -199,10 +214,12 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     try {
       XFile? result = await ImagePicker().pickImage(
         source: imageSource,
-        maxHeight: 1500,
-        maxWidth: 1500,
+        // maxHeight: 1500,
+        // maxWidth: 1500,
         imageQuality: 100,
       );
+
+      debugPrint("result: $result");
 
       if (result != null) {
         final fileSize = await result.length();
@@ -218,15 +235,22 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
             return CropImagePage(imageBytes: bytes);
           },
         ));
-        final savedFile = await _saveImageToTempStorage(croppedImage);
+        if (croppedImage != null) {
+          final savedFile = await _saveImageToTempStorage(croppedImage);
 
-        ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
-        // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+          ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
+          // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
-        context.pop();
-        context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+          debugPrint("before popping");
+
+          context.pop();
+          debugPrint("after popping");
+          context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint("error: $e");
+    }
   }
 
   void pickFile(
