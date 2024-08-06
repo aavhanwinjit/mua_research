@@ -3,6 +3,7 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
+import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request/verify_mobile_number_request_model.dart';
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
@@ -11,6 +12,7 @@ import 'package:ekyc/features/login_otp/presentation/providers/login_provider.da
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -24,10 +26,21 @@ class LoginScreen extends ConsumerStatefulWidget {
 class _LoginScreenState extends ConsumerState<LoginScreen> {
   final formKey = GlobalKey<FormState>();
 
+  TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
-    ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+    });
   }
 
   @override
@@ -56,7 +69,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                   ),
                   CustomTextFormField(
+                    controller: controller,
                     maxLength: 8,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                      FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                    ],
                     validator: (value) {
                       if (value!.trim().isEmpty || value.trim().length < 8) {
                         return Strings.loginPhoneValidatorString;
@@ -66,7 +84,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     onChanged: (value) {
                       ref.read(phoneNumberProvider.notifier).update((state) => value);
                     },
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.number,
                     hint: Strings.loginPhoneHint,
                     label: Strings.loginPhoneLabel,
                     floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -132,7 +150,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 
             context.showSnackBar(message: Strings.otpSentSuccessfully);
+            controller.text = "";
             context.pushNamed(AppRoutes.otpScreen);
+          } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
+            ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
+            context.pushReplacementNamed(AppRoutes.failureScreen);
           } else {
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 

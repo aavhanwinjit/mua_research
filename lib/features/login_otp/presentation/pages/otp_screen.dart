@@ -66,8 +66,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         },
         child: Scaffold(
           body: Padding(
-            padding: EdgeInsets.only(
-                left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
             child: Column(
               children: [
                 CustomAppBar(
@@ -103,10 +102,15 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                 SizedBox(height: 24.h),
                 CustomPrimaryButton(
                   loading: ref.watch(otpScreenLoadingProvider),
-                  disable: ref.watch(otpProvider).trim().length < 6,
-                  onTap: () => ref.watch(userLoggedInProvider)
-                      ? _changeMPIN()
-                      : _verifyOTP(),
+                  disable: ref.watch(otpProvider).trim().length < 6 || showResendOption,
+                  disabledOnTap: () {
+                    if (ref.watch(otpProvider).trim().length < 6) {
+                      context.showErrorSnackBar(message: Strings.pleaseEnterOTP);
+                    } else {
+                      context.showErrorSnackBar(message: Strings.otpExpiredMessage);
+                    }
+                  },
+                  onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
                   label: Strings.contn,
                 ),
                 SizedBox(height: 18.h),
@@ -256,9 +260,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       },
       (ValidateOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .read(validateOTPResponseProvider.notifier)
-              .update((state) => success);
+          ref.read(validateOTPResponseProvider.notifier).update((state) => success);
 
           // clear controllers
           ref.watch(oldPINProvider.notifier).update((state) => '');
@@ -273,29 +275,34 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           );
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
-          if (success.body?.responseBody?.isMPINSet == true &&
-              ref.watch(forgotPasswordSelectedProvider) == false) {
+          if (success.body?.responseBody?.isMPINSet == true && ref.watch(forgotPasswordSelectedProvider) == false) {
             await LocalDataHelper.storeMobileNumber(phoneNumber);
-            final request =
-                RegisterDeviceRequestModel(mobileNumber: phoneNumber);
+            final request = RegisterDeviceRequestModel(mobileNumber: phoneNumber);
 
             final response = await getIt<RegisterDevice>().call(request);
 
             response.fold((failure) {
-              context.showSnackBar(
-                  message: Strings.globalErrorGenericMessageOne);
+              context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
             }, (RegisterDeviceResponseModel success) async {
               if (success.status?.isSuccess == true) {
-                await LocalDataHelper.storeDeviceToken(
-                    success.body!.responseBody!.deviceToken);
+                await LocalDataHelper.storeDeviceToken(success.body!.responseBody!.deviceToken);
                 context.pushReplacementNamed(AppRoutes.mpinLoginScreen);
               }
             });
           } else {
             context.pushReplacementNamed(AppRoutes.successScreen);
           }
-        } else if (success.status?.isSuccess == false &&
-            success.status?.statusCode == ApiErrorCodes.notFount) {
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.otpAtMax) {
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+
+          setState(() {
+            showResendOption = true;
+          });
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.pushReplacementNamed(AppRoutes.failureScreen);
@@ -303,8 +310,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -344,12 +350,8 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       (ChangeMPINResponseModel success) async {
         debugPrint("success in otp screen : $success");
         if (success.status?.isSuccess == true) {
-          ref
-              .read(changeMPINResponseProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(changeMPINResponseProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -374,8 +376,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
@@ -386,13 +387,13 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
     if (retryCount == 3) {
       debugPrint("retry count $retryCount");
       context.showErrorSnackBar(message: Strings.maximumOTPRetryReached);
+
       return;
     }
 
     final String? refCode = ref.watch(refCodeProvider);
 
-    final ResendOtpRequestModel request =
-        ResendOtpRequestModel(refCode: refCode);
+    final ResendOtpRequestModel request = ResendOtpRequestModel(refCode: refCode);
 
     debugPrint("request resed otp to json: ${request.toJson()}");
 
@@ -406,19 +407,17 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
       (ResendOtpResponseModel success) async {
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
 
           context.showSnackBar(message: Strings.otpSentSuccessfully);
 
           retryCount++;
+          otpController.text = '';
           showResendOption = false;
           setState(() {});
         } else {
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

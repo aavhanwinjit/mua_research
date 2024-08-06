@@ -41,16 +41,13 @@ class _TimerViewState extends State<TimerWidget> {
         ? const SizedBox.shrink()
         : Row(
             children: [
-              SizedBox(width: 10.w),
-              TextButton(
-                onPressed: null,
-                child: Text(
-                  '${(_start ~/ 60).toString().padLeft(2, '0')}:${(_start % 60).toString().padLeft(2, '0')}',
-                  style: TextStyle(
-                    color: textGrayColor2,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.normal,
-                  ),
+              SizedBox(width: 4.w),
+              Text(
+                '${(_start ~/ 60).toString().padLeft(2, '0')}:${(_start % 60).toString().padLeft(2, '0')}',
+                style: TextStyle(
+                  color: textGrayColor2,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.normal,
                 ),
               ),
             ],

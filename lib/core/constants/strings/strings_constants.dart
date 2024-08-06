@@ -81,10 +81,12 @@ class Strings {
   static const String loginPhoneValidatorString = "Please enter 8-digit mobile number";
   static const String enterValidPhoneNumberString = "Please enter valid phone number";
   static const String loginButtonTitle = "Get Verification Code";
-  static const String otpSentSuccessfully = "An OTP has been sent successfully";
+  static const String otpSentSuccessfully = "An OTP has been sent successfully. It will be valid for the next 30 secs.";
 
   //3.OTP Screen
   static const String otpScreenTitle = "Enter the OTP sent to";
+  static const String otpExpiredMessage = "The OTP has been expired, please generate new OTP";
+  static const String pleaseEnterOTP = "Please enter valid OTP";
 
   //4.OTP Success Screen
   static const String otpSuccessScreenTitle = "Great, that matches!";
@@ -97,7 +99,7 @@ class Strings {
   //5.OTP Failure Screen
   static const String otpFailureScreenTitle = "Oops!";
   static const String otpFailureScreenSubTitle =
-      "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your MUA for assistance";
+      "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your bank for assistance";
   static const String otpFailureScreenButtonTitle = "Got it!";
 
   //Fonts

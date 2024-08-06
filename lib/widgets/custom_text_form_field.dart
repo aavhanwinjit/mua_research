@@ -1,6 +1,7 @@
 import 'package:ekyc/core/constants/color/color_constants.dart';
 import 'package:ekyc/theme/custom_border_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -28,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   final FloatingLabelBehavior? floatingLabelBehavior;
   final String? initialValue;
   final bool? enabled;
+  final List<TextInputFormatter>? inputFormatters;
 
   const CustomTextFormField({
     super.key,
@@ -55,6 +57,7 @@ class CustomTextFormField extends StatelessWidget {
     this.floatingLabelBehavior,
     this.initialValue,
     this.enabled,
+    this.inputFormatters,
   });
 
   @override
@@ -73,6 +76,7 @@ class CustomTextFormField extends StatelessWidget {
         fontSize: 16.sp,
       ),
       maxLength: maxLength,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         fillColor: white,
         filled: true,

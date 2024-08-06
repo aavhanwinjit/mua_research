@@ -82,7 +82,7 @@ mixin RegistrationMixin {
             message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
           // clear controller
-          ref.watch(createPINProvider.notifier).update((state) => '');
+          // ref.watch(createPINProvider.notifier).update((state) => '');
           ref.watch(confirmPINProvider.notifier).update((state) => '');
         }
       },
