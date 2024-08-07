@@ -38,6 +38,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void initState() {
     super.initState();
 
+    debugPrint('init triggered');
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
     });
@@ -150,7 +152,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 
             context.showSnackBar(message: Strings.otpSentSuccessfully);
-            controller.text = "";
+            // controller.text = "";
             context.pushNamed(AppRoutes.otpScreen);
           } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);

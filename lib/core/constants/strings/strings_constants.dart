@@ -99,7 +99,8 @@ class Strings {
   //5.OTP Failure Screen
   static const String otpFailureScreenTitle = "Oops!";
   static const String otpFailureScreenSubTitle =
-      "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your bank for assistance";
+      "It seems like this mobile number isn't\nregistered. Please contact your\nrepresentative at MUA.";
+  // "It seems like this mobile number isn't\nregistered. If you're having trouble, feel\nfree to contact your bank for assistance";
   static const String otpFailureScreenButtonTitle = "Got it!";
 
   //Fonts
@@ -154,10 +155,11 @@ class Strings {
       "Enter the following details from the customer's insurance documentation.";
   static const String enterFollowingDetailsCustomerInfoScreen =
       "Enter the following details from the customer's insurance documentation.";
-  static const String enterFollowingDetailsEditScreen = "Enter the following details from the ";
+  static const String enterFollowingDetailsEditScreen =
+      "Enter the following details from the National ID Card (NIC) or Passport";
   static const String surname = "Surname";
   static const String surnameValidationString = "Enter surname";
-  static const String enterNameAsPerDoc = "Enter customer name as per NIC or Passport documents";
+  static const String enterNameAsPerDoc = "Enter customer surname as per NIC or Passport documents";
   static const String otherName = "Other Name";
   static const String otherNameValidationString = "Enter other Name";
   static const String contactNo = "Contact No";
@@ -189,7 +191,7 @@ class Strings {
   static const String kycSubmission = "KYC Submission";
   static const String insuranceStageScreenSubtitle = "Ensure a smooth process by completing the following steps.";
 
-  static const String identityIdDetails = "Identity/ID details";
+  static const String identityIdDetails = "Identity/ID Details";
   static const String idDetailsSubtitle = "Upload a clear photo of a valid ID document (e.g., passport or NIC).";
   static const String addressDetails = "Address Details";
   static const String addressDetailsSubtitle = "Upload documents serving as proof of the customer's address.";

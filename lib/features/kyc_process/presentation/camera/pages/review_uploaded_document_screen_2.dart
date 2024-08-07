@@ -60,7 +60,7 @@ class _ReviewUploadedDocumentScreen2State extends ConsumerState<ReviewUploadedDo
                     File(capturedFilePath ?? ""),
                     width: double.infinity,
                     height: 250.h,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -102,10 +102,11 @@ class _ReviewUploadedDocumentScreen2State extends ConsumerState<ReviewUploadedDo
                 onTap: ref.watch(reviewScreen2LoadingProvider) == true
                     ? () {}
                     : () {
-                        context.pushReplacementNamed(
-                          AppRoutes.cameraScreen2,
-                          extra: {'onChange': widget.onChange, 'documentCode': widget.documentCode},
-                        );
+                        // context.pushReplacementNamed(
+                        //   AppRoutes.cameraScreen2,
+                        //   extra: {'onChange': widget.onChange, 'documentCode': widget.documentCode},
+                        // );
+                        context.pop(true);
                       },
               ),
             ],

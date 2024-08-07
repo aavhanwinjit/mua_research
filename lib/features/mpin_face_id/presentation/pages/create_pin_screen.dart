@@ -18,68 +18,93 @@ class CreatePinScreen extends ConsumerStatefulWidget {
 
 class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(createPINProvider.notifier).update((state) => "");
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: white,
-      appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //Heading
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: Text(
-                Strings.createPin,
-                style: TextStyle(
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.w700,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        context.pop(true);
+      },
+      child: Scaffold(
+        backgroundColor: white,
+        appBar: AppBarHelper.showCustomAppbar(
+          context: context,
+          title: "",
+          onPressed: () {
+            context.pop(true);
+          },
+        ),
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //Heading
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Text(
+                  Strings.createPin,
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
-            //subtitle
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: Text(
-                Strings.createPinSubtitle,
-                style: TextStyle(
-                  fontSize: 14.sp,
+              const SizedBox(height: 10),
+              //subtitle
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Text(
+                  Strings.createPinSubtitle,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
-            ),
-            const Spacer(),
-            MaskedPinTextfield(provider: createPINProvider),
-            const Spacer(),
-            //PIN keypad
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+              const Spacer(),
+              MaskedPinTextfield(provider: createPINProvider),
+              const Spacer(),
+              //PIN keypad
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: PinKeypad(
+                  provider: createPINProvider,
+                  callback: _validatePin,
+                ),
               ),
-              child: PinKeypad(
-                provider: createPINProvider,
-                callback: _validatePin,
-              ),
-            ),
-            const Spacer(),
-          ],
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  void _validatePin() {
+  void _validatePin() async {
     final bool isValid = ref.watch(createPINProvider).validatePin();
 
     if (!isValid) {
       context.showErrorSnackBar(message: Strings.pinValidationFailed);
       ref.watch(createPINProvider.notifier).update((state) => "");
     } else {
-      context.pushNamed(AppRoutes.confirmPINScreen);
+      final bool? result = await context.pushNamed(AppRoutes.confirmPINScreen);
+
+      if (result == true) {
+        ref.watch(createPINProvider.notifier).update((state) => "");
+      }
     }
   }
 }

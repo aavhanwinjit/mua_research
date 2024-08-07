@@ -42,7 +42,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                     File(capturedFilePath ?? ""),
                     width: double.infinity,
                     height: 250.h,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
@@ -57,9 +57,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 disable: false,
                 label: Strings.upload,
                 onTap: () {
-                  ref
-                      .watch(provider.notifier)
-                      .update((state) => capturedFilePath);
+                  ref.watch(provider.notifier).update((state) => capturedFilePath);
                   context.pop();
                 },
               ),
@@ -69,7 +67,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 primary: true,
                 label: Strings.retakePhoto,
                 onTap: () {
-                  context.pop();
+                  context.pop(true);
                 },
               ),
             ],

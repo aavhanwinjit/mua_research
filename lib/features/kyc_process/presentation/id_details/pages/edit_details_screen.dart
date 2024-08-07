@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/utils/extensions/input_formatter_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/disabled_fields_widget.dart';
@@ -13,8 +14,7 @@ class EditDetailsScreen extends ConsumerStatefulWidget {
   const EditDetailsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _EditDetailsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _EditDetailsScreenState();
 }
 
 class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
@@ -49,8 +49,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
     String? extractedFirstName = ref.watch(extractedFirstNameProvider);
     String? extractedSurName = ref.watch(extractedSurNameProvider);
     String? extractedIdNumber = ref.watch(extractedNICIDNumberProvider);
-    AgentApplicationModel? selectedApplication =
-        ref.watch(selectedApplicationProvider);
+    AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
@@ -71,7 +70,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "${Strings.enterFollowingDetailsEditScreen} ${Strings.nicCard}",
+                      Strings.enterFollowingDetailsEditScreen,
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor2,
@@ -80,6 +79,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedSurName,
+                      inputFormatters: [UpperCaseTextFormatter()],
                       label: Strings.surname,
                       onChanged: (value) {
                         surname = value.trim();
@@ -103,6 +103,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedFirstName,
+                      inputFormatters: [UpperCaseTextFormatter()],
                       label: Strings.otherName,
                       onChanged: (value) {
                         otherName = value.trim();
@@ -126,10 +127,8 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedIdNumber,
-                      label: selectedApplication?.nationality ==
-                              NationalityType.Mauritian.toString()
-                                  .split('.')
-                                  .last
+                      inputFormatters: [UpperCaseTextFormatter()],
+                      label: selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last
                           ? Strings.nicIdNo
                           : Strings.passportNo,
                       onChanged: (value) {
@@ -169,9 +168,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
 
     ref.watch(extractedFirstNameProvider.notifier).update((state) => otherName);
     ref.watch(extractedSurNameProvider.notifier).update((state) => surname);
-    ref
-        .watch(extractedNICIDNumberProvider.notifier)
-        .update((state) => idCardNumber);
+    ref.watch(extractedNICIDNumberProvider.notifier).update((state) => idCardNumber);
 
     context.pop();
   }

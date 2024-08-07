@@ -6,4 +6,16 @@ class DateTimeFormatter {
   static String getApplicationCardDateTime(DateTime? dateTime) {
     return dateTime != null ? _applicationCardDateTimeFormat.format(dateTime) : "";
   }
+
+  static String formatSignatureDate(DateTime? dateTime) {
+    if (dateTime != null) {
+      String formattedDate = DateFormat('EEE MMM dd HH:mm:ss').format(dateTime);
+
+      formattedDate += ' ${dateTime.year}';
+
+      return formattedDate;
+    }
+
+    return '';
+  }
 }

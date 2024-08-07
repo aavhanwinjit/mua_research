@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/providers/application_filters_providers.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/dashboard_page_number_notifier.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -137,6 +138,8 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => poaMissing);
     ref.watch(filterCompleteProvider.notifier).update((state) => completed);
 
+    ref.read(dashboardPageNumberNotifierProvider.notifier).resetPageNumber();
+
     await getAgentApplications(
       context: context,
       ref: ref,
@@ -157,6 +160,8 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
     ref.watch(filterIncompletePORProvider.notifier).update((state) => false);
     ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
     ref.watch(filterCompleteProvider.notifier).update((state) => false);
+
+    ref.read(dashboardPageNumberNotifierProvider.notifier).resetPageNumber();
 
     await getAgentApplications(
       context: context,

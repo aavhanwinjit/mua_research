@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/utils/api_error_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/data/models/get_agent_application/request/get_agent_applications_request_model.dart';
 import 'package:ekyc/features/dashboard/data/models/get_agent_application/response/get_agent_applications_response_model.dart';
@@ -35,7 +36,7 @@ mixin AgentApplicationsMixin {
     );
 
     // if (pageNumberNotifier.isFirstPage) {
-      ref.watch(applicationListLoadingProvider.notifier).update((state) => true);
+    ref.watch(applicationListLoadingProvider.notifier).update((state) => true);
     // }
     ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
@@ -50,6 +51,7 @@ mixin AgentApplicationsMixin {
         context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (GetAgentApplicationsResponseModel success) async {
+        debugPrint("success: $success");
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody?.agentApplicationList != null) {
@@ -65,6 +67,26 @@ mixin AgentApplicationsMixin {
             ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
             ref.watch(applicationListErrorProvider.notifier).update((state) => false);
           }
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.listEmpty) {
+          // final agentApplicationNotifier = ref.read(agentApplicationsNotifierProvider.notifier);
+
+          // agentApplicationNotifier.updateApplicationList([]);
+
+          // ref.watch(filterIncompleteIdProvider.notifier).update((state) => false);
+          // ref.watch(filterIncompletePORProvider.notifier).update((state) => false);
+          // ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
+          // ref.watch(filterCompleteProvider.notifier).update((state) => false);
+
+          // ref.read(dashboardPageNumberNotifierProvider.notifier).resetPageNumber();
+
+          // await getAgentApplications(context: context, ref: ref);
+
+          ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
+          ref.watch(applicationListErrorProvider.notifier).update((state) => false);
+
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
         } else {
           ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
           ref.watch(applicationListErrorProvider.notifier).update((state) => false);

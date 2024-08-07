@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/date_time_formatter.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/signature/presentation/mixins/signature_mixin.dart';
@@ -52,7 +53,8 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
             ),
           ),
           Text(
-            agentDetails?.signatureUploadDate.toString() ?? "",
+            DateTimeFormatter.formatSignatureDate(agentDetails?.signatureUploadDate) ?? "",
+            // agentDetails?.signatureUploadDate.toString() ?? "",
             // "Tue Jan 18 11:55:50 IST 2023",
             style: TextStyle(
               color: textGrayColor2,

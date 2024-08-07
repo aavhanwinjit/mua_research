@@ -16,6 +16,15 @@ class OldPinScreen extends ConsumerStatefulWidget {
 
 class _OldPinScreenState extends ConsumerState<OldPinScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(oldPINProvider.notifier).update((state) => "");
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
@@ -60,7 +69,13 @@ class _OldPinScreenState extends ConsumerState<OldPinScreen> {
               ),
               child: PinKeypad(
                 provider: oldPINProvider,
-                callback: () => context.pushNamed(AppRoutes.createPINScreen),
+                callback: () async {
+                  final bool? result = await context.pushNamed(AppRoutes.createPINScreen);
+
+                  if (result == true) {
+                    ref.watch(oldPINProvider.notifier).update((state) => "");
+                  }
+                },
               ),
             ),
             const Spacer(),

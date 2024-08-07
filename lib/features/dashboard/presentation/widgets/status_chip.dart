@@ -39,11 +39,13 @@ class StatusChip extends StatelessWidget {
       return const Icon(
         Icons.check_circle,
         color: primaryGreenColor,
+        size: 18,
       );
     } else {
       return const Icon(
         Icons.help,
         color: darkYellow,
+        size: 18,
       );
     }
   }

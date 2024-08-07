@@ -283,6 +283,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
                 context.pushNamed(AppRoutes.idReviewSubmitScreen);
               } else {
                 context.showErrorSnackBar(message: Strings.idNumberNotMatching);
+                // return;
               }
             } else {
               context.showErrorSnackBar(message: Strings.idNumberNotFound);

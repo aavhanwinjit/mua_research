@@ -86,7 +86,7 @@ class DisabledFieldsWidget extends ConsumerWidget {
           text: TextSpan(
             text: "  +230",
             style: TextStyle(
-              color: black,
+              color: textGrayColor,
               fontSize: 16.sp,
             ),
             children: [

@@ -45,31 +45,6 @@ class DocumentUploadContainer extends ConsumerStatefulWidget {
 }
 
 class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContainer> {
-  // DocumentScannerOptions options = DocumentScannerOptions(
-  //   mode: ScannerMode.filter,
-  //   isGalleryImport: true,
-  //   pageLimit: 1,
-  //   documentFormat: DocumentFormat.jpeg,
-  // );
-
-  // late DocumentScanner documentScanner;
-
-  // List<String>? documents;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   documentScanner = DocumentScanner(options: options);
-  //   setState(() {});
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   documentScanner.close();
-  // }
-
   @override
   Widget build(BuildContext context) {
     final documentFilePath = ref.watch(widget.provider);
@@ -85,7 +60,8 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
             ? widget.disableCallback
             : documentFilePath == null
                 ? () {
-                    _onContainerTap(ref, context);
+                    openDocumentScanner(true);
+                    // _onContainerTap();
                   }
                 : null,
         child: SizedBox(
@@ -132,10 +108,12 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     );
   }
 
-  void _onContainerTap(WidgetRef ref, BuildContext context) {
+  void _onContainerTap() {
     ref.read(cameraScreenSubtitle.notifier).update((state) => widget.cameraScreenDescription);
     ref.read(cameraScreenAppBarTitle.notifier).update((state) => widget.cameraScreenTitle);
     ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => widget.reviewScreenTitle);
+
+    debugPrint("inside container tap");
 
     showCupertinoModalPopup(
       context: context,
@@ -145,15 +123,15 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           CupertinoActionSheetAction(
             child: const Text('Camera'),
             onPressed: () {
-              // pickImage(ImageSource.camera, ref, context);
-              openDocumentScanner(false);
+              pickImage(ImageSource.camera, context);
+              // openDocumentScanner(false);
             },
           ),
           CupertinoActionSheetAction(
             child: const Text('Gallery'),
             onPressed: () {
-              // pickImage(ImageSource.gallery, ref, context);
-              openDocumentScanner(true);
+              pickImage(ImageSource.gallery, context);
+              // openDocumentScanner(true);
             },
           )
         ],
@@ -191,24 +169,25 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
 
         // debugPrint("before popping");
 
-        context.pop();
         // debugPrint("after popping");
-        context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+        final bool? result = await context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+
+        debugPrint("result: $result");
+
+        if (result == true) {
+          ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+
+          openDocumentScanner(true);
+        }
       }
       setState(() {});
     } catch (e) {
       debugPrint("error in document scanner function : $e");
     }
-
-    // DocumentScanningResult documentScanningResult = await documentScanner.scanDocument();
-
-    // documents = documentScanningResult.images;
-    // setState(() {});
   }
 
   void pickImage(
     ImageSource imageSource,
-    WidgetRef ref,
     BuildContext context,
   ) async {
     try {
@@ -245,7 +224,18 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
 
           context.pop();
           debugPrint("after popping");
-          context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+
+          final bool? res = await context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+
+          debugPrint("res: $res");
+
+          if (res == true) {
+            ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+
+            debugPrint("before calling container tap");
+
+            _onContainerTap();
+          }
         }
       }
     } catch (e) {
@@ -253,10 +243,7 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     }
   }
 
-  void pickFile(
-    WidgetRef ref,
-    BuildContext context,
-  ) async {
+  void pickFile(BuildContext context) async {
     try {
       FilePickerResult? file = await FilePicker.platform.pickFiles(allowedExtensions: ["pdf"]);
 

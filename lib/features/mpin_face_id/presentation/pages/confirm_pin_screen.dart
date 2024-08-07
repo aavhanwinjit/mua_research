@@ -33,91 +33,107 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
   void initState() {
     super.initState();
     ref.read(mpinLoadingProvider.notifier).update((state) => false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.watch(confirmPINProvider.notifier).update((state) => "");
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: white,
-      appBar: AppBarHelper.showCustomAppbar(context: context, title: ""),
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //Heading
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: Text(
-                Strings.confirmPin,
-                style: TextStyle(
-                  fontSize: 30.sp,
-                  fontWeight: FontWeight.w700,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        context.pop(true);
+      },
+      child: Scaffold(
+        backgroundColor: white,
+        appBar: AppBarHelper.showCustomAppbar(
+          context: context,
+          title: "",
+          onPressed: () {
+            context.pop(true);
+          },
+        ),
+        body: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //Heading
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Text(
+                  Strings.confirmPin,
+                  style: TextStyle(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
-            //Subtitle
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
-              ),
-              child: Text(
-                Strings.createPinSubtitle,
-                style: TextStyle(
-                  fontSize: 14.sp,
+              const SizedBox(height: 10),
+              //Subtitle
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: Text(
+                  Strings.createPinSubtitle,
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                  ),
                 ),
               ),
-            ),
-            const Spacer(),
-            MaskedPinTextfield(provider: confirmPINProvider),
-            if (ref.watch(mpinLoadingProvider)) ...[
               const Spacer(),
-              _loader(),
-            ],
-            const Spacer(),
-            successVal
-                ? Container(
-                    color: primaryGreenColor,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 5,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "PIN successfully set. Your account is now secured.",
-                        style: TextStyle(
-                          color: white,
+              MaskedPinTextfield(provider: confirmPINProvider),
+              if (ref.watch(mpinLoadingProvider)) ...[
+                const Spacer(),
+                _loader(),
+              ],
+              const Spacer(),
+              successVal
+                  ? Container(
+                      color: primaryGreenColor,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "PIN successfully set. Your account is now secured.",
+                          style: TextStyle(
+                            color: white,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                : const SizedBox(height: 0),
-            const Spacer(),
-            //PIN keypad
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+                    )
+                  : const SizedBox(height: 0),
+              const Spacer(),
+              //PIN keypad
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: PinKeypad(
+                  provider: confirmPINProvider,
+                  callback: () => Future.delayed(const Duration(seconds: 2), () {
+                    ref.watch(userLoggedInProvider)
+                        ? _verifyMPIN()
+                        : setAgentMPIN(
+                            context: context,
+                            ref: ref,
+                            onSuccess: () {
+                              successVal = true;
+                              setState(() {});
+                            },
+                            biometricAuth: _biometricAuthentication,
+                          );
+                  }),
+                ),
               ),
-              child: PinKeypad(
-                provider: confirmPINProvider,
-                callback: () => Future.delayed(const Duration(seconds: 2), () {
-                  ref.watch(userLoggedInProvider)
-                      ? _verifyMPIN()
-                      : setAgentMPIN(
-                          context: context,
-                          ref: ref,
-                          onSuccess: () {
-                            successVal = true;
-                            setState(() {});
-                          },
-                          biometricAuth: _biometricAuthentication,
-                        );
-                }),
-              ),
-            ),
-            const Spacer(),
-          ],
+              const Spacer(),
+            ],
+          ),
         ),
       ),
     );
