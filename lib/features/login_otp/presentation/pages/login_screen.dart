@@ -155,6 +155,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
             String expiryTime = DateHelper.formatExpiryTime(success.body?.responseBody?.tokenData?.expiry ?? 60);
 
+            debugPrint("expiryTime: $expiryTime");
+
             context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
             // controller.text = "";
             context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': true});

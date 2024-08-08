@@ -60,8 +60,8 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
             ? widget.disableCallback
             : documentFilePath == null
                 ? () {
-                    openDocumentScanner(true);
-                    // _onContainerTap();
+                    // openDocumentScanner(true);
+                    _onContainerTap();
                   }
                 : null,
         child: SizedBox(

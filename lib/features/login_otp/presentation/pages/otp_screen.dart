@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/date_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
@@ -411,8 +412,13 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
         if (success.status?.isSuccess == true) {
           ref.read(resendOTPProvider.notifier).update((state) => success);
           ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref.read(expiryTimeProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.expiry);
 
-          context.showSnackBar(message: Strings.otpSentSuccessfully);
+          String expiryTime = DateHelper.formatExpiryTime(success.body?.responseBody?.tokenData?.expiry ?? 60);
+
+          debugPrint("expiryTime: $expiryTime");
+
+          context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
 
           retryCount++;
           otpController.text = '';
