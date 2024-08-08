@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -9,6 +10,7 @@ import 'package:ekyc/features/kyc_process/data/models/scan_document/request/scan
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/domain/usecases/scan_document.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/upload_por_docs_screen_providers.dart';
+import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
@@ -23,6 +25,7 @@ mixin ScanDocumentMixin {
     required StateProvider<bool> loadingProvider,
     required Function(ScanDocumentResponseBody?) onSuccess,
     required String base64Image,
+    String? documentSide,
   }) async {
     final loading = ref.watch(loadingProvider);
     if (loading) return;
@@ -38,18 +41,39 @@ mixin ScanDocumentMixin {
 
     final DocumentCategoryModel? selectedDocumentCategory = ref.watch(selectedDocumentCategoryProvider);
 
+    String? firstName;
+    String? lastName;
+    String? idNumber;
+    String? nicNumber;
+
+    if (documentType == DocumentCodes.NIC.toString().split('.').last && documentSide == "BACK") {
+      firstName = ref.watch(extractedFirstNameProvider);
+      lastName = ref.watch(extractedSurNameProvider);
+      idNumber = ref.watch(extractedNICIDNumberProvider);
+      nicNumber = ref.watch(extractedNICIDNumberProvider);
+    } else {
+      firstName = // selectedApplication?.idDocOtherName,
+          ref.watch(porDocUploadProcess)
+              ? selectedApplication?.addressDocOtherName
+              : selectedApplication?.idDocOtherName;
+      lastName = // selectedApplication?.idDocSurname,
+          ref.watch(porDocUploadProcess) ? selectedApplication?.addressDocSurname : selectedApplication?.idDocSurname;
+      idNumber = selectedApplication?.idDocNumber;
+      nicNumber = (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
+          ? selectedApplication?.idDocNumber
+          : null;
+    }
+
     ScanDocumentRequestModel request = ScanDocumentRequestModel(
       applicantType: selectedApplication?.nationality,
       policyType: selectedKycType.policyType,
       documentCategory: selectedDocumentCategory?.documentCategory,
       documentType: documentType,
-      documentSide: "FRONT",
+      documentSide: documentSide ?? "FRONT",
       customerId: "",
       policyNumber: selectedApplication?.policyNumber,
       fileExtension: FileExtensionEnums.png.toString().split('.').last,
-      nicNumber: (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last)
-          ? selectedApplication?.idDocNumber
-          : null,
+      nicNumber: nicNumber,
       passportNumber: (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
           : null,
@@ -57,16 +81,10 @@ mixin ScanDocumentMixin {
       //  "252248",
       verificationData: VerificationData(
         // firstName: "CALOWTEE",
-        firstName:
-            // selectedApplication?.idDocOtherName,
-            ref.watch(porDocUploadProcess)
-                ? selectedApplication?.addressDocOtherName
-                : selectedApplication?.idDocOtherName,
+        firstName: firstName,
         // surname: "MUSSAI",
-        surname:
-            // selectedApplication?.idDocSurname,
-            ref.watch(porDocUploadProcess) ? selectedApplication?.addressDocSurname : selectedApplication?.idDocSurname,
-        idNumber: selectedApplication?.idDocNumber,
+        surname: lastName,
+        idNumber: idNumber,
         billDate: null,
         registrationMark: null,
         issueDate: null,

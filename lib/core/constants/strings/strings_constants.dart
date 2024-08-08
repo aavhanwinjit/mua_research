@@ -81,7 +81,7 @@ class Strings {
   static const String loginPhoneValidatorString = "Please enter 8-digit mobile number";
   static const String enterValidPhoneNumberString = "Please enter valid phone number";
   static const String loginButtonTitle = "Get Verification Code";
-  static const String otpSentSuccessfully = "An OTP has been sent successfully. It will be valid for the next 30 secs.";
+  static const String otpSentSuccessfully = "An OTP has been sent successfully. It will be valid for the next";
 
   //3.OTP Screen
   static const String otpScreenTitle = "Enter the OTP sent to";
@@ -159,7 +159,8 @@ class Strings {
       "Enter the following details from the National ID Card (NIC) or Passport";
   static const String surname = "Surname";
   static const String surnameValidationString = "Enter surname";
-  static const String enterNameAsPerDoc = "Enter customer surname as per NIC or Passport documents";
+  static const String enterSurNameAsPerDoc = "Enter customer surname as per NIC or Passport documents";
+  static const String enterNameAsPerDoc = "Enter customer name as per NIC or Passport documents";
   static const String otherName = "Other Name";
   static const String otherNameValidationString = "Enter other Name";
   static const String contactNo = "Contact No";

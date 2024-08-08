@@ -167,6 +167,8 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
       context: context,
       ref: ref,
     );
+
+    context.pop();
   }
 
   Widget _titleWithCloseButton() {

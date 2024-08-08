@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/date_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
@@ -143,6 +144,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           if (success.status?.isSuccess == true) {
             ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
             ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+            ref.read(expiryTimeProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.expiry);
 
             await _setData(
               authToken: success.body?.responseBody?.tokenData?.token,
@@ -151,9 +153,11 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 
-            context.showSnackBar(message: Strings.otpSentSuccessfully);
+            String expiryTime = DateHelper.formatExpiryTime(success.body?.responseBody?.tokenData?.expiry ?? 60);
+
+            context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
             // controller.text = "";
-            context.pushNamed(AppRoutes.otpScreen);
+            context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': true});
           } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.notFount) {
             ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 

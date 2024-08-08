@@ -115,7 +115,11 @@ final GoRouter router = GoRouter(
       path: AppRoutes.otpScreen,
       name: AppRoutes.otpScreen,
       builder: (BuildContext context, GoRouterState state) {
-        return const OTPScreen();
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+
+        final bool showEdit = extra['showEdit'] as bool;
+
+        return OTPScreen(showEdit: showEdit);
       },
     ),
     GoRoute(
@@ -382,9 +386,12 @@ final GoRouter router = GoRouter(
 
         final String documentCode = extra['documentCode'] as String;
 
+        final String? documentSide = extra['documentSide'] as String?;
+
         return ReviewUploadedDocumentScreen2(
           onChange: onChange,
           documentCode: documentCode,
+          documentSide: documentSide,
         );
       },
     ),

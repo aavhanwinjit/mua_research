@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/helpers/date_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -222,6 +223,7 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
         if (success.status?.isSuccess == true) {
           ref.read(verifyMPINResponseProvider.notifier).update((state) => success);
           ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref.read(expiryTimeProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.expiry);
 
           // await _setData(
           //   authToken: success.body?.responseBody?.tokenData?.token,
@@ -229,8 +231,11 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
           // );
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-          context.showSnackBar(message: Strings.otpSentSuccessfully);
-          context.pushNamed(AppRoutes.otpScreen);
+          String expiryTime = DateHelper.formatExpiryTime(success.body?.responseBody?.tokenData?.expiry ?? 60);
+
+          context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
+
+          context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': false});
         } else {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 

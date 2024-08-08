@@ -94,7 +94,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      Strings.enterNameAsPerDoc,
+                      Strings.enterSurNameAsPerDoc,
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor,

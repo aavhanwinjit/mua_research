@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/features/dashboard/presentation/providers/application_filters_providers.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/mixins/agent_details_mixin.dart';
@@ -81,6 +82,11 @@ class _OnboardSuccessScreenState extends ConsumerState<OnboardSuccessScreen> wit
                         .update((state) => agentDetails?.body?.responseBody?.signaturePath);
 
                     ref.watch(agentDetailsLoadingProvider.notifier).update((state) => false);
+
+                    ref.watch(filterIncompleteIdProvider.notifier).update((state) => false);
+                    ref.watch(filterIncompletePORProvider.notifier).update((state) => false);
+                    ref.watch(filterIncompletePOAProvider.notifier).update((state) => false);
+                    ref.watch(filterCompleteProvider.notifier).update((state) => false);
 
                     context.go(AppRoutes.dashboardScreen);
                   },

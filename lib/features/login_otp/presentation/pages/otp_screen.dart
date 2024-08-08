@@ -30,7 +30,8 @@ import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
 class OTPScreen extends ConsumerStatefulWidget {
-  const OTPScreen({super.key});
+  final bool? showEdit;
+  const OTPScreen({super.key, this.showEdit = true});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _OTPScreenState();
@@ -81,20 +82,21 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                           fontSize: 16.sp,
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          context.pop();
-                        },
-                        child: Text(
-                          Strings.edit,
-                          style: TextStyle(
-                            color: primaryColor,
-                            decoration: TextDecoration.underline,
-                            fontSize: 16.sp,
-                            decorationColor: primaryColor,
+                      if (widget.showEdit == true)
+                        TextButton(
+                          onPressed: () {
+                            context.pop();
+                          },
+                          child: Text(
+                            Strings.edit,
+                            style: TextStyle(
+                              color: primaryColor,
+                              decoration: TextDecoration.underline,
+                              fontSize: 16.sp,
+                              decorationColor: primaryColor,
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -176,6 +178,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   }
 
   Widget _resendWidget() {
+    int? expiryTime = ref.watch(expiryTimeProvider);
     return Row(
       children: [
         Text(
@@ -202,7 +205,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
                     showResendOption = true;
                   });
                 },
-                seconds: 30,
+                seconds: expiryTime ?? 30,
                 timerKey: ValueKey(retryCount),
               )
             : TextButton.icon(
@@ -384,7 +387,7 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
   }
 
   void _resendOTP() async {
-    if (retryCount == 3) {
+    if (retryCount == 2) {
       debugPrint("retry count $retryCount");
       context.showErrorSnackBar(message: Strings.maximumOTPRetryReached);
 

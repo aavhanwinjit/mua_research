@@ -11,3 +11,5 @@ final verifyMobileNumberProvider = StateProvider<VerifyMobileNumberResponseModel
 final resendOTPProvider = StateProvider<ResendOtpResponseModel?>((ref) => null);
 
 final refCodeProvider = StateProvider<String?>((ref) => null);
+
+final expiryTimeProvider = StateProvider<int?>((ref) => null);

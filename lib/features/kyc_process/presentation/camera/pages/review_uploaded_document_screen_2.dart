@@ -14,8 +14,10 @@ import 'package:go_router/go_router.dart';
 class ReviewUploadedDocumentScreen2 extends ConsumerStatefulWidget {
   final Function(String, ScanDocumentResponseBody?) onChange;
   final String documentCode;
+  final String? documentSide;
 
-  const ReviewUploadedDocumentScreen2({required this.onChange, required this.documentCode, super.key});
+  const ReviewUploadedDocumentScreen2(
+      {required this.onChange, required this.documentCode, this.documentSide, super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ReviewUploadedDocumentScreen2State();
@@ -91,6 +93,7 @@ class _ReviewUploadedDocumentScreen2State extends ConsumerState<ReviewUploadedDo
                       widget.onChange(capturedFilePath ?? "", response);
                     },
                     base64Image: fileBase64,
+                    documentSide: widget.documentSide,
                   );
                 },
               ),

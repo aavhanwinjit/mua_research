@@ -229,6 +229,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
                 disableCallback: () {
                   context.showErrorSnackBar(message: Strings.selectFrontImageFirst);
                 },
+                documentSide: 'BACK',
               )
             : Container(),
       ],
@@ -283,7 +284,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
                 context.pushNamed(AppRoutes.idReviewSubmitScreen);
               } else {
                 context.showErrorSnackBar(message: Strings.idNumberNotMatching);
-                // return;
+                return;
               }
             } else {
               context.showErrorSnackBar(message: Strings.idNumberNotFound);
@@ -300,7 +301,7 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
             }
           }
 
-          context.pushNamed(AppRoutes.idReviewSubmitScreen);
+          // context.pushNamed(AppRoutes.idReviewSubmitScreen);
 
           // await _performOCR(
           //   onSuccess: () {

@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/date_helper.dart';
 import 'package:ekyc/core/helpers/device_information_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
@@ -33,13 +34,11 @@ mixin LoginMixin {
     final loading = ref.watch(mpinLoadingProvider);
     if (loading) return;
 
-    final deviceInfo =
-        await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
 
-    final String mobileNo = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
+    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ??
         await LocalDataHelper.getMobileNumber();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
@@ -60,8 +59,7 @@ mixin LoginMixin {
         debugPrint("failure: $failure");
         ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (LoginbyMpinResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -75,8 +73,7 @@ mixin LoginMixin {
           );
 
           onSuccess(success.body?.responseBody);
-        } else if (success.status?.isSuccess == false &&
-            success.status?.statusCode == ApiErrorCodes.inValidPin) {
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.inValidPin) {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
@@ -88,8 +85,7 @@ mixin LoginMixin {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
 
           onFailure();
@@ -106,16 +102,13 @@ mixin LoginMixin {
     final loading = ref.watch(mpinLoadingProvider);
     if (loading) return;
 
-    final deviceInfo =
-        await DeviceInformationHelper().generateDeviceInformation();
+    final deviceInfo = await DeviceInformationHelper().generateDeviceInformation();
 
     final String deviceToken = await LocalDataHelper.getDeviceToken();
     final String fpToken = await LocalDataHelper.getFPToken();
 
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final String mobileNo = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.mobileNo ??
-        "";
+    final String mobileNo = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.mobileNo ?? "";
 
     LoginByFpRequestModel request = LoginByFpRequestModel(
       deviceId: deviceInfo.deviceId,
@@ -134,8 +127,7 @@ mixin LoginMixin {
         debugPrint("failure: $failure");
         ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (LoginByFpResponseModel success) async {
         if (success.status?.isSuccess == true) {
@@ -154,70 +146,57 @@ mixin LoginMixin {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },
     );
   }
 
-  Future<void> forgotPin(
-      {required BuildContext context, required WidgetRef ref}) async {
+  Future<void> forgotPin({required BuildContext context, required WidgetRef ref}) async {
     final String phoneNumber = await LocalDataHelper.getMobileNumber();
     ref.watch(phoneNumberProvider.notifier).update((state) => phoneNumber);
 
     final body = VerifyMobileNumberRequestModel(mobileNumber: phoneNumber);
 
-    ref
-        .watch(verifyMobileNumberLoadingProvider.notifier)
-        .update((state) => true);
+    ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => true);
 
     final response = await getIt<VerifyMobileNumber>().call(body);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        ref
-            .watch(verifyMobileNumberLoadingProvider.notifier)
-            .update((state) => false);
+        ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 
         context.showSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (VerifyMobileNumberResponseModel success) async {
         if (success.status?.isSuccess == true) {
-          ref
-              .read(verifyMobileNumberProvider.notifier)
-              .update((state) => success);
-          ref
-              .read(refCodeProvider.notifier)
-              .update((state) => success.body?.responseBody?.refCode);
+          ref.read(verifyMobileNumberProvider.notifier).update((state) => success);
+          ref.read(refCodeProvider.notifier).update((state) => success.body?.responseBody?.refCode);
+          ref.read(expiryTimeProvider.notifier).update((state) => success.body?.responseBody?.tokenData?.expiry);
 
-          await LocalDataHelper.storeAuthToken(
-              success.body?.responseBody?.tokenData?.token);
-          await LocalDataHelper.storeSessionId(
-              success.body?.responseBody?.tokenData?.sessionId);
-
-          ref.watch(sessionIdProvider.notifier).update((state) =>
-              success.body?.responseBody?.tokenData?.sessionId ?? "");
+          await LocalDataHelper.storeAuthToken(success.body?.responseBody?.tokenData?.token);
+          await LocalDataHelper.storeSessionId(success.body?.responseBody?.tokenData?.sessionId);
 
           ref
-              .watch(verifyMobileNumberLoadingProvider.notifier)
-              .update((state) => false);
+              .watch(sessionIdProvider.notifier)
+              .update((state) => success.body?.responseBody?.tokenData?.sessionId ?? "");
 
-          ref
-              .watch(forgotPasswordSelectedProvider.notifier)
-              .update((state) => true);
-          context.showSnackBar(message: Strings.otpSentSuccessfully);
-          context.pushNamed(AppRoutes.otpScreen);
+          ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+
+          ref.watch(forgotPasswordSelectedProvider.notifier).update((state) => true);
+
+          String expiryTime = DateHelper.formatExpiryTime(success.body?.responseBody?.tokenData?.expiry ?? 60);
+
+          context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
+
+          context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': false});
         } else {
-          ref
-              .watch(verifyMobileNumberLoadingProvider.notifier)
-              .update((state) => false);
+          ref.watch(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

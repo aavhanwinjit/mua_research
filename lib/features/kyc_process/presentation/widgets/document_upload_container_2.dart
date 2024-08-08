@@ -28,6 +28,7 @@ class DocumentUploadContainer2 extends ConsumerStatefulWidget {
   final Function(String, ScanDocumentResponseBody?) onChange;
   final Function() clearFile;
   final String documentCode;
+  final String? documentSide;
 
   const DocumentUploadContainer2({
     required this.documentCode,
@@ -41,6 +42,7 @@ class DocumentUploadContainer2 extends ConsumerStatefulWidget {
     this.disable,
     this.disableCallback,
     this.hideClearButton,
+    this.documentSide,
     super.key,
   });
 
@@ -62,8 +64,8 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
             ? widget.disableCallback
             : widget.filePath == null
                 ? () {
-                    openDocumentScanner(true);
-                    // _onContainerTap();
+                    // openDocumentScanner(true);
+                    _onContainerTap();
                   }
                 : null,
         child: SizedBox(
@@ -175,7 +177,11 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
 
         final bool? result = await context.pushNamed(
           AppRoutes.confirmUploadOrRetakeScreen2,
-          extra: {'onChange': widget.onChange, 'documentCode': widget.documentCode},
+          extra: {
+            'onChange': widget.onChange,
+            'documentCode': widget.documentCode,
+            'documentSide': widget.documentSide,
+          },
         );
 
         debugPrint("result: $result");
@@ -227,7 +233,11 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
 
         final bool? res = await context.pushNamed(
           AppRoutes.confirmUploadOrRetakeScreen2,
-          extra: {'onChange': widget.onChange, 'documentCode': widget.documentCode},
+          extra: {
+            'onChange': widget.onChange,
+            'documentCode': widget.documentCode,
+            'documentSide': widget.documentSide,
+          },
         );
 
         debugPrint("res: $res");
