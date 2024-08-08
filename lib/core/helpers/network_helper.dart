@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/network/interceptors/authorization_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/encryption_interceptor.dart';
+import 'package:flutter/foundation.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class NetworkHelper {
   static const ACCEPT_HEADER = "Accept";
@@ -33,17 +35,17 @@ class NetworkHelper {
       EncryptionInterceptor(),
     );
 
-    // if (kDebugMode) {
-    //   dio.interceptors.add(
-    //     PrettyDioLogger(
-    //       requestHeader: true,
-    //       requestBody: true,
-    //       responseHeader: true,
-    //       responseBody: true,
-    //       error: true,
-    //     ),
-    //   );
-    // }
+    if (kDebugMode) {
+      dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: true,
+          responseBody: true,
+          error: true,
+        ),
+      );
+    }
 
     return dio;
   }

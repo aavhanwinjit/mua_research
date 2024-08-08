@@ -376,6 +376,16 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
           context.go(AppRoutes.splashScreen);
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.otpAtMax) {
+          ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
+
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+
+          setState(() {
+            showResendOption = true;
+          });
         } else {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
