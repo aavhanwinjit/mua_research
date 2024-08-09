@@ -10,6 +10,7 @@ import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/request
 import 'package:ekyc/features/login_otp/data/models/verify_mobile_number/response/verify_mobile_number_response_model.dart';
 import 'package:ekyc/features/login_otp/domain/usecases/verify_mobile_number.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/login_provider.dart';
+import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/request/login_by_fp_request_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_biometric/response/login_by_fp_response_model.dart';
 import 'package:ekyc/features/mpin_face_id/data/models/login_by_mpin/request/login_by_mpin_request_model.dart';
@@ -81,6 +82,21 @@ mixin LoginMixin {
           );
 
           onWrongPin();
+        } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.permanentBlock) {
+          ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+
+          await LocalDataHelper.removeDeviceToken();
+          await LocalDataHelper.removeAuthToken();
+          await LocalDataHelper.removeSessionId();
+          ref.watch(userLoggedInProvider.notifier).update((state) => false);
+
+          context.go(AppRoutes.loginScreen);
+
+          // onWrongPin();
         } else {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
