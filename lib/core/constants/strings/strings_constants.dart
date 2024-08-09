@@ -255,6 +255,7 @@ class Strings {
 
   //Insured Document Screen
   static const String uploadInsuredDocuments = "Upload Insured Documents";
+  static const String editInsuredDocuments = "Edit Insured Details";
   static const String uploadProofOfRelationship = "Proof of Relationship Documents";
   static const String specifyDocumentType = "Please specify the type of document you are uploading.";
   static const String insuredDocumentContainerLabel = "Take a photo or upload\ninsured documents";

@@ -905,6 +905,8 @@ mixin _$Documentdata {
   bool? get isRegistrationMarkAvailable => throw _privateConstructorUsedError;
   @JsonKey(name: "registrationMark")
   dynamic get registrationMark => throw _privateConstructorUsedError;
+  @JsonKey(name: "address")
+  String? get address => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -931,7 +933,8 @@ abstract class $DocumentdataCopyWith<$Res> {
       @JsonKey(name: "issueDate") String? issueDate,
       @JsonKey(name: "isRegistrationMarkAvailable")
       bool? isRegistrationMarkAvailable,
-      @JsonKey(name: "registrationMark") dynamic registrationMark});
+      @JsonKey(name: "registrationMark") dynamic registrationMark,
+      @JsonKey(name: "address") String? address});
 }
 
 /// @nodoc
@@ -959,6 +962,7 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
     Object? issueDate = freezed,
     Object? isRegistrationMarkAvailable = freezed,
     Object? registrationMark = freezed,
+    Object? address = freezed,
   }) {
     return _then(_value.copyWith(
       kycStatus: freezed == kycStatus
@@ -1009,6 +1013,10 @@ class _$DocumentdataCopyWithImpl<$Res, $Val extends Documentdata>
           ? _value.registrationMark
           : registrationMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1034,7 +1042,8 @@ abstract class _$$DocumentdataImplCopyWith<$Res>
       @JsonKey(name: "issueDate") String? issueDate,
       @JsonKey(name: "isRegistrationMarkAvailable")
       bool? isRegistrationMarkAvailable,
-      @JsonKey(name: "registrationMark") dynamic registrationMark});
+      @JsonKey(name: "registrationMark") dynamic registrationMark,
+      @JsonKey(name: "address") String? address});
 }
 
 /// @nodoc
@@ -1060,6 +1069,7 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
     Object? issueDate = freezed,
     Object? isRegistrationMarkAvailable = freezed,
     Object? registrationMark = freezed,
+    Object? address = freezed,
   }) {
     return _then(_$DocumentdataImpl(
       kycStatus: freezed == kycStatus
@@ -1110,6 +1120,10 @@ class __$$DocumentdataImplCopyWithImpl<$Res>
           ? _value.registrationMark
           : registrationMark // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1130,7 +1144,8 @@ class _$DocumentdataImpl implements _Documentdata {
       @JsonKey(name: "issueDate") this.issueDate,
       @JsonKey(name: "isRegistrationMarkAvailable")
       this.isRegistrationMarkAvailable,
-      @JsonKey(name: "registrationMark") this.registrationMark});
+      @JsonKey(name: "registrationMark") this.registrationMark,
+      @JsonKey(name: "address") this.address});
 
   factory _$DocumentdataImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentdataImplFromJson(json);
@@ -1171,10 +1186,13 @@ class _$DocumentdataImpl implements _Documentdata {
   @override
   @JsonKey(name: "registrationMark")
   final dynamic registrationMark;
+  @override
+  @JsonKey(name: "address")
+  final String? address;
 
   @override
   String toString() {
-    return 'Documentdata(kycStatus: $kycStatus, kycStatusMsg: $kycStatusMsg, isFirstNameAvailable: $isFirstNameAvailable, isLastNameAvailable: $isLastNameAvailable, isIdNumberAvailable: $isIdNumberAvailable, firstName: $firstName, lastName: $lastName, idNumber: $idNumber, billDate: $billDate, issueDate: $issueDate, isRegistrationMarkAvailable: $isRegistrationMarkAvailable, registrationMark: $registrationMark)';
+    return 'Documentdata(kycStatus: $kycStatus, kycStatusMsg: $kycStatusMsg, isFirstNameAvailable: $isFirstNameAvailable, isLastNameAvailable: $isLastNameAvailable, isIdNumberAvailable: $isIdNumberAvailable, firstName: $firstName, lastName: $lastName, idNumber: $idNumber, billDate: $billDate, issueDate: $issueDate, isRegistrationMarkAvailable: $isRegistrationMarkAvailable, registrationMark: $registrationMark, address: $address)';
   }
 
   @override
@@ -1207,7 +1225,8 @@ class _$DocumentdataImpl implements _Documentdata {
                 other.isRegistrationMarkAvailable ==
                     isRegistrationMarkAvailable) &&
             const DeepCollectionEquality()
-                .equals(other.registrationMark, registrationMark));
+                .equals(other.registrationMark, registrationMark) &&
+            (identical(other.address, address) || other.address == address));
   }
 
   @JsonKey(ignore: true)
@@ -1225,7 +1244,8 @@ class _$DocumentdataImpl implements _Documentdata {
       billDate,
       issueDate,
       isRegistrationMarkAvailable,
-      const DeepCollectionEquality().hash(registrationMark));
+      const DeepCollectionEquality().hash(registrationMark),
+      address);
 
   @JsonKey(ignore: true)
   @override
@@ -1255,8 +1275,8 @@ abstract class _Documentdata implements Documentdata {
       @JsonKey(name: "issueDate") final String? issueDate,
       @JsonKey(name: "isRegistrationMarkAvailable")
       final bool? isRegistrationMarkAvailable,
-      @JsonKey(name: "registrationMark")
-      final dynamic registrationMark}) = _$DocumentdataImpl;
+      @JsonKey(name: "registrationMark") final dynamic registrationMark,
+      @JsonKey(name: "address") final String? address}) = _$DocumentdataImpl;
 
   factory _Documentdata.fromJson(Map<String, dynamic> json) =
       _$DocumentdataImpl.fromJson;
@@ -1297,6 +1317,9 @@ abstract class _Documentdata implements Documentdata {
   @override
   @JsonKey(name: "registrationMark")
   dynamic get registrationMark;
+  @override
+  @JsonKey(name: "address")
+  String? get address;
   @override
   @JsonKey(ignore: true)
   _$$DocumentdataImplCopyWith<_$DocumentdataImpl> get copyWith =>

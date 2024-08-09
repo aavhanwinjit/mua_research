@@ -218,25 +218,29 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPorDocTypeListNotifierProvider);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Row(
-        children: selectedDocsListProvider
-            .list()
-            .map((e) => Padding(
-                  padding: EdgeInsets.only(right: 16.w),
-                  child: Column(
-                    children: [
-                      Text(
-                        e.documentElement?.porDocType ?? "-",
-                        style: const TextStyle(color: textGrayColor2),
-                      ),
-                      const SizedBox(height: 5),
-                      _imageWidget(e.filePath),
-                    ],
-                  ),
-                ))
-            .toList(),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: selectedDocsListProvider
+              .list()
+              .map((e) => Padding(
+                    padding: EdgeInsets.only(right: 16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          e.documentElement?.porDocType ?? "-",
+                          style: const TextStyle(color: textGrayColor2),
+                        ),
+                        const SizedBox(height: 5),
+                        _imageWidget(e.filePath),
+                      ],
+                    ),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }

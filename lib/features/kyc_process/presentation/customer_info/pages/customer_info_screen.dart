@@ -8,6 +8,7 @@ import 'package:ekyc/features/dashboard/presentation/providers/kyc_type_provider
 import 'package:ekyc/features/kyc_process/presentation/customer_info/mixins/add_customer_info_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/providers/customer_info_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -68,6 +69,10 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        FilteringTextInputFormatter.deny(RegExp(r'\s')),
+                      ],
                       maxLength: 8,
                       validator: (value) {
                         if ((value!.trim().isEmpty || value.trim().length < 8)) {
@@ -80,7 +85,7 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                       onChanged: (value) {
                         ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => value.trim());
                       },
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.number,
                       hint: Strings.mobileNo,
                       label: Strings.mobileNo,
                       floatingLabelBehavior: FloatingLabelBehavior.always,

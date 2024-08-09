@@ -98,6 +98,22 @@ class SelectedPorDocTypeListNotifier extends _$SelectedPorDocTypeListNotifier {
     state = newList;
   }
 
+  void updateElementIssueDate({
+    required int index,
+    required String? issueDate,
+  }) {
+    PORDocumentElement item = state[index];
+
+    List<PORDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
+
+    item.issueDate = issueDate;
+
+    newList.insert(index, item);
+
+    state = newList;
+  }
+
   void clearElementsFilePath({required int index}) {
     PORDocumentElement item = state[index];
 

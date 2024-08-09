@@ -282,5 +282,10 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
     if (response?.ocrResponse?.documentdata?.isLastNameAvailable == true) {
       ref.watch(addressSurnameProvider.notifier).update((state) => surname);
     }
+
+    if (response?.ocrResponse?.documentdata?.address != null &&
+        response!.ocrResponse!.documentdata!.address!.isNotEmpty) {
+      ref.watch(addressTextProvider.notifier).update((state) => response.ocrResponse?.documentdata?.address);
+    }
   }
 }

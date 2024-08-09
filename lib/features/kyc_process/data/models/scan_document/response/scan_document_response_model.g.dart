@@ -94,6 +94,7 @@ _$DocumentdataImpl _$$DocumentdataImplFromJson(Map<String, dynamic> json) =>
       issueDate: json['issueDate'] as String?,
       isRegistrationMarkAvailable: json['isRegistrationMarkAvailable'] as bool?,
       registrationMark: json['registrationMark'],
+      address: json['address'] as String?,
     );
 
 Map<String, dynamic> _$$DocumentdataImplToJson(_$DocumentdataImpl instance) =>
@@ -110,4 +111,5 @@ Map<String, dynamic> _$$DocumentdataImplToJson(_$DocumentdataImpl instance) =>
       'issueDate': instance.issueDate,
       'isRegistrationMarkAvailable': instance.isRegistrationMarkAvailable,
       'registrationMark': instance.registrationMark,
+      'address': instance.address,
     };

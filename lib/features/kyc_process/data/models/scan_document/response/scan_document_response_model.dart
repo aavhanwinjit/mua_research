@@ -74,6 +74,7 @@ class Documentdata with _$Documentdata {
     @JsonKey(name: "issueDate") String? issueDate,
     @JsonKey(name: "isRegistrationMarkAvailable") bool? isRegistrationMarkAvailable,
     @JsonKey(name: "registrationMark") dynamic registrationMark,
+    @JsonKey(name: "address") String? address,
   }) = _Documentdata;
 
   factory Documentdata.fromJson(Map<String, dynamic> json) => _$DocumentdataFromJson(json);

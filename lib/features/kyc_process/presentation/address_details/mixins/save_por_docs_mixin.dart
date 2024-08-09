@@ -32,7 +32,8 @@ mixin SavePORDocsMixin {
           .map(
             (e) => PorDocumentDetailsModel(
               porDocumentTypeId: e.documentElement?.porDocumentTypeId,
-              issueDate: e.scanResponse?.ocrResponse?.documentdata?.billDate,
+              issueDate: e.issueDate,
+              // issueDate: e.scanResponse?.ocrResponse?.documentdata?.billDate,
               lastName: e.extractedLastName,
               porDocImagePath: e.scanResponse?.fileName,
               uploadDocumentId: e.scanResponse?.uploadedDocumentId,
