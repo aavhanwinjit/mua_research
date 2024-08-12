@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/core/utils/extensions/input_formatter_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
@@ -81,6 +82,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
+                      inputFormatters: [UpperCaseTextFormatter()],
                       initialValue: addressSurname,
                       label: Strings.surname,
                       onChanged: (value) {
@@ -96,7 +98,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                     ),
                     SizedBox(height: 4.h),
                     Text(
-                      Strings.enterNameAsPerDoc,
+                      Strings.enterSurNameAsPerDoc,
                       style: TextStyle(
                         fontSize: 12.sp,
                         color: textGrayColor,
@@ -104,6 +106,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
+                      inputFormatters: [UpperCaseTextFormatter()],
                       initialValue: addressOtherName,
                       label: Strings.otherName,
                       onChanged: (value) {
@@ -127,6 +130,7 @@ class _EditAddressDetailsScreenState extends ConsumerState<EditAddressDetailsScr
                     ),
                     SizedBox(height: 24.h),
                     CustomTextFormField(
+                      inputFormatters: [UpperCaseTextFormatter()],
                       initialValue: addressText,
                       label: Strings.address,
                       onChanged: (value) {

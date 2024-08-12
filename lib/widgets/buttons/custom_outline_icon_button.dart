@@ -86,12 +86,15 @@ class CustomOutlineIconButton extends StatelessWidget {
     return const Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          height: 20,
-          width: 20,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            backgroundColor: white,
+        Padding(
+          padding: EdgeInsets.all(2.0),
+          child: SizedBox(
+            height: 25,
+            width: 25,
+            child: CircularProgressIndicator(
+              strokeWidth: 2,
+              backgroundColor: white,
+            ),
           ),
         ),
       ],

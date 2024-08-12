@@ -73,6 +73,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
   }
 
   Widget _surnameElement(PORDocumentElement element) {
+    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     int index = selectedDocsListProvider.list().indexOf(element);
 
@@ -180,10 +181,11 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       initialDate: DateTime.now(),
       firstDate: DateTime(1920, 8),
       lastDate: DateTime.now(),
+      
     );
 
     if (picked != null) {
-      final String formattedDate = DateTimeFormatter.getShortMonthDateTime(picked);
+      final String formattedDate = DateTimeFormatter.getDocumentDateTime(picked);
       return formattedDate;
     }
 

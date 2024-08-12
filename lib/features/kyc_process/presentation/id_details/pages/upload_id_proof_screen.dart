@@ -264,7 +264,12 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
         loading: ref.watch(ocrLoadingProvider),
         disable: _disableNextButtonCondition(),
         disabledOnTap: () {
-          context.showErrorSnackBar(message: Strings.uploadBothDocuments);
+          final selectedApplication = ref.watch(selectedApplicationProvider);
+          if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+            context.showErrorSnackBar(message: Strings.uploadBothDocuments);
+          } else {
+            context.showErrorSnackBar(message: Strings.uploadDocument);
+          }
         },
         onTap: () async {
           final selectedApplication = ref.watch(selectedApplicationProvider);

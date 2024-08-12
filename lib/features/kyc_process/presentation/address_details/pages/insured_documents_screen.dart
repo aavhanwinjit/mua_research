@@ -176,6 +176,9 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
                   index: index, lastName: response?.ocrResponse?.documentdata?.lastName);
             }
 
+            selectedDocsListProvider.updateElementIssueDate(
+                index: index, issueDate: response?.ocrResponse?.documentdata?.issueDate);
+
             context.pop();
           },
           clearFile: () {

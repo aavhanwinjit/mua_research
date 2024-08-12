@@ -156,6 +156,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
   }
 
   Widget _infoWidget2(WidgetRef ref) {
+    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     return ListView.separated(
@@ -174,6 +175,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
   }
 
   Widget _docElement(PORDocumentElement item) {
+    debugPrint("item.issuedaste: ${item.issueDate}");
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w),
       child: Row(
@@ -207,7 +209,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
         children: [
           InfoTile(
             title: Strings.issueDate,
-            value: item.scanResponse?.ocrResponse?.documentdata?.billDate ?? "-",
+            value: item.issueDate ?? "-",
           ),
         ],
       ),
