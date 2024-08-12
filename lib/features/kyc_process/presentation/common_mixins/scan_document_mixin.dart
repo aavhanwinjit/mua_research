@@ -112,6 +112,9 @@ mixin ScanDocumentMixin {
             if (success.body?.responseBody?.ocrResponse == null) {
               // Allow ocr response is null
               onSuccess(success.body?.responseBody);
+            } else if (success.body?.responseBody?.ocrResponse != null &&
+                success.body?.responseBody?.ocrResponse?.code == 0) {
+              onSuccess(success.body?.responseBody);
             } else {
               if (success.body?.responseBody?.ocrResponse?.documentdata?.kycStatus == "Success") {
                 // Allow only if KYC status is success

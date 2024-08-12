@@ -268,6 +268,8 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
           toolbarWidgetColor: Colors.white,
           lockAspectRatio: false,
           cropFrameColor: primaryColor,
+          // hideBottomControls: false,
+          
 
           // cropGridColor: primaryColor,
           // aspectRatioPresets: [

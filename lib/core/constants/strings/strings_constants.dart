@@ -267,7 +267,9 @@ class Strings {
       "Uploading marriage certificate is compulsory in case of 'Married' users";
   static const String uploadNICofLandlord =
       "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
-  static const String surnamesForSelectedDocuments = "Please add surnames for selected documents";
+  static const String surnamesForSelectedDocuments =
+      "Surname data is missing. Please update the information for the selected documents.";
+  // static const String surnamesForSelectedDocuments = "Please add surnames for selected documents";
   static const String enterNameAsPerInsuredDoc = "Enter surname as per selected insured document";
   static const String surnameMismatched = "Surname does not match with uploaded address proof document";
   static const String insuredDoc = "insured document";

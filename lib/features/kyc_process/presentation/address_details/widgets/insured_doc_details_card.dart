@@ -81,7 +81,7 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                       const SizedBox(height: 24),
                       InfoTile(
                         title: Strings.billDate,
-                        value: selectedApplication?.addressDocBillDate!.format() ?? "-",
+                        value: selectedApplication?.addressDocBillDate!.format('yyyy-MM-dd') ?? "-",
                       ),
                     ],
                   ],

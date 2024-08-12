@@ -194,6 +194,8 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
   void onSuccess(ScanDocumentResponseBody? response) {
     final AddressDocumentTypeModel? selectedAddressDocType = ref.watch(selectedAddressDocTypeProvider);
 
+    debugPrint("selectedAddressDocType?.documentCode: ${selectedAddressDocType?.documentCode}");
+
     if (selectedAddressDocType?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
       if (response?.ocrResponse != null) {
         // check different conditions for ocr status
