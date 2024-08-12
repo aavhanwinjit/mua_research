@@ -8,12 +8,12 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
-import 'package:ekyc/features/kyc_process/presentation/widgets/image_cropper_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_cropper/image_cropper.dart';
 // import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -208,16 +208,19 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           return;
         }
 
-        final bytes = await result.readAsBytes();
-        final croppedImage = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return CropImagePage(imageBytes: bytes);
-          },
-        ));
-        if (croppedImage != null) {
-          final savedFile = await _saveImageToTempStorage(croppedImage);
+        // final bytes = await result.readAsBytes();
+        // final croppedImage = await Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) {
+        //     return CropImagePage(imageBytes: bytes);
+        //   },
+        // ));
 
-          ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
+        String? croppedImagePath = await _cropImage(result.path);
+
+        if (croppedImagePath != null) {
+          // final savedFile = await _saveImageToTempStorage(croppedImage);
+
+          ref.watch(capturedFilePathProvider.notifier).update((state) => croppedImagePath);
           // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
           debugPrint("before popping");
@@ -241,6 +244,40 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     } catch (e) {
       debugPrint("error: $e");
     }
+  }
+
+  Future<String?> _cropImage(String path) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: path,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: Strings.cropImage,
+          toolbarColor: primaryColor,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false,
+          cropFrameColor: primaryColor,
+
+          // cropGridColor: primaryColor,
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.square,
+          // ],
+        ),
+        IOSUiSettings(
+          title: Strings.cropImage, aspectRatioLockEnabled: false,
+
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.square,
+          // ],
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      return croppedFile.path;
+    }
+    return null;
   }
 
   void pickFile(BuildContext context) async {

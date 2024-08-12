@@ -72,6 +72,7 @@ class Strings {
   static const String saveAndUploadLater = "Save & Upload Later";
   static const String uploadSignature = "Upload signature";
   static const String errorInFullnameInDoc = "Invalid characters present in name";
+  static const String cropImage = "Crop Image";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";
@@ -236,7 +237,8 @@ class Strings {
   static const String uploadBothDocuments = "Upload both documents";
 
   static const String idNumberNotFound = "ID number not found. Kindly re-upload the document";
-  static const String idNumberNotMatching = "ID number not matching";
+  static const String idNumberNotMatching =
+      "The ID number doesn't match. Please upload the correct documents for identification.";
 
   //Address Details Screen
   static const String uploadAddressProof = "Upload address proof";

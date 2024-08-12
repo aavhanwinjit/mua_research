@@ -15,6 +15,7 @@ class CropImagePage extends StatefulWidget {
 
 class _CropImagePageState extends State<CropImagePage> {
   final _controller = CropController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

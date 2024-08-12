@@ -188,13 +188,13 @@ class _MlKitDemoScreenState extends ConsumerState<MlKitDemoScreen> with GoogleML
     // final selectedApplication = ref.watch(selectedApplicationProvider);
 
     // if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-    await performNICCardOCR2(
-      ref: ref,
-      context: context,
-      onSuccess: () {
-        onSuccess();
-      },
-    );
+    // await performNICCardOCR2(
+    //   ref: ref,
+    //   context: context,
+    //   onSuccess: () {
+    //     onSuccess();
+    //   },
+    // );
     // } else {
     //   // perform OCR on passport
     //   await performPassportOCR(

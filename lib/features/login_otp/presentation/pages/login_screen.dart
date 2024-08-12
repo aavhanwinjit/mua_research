@@ -78,14 +78,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       FilteringTextInputFormatter.digitsOnly,
                       FilteringTextInputFormatter.deny(RegExp(r'\s')),
                     ],
-                    validator: (value) {
-                      if (value!.trim().isEmpty || value.trim().length < 8) {
-                        return Strings.loginPhoneValidatorString;
-                      }
-                      return null;
-                    },
+                    validator: validate,
                     onChanged: (value) {
                       ref.read(phoneNumberProvider.notifier).update((state) => value);
+
+                      if (value.length == 8) {
+                        formKey.currentState!.validate();
+                      }
                     },
                     keyboardType: TextInputType.number,
                     hint: Strings.loginPhoneHint,
@@ -114,6 +113,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         ),
       ),
     );
+  }
+
+  String? validate(String? value) {
+    if ((value!.trim().isEmpty || value.trim().length < 8)) {
+      return Strings.loginPhoneValidatorString;
+    }
+
+    return null;
   }
 
   void _verifyMobileNumber() async {

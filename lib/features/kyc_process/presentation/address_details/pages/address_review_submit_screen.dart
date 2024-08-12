@@ -82,12 +82,12 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
                   child: ReviewScreenButtons(
                     disable: ref.watch(addreddScreenConfirmationProvider) != true,
                     loadingProvider: saveAddressDetailsLoading,
+                    onExit: () {
+                      _uploadDetails(true);
+                    },
                     onNext: () {
                       //   context.pushNamed(AppRoutes.insuredDocumentScreen);
                       _uploadDetails(false);
-                    },
-                    onExit: () {
-                      _uploadDetails(true);
                     },
                   ),
                 ),

@@ -8,11 +8,11 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
-import 'package:ekyc/features/kyc_process/presentation/widgets/image_cropper_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -217,40 +217,79 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
           return;
         }
 
-        final bytes = await result.readAsBytes();
-        final croppedImage = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return CropImagePage(imageBytes: bytes);
-          },
-        ));
-        final savedFile = await _saveImageToTempStorage(croppedImage);
+        // final bytes = await result.readAsBytes();
+        // final croppedImage = await Navigator.of(context).push(MaterialPageRoute(
+        //   builder: (context) {
+        //     return CropImagePage(imageBytes: bytes);
+        //   },
+        // ));
+        // final savedFile = await _saveImageToTempStorage(croppedImage);
+        // ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
 
-        ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
+        String? croppedImagePath = await _cropImage(result.path);
 
-        // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
+        if (croppedImagePath != null) {
+          ref.watch(capturedFilePathProvider.notifier).update((state) => croppedImagePath);
 
-        context.pop();
+          // ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
-        final bool? res = await context.pushNamed(
-          AppRoutes.confirmUploadOrRetakeScreen2,
-          extra: {
-            'onChange': widget.onChange,
-            'documentCode': widget.documentCode,
-            'documentSide': widget.documentSide,
-          },
-        );
+          context.pop();
 
-        debugPrint("res: $res");
+          final bool? res = await context.pushNamed(
+            AppRoutes.confirmUploadOrRetakeScreen2,
+            extra: {
+              'onChange': widget.onChange,
+              'documentCode': widget.documentCode,
+              'documentSide': widget.documentSide,
+            },
+          );
 
-        if (res == true) {
-          ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+          debugPrint("res: $res");
 
-          debugPrint("before calling container tap");
+          if (res == true) {
+            ref.watch(capturedFilePathProvider.notifier).update((state) => null);
 
-          _onContainerTap();
+            debugPrint("before calling container tap");
+
+            _onContainerTap();
+          }
         }
       }
     } catch (e) {}
+  }
+
+  Future<String?> _cropImage(String path) async {
+    CroppedFile? croppedFile = await ImageCropper().cropImage(
+      sourcePath: path,
+      uiSettings: [
+        AndroidUiSettings(
+          toolbarTitle: Strings.cropImage,
+          toolbarColor: primaryColor,
+          toolbarWidgetColor: Colors.white,
+          lockAspectRatio: false,
+          cropFrameColor: primaryColor,
+
+          // cropGridColor: primaryColor,
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.square,
+          // ],
+        ),
+        IOSUiSettings(
+          title: Strings.cropImage, aspectRatioLockEnabled: false,
+
+          // aspectRatioPresets: [
+          //   CropAspectRatioPreset.original,
+          //   CropAspectRatioPreset.square,
+          // ],
+        ),
+      ],
+    );
+
+    if (croppedFile != null) {
+      return croppedFile.path;
+    }
+    return null;
   }
 
   Future<File> _saveImageToTempStorage(Uint8List imageBytes) async {

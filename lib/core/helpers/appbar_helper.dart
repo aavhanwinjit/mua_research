@@ -26,16 +26,12 @@ class AppBarHelper {
               context.pop();
             },
         color: blueBackground == true ? white : black,
-        
       ),
       systemOverlayStyle: SystemUiOverlayStyle(
         // statusBarColor: Colors.red,
-        statusBarIconBrightness: blueBackground == true
-            ? Brightness.light
-            : Brightness.dark, // For Android (dark icons)
-        statusBarBrightness: blueBackground == true
-            ? Brightness.light
-            : Brightness.dark, // For iOS (dark icons)
+        statusBarIconBrightness:
+            blueBackground == true ? Brightness.light : Brightness.dark, // For Android (dark icons)
+        statusBarBrightness: blueBackground == true ? Brightness.light : Brightness.dark, // For iOS (dark icons)
       ),
     );
   }

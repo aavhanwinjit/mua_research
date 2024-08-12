@@ -320,27 +320,27 @@ class _UploadIDdetailsScreenState extends ConsumerState<UploadIDdetailsScreen>
   }
 
   Future<void> _performOCR({required Function onSuccess}) async {
-    final selectedApplication = ref.watch(selectedApplicationProvider);
+    // final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
-      await performNICCardOCR(
-        ref: ref,
-        context: context,
-        onSuccess: () {
-          onSuccess();
-        },
-      );
-    } else {
-      // perform OCR on passport
-      await performPassportOCR(
-        ref: ref,
-        context: context,
-        onSuccess: () {
-          onSuccess();
-        },
-      );
-      // context.showSnackBar(message: "OCR on passport is under development");
-    }
+    // if (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) {
+    //   await performNICCardOCR(
+    //     ref: ref,
+    //     context: context,
+    //     onSuccess: () {
+    //       onSuccess();
+    //     },
+    //   );
+    // } else {
+    //   // perform OCR on passport
+    //   await performPassportOCR(
+    //     ref: ref,
+    //     context: context,
+    //     onSuccess: () {
+    //       onSuccess();
+    //     },
+    //   );
+    //   // context.showSnackBar(message: "OCR on passport is under development");
+    // }
   }
 
   bool _disableNextButtonCondition() {

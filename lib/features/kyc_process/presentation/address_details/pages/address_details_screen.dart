@@ -93,6 +93,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
                         label: Strings.addressDocumentContainerLabel,
                         cameraScreenDescription: Strings.addressDocCameraLabel,
                         reviewScreenTitle: Strings.addressDetails,
+                        hideClearButton: ref.watch(addressDocOCRLoadingProvider),
                       ),
                     ],
                   ],
@@ -130,15 +131,19 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
     final addressDocTypesNotifier = ref.watch(addressDocsTypesNotifierProvider.notifier);
     ref.watch(addressDocsTypesNotifierProvider);
 
+    bool loading = ref.watch(addressDocOCRLoadingProvider);
+
     return CustomDrowDownField(
       value: ref.watch(selectedAddressDocTypeProvider),
       labelText: Strings.selectDocument,
       validator: (value) {
         return value == null ? Strings.selectDocument : null;
       },
-      onChanged: (value) {
-        ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => value as AddressDocumentTypeModel);
-      },
+      onChanged: loading == true
+          ? null
+          : (value) {
+              ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => value as AddressDocumentTypeModel);
+            },
       items: addressDocTypesNotifier.addressDocsTypesList().map((AddressDocumentTypeModel value) {
         return DropdownMenuItem<AddressDocumentTypeModel>(
           value: value,

@@ -74,16 +74,13 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
                         FilteringTextInputFormatter.deny(RegExp(r'\s')),
                       ],
                       maxLength: 8,
-                      validator: (value) {
-                        if ((value!.trim().isEmpty || value.trim().length < 8)) {
-                          return Strings.loginPhoneValidatorString;
-                        } else if (!RegExp(r'^\d{8}$').hasMatch(value.trim())) {
-                          return Strings.enterValidPhoneNumberString;
-                        }
-                        return null;
-                      },
+                      validator: validate,
                       onChanged: (value) {
                         ref.watch(customerInfoMobileNumberProvider.notifier).update((state) => value.trim());
+
+                        if (value.length == 8) {
+                          formKey.currentState!.validate();
+                        }
                       },
                       keyboardType: TextInputType.number,
                       hint: Strings.mobileNo,
@@ -195,6 +192,16 @@ class _CustomerInfoScreenState extends ConsumerState<CustomerInfoScreen>
         ),
       ),
     );
+  }
+
+  String? validate(String? value) {
+    if ((value!.trim().isEmpty || value.trim().length < 8)) {
+      return Strings.loginPhoneValidatorString;
+    }
+    // else if (!RegExp(r'^\d{8}$').hasMatch(value.trim())) {
+    //   return Strings.enterValidPhoneNumberString;
+    // }
+    return null;
   }
 
   void _resetTextFields() {
