@@ -2,6 +2,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
+import 'package:ekyc/core/helpers/error_dialog_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
@@ -74,8 +75,8 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
 
     final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
-    print("provider value:");
-    print(ref.watch(porDocUploadProcess));
+    // print("provider value:");
+    // print(ref.watch(porDocUploadProcess));
 
     return PopScope(
       canPop: false,
@@ -292,12 +293,24 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
           }
 
           bool leaseAgreementSelected = checkIfLeaseAgreementIsSelected();
+          debugPrint("leaseAgreementSelected: $leaseAgreementSelected");
 
           if (leaseAgreementSelected == true) {
             bool nicOfLandlordSelected = checkIfNICofLandlordIsSelected();
+            debugPrint("nicOfLandlordSelected: $nicOfLandlordSelected");
 
             if (nicOfLandlordSelected == false) {
-              context.showErrorSnackBar(message: Strings.uploadNICofLandlord);
+              // show error dialog
+              // context.showErrorSnackBar(message: Strings.uploadNICofLandlord);
+              ErrorDialogHelper.showErrorDialog(
+                context,
+                title: "Invalid Document",
+                content: "Please upload NIC/Valid Passport of landlord to complete the KYC validation.",
+                onConfirm: () {
+                  context.pop();
+                },
+                positiveButtonTitle: "Okay",
+              );
               return;
             }
           }
@@ -343,6 +356,9 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
 
   bool checkIfLeaseAgreementIsSelected() {
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+    debugPrint(
+        "selectedApplication?.addressDocumentTypes?.documentCode: ${selectedApplication?.addressDocumentTypes?.documentCode}");
 
     if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
       return true;

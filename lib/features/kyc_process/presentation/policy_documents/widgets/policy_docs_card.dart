@@ -50,25 +50,32 @@ class PolicyDocsCard extends ConsumerWidget {
     final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPolicyDocTypeListNotifierProvider);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Row(
-        children: selectedDocsListProvider
-            .list()
-            .map(
-              (PolicyDocumentElement e) => Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    e.documentElement?.policyDocTypes ?? "-",
-                    style: const TextStyle(color: textGrayColor2),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: selectedDocsListProvider
+              .list()
+              .map(
+                (PolicyDocumentElement e) => Container(
+                  margin: EdgeInsets.only(right: 8.w),
+                  width: 150.h,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        e.documentElement?.policyDocTypes ?? "-",
+                        style: const TextStyle(color: textGrayColor2),
+                      ),
+                      const SizedBox(height: 5),
+                      _imageWidget(e),
+                    ],
                   ),
-                  const SizedBox(height: 5),
-                  _imageWidget(e),
-                ],
-              ),
-            )
-            .toList(),
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

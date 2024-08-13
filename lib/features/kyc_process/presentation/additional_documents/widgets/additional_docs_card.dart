@@ -66,21 +66,24 @@ class AdditionalDocsCard extends ConsumerWidget {
     final selectedDocsListProvider = ref.watch(selectedAdditionalDocListNotifierProvider.notifier);
     ref.watch(selectedAdditionalDocListNotifierProvider);
 
-    return Row(
-      children: selectedDocsListProvider.list().map((e) {
-        return Padding(
-          padding: EdgeInsets.only(right: 16.w),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Image.file(
-              File(e.filePath ?? ""),
-              height: 150.h,
-              width: 150.h,
-              fit: BoxFit.cover,
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: selectedDocsListProvider.list().map((e) {
+          return Padding(
+            padding: EdgeInsets.only(right: 16.w),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Image.file(
+                File(e.filePath ?? ""),
+                height: 150.h,
+                width: 150.h,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-        );
-      }).toList(),
+          );
+        }).toList(),
+      ),
     );
   }
 }

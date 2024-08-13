@@ -18,6 +18,8 @@ class EditInsuredDetailsScreen extends ConsumerStatefulWidget {
 class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
+  bool dateValidator = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,6 +147,18 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
             ),
           ),
         ),
+        if ((element.issueDate == null || element.issueDate!.isEmpty) && dateValidator == true)
+          Padding(
+            padding: EdgeInsets.only(left: 8.w, top: 4.w),
+            child: Text(
+              "Select Issue Date",
+              // "12 June 2024",
+              style: TextStyle(
+                fontSize: 11.sp,
+                color: errorTextRed,
+              ),
+            ),
+          ),
         // CustomTextFormField(
         //   initialValue: element.extractedLastName,
         //   label: Strings.surname,
@@ -181,7 +195,6 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       initialDate: DateTime.now(),
       firstDate: DateTime(1920, 8),
       lastDate: DateTime.now(),
-      
     );
 
     if (picked != null) {
@@ -199,6 +212,35 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       return;
     }
 
+    if (dateValidatorChecker() == true) {
+      dateValidatorChecker();
+      return;
+    }
+
     context.pop();
+  }
+
+  bool dateValidatorChecker() {
+    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
+
+    bool data = selectedDocsList.any(
+      (element) {
+        // debugPrint("element.issueDate == null: ${element.issueDate == null}");
+        // debugPrint("element.issueDate.isEmpty: ${element.issueDate?.isEmpty}");
+
+        if (element.issueDate == null || element.issueDate!.isEmpty) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+    );
+
+    dateValidator = data;
+    setState(() {});
+
+    debugPrint("data: $data");
+
+    return data;
   }
 }

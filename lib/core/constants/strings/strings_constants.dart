@@ -61,7 +61,9 @@ class Strings {
   static const String confirmDetails = "Confirm Details";
   static const String documentUploadConfirmationDialogText =
       "Do you confirm the details are correct as per the uploaded document? If No, you can edit the details before proceeding.";
-  static const String selectFrontImageFirst = "Select front image first";
+  static const String selectFrontImageFirst =
+      "Please upload the front side image first, followed by the back side image!";
+  // static const String selectFrontImageFirst = "Select front image first";
   static const String back = "Back";
   static const String changeDocument = "Change Document";
   static const String only2Documents = "You can add only 2 documents";
@@ -263,8 +265,10 @@ class Strings {
   static const String insuredDocumentContainerLabel = "Take a photo or upload\ninsured documents";
   static const String insuredDocCameraLabel = "Please scan the document by\nadjusting it inside the frame.";
   static const String insuredDocuments = "Insured Documents";
+  static const String insuredDetails = "Insured Details";
   static const String uploadMarriageCertificate =
-      "Uploading marriage certificate is compulsory in case of 'Married' users";
+      "Uploading a marriage certificate is mandatory for customers marked as 'married'.";
+  // "Uploading marriage certificate is compulsory in case of 'Married' users";
   static const String uploadNICofLandlord =
       "Please upload NIC/Valid Passport of landlord to complete the KYC validation.";
   static const String surnamesForSelectedDocuments =

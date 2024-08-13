@@ -11,6 +11,7 @@ import 'package:ekyc/features/dashboard/presentation/providers/dashboard_page_nu
 import 'package:ekyc/features/dashboard/presentation/providers/dashboard_providers.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,6 +19,7 @@ mixin AgentApplicationsMixin {
   Future<void> getAgentApplications({
     required BuildContext context,
     required WidgetRef ref,
+    Function(List<AgentApplicationModel>)? onSuccess,
   }) async {
     final agentDetailsProvider = ref.watch(agentDetailsResponseProvider);
     final GetAgentDetailsResponseBody? agentDetails = agentDetailsProvider?.body?.responseBody;
@@ -62,6 +64,10 @@ mixin AgentApplicationsMixin {
             } else {
               agentApplicationNotifier
                   .appendDataToApplicationList(success.body?.responseBody?.agentApplicationList ?? []);
+            }
+
+            if (onSuccess != null) {
+              onSuccess(success.body?.responseBody?.agentApplicationList ?? []);
             }
 
             ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
