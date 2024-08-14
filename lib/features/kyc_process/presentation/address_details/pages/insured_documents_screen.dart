@@ -371,9 +371,9 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
   bool checkIfNICofLandlordIsSelected() {
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    return selectedDocsListProvider
-        .list()
-        .any((element) => element.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last);
+    return selectedDocsListProvider.list().any((element) =>
+        element.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last ||
+        element.documentElement?.documentCode == DocumentCodes.PSL.toString().split('.').last);
   }
 
   bool buttonDisableCheck() {
