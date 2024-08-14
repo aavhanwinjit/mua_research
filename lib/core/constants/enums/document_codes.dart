@@ -8,5 +8,6 @@ enum DocumentCodes {
   DRC,
   LAR,
   NIL,
+  PSL,
   ADD,
 }

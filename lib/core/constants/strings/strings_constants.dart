@@ -68,6 +68,8 @@ class Strings {
   static const String changeDocument = "Change Document";
   static const String only2Documents = "You can add only 2 documents";
   static const String addressDetailsConfirmationString = "Are the details of same customer?";
+  static const String insuredDetailsConfirmationString =
+      "Are the proof of relationship documents are of same customer?";
   static const String insuredDocsRequiredDialogTitleString = "Insured Document Required";
   static const String insuredDocsRequiredDialogSubtitleString =
       "The uploaded address proof doesn't match the customer details. Additional documents are needed to confirm the relationship.";

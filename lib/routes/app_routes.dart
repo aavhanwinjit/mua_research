@@ -1,3 +1,4 @@
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
@@ -211,9 +212,17 @@ final GoRouter router = GoRouter(
       path: AppRoutes.confirmUploadOrRetakeScreen,
       name: AppRoutes.confirmUploadOrRetakeScreen,
       builder: (BuildContext context, GoRouterState state) {
-        StateProvider<String?> provider = state.extra as StateProvider<String?>;
+        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
 
-        return ReviewUploadedDocumentScreen(provider: provider);
+        final StateProvider<String?> provider = extra['provider'] as StateProvider<String?>;
+
+        final String? documentCode = extra['documentCode'] as String?;
+        // StateProvider<String?> provider = state.extra as StateProvider<String?>;
+
+        return ReviewUploadedDocumentScreen(
+          provider: provider,
+          documentCode: documentCode,
+        );
       },
     ),
     GoRoute(

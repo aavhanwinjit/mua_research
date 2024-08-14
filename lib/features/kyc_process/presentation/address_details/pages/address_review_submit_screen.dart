@@ -216,21 +216,22 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
         resetPageNumber(ref);
 
         await getAgentApplications(
-            context: context,
-            ref: ref,
-            onSuccess: (List<AgentApplicationModel> applicationList) {
-              AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+          context: context,
+          ref: ref,
+          onSuccess: (List<AgentApplicationModel> applicationList) {
+            AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-              AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
-                (element) {
-                  return element.applicationRefNo == selectedApplication?.applicationRefNo;
-                },
-              );
+            AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
+              (element) {
+                return element.applicationRefNo == selectedApplication?.applicationRefNo;
+              },
+            );
 
-              if (updatedApplication != null) {
-                ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
-              }
-            });
+            if (updatedApplication != null) {
+              ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
+            }
+          },
+        );
 
         ref.watch(saveAddressDetailsLoading.notifier).update((state) => false);
 

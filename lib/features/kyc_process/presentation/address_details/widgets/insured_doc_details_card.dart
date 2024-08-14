@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/features/kyc_process/data/models/por_document_element/por_document_element.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_proof_image_widget.dart';
@@ -175,14 +176,15 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
   }
 
   Widget _docElement(PORDocumentElement item) {
-    debugPrint("item.issuedaste: ${item.issueDate}");
     return Padding(
       padding: EdgeInsets.only(left: 16.w, right: 16.w),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _surnameWidget(item),
-          _billDateWidget(item),
+          if (item.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last &&
+              item.documentElement?.documentCode != DocumentCodes.PSL.toString().split('.').last)
+            _billDateWidget(item),
         ],
       ),
     );

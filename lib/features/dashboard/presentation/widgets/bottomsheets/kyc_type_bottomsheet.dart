@@ -14,12 +14,10 @@ class KYCTypeBottomsheet extends ConsumerStatefulWidget {
   const KYCTypeBottomsheet({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      _FilterBottomsheetState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _FilterBottomsheetState();
 }
 
-class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet>
-    with KycTypesMixin {
+class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet> with KycTypesMixin {
   @override
   void initState() {
     super.initState();
@@ -66,9 +64,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet>
       padding: EdgeInsets.only(left: 20.w, right: 8.w),
       child: Row(
         children: kycTypeNotifier.kycTypes().map((KycTypesModel element) {
-          return kycTypeNotifier.kycTypes().length < 3
-              ? _kycItem(element)
-              : _kycItemExpanded(element);
+          return kycTypeNotifier.kycTypes().length < 3 ? _kycItem(element) : _kycItemExpanded(element);
         }).toList(),
       ),
     );
@@ -81,6 +77,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet>
         padding: EdgeInsets.only(right: 12.w),
         child: InsuranceTypeCard(
           kycType: element,
+          iconWidth: element.kycTypeId == 2 ? 30.w : null,
           imagePath: element.kycTypeId == 1
               ? ImageConstants.lifeInsuranceImage
               : element.kycTypeId == 2
@@ -98,6 +95,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet>
         padding: EdgeInsets.only(right: 12.w),
         child: InsuranceTypeCard(
           kycType: element,
+          iconWidth: element.kycTypeId == 2 ? 30.w : null,
           imagePath: element.kycTypeId == 1
               ? ImageConstants.lifeInsuranceImage
               : element.kycTypeId == 2
@@ -128,8 +126,7 @@ class _FilterBottomsheetState extends ConsumerState<KYCTypeBottomsheet>
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
-        disable: (ref.watch(selectedKycTypeProvider) == null) ||
-            (kycTypeListLoading == true),
+        disable: (ref.watch(selectedKycTypeProvider) == null) || (kycTypeListLoading == true),
         onTap: () {
           context.pop();
           context.pushNamed(AppRoutes.customerInfoScreen);

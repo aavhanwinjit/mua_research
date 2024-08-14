@@ -60,6 +60,7 @@ dependencies:
   open_file: ^3.3.2
   crop_your_image: ^1.1.0
   image_cropper: ^8.0.1
+  image_cropping: ^0.0.14
   file_picker: ^8.0.6
  
 dev_dependencies:

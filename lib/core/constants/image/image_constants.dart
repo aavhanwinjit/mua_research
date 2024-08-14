@@ -31,6 +31,7 @@ class ImageConstants {
   static const String logoutIcon = '$imagePath/logout.png';
   static const String pageBgImage = '$imagePath/page_bg.png';
   static const String pdfIcon = '$imagePath/pdf_icon.png';
+  static const String pdfIcon2 = '$imagePath/pdf_icon_2.png';
 
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';

@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
@@ -113,7 +114,7 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
     ConfirmationDialogHelper.showConfirmationDialog(
       context,
       title: Strings.confirmDetails,
-      content: Strings.documentUploadConfirmationDialogText,
+      content: Strings.insuredDetailsConfirmationString,
       onConfirm: () async {
         // pop the confirmation dialog box
         context.pop();
@@ -127,6 +128,17 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
             await getAgentApplications(
               context: context,
               ref: ref,
+              onSuccess: (List<AgentApplicationModel> applicationList) {
+                AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+                AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
+                  (element) {
+                    return element.applicationRefNo == selectedApplication?.applicationRefNo;
+                  },
+                );
+
+                ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
+              },
             );
 
             ref.watch(saveInsuredDetailsLoading.notifier).update((state) => false);

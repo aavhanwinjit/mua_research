@@ -7,6 +7,8 @@ const Color borderColor = Color(0xFFDDDDDD);
 const Color borderColorSecondary = Color(0xFFBBBBBB);
 const Color borderColorLightGreen = Color(0xFFB0D8BA);
 
+const Color lightOrange = Color(0xFFFBCEB1);
+
 const Color disabledButtonColor = Color(0xFFF3F3F3);
 
 const Color textGrayColor = Color(0xFFA6A6A6);

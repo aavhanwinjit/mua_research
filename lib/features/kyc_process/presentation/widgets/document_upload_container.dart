@@ -5,6 +5,7 @@ import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 // import 'package:docscan/docscan.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
@@ -14,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_cropping/image_cropping.dart';
 // import 'package:google_mlkit_document_scanner/google_mlkit_document_scanner.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -27,6 +29,7 @@ class DocumentUploadContainer extends ConsumerStatefulWidget {
   final bool? disable;
   final Function()? disableCallback;
   final bool? hideClearButton;
+  final String? documentCode;
 
   const DocumentUploadContainer({
     required this.provider,
@@ -37,6 +40,7 @@ class DocumentUploadContainer extends ConsumerStatefulWidget {
     this.disable,
     this.disableCallback,
     this.hideClearButton,
+    this.documentCode,
     super.key,
   });
 
@@ -60,8 +64,13 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
             ? widget.disableCallback
             : documentFilePath == null
                 ? () {
+                    debugPrint("on container tap");
                     // openDocumentScanner(true);
-                    _onContainerTap();
+                    if (widget.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+                      pickFile(context);
+                    } else {
+                      _onContainerTap();
+                    }
                   }
                 : null,
         child: SizedBox(
@@ -90,11 +99,20 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
                 )
               : Stack(
                   children: [
-                    Positioned.fill(
-                      child: Image.file(
-                        File(documentFilePath),
+                    if (widget.documentCode != null &&
+                        widget.documentCode == DocumentCodes.LAA.toString().split('.').last) ...[
+                      Positioned.fill(
+                        child: Image.asset(
+                          ImageConstants.pdfIcon2,
+                        ),
                       ),
-                    ),
+                    ] else ...[
+                      Positioned.fill(
+                        child: Image.file(
+                          File(documentFilePath),
+                        ),
+                      ),
+                    ],
                     if (widget.hideClearButton != true)
                       Positioned(
                         top: 0,
@@ -215,6 +233,7 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
         //   },
         // ));
 
+        // String? croppedImagePath = await _cropImage2(result.path);
         String? croppedImagePath = await _cropImage(result.path);
 
         if (croppedImagePath != null) {
@@ -228,7 +247,10 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           context.pop();
           debugPrint("after popping");
 
-          final bool? res = await context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+          final bool? res = await context.pushNamed(
+            AppRoutes.confirmUploadOrRetakeScreen,
+            extra: {"provider": widget.provider},
+          );
 
           debugPrint("res: $res");
 
@@ -244,6 +266,29 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     } catch (e) {
       debugPrint("error: $e");
     }
+  }
+
+  Future<String?> _cropImage2(String path) async {
+    File pickedFile = File(path);
+    Uint8List bytes = await pickedFile.readAsBytes();
+
+    final Uint8List? croppedBytes = await ImageCropping.cropImage(
+      context: context,
+      imageBytes: bytes,
+      onImageDoneListener: (data) {},
+      defaultTextColor: black,
+      selectedTextColor: primaryColor,
+      colorForWhiteSpace: white,
+      outputImageFormat: OutputImageFormat.png,
+      squareCircleColor: primaryColor,
+    );
+
+    if (croppedBytes != null) {
+      final File savedFile = await _saveImageToTempStorage(croppedBytes);
+
+      return savedFile.path;
+    }
+    return null;
   }
 
   Future<String?> _cropImage(String path) async {
@@ -281,9 +326,13 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
     return null;
   }
 
-  void pickFile(BuildContext context) async {
+  Future<void> pickFile(BuildContext context) async {
+    debugPrint("inside pick file");
     try {
-      FilePickerResult? file = await FilePicker.platform.pickFiles(allowedExtensions: ["pdf"]);
+      FilePickerResult? file = await FilePicker.platform.pickFiles(
+        allowedExtensions: ['pdf'],
+        type: FileType.custom,
+      );
 
       if (file != null) {
         File result = File(file.files.first.path!);
@@ -297,10 +346,20 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
 
         ref.watch(capturedFilePathProvider.notifier).update((state) => result.path);
 
-        context.pop();
-        context.pushNamed(AppRoutes.confirmUploadOrRetakeScreen, extra: widget.provider);
+        final bool? res = await context.pushNamed(
+          AppRoutes.confirmUploadOrRetakeScreen,
+          extra: {"provider": widget.provider, "documentCode": widget.documentCode},
+        );
+
+        if (res == true) {
+          ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+
+          await pickFile(context);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint("error in catch: $e");
+    }
   }
 
   Future<File> _saveImageToTempStorage(Uint8List imageBytes) async {

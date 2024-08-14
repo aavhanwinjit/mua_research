@@ -7,11 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class InsuranceTypeCard extends ConsumerWidget {
   final KycTypesModel kycType;
   final String imagePath;
+  final double? iconWidth;
 
   const InsuranceTypeCard({
     super.key,
     required this.kycType,
     required this.imagePath,
+    this.iconWidth,
   });
 
   @override
@@ -50,6 +52,7 @@ class InsuranceTypeCard extends ConsumerWidget {
                 Image.asset(
                   imagePath,
                   height: 27.h,
+                  width: iconWidth,
                 ),
                 selectedKycType == kycType
                     ? const Icon(

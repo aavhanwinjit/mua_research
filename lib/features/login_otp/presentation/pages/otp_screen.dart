@@ -24,6 +24,7 @@ import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart
 import 'package:ekyc/features/login_otp/presentation/widgets/timer_widget.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
+import 'package:ekyc/features/splash_screen/presentation/mixins/launch_details_mixin.dart';
 import 'package:ekyc/widgets/app_bar/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,7 +39,7 @@ class OTPScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _OTPScreenState();
 }
 
-class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
+class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin, LaunchDetailsMixin {
   TextEditingController otpController = TextEditingController();
 
   int retryCount = 0;
@@ -375,7 +376,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin {
 
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 
-          context.go(AppRoutes.splashScreen);
+          // context.go(AppRoutes.splashScreen);
+          callLaunchDetailsApi(
+            context: context,
+            ref: ref,
+          );
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.otpAtMax) {
           ref.watch(otpScreenLoadingProvider.notifier).update((state) => false);
 

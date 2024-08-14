@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
@@ -10,8 +11,13 @@ import 'package:go_router/go_router.dart';
 
 class ReviewUploadedDocumentScreen extends ConsumerWidget {
   final StateProvider<String?> provider;
+  final String? documentCode;
 
-  const ReviewUploadedDocumentScreen({required this.provider, super.key});
+  const ReviewUploadedDocumentScreen({
+    required this.provider,
+    this.documentCode,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context, ref) {
@@ -38,12 +44,25 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(16),
-                  child: Image.file(
-                    File(capturedFilePath ?? ""),
-                    width: double.infinity,
-                    height: 250.h,
-                    fit: BoxFit.contain,
-                  ),
+                  child: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
+                      ? SizedBox(
+                          width: double.infinity,
+                          height: 250.h,
+                          child: Center(
+                            child: Image.asset(
+                              ImageConstants.pdfIcon2,
+                              // width: double.infinity,
+                              // height: 250.h,
+                              // fit: BoxFit.contain,
+                            ),
+                          ),
+                        )
+                      : Image.file(
+                          File(capturedFilePath ?? ""),
+                          width: double.infinity,
+                          height: 250.h,
+                          fit: BoxFit.contain,
+                        ),
                 ),
               ),
               SizedBox(height: 32.h),

@@ -84,6 +84,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
                       _dropdownWidget(),
                       SizedBox(height: 24.h),
                       DocumentUploadContainer(
+                        documentCode: ref.watch(selectedAddressDocTypeProvider)?.documentCode,
                         provider: addressProofFilePathProvider,
                         disable: ref.watch(selectedAddressDocTypeProvider) == null,
                         disableCallback: () {
@@ -142,6 +143,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
       onChanged: loading == true
           ? null
           : (value) {
+              ref.watch(addressProofFilePathProvider.notifier).update((state) => null);
               ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => value as AddressDocumentTypeModel);
             },
       items: addressDocTypesNotifier.addressDocsTypesList().map((AddressDocumentTypeModel value) {

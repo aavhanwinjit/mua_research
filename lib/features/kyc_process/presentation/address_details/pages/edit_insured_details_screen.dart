@@ -1,4 +1,5 @@
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
@@ -115,75 +116,77 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
           ),
         ),
         SizedBox(height: 14.h),
-        InkWell(
-          onTap: () async {
-            final String date = await _openDatePicker();
+        if (element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last &&
+            element.documentElement?.documentCode != DocumentCodes.PSL.toString().split('.').last) ...[
+          InkWell(
+            onTap: () async {
+              final String date = await _openDatePicker();
 
-            selectedDocsListProvider.updateElementIssueDate(
-              index: index,
-              issueDate: date.trim(),
-            );
-          },
-          child: Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: borderColor,
+              selectedDocsListProvider.updateElementIssueDate(
+                index: index,
+                issueDate: date.trim(),
+              );
+            },
+            child: Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: borderColor,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Text(
-              element.issueDate == null || element.issueDate!.isEmpty
-                  ? element.scanResponse?.ocrResponse?.documentdata?.billDate == null ||
-                          element.scanResponse!.ocrResponse!.documentdata!.billDate!.isEmpty
-                      ? "Select Issue Date"
-                      : element.scanResponse?.ocrResponse?.documentdata?.billDate ?? "Select issue date"
-                  : element.issueDate ?? "-",
-              // "12 June 2024",
-              style: TextStyle(
-                fontSize: 16.sp,
-              ),
-            ),
-          ),
-        ),
-        if ((element.issueDate == null || element.issueDate!.isEmpty) && dateValidator == true)
-          Padding(
-            padding: EdgeInsets.only(left: 8.w, top: 4.w),
-            child: Text(
-              "Select Issue Date",
-              // "12 June 2024",
-              style: TextStyle(
-                fontSize: 11.sp,
-                color: errorTextRed,
+              child: Text(
+                element.issueDate == null || element.issueDate!.isEmpty
+                    ? element.scanResponse?.ocrResponse?.documentdata?.billDate == null ||
+                            element.scanResponse!.ocrResponse!.documentdata!.billDate!.isEmpty
+                        ? "Select Issue Date"
+                        : element.scanResponse?.ocrResponse?.documentdata?.billDate ?? "Select issue date"
+                    : element.issueDate ?? "-",
+                // "12 June 2024",
+                style: TextStyle(
+                  fontSize: 16.sp,
+                ),
               ),
             ),
           ),
-        // CustomTextFormField(
-        //   initialValue: element.extractedLastName,
-        //   label: Strings.surname,
-        //   onChanged: (value) {
-        //     selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
-        //       index: index,
-        //       lastName: value.trim(),
-        //     );
-        //   },
-        //   validator: (value) {
-        //     if (value!.trim().isEmpty) {
-        //       return Strings.surnameValidationString;
-        //     }
-        //     return null;
-        //   },
-        // ),
-        SizedBox(height: 4.h),
-        Text(
-          Strings.issueDate,
-          style: TextStyle(
-            fontSize: 12.sp,
-            color: textGrayColor,
+          if ((element.issueDate == null || element.issueDate!.isEmpty) && dateValidator == true)
+            Padding(
+              padding: EdgeInsets.only(left: 8.w, top: 4.w),
+              child: Text(
+                "Select Issue Date",
+                // "12 June 2024",
+                style: TextStyle(
+                  fontSize: 11.sp,
+                  color: errorTextRed,
+                ),
+              ),
+            ),
+          // CustomTextFormField(
+          //   initialValue: element.extractedLastName,
+          //   label: Strings.surname,
+          //   onChanged: (value) {
+          //     selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
+          //       index: index,
+          //       lastName: value.trim(),
+          //     );
+          //   },
+          //   validator: (value) {
+          //     if (value!.trim().isEmpty) {
+          //       return Strings.surnameValidationString;
+          //     }
+          //     return null;
+          //   },
+          // ),
+          SizedBox(height: 4.h),
+          Text(
+            Strings.issueDate,
+            style: TextStyle(
+              fontSize: 12.sp,
+              color: textGrayColor,
+            ),
           ),
-        ),
-
+        ],
         SizedBox(height: 24.h)
       ],
     );
@@ -228,11 +231,16 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
         // debugPrint("element.issueDate == null: ${element.issueDate == null}");
         // debugPrint("element.issueDate.isEmpty: ${element.issueDate?.isEmpty}");
 
-        if (element.issueDate == null || element.issueDate!.isEmpty) {
-          return true;
-        } else {
-          return false;
+        if (element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last &&
+            element.documentElement?.documentCode != DocumentCodes.PSL.toString().split('.').last) {
+          if (element.issueDate == null || element.issueDate!.isEmpty) {
+            return true;
+          } else {
+            return false;
+          }
         }
+
+        return false;
       },
     );
 

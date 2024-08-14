@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_cropping/image_cropping.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -205,8 +206,9 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
     try {
       XFile? result = await ImagePicker().pickImage(
         source: imageSource,
-        maxHeight: 1500,
-        maxWidth: 1500,
+        // maxHeight: 1500,
+        // maxWidth: 1500,
+        imageQuality: 100,
       );
 
       if (result != null) {
@@ -226,6 +228,7 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
         // final savedFile = await _saveImageToTempStorage(croppedImage);
         // ref.watch(capturedFilePathProvider.notifier).update((state) => savedFile.path);
 
+        // String? croppedImagePath = await _cropImage2(result.path);
         String? croppedImagePath = await _cropImage(result.path);
 
         if (croppedImagePath != null) {
@@ -258,6 +261,29 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
     } catch (e) {}
   }
 
+  Future<String?> _cropImage2(String path) async {
+    File pickedFile = File(path);
+    Uint8List bytes = await pickedFile.readAsBytes();
+
+    final Uint8List? croppedBytes = await ImageCropping.cropImage(
+      context: context,
+      imageBytes: bytes,
+      onImageDoneListener: (data) {},
+      defaultTextColor: black,
+      selectedTextColor: primaryColor,
+      colorForWhiteSpace: white,
+      outputImageFormat: OutputImageFormat.png,
+      squareCircleColor: primaryColor,
+    );
+
+    if (croppedBytes != null) {
+      final File savedFile = await _saveImageToTempStorage(croppedBytes);
+
+      return savedFile.path;
+    }
+    return null;
+  }
+
   Future<String?> _cropImage(String path) async {
     CroppedFile? croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
@@ -269,7 +295,6 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
           lockAspectRatio: false,
           cropFrameColor: primaryColor,
           // hideBottomControls: false,
-          
 
           // cropGridColor: primaryColor,
           // aspectRatioPresets: [

@@ -4,7 +4,6 @@ import 'package:ekyc/features/dashboard/presentation/widgets/status_chip.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/theme/custom_shadows.dart';
-import 'package:ekyc/widgets/custom_profile_image_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -29,12 +28,32 @@ class ApplicantCard extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             child: Row(
               children: [
-                CustomProfileImageWidget(
-                  userName: _getApplicantName().initials,
-                  size: MediaQuery.of(context).size.width > 480 ? 32.w : 50.w,
-                  fontSize: 18.sp,
-                  primary: false,
+                Container(
+                  height: MediaQuery.of(context).size.width > 480 ? 32.w : 50.w,
+                  width: MediaQuery.of(context).size.width > 480 ? 32.w : 50.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: primaryColor,
+                    // color: lightOrange,
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      application.kycTypeId == 1
+                          ? ImageConstants.lifeInsuranceImage
+                          : application.kycTypeId == 2
+                              ? ImageConstants.motorInsuranceImage
+                              : ImageConstants.nonMotorInsuranceImage,
+                      height: application.kycTypeId == 2 ? 22.h : 32.h,
+                      color: white,
+                    ),
+                  ),
                 ),
+                // CustomProfileImageWidget(
+                //   userName: _getApplicantName().initials,
+                //   size: MediaQuery.of(context).size.width > 480 ? 32.w : 50.w,
+                //   fontSize: 18.sp,
+                //   primary: false,
+                // ),
                 SizedBox(width: 12.w),
                 Expanded(
                   child: Column(
@@ -45,21 +64,16 @@ class ApplicantCard extends ConsumerWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width > 480
-                              ? 13.sp
-                              : 16.sp,
+                          fontSize: MediaQuery.of(context).size.width > 480 ? 13.sp : 16.sp,
                           color: black,
                         ),
                       ),
                       SizedBox(height: 4.h),
                       Text(
-                        DateTimeFormatter.getApplicationCardDateTime(
-                            application.crd),
+                        DateTimeFormatter.getApplicationCardDateTime(application.crd),
                         style: TextStyle(
                           color: textGrayColor2,
-                          fontSize: MediaQuery.of(context).size.width > 480
-                              ? 10.sp
-                              : 12.sp,
+                          fontSize: MediaQuery.of(context).size.width > 480 ? 10.sp : 12.sp,
                         ),
                       ),
                     ],
@@ -90,12 +104,10 @@ class ApplicantCard extends ConsumerWidget {
   }
 
   ({String name, String initials}) _getApplicantName() {
-    if (application.idDocOtherName == null &&
-        application.idDocSurname == null) {
+    if (application.idDocOtherName == null && application.idDocSurname == null) {
       return (name: application.mobileNumber ?? "", initials: "-");
     } else {
-      final String fullName =
-          "${application.idDocOtherName ?? ""} ${application.idDocSurname ?? ""}";
+      final String fullName = "${application.idDocOtherName ?? ""} ${application.idDocSurname ?? ""}";
       return (name: fullName, initials: fullName);
     }
   }
@@ -130,9 +142,7 @@ class ApplicantCard extends ConsumerWidget {
   Widget _resumeWidget(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () {
-        ref
-            .watch(selectedApplicationProvider.notifier)
-            .update((state) => application);
+        ref.watch(selectedApplicationProvider.notifier).update((state) => application);
 
         context.pushNamed(AppRoutes.insuranceStagesScreen);
       },
@@ -143,7 +153,7 @@ class ApplicantCard extends ConsumerWidget {
             style: TextStyle(
               color: primaryColor,
               fontWeight: FontWeight.w600,
-              fontSize: MediaQuery.of(context).size.width > 480 ?10.sp: 12.sp,
+              fontSize: MediaQuery.of(context).size.width > 480 ? 10.sp : 12.sp,
             ),
           ),
           const Icon(
