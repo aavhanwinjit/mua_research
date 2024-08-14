@@ -48,7 +48,11 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin, LaunchD
   @override
   void initState() {
     super.initState();
-    ref.read(otpScreenLoadingProvider.notifier).update((state) => false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(otpScreenLoadingProvider.notifier).update((state) => false);
+      ref.watch(otpProvider.notifier).update((state) => '');
+    });
   }
 
   @override
@@ -61,65 +65,86 @@ class _OTPScreenState extends ConsumerState<OTPScreen> with LogoutMixin, LaunchD
   Widget build(BuildContext context) {
     final phoneNumber = ref.watch(phoneNumberProvider);
 
-    return SafeArea(
-      top: false,
-      child: GestureDetector(
-        onTap: () {
-          KeyboardHelper.onScreenTap(context);
-        },
-        child: Scaffold(
-          body: Padding(
-            padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
-            child: Column(
-              children: [
-                CustomAppBar(
-                  title: Strings.otpScreenTitle,
-                  subTitleWidget: Row(
-                    children: [
-                      Text(
-                        phoneNumber.maskMobileNumber(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: black,
-                          fontSize: 16.sp,
-                        ),
-                      ),
-                      if (widget.showEdit == true)
-                        TextButton(
-                          onPressed: () {
-                            context.pop();
-                          },
-                          child: Text(
-                            Strings.edit,
-                            style: TextStyle(
-                              color: primaryColor,
-                              decoration: TextDecoration.underline,
-                              fontSize: 16.sp,
-                              decorationColor: primaryColor,
-                            ),
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (didPop) {
+        context.pop(1);
+        // bool isLoggedIn = ref.watch(userLoggedInProvider);
+
+        // debugPrint("isLoggedIn: $isLoggedIn");
+
+        // if (isLoggedIn == true) {
+        //   debugPrint("inside logged in true");
+        //   Navigator.pop(context);
+        //   debugPrint("inside logged in true 2");
+        //   Navigator.pop(context);
+        //   debugPrint("inside logged in true 3");
+        //   Navigator.pop(context);
+        // } else {
+        //   debugPrint("inside logged in false");
+        //   context.pop();
+        // }
+      },
+      child: SafeArea(
+        top: false,
+        child: GestureDetector(
+          onTap: () {
+            KeyboardHelper.onScreenTap(context);
+          },
+          child: Scaffold(
+            body: Padding(
+              padding: EdgeInsets.only(left: 20.w, right: 20.w, top: ScreenUtil().statusBarHeight),
+              child: Column(
+                children: [
+                  CustomAppBar(
+                    title: Strings.otpScreenTitle,
+                    subTitleWidget: Row(
+                      children: [
+                        Text(
+                          phoneNumber.maskMobileNumber(),
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: black,
+                            fontSize: 16.sp,
                           ),
                         ),
-                    ],
+                        if (widget.showEdit == true)
+                          TextButton(
+                            onPressed: () {
+                              context.pop();
+                            },
+                            child: Text(
+                              Strings.edit,
+                              style: TextStyle(
+                                color: primaryColor,
+                                decoration: TextDecoration.underline,
+                                fontSize: 16.sp,
+                                decorationColor: primaryColor,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
                   ),
-                ),
-                _pinInputField(),
-                SizedBox(height: 24.h),
-                CustomPrimaryButton(
-                  loading: ref.watch(otpScreenLoadingProvider),
-                  disable: ref.watch(otpProvider).trim().length < 6 || showResendOption,
-                  disabledOnTap: () {
-                    if (ref.watch(otpProvider).trim().length < 6) {
-                      context.showErrorSnackBar(message: Strings.pleaseEnterOTP);
-                    } else {
-                      context.showErrorSnackBar(message: Strings.otpExpiredMessage);
-                    }
-                  },
-                  onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
-                  label: Strings.contn,
-                ),
-                SizedBox(height: 18.h),
-                _resendWidget(),
-              ],
+                  _pinInputField(),
+                  SizedBox(height: 24.h),
+                  CustomPrimaryButton(
+                    loading: ref.watch(otpScreenLoadingProvider),
+                    disable: ref.watch(otpProvider).trim().length < 6 || showResendOption,
+                    disabledOnTap: () {
+                      if (ref.watch(otpProvider).trim().length < 6) {
+                        context.showErrorSnackBar(message: Strings.pleaseEnterOTP);
+                      } else {
+                        context.showErrorSnackBar(message: Strings.otpExpiredMessage);
+                      }
+                    },
+                    onTap: () => ref.watch(userLoggedInProvider) ? _changeMPIN() : _verifyOTP(),
+                    label: Strings.contn,
+                  ),
+                  SizedBox(height: 18.h),
+                  _resendWidget(),
+                ],
+              ),
             ),
           ),
         ),

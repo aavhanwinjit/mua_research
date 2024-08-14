@@ -90,12 +90,12 @@ mixin AgentApplicationsMixin {
           ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
           ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
-          if (status.isEmpty && pageNumber == 1) {
-          } else {
-            context.showErrorSnackBar(
-              message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-            );
-          }
+          // if (status.isEmpty && pageNumber == 1) {
+          // } else {
+          //   context.showErrorSnackBar(
+          //     message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          //   );
+          // }
         } else {
           ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
           ref.watch(applicationListErrorProvider.notifier).update((state) => false);

@@ -53,7 +53,8 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
             ),
           ),
           Text(
-            DateTimeFormatter.formatSignatureDate(agentDetails?.signatureUploadDate) ?? "",
+            DateTimeFormatter.formatSignatureDate(DateTime.now()) ?? "",
+            // DateTimeFormatter.formatSignatureDate(agentDetails?.signatureUploadDate) ?? "",
             // agentDetails?.signatureUploadDate.toString() ?? "",
             // "Tue Jan 18 11:55:50 IST 2023",
             style: TextStyle(

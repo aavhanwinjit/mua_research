@@ -235,7 +235,11 @@ class _ConfirmPINScreenState extends ConsumerState<ConfirmPINScreen> with Biomet
 
           context.showSnackBar(message: "${Strings.otpSentSuccessfully} $expiryTime");
 
-          context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': false});
+          final int? result = await context.pushNamed(AppRoutes.otpScreen, extra: {'showEdit': false});
+
+          if (result == 1) {
+            context.pop(1);
+          }
         } else {
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 

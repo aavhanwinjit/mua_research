@@ -100,10 +100,14 @@ class _CreatePinScreenState extends ConsumerState<CreatePinScreen> {
       context.showErrorSnackBar(message: Strings.pinValidationFailed);
       ref.watch(createPINProvider.notifier).update((state) => "");
     } else {
-      final bool? result = await context.pushNamed(AppRoutes.confirmPINScreen);
+      final result = await context.pushNamed(AppRoutes.confirmPINScreen);
 
       if (result == true) {
         ref.watch(createPINProvider.notifier).update((state) => "");
+      }
+
+      if (result == 1) {
+        context.pop(1);
       }
     }
   }

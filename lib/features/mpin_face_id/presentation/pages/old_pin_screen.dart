@@ -70,10 +70,14 @@ class _OldPinScreenState extends ConsumerState<OldPinScreen> {
               child: PinKeypad(
                 provider: oldPINProvider,
                 callback: () async {
-                  final bool? result = await context.pushNamed(AppRoutes.createPINScreen);
+                  final result = await context.pushNamed(AppRoutes.createPINScreen);
 
                   if (result == true) {
                     ref.watch(oldPINProvider.notifier).update((state) => "");
+                  }
+
+                  if (result == 1) {
+                    context.pop();
                   }
                 },
               ),

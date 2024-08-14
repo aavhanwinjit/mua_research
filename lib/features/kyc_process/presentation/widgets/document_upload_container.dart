@@ -102,8 +102,19 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
                     if (widget.documentCode != null &&
                         widget.documentCode == DocumentCodes.LAA.toString().split('.').last) ...[
                       Positioned.fill(
-                        child: Image.asset(
-                          ImageConstants.pdfIcon2,
+                        child: SizedBox(
+                          height: 50.h,
+                          width: 50.h,
+                          // padding: EdgeInsets.all(16.w),
+                          child: Center(
+                            child: SizedBox(
+                              height: 70.h,
+                              width: 70.h,
+                              child: Image.asset(
+                                ImageConstants.pdfIcon2,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ] else ...[
