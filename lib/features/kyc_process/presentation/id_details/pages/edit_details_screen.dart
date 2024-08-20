@@ -1,7 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
-import 'package:ekyc/core/utils/extensions/input_formatter_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/id_details/providers/id_details_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/disabled_fields_widget.dart';
@@ -79,7 +78,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedSurName,
-                      inputFormatters: [UpperCaseTextFormatter()],
+                      // inputFormatters: [UpperCaseTextFormatter()],
                       label: Strings.surname,
                       onChanged: (value) {
                         surname = value.trim();
@@ -103,7 +102,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedFirstName,
-                      inputFormatters: [UpperCaseTextFormatter()],
+                      // inputFormatters: [UpperCaseTextFormatter()],
                       label: Strings.otherName,
                       onChanged: (value) {
                         otherName = value.trim();
@@ -127,7 +126,7 @@ class _EditDetailsScreenState extends ConsumerState<EditDetailsScreen> {
                     SizedBox(height: 24.h),
                     CustomTextFormField(
                       initialValue: extractedIdNumber,
-                      inputFormatters: [UpperCaseTextFormatter()],
+                      // inputFormatters: [UpperCaseTextFormatter()],
                       label: selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last
                           ? Strings.nicIdNo
                           : Strings.passportNo,
