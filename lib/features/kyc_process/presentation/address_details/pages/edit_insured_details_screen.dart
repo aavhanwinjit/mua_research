@@ -120,12 +120,14 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
             element.documentElement?.documentCode != DocumentCodes.PSL.toString().split('.').last) ...[
           InkWell(
             onTap: () async {
-              final String date = await _openDatePicker();
+              final String? date = await _openDatePicker();
 
-              selectedDocsListProvider.updateElementIssueDate(
-                index: index,
-                issueDate: date.trim(),
-              );
+              if (date != null) {
+                selectedDocsListProvider.updateElementIssueDate(
+                  index: index,
+                  issueDate: date.trim(),
+                );
+              }
             },
             child: Container(
               width: double.infinity,
@@ -192,7 +194,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
     );
   }
 
-  Future<String> _openDatePicker() async {
+  Future<String?> _openDatePicker() async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -205,7 +207,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       return formattedDate;
     }
 
-    return '';
+    return null;
   }
 
   void _updateData() {

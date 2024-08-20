@@ -56,7 +56,7 @@ class SelectedPorDocTypeListNotifier extends _$SelectedPorDocTypeListNotifier {
     state = newList;
   }
 
-  void updateElementsFilePath({required int index, required String filePath}) {
+  void updateElementsFilePath({required int index, required String? filePath}) {
     PORDocumentElement item = state[index];
 
     List<PORDocumentElement> newList = List.from(state);

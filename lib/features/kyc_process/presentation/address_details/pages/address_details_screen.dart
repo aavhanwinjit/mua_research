@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
+import 'package:ekyc/core/constants/enums/file_extension_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/helpers/kyc_status_dialog_helper.dart';
@@ -177,6 +178,10 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
           final List<int> addressProofFileBytes = await addressProofFile.readAsBytes() as List<int>;
           final String addressProofFileBase64 = base64Encode(addressProofFileBytes);
 
+          String? fileExtension = selectedAddressDocType?.documentCode == DocumentCodes.LAA.toString().split('.').last
+              ? FileExtensionEnums.pdf.toString().split('.').last
+              : null;
+
           await scanDocument(
             context: context,
             ref: ref,
@@ -186,6 +191,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
               onSuccess(response);
             },
             base64Image: addressProofFileBase64,
+            fileExtension: fileExtension,
           );
         },
         label: Strings.next,

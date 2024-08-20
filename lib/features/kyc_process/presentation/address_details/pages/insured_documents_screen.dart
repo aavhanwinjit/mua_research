@@ -252,15 +252,21 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
     final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
 
+    bool loading = ref.watch(porDocsTypesListLoading);
+
     return CustomDrowDownField(
       value: item.documentElement,
       labelText: Strings.selectDocument,
       validator: (value) {
         return value == null ? Strings.selectDocument : null;
       },
-      onChanged: (value) {
-        selectedDocsListProvider.updateElementsSelectedDocType(index: index, element: value as PORDocumentTypeModel);
-      },
+      onChanged: loading == true
+          ? null
+          : (value) {
+              selectedDocsListProvider.updateElementsFilePath(filePath: null, index: index);
+              selectedDocsListProvider.updateElementsSelectedDocType(
+                  index: index, element: value as PORDocumentTypeModel);
+            },
       items: porDocTypesNotifier.porDocsTypesList().map((PORDocumentTypeModel value) {
         return DropdownMenuItem<PORDocumentTypeModel>(
           value: value,
@@ -327,11 +333,14 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     selectedDocsListProvider.list().forEach((element) {
-      if ((element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last) &&
-          (element.scanResponse?.ocrResponse?.documentdata?.isLastNameAvailable == true)) {
-        final selectedApplication = ref.watch(selectedApplicationProvider);
+      if (
+          // if ((element.documentElement?.documentCode != DocumentCodes.NIL.toString().split('.').last) &&
+          (element.scanResponse?.ocrResponse?.documentdata?.lastName != null &&
+              element.scanResponse!.ocrResponse!.documentdata!.lastName!.isNotEmpty)) {
+        // final selectedApplication = ref.watch(selectedApplicationProvider);
 
-        element.extractedLastName = selectedApplication?.idDocSurname;
+        element.extractedLastName = element.scanResponse?.ocrResponse?.documentdata?.lastName;
+        // element.extractedLastName = selectedApplication?.idDocSurname;
       }
     });
 

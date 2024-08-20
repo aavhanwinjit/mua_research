@@ -133,7 +133,7 @@ class AddressDetailsCard extends ConsumerWidget {
             selectedAddressDocType?.addressDocType ?? "-",
             style: const TextStyle(color: textGrayColor2),
           ),
-          const SizedBox(height: 5),
+          const SizedBox(height: 10),
           selectedAddressDocType?.documentCode == DocumentCodes.LAA.toString().split('.').last
               ? _pdfWidget()
               : _imageWidget(addressProofImagePath),
@@ -158,8 +158,8 @@ class AddressDetailsCard extends ConsumerWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
       child: SizedBox(
-        height: 150.h,
-        width: 150.h,
+        height: 80.h,
+        width: 80.h,
         child: Center(
           child: Image.asset(
             ImageConstants.pdfIcon2,

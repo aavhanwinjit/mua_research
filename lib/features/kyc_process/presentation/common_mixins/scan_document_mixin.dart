@@ -26,6 +26,7 @@ mixin ScanDocumentMixin {
     required Function(ScanDocumentResponseBody?) onSuccess,
     required String base64Image,
     String? documentSide,
+    String? fileExtension,
   }) async {
     final loading = ref.watch(loadingProvider);
     if (loading) return;
@@ -72,7 +73,7 @@ mixin ScanDocumentMixin {
       documentSide: documentSide ?? "FRONT",
       customerId: "",
       policyNumber: selectedApplication?.policyNumber,
-      fileExtension: FileExtensionEnums.png.toString().split('.').last,
+      fileExtension: fileExtension ?? FileExtensionEnums.png.toString().split('.').last,
       nicNumber: nicNumber,
       passportNumber: (selectedApplication?.nationality == NationalityType.NonMauritian.toString().split('.').last)
           ? selectedApplication?.idDocNumber
