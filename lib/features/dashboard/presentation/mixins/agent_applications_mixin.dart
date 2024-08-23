@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 mixin AgentApplicationsMixin {
-  Future<void> getAgentApplications({
+  Future<bool?> getAgentApplications({
     required BuildContext context,
     required WidgetRef ref,
     Function(List<AgentApplicationModel>)? onSuccess,
@@ -43,6 +43,8 @@ mixin AgentApplicationsMixin {
     ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
     final response = await getIt<GetAgentApplications>().call(request);
+
+    bool? returnValue;
 
     response.fold(
       (failure) {
@@ -74,6 +76,21 @@ mixin AgentApplicationsMixin {
             ref.watch(applicationListErrorProvider.notifier).update((state) => false);
           }
         } else if (success.status?.isSuccess == false && success.status?.statusCode == ApiErrorCodes.listEmpty) {
+          if (status.isNotEmpty) {
+            context.showErrorSnackBar(
+              message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            );
+
+            ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
+            ref.watch(applicationListErrorProvider.notifier).update((state) => false);
+
+            // call clear filter
+            // if (clearFilter != null) {
+            //   clearFilter();
+            // }
+
+            returnValue = false;
+          }
           // final agentApplicationNotifier = ref.read(agentApplicationsNotifierProvider.notifier);
 
           // agentApplicationNotifier.updateApplicationList([]);
@@ -87,8 +104,8 @@ mixin AgentApplicationsMixin {
 
           // await getAgentApplications(context: context, ref: ref);
 
-          ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
-          ref.watch(applicationListErrorProvider.notifier).update((state) => false);
+          // ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
+          // ref.watch(applicationListErrorProvider.notifier).update((state) => false);
 
           // if (status.isEmpty && pageNumber == 1) {
           // } else {
@@ -106,6 +123,7 @@ mixin AgentApplicationsMixin {
         }
       },
     );
+    return returnValue;
   }
 
   String getFilterStatus(WidgetRef ref) {

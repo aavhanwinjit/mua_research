@@ -81,7 +81,7 @@ mixin DownloadPdfMixin {
       ref.watch(pdfLoadingProvider.notifier).update((state) => false);
 
       context.showSnackBarDownload(
-        message: "FILE DOWNLOADED",
+        message: "File Downloaded",
         action: SnackBarAction(
           label: 'View now',
           disabledTextColor: Colors.white,

@@ -110,7 +110,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
             flex: 2,
             child: CustomOutlineButton(
               disable: false,
-              onTap: _clearFilters,
+              onTap: clearFilters,
               label: Strings.clearAll,
             ),
           ),
@@ -140,15 +140,19 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
 
     ref.read(dashboardPageNumberNotifierProvider.notifier).resetPageNumber();
 
-    await getAgentApplications(
+    bool? result = await getAgentApplications(
       context: context,
       ref: ref,
     );
 
-    context.pop();
+    if (result == false) {
+      await clearFilters();
+    } else {
+      context.pop();
+    }
   }
 
-  void _clearFilters() async {
+  Future<void> clearFilters() async {
     idMissing = false;
     porMissing = false;
     poaMissing = false;

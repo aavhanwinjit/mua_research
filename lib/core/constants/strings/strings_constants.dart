@@ -61,6 +61,8 @@ class Strings {
   static const String confirmDetails = "Confirm Details";
   static const String documentUploadConfirmationDialogText =
       "Do you confirm the details are correct as per the uploaded document? If No, you can edit the details before proceeding.";
+  static const String documentUploadConfirmationDialogText2 =
+      "Do you confirm the details are correct as per the uploaded document? If No, you can verify the details before proceeding.";
   static const String selectFrontImageFirst =
       "Please upload the front side image first, followed by the back side image!";
   // static const String selectFrontImageFirst = "Select front image first";

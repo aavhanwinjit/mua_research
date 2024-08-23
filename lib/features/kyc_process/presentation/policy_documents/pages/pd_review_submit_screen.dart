@@ -94,7 +94,7 @@ class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen>
     ConfirmationDialogHelper.showConfirmationDialog(
       context,
       title: Strings.confirmDetails,
-      content: Strings.documentUploadConfirmationDialogText,
+      content: Strings.documentUploadConfirmationDialogText2,
       onConfirm: () async {
         // pop the confirmation dialog box
         context.pop();
