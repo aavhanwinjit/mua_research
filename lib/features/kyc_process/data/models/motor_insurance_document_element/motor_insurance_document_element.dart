@@ -6,10 +6,13 @@ class MotorInsuranceDocumentElement {
   // int index;
   ScanDocumentResponseBody? scanResponse;
   String? motorDocImagePath;
+  String? registrationNumber;
 
-  MotorInsuranceDocumentElement(
-      {required this.documentElement,
-      // required this.index,
-      required this.scanResponse,
-      required this.motorDocImagePath});
+  MotorInsuranceDocumentElement({
+    required this.documentElement,
+    // required this.index,
+    required this.scanResponse,
+    required this.motorDocImagePath,
+    this.registrationNumber,
+  });
 }

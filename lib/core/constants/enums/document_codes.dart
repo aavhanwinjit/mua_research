@@ -10,4 +10,5 @@ enum DocumentCodes {
   NIL,
   PSL,
   ADD,
+  HRP,
 }

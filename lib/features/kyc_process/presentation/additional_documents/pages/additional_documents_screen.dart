@@ -17,10 +17,10 @@ class AdditionalDocumentsScreen extends ConsumerStatefulWidget {
   const AdditionalDocumentsScreen({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _PolicyDocumentsScreenState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _AdditionalDocumentsScreenState();
 }
 
-class _PolicyDocumentsScreenState extends ConsumerState<AdditionalDocumentsScreen> {
+class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsScreen> {
   @override
   void initState() {
     super.initState();

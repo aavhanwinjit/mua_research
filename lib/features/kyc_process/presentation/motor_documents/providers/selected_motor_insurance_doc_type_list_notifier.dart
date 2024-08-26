@@ -54,7 +54,7 @@ class SelectedMotorInsuranceDocTypeListNotifier extends _$SelectedMotorInsurance
     state = newList;
   }
 
-  void updateElementsFilePath({required int index, required String filePath}) {
+  void updateElementsFilePath({required int index, required String? filePath}) {
     MotorInsuranceDocumentElement item = state[index];
 
     List<MotorInsuranceDocumentElement> newList = List.from(state);
@@ -74,6 +74,19 @@ class SelectedMotorInsuranceDocTypeListNotifier extends _$SelectedMotorInsurance
     newList.removeAt(index);
 
     item.scanResponse = scanResponse;
+
+    newList.insert(index, item);
+
+    state = newList;
+  }
+
+  void updateElementsRegistrationNumber({required int index, required String registrationNumber}) {
+    MotorInsuranceDocumentElement item = state[index];
+
+    List<MotorInsuranceDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
+
+    item.registrationNumber = registrationNumber;
 
     newList.insert(index, item);
 

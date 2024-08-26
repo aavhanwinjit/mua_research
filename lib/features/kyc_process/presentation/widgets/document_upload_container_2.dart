@@ -30,6 +30,7 @@ class DocumentUploadContainer2 extends ConsumerStatefulWidget {
   final Function() clearFile;
   final String documentCode;
   final String? documentSide;
+  final String? registrationNumber;
 
   const DocumentUploadContainer2({
     required this.documentCode,
@@ -44,6 +45,7 @@ class DocumentUploadContainer2 extends ConsumerStatefulWidget {
     this.disableCallback,
     this.hideClearButton,
     this.documentSide,
+    this.registrationNumber,
     super.key,
   });
 
@@ -62,7 +64,13 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
       radius: const Radius.circular(16),
       child: InkWell(
         onTap: widget.disable == true
-            ? widget.disableCallback
+            ? () {
+                debugPrint("disable function");
+                // if (widget.disableCallback != null) {
+                widget.disableCallback!();
+                // }
+              }
+            // ? widget.disableCallback
             : widget.filePath == null
                 ? () {
                     // openDocumentScanner(true);
@@ -244,6 +252,7 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
               'onChange': widget.onChange,
               'documentCode': widget.documentCode,
               'documentSide': widget.documentSide,
+              'registrationNumber': widget.registrationNumber,
             },
           );
 

@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -149,27 +150,55 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
       children: [
         DropdownWidget(item: item, index: index),
         SizedBox(height: 24.h),
-        DocumentUploadContainer2(
-          filePath: item.motorDocImagePath,
-          documentCode: item.documentElement?.documentCode ?? "",
-          onChange: (String path, ScanDocumentResponseBody? response) async {
-            selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
-            selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
 
-            context.pop();
-          },
-          clearFile: () {
-            selectedDocsListProvider.clearElementsFilePath(index: index);
-          },
-          label: Strings.insuredDocumentContainerLabel,
-          cameraScreenTitle: Strings.scanDocuments,
-          cameraScreenDescription: Strings.insuredDocCameraLabel,
-          reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
-          disable: item.documentElement == null,
-          disableCallback: () {
-            context.showErrorSnackBar(message: Strings.selectDocumentType);
-          },
-        ),
+        // show textfield if HP is selected
+        if (item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last) ...[
+          CustomTextFormField(
+            label: Strings.registrationNumber,
+            keyboardType: TextInputType.text,
+            onChanged: (value) {
+              selectedDocsListProvider.updateElementsRegistrationNumber(index: index, registrationNumber: value.trim());
+              selectedDocsListProvider.updateElementsFilePath(filePath: null, index: index);
+            },
+            // validator: (selectedKycType?.kycTypeId == KYCType.MOTOR_INSURANCE ||
+            //         selectedKycType?.kycTypeId == KYCType.NON_MOTOR_INSURANCE)
+            //     ? (value) {
+            //         if (value!.trim().isEmpty) {
+            //           return Strings.quoteNumberValidationString;
+            //         }
+            //         return null;
+            //       }
+            //     : null,
+          ),
+          SizedBox(height: 24.h),
+          //
+        ],
+
+        DocumentUploadContainer2(
+            filePath: item.motorDocImagePath,
+            documentCode: item.documentElement?.documentCode ?? "",
+            onChange: (String path, ScanDocumentResponseBody? response) async {
+              selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
+              selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
+
+              context.pop();
+            },
+            clearFile: () {
+              selectedDocsListProvider.clearElementsFilePath(index: index);
+            },
+            label: Strings.insuredDocumentContainerLabel,
+            cameraScreenTitle: Strings.scanDocuments,
+            cameraScreenDescription: Strings.insuredDocCameraLabel,
+            reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
+            disable: (item.documentElement == null) ||
+                (item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last &&
+                    (item.registrationNumber == null || item.registrationNumber!.isEmpty)),
+            disableCallback: () {
+              context.showErrorSnackBar(message: Strings.selectDocumentType);
+            },
+            registrationNumber: item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last
+                ? item.registrationNumber
+                : null),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -181,7 +210,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
               ),
             const SizedBox(),
             // show add doc button only for the last element in the list
-            if ((selectedDocsListProvider.list().length - 1) == index)
+            // if ((selectedDocsListProvider.list().length - 1) == index)
+            if (index == 0)
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add
@@ -249,7 +279,39 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
           context.showErrorSnackBar(message: Strings.uploadInsuredDocuments);
         },
         onTap: () {
-          context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+          final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+
+          // selectedDocsListProvider.list().forEach(
+          //   (element) {
+          //     if (element.documentElement!.documentCode == DocumentCodes.HRP.toString().split('.').last) {
+          //       if (element.scanResponse!.ocrResponse!.documentdata!.kycStatus != "Success") {
+          //         context.showErrorSnackBar(message: "Horse power kyc failed. Enter correct registration number");
+          //       } else {
+          //         context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+          //       }
+          //     } else {
+          //       context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+          //     }
+          //   },
+          // );
+
+          bool result = selectedDocsListProvider.list().any((element) {
+            if (element.documentElement!.documentCode == DocumentCodes.HRP.toString().split('.').last) {
+              if (element.scanResponse!.ocrResponse!.documentdata!.kycStatus != "Success") {
+                return false;
+              } else {
+                return true;
+              }
+            } else {
+              return true;
+            }
+          });
+
+          if (result == true) {
+            context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+          } else {
+            context.showErrorSnackBar(message: "Horse power kyc failed. Enter correct registration number");
+          }
         },
         label: Strings.next,
       ),

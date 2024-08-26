@@ -15,9 +15,15 @@ class ReviewUploadedDocumentScreen2 extends ConsumerStatefulWidget {
   final Function(String, ScanDocumentResponseBody?) onChange;
   final String documentCode;
   final String? documentSide;
+  final String? registrationNumber;
 
-  const ReviewUploadedDocumentScreen2(
-      {required this.onChange, required this.documentCode, this.documentSide, super.key});
+  const ReviewUploadedDocumentScreen2({
+    required this.onChange,
+    required this.documentCode,
+    this.documentSide,
+    this.registrationNumber,
+    super.key,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _ReviewUploadedDocumentScreen2State();
@@ -94,6 +100,7 @@ class _ReviewUploadedDocumentScreen2State extends ConsumerState<ReviewUploadedDo
                     },
                     base64Image: fileBase64,
                     documentSide: widget.documentSide,
+                    registrationNumber: widget.registrationNumber,
                   );
                 },
               ),

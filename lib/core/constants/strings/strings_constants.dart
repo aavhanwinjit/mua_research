@@ -194,6 +194,7 @@ class Strings {
   static const String emailOptional = "Email ID (Optional)";
   static const String emailValidationString = "Enter valid email id";
   static const String addressValidationString = "Enter valid address";
+  static const String registrationNumber = "Registration Number";
 
   //Insurance Stage Screen
   static const String kycSubmission = "KYC Submission";

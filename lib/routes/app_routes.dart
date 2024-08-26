@@ -1,4 +1,3 @@
-import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/features/auth_profile/presentation/pages/auth_profile_screen.dart';
 import 'package:ekyc/features/dashboard/presentation/pages/dashboard_screen.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
@@ -397,10 +396,13 @@ final GoRouter router = GoRouter(
 
         final String? documentSide = extra['documentSide'] as String?;
 
+        final String? registrationNumber = extra['registrationNumber'] as String?;
+
         return ReviewUploadedDocumentScreen2(
           onChange: onChange,
           documentCode: documentCode,
           documentSide: documentSide,
+          registrationNumber: registrationNumber,
         );
       },
     ),
