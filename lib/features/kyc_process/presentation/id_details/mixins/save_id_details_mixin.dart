@@ -30,6 +30,9 @@ mixin SaveIDDetailsMixin {
 
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
+    bool mauritian =
+        (selectedApplication?.nationality == NationalityType.Mauritian.toString().split('.').last) ? true : false;
+
     final kycTypeNotifier = ref.watch(kycTypesNotifierProvider.notifier);
     final KycTypesModel selectedKycType = kycTypeNotifier
         .kycTypes()
@@ -89,12 +92,12 @@ mixin SaveIDDetailsMixin {
       // idDocFrontImage: "frontBase64",
       // idDocFrontImage: frontBase64,
       // idDocFrontImage: idCardFrontScanResult?.fileName,
-      idDocBackImage: idDocBackImage,
+      idDocBackImage: mauritian ? idDocBackImage : null,
       // idDocBackImage: "backBase64",
       // idDocBackImage: backBase64,
       // idDocBackImage: idCardBackScanResult?.fileName,
       iDDocFrontUploadedDocumentId: idDocFrontDocId,
-      iDDocBackUploadedDocumentId: idDocBackDocId,
+      iDDocBackUploadedDocumentId: mauritian ? idDocBackDocId : null,
       // customerId: "",
       // fileExtension: FileExtensionEnums.png.toString().split('.').last,
       // quoteNumber: selectedApplication?.quoteNumber,

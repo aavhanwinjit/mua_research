@@ -56,29 +56,34 @@ class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
     // final MotorInsuranceDocumentTypeModel? selectedMotorInsuranceDocType =
     //     ref.watch(selectedMotorInsuranceDocTypeProvider);
 
-    final selectedDocsListProvider =
-        ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          selectedDocsListProvider.list().length,
-          (index) {
-            MotorInsuranceDocumentElement item =
-                selectedDocsListProvider.list()[index];
-            return Column(
-              children: [
-                Text(
-                  item.documentElement!.motorInsuranceDocType ?? "-",
-                  style: const TextStyle(color: textGrayColor2),
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: selectedDocsListProvider
+              .list()
+              .map(
+                (MotorInsuranceDocumentElement e) => Container(
+                  margin: EdgeInsets.only(right: 8.w),
+                  width: 150.h,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        e.documentElement!.motorInsuranceDocType ?? "-",
+                        style: const TextStyle(color: textGrayColor2),
+                      ),
+                      const SizedBox(height: 5),
+                      _imageWidget(e.motorDocImagePath),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 5),
-                _imageWidget(item.motorDocImagePath),
-              ],
-            );
-          },
+              )
+              .toList(),
         ),
       ),
     );

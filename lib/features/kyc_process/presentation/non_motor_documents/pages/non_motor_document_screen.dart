@@ -34,6 +34,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       setSelectedDocumentCategory();
       ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => false);
@@ -77,6 +78,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
 
     final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
     ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
+
     return GestureDetector(
       onTap: () {
         KeyboardHelper.onScreenTap(context);

@@ -31,10 +31,10 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
   }
 
   void setData() {
-    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    final selectedDocsListProvider = ref.read(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
 
-    final nonMotorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
-    ref.watch(nonMotorInsuranceDocsTypesNotifierProvider);
+    final nonMotorInsuranceDocTypesNotifier = ref.read(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
+    ref.read(nonMotorInsuranceDocsTypesNotifierProvider);
 
     list = List.from(nonMotorInsuranceDocTypesNotifier.nonMotorInsuranceDocsTypesList());
 

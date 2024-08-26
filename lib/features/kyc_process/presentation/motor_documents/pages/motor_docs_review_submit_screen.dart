@@ -17,12 +17,10 @@ class MotorDocsReviewSubmitScreen extends ConsumerStatefulWidget {
   const MotorDocsReviewSubmitScreen({super.key});
 
   @override
-  ConsumerState<MotorDocsReviewSubmitScreen> createState() =>
-      _ReviewSubmitScreenState();
+  ConsumerState<MotorDocsReviewSubmitScreen> createState() => _ReviewSubmitScreenState();
 }
 
-class _ReviewSubmitScreenState
-    extends ConsumerState<MotorDocsReviewSubmitScreen>
+class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen>
     with SaveMotorInsuranceDocMixin, AgentApplicationsMixin {
   @override
   Widget build(BuildContext context) {
@@ -56,9 +54,7 @@ class _ReviewSubmitScreenState
                 CustomCheckboxTile(
                   value: ref.watch(motorInsuranceReviewConfirmationProvider),
                   onChanged: (value) {
-                    ref
-                        .read(motorInsuranceReviewConfirmationProvider.notifier)
-                        .update((state) => value!);
+                    ref.read(motorInsuranceReviewConfirmationProvider.notifier).update((state) => value!);
                   },
                   title: Strings.reviewScreenCheckboxTitle,
                   fontSize: 12.sp,
@@ -66,9 +62,7 @@ class _ReviewSubmitScreenState
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: ReviewScreenButtons(
-                    disable:
-                        ref.watch(motorInsuranceReviewConfirmationProvider) !=
-                            true,
+                    disable: ref.watch(motorInsuranceReviewConfirmationProvider) != true,
                     loadingProvider: saveMotorInsuranceProofFileLoading,
                     onExit: () {
                       _uploadDetails(true);
@@ -90,7 +84,7 @@ class _ReviewSubmitScreenState
     ConfirmationDialogHelper.showConfirmationDialog(
       context,
       title: Strings.confirmDetails,
-      content: Strings.documentUploadConfirmationDialogText,
+      content: Strings.documentUploadConfirmationDialogText2,
       onConfirm: () async {
         // pop the confirmation dialog box
         context.pop();
@@ -106,9 +100,7 @@ class _ReviewSubmitScreenState
                 ref: ref,
               );
 
-              ref
-                  .watch(saveMotorInsuranceProofFileLoading.notifier)
-                  .update((state) => false);
+              ref.watch(saveMotorInsuranceProofFileLoading.notifier).update((state) => false);
 
               context.pop();
               context.pop();
