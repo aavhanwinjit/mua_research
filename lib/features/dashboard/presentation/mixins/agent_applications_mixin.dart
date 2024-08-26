@@ -90,6 +90,9 @@ mixin AgentApplicationsMixin {
             // }
 
             returnValue = false;
+          } else {
+            ref.watch(applicationListLoadingProvider.notifier).update((state) => false);
+            ref.watch(applicationListErrorProvider.notifier).update((state) => false);
           }
           // final agentApplicationNotifier = ref.read(agentApplicationsNotifierProvider.notifier);
 
