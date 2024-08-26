@@ -71,7 +71,7 @@ class Strings {
   static const String only2Documents = "You can add only 2 documents";
   static const String addressDetailsConfirmationString = "Are the details of same customer?";
   static const String insuredDetailsConfirmationString =
-      "Are the proof of relationship documents are of same customer?";
+      "Are the proof of relationship documents of the same customer?";
   static const String insuredDocsRequiredDialogTitleString = "Insured Document Required";
   static const String insuredDocsRequiredDialogSubtitleString =
       "The uploaded address proof doesn't match the customer details. Additional documents are needed to confirm the relationship.";
@@ -175,7 +175,7 @@ class Strings {
   static const String nicIdNo = "NIC ID Number";
   static const String nicIdNoValidationString = "Enter valid number";
   static const String quoteNumber = "Quote Number";
-  static const String quoteNumberValidationString = "Enter valid number";
+  static const String quoteNumberValidationString = "Enter valid quote number";
   static const String policyNo = "Policy Number";
   static const String policyNoOptional = "Policy Number (Optional)";
   static const String policyNoValidationString = "Enter valid number";
