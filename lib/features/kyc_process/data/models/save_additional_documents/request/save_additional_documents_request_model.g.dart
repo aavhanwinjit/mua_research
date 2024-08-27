@@ -34,6 +34,7 @@ _$AdditionalDocumentDetailsModelImpl
         _$AdditionalDocumentDetailsModelImpl(
           uploadDocumentId: json['uploadDocumentId'] as int?,
           additionalDocImagePath: json['additionalDocImagePath'] as String?,
+          additionalDoumentTypeId: json['additionalDoumentTypeId'] as int?,
         );
 
 Map<String, dynamic> _$$AdditionalDocumentDetailsModelImplToJson(
@@ -41,4 +42,5 @@ Map<String, dynamic> _$$AdditionalDocumentDetailsModelImplToJson(
     <String, dynamic>{
       'uploadDocumentId': instance.uploadDocumentId,
       'additionalDocImagePath': instance.additionalDocImagePath,
+      'additionalDoumentTypeId': instance.additionalDoumentTypeId,
     };

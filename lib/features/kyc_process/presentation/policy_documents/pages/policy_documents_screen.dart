@@ -144,8 +144,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
             const SizedBox(),
 
             // show add doc button only for the first element in the list
-            if (index == 0)
-              // if ((selectedDocsListProvider.list().length - 1) == index)
+            // if (index == 0)
+            if ((selectedDocsListProvider.list().length - 1) == index)
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add

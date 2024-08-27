@@ -263,6 +263,8 @@ mixin _$AdditionalDocumentDetailsModel {
   int? get uploadDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocImagePath")
   String? get additionalDocImagePath => throw _privateConstructorUsedError;
+  @JsonKey(name: "additionalDoumentTypeId")
+  int? get additionalDoumentTypeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -280,7 +282,8 @@ abstract class $AdditionalDocumentDetailsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath});
+      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
+      @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId});
 }
 
 /// @nodoc
@@ -299,6 +302,7 @@ class _$AdditionalDocumentDetailsModelCopyWithImpl<$Res,
   $Res call({
     Object? uploadDocumentId = freezed,
     Object? additionalDocImagePath = freezed,
+    Object? additionalDoumentTypeId = freezed,
   }) {
     return _then(_value.copyWith(
       uploadDocumentId: freezed == uploadDocumentId
@@ -309,6 +313,10 @@ class _$AdditionalDocumentDetailsModelCopyWithImpl<$Res,
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      additionalDoumentTypeId: freezed == additionalDoumentTypeId
+          ? _value.additionalDoumentTypeId
+          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -324,7 +332,8 @@ abstract class _$$AdditionalDocumentDetailsModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath});
+      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
+      @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId});
 }
 
 /// @nodoc
@@ -342,6 +351,7 @@ class __$$AdditionalDocumentDetailsModelImplCopyWithImpl<$Res>
   $Res call({
     Object? uploadDocumentId = freezed,
     Object? additionalDocImagePath = freezed,
+    Object? additionalDoumentTypeId = freezed,
   }) {
     return _then(_$AdditionalDocumentDetailsModelImpl(
       uploadDocumentId: freezed == uploadDocumentId
@@ -352,6 +362,10 @@ class __$$AdditionalDocumentDetailsModelImplCopyWithImpl<$Res>
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
+      additionalDoumentTypeId: freezed == additionalDoumentTypeId
+          ? _value.additionalDoumentTypeId
+          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -362,7 +376,8 @@ class _$AdditionalDocumentDetailsModelImpl
     implements _AdditionalDocumentDetailsModel {
   const _$AdditionalDocumentDetailsModelImpl(
       {@JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath});
+      @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath,
+      @JsonKey(name: "additionalDoumentTypeId") this.additionalDoumentTypeId});
 
   factory _$AdditionalDocumentDetailsModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -374,10 +389,13 @@ class _$AdditionalDocumentDetailsModelImpl
   @override
   @JsonKey(name: "additionalDocImagePath")
   final String? additionalDocImagePath;
+  @override
+  @JsonKey(name: "additionalDoumentTypeId")
+  final int? additionalDoumentTypeId;
 
   @override
   String toString() {
-    return 'AdditionalDocumentDetailsModel(uploadDocumentId: $uploadDocumentId, additionalDocImagePath: $additionalDocImagePath)';
+    return 'AdditionalDocumentDetailsModel(uploadDocumentId: $uploadDocumentId, additionalDocImagePath: $additionalDocImagePath, additionalDoumentTypeId: $additionalDoumentTypeId)';
   }
 
   @override
@@ -388,13 +406,16 @@ class _$AdditionalDocumentDetailsModelImpl
             (identical(other.uploadDocumentId, uploadDocumentId) ||
                 other.uploadDocumentId == uploadDocumentId) &&
             (identical(other.additionalDocImagePath, additionalDocImagePath) ||
-                other.additionalDocImagePath == additionalDocImagePath));
+                other.additionalDocImagePath == additionalDocImagePath) &&
+            (identical(
+                    other.additionalDoumentTypeId, additionalDoumentTypeId) ||
+                other.additionalDoumentTypeId == additionalDoumentTypeId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uploadDocumentId, additionalDocImagePath);
+  int get hashCode => Object.hash(runtimeType, uploadDocumentId,
+      additionalDocImagePath, additionalDoumentTypeId);
 
   @JsonKey(ignore: true)
   @override
@@ -417,7 +438,9 @@ abstract class _AdditionalDocumentDetailsModel
   const factory _AdditionalDocumentDetailsModel(
           {@JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
           @JsonKey(name: "additionalDocImagePath")
-          final String? additionalDocImagePath}) =
+          final String? additionalDocImagePath,
+          @JsonKey(name: "additionalDoumentTypeId")
+          final int? additionalDoumentTypeId}) =
       _$AdditionalDocumentDetailsModelImpl;
 
   factory _AdditionalDocumentDetailsModel.fromJson(Map<String, dynamic> json) =
@@ -429,6 +452,9 @@ abstract class _AdditionalDocumentDetailsModel
   @override
   @JsonKey(name: "additionalDocImagePath")
   String? get additionalDocImagePath;
+  @override
+  @JsonKey(name: "additionalDoumentTypeId")
+  int? get additionalDoumentTypeId;
   @override
   @JsonKey(ignore: true)
   _$$AdditionalDocumentDetailsModelImplCopyWith<

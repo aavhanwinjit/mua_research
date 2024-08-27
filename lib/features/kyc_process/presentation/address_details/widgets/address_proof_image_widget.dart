@@ -20,10 +20,11 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // final selectedApplication = ref.read(selectedApplicationProvider);
+      final selectedApplication = ref.read(selectedApplicationProvider);
 
-      // if(selectedApplication.addressDocImagePath.contains())
-      getAddressProofImage(context: context, ref: ref);
+      if (!selectedApplication!.addressDocImagePath!.contains('.pdf')) {
+        getAddressProofImage(context: context, ref: ref);
+      }
     });
   }
 
@@ -46,16 +47,33 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
               ? SizedBox(
                   height: 150.h,
                 )
-              : ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.memory(
-                    base64Decode(addressProofBase64),
-                    height: 150.h,
-                    width: 150.h,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+              : selectedApplication!.addressDocImagePath!.contains(".pdf")
+                  ? _pdfWidget()
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Image.memory(
+                        base64Decode(addressProofBase64),
+                        height: 150.h,
+                        width: 150.h,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
         ],
+      ),
+    );
+  }
+
+  Widget _pdfWidget() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: SizedBox(
+        height: 80.h,
+        width: 80.h,
+        child: Center(
+          child: Image.asset(
+            ImageConstants.pdfIcon2,
+          ),
+        ),
       ),
     );
   }

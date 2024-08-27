@@ -181,8 +181,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
               ),
             const SizedBox(),
             // show add doc button only for the last element in the list
-            // if ((selectedDocsListProvider.list().length - 1) == index)
-            if (index == 0)
+            if ((selectedDocsListProvider.list().length - 1) == index)
+              // if (index == 0)
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add

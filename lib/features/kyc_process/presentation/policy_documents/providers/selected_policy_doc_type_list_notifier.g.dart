@@ -7,7 +7,7 @@ part of 'selected_policy_doc_type_list_notifier.dart';
 // **************************************************************************
 
 String _$selectedPolicyDocTypeListNotifierHash() =>
-    r'231d3e2a552b1f2c1c9a1764b591c3d496d4017b';
+    r'7cc6b65a7407ee6f3a70e88a18dab798ee290437';
 
 /// See also [SelectedPolicyDocTypeListNotifier].
 @ProviderFor(SelectedPolicyDocTypeListNotifier)

@@ -33,6 +33,7 @@ class AdditionalDocumentDetailsModel with _$AdditionalDocumentDetailsModel {
   const factory AdditionalDocumentDetailsModel({
     @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
     @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
+    @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
   }) = _AdditionalDocumentDetailsModel;
 
   factory AdditionalDocumentDetailsModel.fromJson(Map<String, dynamic> json) =>

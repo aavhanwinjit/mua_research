@@ -65,6 +65,24 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
         title: Strings.editInsuredDocuments,
+        // onPressed: () {
+        //   for (var element in list) {
+        //     debugPrint("element.extractedLastName : ${element.extractedLastName}");
+        //     debugPrint("element.issueDate : ${element.issueDate}");
+        //   }
+
+        //   final selectedDocsListNotifier = ref.read(selectedPorDocTypeListNotifierProvider.notifier);
+
+        //   final List<PORDocumentElement> selectedDocsList = selectedDocsListNotifier.list();
+        //   debugPrint("selectedDocsList.length: ${selectedDocsList.length}");
+
+        //   for (var element in selectedDocsList) {
+        //     debugPrint("actualtListElement.extractedLastName : ${element.extractedLastName}");
+        //     debugPrint("actualtListElement.issueDate : ${element.issueDate}");
+
+        //     list.add(element);
+        //   }
+        // },
       ),
       body: SafeArea(
         child: GestureDetector(
