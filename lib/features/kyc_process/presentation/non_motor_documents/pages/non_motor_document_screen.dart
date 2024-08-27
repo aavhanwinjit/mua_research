@@ -236,11 +236,31 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
     return Padding(
       padding: EdgeInsets.all(20.w),
       child: CustomPrimaryButton(
+        disable: buttonDisableCheck(),
+        disabledOnTap: () {
+          context.showErrorSnackBar(message: Strings.uploadNonMotorDocuments);
+        },
         onTap: () {
           context.pushNamed(AppRoutes.nonMotorDocsReviewSubmitScreen);
         },
         label: Strings.next,
       ),
     );
+  }
+
+  bool buttonDisableCheck() {
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+
+    if (selectedDocsListProvider.list().isEmpty) {
+      return true;
+    }
+
+    return selectedDocsListProvider.list().any((element) {
+      if (element.nonMotorDocImagePath == null || element.scanResponse == null || element.documentElement == null) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

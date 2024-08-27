@@ -7,7 +7,9 @@ class PORDocumentElement {
   ScanDocumentResponseBody? scanResponse;
   String? filePath;
   String? extractedLastName;
+  // String? tempExtractedLastName;
   String? issueDate;
+  // String? tempIssueDate;
 
   PORDocumentElement({
     required this.documentElement,
@@ -15,6 +17,8 @@ class PORDocumentElement {
     required this.scanResponse,
     required this.filePath,
     this.extractedLastName,
+    // this.tempExtractedLastName,
     this.issueDate,
+    // this.tempIssueDate,
   });
 }

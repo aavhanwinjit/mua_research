@@ -194,7 +194,12 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
                 (item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last &&
                     (item.registrationNumber == null || item.registrationNumber!.isEmpty)),
             disableCallback: () {
-              context.showErrorSnackBar(message: Strings.selectDocumentType);
+              if (item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last &&
+                  (item.registrationNumber == null || item.registrationNumber!.isEmpty)) {
+                context.showErrorSnackBar(message: Strings.enterRegistrationNumber);
+              } else {
+                context.showErrorSnackBar(message: Strings.selectDocumentType);
+              }
             },
             registrationNumber: item.documentElement?.documentCode == DocumentCodes.HRP.toString().split('.').last
                 ? item.registrationNumber
@@ -310,7 +315,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
           if (result == true) {
             context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
           } else {
-            context.showErrorSnackBar(message: "Horse power kyc failed. Enter correct registration number");
+            context.showErrorSnackBar(message: Strings.horsePowerKYCFailed);
           }
         },
         label: Strings.next,

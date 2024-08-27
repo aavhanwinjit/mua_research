@@ -56,7 +56,7 @@ class SelectedPolicyDocTypeListNotifier extends _$SelectedPolicyDocTypeListNotif
     state = newList;
   }
 
-  void updateElementsFilePath({required int index, required String filePath}) {
+  void updateElementsFilePath({required int index, required String? filePath}) {
     PolicyDocumentElement item = state[index];
 
     List<PolicyDocumentElement> newList = List.from(state);

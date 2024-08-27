@@ -258,6 +258,7 @@ class Strings {
   static const String billDate = "Bill Date";
   static const String issueDate = "Issue Date";
   static const String selectDocumentType = "Select document type";
+  static const String enterRegistrationNumber = "Enter Registration Number";
   static const String kycFailed = "KYC Failed";
   static const String enterAddressInfo = "Make sure surname, other name & address are entered";
   static const String addressProofDoc = "address proof document";
@@ -307,12 +308,14 @@ class Strings {
   static const String motorDocsContainerLabel = "Take a photo or upload\nmotor documents";
   static const String motorDocCameraLabel = "Please scan the motor document by\nadjusting it inside the frame.";
   static const String uploadMotorInsuranceDocuments = "Upload Motor Insurance Documents";
+  static const String horsePowerKYCFailed = "Horse power kyc failed. Enter correct registration number";
 
   //Non-Motor Documents Screen
   static const String nonMotorDocsScreenSubtitle = "Please specify the type of non-motor document you are uploading.";
   static const String nonMotorDocsContainerLabel = "Take a photo or upload\nnon motor retail documents";
   static const String nonMotorDocCameraLabel =
       "Please scan the non motor retail documents\nby adjusting it inside the frame.";
+  static const String uploadNonMotorDocuments = "Upload Non-Motor Documents";
 
   //Profile Screen
   static const String agencyName = "Agency name";

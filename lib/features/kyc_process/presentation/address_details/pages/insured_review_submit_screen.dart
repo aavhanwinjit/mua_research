@@ -1,5 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -167,19 +168,23 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
   bool isSurnameMatched() {
     AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+      return true;
+    } else {
+      final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
-    final surnameMatched = selectedDocsListProvider.list().any(
-      (element) {
-        if (element.extractedLastName == selectedApplication?.addressDocSurname) {
-          return true;
-        } else {
-          return false;
-        }
-      },
-    );
+      final surnameMatched = selectedDocsListProvider.list().any(
+        (element) {
+          if (element.extractedLastName == selectedApplication?.addressDocSurname) {
+            return true;
+          } else {
+            return false;
+          }
+        },
+      );
 
-    return surnameMatched;
+      return surnameMatched;
+    }
   }
 
   bool _checkIfSurnameMissingInAnyDocuments() {

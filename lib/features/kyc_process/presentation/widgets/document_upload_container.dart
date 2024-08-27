@@ -338,6 +338,10 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
   }
 
   Future<void> pickFile(BuildContext context) async {
+    ref.read(cameraScreenSubtitle.notifier).update((state) => widget.cameraScreenDescription);
+    ref.read(cameraScreenAppBarTitle.notifier).update((state) => widget.cameraScreenTitle);
+    ref.read(reviewUploadedDocScreenTitle.notifier).update((state) => widget.reviewScreenTitle);
+
     debugPrint("inside pick file");
     try {
       FilePickerResult? file = await FilePicker.platform.pickFiles(

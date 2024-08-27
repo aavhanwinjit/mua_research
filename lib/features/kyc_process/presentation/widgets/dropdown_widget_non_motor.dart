@@ -60,6 +60,7 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
+        selectedDocsListProvider.updateElementsFilePath(filePath: null, index: widget.index);
         selectedDocsListProvider.updateElementsSelectedDocType(
             index: widget.index, element: value as NonMotorInsuranceDocumentTypeModel);
       },

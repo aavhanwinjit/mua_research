@@ -20,6 +20,9 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      // final selectedApplication = ref.read(selectedApplicationProvider);
+
+      // if(selectedApplication.addressDocImagePath.contains())
       getAddressProofImage(context: context, ref: ref);
     });
   }

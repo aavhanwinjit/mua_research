@@ -21,8 +21,46 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
 
   bool dateValidator = false;
 
+  List<PORDocumentElement> list = [];
+
+  void setData() {
+    list.clear();
+    debugPrint("list.length before setting: ${list.length}");
+
+    final selectedDocsListNotifier = ref.read(selectedPorDocTypeListNotifierProvider.notifier);
+
+    final List<PORDocumentElement> selectedDocsList = selectedDocsListNotifier.list();
+    debugPrint("selectedDocsList.length: ${selectedDocsList.length}");
+
+    for (var element in selectedDocsList) {
+      debugPrint("actualtListElement.extractedLastName : ${element.extractedLastName}");
+      debugPrint("actualtListElement.issueDate : ${element.issueDate}");
+
+      list.add(element);
+    }
+
+    // List<PORDocumentElement> newList = List.from(selectedDocsList);
+    // list = newList;
+
+    debugPrint("list.length after setting: ${list.length}");
+    setState(() {});
+
+    for (var element in list) {
+      debugPrint("element.extractedLastName : ${element.extractedLastName}");
+      debugPrint("element.issueDate : ${element.issueDate}");
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // debugPrint("list.length: ${list.length}");
+
     return Scaffold(
       appBar: AppBarHelper.showCustomAppbar(
         context: context,
@@ -67,18 +105,19 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
   }
 
   Widget _surnameWidgets() {
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: selectedDocsListProvider.list().map((PORDocumentElement e) => _surnameElement(e)).toList(),
+      children: list.map((PORDocumentElement e) => _surnameElement(e)).toList(),
     );
   }
 
   Widget _surnameElement(PORDocumentElement element) {
-    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
-    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
-    int index = selectedDocsListProvider.list().indexOf(element);
+    // final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
+    // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    // int index = selectedDocsListProvider.list().indexOf(element);
+    int index = list.indexOf(element);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,10 +134,23 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
           initialValue: element.extractedLastName,
           label: Strings.surname,
           onChanged: (value) {
-            selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
-              index: index,
-              lastName: value.trim(),
-            );
+            // element.extractedLastName = value.trim();
+
+            // list.indexWhere(
+            //   (element) {
+            //     element.extractedLastName = value.trim();
+            //   },
+            // );
+
+            PORDocumentElement el = list[index];
+
+            el.extractedLastName = value.trim();
+            setState(() {});
+
+            // selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
+            //   index: index,
+            //   lastName: value.trim(),
+            // );
           },
           validator: (value) {
             if (value!.trim().isEmpty) {
@@ -123,10 +175,13 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
               final String? date = await _openDatePicker();
 
               if (date != null) {
-                selectedDocsListProvider.updateElementIssueDate(
-                  index: index,
-                  issueDate: date.trim(),
-                );
+                element.issueDate = date.trim();
+                setState(() {});
+
+                // selectedDocsListProvider.updateElementIssueDate(
+                //   index: index,
+                //   issueDate: date.trim(),
+                // );
               }
             },
             child: Container(
@@ -222,13 +277,16 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       return;
     }
 
+    final selectedDocsListNotifier = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    selectedDocsListNotifier.updateDocTypesList(list);
+
     context.pop();
   }
 
   bool dateValidatorChecker() {
-    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
+    // final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
 
-    bool data = selectedDocsList.any(
+    bool data = list.any(
       (element) {
         // debugPrint("element.issueDate == null: ${element.issueDate == null}");
         // debugPrint("element.issueDate.isEmpty: ${element.issueDate?.isEmpty}");

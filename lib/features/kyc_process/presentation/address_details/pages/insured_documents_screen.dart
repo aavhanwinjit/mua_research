@@ -316,7 +316,7 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
                 onConfirm: () {
                   context.pop();
                 },
-                positiveButtonTitle: "Okay",
+                positiveButtonTitle: "Ok",
               );
               return;
             }

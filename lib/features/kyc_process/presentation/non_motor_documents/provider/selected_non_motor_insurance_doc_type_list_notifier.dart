@@ -7,8 +7,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'selected_non_motor_insurance_doc_type_list_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-class SelectedNonMotorInsuranceDocTypeListNotifier
-    extends _$SelectedNonMotorInsuranceDocTypeListNotifier {
+class SelectedNonMotorInsuranceDocTypeListNotifier extends _$SelectedNonMotorInsuranceDocTypeListNotifier {
   @override
   List<NonMotorInsuranceDocumentElement> build() {
     return [];
@@ -44,9 +43,7 @@ class SelectedNonMotorInsuranceDocTypeListNotifier
     state = newList;
   }
 
-  void updateElementsSelectedDocType(
-      {required int index,
-      required NonMotorInsuranceDocumentTypeModel element}) {
+  void updateElementsSelectedDocType({required int index, required NonMotorInsuranceDocumentTypeModel element}) {
     NonMotorInsuranceDocumentElement item = state[index];
 
     List<NonMotorInsuranceDocumentElement> newList = List.from(state);
@@ -59,7 +56,7 @@ class SelectedNonMotorInsuranceDocTypeListNotifier
     state = newList;
   }
 
-  void updateElementsFilePath({required int index, required String filePath}) {
+  void updateElementsFilePath({required int index, required String? filePath}) {
     NonMotorInsuranceDocumentElement item = state[index];
 
     List<NonMotorInsuranceDocumentElement> newList = List.from(state);
@@ -72,8 +69,7 @@ class SelectedNonMotorInsuranceDocTypeListNotifier
     state = newList;
   }
 
-  void updateElementScanResponse(
-      {required int index, required ScanDocumentResponseBody? scanResponse}) {
+  void updateElementScanResponse({required int index, required ScanDocumentResponseBody? scanResponse}) {
     NonMotorInsuranceDocumentElement item = state[index];
 
     List<NonMotorInsuranceDocumentElement> newList = List.from(state);

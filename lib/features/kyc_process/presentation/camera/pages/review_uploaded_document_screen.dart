@@ -66,11 +66,15 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 32.h),
-              const Text(
-                Strings.makeSureDocsClear,
-                style: TextStyle(),
-                textAlign: TextAlign.center,
-              ),
+              if (documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last) ...[
+                const SizedBox()
+              ] else ...[
+                const Text(
+                  Strings.makeSureDocsClear,
+                  style: TextStyle(),
+                  textAlign: TextAlign.center,
+                ),
+              ],
               const Spacer(),
               CustomPrimaryButton(
                 disable: false,

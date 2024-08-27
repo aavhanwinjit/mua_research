@@ -60,6 +60,8 @@ class _DropdownWidgetState extends ConsumerState<DropdownWidget> {
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
+        selectedDocsListProvider.updateElementsFilePath(filePath: null, index: widget.index);
+
         selectedDocsListProvider.updateElementsSelectedDocType(
             index: widget.index, element: value as MotorInsuranceDocumentTypeModel);
       },
