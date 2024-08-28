@@ -6,7 +6,7 @@ description: A new Flutter project.
 # version: 1.0.1+2
  
 # Development
-version: 2.2.10+33
+version: 2.3.0+34
 
 environment: 
   sdk: '>=3.4.0 <4.0.0'
