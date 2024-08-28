@@ -186,7 +186,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
             clearFile: () {
               selectedDocsListProvider.clearElementsFilePath(index: index);
             },
-            label: Strings.insuredDocumentContainerLabel,
+            label: Strings.motorDocsContainerLabel,
             cameraScreenTitle: Strings.scanDocuments,
             cameraScreenDescription: Strings.insuredDocCameraLabel,
             reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
@@ -281,7 +281,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
       child: CustomPrimaryButton(
         disable: buttonDisableCheck(),
         disabledOnTap: () {
-          context.showErrorSnackBar(message: Strings.uploadInsuredDocuments);
+          context.showErrorSnackBar(message: Strings.uploadMotorDocuments);
         },
         onTap: () {
           final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);

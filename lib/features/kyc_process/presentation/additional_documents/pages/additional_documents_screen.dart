@@ -104,7 +104,7 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
           clearFile: () {
             selectedDocsListProvider.clearElementsFilePath(index: index);
           },
-          label: Strings.insuredDocumentContainerLabel,
+          label: Strings.additionalDocsContainerLabel,
           cameraScreenTitle: Strings.scanDocuments,
           cameraScreenDescription: Strings.insuredDocCameraLabel,
           reviewScreenTitle: Strings.uploadInsuredDocuments,

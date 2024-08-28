@@ -19,6 +19,7 @@ class CustomCheckboxTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return CheckboxListTile(
+      // contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
       value: value,
       onChanged: onChanged,
       activeColor: primaryBlueColor,

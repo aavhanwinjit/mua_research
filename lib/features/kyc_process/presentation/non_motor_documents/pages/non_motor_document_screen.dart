@@ -161,7 +161,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
           clearFile: () {
             selectedDocsListProvider.clearElementsFilePath(index: index);
           },
-          label: Strings.insuredDocumentContainerLabel,
+          label: Strings.nonMotorDocsContainerLabel,
           cameraScreenTitle: Strings.scanDocuments,
           cameraScreenDescription: Strings.insuredDocCameraLabel,
           reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
