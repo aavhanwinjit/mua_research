@@ -66,25 +66,37 @@ class _DropdownWidgetState extends ConsumerState<DropdownWidget> {
             index: widget.index, element: value as MotorInsuranceDocumentTypeModel);
       },
       items: list.map((MotorInsuranceDocumentTypeModel value) {
-        return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
-          enabled: (selectedDocsListProvider
-                  .list()
-                  .any((element) => element.documentElement?.documentCode == value.documentCode))
-              ? false
-              : true,
-          value: value,
-          child: Text(
-            value.motorInsuranceDocType ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: (selectedDocsListProvider
-                      .list()
-                      .any((element) => element.documentElement?.documentCode == value.documentCode))
-                  ? textGrayColor
-                  : black,
+        if (value.documentCode == widget.item.documentElement?.documentCode) {
+          return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
+            value: value,
+            child: Text(
+              value.motorInsuranceDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
+            enabled: (selectedDocsListProvider
+                    .list()
+                    .any((element) => element.documentElement?.documentCode == value.documentCode))
+                ? false
+                : true,
+            value: value,
+            child: Text(
+              value.motorInsuranceDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: (selectedDocsListProvider
+                        .list()
+                        .any((element) => element.documentElement?.documentCode == value.documentCode))
+                    ? textGrayColor
+                    : black,
+              ),
+            ),
+          );
+        }
       }).toList(),
     );
   }

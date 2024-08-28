@@ -11,4 +11,5 @@ enum DocumentCodes {
   PSL,
   ADD,
   HRP,
+  ECNF,
 }

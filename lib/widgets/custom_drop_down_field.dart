@@ -28,6 +28,7 @@ class CustomDrowDownField extends StatelessWidget {
         isExpanded: true,
         borderRadius: BorderRadius.circular(16),
         value: value,
+        style: const TextStyle(color: black),
         icon: Icon(
           Icons.keyboard_arrow_down,
           size: 20.sp,

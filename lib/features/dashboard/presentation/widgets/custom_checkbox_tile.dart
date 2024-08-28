@@ -7,19 +7,21 @@ class CustomCheckboxTile extends ConsumerWidget {
   final Function(bool?) onChanged;
   final String title;
   final double? fontSize;
+  final bool? squeez;
 
   const CustomCheckboxTile({
     this.fontSize,
     required this.value,
     required this.onChanged,
     required this.title,
+    this.squeez = false,
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return SizedBox(
-      height: 40,
+      height: squeez == true ? 40 : null,
       child: CheckboxListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
         value: value,

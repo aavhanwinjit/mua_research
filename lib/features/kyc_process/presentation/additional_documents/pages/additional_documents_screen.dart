@@ -170,11 +170,11 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add
-                  if (selectedDocsListProvider.list().length < 2) {
-                    selectedDocsListProvider.addElementToList();
-                  } else {
-                    context.showErrorSnackBar(message: Strings.only2Documents);
-                  }
+                  // if (selectedDocsListProvider.list().length < 2) {
+                  selectedDocsListProvider.addElementToList();
+                  // } else {
+                  //   context.showErrorSnackBar(message: Strings.only2Documents);
+                  // }
                 },
               ),
           ],

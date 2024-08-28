@@ -211,11 +211,11 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add
-                  if (selectedDocsListProvider.list().length < 2) {
-                    selectedDocsListProvider.addElementToList();
-                  } else {
-                    context.showErrorSnackBar(message: Strings.only2Documents);
-                  }
+                  // if (selectedDocsListProvider.list().length < 2) {
+                  selectedDocsListProvider.addElementToList();
+                  // } else {
+                  //   context.showErrorSnackBar(message: Strings.only2Documents);
+                  // }
                 },
               ),
           ],
@@ -268,25 +268,37 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
                   index: index, element: value as PORDocumentTypeModel);
             },
       items: porDocTypesNotifier.porDocsTypesList().map((PORDocumentTypeModel value) {
-        return DropdownMenuItem<PORDocumentTypeModel>(
-          enabled: (selectedDocsListProvider
-                  .list()
-                  .any((element) => element.documentElement?.documentCode == value.documentCode))
-              ? false
-              : true,
-          value: value,
-          child: Text(
-            value.porDocType ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: (selectedDocsListProvider
-                      .list()
-                      .any((element) => element.documentElement?.documentCode == value.documentCode))
-                  ? textGrayColor
-                  : black,
+        if (value.documentCode == item.documentElement?.documentCode) {
+          return DropdownMenuItem<PORDocumentTypeModel>(
+            value: value,
+            child: Text(
+              value.porDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return DropdownMenuItem<PORDocumentTypeModel>(
+            enabled: (selectedDocsListProvider
+                    .list()
+                    .any((element) => element.documentElement?.documentCode == value.documentCode))
+                ? false
+                : true,
+            value: value,
+            child: Text(
+              value.porDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: (selectedDocsListProvider
+                        .list()
+                        .any((element) => element.documentElement?.documentCode == value.documentCode))
+                    ? textGrayColor
+                    : black,
+              ),
+            ),
+          );
+        }
       }).toList(),
     );
   }

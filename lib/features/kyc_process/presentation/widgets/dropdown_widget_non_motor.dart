@@ -31,7 +31,7 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
   }
 
   void setData() {
-    final selectedDocsListProvider = ref.read(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    // final selectedDocsListProvider = ref.read(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
 
     final nonMotorInsuranceDocTypesNotifier = ref.read(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
     ref.read(nonMotorInsuranceDocsTypesNotifierProvider);
@@ -65,25 +65,37 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
             index: widget.index, element: value as NonMotorInsuranceDocumentTypeModel);
       },
       items: list.map((NonMotorInsuranceDocumentTypeModel value) {
-        return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
-          enabled: (selectedDocsListProvider
-                  .list()
-                  .any((element) => element.documentElement?.documentCode == value.documentCode))
-              ? false
-              : true,
-          value: value,
-          child: Text(
-            value.nonMotorInsuranceDocType ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: (selectedDocsListProvider
-                      .list()
-                      .any((element) => element.documentElement?.documentCode == value.documentCode))
-                  ? textGrayColor
-                  : black,
+        if (value.documentCode == widget.item.documentElement?.documentCode) {
+          return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
+            value: value,
+            child: Text(
+              value.nonMotorInsuranceDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
+            enabled: (selectedDocsListProvider
+                    .list()
+                    .any((element) => element.documentElement?.documentCode == value.documentCode))
+                ? false
+                : true,
+            value: value,
+            child: Text(
+              value.nonMotorInsuranceDocType ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: (selectedDocsListProvider
+                        .list()
+                        .any((element) => element.documentElement?.documentCode == value.documentCode))
+                    ? textGrayColor
+                    : black,
+              ),
+            ),
+          );
+        }
       }).toList(),
     );
   }

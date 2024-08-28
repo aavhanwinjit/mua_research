@@ -126,7 +126,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
   Widget _documentWidgetList() {
     final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
-    
+
     return ListView.separated(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -187,11 +187,11 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add
-                  if (selectedDocsListProvider.list().length < 2) {
-                    selectedDocsListProvider.addElementToList();
-                  } else {
-                    context.showErrorSnackBar(message: Strings.only2Documents);
-                  }
+                  // if (selectedDocsListProvider.list().length < 2) {
+                  selectedDocsListProvider.addElementToList();
+                  // } else {
+                  //   context.showErrorSnackBar(message: Strings.only2Documents);
+                  // }
                 },
               ),
           ],

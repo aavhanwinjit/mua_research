@@ -50,6 +50,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
           SizedBox(height: 10.h),
           _headingWidget(),
           CustomCheckboxTile(
+            squeez: true,
             value: idMissing,
             onChanged: (value) {
               idMissing = !idMissing;
@@ -58,6 +59,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
             title: Strings.chipStatusIDMissing,
           ),
           CustomCheckboxTile(
+            squeez: true,
             value: porMissing,
             onChanged: (value) {
               porMissing = !porMissing;
@@ -66,6 +68,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
             title: Strings.chipStatusPORMissing,
           ),
           CustomCheckboxTile(
+            squeez: true,
             value: poaMissing,
             onChanged: (value) {
               poaMissing = !poaMissing;
@@ -74,6 +77,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
             title: Strings.chipStatusPOAMissing,
           ),
           CustomCheckboxTile(
+            squeez: true,
             value: completed,
             onChanged: (value) {
               completed = !completed;

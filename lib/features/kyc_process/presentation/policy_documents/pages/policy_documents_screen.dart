@@ -123,7 +123,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
           clearFile: () {
             selectedDocsListProvider.clearElementsFilePath(index: index);
           },
-          label: Strings.insuredDocumentContainerLabel,
+          label: Strings.policyDocumentContainerLabel,
           cameraScreenTitle: Strings.scanDocuments,
           cameraScreenDescription: Strings.insuredDocCameraLabel,
           reviewScreenTitle: Strings.uploadInsuredDocuments,
@@ -149,11 +149,11 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add
-                  if (selectedDocsListProvider.list().length < 2) {
-                    selectedDocsListProvider.addElementToList();
-                  } else {
-                    context.showErrorSnackBar(message: Strings.only2Documents);
-                  }
+                  // if (selectedDocsListProvider.list().length < 2) {
+                  selectedDocsListProvider.addElementToList();
+                  // } else {
+                  //   context.showErrorSnackBar(message: Strings.only2Documents);
+                  // }
                 },
               ),
           ],
@@ -191,25 +191,37 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
         selectedDocsListProvider.updateElementsSelectedDocType(index: index, element: value as PolicyDocumentTypeModel);
       },
       items: policyDocTypesNotifier.list().map((PolicyDocumentTypeModel value) {
-        return DropdownMenuItem<PolicyDocumentTypeModel>(
-          enabled: (selectedDocsListProvider
-                  .list()
-                  .any((element) => element.documentElement?.documentCode == value.documentCode))
-              ? false
-              : true,
-          value: value,
-          child: Text(
-            value.policyDocTypes ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: (selectedDocsListProvider
-                      .list()
-                      .any((element) => element.documentElement?.documentCode == value.documentCode))
-                  ? textGrayColor
-                  : black,
+        if (value.documentCode == item.documentElement?.documentCode) {
+          return DropdownMenuItem<PolicyDocumentTypeModel>(
+            value: value,
+            child: Text(
+              value.policyDocTypes ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return DropdownMenuItem<PolicyDocumentTypeModel>(
+            enabled: (selectedDocsListProvider
+                    .list()
+                    .any((element) => element.documentElement?.documentCode == value.documentCode))
+                ? false
+                : true,
+            value: value,
+            child: Text(
+              value.policyDocTypes ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: (selectedDocsListProvider
+                        .list()
+                        .any((element) => element.documentElement?.documentCode == value.documentCode))
+                    ? textGrayColor
+                    : black,
+              ),
+            ),
+          );
+        }
       }).toList(),
     );
   }

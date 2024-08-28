@@ -31,7 +31,7 @@ class _DropdownWidgetAdditionalState extends ConsumerState<DropdownWidgetAdditio
   }
 
   void setData() {
-    // final selectedDocsListProvider = ref.read(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    // final selectedDocsListProvider = ref.read(selectedAdditionalDocListNotifierProvider.notifier);
 
     final additionalDocTypeNotifier = ref.read(additionalDocTypeNotifierProvider.notifier);
     ref.read(additionalDocTypeNotifierProvider);
@@ -41,7 +41,7 @@ class _DropdownWidgetAdditionalState extends ConsumerState<DropdownWidgetAdditio
     // if (selectedDocsListProvider.haveList()) {
     //   selectedDocsListProvider.list().forEach(
     //     (element) {
-    //       list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
+    //       list.removeWhere((e) => e.additionalDoumentTypeId == element.documentElement?.additionalDoumentTypeId);
     //     },
     //   );
     // }
@@ -61,42 +61,42 @@ class _DropdownWidgetAdditionalState extends ConsumerState<DropdownWidgetAdditio
         return value == null ? Strings.selectDocument : null;
       },
       onChanged: (value) {
-        // debugPrint("inside onchange");
-        // final val = value as AdditionalDocumentTypeModel;
-        // if (selectedDocsListProvider
-        //     .list()
-        //     .any((element) => element.documentElement?.documentCode == val.documentCode)) {
-        //   context.showErrorSnackBar(message: "Document already selected");
-        //   return;
-        // } else {
-        //   selectedDocsListProvider.updateElementsFilePath(filePath: null, index: widget.index);
-        //   selectedDocsListProvider.updateElementsSelectedDocType(index: widget.index, element: value);
-        // }
-
         selectedDocsListProvider.updateElementsFilePath(filePath: null, index: widget.index);
         selectedDocsListProvider.updateElementsSelectedDocType(
             index: widget.index, element: value as AdditionalDocumentTypeModel);
       },
       items: list.map((AdditionalDocumentTypeModel value) {
-        return DropdownMenuItem<AdditionalDocumentTypeModel>(
-          enabled: (selectedDocsListProvider
-                  .list()
-                  .any((element) => element.documentElement?.documentCode == value.documentCode))
-              ? false
-              : true,
-          value: value,
-          child: Text(
-            value.additionalDoumentTypeName ?? "-",
-            style: TextStyle(
-              fontSize: 14.sp,
-              color: (selectedDocsListProvider
-                      .list()
-                      .any((element) => element.documentElement?.documentCode == value.documentCode))
-                  ? textGrayColor
-                  : black,
+        if (value.documentCode == widget.item.documentElement?.documentCode) {
+          return DropdownMenuItem<AdditionalDocumentTypeModel>(
+            value: value,
+            child: Text(
+              value.additionalDoumentTypeName ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+              ),
             ),
-          ),
-        );
+          );
+        } else {
+          return DropdownMenuItem<AdditionalDocumentTypeModel>(
+            enabled: (selectedDocsListProvider
+                    .list()
+                    .any((element) => element.documentElement?.documentCode == value.documentCode))
+                ? false
+                : true,
+            value: value,
+            child: Text(
+              value.additionalDoumentTypeName ?? "-",
+              style: TextStyle(
+                fontSize: 14.sp,
+                color: (selectedDocsListProvider
+                        .list()
+                        .any((element) => element.documentElement?.documentCode == value.documentCode))
+                    ? textGrayColor
+                    : black,
+              ),
+            ),
+          );
+        }
       }).toList(),
     );
   }
