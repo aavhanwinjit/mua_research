@@ -192,11 +192,21 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
       },
       items: policyDocTypesNotifier.list().map((PolicyDocumentTypeModel value) {
         return DropdownMenuItem<PolicyDocumentTypeModel>(
+          enabled: (selectedDocsListProvider
+                  .list()
+                  .any((element) => element.documentElement?.documentCode == value.documentCode))
+              ? false
+              : true,
           value: value,
           child: Text(
             value.policyDocTypes ?? "-",
             style: TextStyle(
               fontSize: 14.sp,
+              color: (selectedDocsListProvider
+                      .list()
+                      .any((element) => element.documentElement?.documentCode == value.documentCode))
+                  ? textGrayColor
+                  : black,
             ),
           ),
         );

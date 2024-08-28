@@ -107,7 +107,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
       child: Row(
         children: [
           Flexible(
-            flex: 2,
+            flex: 1,
             child: CustomOutlineButton(
               disable: false,
               onTap: clearFilters,
@@ -116,7 +116,7 @@ class _FilterBottomsheetState extends ConsumerState<FilterBottomsheet> with Agen
           ),
           SizedBox(width: 8.w),
           Flexible(
-            flex: 3,
+            flex: 1,
             child: CustomPrimaryButton(
               disable: !_isAnyFilterApplied(),
               onTap: _applyFilter,

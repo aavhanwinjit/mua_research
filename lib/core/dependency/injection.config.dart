@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:dio/dio.dart' as _i4;
-import 'package:ekyc/core/dependency/injection.dart' as _i76;
+import 'package:ekyc/core/dependency/injection.dart' as _i77;
 import 'package:ekyc/core/helpers/device_information_helper.dart' as _i6;
 import 'package:ekyc/core/helpers/request_generator.dart' as _i7;
 import 'package:ekyc/core/network/network_info.dart' as _i30;
@@ -49,9 +49,11 @@ import 'package:ekyc/features/kyc_process/domain/repositories/ocr_api_repository
 import 'package:ekyc/features/kyc_process/domain/repositories/save_document_info_repository.dart'
     as _i51;
 import 'package:ekyc/features/kyc_process/domain/usecases/add_customer_information.dart'
-    as _i71;
+    as _i72;
 import 'package:ekyc/features/kyc_process/domain/usecases/generate_pdf.dart'
     as _i44;
+import 'package:ekyc/features/kyc_process/domain/usecases/get_additional_document_types.dart'
+    as _i64;
 import 'package:ekyc/features/kyc_process/domain/usecases/get_address_document_types.dart'
     as _i57;
 import 'package:ekyc/features/kyc_process/domain/usecases/get_document_category.dart'
@@ -67,19 +69,19 @@ import 'package:ekyc/features/kyc_process/domain/usecases/get_policy_document_ty
 import 'package:ekyc/features/kyc_process/domain/usecases/get_por_document_types.dart'
     as _i63;
 import 'package:ekyc/features/kyc_process/domain/usecases/save_additional_documents.dart'
-    as _i64;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_address_details.dart'
     as _i65;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_identity_details.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_address_details.dart'
     as _i66;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_motor_insurance_documents.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_identity_details.dart'
     as _i67;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_non_motor_insurance_documents.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_motor_insurance_documents.dart'
     as _i68;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_policy_documents.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_non_motor_insurance_documents.dart'
     as _i69;
-import 'package:ekyc/features/kyc_process/domain/usecases/save_por_documents.dart'
+import 'package:ekyc/features/kyc_process/domain/usecases/save_policy_documents.dart'
     as _i70;
+import 'package:ekyc/features/kyc_process/domain/usecases/save_por_documents.dart'
+    as _i71;
 import 'package:ekyc/features/kyc_process/domain/usecases/scan_document.dart'
     as _i31;
 import 'package:ekyc/features/login_otp/data/repositories/auth_repository_impl.dart'
@@ -115,10 +117,10 @@ import 'package:ekyc/features/profile/data/repositories/profile_repository_impl.
 import 'package:ekyc/features/profile/domain/repositories/profile_repository.dart'
     as _i33;
 import 'package:ekyc/features/profile/domain/usecases/de_register_fingerprint.dart'
-    as _i73;
-import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart'
     as _i74;
-import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i75;
+import 'package:ekyc/features/profile/domain/usecases/get_agent_details.dart'
+    as _i75;
+import 'package:ekyc/features/profile/domain/usecases/logout.dart' as _i76;
 import 'package:ekyc/features/signature/data/repositories/save_file_repository_impl.dart'
     as _i29;
 import 'package:ekyc/features/signature/data/repositories/save_signature_repository_impl.dart'
@@ -133,7 +135,7 @@ import 'package:ekyc/features/signature/domain/repositories/view_file_repository
     as _i17;
 import 'package:ekyc/features/signature/domain/usecases/save_file.dart' as _i32;
 import 'package:ekyc/features/signature/domain/usecases/save_signature.dart'
-    as _i72;
+    as _i73;
 import 'package:ekyc/features/signature/domain/usecases/view_file.dart' as _i27;
 import 'package:ekyc/features/splash_screen/data/repositories/splash_screen_repository_impl.dart'
     as _i22;
@@ -252,34 +254,36 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i62.GetPolicyDocumentTypes(gh<_i15.MasterDataRepository>()));
     gh.lazySingleton<_i63.GetPORDocumentTypes>(
         () => _i63.GetPORDocumentTypes(gh<_i15.MasterDataRepository>()));
-    gh.lazySingleton<_i64.SaveAdditionalDocuments>(() =>
-        _i64.SaveAdditionalDocuments(gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i65.SaveAddressDetails>(
-        () => _i65.SaveAddressDetails(gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i66.SaveIdentityDetails>(
-        () => _i66.SaveIdentityDetails(gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i67.SaveMotorInsuranceDocuments>(() =>
-        _i67.SaveMotorInsuranceDocuments(
+    gh.lazySingleton<_i64.GetAdditionalDocumentTypes>(
+        () => _i64.GetAdditionalDocumentTypes(gh<_i15.MasterDataRepository>()));
+    gh.lazySingleton<_i65.SaveAdditionalDocuments>(() =>
+        _i65.SaveAdditionalDocuments(gh<_i51.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i66.SaveAddressDetails>(
+        () => _i66.SaveAddressDetails(gh<_i51.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i67.SaveIdentityDetails>(
+        () => _i67.SaveIdentityDetails(gh<_i51.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i68.SaveMotorInsuranceDocuments>(() =>
+        _i68.SaveMotorInsuranceDocuments(
             gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i68.SaveNonMotorInsuranceDocuments>(() =>
-        _i68.SaveNonMotorInsuranceDocuments(
+    gh.lazySingleton<_i69.SaveNonMotorInsuranceDocuments>(() =>
+        _i69.SaveNonMotorInsuranceDocuments(
             gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i69.SavePolicyDocuments>(
-        () => _i69.SavePolicyDocuments(gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i70.SavePORDocuments>(
-        () => _i70.SavePORDocuments(gh<_i51.SaveDocumentInfoRepository>()));
-    gh.lazySingleton<_i71.AddCustomerInformation>(() =>
-        _i71.AddCustomerInformation(gh<_i35.AddCustomerInfoRepository>()));
-    gh.lazySingleton<_i72.SaveSignature>(
-        () => _i72.SaveSignature(gh<_i53.SaveSignatureRepository>()));
-    gh.lazySingleton<_i73.DeRegisterFingerprint>(
-        () => _i73.DeRegisterFingerprint(gh<_i33.ProfileRepository>()));
-    gh.lazySingleton<_i74.GetAgentDetails>(
-        () => _i74.GetAgentDetails(gh<_i33.ProfileRepository>()));
-    gh.lazySingleton<_i75.Logout>(
-        () => _i75.Logout(gh<_i33.ProfileRepository>()));
+    gh.lazySingleton<_i70.SavePolicyDocuments>(
+        () => _i70.SavePolicyDocuments(gh<_i51.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i71.SavePORDocuments>(
+        () => _i71.SavePORDocuments(gh<_i51.SaveDocumentInfoRepository>()));
+    gh.lazySingleton<_i72.AddCustomerInformation>(() =>
+        _i72.AddCustomerInformation(gh<_i35.AddCustomerInfoRepository>()));
+    gh.lazySingleton<_i73.SaveSignature>(
+        () => _i73.SaveSignature(gh<_i53.SaveSignatureRepository>()));
+    gh.lazySingleton<_i74.DeRegisterFingerprint>(
+        () => _i74.DeRegisterFingerprint(gh<_i33.ProfileRepository>()));
+    gh.lazySingleton<_i75.GetAgentDetails>(
+        () => _i75.GetAgentDetails(gh<_i33.ProfileRepository>()));
+    gh.lazySingleton<_i76.Logout>(
+        () => _i76.Logout(gh<_i33.ProfileRepository>()));
     return this;
   }
 }
 
-class _$MAUEngineModule extends _i76.MAUEngineModule {}
+class _$MAUEngineModule extends _i77.MAUEngineModule {}

@@ -38,13 +38,13 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
 
     list = List.from(nonMotorInsuranceDocTypesNotifier.nonMotorInsuranceDocsTypesList());
 
-    if (selectedDocsListProvider.haveList()) {
-      selectedDocsListProvider.list().forEach(
-        (element) {
-          list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
-        },
-      );
-    }
+    // if (selectedDocsListProvider.haveList()) {
+    //   selectedDocsListProvider.list().forEach(
+    //     (element) {
+    //       list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
+    //     },
+    //   );
+    // }
 
     setState(() {});
   }
@@ -66,11 +66,21 @@ class _DropdownWidgetNonMotorState extends ConsumerState<DropdownWidgetNonMotor>
       },
       items: list.map((NonMotorInsuranceDocumentTypeModel value) {
         return DropdownMenuItem<NonMotorInsuranceDocumentTypeModel>(
+          enabled: (selectedDocsListProvider
+                  .list()
+                  .any((element) => element.documentElement?.documentCode == value.documentCode))
+              ? false
+              : true,
           value: value,
           child: Text(
             value.nonMotorInsuranceDocType ?? "-",
             style: TextStyle(
               fontSize: 14.sp,
+              color: (selectedDocsListProvider
+                      .list()
+                      .any((element) => element.documentElement?.documentCode == value.documentCode))
+                  ? textGrayColor
+                  : black,
             ),
           ),
         );

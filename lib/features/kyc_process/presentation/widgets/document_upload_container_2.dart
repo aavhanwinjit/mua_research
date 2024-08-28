@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:cunning_document_scanner/cunning_document_scanner.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
@@ -65,7 +66,7 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
       child: InkWell(
         onTap: widget.disable == true
             ? () {
-                debugPrint("disable function");
+                KeyboardHelper.hideKeyboard(context);
                 // if (widget.disableCallback != null) {
                 widget.disableCallback!();
                 // }
@@ -73,6 +74,8 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
             // ? widget.disableCallback
             : widget.filePath == null
                 ? () {
+                    KeyboardHelper.hideKeyboard(context);
+
                     // openDocumentScanner(true);
                     _onContainerTap();
                   }

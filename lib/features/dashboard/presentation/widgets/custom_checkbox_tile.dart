@@ -18,25 +18,28 @@ class CustomCheckboxTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return CheckboxListTile(
-      // contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.w),
-      value: value,
-      onChanged: onChanged,
-      activeColor: primaryBlueColor,
-      checkboxShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(5),
-        side: const BorderSide(
-          color: textGrayColor,
+    return SizedBox(
+      height: 40,
+      child: CheckboxListTile(
+        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
+        value: value,
+        onChanged: onChanged,
+        activeColor: primaryBlueColor,
+        checkboxShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+          side: const BorderSide(
+            color: textGrayColor,
+          ),
         ),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontSize: fontSize ?? 14.sp,
-          color: value ? black : textGrayColor2,
+        title: Text(
+          title,
+          style: TextStyle(
+            fontSize: fontSize ?? 14.sp,
+            color: value ? black : textGrayColor2,
+          ),
         ),
+        controlAffinity: ListTileControlAffinity.leading,
       ),
-      controlAffinity: ListTileControlAffinity.leading,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:ekyc/features/kyc_process/data/models/additional_document_element/additional_document_element.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_additional_document_types/response/get_additional_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -20,6 +21,7 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
     // final length = state.length;
 
     AdditionalDocumentElement element = AdditionalDocumentElement(
+      documentElement: null,
       scanResponse: null,
       filePath: null,
     );
@@ -35,7 +37,20 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
     state = newList;
   }
 
-  void updateElementsFilePath({required int index, required String filePath}) {
+  void updateElementsSelectedDocType({required int index, required AdditionalDocumentTypeModel element}) {
+    AdditionalDocumentElement item = state[index];
+
+    List<AdditionalDocumentElement> newList = List.from(state);
+    newList.removeAt(index);
+
+    item.documentElement = element;
+
+    newList.insert(index, item);
+
+    state = newList;
+  }
+
+  void updateElementsFilePath({required int index, required String? filePath}) {
     AdditionalDocumentElement item = state[index];
 
     List<AdditionalDocumentElement> newList = List.from(state);

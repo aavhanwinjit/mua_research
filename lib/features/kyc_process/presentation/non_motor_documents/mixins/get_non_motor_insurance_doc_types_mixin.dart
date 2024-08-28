@@ -13,44 +13,31 @@ mixin GetNonMotorInsuranceDocTypeMixin {
     required BuildContext context,
     required WidgetRef ref,
   }) async {
-    ref
-        .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
-        .update((state) => true);
+    ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => true);
 
-    final response =
-        await getIt<GetNonMotorInsuranceDocumentTypes>().call(null);
+    final response = await getIt<GetNonMotorInsuranceDocumentTypes>().call(null);
 
     response.fold(
       (failure) {
         debugPrint("failure: $failure");
-        ref
-            .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
-            .update((state) => false);
+        ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => false);
 
-        context.showErrorSnackBar(
-            message: Strings.globalErrorGenericMessageOne);
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
       },
       (GetNonMotorInsuranceDocumentTypesResponseModel success) async {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            final motorInsuranceDocTypesNotifier =
-                ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
-            motorInsuranceDocTypesNotifier
-                .updateDocTypesList(success.body?.responseBody ?? []);
+            final motorInsuranceDocTypesNotifier = ref.watch(nonMotorInsuranceDocsTypesNotifierProvider.notifier);
+            motorInsuranceDocTypesNotifier.updateDocTypesList(success.body?.responseBody ?? []);
 
-            ref
-                .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
-                .update((state) => false);
+            ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => false);
           }
         } else {
-          ref
-              .watch(nonMotorInsuranceDocsTypesListLoading.notifier)
-              .update((state) => false);
+          ref.watch(nonMotorInsuranceDocsTypesListLoading.notifier).update((state) => false);
 
           context.showErrorSnackBar(
-            message:
-                success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
           );
         }
       },

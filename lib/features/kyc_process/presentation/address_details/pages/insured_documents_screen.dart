@@ -252,8 +252,6 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
     final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
     ref.watch(pORDocsTypesNotifierProvider);
 
-    
-
     bool loading = ref.watch(porDocsTypesListLoading);
 
     return CustomDrowDownField(
@@ -271,11 +269,21 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
             },
       items: porDocTypesNotifier.porDocsTypesList().map((PORDocumentTypeModel value) {
         return DropdownMenuItem<PORDocumentTypeModel>(
+          enabled: (selectedDocsListProvider
+                  .list()
+                  .any((element) => element.documentElement?.documentCode == value.documentCode))
+              ? false
+              : true,
           value: value,
           child: Text(
             value.porDocType ?? "-",
             style: TextStyle(
               fontSize: 14.sp,
+              color: (selectedDocsListProvider
+                      .list()
+                      .any((element) => element.documentElement?.documentCode == value.documentCode))
+                  ? textGrayColor
+                  : black,
             ),
           ),
         );

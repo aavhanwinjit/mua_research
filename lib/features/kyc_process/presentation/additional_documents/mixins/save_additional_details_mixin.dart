@@ -33,6 +33,7 @@ mixin SaveAdditionalDetailsMixin {
             (e) => AdditionalDocumentDetailsModel(
               additionalDocImagePath: e.scanResponse?.fileName,
               uploadDocumentId: e.scanResponse?.uploadedDocumentId,
+              additionalDoumentTypeId: e.documentElement?.additionalDoumentTypeId,
             ),
           )
           .toList(),

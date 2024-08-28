@@ -31,20 +31,20 @@ class _DropdownWidgetState extends ConsumerState<DropdownWidget> {
   }
 
   void setData() {
-    final selectedDocsListProvider = ref.read(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    // final selectedDocsListProvider = ref.read(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
 
     final motorInsuranceDocTypesNotifier = ref.read(motorInsuranceDocsTypesNotifierProvider.notifier);
     ref.read(motorInsuranceDocsTypesNotifierProvider);
 
     list = List.from(motorInsuranceDocTypesNotifier.motorInsuranceDocsTypesList());
 
-    if (selectedDocsListProvider.haveList()) {
-      selectedDocsListProvider.list().forEach(
-        (element) {
-          list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
-        },
-      );
-    }
+    // if (selectedDocsListProvider.haveList()) {
+    //   selectedDocsListProvider.list().forEach(
+    //     (element) {
+    //       list.removeWhere((e) => e.mDocumentTypeId == element.documentElement?.mDocumentTypeId);
+    //     },
+    //   );
+    // }
 
     setState(() {});
   }
@@ -67,11 +67,21 @@ class _DropdownWidgetState extends ConsumerState<DropdownWidget> {
       },
       items: list.map((MotorInsuranceDocumentTypeModel value) {
         return DropdownMenuItem<MotorInsuranceDocumentTypeModel>(
+          enabled: (selectedDocsListProvider
+                  .list()
+                  .any((element) => element.documentElement?.documentCode == value.documentCode))
+              ? false
+              : true,
           value: value,
           child: Text(
             value.motorInsuranceDocType ?? "-",
             style: TextStyle(
               fontSize: 14.sp,
+              color: (selectedDocsListProvider
+                      .list()
+                      .any((element) => element.documentElement?.documentCode == value.documentCode))
+                  ? textGrayColor
+                  : black,
             ),
           ),
         );

@@ -7,6 +7,7 @@ import 'package:ekyc/features/kyc_process/data/models/add_customer_information/r
 import 'package:ekyc/features/kyc_process/data/models/add_customer_information/response/add_customer_information_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/generate_pdf/request/generate_pdf_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/generate_pdf/response/generate_pdf_response_model.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_additional_document_types/response/get_additional_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_address_document_types/response/get_address_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/request/get_document_category_request_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/get_document_category/response/get_document_category_response_model.dart';
@@ -102,6 +103,7 @@ abstract class ApiService {
   static const SAVE_POR_DOCUMENTS = "/AgentAPI/Agent/SavePORDocuments";
   static const GET_POLICY_DOCUMENT_TYPES = "/AgentAPI/Data/GetPolicyDocumentTypes";
   static const SAVE_POLICY_DOCUMENTS = "/AgentAPI/Agent/SavePolicyDocuments";
+  static const GET_ADDITIONAL_DOCUMENT_TYPES = "/AgentAPI/Data/GetAdditionalDoumentTypes";
   static const SAVE_ADDITIONAL_DOCUMENTS = "/AgentAPI/Agent/SaveAdditionalDocuments";
   static const GENERATE_PDF = "/AgentAPI/Agent/GeneratePDF";
 
@@ -239,6 +241,10 @@ abstract class ApiService {
   @POST(SAVE_POLICY_DOCUMENTS)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
   Future<SavePolicyDocumentsResponseModel> savePolicyDocuments(@Body() SavePolicyDocumentsRequestModel request);
+
+  @POST(GET_ADDITIONAL_DOCUMENT_TYPES)
+  @retrofit.Headers(<String, dynamic>{'Authorization': true})
+  Future<GetAdditionalDocumentTypesResponseModel> getAdditionalDocTypes();
 
   @POST(SAVE_ADDITIONAL_DOCUMENTS)
   @retrofit.Headers(<String, dynamic>{'Authorization': true})
