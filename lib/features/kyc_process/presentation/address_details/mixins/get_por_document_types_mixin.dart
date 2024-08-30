@@ -36,6 +36,14 @@ mixin GetPORDocumentTypesMixin {
 
             final selectedApplication = ref.watch(selectedApplicationProvider);
 
+            // if (selectedApplication?.addressDocumentTypes?.documentCode !=
+            //     DocumentCodes.LAA.toString().split('.').last) {
+            //   documentList
+            //       .removeWhere((element) => element.documentCode == DocumentCodes.NIL.toString().split('.').last);
+            //   documentList
+            //       .removeWhere((element) => element.documentCode == DocumentCodes.PSL.toString().split('.').last);
+            // }
+
             if (selectedApplication?.maritalStatus == MaritalStatus.SINGLE.toString().split('.').last) {
               documentList
                   .removeWhere((element) => element.documentCode == DocumentCodes.MRC.toString().split('.').last);

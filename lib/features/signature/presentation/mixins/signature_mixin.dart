@@ -129,7 +129,7 @@ mixin SignatureMixin {
 
     final ViewFileRequestModel request = ViewFileRequestModel(
       fileName: agentSignaturePath ?? "",
-      isImage: true,
+      isImage: false,
     );
 
     final response = await getIt<ViewFile>().call(request);

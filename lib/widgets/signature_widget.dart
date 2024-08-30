@@ -38,6 +38,10 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
     final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
     final signatureBase64 = ref.watch(signatureBase64Provider);
 
+    // debugPrint("widget.dateTime: ${widget.dateTime}");
+    debugPrint(
+        "    DateTimeFormatter.formatSignatureDate(DateTime.parse(widget.dateTime)): ${DateTimeFormatter.formatSignatureDate(DateTime.parse(widget.dateTime))}");
+
     return Container(
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
@@ -58,7 +62,8 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
             ),
           ),
           Text(
-            DateTimeFormatter.formatSignatureDate(DateTime.parse(widget.dateTime)),
+            widget.dateTime,
+            // DateTimeFormatter.formatSignatureDate(DateTime.parse(widget.dateTime)),
             // DateTimeFormatter.formatSignatureDate(DateTime.now()) ?? "",
             // DateTimeFormatter.formatSignatureDate(agentDetails?.signatureUploadDate) ?? "",
             // agentDetails?.signatureUploadDate.toString() ?? "",

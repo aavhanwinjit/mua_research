@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeFormatter {
@@ -19,7 +20,8 @@ class DateTimeFormatter {
 
   static String formatSignatureDate(DateTime? dateTime) {
     if (dateTime != null) {
-      String formattedDate = DateFormat('EEE MMM dd HH:mm:ss').format(dateTime);
+      debugPrint("dateTime: $dateTime");
+      String formattedDate = DateFormat('EEE MMM dd hh:mm:ss').format(dateTime);
 
       formattedDate += ' ${dateTime.year}';
 

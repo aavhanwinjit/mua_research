@@ -201,7 +201,7 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
                 final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
                 selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
-                    index: index, lastName: selectedApplication?.addressDocOtherName);
+                    index: index, lastName: selectedApplication?.addressDocSurname);
               } else if (documentData?.kycStatus == "Failed" &&
                   documentData!.kycStatusMsg!.contains(
                       "The uploaded certificate should be of last 3 months only. Older documents are not allowed.")) {

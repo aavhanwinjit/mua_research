@@ -177,7 +177,9 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
   bool isSurnameMatched() {
     AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+    if (selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last ||
+        selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.NIL.toString().split('.').last ||
+        selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.PSL.toString().split('.').last) {
       return true;
     } else {
       final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
