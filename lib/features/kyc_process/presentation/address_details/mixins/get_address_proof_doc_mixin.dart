@@ -18,9 +18,8 @@ mixin GetAddressProofDocMixin {
 
     final selectedApplication = ref.watch(selectedApplicationProvider);
 
-    final ViewFileRequestModel request = ViewFileRequestModel(
-      fileName: selectedApplication?.addressDocImagePath ?? "",
-    );
+    final ViewFileRequestModel request =
+        ViewFileRequestModel(fileName: selectedApplication?.addressDocImagePath ?? "", isImage: true);
 
     final response = await getIt<ViewFile>().call(request);
 

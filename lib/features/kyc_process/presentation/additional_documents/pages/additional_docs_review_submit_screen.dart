@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_m
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/mixins/save_additional_details_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/providers/additional_docs_review_screen_providers.dart';
+import 'package:ekyc/features/kyc_process/presentation/additional_documents/providers/selected_additional_doc_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/widgets/additional_docs_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
@@ -56,10 +57,7 @@ class _ReviewSubmitScreenState extends ConsumerState<AdditionalDocsReviewSubmitS
                   child: const AdditionalDocsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(additionalDocsReviewScreenConfirmationProvider),
@@ -86,6 +84,18 @@ class _ReviewSubmitScreenState extends ConsumerState<AdditionalDocsReviewSubmitS
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(selectedAdditionalDocListNotifierProvider.notifier);
+    ref.watch(selectedAdditionalDocListNotifierProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider.list().last.scanResponse?.currentDateTime ?? "",
       ),
     );
   }

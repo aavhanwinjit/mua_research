@@ -59,10 +59,7 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
                   child: const NICDetailsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(idReviewScreenConfirmationProvider),
@@ -90,6 +87,17 @@ class _ReviewSubmitScreenState extends ConsumerState<IDReviewSubmitScreen>
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(idDocFrontScanDocResultProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider?.currentDateTime ?? "",
       ),
     );
   }

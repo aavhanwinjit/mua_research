@@ -157,6 +157,11 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPorDocTypeListNotifierProvider);
 
+    final porDocTypesNotifier = ref.watch(pORDocsTypesNotifierProvider.notifier);
+
+    debugPrint("index: $index");
+    debugPrint("selectedDocsListProvider.list().length: ${selectedDocsListProvider.list().length}");
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -168,6 +173,17 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
           onChange: (String path, ScanDocumentResponseBody? response) async {
             selectedDocsListProvider.updateElementsFilePath(filePath: path, index: index);
             selectedDocsListProvider.updateElementScanResponse(scanResponse: response, index: index);
+
+            // if (item.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last ||
+            //     item.documentElement?.documentCode == DocumentCodes.PSL.toString().split('.').last) {
+            //   if (response?.ocrResponse?.documentdata?.lastName == null ||
+            //       response!.ocrResponse!.documentdata!.lastName!.isEmpty) {
+            //     // did not extract
+            //   } else {
+            //     // did not match logic
+            //   }
+            // }
+
             // do google ml kit if nic card selected
             if (item.documentElement?.documentCode == DocumentCodes.NIL.toString().split('.').last) {
               // final ({String? firstName, String? lastName}) ocrResult =
@@ -175,6 +191,36 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
 
               selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
                   index: index, lastName: response?.ocrResponse?.documentdata?.lastName);
+            }
+
+            if (item.documentElement?.documentCode == DocumentCodes.BRC.toString().split('.').last ||
+                item.documentElement?.documentCode == DocumentCodes.MRC.toString().split('.').last) {
+              final Documentdata? documentData = response?.ocrResponse?.documentdata;
+
+              if (documentData?.kycStatus == "Success" && documentData?.isLastNameAvailable == true) {
+                final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+                selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
+                    index: index, lastName: selectedApplication?.addressDocOtherName);
+              } else if (documentData?.kycStatus == "Failed" &&
+                  documentData!.kycStatusMsg!.contains(
+                      "The uploaded certificate should be of last 3 months only. Older documents are not allowed.")) {
+                context.showErrorSnackBar(message: documentData.kycStatusMsg ?? Strings.globalErrorGenericMessageOne);
+
+                return;
+              } else if (documentData?.kycStatus == "Failed" &&
+                  documentData!.kycStatusMsg!.contains("Could not detect any issue date.")) {
+                context.showErrorSnackBar(message: documentData.kycStatusMsg ?? Strings.globalErrorGenericMessageOne);
+
+                return;
+              }
+              //  else if (documentData?.kycStatus == "Failed" &&
+              //     documentData!.kycStatusMsg!.contains("Last name did not match")) {
+              //   context.showErrorSnackBar(
+              //       message:
+              //           "Last name provided in the Birth Certificate does not match the Last  name in the Address Proof");
+              //   return;
+              // }
             }
 
             selectedDocsListProvider.updateElementIssueDate(
@@ -206,7 +252,9 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
             const SizedBox(),
 
             // show add doc button only for the last element in the list
-            if ((selectedDocsListProvider.list().length - 1) == index)
+            // if (index + 1 != (selectedDocsListProvider.list().length))
+            if ((selectedDocsListProvider.list().length - 1) == index &&
+                index != porDocTypesNotifier.porDocsTypesList().length - 1)
               // if (index == 0)
               AddDocumentButton(
                 onPressed: () {

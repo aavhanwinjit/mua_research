@@ -2,8 +2,9 @@
 //
 //     final viewFileRequestModel = viewFileRequestModelFromJson(jsonString);
 
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'dart:convert';
+
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'view_file_request_model.freezed.dart';
 part 'view_file_request_model.g.dart';
@@ -14,10 +15,10 @@ String viewFileRequestModelToJson(ViewFileRequestModel data) => json.encode(data
 
 @freezed
 class ViewFileRequestModel with _$ViewFileRequestModel {
-    const factory ViewFileRequestModel({
-        @JsonKey(name: "fileName")
-        String? fileName,
-    }) = _ViewFileRequestModel;
+  const factory ViewFileRequestModel({
+    @JsonKey(name: "fileName") String? fileName,
+    @JsonKey(name: "isImage") bool? isImage,
+  }) = _ViewFileRequestModel;
 
-    factory ViewFileRequestModel.fromJson(Map<String, dynamic> json) => _$ViewFileRequestModelFromJson(json);
+  factory ViewFileRequestModel.fromJson(Map<String, dynamic> json) => _$ViewFileRequestModelFromJson(json);
 }

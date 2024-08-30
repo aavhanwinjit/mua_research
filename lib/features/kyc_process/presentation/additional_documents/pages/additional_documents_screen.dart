@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_category_enums.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
+import 'package:ekyc/core/constants/enums/kyc_type_enums.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
@@ -15,6 +16,7 @@ import 'package:ekyc/features/kyc_process/presentation/additional_documents/widg
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/document_category_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/insurance_stage/providers/insurance_stage_screen_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_insurance_loading_widget.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/document_upload_container_2.dart';
 import 'package:ekyc/widgets/buttons/add_documents_button.dart';
 import 'package:ekyc/widgets/buttons/remove_document_button.dart';
@@ -85,8 +87,8 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _title(),
-                  SizedBox(height: 8.h),
+                  // _title(),
+                  // SizedBox(height: 8.h),
                   _subTitle(),
                   SizedBox(height: 20.h),
                   if (additionalDocsLoading) const NonMotorInsuranceDetailsLoadingWidget(),
@@ -127,6 +129,10 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
     final selectedDocsListProvider = ref.watch(selectedAdditionalDocListNotifierProvider.notifier);
     ref.watch(selectedAdditionalDocListNotifierProvider);
 
+    final selectedApplication = ref.watch(selectedApplicationProvider);
+
+    final additionalDocTypeNotifier = ref.read(additionalDocTypeNotifierProvider.notifier);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -144,10 +150,12 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
           clearFile: () {
             selectedDocsListProvider.clearElementsFilePath(index: index);
           },
-          label: Strings.additionalDocsContainerLabel,
+          label: (selectedApplication?.kycTypeId == KYCType.LIFE_INSURANCE)
+              ? Strings.additionalDocsContainerLabel
+              : Strings.additionalDocsContainerLabel2,
           cameraScreenTitle: Strings.scanDocuments,
-          cameraScreenDescription: Strings.insuredDocCameraLabel,
-          reviewScreenTitle: Strings.uploadInsuredDocuments,
+          cameraScreenDescription: Strings.uploadAdditionalDocuments,
+          reviewScreenTitle: Strings.uploadAdditionalDocuments,
           disable: item.documentElement == null,
           disableCallback: () {
             context.showErrorSnackBar(message: Strings.selectDocumentType);
@@ -166,7 +174,8 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
 
             // show add doc button only for the fist element in the list
             // if (index == 0)
-            if ((selectedDocsListProvider.list().length - 1) == index)
+            if ((selectedDocsListProvider.list().length - 1) == index &&
+                index != additionalDocTypeNotifier.nonMotorInsuranceDocsTypesList().length - 1)
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add

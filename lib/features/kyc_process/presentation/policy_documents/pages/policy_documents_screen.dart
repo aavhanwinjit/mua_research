@@ -106,6 +106,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
     final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
     ref.watch(selectedPolicyDocTypeListNotifierProvider);
 
+    final policyDocTypesNotifier = ref.watch(policyDocTypeNotifierProvider.notifier);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -145,7 +147,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<PolicyDocumentsScreen> w
 
             // show add doc button only for the first element in the list
             // if (index == 0)
-            if ((selectedDocsListProvider.list().length - 1) == index)
+            if ((selectedDocsListProvider.list().length - 1) == index &&
+                index != policyDocTypesNotifier.list().length - 1)
               AddDocumentButton(
                 onPressed: () {
                   // only 2 docs are allowed to add

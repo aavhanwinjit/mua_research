@@ -300,6 +300,7 @@ class Strings {
   static const String otherKYCDocs = "Other KYC Documents";
   static const String additionalDocsScreenSubtitle = "Kindly provide the required documents for the selected KYC type";
   static const String additionalDocsContainerLabel = "Take a photo or upload\nOther KYC Document";
+  static const String additionalDocsContainerLabel2 = "Take a photo or upload\nAdditional Document";
   static const String additionalDocCameraLabel =
       "Please scan the other KYC document by\nadjusting it inside the frame.";
 

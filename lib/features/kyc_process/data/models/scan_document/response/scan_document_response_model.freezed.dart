@@ -464,6 +464,8 @@ mixin _$ScanDocumentResponseBody {
   OcrResponse? get ocrResponse => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadedDocumentId")
   int? get uploadedDocumentId => throw _privateConstructorUsedError;
+  @JsonKey(name: "currentDateTime")
+  String? get currentDateTime => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -480,7 +482,8 @@ abstract class $ScanDocumentResponseBodyCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "fileName") String? fileName,
       @JsonKey(name: "ocrResponse") OcrResponse? ocrResponse,
-      @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId});
+      @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
+      @JsonKey(name: "currentDateTime") String? currentDateTime});
 
   $OcrResponseCopyWith<$Res>? get ocrResponse;
 }
@@ -502,6 +505,7 @@ class _$ScanDocumentResponseBodyCopyWithImpl<$Res,
     Object? fileName = freezed,
     Object? ocrResponse = freezed,
     Object? uploadedDocumentId = freezed,
+    Object? currentDateTime = freezed,
   }) {
     return _then(_value.copyWith(
       fileName: freezed == fileName
@@ -516,6 +520,10 @@ class _$ScanDocumentResponseBodyCopyWithImpl<$Res,
           ? _value.uploadedDocumentId
           : uploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
+      currentDateTime: freezed == currentDateTime
+          ? _value.currentDateTime
+          : currentDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -544,7 +552,8 @@ abstract class _$$ScanDocumentResponseBodyImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "fileName") String? fileName,
       @JsonKey(name: "ocrResponse") OcrResponse? ocrResponse,
-      @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId});
+      @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
+      @JsonKey(name: "currentDateTime") String? currentDateTime});
 
   @override
   $OcrResponseCopyWith<$Res>? get ocrResponse;
@@ -566,6 +575,7 @@ class __$$ScanDocumentResponseBodyImplCopyWithImpl<$Res>
     Object? fileName = freezed,
     Object? ocrResponse = freezed,
     Object? uploadedDocumentId = freezed,
+    Object? currentDateTime = freezed,
   }) {
     return _then(_$ScanDocumentResponseBodyImpl(
       fileName: freezed == fileName
@@ -580,6 +590,10 @@ class __$$ScanDocumentResponseBodyImplCopyWithImpl<$Res>
           ? _value.uploadedDocumentId
           : uploadedDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
+      currentDateTime: freezed == currentDateTime
+          ? _value.currentDateTime
+          : currentDateTime // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -590,7 +604,8 @@ class _$ScanDocumentResponseBodyImpl implements _ScanDocumentResponseBody {
   const _$ScanDocumentResponseBodyImpl(
       {@JsonKey(name: "fileName") this.fileName,
       @JsonKey(name: "ocrResponse") this.ocrResponse,
-      @JsonKey(name: "uploadedDocumentId") this.uploadedDocumentId});
+      @JsonKey(name: "uploadedDocumentId") this.uploadedDocumentId,
+      @JsonKey(name: "currentDateTime") this.currentDateTime});
 
   factory _$ScanDocumentResponseBodyImpl.fromJson(Map<String, dynamic> json) =>
       _$$ScanDocumentResponseBodyImplFromJson(json);
@@ -604,10 +619,13 @@ class _$ScanDocumentResponseBodyImpl implements _ScanDocumentResponseBody {
   @override
   @JsonKey(name: "uploadedDocumentId")
   final int? uploadedDocumentId;
+  @override
+  @JsonKey(name: "currentDateTime")
+  final String? currentDateTime;
 
   @override
   String toString() {
-    return 'ScanDocumentResponseBody(fileName: $fileName, ocrResponse: $ocrResponse, uploadedDocumentId: $uploadedDocumentId)';
+    return 'ScanDocumentResponseBody(fileName: $fileName, ocrResponse: $ocrResponse, uploadedDocumentId: $uploadedDocumentId, currentDateTime: $currentDateTime)';
   }
 
   @override
@@ -620,13 +638,15 @@ class _$ScanDocumentResponseBodyImpl implements _ScanDocumentResponseBody {
             (identical(other.ocrResponse, ocrResponse) ||
                 other.ocrResponse == ocrResponse) &&
             (identical(other.uploadedDocumentId, uploadedDocumentId) ||
-                other.uploadedDocumentId == uploadedDocumentId));
+                other.uploadedDocumentId == uploadedDocumentId) &&
+            (identical(other.currentDateTime, currentDateTime) ||
+                other.currentDateTime == currentDateTime));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, fileName, ocrResponse, uploadedDocumentId);
+  int get hashCode => Object.hash(
+      runtimeType, fileName, ocrResponse, uploadedDocumentId, currentDateTime);
 
   @JsonKey(ignore: true)
   @override
@@ -647,7 +667,8 @@ abstract class _ScanDocumentResponseBody implements ScanDocumentResponseBody {
   const factory _ScanDocumentResponseBody(
           {@JsonKey(name: "fileName") final String? fileName,
           @JsonKey(name: "ocrResponse") final OcrResponse? ocrResponse,
-          @JsonKey(name: "uploadedDocumentId") final int? uploadedDocumentId}) =
+          @JsonKey(name: "uploadedDocumentId") final int? uploadedDocumentId,
+          @JsonKey(name: "currentDateTime") final String? currentDateTime}) =
       _$ScanDocumentResponseBodyImpl;
 
   factory _ScanDocumentResponseBody.fromJson(Map<String, dynamic> json) =
@@ -662,6 +683,9 @@ abstract class _ScanDocumentResponseBody implements ScanDocumentResponseBody {
   @override
   @JsonKey(name: "uploadedDocumentId")
   int? get uploadedDocumentId;
+  @override
+  @JsonKey(name: "currentDateTime")
+  String? get currentDateTime;
   @override
   @JsonKey(ignore: true)
   _$$ScanDocumentResponseBodyImplCopyWith<_$ScanDocumentResponseBodyImpl>

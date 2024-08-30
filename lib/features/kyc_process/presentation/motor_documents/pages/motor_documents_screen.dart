@@ -145,6 +145,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
     final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
     ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
 
+    final motorInsuranceDocTypesNotifier = ref.read(motorInsuranceDocsTypesNotifierProvider.notifier);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -215,7 +217,8 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
               ),
             const SizedBox(),
             // show add doc button only for the last element in the list
-            if ((selectedDocsListProvider.list().length - 1) == index)
+            if ((selectedDocsListProvider.list().length - 1) == index &&
+                index != motorInsuranceDocTypesNotifier.motorInsuranceDocsTypesList().length - 1)
               // if (index == 0)
               AddDocumentButton(
                 onPressed: () {

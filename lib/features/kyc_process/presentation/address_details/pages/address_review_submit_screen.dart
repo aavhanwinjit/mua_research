@@ -5,6 +5,7 @@ import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/save_address_details_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_review_submit_provider.dart';
@@ -67,10 +68,7 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
                   child: const AddressDetailsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(addreddScreenConfirmationProvider),
@@ -98,6 +96,17 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final ScanDocumentResponseBody? addressOCRResponse = ref.watch(addressDocOCRApiResponse);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: addressOCRResponse?.currentDateTime ?? "",
       ),
     );
   }

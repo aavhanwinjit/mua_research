@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_m
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/mixins/save_policy_documents_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/pd_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/selected_policy_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/widgets/policy_docs_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
@@ -56,10 +57,7 @@ class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen>
                   child: const PolicyDocsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(policyDocsReviewConfirmationProvider),
@@ -86,6 +84,18 @@ class _ReviewSubmitScreenState extends ConsumerState<PDReviewSubmitScreen>
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(selectedPolicyDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPolicyDocTypeListNotifierProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider.list().last.scanResponse?.currentDateTime ?? "",
       ),
     );
   }

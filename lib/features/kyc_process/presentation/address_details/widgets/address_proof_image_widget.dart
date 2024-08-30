@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/get_address_proof_doc_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/insured_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
@@ -21,8 +22,10 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final selectedApplication = ref.read(selectedApplicationProvider);
+      debugPrint("!selectedApplication!.addressDocImagePath!: ${selectedApplication!.addressDocImagePath!}");
 
-      if (!selectedApplication!.addressDocImagePath!.contains('.pdf')) {
+      if (selectedApplication.addressDocumentTypes?.documentCode != DocumentCodes.LAA.toString().split('.').last) {
+        debugPrint("inside get address proof");
         getAddressProofImage(context: context, ref: ref);
       }
     });
@@ -47,7 +50,7 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
               ? SizedBox(
                   height: 150.h,
                 )
-              : selectedApplication!.addressDocImagePath!.contains(".pdf")
+              : selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last
                   ? _pdfWidget()
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(12),

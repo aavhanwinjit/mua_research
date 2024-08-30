@@ -63,10 +63,7 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
                   child: const InsuredDocDetailsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(insuredReviewScreenConfirmationProvider),
@@ -93,6 +90,18 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedPorDocTypeListNotifierProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider.list().last.scanResponse?.currentDateTime ?? "",
       ),
     );
   }

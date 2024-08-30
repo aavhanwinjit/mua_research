@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_m
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/mixins/save_motor_insurance_doc_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/motor_insurance_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/selected_motor_insurance_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/widgets/motor_docs_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
@@ -46,10 +47,7 @@ class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen
                   child: const MotorDocsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(motorInsuranceReviewConfirmationProvider),
@@ -76,6 +74,18 @@ class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedMotorInsuranceDocTypeListNotifierProvider);
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider.list().last.scanResponse?.currentDateTime ?? "",
       ),
     );
   }

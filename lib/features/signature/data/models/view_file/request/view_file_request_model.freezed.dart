@@ -22,6 +22,8 @@ ViewFileRequestModel _$ViewFileRequestModelFromJson(Map<String, dynamic> json) {
 mixin _$ViewFileRequestModel {
   @JsonKey(name: "fileName")
   String? get fileName => throw _privateConstructorUsedError;
+  @JsonKey(name: "isImage")
+  bool? get isImage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,9 @@ abstract class $ViewFileRequestModelCopyWith<$Res> {
           $Res Function(ViewFileRequestModel) then) =
       _$ViewFileRequestModelCopyWithImpl<$Res, ViewFileRequestModel>;
   @useResult
-  $Res call({@JsonKey(name: "fileName") String? fileName});
+  $Res call(
+      {@JsonKey(name: "fileName") String? fileName,
+      @JsonKey(name: "isImage") bool? isImage});
 }
 
 /// @nodoc
@@ -53,12 +57,17 @@ class _$ViewFileRequestModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? fileName = freezed,
+    Object? isImage = freezed,
   }) {
     return _then(_value.copyWith(
       fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String?,
+      isImage: freezed == isImage
+          ? _value.isImage
+          : isImage // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -71,7 +80,9 @@ abstract class _$$ViewFileRequestModelImplCopyWith<$Res>
       __$$ViewFileRequestModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "fileName") String? fileName});
+  $Res call(
+      {@JsonKey(name: "fileName") String? fileName,
+      @JsonKey(name: "isImage") bool? isImage});
 }
 
 /// @nodoc
@@ -86,12 +97,17 @@ class __$$ViewFileRequestModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? fileName = freezed,
+    Object? isImage = freezed,
   }) {
     return _then(_$ViewFileRequestModelImpl(
       fileName: freezed == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String?,
+      isImage: freezed == isImage
+          ? _value.isImage
+          : isImage // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -99,7 +115,9 @@ class __$$ViewFileRequestModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ViewFileRequestModelImpl implements _ViewFileRequestModel {
-  const _$ViewFileRequestModelImpl({@JsonKey(name: "fileName") this.fileName});
+  const _$ViewFileRequestModelImpl(
+      {@JsonKey(name: "fileName") this.fileName,
+      @JsonKey(name: "isImage") this.isImage});
 
   factory _$ViewFileRequestModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ViewFileRequestModelImplFromJson(json);
@@ -107,10 +125,13 @@ class _$ViewFileRequestModelImpl implements _ViewFileRequestModel {
   @override
   @JsonKey(name: "fileName")
   final String? fileName;
+  @override
+  @JsonKey(name: "isImage")
+  final bool? isImage;
 
   @override
   String toString() {
-    return 'ViewFileRequestModel(fileName: $fileName)';
+    return 'ViewFileRequestModel(fileName: $fileName, isImage: $isImage)';
   }
 
   @override
@@ -119,12 +140,13 @@ class _$ViewFileRequestModelImpl implements _ViewFileRequestModel {
         (other.runtimeType == runtimeType &&
             other is _$ViewFileRequestModelImpl &&
             (identical(other.fileName, fileName) ||
-                other.fileName == fileName));
+                other.fileName == fileName) &&
+            (identical(other.isImage, isImage) || other.isImage == isImage));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, fileName);
+  int get hashCode => Object.hash(runtimeType, fileName, isImage);
 
   @JsonKey(ignore: true)
   @override
@@ -144,7 +166,8 @@ class _$ViewFileRequestModelImpl implements _ViewFileRequestModel {
 
 abstract class _ViewFileRequestModel implements ViewFileRequestModel {
   const factory _ViewFileRequestModel(
-          {@JsonKey(name: "fileName") final String? fileName}) =
+          {@JsonKey(name: "fileName") final String? fileName,
+          @JsonKey(name: "isImage") final bool? isImage}) =
       _$ViewFileRequestModelImpl;
 
   factory _ViewFileRequestModel.fromJson(Map<String, dynamic> json) =
@@ -153,6 +176,9 @@ abstract class _ViewFileRequestModel implements ViewFileRequestModel {
   @override
   @JsonKey(name: "fileName")
   String? get fileName;
+  @override
+  @JsonKey(name: "isImage")
+  bool? get isImage;
   @override
   @JsonKey(ignore: true)
   _$$ViewFileRequestModelImplCopyWith<_$ViewFileRequestModelImpl>

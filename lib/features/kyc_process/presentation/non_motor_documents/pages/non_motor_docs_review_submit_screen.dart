@@ -5,6 +5,7 @@ import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_m
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/mixins/save_non_motor_insurance_doc_mixin.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/non_motor_insurance_review_submit_provider.dart';
+import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/selected_non_motor_insurance_doc_type_list_notifier.dart';
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/widgets/non_motor_docs_card.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
@@ -46,10 +47,7 @@ class _ReviewSubmitScreenState extends ConsumerState<NonMotorDocsReviewSubmitScr
                   child: const NonMotorDocsCard(),
                 ),
                 SizedBox(height: 24.h),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20.w),
-                  child: const SignatureWidget(),
-                ),
+                _signature(),
                 SizedBox(height: 24.h),
                 CustomCheckboxTile(
                   value: ref.watch(nonMotorInsuranceReviewConfirmationProvider),
@@ -76,6 +74,19 @@ class _ReviewSubmitScreenState extends ConsumerState<NonMotorDocsReviewSubmitScr
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _signature() {
+    final selectedDocsListProvider = ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider.notifier);
+    ref.watch(selectedNonMotorInsuranceDocTypeListNotifierProvider);
+
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.w),
+      child: SignatureWidget(
+        dateTime: selectedDocsListProvider.list().last.scanResponse?.currentDateTime ?? "",
       ),
     );
   }

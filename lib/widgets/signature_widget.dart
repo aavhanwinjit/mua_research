@@ -11,7 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SignatureWidget extends ConsumerStatefulWidget {
-  const SignatureWidget({super.key});
+  final String dateTime;
+
+  const SignatureWidget({
+    required this.dateTime,
+    super.key,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _SignatureWidgetState();
@@ -53,7 +58,8 @@ class _SignatureWidgetState extends ConsumerState<SignatureWidget> with Signatur
             ),
           ),
           Text(
-            DateTimeFormatter.formatSignatureDate(DateTime.now()) ?? "",
+            DateTimeFormatter.formatSignatureDate(DateTime.parse(widget.dateTime)),
+            // DateTimeFormatter.formatSignatureDate(DateTime.now()) ?? "",
             // DateTimeFormatter.formatSignatureDate(agentDetails?.signatureUploadDate) ?? "",
             // agentDetails?.signatureUploadDate.toString() ?? "",
             // "Tue Jan 18 11:55:50 IST 2023",

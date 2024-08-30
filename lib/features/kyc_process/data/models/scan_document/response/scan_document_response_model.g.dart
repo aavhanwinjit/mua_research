@@ -54,6 +54,7 @@ _$ScanDocumentResponseBodyImpl _$$ScanDocumentResponseBodyImplFromJson(
           ? null
           : OcrResponse.fromJson(json['ocrResponse'] as Map<String, dynamic>),
       uploadedDocumentId: json['uploadedDocumentId'] as int?,
+      currentDateTime: json['currentDateTime'] as String?,
     );
 
 Map<String, dynamic> _$$ScanDocumentResponseBodyImplToJson(
@@ -62,6 +63,7 @@ Map<String, dynamic> _$$ScanDocumentResponseBodyImplToJson(
       'fileName': instance.fileName,
       'ocrResponse': instance.ocrResponse,
       'uploadedDocumentId': instance.uploadedDocumentId,
+      'currentDateTime': instance.currentDateTime,
     };
 
 _$OcrResponseImpl _$$OcrResponseImplFromJson(Map<String, dynamic> json) =>

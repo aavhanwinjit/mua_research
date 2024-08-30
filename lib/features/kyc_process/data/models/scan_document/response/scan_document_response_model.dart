@@ -43,6 +43,7 @@ class ScanDocumentResponseBody with _$ScanDocumentResponseBody {
     @JsonKey(name: "fileName") String? fileName,
     @JsonKey(name: "ocrResponse") OcrResponse? ocrResponse,
     @JsonKey(name: "uploadedDocumentId") int? uploadedDocumentId,
+    @JsonKey(name: "currentDateTime") String? currentDateTime,
   }) = _ScanDocumentResponseBody;
 
   factory ScanDocumentResponseBody.fromJson(Map<String, dynamic> json) => _$ScanDocumentResponseBodyFromJson(json);
