@@ -1,6 +1,7 @@
 import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/por_document_element/por_document_element.dart';
 import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
+import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edit_insured_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -15,6 +16,22 @@ class SelectedPorDocTypeListNotifier extends _$SelectedPorDocTypeListNotifier {
 
   void updateDocTypesList(List<PORDocumentElement> list) {
     state = list;
+  }
+
+  void updateDocTypesList2(List<InsuredDocEditModel> list) {
+    for (var listItem in list) {
+      for (var i = 0; i < state.length; i++) {
+        if (state[i].documentElement?.documentCode == listItem.documentElement?.documentCode) {
+          state[i].extractedLastName = listItem.extractedLastName;
+          state[i].issueDate = listItem.issueDate;
+        }
+      }
+    }
+
+    // for (var element in list) {
+    //   if(element.documentElement.documentCode ==)
+    // }
+    // state = list;
   }
 
   // void addFirstElementToList() {

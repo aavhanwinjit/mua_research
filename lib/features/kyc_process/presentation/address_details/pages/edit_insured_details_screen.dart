@@ -3,7 +3,9 @@ import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
 import 'package:ekyc/core/helpers/keyboard_helper.dart';
+import 'package:ekyc/features/kyc_process/data/models/get_por_document_types/response/get_por_document_types_response_model.dart';
 import 'package:ekyc/features/kyc_process/data/models/por_document_element/por_document_element.dart';
+import 'package:ekyc/features/kyc_process/data/models/scan_document/response/scan_document_response_model.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/selected_por_doc_type_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,7 +23,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
 
   bool dateValidator = false;
 
-  List<PORDocumentElement> list = [];
+  List<InsuredDocEditModel> list = [];
 
   void setData() {
     list.clear();
@@ -36,7 +38,14 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
       debugPrint("actualtListElement.extractedLastName : ${element.extractedLastName}");
       debugPrint("actualtListElement.issueDate : ${element.issueDate}");
 
-      list.add(element);
+      InsuredDocEditModel item = InsuredDocEditModel(
+        issueDate: element.issueDate,
+        extractedLastName: element.extractedLastName,
+        documentElement: element.documentElement,
+        scanResponse: element.scanResponse,
+      );
+
+      list.add(item);
     }
 
     // List<PORDocumentElement> newList = List.from(selectedDocsList);
@@ -45,10 +54,10 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
     debugPrint("list.length after setting: ${list.length}");
     setState(() {});
 
-    for (var element in list) {
-      debugPrint("element.extractedLastName : ${element.extractedLastName}");
-      debugPrint("element.issueDate : ${element.issueDate}");
-    }
+    // for (var element in list) {
+    //   debugPrint("element.extractedLastName : ${element.extractedLastName}");
+    //   debugPrint("element.issueDate : ${element.issueDate}");
+    // }
   }
 
   @override
@@ -127,11 +136,11 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: list.map((PORDocumentElement e) => _surnameElement(e)).toList(),
+      children: list.map((InsuredDocEditModel e) => _surnameElement(e)).toList(),
     );
   }
 
-  Widget _surnameElement(PORDocumentElement element) {
+  Widget _surnameElement(InsuredDocEditModel element) {
     // final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
     // final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
     // int index = selectedDocsListProvider.list().indexOf(element);
@@ -152,7 +161,7 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
           initialValue: element.extractedLastName,
           label: Strings.surname,
           onChanged: (value) {
-            // element.extractedLastName = value.trim();
+            element.extractedLastName = value.trim();
 
             // list.indexWhere(
             //   (element) {
@@ -160,9 +169,9 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
             //   },
             // );
 
-            PORDocumentElement el = list[index];
+            // InsuredDocEditModel el = list[index];
 
-            el.extractedLastName = value.trim();
+            // el.extractedLastName = value.trim();
             setState(() {});
 
             // selectedDocsListProvider.updateElementOcrFirstNameAndLastName(
@@ -296,9 +305,15 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
     }
 
     final selectedDocsListNotifier = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
-    selectedDocsListNotifier.updateDocTypesList(list);
+    selectedDocsListNotifier.updateDocTypesList2(list);
 
-    context.pop();
+    final providerList = selectedDocsListNotifier.list();
+    for (var element in providerList) {
+      debugPrint("element.surname: ${element.extractedLastName}");
+      debugPrint("element.issueDate: ${element.issueDate}");
+    }
+
+    context.pop(true);
   }
 
   bool dateValidatorChecker() {
@@ -329,4 +344,18 @@ class _EditInsuredDetailsScreenState extends ConsumerState<EditInsuredDetailsScr
 
     return data;
   }
+}
+
+class InsuredDocEditModel {
+  String? issueDate;
+  String? extractedLastName;
+  PORDocumentTypeModel? documentElement;
+  ScanDocumentResponseBody? scanResponse;
+
+  InsuredDocEditModel({
+    this.issueDate,
+    this.extractedLastName,
+    this.documentElement,
+    this.scanResponse,
+  });
 }

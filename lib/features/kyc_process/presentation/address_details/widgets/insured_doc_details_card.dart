@@ -136,7 +136,12 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                 ),
               ),
               TextButton(
-                onPressed: () => context.pushNamed(AppRoutes.editInsuredDetailsScreen),
+                onPressed: () async {
+                  final bool? result = await context.pushNamed(AppRoutes.editInsuredDetailsScreen);
+                  if (result == true) {
+                    setState(() {});
+                  }
+                },
                 child: Text(
                   Strings.edit,
                   style: TextStyle(
@@ -157,15 +162,16 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
   }
 
   Widget _infoWidget2(WidgetRef ref) {
-    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
     final selectedDocsListProvider = ref.watch(selectedPorDocTypeListNotifierProvider.notifier);
+    final selectedDocsList = ref.watch(selectedPorDocTypeListNotifierProvider);
 
     return ListView.separated(
       shrinkWrap: true,
-      itemCount: selectedDocsListProvider.list().length,
+      itemCount: selectedDocsList.length,
       physics: const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        final PORDocumentElement item = selectedDocsListProvider.list()[index];
+        final PORDocumentElement item = selectedDocsList[index];
+        // final PORDocumentElement item = selectedDocsListProvider.list()[index];
 
         return _docElement(item);
       },
