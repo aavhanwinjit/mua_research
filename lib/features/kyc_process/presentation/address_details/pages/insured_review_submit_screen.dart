@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
@@ -138,17 +137,17 @@ class _InsuredReviewSubmitScreenState extends ConsumerState<InsuredReviewSubmitS
             await getAgentApplications(
               context: context,
               ref: ref,
-              onSuccess: (List<AgentApplicationModel> applicationList) {
-                AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+              // onSuccess: (List<AgentApplicationModel> applicationList) {
+              //   AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-                AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
-                  (element) {
-                    return element.applicationRefNo == selectedApplication?.applicationRefNo;
-                  },
-                );
+              //   AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
+              //     (element) {
+              //       return element.applicationRefNo == selectedApplication?.applicationRefNo;
+              //     },
+              //   );
 
-                ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
-              },
+              //   ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
+              // },
             );
 
             ref.watch(saveInsuredDetailsLoading.notifier).update((state) => false);

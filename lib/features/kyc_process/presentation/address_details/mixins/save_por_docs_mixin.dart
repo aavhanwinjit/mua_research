@@ -59,7 +59,7 @@ mixin SavePORDocsMixin {
         if (success.status?.isSuccess == true) {
           // onSuccess
           if (success.body?.responseBody != null) {
-            // ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
+            ref.watch(selectedApplicationProvider.notifier).update((state) => success.body?.responseBody);
 
             onSuccess.call();
           }

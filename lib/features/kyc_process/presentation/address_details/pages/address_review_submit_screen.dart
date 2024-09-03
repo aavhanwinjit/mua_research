@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
@@ -10,9 +9,7 @@ import 'package:ekyc/features/kyc_process/presentation/address_details/mixins/sa
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_details_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/providers/address_review_submit_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/widgets/address_details_card.dart';
-import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/kyc_process/presentation/widgets/customer_info_card.dart';
-import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:ekyc/widgets/review_screen_buttons.dart';
 import 'package:ekyc/widgets/signature_widget.dart';
 import 'package:flutter/material.dart';
@@ -202,19 +199,19 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
         await getAgentApplications(
           context: context,
           ref: ref,
-          onSuccess: (List<AgentApplicationModel> applicationList) {
-            AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+          // onSuccess: (List<AgentApplicationModel> applicationList) {
+          //   AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-            AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
-              (element) {
-                return element.applicationRefNo == selectedApplication?.applicationRefNo;
-              },
-            );
+          //   AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
+          //     (element) {
+          //       return element.applicationRefNo == selectedApplication?.applicationRefNo;
+          //     },
+          //   );
 
-            if (updatedApplication != null) {
-              ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
-            }
-          },
+          //   if (updatedApplication != null) {
+          //     ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
+          //   }
+          // },
         );
 
         ref.watch(saveAddressDetailsLoading.notifier).update((state) => false);
@@ -240,19 +237,19 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
         await getAgentApplications(
           context: context,
           ref: ref,
-          onSuccess: (List<AgentApplicationModel> applicationList) {
-            AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+          // onSuccess: (List<AgentApplicationModel> applicationList) {
+          //   AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
-            AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
-              (element) {
-                return element.applicationRefNo == selectedApplication?.applicationRefNo;
-              },
-            );
+          //   AgentApplicationModel? updatedApplication = applicationList.firstWhereOrNull(
+          //     (element) {
+          //       return element.applicationRefNo == selectedApplication?.applicationRefNo;
+          //     },
+          //   );
 
-            if (updatedApplication != null) {
-              ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
-            }
-          },
+          //   if (updatedApplication != null) {
+          //     ref.watch(selectedApplicationProvider.notifier).update((state) => updatedApplication);
+          //   }
+          // },
         );
 
         ref.watch(saveAddressDetailsLoading.notifier).update((state) => false);
