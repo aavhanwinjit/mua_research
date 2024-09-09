@@ -94,6 +94,8 @@ mixin LoginMixin {
           await LocalDataHelper.removeSessionId();
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
 
+          ref.read(phoneNumberProvider.notifier).update((state) => '');
+
           context.go(AppRoutes.loginScreen);
 
           // onWrongPin();

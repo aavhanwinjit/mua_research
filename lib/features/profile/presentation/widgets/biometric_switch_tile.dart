@@ -3,6 +3,7 @@ import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/biometric_auth_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/logout_mixin.dart';
 import 'package:ekyc/features/mpin_face_id/presentation/mixins/registration_mixin.dart';
+import 'package:ekyc/features/mpin_face_id/presentation/providers/mpin_providers.dart';
 import 'package:ekyc/features/profile/presentation/widgets/options_tile.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,6 +30,8 @@ class _BiometricSwitchTileState extends ConsumerState<BiometricSwitchTile>
         value: isFPLogin,
         activeColor: iosSwitchColor,
         onChanged: (bool? value) {
+          debugPrint("value of biometric switch: $value");
+
           if (value == false) {
             deRegisterFingerprint(context: context, ref: ref);
           } else {
@@ -51,10 +54,14 @@ class _BiometricSwitchTileState extends ConsumerState<BiometricSwitchTile>
 
     await authenticateWithBiometric(
       onAuthenticated: () async {
+        debugPrint("onAuthenticated called");
+
         await setFingerPrint(
           context: context,
           ref: ref,
-          onSuccess: () {},
+          onSuccess: () {
+            ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+          },
           successNavigation: () {
             ref.watch(isFPLoginProvider.notifier).update((state) => true);
           },

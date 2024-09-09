@@ -30,6 +30,8 @@ mixin BiometricAuthMixin {
         options: authenticationOptions,
       );
 
+      debugPrint("didAuthenticate: $didAuthenticate");
+
       // check if authenticated
       if (didAuthenticate) {
         onAuthenticated.call();

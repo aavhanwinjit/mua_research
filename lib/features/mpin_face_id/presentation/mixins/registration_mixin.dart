@@ -95,45 +95,55 @@ mixin RegistrationMixin {
     required Function onSuccess,
     required Function successNavigation,
   }) async {
-    final loading = ref.watch(mpinLoadingProvider);
-    if (loading) return;
+    debugPrint("inside setFingerPrint");
 
-    ref.watch(mpinLoadingProvider.notifier).update((state) => true);
+    try {
+      debugPrint("1");
 
-    final response = await getIt<SetFingerPrint>().call(null);
+      final loading = ref.watch(mpinLoadingProvider);
+      if (loading) return;
 
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+      debugPrint("2");
 
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-      },
-      (SetFingerprintResponseModel success) async {
-        if (success.status?.isSuccess == true) {
-          onSuccess();
+      ref.watch(mpinLoadingProvider.notifier).update((state) => true);
 
-          context.showSnackBar(message: success.body?.responseBody?.data?.message ?? "");
+      final response = await getIt<SetFingerPrint>().call(null);
 
-          // store the auth token
-          await _setData(
-            deviceToken: success.body?.responseBody?.data?.data?.deviceToken,
-            authToken: success.body?.responseBody?.tokenData?.token,
-            sessionId: success.body?.responseBody?.tokenData?.sessionId,
-            fpToken: success.body?.responseBody?.data?.data?.id,
-            ref: ref,
-          );
-
-          successNavigation();
-        } else {
+      response.fold(
+        (failure) {
+          debugPrint("failure: $failure");
           ref.watch(mpinLoadingProvider.notifier).update((state) => false);
 
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
-      },
-    );
+          context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        },
+        (SetFingerprintResponseModel success) async {
+          if (success.status?.isSuccess == true) {
+            onSuccess();
+
+            context.showSnackBar(message: success.body?.responseBody?.data?.message ?? "");
+
+            // store the auth token
+            await _setData(
+              deviceToken: success.body?.responseBody?.data?.data?.deviceToken,
+              authToken: success.body?.responseBody?.tokenData?.token,
+              sessionId: success.body?.responseBody?.tokenData?.sessionId,
+              fpToken: success.body?.responseBody?.data?.data?.id,
+              ref: ref,
+            );
+
+            successNavigation();
+          } else {
+            ref.watch(mpinLoadingProvider.notifier).update((state) => false);
+
+            context.showErrorSnackBar(
+              message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            );
+          }
+        },
+      );
+    } catch (e) {
+      debugPrint("error in catch block: $e");
+    }
   }
 
   Future<void> _setData({
