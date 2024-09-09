@@ -95,6 +95,9 @@ mixin LoginMixin {
           ref.watch(userLoggedInProvider.notifier).update((state) => false);
 
           ref.read(phoneNumberProvider.notifier).update((state) => '');
+          ref.read(loginPINProvider.notifier).update((state) => '');
+          ref.read(createPINProvider.notifier).update((state) => '');
+          ref.read(confirmPINProvider.notifier).update((state) => '');
 
           context.go(AppRoutes.loginScreen);
 
