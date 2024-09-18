@@ -36,6 +36,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(mpinLoadingProvider.notifier).update((state) => false);
       ref.read(agentDetailsLoadingProvider.notifier).update((state) => false);
+      ref.read(loginPINProvider.notifier).update((state) => "");
     });
 
     getAgentName();
@@ -60,8 +61,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
             const Spacer(),
             MaskedPinTextfield(provider: loginPINProvider),
 
-            if (ref.watch(mpinLoadingProvider) ||
-                ref.watch(agentDetailsLoadingProvider)) ...[
+            if (ref.watch(mpinLoadingProvider) || ref.watch(agentDetailsLoadingProvider)) ...[
               const Spacer(),
               _loader(),
             ],
@@ -87,16 +87,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
                       ref: ref,
                       onSuccess: onLoginSuccess,
                       onWrongPin: () {
-                        ref
-                            .watch(loginPINProvider.notifier)
-                            .update((state) => "");
+                        ref.watch(loginPINProvider.notifier).update((state) => "");
                         wrongPin = true;
                         setState(() {});
                       },
                       onFailure: () {
-                        ref
-                            .watch(loginPINProvider.notifier)
-                            .update((state) => "");
+                        ref.watch(loginPINProvider.notifier).update((state) => "");
                         setState(() {});
                       },
                     );
@@ -176,9 +172,7 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
 
   Widget _useBiometricButton() {
     final launchDetailsProvider = ref.watch(launchDetailsResponseProvider);
-    final isFPLogin = launchDetailsProvider
-            ?.body?.responseBody?.agentData?.loginData?.isFpLogin ??
-        false;
+    final isFPLogin = launchDetailsProvider?.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false;
 
     return isFPLogin
         ? TextButton(
@@ -230,16 +224,13 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
         );
       },
       onAuthenticationFailure: (String error) {
-        context.showErrorSnackBar(
-            message: Strings.biometricAuthenticationFailed);
+        context.showErrorSnackBar(message: Strings.biometricAuthenticationFailed);
       },
     );
   }
 
   void onLoginSuccess(AgentLoginDetailsResponseModel? agentDetails) async {
-    ref
-        .read(agentLoginDetailsProvider.notifier)
-        .update((state) => agentDetails);
+    ref.read(agentLoginDetailsProvider.notifier).update((state) => agentDetails);
 
     ref.watch(userLoggedInProvider.notifier).update((state) => true);
 
@@ -250,16 +241,12 @@ class _CreatePinScreenState extends ConsumerState<MPINLoginScreen>
       ref,
       onSuccess: (GetAgentDetailsResponseModel? agentDetails) {
         ref.watch(loginPINProvider.notifier).update((state) => "");
-        ref
-            .watch(agentDetailsResponseProvider.notifier)
-            .update((state) => agentDetails);
+        ref.watch(agentDetailsResponseProvider.notifier).update((state) => agentDetails);
         ref
             .watch(agentSignaturePathProvider.notifier)
             .update((state) => agentDetails?.body?.responseBody?.signaturePath);
 
-        ref
-            .watch(agentDetailsLoadingProvider.notifier)
-            .update((state) => false);
+        ref.watch(agentDetailsLoadingProvider.notifier).update((state) => false);
 
         context.go(AppRoutes.dashboardScreen);
       },

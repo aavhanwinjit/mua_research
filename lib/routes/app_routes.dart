@@ -9,8 +9,6 @@ import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edi
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/edit_insured_details_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_documents_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/address_details/pages/insured_review_submit_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen.dart';
-import 'package:ekyc/features/kyc_process/presentation/camera/pages/camera_screen_2.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/pages/review_uploaded_document_screen_2.dart';
 import 'package:ekyc/features/kyc_process/presentation/customer_info/pages/customer_info_screen.dart';
@@ -67,7 +65,7 @@ class AppRoutes {
   static const String policyDocumentScreen = '/policy_document_screen';
   static const String pdReviewSubmitScreen = '/policy_document_review_submit_screen';
   static const String reviewSubmitScreen = '/review_submit_screen';
-  static const String cameraScreen = '/camera_screen';
+  // static const String cameraScreen = '/camera_screen';
   static const String addressDetailsScreen = '/address_details_screen';
   static const String insuredDocumentScreen = '/insured_document_screen';
   static const String addressReviewSubmitScreen = '/address_review_submit_screen';
@@ -83,7 +81,7 @@ class AppRoutes {
   static const String mpinLoginScreen = '/mpin_login_screen';
   static const String editDetailsScreen = '/edit_details_screen';
   static const String editAddressDetailsScreen = '/edit_address_details_screen';
-  static const String cameraScreen2 = '/camera_screen_2';
+  // static const String cameraScreen2 = '/camera_screen_2';
   static const String confirmUploadOrRetakeScreen2 = '/confirm_upload_or_retake_screen_2';
   static const String insuredReviewSubmitScreen = '/insured_review_submit_screen';
   static const String editInsuredDetailsScreen = '/edit_insured_details_screen';
@@ -252,15 +250,15 @@ final GoRouter router = GoRouter(
         return const PDReviewSubmitScreen();
       },
     ),
-    GoRoute(
-      path: AppRoutes.cameraScreen,
-      name: AppRoutes.cameraScreen,
-      builder: (BuildContext context, GoRouterState state) {
-        StateProvider<String?> provider = state.extra as StateProvider<String?>;
+    // GoRoute(
+    //   path: AppRoutes.cameraScreen,
+    //   name: AppRoutes.cameraScreen,
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     StateProvider<String?> provider = state.extra as StateProvider<String?>;
 
-        return CameraScreen(provider: provider);
-      },
-    ),
+    //     return CameraScreen(provider: provider);
+    //   },
+    // ),
     GoRoute(
       path: AppRoutes.addressDetailsScreen,
       name: AppRoutes.addressDetailsScreen,
@@ -366,23 +364,23 @@ final GoRouter router = GoRouter(
         return const EditAddressDetailsScreen();
       },
     ),
-    GoRoute(
-      path: AppRoutes.cameraScreen2,
-      name: AppRoutes.cameraScreen2,
-      builder: (BuildContext context, GoRouterState state) {
-        Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
+    // GoRoute(
+    //   path: AppRoutes.cameraScreen2,
+    //   name: AppRoutes.cameraScreen2,
+    //   builder: (BuildContext context, GoRouterState state) {
+    //     Map<String, dynamic> extra = state.extra as Map<String, dynamic>;
 
-        final Function(String, ScanDocumentResponseBody?) onChange =
-            extra['onChange'] as Function(String, ScanDocumentResponseBody?);
+    //     final Function(String, ScanDocumentResponseBody?) onChange =
+    //         extra['onChange'] as Function(String, ScanDocumentResponseBody?);
 
-        final String documentCode = extra['documentCode'] as String;
+    //     final String documentCode = extra['documentCode'] as String;
 
-        return CameraScreen2(
-          onchange: onChange,
-          documentCode: documentCode,
-        );
-      },
-    ),
+    //     return CameraScreen2(
+    //       onchange: onChange,
+    //       documentCode: documentCode,
+    //     );
+    //   },
+    // ),
     GoRoute(
       path: AppRoutes.confirmUploadOrRetakeScreen2,
       name: AppRoutes.confirmUploadOrRetakeScreen2,
@@ -398,11 +396,14 @@ final GoRouter router = GoRouter(
 
         final String? registrationNumber = extra['registrationNumber'] as String?;
 
+        final bool? isPdf = extra['isPdf'] as bool?;
+
         return ReviewUploadedDocumentScreen2(
           onChange: onChange,
           documentCode: documentCode,
           documentSide: documentSide,
           registrationNumber: registrationNumber,
+          isPdf: isPdf,
         );
       },
     ),

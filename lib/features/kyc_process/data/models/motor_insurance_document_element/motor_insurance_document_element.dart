@@ -6,6 +6,8 @@ class MotorInsuranceDocumentElement {
   // int index;
   ScanDocumentResponseBody? scanResponse;
   String? motorDocImagePath;
+  // ScanDocumentResponseBody? scanResponse2;
+  // String? motorDocPdfPath;
   String? registrationNumber;
 
   MotorInsuranceDocumentElement({
@@ -13,6 +15,8 @@ class MotorInsuranceDocumentElement {
     // required this.index,
     required this.scanResponse,
     required this.motorDocImagePath,
+    // required this.scanResponse2,
+    // required this.motorDocPdfPath,
     this.registrationNumber,
   });
 }

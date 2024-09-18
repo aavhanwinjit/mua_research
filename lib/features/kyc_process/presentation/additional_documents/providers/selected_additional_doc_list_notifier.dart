@@ -24,6 +24,8 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
       documentElement: null,
       scanResponse: null,
       filePath: null,
+      // pdfPath: null,
+      // scanResponse2: null,
     );
 
     state = [...state, element];
@@ -63,6 +65,19 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
     state = newList;
   }
 
+  // void updateElementsPdfFilePath({required int index, required String? filePath}) {
+  //   AdditionalDocumentElement item = state[index];
+
+  //   List<AdditionalDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.pdfPath = filePath;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void updateElementScanResponse({required int index, required ScanDocumentResponseBody? scanResponse}) {
     AdditionalDocumentElement item = state[index];
 
@@ -76,6 +91,19 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
     state = newList;
   }
 
+  // void updateElementScanResponse2({required int index, required ScanDocumentResponseBody? scanResponse}) {
+  //   AdditionalDocumentElement item = state[index];
+
+  //   List<AdditionalDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.scanResponse2 = scanResponse;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void clearElementsFilePath({required int index}) {
     AdditionalDocumentElement item = state[index];
 
@@ -88,6 +116,19 @@ class SelectedAdditionalDocListNotifier extends _$SelectedAdditionalDocListNotif
 
     state = newList;
   }
+
+  // void clearElementsPdfFilePath({required int index}) {
+  //   AdditionalDocumentElement item = state[index];
+
+  //   List<AdditionalDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.pdfPath = null;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
 
   void clearList() {
     state = [];

@@ -31,9 +31,11 @@ class SaveAdditionalDocumentsRequestModel with _$SaveAdditionalDocumentsRequestM
 @freezed
 class AdditionalDocumentDetailsModel with _$AdditionalDocumentDetailsModel {
   const factory AdditionalDocumentDetailsModel({
+    @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
     @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
     @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
-    @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
+    // @JsonKey(name: "uploadPDFDocumentId") int? uploadPDFDocumentId,
+    // @JsonKey(name: "additionalDocPDFPath") String? additionalDocPDFPath,
   }) = _AdditionalDocumentDetailsModel;
 
   factory AdditionalDocumentDetailsModel.fromJson(Map<String, dynamic> json) =>

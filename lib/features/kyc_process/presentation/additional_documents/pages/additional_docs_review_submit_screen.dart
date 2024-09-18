@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
+import 'package:ekyc/core/mixins/generate_pdf_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/mixins/save_additional_details_mixin.dart';
@@ -22,7 +23,7 @@ class AdditionalDocsReviewSubmitScreen extends ConsumerStatefulWidget {
 }
 
 class _ReviewSubmitScreenState extends ConsumerState<AdditionalDocsReviewSubmitScreen>
-    with AgentApplicationsMixin, SaveAdditionalDetailsMixin {
+    with AgentApplicationsMixin, SaveAdditionalDetailsMixin, GeneratePdfMixin {
   @override
   void initState() {
     super.initState();
@@ -113,6 +114,8 @@ class _ReviewSubmitScreenState extends ConsumerState<AdditionalDocsReviewSubmitS
           context: context,
           ref: ref,
           onSuccess: () async {
+            await deleteGeneratedPdfDirectory();
+
             resetPageNumber(ref);
 
             await getAgentApplications(

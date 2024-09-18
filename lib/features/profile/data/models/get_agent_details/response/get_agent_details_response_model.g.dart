@@ -50,6 +50,7 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
     _$GetAgentDetailsResponseBodyImpl(
       agentId: json['agentId'] as int?,
       agentName: json['agentName'] as String?,
+      lastName: json['lastName'] as String?,
       address: json['address'] as String?,
       companyIds: json['companyIds'] as String?,
       signaturePath: json['signaturePath'] as String?,
@@ -79,7 +80,7 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
       signatureUploadDate: json['signatureUploadDate'] == null
           ? null
           : DateTime.parse(json['signatureUploadDate'] as String),
-      designation: json['designation'],
+      designation: json['designation'] as String?,
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
       crdBy: json['crdBy'],
@@ -92,6 +93,7 @@ Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
     <String, dynamic>{
       'agentId': instance.agentId,
       'agentName': instance.agentName,
+      'lastName': instance.lastName,
       'address': instance.address,
       'companyIds': instance.companyIds,
       'signaturePath': instance.signaturePath,

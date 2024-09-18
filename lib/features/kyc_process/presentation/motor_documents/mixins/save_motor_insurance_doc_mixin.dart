@@ -31,9 +31,11 @@ mixin SaveMotorInsuranceDocMixin {
           .list()
           .map(
             (e) => MotorDocDetail(
-              uploadDocumentId: e.documentElement?.mDocumentTypeId,
               motorDocumentTypeId: e.documentElement?.mDocumentTypeId,
               motorDocImagePath: e.scanResponse?.fileName ?? "",
+              uploadDocumentId: e.scanResponse?.uploadedDocumentId,
+              // motorDocPDFPath: e.scanResponse2?.fileName,
+              // uploadPDFDocumentId: e.scanResponse2?.uploadedDocumentId,
             ),
           )
           .toList(),

@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
+import 'package:ekyc/core/mixins/generate_pdf_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/mixins/save_motor_insurance_doc_mixin.dart';
@@ -22,7 +23,18 @@ class MotorDocsReviewSubmitScreen extends ConsumerStatefulWidget {
 }
 
 class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen>
-    with SaveMotorInsuranceDocMixin, AgentApplicationsMixin {
+    with SaveMotorInsuranceDocMixin, AgentApplicationsMixin, GeneratePdfMixin {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(motorInsuranceReviewConfirmationProvider.notifier).update((state) => false);
+      ref.read(saveMotorInsuranceProofFileLoading.notifier).update((state) => false);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,6 +115,8 @@ class _ReviewSubmitScreenState extends ConsumerState<MotorDocsReviewSubmitScreen
             context: context,
             ref: ref,
             onSuccess: () async {
+              await deleteGeneratedPdfDirectory();
+
               resetPageNumber(ref);
 
               await getAgentApplications(

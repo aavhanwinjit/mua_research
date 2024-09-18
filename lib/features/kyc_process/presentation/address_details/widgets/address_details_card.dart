@@ -9,6 +9,7 @@ import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_file/open_file.dart';
 
 class AddressDetailsCard extends ConsumerWidget {
   const AddressDetailsCard({super.key});
@@ -135,7 +136,7 @@ class AddressDetailsCard extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
           selectedAddressDocType?.documentCode == DocumentCodes.LAA.toString().split('.').last
-              ? _pdfWidget()
+              ? _pdfWidget(addressProofImagePath ?? "")
               : _imageWidget(addressProofImagePath),
         ],
       ),
@@ -154,15 +155,20 @@ class AddressDetailsCard extends ConsumerWidget {
     );
   }
 
-  Widget _pdfWidget() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(12),
-      child: SizedBox(
-        height: 80.h,
-        width: 80.h,
-        child: Center(
-          child: Image.asset(
-            ImageConstants.pdfIcon2,
+  Widget _pdfWidget(String filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
           ),
         ),
       ),

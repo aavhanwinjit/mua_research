@@ -32,8 +32,10 @@ mixin SavePolicyDocumentsMixin {
           .map(
             (e) => PolicyDoumentDetailsModel(
               policyDocumentTypeId: e.documentElement?.policyDocumentTypeId,
-              policyDouImagePath: e.scanResponse?.fileName,
+              policyDocImagePath: e.scanResponse?.fileName,
               uploadDocumentId: e.scanResponse?.uploadedDocumentId,
+              // policyDocPDFPath: e.scanResponse2?.fileName,
+              // uploadPDFDocumentId: e.scanResponse2?.uploadedDocumentId,
             ),
           )
           .toList(),

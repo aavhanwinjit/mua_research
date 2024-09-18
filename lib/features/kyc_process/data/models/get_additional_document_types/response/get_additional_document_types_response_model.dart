@@ -43,8 +43,8 @@ class GetAdditionalDocumentTypesData with _$GetAdditionalDocumentTypesData {
 @freezed
 class AdditionalDocumentTypeModel with _$AdditionalDocumentTypeModel {
   const factory AdditionalDocumentTypeModel({
-    @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
-    @JsonKey(name: "additionalDoumentTypeName") String? additionalDoumentTypeName,
+    @JsonKey(name: "additionalDocumentTypeId") int? additionalDocumentTypeId,
+    @JsonKey(name: "additionalDocumentTypeName") String? additionalDocumentTypeName,
     @JsonKey(name: "documentCode") String? documentCode,
   }) = _AdditionalDocumentTypeModel;
 

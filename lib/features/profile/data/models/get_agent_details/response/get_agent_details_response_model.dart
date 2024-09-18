@@ -43,6 +43,7 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
   const factory GetAgentDetailsResponseBody({
     @JsonKey(name: "agentId") int? agentId,
     @JsonKey(name: "agentName") String? agentName,
+    @JsonKey(name: "lastName") String? lastName,
     @JsonKey(name: "address") String? address,
     @JsonKey(name: "companyIds") String? companyIds,
     @JsonKey(name: "signaturePath") String? signaturePath,
@@ -66,7 +67,7 @@ class GetAgentDetailsResponseBody with _$GetAgentDetailsResponseBody {
     @JsonKey(name: "companies") List<Company>? companies,
     @JsonKey(name: "agencyName") String? agencyName,
     @JsonKey(name: "signatureUploadDate") DateTime? signatureUploadDate,
-    @JsonKey(name: "designation") dynamic designation,
+    @JsonKey(name: "designation") String? designation,
     @JsonKey(name: "isDisabled") bool? isDisabled,
     @JsonKey(name: "crd") DateTime? crd,
     @JsonKey(name: "crdBy") dynamic crdBy,

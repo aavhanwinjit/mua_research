@@ -33,6 +33,8 @@ class ImageConstants {
   static const String pdfIcon = '$imagePath/pdf_icon.png';
   static const String pdfIcon2 = '$imagePath/pdf_icon_2.png';
 
+  static const String pdfWatermark = '$imagePath/mua_watermark.png';
+
   // static const String svgDrawerBook = svgPath + '/drawer_book.svg';
   // static const String svgDeRegister = svgPath + '/de_register.svg';
   // static const String svgRightArrow = svgPath + '/right_arrow.svg';

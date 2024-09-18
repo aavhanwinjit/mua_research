@@ -153,6 +153,17 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
         DropdownWidgetNonMotor(item: item, index: index),
         SizedBox(height: 24.h),
         DocumentUploadContainer2(
+          uploadGeneratedPdfDoc: true,
+          // pdfPath: item.nonMotorDocPdfPath,
+          // onChangePdf: (String path, ScanDocumentResponseBody? response) async {
+          //   selectedDocsListProvider.updateElementsPdfFilePath(filePath: path, index: index);
+          //   selectedDocsListProvider.updateElementScanResponse2(scanResponse: response, index: index);
+
+          //   context.pop();
+          // },
+          // clearPdf: () {
+          //   selectedDocsListProvider.clearElementsPdfFilePath(index: index);
+          // },
           filePath: item.nonMotorDocImagePath,
           documentCode: item.documentElement?.documentCode ?? "",
           onChange: (String path, ScanDocumentResponseBody? response) async {

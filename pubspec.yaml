@@ -28,7 +28,7 @@ dependencies:
   dotted_border: ^2.1.0
   flutter_scrolling_fab_animated: ^0.1.4
   image_picker: ^1.0.7
-  camera: ^0.10.5+9
+  # camera: ^0.10.5+9
   dio: ^5.4.1
   pretty_dio_logger: ^1.3.1
   retrofit: ^4.1.0
@@ -52,16 +52,18 @@ dependencies:
   # google_mlkit_text_recognition: ^0.11.0
   # google_mlkit_document_scanner: ^0.2.0
   # docscan: ^1.1.6
-  cunning_document_scanner: ^1.2.3
+  # cunning_document_scanner: ^1.2.3
   firebase_core: ^2.30.0
   firebase_crashlytics: ^3.5.2
   firebase_analytics: ^10.10.2
   path_provider: ^2.1.3
   open_file: ^3.3.2
-  crop_your_image: ^1.1.0
+  # crop_your_image: ^1.1.0
   image_cropper: ^8.0.1
-  image_cropping: ^0.0.14
-  file_picker: ^8.0.6
+  # image_cropping: ^0.0.14
+  # file_picker: ^8.0.6
+  pdf: ^3.11.1
+  multiple_image_camera: ^0.0.2
  
 dev_dependencies:
   flutter_test:

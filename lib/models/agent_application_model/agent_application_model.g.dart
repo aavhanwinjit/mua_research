@@ -158,7 +158,7 @@ _$AdditionalDoumentDetailImpl _$$AdditionalDoumentDetailImplFromJson(
       crdBy: json['crdBy'] as int?,
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
       lmdBy: json['lmdBy'] as int?,
-      additionalDoumentDetailId: json['additionalDoumentDetailId'] as int?,
+      additionalDocumentDetailId: json['additionalDocumentDetailId'] as int?,
       agentApplicationId: json['agentApplicationId'] as int?,
       uploadDocumentId: json['uploadDocumentId'] as int?,
       additionalDocumentTypeId: json['additionalDocumentTypeId'] as int?,
@@ -173,7 +173,7 @@ Map<String, dynamic> _$$AdditionalDoumentDetailImplToJson(
       'crdBy': instance.crdBy,
       'lmd': instance.lmd?.toIso8601String(),
       'lmdBy': instance.lmdBy,
-      'additionalDoumentDetailId': instance.additionalDoumentDetailId,
+      'additionalDocumentDetailId': instance.additionalDocumentDetailId,
       'agentApplicationId': instance.agentApplicationId,
       'uploadDocumentId': instance.uploadDocumentId,
       'additionalDocumentTypeId': instance.additionalDocumentTypeId,
@@ -214,8 +214,8 @@ _$MotorInsuranceDocumentDetailImpl _$$MotorInsuranceDocumentDetailImplFromJson(
       crdBy: json['crdBy'] as int?,
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
       lmdBy: json['lmdBy'] as int?,
-      motorInsuranceDoumentDetailId:
-          json['motorInsuranceDoumentDetailId'] as int?,
+      motorInsuranceDocumentDetailId:
+          json['motorInsuranceDocumentDetailId'] as int?,
       agentApplicationId: json['agentApplicationId'] as int?,
       uploadDocumentId: json['uploadDocumentId'] as int?,
       motorInsuranceDocumentTypeId:
@@ -231,7 +231,7 @@ Map<String, dynamic> _$$MotorInsuranceDocumentDetailImplToJson(
       'crdBy': instance.crdBy,
       'lmd': instance.lmd?.toIso8601String(),
       'lmdBy': instance.lmdBy,
-      'motorInsuranceDoumentDetailId': instance.motorInsuranceDoumentDetailId,
+      'motorInsuranceDocumentDetailId': instance.motorInsuranceDocumentDetailId,
       'agentApplicationId': instance.agentApplicationId,
       'uploadDocumentId': instance.uploadDocumentId,
       'motorInsuranceDocumentTypeId': instance.motorInsuranceDocumentTypeId,
@@ -250,8 +250,8 @@ _$NonMotorInsuranceDocumentDetailImpl
               ? null
               : DateTime.parse(json['lmd'] as String),
           lmdBy: json['lmdBy'] as int?,
-          nonMotorInsuranceDoumentDetailId:
-              json['nonMotorInsuranceDoumentDetailId'] as int?,
+          nonMotorInsuranceDocumentDetailId:
+              json['nonMotorInsuranceDocumentDetailId'] as int?,
           agentApplicationId: json['agentApplicationId'] as int?,
           uploadDocumentId: json['uploadDocumentId'] as int?,
           nonMotorInsuranceDocumentTypeId:
@@ -267,8 +267,8 @@ Map<String, dynamic> _$$NonMotorInsuranceDocumentDetailImplToJson(
       'crdBy': instance.crdBy,
       'lmd': instance.lmd?.toIso8601String(),
       'lmdBy': instance.lmdBy,
-      'nonMotorInsuranceDoumentDetailId':
-          instance.nonMotorInsuranceDoumentDetailId,
+      'nonMotorInsuranceDocumentDetailId':
+          instance.nonMotorInsuranceDocumentDetailId,
       'agentApplicationId': instance.agentApplicationId,
       'uploadDocumentId': instance.uploadDocumentId,
       'nonMotorInsuranceDocumentTypeId':
@@ -284,11 +284,11 @@ _$PolicyDocumentDetailImpl _$$PolicyDocumentDetailImplFromJson(
       crdBy: json['crdBy'] as int?,
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
       lmdBy: json['lmdBy'] as int?,
-      policyDoumentDetailId: json['policyDoumentDetailId'] as int?,
+      policyDocumentDetailId: json['policyDocumentDetailId'] as int?,
       agentApplicationId: json['agentApplicationId'] as int?,
       uploadDocumentId: json['uploadDocumentId'] as int?,
       policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
-      policyDouImagePath: json['policyDouImagePath'] as String?,
+      policyDocImagePath: json['policyDocImagePath'] as String?,
     );
 
 Map<String, dynamic> _$$PolicyDocumentDetailImplToJson(
@@ -299,11 +299,11 @@ Map<String, dynamic> _$$PolicyDocumentDetailImplToJson(
       'crdBy': instance.crdBy,
       'lmd': instance.lmd?.toIso8601String(),
       'lmdBy': instance.lmdBy,
-      'policyDoumentDetailId': instance.policyDoumentDetailId,
+      'policyDocumentDetailId': instance.policyDocumentDetailId,
       'agentApplicationId': instance.agentApplicationId,
       'uploadDocumentId': instance.uploadDocumentId,
       'policyDocumentTypeId': instance.policyDocumentTypeId,
-      'policyDouImagePath': instance.policyDouImagePath,
+      'policyDocImagePath': instance.policyDocImagePath,
     };
 
 _$PorDocumentDetailImpl _$$PorDocumentDetailImplFromJson(

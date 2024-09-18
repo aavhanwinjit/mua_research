@@ -31,15 +31,15 @@ Map<String, dynamic> _$$SavePolicyDocumentsRequestModelImplToJson(
 _$PolicyDoumentDetailsModelImpl _$$PolicyDoumentDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PolicyDoumentDetailsModelImpl(
-      uploadDocumentId: json['uploadDocumentId'] as int?,
       policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
-      policyDouImagePath: json['policyDouImagePath'] as String?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
+      policyDocImagePath: json['policyDocImagePath'] as String?,
     );
 
 Map<String, dynamic> _$$PolicyDoumentDetailsModelImplToJson(
         _$PolicyDoumentDetailsModelImpl instance) =>
     <String, dynamic>{
-      'uploadDocumentId': instance.uploadDocumentId,
       'policyDocumentTypeId': instance.policyDocumentTypeId,
-      'policyDouImagePath': instance.policyDouImagePath,
+      'uploadDocumentId': instance.uploadDocumentId,
+      'policyDocImagePath': instance.policyDocImagePath,
     };

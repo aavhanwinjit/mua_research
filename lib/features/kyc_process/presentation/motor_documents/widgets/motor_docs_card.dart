@@ -5,6 +5,7 @@ import 'package:ekyc/features/kyc_process/data/models/motor_insurance_document_e
 import 'package:ekyc/features/kyc_process/presentation/motor_documents/providers/selected_motor_insurance_doc_type_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_file/open_file.dart';
 
 class MotorDocsCard extends ConsumerStatefulWidget {
   const MotorDocsCard({super.key});
@@ -78,7 +79,8 @@ class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
                         style: const TextStyle(color: textGrayColor2),
                       ),
                       const SizedBox(height: 5),
-                      _imageWidget(e.motorDocImagePath),
+                      _pdfWidget(e.motorDocImagePath),
+                      // _imageWidget(e.motorDocImagePath),
                     ],
                   ),
                 ),
@@ -97,6 +99,26 @@ class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _pdfWidget(String? filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
+          ),
+        ),
       ),
     );
   }

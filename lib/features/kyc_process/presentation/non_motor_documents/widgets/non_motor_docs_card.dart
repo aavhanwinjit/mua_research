@@ -5,6 +5,7 @@ import 'package:ekyc/features/kyc_process/data/models/non_motor_insurance_docume
 import 'package:ekyc/features/kyc_process/presentation/non_motor_documents/provider/selected_non_motor_insurance_doc_type_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_file/open_file.dart';
 
 class NonMotorDocsCard extends ConsumerStatefulWidget {
   const NonMotorDocsCard({super.key});
@@ -72,7 +73,8 @@ class _NonMotorDocsCardState extends ConsumerState<NonMotorDocsCard> {
                         style: const TextStyle(color: textGrayColor2),
                       ),
                       const SizedBox(height: 5),
-                      _imageWidget(e.nonMotorDocImagePath),
+                      // _imageWidget(e.nonMotorDocImagePath),
+                      _pdfWidget(e.nonMotorDocImagePath),
                     ],
                   ),
                 ),
@@ -91,6 +93,26 @@ class _NonMotorDocsCardState extends ConsumerState<NonMotorDocsCard> {
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _pdfWidget(String? filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
+          ),
+        ),
       ),
     );
   }

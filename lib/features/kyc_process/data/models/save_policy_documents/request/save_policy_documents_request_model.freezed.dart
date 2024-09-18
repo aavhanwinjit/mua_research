@@ -254,12 +254,12 @@ PolicyDoumentDetailsModel _$PolicyDoumentDetailsModelFromJson(
 
 /// @nodoc
 mixin _$PolicyDoumentDetailsModel {
-  @JsonKey(name: "uploadDocumentId")
-  int? get uploadDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "policyDocumentTypeId")
   int? get policyDocumentTypeId => throw _privateConstructorUsedError;
-  @JsonKey(name: "policyDouImagePath")
-  String? get policyDouImagePath => throw _privateConstructorUsedError;
+  @JsonKey(name: "uploadDocumentId")
+  int? get uploadDocumentId => throw _privateConstructorUsedError;
+  @JsonKey(name: "policyDocImagePath")
+  String? get policyDocImagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -274,9 +274,9 @@ abstract class $PolicyDoumentDetailsModelCopyWith<$Res> {
       _$PolicyDoumentDetailsModelCopyWithImpl<$Res, PolicyDoumentDetailsModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") String? policyDouImagePath});
+      {@JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
+      @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
+      @JsonKey(name: "policyDocImagePath") String? policyDocImagePath});
 }
 
 /// @nodoc
@@ -293,22 +293,22 @@ class _$PolicyDoumentDetailsModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uploadDocumentId = freezed,
     Object? policyDocumentTypeId = freezed,
-    Object? policyDouImagePath = freezed,
+    Object? uploadDocumentId = freezed,
+    Object? policyDocImagePath = freezed,
   }) {
     return _then(_value.copyWith(
-      uploadDocumentId: freezed == uploadDocumentId
-          ? _value.uploadDocumentId
-          : uploadDocumentId // ignore: cast_nullable_to_non_nullable
-              as int?,
       policyDocumentTypeId: freezed == policyDocumentTypeId
           ? _value.policyDocumentTypeId
           : policyDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDouImagePath: freezed == policyDouImagePath
-          ? _value.policyDouImagePath
-          : policyDouImagePath // ignore: cast_nullable_to_non_nullable
+      uploadDocumentId: freezed == uploadDocumentId
+          ? _value.uploadDocumentId
+          : uploadDocumentId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      policyDocImagePath: freezed == policyDocImagePath
+          ? _value.policyDocImagePath
+          : policyDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -324,9 +324,9 @@ abstract class _$$PolicyDoumentDetailsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") String? policyDouImagePath});
+      {@JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
+      @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
+      @JsonKey(name: "policyDocImagePath") String? policyDocImagePath});
 }
 
 /// @nodoc
@@ -342,22 +342,22 @@ class __$$PolicyDoumentDetailsModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? uploadDocumentId = freezed,
     Object? policyDocumentTypeId = freezed,
-    Object? policyDouImagePath = freezed,
+    Object? uploadDocumentId = freezed,
+    Object? policyDocImagePath = freezed,
   }) {
     return _then(_$PolicyDoumentDetailsModelImpl(
-      uploadDocumentId: freezed == uploadDocumentId
-          ? _value.uploadDocumentId
-          : uploadDocumentId // ignore: cast_nullable_to_non_nullable
-              as int?,
       policyDocumentTypeId: freezed == policyDocumentTypeId
           ? _value.policyDocumentTypeId
           : policyDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDouImagePath: freezed == policyDouImagePath
-          ? _value.policyDouImagePath
-          : policyDouImagePath // ignore: cast_nullable_to_non_nullable
+      uploadDocumentId: freezed == uploadDocumentId
+          ? _value.uploadDocumentId
+          : uploadDocumentId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      policyDocImagePath: freezed == policyDocImagePath
+          ? _value.policyDocImagePath
+          : policyDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -367,26 +367,26 @@ class __$$PolicyDoumentDetailsModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PolicyDoumentDetailsModelImpl implements _PolicyDoumentDetailsModel {
   const _$PolicyDoumentDetailsModelImpl(
-      {@JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
-      @JsonKey(name: "policyDocumentTypeId") this.policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") this.policyDouImagePath});
+      {@JsonKey(name: "policyDocumentTypeId") this.policyDocumentTypeId,
+      @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
+      @JsonKey(name: "policyDocImagePath") this.policyDocImagePath});
 
   factory _$PolicyDoumentDetailsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PolicyDoumentDetailsModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "uploadDocumentId")
-  final int? uploadDocumentId;
-  @override
   @JsonKey(name: "policyDocumentTypeId")
   final int? policyDocumentTypeId;
   @override
-  @JsonKey(name: "policyDouImagePath")
-  final String? policyDouImagePath;
+  @JsonKey(name: "uploadDocumentId")
+  final int? uploadDocumentId;
+  @override
+  @JsonKey(name: "policyDocImagePath")
+  final String? policyDocImagePath;
 
   @override
   String toString() {
-    return 'PolicyDoumentDetailsModel(uploadDocumentId: $uploadDocumentId, policyDocumentTypeId: $policyDocumentTypeId, policyDouImagePath: $policyDouImagePath)';
+    return 'PolicyDoumentDetailsModel(policyDocumentTypeId: $policyDocumentTypeId, uploadDocumentId: $uploadDocumentId, policyDocImagePath: $policyDocImagePath)';
   }
 
   @override
@@ -394,18 +394,18 @@ class _$PolicyDoumentDetailsModelImpl implements _PolicyDoumentDetailsModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PolicyDoumentDetailsModelImpl &&
-            (identical(other.uploadDocumentId, uploadDocumentId) ||
-                other.uploadDocumentId == uploadDocumentId) &&
             (identical(other.policyDocumentTypeId, policyDocumentTypeId) ||
                 other.policyDocumentTypeId == policyDocumentTypeId) &&
-            (identical(other.policyDouImagePath, policyDouImagePath) ||
-                other.policyDouImagePath == policyDouImagePath));
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
+            (identical(other.policyDocImagePath, policyDocImagePath) ||
+                other.policyDocImagePath == policyDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, uploadDocumentId, policyDocumentTypeId, policyDouImagePath);
+      runtimeType, policyDocumentTypeId, uploadDocumentId, policyDocImagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -424,23 +424,23 @@ class _$PolicyDoumentDetailsModelImpl implements _PolicyDoumentDetailsModel {
 
 abstract class _PolicyDoumentDetailsModel implements PolicyDoumentDetailsModel {
   const factory _PolicyDoumentDetailsModel(
-      {@JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
-      @JsonKey(name: "policyDocumentTypeId") final int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath")
-      final String? policyDouImagePath}) = _$PolicyDoumentDetailsModelImpl;
+      {@JsonKey(name: "policyDocumentTypeId") final int? policyDocumentTypeId,
+      @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
+      @JsonKey(name: "policyDocImagePath")
+      final String? policyDocImagePath}) = _$PolicyDoumentDetailsModelImpl;
 
   factory _PolicyDoumentDetailsModel.fromJson(Map<String, dynamic> json) =
       _$PolicyDoumentDetailsModelImpl.fromJson;
 
   @override
-  @JsonKey(name: "uploadDocumentId")
-  int? get uploadDocumentId;
-  @override
   @JsonKey(name: "policyDocumentTypeId")
   int? get policyDocumentTypeId;
   @override
-  @JsonKey(name: "policyDouImagePath")
-  String? get policyDouImagePath;
+  @JsonKey(name: "uploadDocumentId")
+  int? get uploadDocumentId;
+  @override
+  @JsonKey(name: "policyDocImagePath")
+  String? get policyDocImagePath;
   @override
   @JsonKey(ignore: true)
   _$$PolicyDoumentDetailsModelImplCopyWith<_$PolicyDoumentDetailsModelImpl>

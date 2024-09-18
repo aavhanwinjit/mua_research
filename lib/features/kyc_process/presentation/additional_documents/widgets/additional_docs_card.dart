@@ -4,6 +4,7 @@ import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/features/kyc_process/presentation/additional_documents/providers/selected_additional_doc_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_file/open_file.dart';
 
 class AdditionalDocsCard extends ConsumerWidget {
   const AdditionalDocsCard({super.key});
@@ -72,17 +73,42 @@ class AdditionalDocsCard extends ConsumerWidget {
         children: selectedDocsListProvider.list().map((e) {
           return Padding(
             padding: EdgeInsets.only(right: 16.w),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.file(
-                File(e.filePath ?? ""),
-                height: 150.h,
-                width: 150.h,
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: _pdfWidget(e.filePath ?? ""),
+            // child: _image(e.filePath ?? ""),
           );
         }).toList(),
+      ),
+    );
+  }
+
+  Widget _image(String filePath) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Image.file(
+        File(filePath ?? ""),
+        height: 150.h,
+        width: 150.h,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _pdfWidget(String? filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
+          ),
+        ),
       ),
     );
   }

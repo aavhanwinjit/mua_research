@@ -30,6 +30,8 @@ class SelectedNonMotorInsuranceDocTypeListNotifier extends _$SelectedNonMotorIns
       documentElement: null,
       scanResponse: null,
       nonMotorDocImagePath: null,
+      // nonMotorDocPdfPath: null,
+      // scanResponse2: null,
     );
 
     state = [...state, element];
@@ -69,6 +71,19 @@ class SelectedNonMotorInsuranceDocTypeListNotifier extends _$SelectedNonMotorIns
     state = newList;
   }
 
+  // void updateElementsPdfFilePath({required int index, required String? filePath}) {
+  //   NonMotorInsuranceDocumentElement item = state[index];
+
+  //   List<NonMotorInsuranceDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.nonMotorDocPdfPath = filePath;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void updateElementScanResponse({required int index, required ScanDocumentResponseBody? scanResponse}) {
     NonMotorInsuranceDocumentElement item = state[index];
 
@@ -82,6 +97,19 @@ class SelectedNonMotorInsuranceDocTypeListNotifier extends _$SelectedNonMotorIns
     state = newList;
   }
 
+  // void updateElementScanResponse2({required int index, required ScanDocumentResponseBody? scanResponse}) {
+  //   NonMotorInsuranceDocumentElement item = state[index];
+
+  //   List<NonMotorInsuranceDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.scanResponse2 = scanResponse;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void clearElementsFilePath({required int index}) {
     NonMotorInsuranceDocumentElement item = state[index];
 
@@ -94,6 +122,19 @@ class SelectedNonMotorInsuranceDocTypeListNotifier extends _$SelectedNonMotorIns
 
     state = newList;
   }
+
+  // void clearElementsPdfFilePath({required int index}) {
+  //   NonMotorInsuranceDocumentElement item = state[index];
+
+  //   List<NonMotorInsuranceDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.nonMotorDocPdfPath = null;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
 
   void clearList() {
     state = [];

@@ -5,11 +5,16 @@ class NonMotorInsuranceDocumentElement {
   NonMotorInsuranceDocumentTypeModel? documentElement;
   // int index;
   ScanDocumentResponseBody? scanResponse;
+  // ScanDocumentResponseBody? scanResponse2;
   String? nonMotorDocImagePath;
+  // String? nonMotorDocPdfPath;
 
-  NonMotorInsuranceDocumentElement(
-      {required this.documentElement,
-      // required this.index,
-      required this.scanResponse,
-      required this.nonMotorDocImagePath});
+  NonMotorInsuranceDocumentElement({
+    required this.documentElement,
+    // required this.index,
+    required this.scanResponse,
+    // required this.scanResponse2,
+    required this.nonMotorDocImagePath,
+    // required this.nonMotorDocPdfPath,
+  });
 }

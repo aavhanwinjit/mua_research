@@ -177,6 +177,17 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
         ],
 
         DocumentUploadContainer2(
+            uploadGeneratedPdfDoc: true,
+            // pdfPath: item.motorDocPdfPath,
+            // onChangePdf: (String path, ScanDocumentResponseBody? response) async {
+            //   selectedDocsListProvider.updateElementsPdfFilePath(filePath: path, index: index);
+            //   selectedDocsListProvider.updateElementScanResponse2(scanResponse: response, index: index);
+
+            //   context.pop();
+            // },
+            // clearPdf: () {
+            //   selectedDocsListProvider.clearElementsPdfFilePath(index: index);
+            // },
             filePath: item.motorDocImagePath,
             documentCode: item.documentElement?.documentCode ?? "",
             onChange: (String path, ScanDocumentResponseBody? response) async {
@@ -303,23 +314,25 @@ class _PolicyDocumentsScreenState extends ConsumerState<MotorDocumentScreen>
           //   },
           // );
 
-          bool result = selectedDocsListProvider.list().any((element) {
-            if (element.documentElement!.documentCode == DocumentCodes.HRP.toString().split('.').last) {
-              if (element.scanResponse!.ocrResponse!.documentdata!.kycStatus != "Success") {
-                return false;
-              } else {
-                return true;
-              }
-            } else {
-              return true;
-            }
-          });
+          // commented on 18 Sept 2024 after making changes of pdf generating on FE
+          // bool result = selectedDocsListProvider.list().any((element) {
+          //   if (element.documentElement!.documentCode == DocumentCodes.HRP.toString().split('.').last) {
+          //     if (element.scanResponse!.ocrResponse!.documentdata!.kycStatus != "Success") {
+          //       return false;
+          //     } else {
+          //       return true;
+          //     }
+          //   } else {
+          //     return true;
+          //   }
+          // });
+          // if (result == true) {
+          //   context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
+          // } else {
+          //   context.showErrorSnackBar(message: Strings.horsePowerKYCFailed);
+          // }
 
-          if (result == true) {
-            context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
-          } else {
-            context.showErrorSnackBar(message: Strings.horsePowerKYCFailed);
-          }
+          context.pushNamed(AppRoutes.motorDocsReviewSubmitScreen);
         },
         label: Strings.next,
       ),

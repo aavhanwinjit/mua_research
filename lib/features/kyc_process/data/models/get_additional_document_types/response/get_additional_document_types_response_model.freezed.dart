@@ -472,10 +472,10 @@ AdditionalDocumentTypeModel _$AdditionalDocumentTypeModelFromJson(
 
 /// @nodoc
 mixin _$AdditionalDocumentTypeModel {
-  @JsonKey(name: "additionalDoumentTypeId")
-  int? get additionalDoumentTypeId => throw _privateConstructorUsedError;
-  @JsonKey(name: "additionalDoumentTypeName")
-  String? get additionalDoumentTypeName => throw _privateConstructorUsedError;
+  @JsonKey(name: "additionalDocumentTypeId")
+  int? get additionalDocumentTypeId => throw _privateConstructorUsedError;
+  @JsonKey(name: "additionalDocumentTypeName")
+  String? get additionalDocumentTypeName => throw _privateConstructorUsedError;
   @JsonKey(name: "documentCode")
   String? get documentCode => throw _privateConstructorUsedError;
 
@@ -494,9 +494,9 @@ abstract class $AdditionalDocumentTypeModelCopyWith<$Res> {
           AdditionalDocumentTypeModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
-      @JsonKey(name: "additionalDoumentTypeName")
-      String? additionalDoumentTypeName,
+      {@JsonKey(name: "additionalDocumentTypeId") int? additionalDocumentTypeId,
+      @JsonKey(name: "additionalDocumentTypeName")
+      String? additionalDocumentTypeName,
       @JsonKey(name: "documentCode") String? documentCode});
 }
 
@@ -514,18 +514,18 @@ class _$AdditionalDocumentTypeModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? additionalDoumentTypeId = freezed,
-    Object? additionalDoumentTypeName = freezed,
+    Object? additionalDocumentTypeId = freezed,
+    Object? additionalDocumentTypeName = freezed,
     Object? documentCode = freezed,
   }) {
     return _then(_value.copyWith(
-      additionalDoumentTypeId: freezed == additionalDoumentTypeId
-          ? _value.additionalDoumentTypeId
-          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+      additionalDocumentTypeId: freezed == additionalDocumentTypeId
+          ? _value.additionalDocumentTypeId
+          : additionalDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalDoumentTypeName: freezed == additionalDoumentTypeName
-          ? _value.additionalDoumentTypeName
-          : additionalDoumentTypeName // ignore: cast_nullable_to_non_nullable
+      additionalDocumentTypeName: freezed == additionalDocumentTypeName
+          ? _value.additionalDocumentTypeName
+          : additionalDocumentTypeName // ignore: cast_nullable_to_non_nullable
               as String?,
       documentCode: freezed == documentCode
           ? _value.documentCode
@@ -545,9 +545,9 @@ abstract class _$$AdditionalDocumentTypeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
-      @JsonKey(name: "additionalDoumentTypeName")
-      String? additionalDoumentTypeName,
+      {@JsonKey(name: "additionalDocumentTypeId") int? additionalDocumentTypeId,
+      @JsonKey(name: "additionalDocumentTypeName")
+      String? additionalDocumentTypeName,
       @JsonKey(name: "documentCode") String? documentCode});
 }
 
@@ -564,18 +564,18 @@ class __$$AdditionalDocumentTypeModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? additionalDoumentTypeId = freezed,
-    Object? additionalDoumentTypeName = freezed,
+    Object? additionalDocumentTypeId = freezed,
+    Object? additionalDocumentTypeName = freezed,
     Object? documentCode = freezed,
   }) {
     return _then(_$AdditionalDocumentTypeModelImpl(
-      additionalDoumentTypeId: freezed == additionalDoumentTypeId
-          ? _value.additionalDoumentTypeId
-          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+      additionalDocumentTypeId: freezed == additionalDocumentTypeId
+          ? _value.additionalDocumentTypeId
+          : additionalDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalDoumentTypeName: freezed == additionalDoumentTypeName
-          ? _value.additionalDoumentTypeName
-          : additionalDoumentTypeName // ignore: cast_nullable_to_non_nullable
+      additionalDocumentTypeName: freezed == additionalDocumentTypeName
+          ? _value.additionalDocumentTypeName
+          : additionalDocumentTypeName // ignore: cast_nullable_to_non_nullable
               as String?,
       documentCode: freezed == documentCode
           ? _value.documentCode
@@ -590,9 +590,9 @@ class __$$AdditionalDocumentTypeModelImplCopyWithImpl<$Res>
 class _$AdditionalDocumentTypeModelImpl
     implements _AdditionalDocumentTypeModel {
   const _$AdditionalDocumentTypeModelImpl(
-      {@JsonKey(name: "additionalDoumentTypeId") this.additionalDoumentTypeId,
-      @JsonKey(name: "additionalDoumentTypeName")
-      this.additionalDoumentTypeName,
+      {@JsonKey(name: "additionalDocumentTypeId") this.additionalDocumentTypeId,
+      @JsonKey(name: "additionalDocumentTypeName")
+      this.additionalDocumentTypeName,
       @JsonKey(name: "documentCode") this.documentCode});
 
   factory _$AdditionalDocumentTypeModelImpl.fromJson(
@@ -600,18 +600,18 @@ class _$AdditionalDocumentTypeModelImpl
       _$$AdditionalDocumentTypeModelImplFromJson(json);
 
   @override
-  @JsonKey(name: "additionalDoumentTypeId")
-  final int? additionalDoumentTypeId;
+  @JsonKey(name: "additionalDocumentTypeId")
+  final int? additionalDocumentTypeId;
   @override
-  @JsonKey(name: "additionalDoumentTypeName")
-  final String? additionalDoumentTypeName;
+  @JsonKey(name: "additionalDocumentTypeName")
+  final String? additionalDocumentTypeName;
   @override
   @JsonKey(name: "documentCode")
   final String? documentCode;
 
   @override
   String toString() {
-    return 'AdditionalDocumentTypeModel(additionalDoumentTypeId: $additionalDoumentTypeId, additionalDoumentTypeName: $additionalDoumentTypeName, documentCode: $documentCode)';
+    return 'AdditionalDocumentTypeModel(additionalDocumentTypeId: $additionalDocumentTypeId, additionalDocumentTypeName: $additionalDocumentTypeName, documentCode: $documentCode)';
   }
 
   @override
@@ -620,19 +620,20 @@ class _$AdditionalDocumentTypeModelImpl
         (other.runtimeType == runtimeType &&
             other is _$AdditionalDocumentTypeModelImpl &&
             (identical(
-                    other.additionalDoumentTypeId, additionalDoumentTypeId) ||
-                other.additionalDoumentTypeId == additionalDoumentTypeId) &&
-            (identical(other.additionalDoumentTypeName,
-                    additionalDoumentTypeName) ||
-                other.additionalDoumentTypeName == additionalDoumentTypeName) &&
+                    other.additionalDocumentTypeId, additionalDocumentTypeId) ||
+                other.additionalDocumentTypeId == additionalDocumentTypeId) &&
+            (identical(other.additionalDocumentTypeName,
+                    additionalDocumentTypeName) ||
+                other.additionalDocumentTypeName ==
+                    additionalDocumentTypeName) &&
             (identical(other.documentCode, documentCode) ||
                 other.documentCode == documentCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, additionalDoumentTypeId,
-      additionalDoumentTypeName, documentCode);
+  int get hashCode => Object.hash(runtimeType, additionalDocumentTypeId,
+      additionalDocumentTypeName, documentCode);
 
   @JsonKey(ignore: true)
   @override
@@ -652,10 +653,10 @@ class _$AdditionalDocumentTypeModelImpl
 abstract class _AdditionalDocumentTypeModel
     implements AdditionalDocumentTypeModel {
   const factory _AdditionalDocumentTypeModel(
-          {@JsonKey(name: "additionalDoumentTypeId")
-          final int? additionalDoumentTypeId,
-          @JsonKey(name: "additionalDoumentTypeName")
-          final String? additionalDoumentTypeName,
+          {@JsonKey(name: "additionalDocumentTypeId")
+          final int? additionalDocumentTypeId,
+          @JsonKey(name: "additionalDocumentTypeName")
+          final String? additionalDocumentTypeName,
           @JsonKey(name: "documentCode") final String? documentCode}) =
       _$AdditionalDocumentTypeModelImpl;
 
@@ -663,11 +664,11 @@ abstract class _AdditionalDocumentTypeModel
       _$AdditionalDocumentTypeModelImpl.fromJson;
 
   @override
-  @JsonKey(name: "additionalDoumentTypeId")
-  int? get additionalDoumentTypeId;
+  @JsonKey(name: "additionalDocumentTypeId")
+  int? get additionalDocumentTypeId;
   @override
-  @JsonKey(name: "additionalDoumentTypeName")
-  String? get additionalDoumentTypeName;
+  @JsonKey(name: "additionalDocumentTypeName")
+  String? get additionalDocumentTypeName;
   @override
   @JsonKey(name: "documentCode")
   String? get documentCode;

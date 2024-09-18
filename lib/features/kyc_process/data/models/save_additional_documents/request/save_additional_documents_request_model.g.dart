@@ -32,15 +32,15 @@ Map<String, dynamic> _$$SaveAdditionalDocumentsRequestModelImplToJson(
 _$AdditionalDocumentDetailsModelImpl
     _$$AdditionalDocumentDetailsModelImplFromJson(Map<String, dynamic> json) =>
         _$AdditionalDocumentDetailsModelImpl(
+          additionalDoumentTypeId: json['additionalDoumentTypeId'] as int?,
           uploadDocumentId: json['uploadDocumentId'] as int?,
           additionalDocImagePath: json['additionalDocImagePath'] as String?,
-          additionalDoumentTypeId: json['additionalDoumentTypeId'] as int?,
         );
 
 Map<String, dynamic> _$$AdditionalDocumentDetailsModelImplToJson(
         _$AdditionalDocumentDetailsModelImpl instance) =>
     <String, dynamic>{
+      'additionalDoumentTypeId': instance.additionalDoumentTypeId,
       'uploadDocumentId': instance.uploadDocumentId,
       'additionalDocImagePath': instance.additionalDocImagePath,
-      'additionalDoumentTypeId': instance.additionalDoumentTypeId,
     };

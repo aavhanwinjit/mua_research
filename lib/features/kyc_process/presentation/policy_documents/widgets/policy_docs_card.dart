@@ -5,6 +5,7 @@ import 'package:ekyc/features/kyc_process/data/models/policy_document_element.da
 import 'package:ekyc/features/kyc_process/presentation/policy_documents/providers/selected_policy_doc_type_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:open_file/open_file.dart';
 
 class PolicyDocsCard extends ConsumerWidget {
   const PolicyDocsCard({super.key});
@@ -69,7 +70,8 @@ class PolicyDocsCard extends ConsumerWidget {
                         style: const TextStyle(color: textGrayColor2),
                       ),
                       const SizedBox(height: 5),
-                      _imageWidget(e),
+                      _pdfWidget(e.filePath),
+                      // _imageWidget(e),
                     ],
                   ),
                 ),
@@ -88,6 +90,26 @@ class PolicyDocsCard extends ConsumerWidget {
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _pdfWidget(String? filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
+          ),
+        ),
       ),
     );
   }

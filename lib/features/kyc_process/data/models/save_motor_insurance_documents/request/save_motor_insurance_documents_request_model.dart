@@ -33,6 +33,8 @@ class MotorDocDetail with _$MotorDocDetail {
     @JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
     @JsonKey(name: 'motorDocumentTypeId') int? motorDocumentTypeId,
     @JsonKey(name: 'motorDocuImagePath') String? motorDocImagePath,
+    // @JsonKey(name: 'uploadPDFDocumentId') int? uploadPDFDocumentId,
+    // @JsonKey(name: 'motorDocPDFPath') String? motorDocPDFPath,
   }) = _MotorDocDetail;
 
   factory MotorDocDetail.fromJson(Map<String, dynamic> json) => _$MotorDocDetailFromJson(json);

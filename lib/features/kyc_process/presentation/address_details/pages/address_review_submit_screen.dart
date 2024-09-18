@@ -1,6 +1,7 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/core/helpers/confirmation_dialog_helper.dart';
+import 'package:ekyc/core/mixins/generate_pdf_mixin.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/dashboard/presentation/mixins/agent_applications_mixin.dart';
 import 'package:ekyc/features/dashboard/presentation/widgets/custom_checkbox_tile.dart';
@@ -24,7 +25,7 @@ class AddressReviewSubmitScreen extends ConsumerStatefulWidget {
 }
 
 class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitScreen>
-    with SaveAddressDetailsMixin, AgentApplicationsMixin {
+    with SaveAddressDetailsMixin, AgentApplicationsMixin, GeneratePdfMixin {
   @override
   void initState() {
     super.initState();
@@ -168,6 +169,8 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
       ref: ref,
       porRequired: false,
       onSuccess: () async {
+        await deleteGeneratedPdfDirectory();
+
         resetPageNumber(ref);
 
         await getAgentApplications(
@@ -194,6 +197,8 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
       ref: ref,
       porRequired: true,
       onSuccess: () async {
+        await deleteGeneratedPdfDirectory();
+
         resetPageNumber(ref);
 
         await getAgentApplications(
@@ -232,6 +237,8 @@ class _AddressReviewSubmitScreenState extends ConsumerState<AddressReviewSubmitS
       ref: ref,
       porRequired: true,
       onSuccess: () async {
+        await deleteGeneratedPdfDirectory();
+
         resetPageNumber(ref);
 
         await getAgentApplications(

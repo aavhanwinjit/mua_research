@@ -139,6 +139,17 @@ class _AdditionalDocumentsScreenState extends ConsumerState<AdditionalDocumentsS
         DropdownWidgetAdditional(item: item, index: index),
         SizedBox(height: 24.h),
         DocumentUploadContainer2(
+          uploadGeneratedPdfDoc: true,
+          // pdfPath: item.pdfPath,
+          // onChangePdf: (String path, ScanDocumentResponseBody? response) async {
+          //   selectedDocsListProvider.updateElementsPdfFilePath(filePath: path, index: index);
+          //   selectedDocsListProvider.updateElementScanResponse2(scanResponse: response, index: index);
+
+          //   context.pop();
+          // },
+          // clearPdf: () {
+          //   selectedDocsListProvider.clearElementsPdfFilePath(index: index);
+          // },
           filePath: item.filePath,
           documentCode: DocumentCodes.ADD.toString().split('.').last,
           onChange: (String path, ScanDocumentResponseBody? response) async {

@@ -30,6 +30,8 @@ class SelectedPolicyDocTypeListNotifier extends _$SelectedPolicyDocTypeListNotif
       documentElement: null,
       scanResponse: null,
       filePath: null,
+      // pdfPath: null,
+      // scanResponse2: null,
     );
 
     state = [...state, element];
@@ -69,6 +71,19 @@ class SelectedPolicyDocTypeListNotifier extends _$SelectedPolicyDocTypeListNotif
     state = newList;
   }
 
+  // void updateElementsPdfFilePath({required int index, required String? filePath}) {
+  //   PolicyDocumentElement item = state[index];
+
+  //   List<PolicyDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.pdfPath = filePath;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void updateElementScanResponse({required int index, required ScanDocumentResponseBody? scanResponse}) {
     PolicyDocumentElement item = state[index];
 
@@ -82,6 +97,19 @@ class SelectedPolicyDocTypeListNotifier extends _$SelectedPolicyDocTypeListNotif
     state = newList;
   }
 
+  // void updateElementScanResponse2({required int index, required ScanDocumentResponseBody? scanResponse}) {
+  //   PolicyDocumentElement item = state[index];
+
+  //   List<PolicyDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.scanResponse2 = scanResponse;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
+
   void clearElementsFilePath({required int index}) {
     PolicyDocumentElement item = state[index];
 
@@ -94,6 +122,19 @@ class SelectedPolicyDocTypeListNotifier extends _$SelectedPolicyDocTypeListNotif
 
     state = newList;
   }
+
+  // void clearElementsPdfFilePath({required int index}) {
+  //   PolicyDocumentElement item = state[index];
+
+  //   List<PolicyDocumentElement> newList = List.from(state);
+  //   newList.removeAt(index);
+
+  //   item.pdfPath = null;
+
+  //   newList.insert(index, item);
+
+  //   state = newList;
+  // }
 
   void clearList() {
     state = [];

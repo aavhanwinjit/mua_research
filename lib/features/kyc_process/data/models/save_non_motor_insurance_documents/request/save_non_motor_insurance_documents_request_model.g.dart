@@ -32,15 +32,15 @@ Map<String, dynamic> _$$SaveNonMotorInsuranceDocumentsRequestModelImplToJson(
 _$NonMotorDocDetailImpl _$$NonMotorDocDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$NonMotorDocDetailImpl(
-      uploadDocumentId: json['uploadDocumentId'] as int?,
       nonMotorDocumentTypeId: json['nonMotorInsuranceDocumentTypeId'] as int?,
+      uploadDocumentId: json['uploadDocumentId'] as int?,
       nonMotorDocImagePath: json['nonMotorDocImagePath'] as String?,
     );
 
 Map<String, dynamic> _$$NonMotorDocDetailImplToJson(
         _$NonMotorDocDetailImpl instance) =>
     <String, dynamic>{
-      'uploadDocumentId': instance.uploadDocumentId,
       'nonMotorInsuranceDocumentTypeId': instance.nonMotorDocumentTypeId,
+      'uploadDocumentId': instance.uploadDocumentId,
       'nonMotorDocImagePath': instance.nonMotorDocImagePath,
     };

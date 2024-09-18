@@ -31,9 +31,11 @@ mixin SaveAdditionalDetailsMixin {
           .list()
           .map(
             (e) => AdditionalDocumentDetailsModel(
+              additionalDoumentTypeId: e.documentElement?.additionalDocumentTypeId,
               additionalDocImagePath: e.scanResponse?.fileName,
               uploadDocumentId: e.scanResponse?.uploadedDocumentId,
-              additionalDoumentTypeId: e.documentElement?.additionalDoumentTypeId,
+              // additionalDocPDFPath: e.scanResponse2?.fileName,
+              // uploadPDFDocumentId: e.scanResponse2?.uploadedDocumentId,
             ),
           )
           .toList(),

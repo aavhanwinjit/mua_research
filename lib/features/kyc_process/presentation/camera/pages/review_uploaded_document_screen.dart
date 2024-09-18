@@ -8,6 +8,7 @@ import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_u
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_file/open_file.dart';
 
 class ReviewUploadedDocumentScreen extends ConsumerWidget {
   final StateProvider<String?> provider;
@@ -35,34 +36,41 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
           child: Column(
             children: [
               const Spacer(),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: textGrayColor,
+              InkWell(
+                onTap: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
+                    ? () {
+                        OpenFile.open(capturedFilePath);
+                      }
+                    : null,
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: textGrayColor,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
-                      ? SizedBox(
-                          width: double.infinity,
-                          height: 250.h,
-                          child: Center(
-                            child: Image.asset(
-                              ImageConstants.pdfIcon2,
-                              // width: double.infinity,
-                              // height: 250.h,
-                              // fit: BoxFit.contain,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
+                        ? SizedBox(
+                            width: double.infinity,
+                            height: 250.h,
+                            child: Center(
+                              child: Image.asset(
+                                ImageConstants.pdfIcon2,
+                                // width: double.infinity,
+                                // height: 250.h,
+                                // fit: BoxFit.contain,
+                              ),
                             ),
+                          )
+                        : Image.file(
+                            File(capturedFilePath ?? ""),
+                            width: double.infinity,
+                            height: 250.h,
+                            fit: BoxFit.contain,
                           ),
-                        )
-                      : Image.file(
-                          File(capturedFilePath ?? ""),
-                          width: double.infinity,
-                          height: 250.h,
-                          fit: BoxFit.contain,
-                        ),
+                  ),
                 ),
               ),
               SizedBox(height: 32.h),

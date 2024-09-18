@@ -50,15 +50,15 @@ Map<String, dynamic> _$$GetAdditionalDocumentTypesDataImplToJson(
 _$AdditionalDocumentTypeModelImpl _$$AdditionalDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AdditionalDocumentTypeModelImpl(
-      additionalDoumentTypeId: json['additionalDoumentTypeId'] as int?,
-      additionalDoumentTypeName: json['additionalDoumentTypeName'] as String?,
+      additionalDocumentTypeId: json['additionalDocumentTypeId'] as int?,
+      additionalDocumentTypeName: json['additionalDocumentTypeName'] as String?,
       documentCode: json['documentCode'] as String?,
     );
 
 Map<String, dynamic> _$$AdditionalDocumentTypeModelImplToJson(
         _$AdditionalDocumentTypeModelImpl instance) =>
     <String, dynamic>{
-      'additionalDoumentTypeId': instance.additionalDoumentTypeId,
-      'additionalDoumentTypeName': instance.additionalDoumentTypeName,
+      'additionalDocumentTypeId': instance.additionalDocumentTypeId,
+      'additionalDocumentTypeName': instance.additionalDocumentTypeName,
       'documentCode': instance.documentCode,
     };

@@ -7,7 +7,7 @@ part of 'selected_por_doc_type_list_notifier.dart';
 // **************************************************************************
 
 String _$selectedPorDocTypeListNotifierHash() =>
-    r'babe48a3f2cadd09aad7310258fb399954da9685';
+    r'ad20e414b0c10dbe65da055d7da65d14d8759918';
 
 /// See also [SelectedPorDocTypeListNotifier].
 @ProviderFor(SelectedPorDocTypeListNotifier)

@@ -259,12 +259,12 @@ AdditionalDocumentDetailsModel _$AdditionalDocumentDetailsModelFromJson(
 
 /// @nodoc
 mixin _$AdditionalDocumentDetailsModel {
+  @JsonKey(name: "additionalDoumentTypeId")
+  int? get additionalDoumentTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadDocumentId")
   int? get uploadDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocImagePath")
   String? get additionalDocImagePath => throw _privateConstructorUsedError;
-  @JsonKey(name: "additionalDoumentTypeId")
-  int? get additionalDoumentTypeId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -281,9 +281,9 @@ abstract class $AdditionalDocumentDetailsModelCopyWith<$Res> {
           AdditionalDocumentDetailsModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
-      @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId});
+      {@JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
+      @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
+      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath});
 }
 
 /// @nodoc
@@ -300,11 +300,15 @@ class _$AdditionalDocumentDetailsModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? additionalDoumentTypeId = freezed,
     Object? uploadDocumentId = freezed,
     Object? additionalDocImagePath = freezed,
-    Object? additionalDoumentTypeId = freezed,
   }) {
     return _then(_value.copyWith(
+      additionalDoumentTypeId: freezed == additionalDoumentTypeId
+          ? _value.additionalDoumentTypeId
+          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
       uploadDocumentId: freezed == uploadDocumentId
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
@@ -313,10 +317,6 @@ class _$AdditionalDocumentDetailsModelCopyWithImpl<$Res,
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      additionalDoumentTypeId: freezed == additionalDoumentTypeId
-          ? _value.additionalDoumentTypeId
-          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -331,9 +331,9 @@ abstract class _$$AdditionalDocumentDetailsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath,
-      @JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId});
+      {@JsonKey(name: "additionalDoumentTypeId") int? additionalDoumentTypeId,
+      @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
+      @JsonKey(name: "additionalDocImagePath") String? additionalDocImagePath});
 }
 
 /// @nodoc
@@ -349,11 +349,15 @@ class __$$AdditionalDocumentDetailsModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? additionalDoumentTypeId = freezed,
     Object? uploadDocumentId = freezed,
     Object? additionalDocImagePath = freezed,
-    Object? additionalDoumentTypeId = freezed,
   }) {
     return _then(_$AdditionalDocumentDetailsModelImpl(
+      additionalDoumentTypeId: freezed == additionalDoumentTypeId
+          ? _value.additionalDoumentTypeId
+          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
+              as int?,
       uploadDocumentId: freezed == uploadDocumentId
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
@@ -362,10 +366,6 @@ class __$$AdditionalDocumentDetailsModelImplCopyWithImpl<$Res>
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
-      additionalDoumentTypeId: freezed == additionalDoumentTypeId
-          ? _value.additionalDoumentTypeId
-          : additionalDoumentTypeId // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -375,27 +375,27 @@ class __$$AdditionalDocumentDetailsModelImplCopyWithImpl<$Res>
 class _$AdditionalDocumentDetailsModelImpl
     implements _AdditionalDocumentDetailsModel {
   const _$AdditionalDocumentDetailsModelImpl(
-      {@JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
-      @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath,
-      @JsonKey(name: "additionalDoumentTypeId") this.additionalDoumentTypeId});
+      {@JsonKey(name: "additionalDoumentTypeId") this.additionalDoumentTypeId,
+      @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
+      @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath});
 
   factory _$AdditionalDocumentDetailsModelImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$AdditionalDocumentDetailsModelImplFromJson(json);
 
   @override
+  @JsonKey(name: "additionalDoumentTypeId")
+  final int? additionalDoumentTypeId;
+  @override
   @JsonKey(name: "uploadDocumentId")
   final int? uploadDocumentId;
   @override
   @JsonKey(name: "additionalDocImagePath")
   final String? additionalDocImagePath;
-  @override
-  @JsonKey(name: "additionalDoumentTypeId")
-  final int? additionalDoumentTypeId;
 
   @override
   String toString() {
-    return 'AdditionalDocumentDetailsModel(uploadDocumentId: $uploadDocumentId, additionalDocImagePath: $additionalDocImagePath, additionalDoumentTypeId: $additionalDoumentTypeId)';
+    return 'AdditionalDocumentDetailsModel(additionalDoumentTypeId: $additionalDoumentTypeId, uploadDocumentId: $uploadDocumentId, additionalDocImagePath: $additionalDocImagePath)';
   }
 
   @override
@@ -403,19 +403,19 @@ class _$AdditionalDocumentDetailsModelImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AdditionalDocumentDetailsModelImpl &&
+            (identical(
+                    other.additionalDoumentTypeId, additionalDoumentTypeId) ||
+                other.additionalDoumentTypeId == additionalDoumentTypeId) &&
             (identical(other.uploadDocumentId, uploadDocumentId) ||
                 other.uploadDocumentId == uploadDocumentId) &&
             (identical(other.additionalDocImagePath, additionalDocImagePath) ||
-                other.additionalDocImagePath == additionalDocImagePath) &&
-            (identical(
-                    other.additionalDoumentTypeId, additionalDoumentTypeId) ||
-                other.additionalDoumentTypeId == additionalDoumentTypeId));
+                other.additionalDocImagePath == additionalDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, uploadDocumentId,
-      additionalDocImagePath, additionalDoumentTypeId);
+  int get hashCode => Object.hash(runtimeType, additionalDoumentTypeId,
+      uploadDocumentId, additionalDocImagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -436,25 +436,25 @@ class _$AdditionalDocumentDetailsModelImpl
 abstract class _AdditionalDocumentDetailsModel
     implements AdditionalDocumentDetailsModel {
   const factory _AdditionalDocumentDetailsModel(
-          {@JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
+          {@JsonKey(name: "additionalDoumentTypeId")
+          final int? additionalDoumentTypeId,
+          @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
           @JsonKey(name: "additionalDocImagePath")
-          final String? additionalDocImagePath,
-          @JsonKey(name: "additionalDoumentTypeId")
-          final int? additionalDoumentTypeId}) =
+          final String? additionalDocImagePath}) =
       _$AdditionalDocumentDetailsModelImpl;
 
   factory _AdditionalDocumentDetailsModel.fromJson(Map<String, dynamic> json) =
       _$AdditionalDocumentDetailsModelImpl.fromJson;
 
   @override
+  @JsonKey(name: "additionalDoumentTypeId")
+  int? get additionalDoumentTypeId;
+  @override
   @JsonKey(name: "uploadDocumentId")
   int? get uploadDocumentId;
   @override
   @JsonKey(name: "additionalDocImagePath")
   String? get additionalDocImagePath;
-  @override
-  @JsonKey(name: "additionalDoumentTypeId")
-  int? get additionalDoumentTypeId;
   @override
   @JsonKey(ignore: true)
   _$$AdditionalDocumentDetailsModelImplCopyWith<

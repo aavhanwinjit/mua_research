@@ -464,6 +464,8 @@ mixin _$GetAgentDetailsResponseBody {
   int? get agentId => throw _privateConstructorUsedError;
   @JsonKey(name: "agentName")
   String? get agentName => throw _privateConstructorUsedError;
+  @JsonKey(name: "lastName")
+  String? get lastName => throw _privateConstructorUsedError;
   @JsonKey(name: "address")
   String? get address => throw _privateConstructorUsedError;
   @JsonKey(name: "companyIds")
@@ -511,7 +513,7 @@ mixin _$GetAgentDetailsResponseBody {
   @JsonKey(name: "signatureUploadDate")
   DateTime? get signatureUploadDate => throw _privateConstructorUsedError;
   @JsonKey(name: "designation")
-  dynamic get designation => throw _privateConstructorUsedError;
+  String? get designation => throw _privateConstructorUsedError;
   @JsonKey(name: "isDisabled")
   bool? get isDisabled => throw _privateConstructorUsedError;
   @JsonKey(name: "crd")
@@ -540,6 +542,7 @@ abstract class $GetAgentDetailsResponseBodyCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "agentName") String? agentName,
+      @JsonKey(name: "lastName") String? lastName,
       @JsonKey(name: "address") String? address,
       @JsonKey(name: "companyIds") String? companyIds,
       @JsonKey(name: "signaturePath") String? signaturePath,
@@ -563,7 +566,7 @@ abstract class $GetAgentDetailsResponseBodyCopyWith<$Res> {
       @JsonKey(name: "companies") List<Company>? companies,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "signatureUploadDate") DateTime? signatureUploadDate,
-      @JsonKey(name: "designation") dynamic designation,
+      @JsonKey(name: "designation") String? designation,
       @JsonKey(name: "isDisabled") bool? isDisabled,
       @JsonKey(name: "crd") DateTime? crd,
       @JsonKey(name: "crdBy") dynamic crdBy,
@@ -587,6 +590,7 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
   $Res call({
     Object? agentId = freezed,
     Object? agentName = freezed,
+    Object? lastName = freezed,
     Object? address = freezed,
     Object? companyIds = freezed,
     Object? signaturePath = freezed,
@@ -625,6 +629,10 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
       agentName: freezed == agentName
           ? _value.agentName
           : agentName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -721,7 +729,7 @@ class _$GetAgentDetailsResponseBodyCopyWithImpl<$Res,
       designation: freezed == designation
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isDisabled: freezed == isDisabled
           ? _value.isDisabled
           : isDisabled // ignore: cast_nullable_to_non_nullable
@@ -758,6 +766,7 @@ abstract class _$$GetAgentDetailsResponseBodyImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: "agentId") int? agentId,
       @JsonKey(name: "agentName") String? agentName,
+      @JsonKey(name: "lastName") String? lastName,
       @JsonKey(name: "address") String? address,
       @JsonKey(name: "companyIds") String? companyIds,
       @JsonKey(name: "signaturePath") String? signaturePath,
@@ -781,7 +790,7 @@ abstract class _$$GetAgentDetailsResponseBodyImplCopyWith<$Res>
       @JsonKey(name: "companies") List<Company>? companies,
       @JsonKey(name: "agencyName") String? agencyName,
       @JsonKey(name: "signatureUploadDate") DateTime? signatureUploadDate,
-      @JsonKey(name: "designation") dynamic designation,
+      @JsonKey(name: "designation") String? designation,
       @JsonKey(name: "isDisabled") bool? isDisabled,
       @JsonKey(name: "crd") DateTime? crd,
       @JsonKey(name: "crdBy") dynamic crdBy,
@@ -804,6 +813,7 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
   $Res call({
     Object? agentId = freezed,
     Object? agentName = freezed,
+    Object? lastName = freezed,
     Object? address = freezed,
     Object? companyIds = freezed,
     Object? signaturePath = freezed,
@@ -842,6 +852,10 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
       agentName: freezed == agentName
           ? _value.agentName
           : agentName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
               as String?,
       address: freezed == address
           ? _value.address
@@ -938,7 +952,7 @@ class __$$GetAgentDetailsResponseBodyImplCopyWithImpl<$Res>
       designation: freezed == designation
           ? _value.designation
           : designation // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as String?,
       isDisabled: freezed == isDisabled
           ? _value.isDisabled
           : isDisabled // ignore: cast_nullable_to_non_nullable
@@ -970,6 +984,7 @@ class _$GetAgentDetailsResponseBodyImpl
   const _$GetAgentDetailsResponseBodyImpl(
       {@JsonKey(name: "agentId") this.agentId,
       @JsonKey(name: "agentName") this.agentName,
+      @JsonKey(name: "lastName") this.lastName,
       @JsonKey(name: "address") this.address,
       @JsonKey(name: "companyIds") this.companyIds,
       @JsonKey(name: "signaturePath") this.signaturePath,
@@ -1011,6 +1026,9 @@ class _$GetAgentDetailsResponseBodyImpl
   @override
   @JsonKey(name: "agentName")
   final String? agentName;
+  @override
+  @JsonKey(name: "lastName")
+  final String? lastName;
   @override
   @JsonKey(name: "address")
   final String? address;
@@ -1090,7 +1108,7 @@ class _$GetAgentDetailsResponseBodyImpl
   final DateTime? signatureUploadDate;
   @override
   @JsonKey(name: "designation")
-  final dynamic designation;
+  final String? designation;
   @override
   @JsonKey(name: "isDisabled")
   final bool? isDisabled;
@@ -1109,7 +1127,7 @@ class _$GetAgentDetailsResponseBodyImpl
 
   @override
   String toString() {
-    return 'GetAgentDetailsResponseBody(agentId: $agentId, agentName: $agentName, address: $address, companyIds: $companyIds, signaturePath: $signaturePath, mpin: $mpin, mobileNumber: $mobileNumber, isApproved: $isApproved, remark: $remark, dateOfApproved: $dateOfApproved, approvedBy: $approvedBy, city: $city, countryId: $countryId, emailId: $emailId, authorized: $authorized, isMpinExpired: $isMpinExpired, mpinExpiry: $mpinExpiry, profileImagePath: $profileImagePath, birthDate: $birthDate, status: $status, reviewByUser: $reviewByUser, apiUniqueKey: $apiUniqueKey, companies: $companies, agencyName: $agencyName, signatureUploadDate: $signatureUploadDate, designation: $designation, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
+    return 'GetAgentDetailsResponseBody(agentId: $agentId, agentName: $agentName, lastName: $lastName, address: $address, companyIds: $companyIds, signaturePath: $signaturePath, mpin: $mpin, mobileNumber: $mobileNumber, isApproved: $isApproved, remark: $remark, dateOfApproved: $dateOfApproved, approvedBy: $approvedBy, city: $city, countryId: $countryId, emailId: $emailId, authorized: $authorized, isMpinExpired: $isMpinExpired, mpinExpiry: $mpinExpiry, profileImagePath: $profileImagePath, birthDate: $birthDate, status: $status, reviewByUser: $reviewByUser, apiUniqueKey: $apiUniqueKey, companies: $companies, agencyName: $agencyName, signatureUploadDate: $signatureUploadDate, designation: $designation, isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy)';
   }
 
   @override
@@ -1120,6 +1138,8 @@ class _$GetAgentDetailsResponseBodyImpl
             (identical(other.agentId, agentId) || other.agentId == agentId) &&
             (identical(other.agentName, agentName) ||
                 other.agentName == agentName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
             (identical(other.address, address) || other.address == address) &&
             (identical(other.companyIds, companyIds) ||
                 other.companyIds == companyIds) &&
@@ -1158,8 +1178,8 @@ class _$GetAgentDetailsResponseBodyImpl
                 other.agencyName == agencyName) &&
             (identical(other.signatureUploadDate, signatureUploadDate) ||
                 other.signatureUploadDate == signatureUploadDate) &&
-            const DeepCollectionEquality()
-                .equals(other.designation, designation) &&
+            (identical(other.designation, designation) ||
+                other.designation == designation) &&
             (identical(other.isDisabled, isDisabled) ||
                 other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
@@ -1174,6 +1194,7 @@ class _$GetAgentDetailsResponseBodyImpl
         runtimeType,
         agentId,
         agentName,
+        lastName,
         address,
         companyIds,
         signaturePath,
@@ -1197,7 +1218,7 @@ class _$GetAgentDetailsResponseBodyImpl
         const DeepCollectionEquality().hash(_companies),
         agencyName,
         signatureUploadDate,
-        const DeepCollectionEquality().hash(designation),
+        designation,
         isDisabled,
         crd,
         const DeepCollectionEquality().hash(crdBy),
@@ -1225,6 +1246,7 @@ abstract class _GetAgentDetailsResponseBody
   const factory _GetAgentDetailsResponseBody(
       {@JsonKey(name: "agentId") final int? agentId,
       @JsonKey(name: "agentName") final String? agentName,
+      @JsonKey(name: "lastName") final String? lastName,
       @JsonKey(name: "address") final String? address,
       @JsonKey(name: "companyIds") final String? companyIds,
       @JsonKey(name: "signaturePath") final String? signaturePath,
@@ -1248,7 +1270,7 @@ abstract class _GetAgentDetailsResponseBody
       @JsonKey(name: "companies") final List<Company>? companies,
       @JsonKey(name: "agencyName") final String? agencyName,
       @JsonKey(name: "signatureUploadDate") final DateTime? signatureUploadDate,
-      @JsonKey(name: "designation") final dynamic designation,
+      @JsonKey(name: "designation") final String? designation,
       @JsonKey(name: "isDisabled") final bool? isDisabled,
       @JsonKey(name: "crd") final DateTime? crd,
       @JsonKey(name: "crdBy") final dynamic crdBy,
@@ -1265,6 +1287,9 @@ abstract class _GetAgentDetailsResponseBody
   @override
   @JsonKey(name: "agentName")
   String? get agentName;
+  @override
+  @JsonKey(name: "lastName")
+  String? get lastName;
   @override
   @JsonKey(name: "address")
   String? get address;
@@ -1336,7 +1361,7 @@ abstract class _GetAgentDetailsResponseBody
   DateTime? get signatureUploadDate;
   @override
   @JsonKey(name: "designation")
-  dynamic get designation;
+  String? get designation;
   @override
   @JsonKey(name: "isDisabled")
   bool? get isDisabled;

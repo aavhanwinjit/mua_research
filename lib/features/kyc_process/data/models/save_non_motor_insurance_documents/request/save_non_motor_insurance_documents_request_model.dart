@@ -30,9 +30,11 @@ class SaveNonMotorInsuranceDocumentsRequestModel with _$SaveNonMotorInsuranceDoc
 @freezed
 class NonMotorDocDetail with _$NonMotorDocDetail {
   const factory NonMotorDocDetail({
-    @JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
     @JsonKey(name: 'nonMotorInsuranceDocumentTypeId') int? nonMotorDocumentTypeId,
+    @JsonKey(name: 'uploadDocumentId') int? uploadDocumentId,
     @JsonKey(name: 'nonMotorDocImagePath') String? nonMotorDocImagePath,
+    // @JsonKey(name: 'uploadPDFDocumentId') int? uploadPDFDocumentId,
+    // @JsonKey(name: 'nonMotorDocPDFPath') String? nonMotorDocPDFPath,
   }) = _NonMotorDocDetail;
 
   factory NonMotorDocDetail.fromJson(Map<String, dynamic> json) => _$NonMotorDocDetailFromJson(json);

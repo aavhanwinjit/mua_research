@@ -70,7 +70,7 @@ class _DropdownWidgetAdditionalState extends ConsumerState<DropdownWidgetAdditio
           return DropdownMenuItem<AdditionalDocumentTypeModel>(
             value: value,
             child: Text(
-              value.additionalDoumentTypeName ?? "-",
+              value.additionalDocumentTypeName ?? "-",
               style: TextStyle(
                 fontSize: 14.sp,
               ),
@@ -85,7 +85,7 @@ class _DropdownWidgetAdditionalState extends ConsumerState<DropdownWidgetAdditio
                 : true,
             value: value,
             child: Text(
-              value.additionalDoumentTypeName ?? "-",
+              value.additionalDocumentTypeName ?? "-",
               style: TextStyle(
                 fontSize: 14.sp,
                 color: (selectedDocsListProvider

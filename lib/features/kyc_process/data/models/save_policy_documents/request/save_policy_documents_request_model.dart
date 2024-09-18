@@ -29,9 +29,11 @@ class SavePolicyDocumentsRequestModel with _$SavePolicyDocumentsRequestModel {
 @freezed
 class PolicyDoumentDetailsModel with _$PolicyDoumentDetailsModel {
   const factory PolicyDoumentDetailsModel({
-    @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
     @JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
-    @JsonKey(name: "policyDouImagePath") String? policyDouImagePath,
+    @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
+    @JsonKey(name: "policyDocImagePath") String? policyDocImagePath,
+    // @JsonKey(name: "uploadPDFDocumentId") int? uploadPDFDocumentId,
+    // @JsonKey(name: "policyDocPDFPath") String? policyDocPDFPath,
   }) = _PolicyDoumentDetailsModel;
 
   factory PolicyDoumentDetailsModel.fromJson(Map<String, dynamic> json) => _$PolicyDoumentDetailsModelFromJson(json);

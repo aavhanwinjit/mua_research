@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-AgentApplicationModel _$AgentApplicationModelFromJson(Map<String, dynamic> json) {
+AgentApplicationModel _$AgentApplicationModelFromJson(
+    Map<String, dynamic> json) {
   return _AgentApplicationModel.fromJson(json);
 }
 
@@ -87,48 +88,62 @@ mixin _$AgentApplicationModel {
   @JsonKey(name: "addressDocUploadedDocumentId")
   int? get addressDocUploadedDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "isAddressVerificationCompleted")
-  bool? get isAddressVerificationCompleted => throw _privateConstructorUsedError;
+  bool? get isAddressVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "porRequired")
   bool? get porRequired => throw _privateConstructorUsedError;
   @JsonKey(name: "isPORDocVerificationCompleted")
   bool? get isPorDocVerificationCompleted => throw _privateConstructorUsedError;
   @JsonKey(name: "isPolicyDocVerificationCompleted")
-  bool? get isPolicyDocVerificationCompleted => throw _privateConstructorUsedError;
+  bool? get isPolicyDocVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "motorInsuranceDocumentTypeId")
-  dynamic get motorInsuranceDocumentTypeId => throw _privateConstructorUsedError;
+  dynamic get motorInsuranceDocumentTypeId =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "motorDocuImagePath")
   dynamic get motorDocImagePath => throw _privateConstructorUsedError;
   @JsonKey(name: "isMotorDocVerificationCompleted")
-  bool? get isMotorDocVerificationCompleted => throw _privateConstructorUsedError;
+  bool? get isMotorDocVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocumentTypeId")
   dynamic get additionalDocumentTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDocImagePath")
   dynamic get additionalDocImagePath => throw _privateConstructorUsedError;
   @JsonKey(name: "isAdditionalDocVerificationCompleted")
-  bool? get isAdditionalDocVerificationCompleted => throw _privateConstructorUsedError;
+  bool? get isAdditionalDocVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "isNonMotorDocVerificationCompleted")
-  bool? get isNonMotorDocVerificationCompleted => throw _privateConstructorUsedError;
+  bool? get isNonMotorDocVerificationCompleted =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "addressDocumentTypes")
-  AddressDocumentTypes? get addressDocumentTypes => throw _privateConstructorUsedError;
+  AddressDocumentTypes? get addressDocumentTypes =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "porDocumentDetails")
-  List<PorDocumentDetail>? get porDocumentDetails => throw _privateConstructorUsedError;
+  List<PorDocumentDetail>? get porDocumentDetails =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "policyDocumentDetails")
-  List<PolicyDocumentDetail>? get policyDocumentDetails => throw _privateConstructorUsedError;
+  List<PolicyDocumentDetail>? get policyDocumentDetails =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "additionalDoumentDetails")
-  List<AdditionalDoumentDetail>? get additionalDoumentDetails => throw _privateConstructorUsedError;
+  List<AdditionalDoumentDetail>? get additionalDoumentDetails =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "motorInsuranceDocumentDetails")
-  List<MotorInsuranceDocumentDetail>? get motorInsuranceDocumentDetails => throw _privateConstructorUsedError;
+  List<MotorInsuranceDocumentDetail>? get motorInsuranceDocumentDetails =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "nonMotorInsuranceDocumentDetails")
-  List<NonMotorInsuranceDocumentDetail>? get nonMotorInsuranceDocumentDetails => throw _privateConstructorUsedError;
+  List<NonMotorInsuranceDocumentDetail>? get nonMotorInsuranceDocumentDetails =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AgentApplicationModelCopyWith<AgentApplicationModel> get copyWith => throw _privateConstructorUsedError;
+  $AgentApplicationModelCopyWith<AgentApplicationModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AgentApplicationModelCopyWith<$Res> {
-  factory $AgentApplicationModelCopyWith(AgentApplicationModel value, $Res Function(AgentApplicationModel) then) =
+  factory $AgentApplicationModelCopyWith(AgentApplicationModel value,
+          $Res Function(AgentApplicationModel) then) =
       _$AgentApplicationModelCopyWithImpl<$Res, AgentApplicationModel>;
   @useResult
   $Res call(
@@ -155,32 +170,49 @@ abstract class $AgentApplicationModelCopyWith<$Res> {
       @JsonKey(name: "idDocOtherName") String? idDocOtherName,
       @JsonKey(name: "idDocNumber") String? idDocNumber,
       @JsonKey(name: "idDocPolicyNumber") String? idDocPolicyNumber,
-      @JsonKey(name: "idDocFrontUploadedDocumentId") int? idDocFrontUploadedDocumentId,
-      @JsonKey(name: "idDocBackUploadedDocumentId") int? idDocBackUploadedDocumentId,
-      @JsonKey(name: "isIDVerificationCompleted") bool? isIdVerificationCompleted,
+      @JsonKey(name: "idDocFrontUploadedDocumentId")
+      int? idDocFrontUploadedDocumentId,
+      @JsonKey(name: "idDocBackUploadedDocumentId")
+      int? idDocBackUploadedDocumentId,
+      @JsonKey(name: "isIDVerificationCompleted")
+      bool? isIdVerificationCompleted,
       @JsonKey(name: "addressDocumentTypeId") int? addressDocumentTypeId,
       @JsonKey(name: "addressDocImagePath") String? addressDocImagePath,
       @JsonKey(name: "addressDocSurname") String? addressDocSurname,
       @JsonKey(name: "addressDocOtherName") String? addressDocOtherName,
       @JsonKey(name: "addressDocBillDate") DateTime? addressDocBillDate,
       @JsonKey(name: "addressDocAddress") String? addressDocAddress,
-      @JsonKey(name: "addressDocUploadedDocumentId") int? addressDocUploadedDocumentId,
-      @JsonKey(name: "isAddressVerificationCompleted") bool? isAddressVerificationCompleted,
+      @JsonKey(name: "addressDocUploadedDocumentId")
+      int? addressDocUploadedDocumentId,
+      @JsonKey(name: "isAddressVerificationCompleted")
+      bool? isAddressVerificationCompleted,
       @JsonKey(name: "porRequired") bool? porRequired,
-      @JsonKey(name: "isPORDocVerificationCompleted") bool? isPorDocVerificationCompleted,
-      @JsonKey(name: "isPolicyDocVerificationCompleted") bool? isPolicyDocVerificationCompleted,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "isPORDocVerificationCompleted")
+      bool? isPorDocVerificationCompleted,
+      @JsonKey(name: "isPolicyDocVerificationCompleted")
+      bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      dynamic motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
-      @JsonKey(name: "isMotorDocVerificationCompleted") bool? isMotorDocVerificationCompleted,
-      @JsonKey(name: "additionalDocumentTypeId") dynamic additionalDocumentTypeId,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      bool? isMotorDocVerificationCompleted,
+      @JsonKey(name: "additionalDocumentTypeId")
+      dynamic additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
-      @JsonKey(name: "isAdditionalDocVerificationCompleted") bool? isAdditionalDocVerificationCompleted,
-      @JsonKey(name: "isNonMotorDocVerificationCompleted") bool? isNonMotorDocVerificationCompleted,
-      @JsonKey(name: "addressDocumentTypes") AddressDocumentTypes? addressDocumentTypes,
-      @JsonKey(name: "porDocumentDetails") List<PorDocumentDetail>? porDocumentDetails,
-      @JsonKey(name: "policyDocumentDetails") List<PolicyDocumentDetail>? policyDocumentDetails,
-      @JsonKey(name: "additionalDoumentDetails") List<AdditionalDoumentDetail>? additionalDoumentDetails,
-      @JsonKey(name: "motorInsuranceDocumentDetails") List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
+      @JsonKey(name: "isAdditionalDocVerificationCompleted")
+      bool? isAdditionalDocVerificationCompleted,
+      @JsonKey(name: "isNonMotorDocVerificationCompleted")
+      bool? isNonMotorDocVerificationCompleted,
+      @JsonKey(name: "addressDocumentTypes")
+      AddressDocumentTypes? addressDocumentTypes,
+      @JsonKey(name: "porDocumentDetails")
+      List<PorDocumentDetail>? porDocumentDetails,
+      @JsonKey(name: "policyDocumentDetails")
+      List<PolicyDocumentDetail>? policyDocumentDetails,
+      @JsonKey(name: "additionalDoumentDetails")
+      List<AdditionalDoumentDetail>? additionalDoumentDetails,
+      @JsonKey(name: "motorInsuranceDocumentDetails")
+      List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
       @JsonKey(name: "nonMotorInsuranceDocumentDetails")
       List<NonMotorInsuranceDocumentDetail>? nonMotorInsuranceDocumentDetails});
 
@@ -188,7 +220,8 @@ abstract class $AgentApplicationModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationModel>
+class _$AgentApplicationModelCopyWithImpl<$Res,
+        $Val extends AgentApplicationModel>
     implements $AgentApplicationModelCopyWith<$Res> {
   _$AgentApplicationModelCopyWithImpl(this._value, this._then);
 
@@ -396,7 +429,8 @@ class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationMod
           ? _value.isPorDocVerificationCompleted
           : isPorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      isPolicyDocVerificationCompleted: freezed == isPolicyDocVerificationCompleted
+      isPolicyDocVerificationCompleted: freezed ==
+              isPolicyDocVerificationCompleted
           ? _value.isPolicyDocVerificationCompleted
           : isPolicyDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -408,7 +442,8 @@ class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationMod
           ? _value.motorDocImagePath
           : motorDocImagePath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isMotorDocVerificationCompleted: freezed == isMotorDocVerificationCompleted
+      isMotorDocVerificationCompleted: freezed ==
+              isMotorDocVerificationCompleted
           ? _value.isMotorDocVerificationCompleted
           : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -420,11 +455,13 @@ class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationMod
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isAdditionalDocVerificationCompleted: freezed == isAdditionalDocVerificationCompleted
+      isAdditionalDocVerificationCompleted: freezed ==
+              isAdditionalDocVerificationCompleted
           ? _value.isAdditionalDocVerificationCompleted
           : isAdditionalDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      isNonMotorDocVerificationCompleted: freezed == isNonMotorDocVerificationCompleted
+      isNonMotorDocVerificationCompleted: freezed ==
+              isNonMotorDocVerificationCompleted
           ? _value.isNonMotorDocVerificationCompleted
           : isNonMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -448,7 +485,8 @@ class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationMod
           ? _value.motorInsuranceDocumentDetails
           : motorInsuranceDocumentDetails // ignore: cast_nullable_to_non_nullable
               as List<MotorInsuranceDocumentDetail>?,
-      nonMotorInsuranceDocumentDetails: freezed == nonMotorInsuranceDocumentDetails
+      nonMotorInsuranceDocumentDetails: freezed ==
+              nonMotorInsuranceDocumentDetails
           ? _value.nonMotorInsuranceDocumentDetails
           : nonMotorInsuranceDocumentDetails // ignore: cast_nullable_to_non_nullable
               as List<NonMotorInsuranceDocumentDetail>?,
@@ -462,16 +500,19 @@ class _$AgentApplicationModelCopyWithImpl<$Res, $Val extends AgentApplicationMod
       return null;
     }
 
-    return $AddressDocumentTypesCopyWith<$Res>(_value.addressDocumentTypes!, (value) {
+    return $AddressDocumentTypesCopyWith<$Res>(_value.addressDocumentTypes!,
+        (value) {
       return _then(_value.copyWith(addressDocumentTypes: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$AgentApplicationModelImplCopyWith<$Res> implements $AgentApplicationModelCopyWith<$Res> {
+abstract class _$$AgentApplicationModelImplCopyWith<$Res>
+    implements $AgentApplicationModelCopyWith<$Res> {
   factory _$$AgentApplicationModelImplCopyWith(
-          _$AgentApplicationModelImpl value, $Res Function(_$AgentApplicationModelImpl) then) =
+          _$AgentApplicationModelImpl value,
+          $Res Function(_$AgentApplicationModelImpl) then) =
       __$$AgentApplicationModelImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -499,32 +540,49 @@ abstract class _$$AgentApplicationModelImplCopyWith<$Res> implements $AgentAppli
       @JsonKey(name: "idDocOtherName") String? idDocOtherName,
       @JsonKey(name: "idDocNumber") String? idDocNumber,
       @JsonKey(name: "idDocPolicyNumber") String? idDocPolicyNumber,
-      @JsonKey(name: "idDocFrontUploadedDocumentId") int? idDocFrontUploadedDocumentId,
-      @JsonKey(name: "idDocBackUploadedDocumentId") int? idDocBackUploadedDocumentId,
-      @JsonKey(name: "isIDVerificationCompleted") bool? isIdVerificationCompleted,
+      @JsonKey(name: "idDocFrontUploadedDocumentId")
+      int? idDocFrontUploadedDocumentId,
+      @JsonKey(name: "idDocBackUploadedDocumentId")
+      int? idDocBackUploadedDocumentId,
+      @JsonKey(name: "isIDVerificationCompleted")
+      bool? isIdVerificationCompleted,
       @JsonKey(name: "addressDocumentTypeId") int? addressDocumentTypeId,
       @JsonKey(name: "addressDocImagePath") String? addressDocImagePath,
       @JsonKey(name: "addressDocSurname") String? addressDocSurname,
       @JsonKey(name: "addressDocOtherName") String? addressDocOtherName,
       @JsonKey(name: "addressDocBillDate") DateTime? addressDocBillDate,
       @JsonKey(name: "addressDocAddress") String? addressDocAddress,
-      @JsonKey(name: "addressDocUploadedDocumentId") int? addressDocUploadedDocumentId,
-      @JsonKey(name: "isAddressVerificationCompleted") bool? isAddressVerificationCompleted,
+      @JsonKey(name: "addressDocUploadedDocumentId")
+      int? addressDocUploadedDocumentId,
+      @JsonKey(name: "isAddressVerificationCompleted")
+      bool? isAddressVerificationCompleted,
       @JsonKey(name: "porRequired") bool? porRequired,
-      @JsonKey(name: "isPORDocVerificationCompleted") bool? isPorDocVerificationCompleted,
-      @JsonKey(name: "isPolicyDocVerificationCompleted") bool? isPolicyDocVerificationCompleted,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "isPORDocVerificationCompleted")
+      bool? isPorDocVerificationCompleted,
+      @JsonKey(name: "isPolicyDocVerificationCompleted")
+      bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      dynamic motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") dynamic motorDocImagePath,
-      @JsonKey(name: "isMotorDocVerificationCompleted") bool? isMotorDocVerificationCompleted,
-      @JsonKey(name: "additionalDocumentTypeId") dynamic additionalDocumentTypeId,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      bool? isMotorDocVerificationCompleted,
+      @JsonKey(name: "additionalDocumentTypeId")
+      dynamic additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") dynamic additionalDocImagePath,
-      @JsonKey(name: "isAdditionalDocVerificationCompleted") bool? isAdditionalDocVerificationCompleted,
-      @JsonKey(name: "isNonMotorDocVerificationCompleted") bool? isNonMotorDocVerificationCompleted,
-      @JsonKey(name: "addressDocumentTypes") AddressDocumentTypes? addressDocumentTypes,
-      @JsonKey(name: "porDocumentDetails") List<PorDocumentDetail>? porDocumentDetails,
-      @JsonKey(name: "policyDocumentDetails") List<PolicyDocumentDetail>? policyDocumentDetails,
-      @JsonKey(name: "additionalDoumentDetails") List<AdditionalDoumentDetail>? additionalDoumentDetails,
-      @JsonKey(name: "motorInsuranceDocumentDetails") List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
+      @JsonKey(name: "isAdditionalDocVerificationCompleted")
+      bool? isAdditionalDocVerificationCompleted,
+      @JsonKey(name: "isNonMotorDocVerificationCompleted")
+      bool? isNonMotorDocVerificationCompleted,
+      @JsonKey(name: "addressDocumentTypes")
+      AddressDocumentTypes? addressDocumentTypes,
+      @JsonKey(name: "porDocumentDetails")
+      List<PorDocumentDetail>? porDocumentDetails,
+      @JsonKey(name: "policyDocumentDetails")
+      List<PolicyDocumentDetail>? policyDocumentDetails,
+      @JsonKey(name: "additionalDoumentDetails")
+      List<AdditionalDoumentDetail>? additionalDoumentDetails,
+      @JsonKey(name: "motorInsuranceDocumentDetails")
+      List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
       @JsonKey(name: "nonMotorInsuranceDocumentDetails")
       List<NonMotorInsuranceDocumentDetail>? nonMotorInsuranceDocumentDetails});
 
@@ -534,10 +592,11 @@ abstract class _$$AgentApplicationModelImplCopyWith<$Res> implements $AgentAppli
 
 /// @nodoc
 class __$$AgentApplicationModelImplCopyWithImpl<$Res>
-    extends _$AgentApplicationModelCopyWithImpl<$Res, _$AgentApplicationModelImpl>
+    extends _$AgentApplicationModelCopyWithImpl<$Res,
+        _$AgentApplicationModelImpl>
     implements _$$AgentApplicationModelImplCopyWith<$Res> {
-  __$$AgentApplicationModelImplCopyWithImpl(
-      _$AgentApplicationModelImpl _value, $Res Function(_$AgentApplicationModelImpl) _then)
+  __$$AgentApplicationModelImplCopyWithImpl(_$AgentApplicationModelImpl _value,
+      $Res Function(_$AgentApplicationModelImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -739,7 +798,8 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
           ? _value.isPorDocVerificationCompleted
           : isPorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      isPolicyDocVerificationCompleted: freezed == isPolicyDocVerificationCompleted
+      isPolicyDocVerificationCompleted: freezed ==
+              isPolicyDocVerificationCompleted
           ? _value.isPolicyDocVerificationCompleted
           : isPolicyDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -751,7 +811,8 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
           ? _value.motorDocImagePath
           : motorDocImagePath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isMotorDocVerificationCompleted: freezed == isMotorDocVerificationCompleted
+      isMotorDocVerificationCompleted: freezed ==
+              isMotorDocVerificationCompleted
           ? _value.isMotorDocVerificationCompleted
           : isMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -763,11 +824,13 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
           ? _value.additionalDocImagePath
           : additionalDocImagePath // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      isAdditionalDocVerificationCompleted: freezed == isAdditionalDocVerificationCompleted
+      isAdditionalDocVerificationCompleted: freezed ==
+              isAdditionalDocVerificationCompleted
           ? _value.isAdditionalDocVerificationCompleted
           : isAdditionalDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
-      isNonMotorDocVerificationCompleted: freezed == isNonMotorDocVerificationCompleted
+      isNonMotorDocVerificationCompleted: freezed ==
+              isNonMotorDocVerificationCompleted
           ? _value.isNonMotorDocVerificationCompleted
           : isNonMotorDocVerificationCompleted // ignore: cast_nullable_to_non_nullable
               as bool?,
@@ -791,7 +854,8 @@ class __$$AgentApplicationModelImplCopyWithImpl<$Res>
           ? _value._motorInsuranceDocumentDetails
           : motorInsuranceDocumentDetails // ignore: cast_nullable_to_non_nullable
               as List<MotorInsuranceDocumentDetail>?,
-      nonMotorInsuranceDocumentDetails: freezed == nonMotorInsuranceDocumentDetails
+      nonMotorInsuranceDocumentDetails: freezed ==
+              nonMotorInsuranceDocumentDetails
           ? _value._nonMotorInsuranceDocumentDetails
           : nonMotorInsuranceDocumentDetails // ignore: cast_nullable_to_non_nullable
               as List<NonMotorInsuranceDocumentDetail>?,
@@ -826,42 +890,58 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
       @JsonKey(name: "idDocOtherName") this.idDocOtherName,
       @JsonKey(name: "idDocNumber") this.idDocNumber,
       @JsonKey(name: "idDocPolicyNumber") this.idDocPolicyNumber,
-      @JsonKey(name: "idDocFrontUploadedDocumentId") this.idDocFrontUploadedDocumentId,
-      @JsonKey(name: "idDocBackUploadedDocumentId") this.idDocBackUploadedDocumentId,
-      @JsonKey(name: "isIDVerificationCompleted") this.isIdVerificationCompleted,
+      @JsonKey(name: "idDocFrontUploadedDocumentId")
+      this.idDocFrontUploadedDocumentId,
+      @JsonKey(name: "idDocBackUploadedDocumentId")
+      this.idDocBackUploadedDocumentId,
+      @JsonKey(name: "isIDVerificationCompleted")
+      this.isIdVerificationCompleted,
       @JsonKey(name: "addressDocumentTypeId") this.addressDocumentTypeId,
       @JsonKey(name: "addressDocImagePath") this.addressDocImagePath,
       @JsonKey(name: "addressDocSurname") this.addressDocSurname,
       @JsonKey(name: "addressDocOtherName") this.addressDocOtherName,
       @JsonKey(name: "addressDocBillDate") this.addressDocBillDate,
       @JsonKey(name: "addressDocAddress") this.addressDocAddress,
-      @JsonKey(name: "addressDocUploadedDocumentId") this.addressDocUploadedDocumentId,
-      @JsonKey(name: "isAddressVerificationCompleted") this.isAddressVerificationCompleted,
+      @JsonKey(name: "addressDocUploadedDocumentId")
+      this.addressDocUploadedDocumentId,
+      @JsonKey(name: "isAddressVerificationCompleted")
+      this.isAddressVerificationCompleted,
       @JsonKey(name: "porRequired") this.porRequired,
-      @JsonKey(name: "isPORDocVerificationCompleted") this.isPorDocVerificationCompleted,
-      @JsonKey(name: "isPolicyDocVerificationCompleted") this.isPolicyDocVerificationCompleted,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") this.motorInsuranceDocumentTypeId,
+      @JsonKey(name: "isPORDocVerificationCompleted")
+      this.isPorDocVerificationCompleted,
+      @JsonKey(name: "isPolicyDocVerificationCompleted")
+      this.isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      this.motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") this.motorDocImagePath,
-      @JsonKey(name: "isMotorDocVerificationCompleted") this.isMotorDocVerificationCompleted,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      this.isMotorDocVerificationCompleted,
       @JsonKey(name: "additionalDocumentTypeId") this.additionalDocumentTypeId,
       @JsonKey(name: "additionalDocImagePath") this.additionalDocImagePath,
-      @JsonKey(name: "isAdditionalDocVerificationCompleted") this.isAdditionalDocVerificationCompleted,
-      @JsonKey(name: "isNonMotorDocVerificationCompleted") this.isNonMotorDocVerificationCompleted,
+      @JsonKey(name: "isAdditionalDocVerificationCompleted")
+      this.isAdditionalDocVerificationCompleted,
+      @JsonKey(name: "isNonMotorDocVerificationCompleted")
+      this.isNonMotorDocVerificationCompleted,
       @JsonKey(name: "addressDocumentTypes") this.addressDocumentTypes,
-      @JsonKey(name: "porDocumentDetails") final List<PorDocumentDetail>? porDocumentDetails,
-      @JsonKey(name: "policyDocumentDetails") final List<PolicyDocumentDetail>? policyDocumentDetails,
-      @JsonKey(name: "additionalDoumentDetails") final List<AdditionalDoumentDetail>? additionalDoumentDetails,
+      @JsonKey(name: "porDocumentDetails")
+      final List<PorDocumentDetail>? porDocumentDetails,
+      @JsonKey(name: "policyDocumentDetails")
+      final List<PolicyDocumentDetail>? policyDocumentDetails,
+      @JsonKey(name: "additionalDoumentDetails")
+      final List<AdditionalDoumentDetail>? additionalDoumentDetails,
       @JsonKey(name: "motorInsuranceDocumentDetails")
       final List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
       @JsonKey(name: "nonMotorInsuranceDocumentDetails")
-      final List<NonMotorInsuranceDocumentDetail>? nonMotorInsuranceDocumentDetails})
+      final List<NonMotorInsuranceDocumentDetail>?
+          nonMotorInsuranceDocumentDetails})
       : _porDocumentDetails = porDocumentDetails,
         _policyDocumentDetails = policyDocumentDetails,
         _additionalDoumentDetails = additionalDoumentDetails,
         _motorInsuranceDocumentDetails = motorInsuranceDocumentDetails,
         _nonMotorInsuranceDocumentDetails = nonMotorInsuranceDocumentDetails;
 
-  factory _$AgentApplicationModelImpl.fromJson(Map<String, dynamic> json) => _$$AgentApplicationModelImplFromJson(json);
+  factory _$AgentApplicationModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AgentApplicationModelImplFromJson(json);
 
   @override
   @JsonKey(name: "isDisabled")
@@ -1004,7 +1084,8 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   List<PorDocumentDetail>? get porDocumentDetails {
     final value = _porDocumentDetails;
     if (value == null) return null;
-    if (_porDocumentDetails is EqualUnmodifiableListView) return _porDocumentDetails;
+    if (_porDocumentDetails is EqualUnmodifiableListView)
+      return _porDocumentDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1015,7 +1096,8 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   List<PolicyDocumentDetail>? get policyDocumentDetails {
     final value = _policyDocumentDetails;
     if (value == null) return null;
-    if (_policyDocumentDetails is EqualUnmodifiableListView) return _policyDocumentDetails;
+    if (_policyDocumentDetails is EqualUnmodifiableListView)
+      return _policyDocumentDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1026,7 +1108,8 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   List<AdditionalDoumentDetail>? get additionalDoumentDetails {
     final value = _additionalDoumentDetails;
     if (value == null) return null;
-    if (_additionalDoumentDetails is EqualUnmodifiableListView) return _additionalDoumentDetails;
+    if (_additionalDoumentDetails is EqualUnmodifiableListView)
+      return _additionalDoumentDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1037,18 +1120,21 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   List<MotorInsuranceDocumentDetail>? get motorInsuranceDocumentDetails {
     final value = _motorInsuranceDocumentDetails;
     if (value == null) return null;
-    if (_motorInsuranceDocumentDetails is EqualUnmodifiableListView) return _motorInsuranceDocumentDetails;
+    if (_motorInsuranceDocumentDetails is EqualUnmodifiableListView)
+      return _motorInsuranceDocumentDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<NonMotorInsuranceDocumentDetail>? _nonMotorInsuranceDocumentDetails;
+  final List<NonMotorInsuranceDocumentDetail>?
+      _nonMotorInsuranceDocumentDetails;
   @override
   @JsonKey(name: "nonMotorInsuranceDocumentDetails")
   List<NonMotorInsuranceDocumentDetail>? get nonMotorInsuranceDocumentDetails {
     final value = _nonMotorInsuranceDocumentDetails;
     if (value == null) return null;
-    if (_nonMotorInsuranceDocumentDetails is EqualUnmodifiableListView) return _nonMotorInsuranceDocumentDetails;
+    if (_nonMotorInsuranceDocumentDetails is EqualUnmodifiableListView)
+      return _nonMotorInsuranceDocumentDetails;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -1063,76 +1149,91 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AgentApplicationModelImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.applicationRefNo, applicationRefNo) || other.applicationRefNo == applicationRefNo) &&
+            (identical(other.applicationRefNo, applicationRefNo) ||
+                other.applicationRefNo == applicationRefNo) &&
             (identical(other.agentId, agentId) || other.agentId == agentId) &&
-            (identical(other.applicationStatus, applicationStatus) || other.applicationStatus == applicationStatus) &&
-            (identical(other.mobileNumber, mobileNumber) || other.mobileNumber == mobileNumber) &&
+            (identical(other.applicationStatus, applicationStatus) ||
+                other.applicationStatus == applicationStatus) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
             (identical(other.emailId, emailId) || other.emailId == emailId) &&
-            (identical(other.maritalStatus, maritalStatus) || other.maritalStatus == maritalStatus) &&
-            (identical(other.nationality, nationality) || other.nationality == nationality) &&
-            (identical(other.kycTypeId, kycTypeId) || other.kycTypeId == kycTypeId) &&
-            (identical(other.quoteNumber, quoteNumber) || other.quoteNumber == quoteNumber) &&
-            (identical(other.policyNumber, policyNumber) || other.policyNumber == policyNumber) &&
-            (identical(other.idDocumentTypeId, idDocumentTypeId) || other.idDocumentTypeId == idDocumentTypeId) &&
+            (identical(other.maritalStatus, maritalStatus) ||
+                other.maritalStatus == maritalStatus) &&
+            (identical(other.nationality, nationality) ||
+                other.nationality == nationality) &&
+            (identical(other.kycTypeId, kycTypeId) ||
+                other.kycTypeId == kycTypeId) &&
+            (identical(other.quoteNumber, quoteNumber) ||
+                other.quoteNumber == quoteNumber) &&
+            (identical(other.policyNumber, policyNumber) ||
+                other.policyNumber == policyNumber) &&
+            (identical(other.idDocumentTypeId, idDocumentTypeId) ||
+                other.idDocumentTypeId == idDocumentTypeId) &&
             (identical(other.idDocFrontImagePath, idDocFrontImagePath) ||
                 other.idDocFrontImagePath == idDocFrontImagePath) &&
             (identical(other.idDocBackImagePath, idDocBackImagePath) ||
                 other.idDocBackImagePath == idDocBackImagePath) &&
-            (identical(other.idDocSurname, idDocSurname) || other.idDocSurname == idDocSurname) &&
-            (identical(other.idDocOtherName, idDocOtherName) || other.idDocOtherName == idDocOtherName) &&
-            (identical(other.idDocNumber, idDocNumber) || other.idDocNumber == idDocNumber) &&
-            (identical(other.idDocPolicyNumber, idDocPolicyNumber) || other.idDocPolicyNumber == idDocPolicyNumber) &&
+            (identical(other.idDocSurname, idDocSurname) ||
+                other.idDocSurname == idDocSurname) &&
+            (identical(other.idDocOtherName, idDocOtherName) ||
+                other.idDocOtherName == idDocOtherName) &&
+            (identical(other.idDocNumber, idDocNumber) ||
+                other.idDocNumber == idDocNumber) &&
+            (identical(other.idDocPolicyNumber, idDocPolicyNumber) ||
+                other.idDocPolicyNumber == idDocPolicyNumber) &&
             (identical(other.idDocFrontUploadedDocumentId, idDocFrontUploadedDocumentId) ||
-                other.idDocFrontUploadedDocumentId == idDocFrontUploadedDocumentId) &&
+                other.idDocFrontUploadedDocumentId ==
+                    idDocFrontUploadedDocumentId) &&
             (identical(other.idDocBackUploadedDocumentId, idDocBackUploadedDocumentId) ||
-                other.idDocBackUploadedDocumentId == idDocBackUploadedDocumentId) &&
+                other.idDocBackUploadedDocumentId ==
+                    idDocBackUploadedDocumentId) &&
             (identical(other.isIdVerificationCompleted, isIdVerificationCompleted) ||
                 other.isIdVerificationCompleted == isIdVerificationCompleted) &&
             (identical(other.addressDocumentTypeId, addressDocumentTypeId) ||
                 other.addressDocumentTypeId == addressDocumentTypeId) &&
             (identical(other.addressDocImagePath, addressDocImagePath) ||
                 other.addressDocImagePath == addressDocImagePath) &&
-            (identical(other.addressDocSurname, addressDocSurname) || other.addressDocSurname == addressDocSurname) &&
+            (identical(other.addressDocSurname, addressDocSurname) ||
+                other.addressDocSurname == addressDocSurname) &&
             (identical(other.addressDocOtherName, addressDocOtherName) ||
                 other.addressDocOtherName == addressDocOtherName) &&
             (identical(other.addressDocBillDate, addressDocBillDate) ||
                 other.addressDocBillDate == addressDocBillDate) &&
-            (identical(other.addressDocAddress, addressDocAddress) || other.addressDocAddress == addressDocAddress) &&
+            (identical(other.addressDocAddress, addressDocAddress) ||
+                other.addressDocAddress == addressDocAddress) &&
             (identical(other.addressDocUploadedDocumentId, addressDocUploadedDocumentId) ||
-                other.addressDocUploadedDocumentId == addressDocUploadedDocumentId) &&
+                other.addressDocUploadedDocumentId ==
+                    addressDocUploadedDocumentId) &&
             (identical(other.isAddressVerificationCompleted, isAddressVerificationCompleted) ||
-                other.isAddressVerificationCompleted == isAddressVerificationCompleted) &&
-            (identical(other.porRequired, porRequired) || other.porRequired == porRequired) &&
+                other.isAddressVerificationCompleted ==
+                    isAddressVerificationCompleted) &&
+            (identical(other.porRequired, porRequired) ||
+                other.porRequired == porRequired) &&
             (identical(other.isPorDocVerificationCompleted, isPorDocVerificationCompleted) ||
-                other.isPorDocVerificationCompleted == isPorDocVerificationCompleted) &&
-            (identical(other.isPolicyDocVerificationCompleted, isPolicyDocVerificationCompleted) ||
-                other.isPolicyDocVerificationCompleted == isPolicyDocVerificationCompleted) &&
+                other.isPorDocVerificationCompleted ==
+                    isPorDocVerificationCompleted) &&
+            (identical(other.isPolicyDocVerificationCompleted, isPolicyDocVerificationCompleted) || other.isPolicyDocVerificationCompleted == isPolicyDocVerificationCompleted) &&
             const DeepCollectionEquality().equals(other.motorInsuranceDocumentTypeId, motorInsuranceDocumentTypeId) &&
             const DeepCollectionEquality().equals(other.motorDocImagePath, motorDocImagePath) &&
-            (identical(other.isMotorDocVerificationCompleted, isMotorDocVerificationCompleted) ||
-                other.isMotorDocVerificationCompleted == isMotorDocVerificationCompleted) &&
+            (identical(other.isMotorDocVerificationCompleted, isMotorDocVerificationCompleted) || other.isMotorDocVerificationCompleted == isMotorDocVerificationCompleted) &&
             const DeepCollectionEquality().equals(other.additionalDocumentTypeId, additionalDocumentTypeId) &&
             const DeepCollectionEquality().equals(other.additionalDocImagePath, additionalDocImagePath) &&
-            (identical(other.isAdditionalDocVerificationCompleted, isAdditionalDocVerificationCompleted) ||
-                other.isAdditionalDocVerificationCompleted == isAdditionalDocVerificationCompleted) &&
-            (identical(other.isNonMotorDocVerificationCompleted, isNonMotorDocVerificationCompleted) ||
-                other.isNonMotorDocVerificationCompleted == isNonMotorDocVerificationCompleted) &&
-            (identical(other.addressDocumentTypes, addressDocumentTypes) ||
-                other.addressDocumentTypes == addressDocumentTypes) &&
+            (identical(other.isAdditionalDocVerificationCompleted, isAdditionalDocVerificationCompleted) || other.isAdditionalDocVerificationCompleted == isAdditionalDocVerificationCompleted) &&
+            (identical(other.isNonMotorDocVerificationCompleted, isNonMotorDocVerificationCompleted) || other.isNonMotorDocVerificationCompleted == isNonMotorDocVerificationCompleted) &&
+            (identical(other.addressDocumentTypes, addressDocumentTypes) || other.addressDocumentTypes == addressDocumentTypes) &&
             const DeepCollectionEquality().equals(other._porDocumentDetails, _porDocumentDetails) &&
             const DeepCollectionEquality().equals(other._policyDocumentDetails, _policyDocumentDetails) &&
             const DeepCollectionEquality().equals(other._additionalDoumentDetails, _additionalDoumentDetails) &&
-            const DeepCollectionEquality()
-                .equals(other._motorInsuranceDocumentDetails, _motorInsuranceDocumentDetails) &&
-            const DeepCollectionEquality()
-                .equals(other._nonMotorInsuranceDocumentDetails, _nonMotorInsuranceDocumentDetails));
+            const DeepCollectionEquality().equals(other._motorInsuranceDocumentDetails, _motorInsuranceDocumentDetails) &&
+            const DeepCollectionEquality().equals(other._nonMotorInsuranceDocumentDetails, _nonMotorInsuranceDocumentDetails));
   }
 
   @JsonKey(ignore: true)
@@ -1194,8 +1295,9 @@ class _$AgentApplicationModelImpl implements _AgentApplicationModel {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AgentApplicationModelImplCopyWith<_$AgentApplicationModelImpl> get copyWith =>
-      __$$AgentApplicationModelImplCopyWithImpl<_$AgentApplicationModelImpl>(this, _$identity);
+  _$$AgentApplicationModelImplCopyWith<_$AgentApplicationModelImpl>
+      get copyWith => __$$AgentApplicationModelImplCopyWithImpl<
+          _$AgentApplicationModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1230,37 +1332,56 @@ abstract class _AgentApplicationModel implements AgentApplicationModel {
       @JsonKey(name: "idDocOtherName") final String? idDocOtherName,
       @JsonKey(name: "idDocNumber") final String? idDocNumber,
       @JsonKey(name: "idDocPolicyNumber") final String? idDocPolicyNumber,
-      @JsonKey(name: "idDocFrontUploadedDocumentId") final int? idDocFrontUploadedDocumentId,
-      @JsonKey(name: "idDocBackUploadedDocumentId") final int? idDocBackUploadedDocumentId,
-      @JsonKey(name: "isIDVerificationCompleted") final bool? isIdVerificationCompleted,
+      @JsonKey(name: "idDocFrontUploadedDocumentId")
+      final int? idDocFrontUploadedDocumentId,
+      @JsonKey(name: "idDocBackUploadedDocumentId")
+      final int? idDocBackUploadedDocumentId,
+      @JsonKey(name: "isIDVerificationCompleted")
+      final bool? isIdVerificationCompleted,
       @JsonKey(name: "addressDocumentTypeId") final int? addressDocumentTypeId,
       @JsonKey(name: "addressDocImagePath") final String? addressDocImagePath,
       @JsonKey(name: "addressDocSurname") final String? addressDocSurname,
       @JsonKey(name: "addressDocOtherName") final String? addressDocOtherName,
       @JsonKey(name: "addressDocBillDate") final DateTime? addressDocBillDate,
       @JsonKey(name: "addressDocAddress") final String? addressDocAddress,
-      @JsonKey(name: "addressDocUploadedDocumentId") final int? addressDocUploadedDocumentId,
-      @JsonKey(name: "isAddressVerificationCompleted") final bool? isAddressVerificationCompleted,
+      @JsonKey(name: "addressDocUploadedDocumentId")
+      final int? addressDocUploadedDocumentId,
+      @JsonKey(name: "isAddressVerificationCompleted")
+      final bool? isAddressVerificationCompleted,
       @JsonKey(name: "porRequired") final bool? porRequired,
-      @JsonKey(name: "isPORDocVerificationCompleted") final bool? isPorDocVerificationCompleted,
-      @JsonKey(name: "isPolicyDocVerificationCompleted") final bool? isPolicyDocVerificationCompleted,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") final dynamic motorInsuranceDocumentTypeId,
+      @JsonKey(name: "isPORDocVerificationCompleted")
+      final bool? isPorDocVerificationCompleted,
+      @JsonKey(name: "isPolicyDocVerificationCompleted")
+      final bool? isPolicyDocVerificationCompleted,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      final dynamic motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") final dynamic motorDocImagePath,
-      @JsonKey(name: "isMotorDocVerificationCompleted") final bool? isMotorDocVerificationCompleted,
-      @JsonKey(name: "additionalDocumentTypeId") final dynamic additionalDocumentTypeId,
-      @JsonKey(name: "additionalDocImagePath") final dynamic additionalDocImagePath,
-      @JsonKey(name: "isAdditionalDocVerificationCompleted") final bool? isAdditionalDocVerificationCompleted,
-      @JsonKey(name: "isNonMotorDocVerificationCompleted") final bool? isNonMotorDocVerificationCompleted,
-      @JsonKey(name: "addressDocumentTypes") final AddressDocumentTypes? addressDocumentTypes,
-      @JsonKey(name: "porDocumentDetails") final List<PorDocumentDetail>? porDocumentDetails,
-      @JsonKey(name: "policyDocumentDetails") final List<PolicyDocumentDetail>? policyDocumentDetails,
-      @JsonKey(name: "additionalDoumentDetails") final List<AdditionalDoumentDetail>? additionalDoumentDetails,
+      @JsonKey(name: "isMotorDocVerificationCompleted")
+      final bool? isMotorDocVerificationCompleted,
+      @JsonKey(name: "additionalDocumentTypeId")
+      final dynamic additionalDocumentTypeId,
+      @JsonKey(name: "additionalDocImagePath")
+      final dynamic additionalDocImagePath,
+      @JsonKey(name: "isAdditionalDocVerificationCompleted")
+      final bool? isAdditionalDocVerificationCompleted,
+      @JsonKey(name: "isNonMotorDocVerificationCompleted")
+      final bool? isNonMotorDocVerificationCompleted,
+      @JsonKey(name: "addressDocumentTypes")
+      final AddressDocumentTypes? addressDocumentTypes,
+      @JsonKey(name: "porDocumentDetails")
+      final List<PorDocumentDetail>? porDocumentDetails,
+      @JsonKey(name: "policyDocumentDetails")
+      final List<PolicyDocumentDetail>? policyDocumentDetails,
+      @JsonKey(name: "additionalDoumentDetails")
+      final List<AdditionalDoumentDetail>? additionalDoumentDetails,
       @JsonKey(name: "motorInsuranceDocumentDetails")
       final List<MotorInsuranceDocumentDetail>? motorInsuranceDocumentDetails,
       @JsonKey(name: "nonMotorInsuranceDocumentDetails")
-      final List<NonMotorInsuranceDocumentDetail>? nonMotorInsuranceDocumentDetails}) = _$AgentApplicationModelImpl;
+      final List<NonMotorInsuranceDocumentDetail>?
+          nonMotorInsuranceDocumentDetails}) = _$AgentApplicationModelImpl;
 
-  factory _AgentApplicationModel.fromJson(Map<String, dynamic> json) = _$AgentApplicationModelImpl.fromJson;
+  factory _AgentApplicationModel.fromJson(Map<String, dynamic> json) =
+      _$AgentApplicationModelImpl.fromJson;
 
   @override
   @JsonKey(name: "isDisabled")
@@ -1414,10 +1535,12 @@ abstract class _AgentApplicationModel implements AgentApplicationModel {
   List<NonMotorInsuranceDocumentDetail>? get nonMotorInsuranceDocumentDetails;
   @override
   @JsonKey(ignore: true)
-  _$$AgentApplicationModelImplCopyWith<_$AgentApplicationModelImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$AgentApplicationModelImplCopyWith<_$AgentApplicationModelImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-AdditionalDoumentDetail _$AdditionalDoumentDetailFromJson(Map<String, dynamic> json) {
+AdditionalDoumentDetail _$AdditionalDoumentDetailFromJson(
+    Map<String, dynamic> json) {
   return _AdditionalDoumentDetail.fromJson(json);
 }
 
@@ -1433,8 +1556,8 @@ mixin _$AdditionalDoumentDetail {
   DateTime? get lmd => throw _privateConstructorUsedError;
   @JsonKey(name: "lmdBy")
   int? get lmdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: "additionalDoumentDetailId")
-  int? get additionalDoumentDetailId => throw _privateConstructorUsedError;
+  @JsonKey(name: "additionalDocumentDetailId")
+  int? get additionalDocumentDetailId => throw _privateConstructorUsedError;
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadDocumentId")
@@ -1446,12 +1569,14 @@ mixin _$AdditionalDoumentDetail {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AdditionalDoumentDetailCopyWith<AdditionalDoumentDetail> get copyWith => throw _privateConstructorUsedError;
+  $AdditionalDoumentDetailCopyWith<AdditionalDoumentDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AdditionalDoumentDetailCopyWith<$Res> {
-  factory $AdditionalDoumentDetailCopyWith(AdditionalDoumentDetail value, $Res Function(AdditionalDoumentDetail) then) =
+  factory $AdditionalDoumentDetailCopyWith(AdditionalDoumentDetail value,
+          $Res Function(AdditionalDoumentDetail) then) =
       _$AdditionalDoumentDetailCopyWithImpl<$Res, AdditionalDoumentDetail>;
   @useResult
   $Res call(
@@ -1460,7 +1585,8 @@ abstract class $AdditionalDoumentDetailCopyWith<$Res> {
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "additionalDoumentDetailId") int? additionalDoumentDetailId,
+      @JsonKey(name: "additionalDocumentDetailId")
+      int? additionalDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "additionalDocumentTypeId") int? additionalDocumentTypeId,
@@ -1468,7 +1594,8 @@ abstract class $AdditionalDoumentDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AdditionalDoumentDetailCopyWithImpl<$Res, $Val extends AdditionalDoumentDetail>
+class _$AdditionalDoumentDetailCopyWithImpl<$Res,
+        $Val extends AdditionalDoumentDetail>
     implements $AdditionalDoumentDetailCopyWith<$Res> {
   _$AdditionalDoumentDetailCopyWithImpl(this._value, this._then);
 
@@ -1485,7 +1612,7 @@ class _$AdditionalDoumentDetailCopyWithImpl<$Res, $Val extends AdditionalDoument
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? additionalDoumentDetailId = freezed,
+    Object? additionalDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? additionalDocumentTypeId = freezed,
@@ -1512,9 +1639,9 @@ class _$AdditionalDoumentDetailCopyWithImpl<$Res, $Val extends AdditionalDoument
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalDoumentDetailId: freezed == additionalDoumentDetailId
-          ? _value.additionalDoumentDetailId
-          : additionalDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      additionalDocumentDetailId: freezed == additionalDocumentDetailId
+          ? _value.additionalDocumentDetailId
+          : additionalDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -1537,9 +1664,11 @@ class _$AdditionalDoumentDetailCopyWithImpl<$Res, $Val extends AdditionalDoument
 }
 
 /// @nodoc
-abstract class _$$AdditionalDoumentDetailImplCopyWith<$Res> implements $AdditionalDoumentDetailCopyWith<$Res> {
+abstract class _$$AdditionalDoumentDetailImplCopyWith<$Res>
+    implements $AdditionalDoumentDetailCopyWith<$Res> {
   factory _$$AdditionalDoumentDetailImplCopyWith(
-          _$AdditionalDoumentDetailImpl value, $Res Function(_$AdditionalDoumentDetailImpl) then) =
+          _$AdditionalDoumentDetailImpl value,
+          $Res Function(_$AdditionalDoumentDetailImpl) then) =
       __$$AdditionalDoumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -1549,7 +1678,8 @@ abstract class _$$AdditionalDoumentDetailImplCopyWith<$Res> implements $Addition
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "additionalDoumentDetailId") int? additionalDoumentDetailId,
+      @JsonKey(name: "additionalDocumentDetailId")
+      int? additionalDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "additionalDocumentTypeId") int? additionalDocumentTypeId,
@@ -1558,10 +1688,12 @@ abstract class _$$AdditionalDoumentDetailImplCopyWith<$Res> implements $Addition
 
 /// @nodoc
 class __$$AdditionalDoumentDetailImplCopyWithImpl<$Res>
-    extends _$AdditionalDoumentDetailCopyWithImpl<$Res, _$AdditionalDoumentDetailImpl>
+    extends _$AdditionalDoumentDetailCopyWithImpl<$Res,
+        _$AdditionalDoumentDetailImpl>
     implements _$$AdditionalDoumentDetailImplCopyWith<$Res> {
   __$$AdditionalDoumentDetailImplCopyWithImpl(
-      _$AdditionalDoumentDetailImpl _value, $Res Function(_$AdditionalDoumentDetailImpl) _then)
+      _$AdditionalDoumentDetailImpl _value,
+      $Res Function(_$AdditionalDoumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1572,7 +1704,7 @@ class __$$AdditionalDoumentDetailImplCopyWithImpl<$Res>
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? additionalDoumentDetailId = freezed,
+    Object? additionalDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? additionalDocumentTypeId = freezed,
@@ -1599,9 +1731,9 @@ class __$$AdditionalDoumentDetailImplCopyWithImpl<$Res>
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      additionalDoumentDetailId: freezed == additionalDoumentDetailId
-          ? _value.additionalDoumentDetailId
-          : additionalDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      additionalDocumentDetailId: freezed == additionalDocumentDetailId
+          ? _value.additionalDocumentDetailId
+          : additionalDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -1632,7 +1764,8 @@ class _$AdditionalDoumentDetailImpl implements _AdditionalDoumentDetail {
       @JsonKey(name: "crdBy") this.crdBy,
       @JsonKey(name: "lmd") this.lmd,
       @JsonKey(name: "lmdBy") this.lmdBy,
-      @JsonKey(name: "additionalDoumentDetailId") this.additionalDoumentDetailId,
+      @JsonKey(name: "additionalDocumentDetailId")
+      this.additionalDocumentDetailId,
       @JsonKey(name: "agentApplicationId") this.agentApplicationId,
       @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
       @JsonKey(name: "additionalDocumentTypeId") this.additionalDocumentTypeId,
@@ -1657,8 +1790,8 @@ class _$AdditionalDoumentDetailImpl implements _AdditionalDoumentDetail {
   @JsonKey(name: "lmdBy")
   final int? lmdBy;
   @override
-  @JsonKey(name: "additionalDoumentDetailId")
-  final int? additionalDoumentDetailId;
+  @JsonKey(name: "additionalDocumentDetailId")
+  final int? additionalDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   final int? agentApplicationId;
@@ -1674,7 +1807,7 @@ class _$AdditionalDoumentDetailImpl implements _AdditionalDoumentDetail {
 
   @override
   String toString() {
-    return 'AdditionalDoumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, additionalDoumentDetailId: $additionalDoumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, additionalDocumentTypeId: $additionalDocumentTypeId, additionalDocImagePath: $additionalDocImagePath)';
+    return 'AdditionalDoumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, additionalDocumentDetailId: $additionalDocumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, additionalDocumentTypeId: $additionalDocumentTypeId, additionalDocImagePath: $additionalDocImagePath)';
   }
 
   @override
@@ -1682,17 +1815,22 @@ class _$AdditionalDoumentDetailImpl implements _AdditionalDoumentDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AdditionalDoumentDetailImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
-            (identical(other.additionalDoumentDetailId, additionalDoumentDetailId) ||
-                other.additionalDoumentDetailId == additionalDoumentDetailId) &&
+            (identical(other.additionalDocumentDetailId,
+                    additionalDocumentDetailId) ||
+                other.additionalDocumentDetailId ==
+                    additionalDocumentDetailId) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.uploadDocumentId, uploadDocumentId) || other.uploadDocumentId == uploadDocumentId) &&
-            (identical(other.additionalDocumentTypeId, additionalDocumentTypeId) ||
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
+            (identical(
+                    other.additionalDocumentTypeId, additionalDocumentTypeId) ||
                 other.additionalDocumentTypeId == additionalDocumentTypeId) &&
             (identical(other.additionalDocImagePath, additionalDocImagePath) ||
                 other.additionalDocImagePath == additionalDocImagePath));
@@ -1700,14 +1838,25 @@ class _$AdditionalDoumentDetailImpl implements _AdditionalDoumentDetail {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, additionalDoumentDetailId,
-      agentApplicationId, uploadDocumentId, additionalDocumentTypeId, additionalDocImagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isDisabled,
+      crd,
+      crdBy,
+      lmd,
+      lmdBy,
+      additionalDocumentDetailId,
+      agentApplicationId,
+      uploadDocumentId,
+      additionalDocumentTypeId,
+      additionalDocImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AdditionalDoumentDetailImplCopyWith<_$AdditionalDoumentDetailImpl> get copyWith =>
-      __$$AdditionalDoumentDetailImplCopyWithImpl<_$AdditionalDoumentDetailImpl>(this, _$identity);
+  _$$AdditionalDoumentDetailImplCopyWith<_$AdditionalDoumentDetailImpl>
+      get copyWith => __$$AdditionalDoumentDetailImplCopyWithImpl<
+          _$AdditionalDoumentDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1724,13 +1873,17 @@ abstract class _AdditionalDoumentDetail implements AdditionalDoumentDetail {
       @JsonKey(name: "crdBy") final int? crdBy,
       @JsonKey(name: "lmd") final DateTime? lmd,
       @JsonKey(name: "lmdBy") final int? lmdBy,
-      @JsonKey(name: "additionalDoumentDetailId") final int? additionalDoumentDetailId,
+      @JsonKey(name: "additionalDocumentDetailId")
+      final int? additionalDocumentDetailId,
       @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
-      @JsonKey(name: "additionalDocumentTypeId") final int? additionalDocumentTypeId,
-      @JsonKey(name: "additionalDocImagePath") final String? additionalDocImagePath}) = _$AdditionalDoumentDetailImpl;
+      @JsonKey(name: "additionalDocumentTypeId")
+      final int? additionalDocumentTypeId,
+      @JsonKey(name: "additionalDocImagePath")
+      final String? additionalDocImagePath}) = _$AdditionalDoumentDetailImpl;
 
-  factory _AdditionalDoumentDetail.fromJson(Map<String, dynamic> json) = _$AdditionalDoumentDetailImpl.fromJson;
+  factory _AdditionalDoumentDetail.fromJson(Map<String, dynamic> json) =
+      _$AdditionalDoumentDetailImpl.fromJson;
 
   @override
   @JsonKey(name: "isDisabled")
@@ -1748,8 +1901,8 @@ abstract class _AdditionalDoumentDetail implements AdditionalDoumentDetail {
   @JsonKey(name: "lmdBy")
   int? get lmdBy;
   @override
-  @JsonKey(name: "additionalDoumentDetailId")
-  int? get additionalDoumentDetailId;
+  @JsonKey(name: "additionalDocumentDetailId")
+  int? get additionalDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId;
@@ -1764,8 +1917,8 @@ abstract class _AdditionalDoumentDetail implements AdditionalDoumentDetail {
   String? get additionalDocImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$AdditionalDoumentDetailImplCopyWith<_$AdditionalDoumentDetailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AdditionalDoumentDetailImplCopyWith<_$AdditionalDoumentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 AddressDocumentTypes _$AddressDocumentTypesFromJson(Map<String, dynamic> json) {
@@ -1793,12 +1946,14 @@ mixin _$AddressDocumentTypes {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AddressDocumentTypesCopyWith<AddressDocumentTypes> get copyWith => throw _privateConstructorUsedError;
+  $AddressDocumentTypesCopyWith<AddressDocumentTypes> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AddressDocumentTypesCopyWith<$Res> {
-  factory $AddressDocumentTypesCopyWith(AddressDocumentTypes value, $Res Function(AddressDocumentTypes) then) =
+  factory $AddressDocumentTypesCopyWith(AddressDocumentTypes value,
+          $Res Function(AddressDocumentTypes) then) =
       _$AddressDocumentTypesCopyWithImpl<$Res, AddressDocumentTypes>;
   @useResult
   $Res call(
@@ -1813,7 +1968,8 @@ abstract class $AddressDocumentTypesCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$AddressDocumentTypesCopyWithImpl<$Res, $Val extends AddressDocumentTypes>
+class _$AddressDocumentTypesCopyWithImpl<$Res,
+        $Val extends AddressDocumentTypes>
     implements $AddressDocumentTypesCopyWith<$Res> {
   _$AddressDocumentTypesCopyWithImpl(this._value, this._then);
 
@@ -1872,9 +2028,10 @@ class _$AddressDocumentTypesCopyWithImpl<$Res, $Val extends AddressDocumentTypes
 }
 
 /// @nodoc
-abstract class _$$AddressDocumentTypesImplCopyWith<$Res> implements $AddressDocumentTypesCopyWith<$Res> {
-  factory _$$AddressDocumentTypesImplCopyWith(
-          _$AddressDocumentTypesImpl value, $Res Function(_$AddressDocumentTypesImpl) then) =
+abstract class _$$AddressDocumentTypesImplCopyWith<$Res>
+    implements $AddressDocumentTypesCopyWith<$Res> {
+  factory _$$AddressDocumentTypesImplCopyWith(_$AddressDocumentTypesImpl value,
+          $Res Function(_$AddressDocumentTypesImpl) then) =
       __$$AddressDocumentTypesImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -1893,8 +2050,8 @@ abstract class _$$AddressDocumentTypesImplCopyWith<$Res> implements $AddressDocu
 class __$$AddressDocumentTypesImplCopyWithImpl<$Res>
     extends _$AddressDocumentTypesCopyWithImpl<$Res, _$AddressDocumentTypesImpl>
     implements _$$AddressDocumentTypesImplCopyWith<$Res> {
-  __$$AddressDocumentTypesImplCopyWithImpl(
-      _$AddressDocumentTypesImpl _value, $Res Function(_$AddressDocumentTypesImpl) _then)
+  __$$AddressDocumentTypesImplCopyWithImpl(_$AddressDocumentTypesImpl _value,
+      $Res Function(_$AddressDocumentTypesImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1959,7 +2116,8 @@ class _$AddressDocumentTypesImpl implements _AddressDocumentTypes {
       @JsonKey(name: "addressDocType") this.addressDocType,
       @JsonKey(name: "documentCode") this.documentCode});
 
-  factory _$AddressDocumentTypesImpl.fromJson(Map<String, dynamic> json) => _$$AddressDocumentTypesImplFromJson(json);
+  factory _$AddressDocumentTypesImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AddressDocumentTypesImplFromJson(json);
 
   @override
   @JsonKey(name: "isDisabled")
@@ -1996,27 +2154,32 @@ class _$AddressDocumentTypesImpl implements _AddressDocumentTypes {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddressDocumentTypesImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
             (identical(other.addressDocumentTypeId, addressDocumentTypeId) ||
                 other.addressDocumentTypeId == addressDocumentTypeId) &&
-            (identical(other.addressDocType, addressDocType) || other.addressDocType == addressDocType) &&
-            (identical(other.documentCode, documentCode) || other.documentCode == documentCode));
+            (identical(other.addressDocType, addressDocType) ||
+                other.addressDocType == addressDocType) &&
+            (identical(other.documentCode, documentCode) ||
+                other.documentCode == documentCode));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, addressDocumentTypeId, addressDocType, documentCode);
+  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd,
+      lmdBy, addressDocumentTypeId, addressDocType, documentCode);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AddressDocumentTypesImplCopyWith<_$AddressDocumentTypesImpl> get copyWith =>
-      __$$AddressDocumentTypesImplCopyWithImpl<_$AddressDocumentTypesImpl>(this, _$identity);
+  _$$AddressDocumentTypesImplCopyWith<_$AddressDocumentTypesImpl>
+      get copyWith =>
+          __$$AddressDocumentTypesImplCopyWithImpl<_$AddressDocumentTypesImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2035,9 +2198,11 @@ abstract class _AddressDocumentTypes implements AddressDocumentTypes {
       @JsonKey(name: "lmdBy") final int? lmdBy,
       @JsonKey(name: "addressDocumentTypeId") final int? addressDocumentTypeId,
       @JsonKey(name: "addressDocType") final String? addressDocType,
-      @JsonKey(name: "documentCode") final String? documentCode}) = _$AddressDocumentTypesImpl;
+      @JsonKey(name: "documentCode")
+      final String? documentCode}) = _$AddressDocumentTypesImpl;
 
-  factory _AddressDocumentTypes.fromJson(Map<String, dynamic> json) = _$AddressDocumentTypesImpl.fromJson;
+  factory _AddressDocumentTypes.fromJson(Map<String, dynamic> json) =
+      _$AddressDocumentTypesImpl.fromJson;
 
   @override
   @JsonKey(name: "isDisabled")
@@ -2065,10 +2230,12 @@ abstract class _AddressDocumentTypes implements AddressDocumentTypes {
   String? get documentCode;
   @override
   @JsonKey(ignore: true)
-  _$$AddressDocumentTypesImplCopyWith<_$AddressDocumentTypesImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$AddressDocumentTypesImplCopyWith<_$AddressDocumentTypesImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-MotorInsuranceDocumentDetail _$MotorInsuranceDocumentDetailFromJson(Map<String, dynamic> json) {
+MotorInsuranceDocumentDetail _$MotorInsuranceDocumentDetailFromJson(
+    Map<String, dynamic> json) {
   return _MotorInsuranceDocumentDetail.fromJson(json);
 }
 
@@ -2084,8 +2251,8 @@ mixin _$MotorInsuranceDocumentDetail {
   DateTime? get lmd => throw _privateConstructorUsedError;
   @JsonKey(name: "lmdBy")
   int? get lmdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: "motorInsuranceDoumentDetailId")
-  int? get motorInsuranceDoumentDetailId => throw _privateConstructorUsedError;
+  @JsonKey(name: "motorInsuranceDocumentDetailId")
+  int? get motorInsuranceDocumentDetailId => throw _privateConstructorUsedError;
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadDocumentId")
@@ -2097,15 +2264,17 @@ mixin _$MotorInsuranceDocumentDetail {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $MotorInsuranceDocumentDetailCopyWith<MotorInsuranceDocumentDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  $MotorInsuranceDocumentDetailCopyWith<MotorInsuranceDocumentDetail>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $MotorInsuranceDocumentDetailCopyWith<$Res> {
   factory $MotorInsuranceDocumentDetailCopyWith(
-          MotorInsuranceDocumentDetail value, $Res Function(MotorInsuranceDocumentDetail) then) =
-      _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, MotorInsuranceDocumentDetail>;
+          MotorInsuranceDocumentDetail value,
+          $Res Function(MotorInsuranceDocumentDetail) then) =
+      _$MotorInsuranceDocumentDetailCopyWithImpl<$Res,
+          MotorInsuranceDocumentDetail>;
   @useResult
   $Res call(
       {@JsonKey(name: "isDisabled") bool? isDisabled,
@@ -2113,15 +2282,18 @@ abstract class $MotorInsuranceDocumentDetailCopyWith<$Res> {
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "motorInsuranceDoumentDetailId") int? motorInsuranceDoumentDetailId,
+      @JsonKey(name: "motorInsuranceDocumentDetailId")
+      int? motorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") int? motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      int? motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") String? motorDocuImagePath});
 }
 
 /// @nodoc
-class _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends MotorInsuranceDocumentDetail>
+class _$MotorInsuranceDocumentDetailCopyWithImpl<$Res,
+        $Val extends MotorInsuranceDocumentDetail>
     implements $MotorInsuranceDocumentDetailCopyWith<$Res> {
   _$MotorInsuranceDocumentDetailCopyWithImpl(this._value, this._then);
 
@@ -2138,7 +2310,7 @@ class _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends MotorInsuran
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? motorInsuranceDoumentDetailId = freezed,
+    Object? motorInsuranceDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? motorInsuranceDocumentTypeId = freezed,
@@ -2165,9 +2337,9 @@ class _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends MotorInsuran
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorInsuranceDoumentDetailId: freezed == motorInsuranceDoumentDetailId
-          ? _value.motorInsuranceDoumentDetailId
-          : motorInsuranceDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      motorInsuranceDocumentDetailId: freezed == motorInsuranceDocumentDetailId
+          ? _value.motorInsuranceDocumentDetailId
+          : motorInsuranceDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2193,7 +2365,8 @@ class _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends MotorInsuran
 abstract class _$$MotorInsuranceDocumentDetailImplCopyWith<$Res>
     implements $MotorInsuranceDocumentDetailCopyWith<$Res> {
   factory _$$MotorInsuranceDocumentDetailImplCopyWith(
-          _$MotorInsuranceDocumentDetailImpl value, $Res Function(_$MotorInsuranceDocumentDetailImpl) then) =
+          _$MotorInsuranceDocumentDetailImpl value,
+          $Res Function(_$MotorInsuranceDocumentDetailImpl) then) =
       __$$MotorInsuranceDocumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -2203,19 +2376,23 @@ abstract class _$$MotorInsuranceDocumentDetailImplCopyWith<$Res>
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "motorInsuranceDoumentDetailId") int? motorInsuranceDoumentDetailId,
+      @JsonKey(name: "motorInsuranceDocumentDetailId")
+      int? motorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") int? motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      int? motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") String? motorDocuImagePath});
 }
 
 /// @nodoc
 class __$$MotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
-    extends _$MotorInsuranceDocumentDetailCopyWithImpl<$Res, _$MotorInsuranceDocumentDetailImpl>
+    extends _$MotorInsuranceDocumentDetailCopyWithImpl<$Res,
+        _$MotorInsuranceDocumentDetailImpl>
     implements _$$MotorInsuranceDocumentDetailImplCopyWith<$Res> {
   __$$MotorInsuranceDocumentDetailImplCopyWithImpl(
-      _$MotorInsuranceDocumentDetailImpl _value, $Res Function(_$MotorInsuranceDocumentDetailImpl) _then)
+      _$MotorInsuranceDocumentDetailImpl _value,
+      $Res Function(_$MotorInsuranceDocumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2226,7 +2403,7 @@ class __$$MotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? motorInsuranceDoumentDetailId = freezed,
+    Object? motorInsuranceDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? motorInsuranceDocumentTypeId = freezed,
@@ -2253,9 +2430,9 @@ class __$$MotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      motorInsuranceDoumentDetailId: freezed == motorInsuranceDoumentDetailId
-          ? _value.motorInsuranceDoumentDetailId
-          : motorInsuranceDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      motorInsuranceDocumentDetailId: freezed == motorInsuranceDocumentDetailId
+          ? _value.motorInsuranceDocumentDetailId
+          : motorInsuranceDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2279,20 +2456,24 @@ class __$$MotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$MotorInsuranceDocumentDetailImpl implements _MotorInsuranceDocumentDetail {
+class _$MotorInsuranceDocumentDetailImpl
+    implements _MotorInsuranceDocumentDetail {
   const _$MotorInsuranceDocumentDetailImpl(
       {@JsonKey(name: "isDisabled") this.isDisabled,
       @JsonKey(name: "crd") this.crd,
       @JsonKey(name: "crdBy") this.crdBy,
       @JsonKey(name: "lmd") this.lmd,
       @JsonKey(name: "lmdBy") this.lmdBy,
-      @JsonKey(name: "motorInsuranceDoumentDetailId") this.motorInsuranceDoumentDetailId,
+      @JsonKey(name: "motorInsuranceDocumentDetailId")
+      this.motorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") this.agentApplicationId,
       @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") this.motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      this.motorInsuranceDocumentTypeId,
       @JsonKey(name: "motorDocuImagePath") this.motorDocuImagePath});
 
-  factory _$MotorInsuranceDocumentDetailImpl.fromJson(Map<String, dynamic> json) =>
+  factory _$MotorInsuranceDocumentDetailImpl.fromJson(
+          Map<String, dynamic> json) =>
       _$$MotorInsuranceDocumentDetailImplFromJson(json);
 
   @override
@@ -2311,8 +2492,8 @@ class _$MotorInsuranceDocumentDetailImpl implements _MotorInsuranceDocumentDetai
   @JsonKey(name: "lmdBy")
   final int? lmdBy;
   @override
-  @JsonKey(name: "motorInsuranceDoumentDetailId")
-  final int? motorInsuranceDoumentDetailId;
+  @JsonKey(name: "motorInsuranceDocumentDetailId")
+  final int? motorInsuranceDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   final int? agentApplicationId;
@@ -2328,7 +2509,7 @@ class _$MotorInsuranceDocumentDetailImpl implements _MotorInsuranceDocumentDetai
 
   @override
   String toString() {
-    return 'MotorInsuranceDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, motorInsuranceDoumentDetailId: $motorInsuranceDoumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, motorInsuranceDocumentTypeId: $motorInsuranceDocumentTypeId, motorDocuImagePath: $motorDocuImagePath)';
+    return 'MotorInsuranceDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, motorInsuranceDocumentDetailId: $motorInsuranceDocumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, motorInsuranceDocumentTypeId: $motorInsuranceDocumentTypeId, motorDocuImagePath: $motorDocuImagePath)';
   }
 
   @override
@@ -2336,32 +2517,50 @@ class _$MotorInsuranceDocumentDetailImpl implements _MotorInsuranceDocumentDetai
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MotorInsuranceDocumentDetailImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
-            (identical(other.motorInsuranceDoumentDetailId, motorInsuranceDoumentDetailId) ||
-                other.motorInsuranceDoumentDetailId == motorInsuranceDoumentDetailId) &&
+            (identical(other.motorInsuranceDocumentDetailId,
+                    motorInsuranceDocumentDetailId) ||
+                other.motorInsuranceDocumentDetailId ==
+                    motorInsuranceDocumentDetailId) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.uploadDocumentId, uploadDocumentId) || other.uploadDocumentId == uploadDocumentId) &&
-            (identical(other.motorInsuranceDocumentTypeId, motorInsuranceDocumentTypeId) ||
-                other.motorInsuranceDocumentTypeId == motorInsuranceDocumentTypeId) &&
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
+            (identical(other.motorInsuranceDocumentTypeId,
+                    motorInsuranceDocumentTypeId) ||
+                other.motorInsuranceDocumentTypeId ==
+                    motorInsuranceDocumentTypeId) &&
             (identical(other.motorDocuImagePath, motorDocuImagePath) ||
                 other.motorDocuImagePath == motorDocuImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, motorInsuranceDoumentDetailId,
-      agentApplicationId, uploadDocumentId, motorInsuranceDocumentTypeId, motorDocuImagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isDisabled,
+      crd,
+      crdBy,
+      lmd,
+      lmdBy,
+      motorInsuranceDocumentDetailId,
+      agentApplicationId,
+      uploadDocumentId,
+      motorInsuranceDocumentTypeId,
+      motorDocuImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$MotorInsuranceDocumentDetailImplCopyWith<_$MotorInsuranceDocumentDetailImpl> get copyWith =>
-      __$$MotorInsuranceDocumentDetailImplCopyWithImpl<_$MotorInsuranceDocumentDetailImpl>(this, _$identity);
+  _$$MotorInsuranceDocumentDetailImplCopyWith<
+          _$MotorInsuranceDocumentDetailImpl>
+      get copyWith => __$$MotorInsuranceDocumentDetailImplCopyWithImpl<
+          _$MotorInsuranceDocumentDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2371,18 +2570,22 @@ class _$MotorInsuranceDocumentDetailImpl implements _MotorInsuranceDocumentDetai
   }
 }
 
-abstract class _MotorInsuranceDocumentDetail implements MotorInsuranceDocumentDetail {
+abstract class _MotorInsuranceDocumentDetail
+    implements MotorInsuranceDocumentDetail {
   const factory _MotorInsuranceDocumentDetail(
       {@JsonKey(name: "isDisabled") final bool? isDisabled,
       @JsonKey(name: "crd") final DateTime? crd,
       @JsonKey(name: "crdBy") final int? crdBy,
       @JsonKey(name: "lmd") final DateTime? lmd,
       @JsonKey(name: "lmdBy") final int? lmdBy,
-      @JsonKey(name: "motorInsuranceDoumentDetailId") final int? motorInsuranceDoumentDetailId,
+      @JsonKey(name: "motorInsuranceDocumentDetailId")
+      final int? motorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
-      @JsonKey(name: "motorInsuranceDocumentTypeId") final int? motorInsuranceDocumentTypeId,
-      @JsonKey(name: "motorDocuImagePath") final String? motorDocuImagePath}) = _$MotorInsuranceDocumentDetailImpl;
+      @JsonKey(name: "motorInsuranceDocumentTypeId")
+      final int? motorInsuranceDocumentTypeId,
+      @JsonKey(name: "motorDocuImagePath")
+      final String? motorDocuImagePath}) = _$MotorInsuranceDocumentDetailImpl;
 
   factory _MotorInsuranceDocumentDetail.fromJson(Map<String, dynamic> json) =
       _$MotorInsuranceDocumentDetailImpl.fromJson;
@@ -2403,8 +2606,8 @@ abstract class _MotorInsuranceDocumentDetail implements MotorInsuranceDocumentDe
   @JsonKey(name: "lmdBy")
   int? get lmdBy;
   @override
-  @JsonKey(name: "motorInsuranceDoumentDetailId")
-  int? get motorInsuranceDoumentDetailId;
+  @JsonKey(name: "motorInsuranceDocumentDetailId")
+  int? get motorInsuranceDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId;
@@ -2419,11 +2622,13 @@ abstract class _MotorInsuranceDocumentDetail implements MotorInsuranceDocumentDe
   String? get motorDocuImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$MotorInsuranceDocumentDetailImplCopyWith<_$MotorInsuranceDocumentDetailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$MotorInsuranceDocumentDetailImplCopyWith<
+          _$MotorInsuranceDocumentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
-NonMotorInsuranceDocumentDetail _$NonMotorInsuranceDocumentDetailFromJson(Map<String, dynamic> json) {
+NonMotorInsuranceDocumentDetail _$NonMotorInsuranceDocumentDetailFromJson(
+    Map<String, dynamic> json) {
   return _NonMotorInsuranceDocumentDetail.fromJson(json);
 }
 
@@ -2439,28 +2644,32 @@ mixin _$NonMotorInsuranceDocumentDetail {
   DateTime? get lmd => throw _privateConstructorUsedError;
   @JsonKey(name: "lmdBy")
   int? get lmdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: "nonMotorInsuranceDoumentDetailId")
-  int? get nonMotorInsuranceDoumentDetailId => throw _privateConstructorUsedError;
+  @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+  int? get nonMotorInsuranceDocumentDetailId =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadDocumentId")
   int? get uploadDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
-  int? get nonMotorInsuranceDocumentTypeId => throw _privateConstructorUsedError;
+  int? get nonMotorInsuranceDocumentTypeId =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: "nonMotorDocImagePath")
   String? get nonMotorDocImagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NonMotorInsuranceDocumentDetailCopyWith<NonMotorInsuranceDocumentDetail> get copyWith =>
-      throw _privateConstructorUsedError;
+  $NonMotorInsuranceDocumentDetailCopyWith<NonMotorInsuranceDocumentDetail>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $NonMotorInsuranceDocumentDetailCopyWith<$Res> {
   factory $NonMotorInsuranceDocumentDetailCopyWith(
-          NonMotorInsuranceDocumentDetail value, $Res Function(NonMotorInsuranceDocumentDetail) then) =
-      _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, NonMotorInsuranceDocumentDetail>;
+          NonMotorInsuranceDocumentDetail value,
+          $Res Function(NonMotorInsuranceDocumentDetail) then) =
+      _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res,
+          NonMotorInsuranceDocumentDetail>;
   @useResult
   $Res call(
       {@JsonKey(name: "isDisabled") bool? isDisabled,
@@ -2468,15 +2677,18 @@ abstract class $NonMotorInsuranceDocumentDetailCopyWith<$Res> {
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "nonMotorInsuranceDoumentDetailId") int? nonMotorInsuranceDoumentDetailId,
+      @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+      int? nonMotorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "nonMotorInsuranceDocumentTypeId") int? nonMotorInsuranceDocumentTypeId,
+      @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
+      int? nonMotorInsuranceDocumentTypeId,
       @JsonKey(name: "nonMotorDocImagePath") String? nonMotorDocImagePath});
 }
 
 /// @nodoc
-class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends NonMotorInsuranceDocumentDetail>
+class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res,
+        $Val extends NonMotorInsuranceDocumentDetail>
     implements $NonMotorInsuranceDocumentDetailCopyWith<$Res> {
   _$NonMotorInsuranceDocumentDetailCopyWithImpl(this._value, this._then);
 
@@ -2493,7 +2705,7 @@ class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends NonMotorI
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? nonMotorInsuranceDoumentDetailId = freezed,
+    Object? nonMotorInsuranceDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? nonMotorInsuranceDocumentTypeId = freezed,
@@ -2520,9 +2732,10 @@ class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends NonMotorI
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      nonMotorInsuranceDoumentDetailId: freezed == nonMotorInsuranceDoumentDetailId
-          ? _value.nonMotorInsuranceDoumentDetailId
-          : nonMotorInsuranceDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      nonMotorInsuranceDocumentDetailId: freezed ==
+              nonMotorInsuranceDocumentDetailId
+          ? _value.nonMotorInsuranceDocumentDetailId
+          : nonMotorInsuranceDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2532,7 +2745,8 @@ class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends NonMotorI
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      nonMotorInsuranceDocumentTypeId: freezed == nonMotorInsuranceDocumentTypeId
+      nonMotorInsuranceDocumentTypeId: freezed ==
+              nonMotorInsuranceDocumentTypeId
           ? _value.nonMotorInsuranceDocumentTypeId
           : nonMotorInsuranceDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -2548,7 +2762,8 @@ class _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, $Val extends NonMotorI
 abstract class _$$NonMotorInsuranceDocumentDetailImplCopyWith<$Res>
     implements $NonMotorInsuranceDocumentDetailCopyWith<$Res> {
   factory _$$NonMotorInsuranceDocumentDetailImplCopyWith(
-          _$NonMotorInsuranceDocumentDetailImpl value, $Res Function(_$NonMotorInsuranceDocumentDetailImpl) then) =
+          _$NonMotorInsuranceDocumentDetailImpl value,
+          $Res Function(_$NonMotorInsuranceDocumentDetailImpl) then) =
       __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -2558,19 +2773,23 @@ abstract class _$$NonMotorInsuranceDocumentDetailImplCopyWith<$Res>
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "nonMotorInsuranceDoumentDetailId") int? nonMotorInsuranceDoumentDetailId,
+      @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+      int? nonMotorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
-      @JsonKey(name: "nonMotorInsuranceDocumentTypeId") int? nonMotorInsuranceDocumentTypeId,
+      @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
+      int? nonMotorInsuranceDocumentTypeId,
       @JsonKey(name: "nonMotorDocImagePath") String? nonMotorDocImagePath});
 }
 
 /// @nodoc
 class __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
-    extends _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res, _$NonMotorInsuranceDocumentDetailImpl>
+    extends _$NonMotorInsuranceDocumentDetailCopyWithImpl<$Res,
+        _$NonMotorInsuranceDocumentDetailImpl>
     implements _$$NonMotorInsuranceDocumentDetailImplCopyWith<$Res> {
   __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl(
-      _$NonMotorInsuranceDocumentDetailImpl _value, $Res Function(_$NonMotorInsuranceDocumentDetailImpl) _then)
+      _$NonMotorInsuranceDocumentDetailImpl _value,
+      $Res Function(_$NonMotorInsuranceDocumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2581,7 +2800,7 @@ class __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? nonMotorInsuranceDoumentDetailId = freezed,
+    Object? nonMotorInsuranceDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? nonMotorInsuranceDocumentTypeId = freezed,
@@ -2608,9 +2827,10 @@ class __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      nonMotorInsuranceDoumentDetailId: freezed == nonMotorInsuranceDoumentDetailId
-          ? _value.nonMotorInsuranceDoumentDetailId
-          : nonMotorInsuranceDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      nonMotorInsuranceDocumentDetailId: freezed ==
+              nonMotorInsuranceDocumentDetailId
+          ? _value.nonMotorInsuranceDocumentDetailId
+          : nonMotorInsuranceDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2620,7 +2840,8 @@ class __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
           ? _value.uploadDocumentId
           : uploadDocumentId // ignore: cast_nullable_to_non_nullable
               as int?,
-      nonMotorInsuranceDocumentTypeId: freezed == nonMotorInsuranceDocumentTypeId
+      nonMotorInsuranceDocumentTypeId: freezed ==
+              nonMotorInsuranceDocumentTypeId
           ? _value.nonMotorInsuranceDocumentTypeId
           : nonMotorInsuranceDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -2634,20 +2855,24 @@ class __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$NonMotorInsuranceDocumentDetailImpl implements _NonMotorInsuranceDocumentDetail {
+class _$NonMotorInsuranceDocumentDetailImpl
+    implements _NonMotorInsuranceDocumentDetail {
   const _$NonMotorInsuranceDocumentDetailImpl(
       {@JsonKey(name: "isDisabled") this.isDisabled,
       @JsonKey(name: "crd") this.crd,
       @JsonKey(name: "crdBy") this.crdBy,
       @JsonKey(name: "lmd") this.lmd,
       @JsonKey(name: "lmdBy") this.lmdBy,
-      @JsonKey(name: "nonMotorInsuranceDoumentDetailId") this.nonMotorInsuranceDoumentDetailId,
+      @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+      this.nonMotorInsuranceDocumentDetailId,
       @JsonKey(name: "agentApplicationId") this.agentApplicationId,
       @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
-      @JsonKey(name: "nonMotorInsuranceDocumentTypeId") this.nonMotorInsuranceDocumentTypeId,
+      @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
+      this.nonMotorInsuranceDocumentTypeId,
       @JsonKey(name: "nonMotorDocImagePath") this.nonMotorDocImagePath});
 
-  factory _$NonMotorInsuranceDocumentDetailImpl.fromJson(Map<String, dynamic> json) =>
+  factory _$NonMotorInsuranceDocumentDetailImpl.fromJson(
+          Map<String, dynamic> json) =>
       _$$NonMotorInsuranceDocumentDetailImplFromJson(json);
 
   @override
@@ -2666,8 +2891,8 @@ class _$NonMotorInsuranceDocumentDetailImpl implements _NonMotorInsuranceDocumen
   @JsonKey(name: "lmdBy")
   final int? lmdBy;
   @override
-  @JsonKey(name: "nonMotorInsuranceDoumentDetailId")
-  final int? nonMotorInsuranceDoumentDetailId;
+  @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+  final int? nonMotorInsuranceDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   final int? agentApplicationId;
@@ -2683,7 +2908,7 @@ class _$NonMotorInsuranceDocumentDetailImpl implements _NonMotorInsuranceDocumen
 
   @override
   String toString() {
-    return 'NonMotorInsuranceDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, nonMotorInsuranceDoumentDetailId: $nonMotorInsuranceDoumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, nonMotorInsuranceDocumentTypeId: $nonMotorInsuranceDocumentTypeId, nonMotorDocImagePath: $nonMotorDocImagePath)';
+    return 'NonMotorInsuranceDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, nonMotorInsuranceDocumentDetailId: $nonMotorInsuranceDocumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, nonMotorInsuranceDocumentTypeId: $nonMotorInsuranceDocumentTypeId, nonMotorDocImagePath: $nonMotorDocImagePath)';
   }
 
   @override
@@ -2691,32 +2916,50 @@ class _$NonMotorInsuranceDocumentDetailImpl implements _NonMotorInsuranceDocumen
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NonMotorInsuranceDocumentDetailImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
-            (identical(other.nonMotorInsuranceDoumentDetailId, nonMotorInsuranceDoumentDetailId) ||
-                other.nonMotorInsuranceDoumentDetailId == nonMotorInsuranceDoumentDetailId) &&
+            (identical(other.nonMotorInsuranceDocumentDetailId,
+                    nonMotorInsuranceDocumentDetailId) ||
+                other.nonMotorInsuranceDocumentDetailId ==
+                    nonMotorInsuranceDocumentDetailId) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.uploadDocumentId, uploadDocumentId) || other.uploadDocumentId == uploadDocumentId) &&
-            (identical(other.nonMotorInsuranceDocumentTypeId, nonMotorInsuranceDocumentTypeId) ||
-                other.nonMotorInsuranceDocumentTypeId == nonMotorInsuranceDocumentTypeId) &&
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
+            (identical(other.nonMotorInsuranceDocumentTypeId,
+                    nonMotorInsuranceDocumentTypeId) ||
+                other.nonMotorInsuranceDocumentTypeId ==
+                    nonMotorInsuranceDocumentTypeId) &&
             (identical(other.nonMotorDocImagePath, nonMotorDocImagePath) ||
                 other.nonMotorDocImagePath == nonMotorDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, nonMotorInsuranceDoumentDetailId,
-      agentApplicationId, uploadDocumentId, nonMotorInsuranceDocumentTypeId, nonMotorDocImagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isDisabled,
+      crd,
+      crdBy,
+      lmd,
+      lmdBy,
+      nonMotorInsuranceDocumentDetailId,
+      agentApplicationId,
+      uploadDocumentId,
+      nonMotorInsuranceDocumentTypeId,
+      nonMotorDocImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NonMotorInsuranceDocumentDetailImplCopyWith<_$NonMotorInsuranceDocumentDetailImpl> get copyWith =>
-      __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<_$NonMotorInsuranceDocumentDetailImpl>(this, _$identity);
+  _$$NonMotorInsuranceDocumentDetailImplCopyWith<
+          _$NonMotorInsuranceDocumentDetailImpl>
+      get copyWith => __$$NonMotorInsuranceDocumentDetailImplCopyWithImpl<
+          _$NonMotorInsuranceDocumentDetailImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2726,18 +2969,22 @@ class _$NonMotorInsuranceDocumentDetailImpl implements _NonMotorInsuranceDocumen
   }
 }
 
-abstract class _NonMotorInsuranceDocumentDetail implements NonMotorInsuranceDocumentDetail {
+abstract class _NonMotorInsuranceDocumentDetail
+    implements NonMotorInsuranceDocumentDetail {
   const factory _NonMotorInsuranceDocumentDetail(
           {@JsonKey(name: "isDisabled") final bool? isDisabled,
           @JsonKey(name: "crd") final DateTime? crd,
           @JsonKey(name: "crdBy") final int? crdBy,
           @JsonKey(name: "lmd") final DateTime? lmd,
           @JsonKey(name: "lmdBy") final int? lmdBy,
-          @JsonKey(name: "nonMotorInsuranceDoumentDetailId") final int? nonMotorInsuranceDoumentDetailId,
+          @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+          final int? nonMotorInsuranceDocumentDetailId,
           @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
           @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
-          @JsonKey(name: "nonMotorInsuranceDocumentTypeId") final int? nonMotorInsuranceDocumentTypeId,
-          @JsonKey(name: "nonMotorDocImagePath") final String? nonMotorDocImagePath}) =
+          @JsonKey(name: "nonMotorInsuranceDocumentTypeId")
+          final int? nonMotorInsuranceDocumentTypeId,
+          @JsonKey(name: "nonMotorDocImagePath")
+          final String? nonMotorDocImagePath}) =
       _$NonMotorInsuranceDocumentDetailImpl;
 
   factory _NonMotorInsuranceDocumentDetail.fromJson(Map<String, dynamic> json) =
@@ -2759,8 +3006,8 @@ abstract class _NonMotorInsuranceDocumentDetail implements NonMotorInsuranceDocu
   @JsonKey(name: "lmdBy")
   int? get lmdBy;
   @override
-  @JsonKey(name: "nonMotorInsuranceDoumentDetailId")
-  int? get nonMotorInsuranceDoumentDetailId;
+  @JsonKey(name: "nonMotorInsuranceDocumentDetailId")
+  int? get nonMotorInsuranceDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId;
@@ -2775,8 +3022,9 @@ abstract class _NonMotorInsuranceDocumentDetail implements NonMotorInsuranceDocu
   String? get nonMotorDocImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$NonMotorInsuranceDocumentDetailImplCopyWith<_$NonMotorInsuranceDocumentDetailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$NonMotorInsuranceDocumentDetailImplCopyWith<
+          _$NonMotorInsuranceDocumentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PolicyDocumentDetail _$PolicyDocumentDetailFromJson(Map<String, dynamic> json) {
@@ -2795,25 +3043,27 @@ mixin _$PolicyDocumentDetail {
   DateTime? get lmd => throw _privateConstructorUsedError;
   @JsonKey(name: "lmdBy")
   int? get lmdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: "policyDoumentDetailId")
-  int? get policyDoumentDetailId => throw _privateConstructorUsedError;
+  @JsonKey(name: "policyDocumentDetailId")
+  int? get policyDocumentDetailId => throw _privateConstructorUsedError;
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId => throw _privateConstructorUsedError;
   @JsonKey(name: "uploadDocumentId")
   int? get uploadDocumentId => throw _privateConstructorUsedError;
   @JsonKey(name: "policyDocumentTypeId")
   int? get policyDocumentTypeId => throw _privateConstructorUsedError;
-  @JsonKey(name: "policyDouImagePath")
-  String? get policyDouImagePath => throw _privateConstructorUsedError;
+  @JsonKey(name: "policyDocImagePath")
+  String? get policyDocImagePath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PolicyDocumentDetailCopyWith<PolicyDocumentDetail> get copyWith => throw _privateConstructorUsedError;
+  $PolicyDocumentDetailCopyWith<PolicyDocumentDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PolicyDocumentDetailCopyWith<$Res> {
-  factory $PolicyDocumentDetailCopyWith(PolicyDocumentDetail value, $Res Function(PolicyDocumentDetail) then) =
+  factory $PolicyDocumentDetailCopyWith(PolicyDocumentDetail value,
+          $Res Function(PolicyDocumentDetail) then) =
       _$PolicyDocumentDetailCopyWithImpl<$Res, PolicyDocumentDetail>;
   @useResult
   $Res call(
@@ -2822,15 +3072,16 @@ abstract class $PolicyDocumentDetailCopyWith<$Res> {
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "policyDoumentDetailId") int? policyDoumentDetailId,
+      @JsonKey(name: "policyDocumentDetailId") int? policyDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") String? policyDouImagePath});
+      @JsonKey(name: "policyDocImagePath") String? policyDocImagePath});
 }
 
 /// @nodoc
-class _$PolicyDocumentDetailCopyWithImpl<$Res, $Val extends PolicyDocumentDetail>
+class _$PolicyDocumentDetailCopyWithImpl<$Res,
+        $Val extends PolicyDocumentDetail>
     implements $PolicyDocumentDetailCopyWith<$Res> {
   _$PolicyDocumentDetailCopyWithImpl(this._value, this._then);
 
@@ -2847,11 +3098,11 @@ class _$PolicyDocumentDetailCopyWithImpl<$Res, $Val extends PolicyDocumentDetail
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? policyDoumentDetailId = freezed,
+    Object? policyDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? policyDocumentTypeId = freezed,
-    Object? policyDouImagePath = freezed,
+    Object? policyDocImagePath = freezed,
   }) {
     return _then(_value.copyWith(
       isDisabled: freezed == isDisabled
@@ -2874,9 +3125,9 @@ class _$PolicyDocumentDetailCopyWithImpl<$Res, $Val extends PolicyDocumentDetail
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDoumentDetailId: freezed == policyDoumentDetailId
-          ? _value.policyDoumentDetailId
-          : policyDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      policyDocumentDetailId: freezed == policyDocumentDetailId
+          ? _value.policyDocumentDetailId
+          : policyDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2890,18 +3141,19 @@ class _$PolicyDocumentDetailCopyWithImpl<$Res, $Val extends PolicyDocumentDetail
           ? _value.policyDocumentTypeId
           : policyDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDouImagePath: freezed == policyDouImagePath
-          ? _value.policyDouImagePath
-          : policyDouImagePath // ignore: cast_nullable_to_non_nullable
+      policyDocImagePath: freezed == policyDocImagePath
+          ? _value.policyDocImagePath
+          : policyDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$PolicyDocumentDetailImplCopyWith<$Res> implements $PolicyDocumentDetailCopyWith<$Res> {
-  factory _$$PolicyDocumentDetailImplCopyWith(
-          _$PolicyDocumentDetailImpl value, $Res Function(_$PolicyDocumentDetailImpl) then) =
+abstract class _$$PolicyDocumentDetailImplCopyWith<$Res>
+    implements $PolicyDocumentDetailCopyWith<$Res> {
+  factory _$$PolicyDocumentDetailImplCopyWith(_$PolicyDocumentDetailImpl value,
+          $Res Function(_$PolicyDocumentDetailImpl) then) =
       __$$PolicyDocumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -2911,19 +3163,19 @@ abstract class _$$PolicyDocumentDetailImplCopyWith<$Res> implements $PolicyDocum
       @JsonKey(name: "crdBy") int? crdBy,
       @JsonKey(name: "lmd") DateTime? lmd,
       @JsonKey(name: "lmdBy") int? lmdBy,
-      @JsonKey(name: "policyDoumentDetailId") int? policyDoumentDetailId,
+      @JsonKey(name: "policyDocumentDetailId") int? policyDocumentDetailId,
       @JsonKey(name: "agentApplicationId") int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") int? uploadDocumentId,
       @JsonKey(name: "policyDocumentTypeId") int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") String? policyDouImagePath});
+      @JsonKey(name: "policyDocImagePath") String? policyDocImagePath});
 }
 
 /// @nodoc
 class __$$PolicyDocumentDetailImplCopyWithImpl<$Res>
     extends _$PolicyDocumentDetailCopyWithImpl<$Res, _$PolicyDocumentDetailImpl>
     implements _$$PolicyDocumentDetailImplCopyWith<$Res> {
-  __$$PolicyDocumentDetailImplCopyWithImpl(
-      _$PolicyDocumentDetailImpl _value, $Res Function(_$PolicyDocumentDetailImpl) _then)
+  __$$PolicyDocumentDetailImplCopyWithImpl(_$PolicyDocumentDetailImpl _value,
+      $Res Function(_$PolicyDocumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -2934,11 +3186,11 @@ class __$$PolicyDocumentDetailImplCopyWithImpl<$Res>
     Object? crdBy = freezed,
     Object? lmd = freezed,
     Object? lmdBy = freezed,
-    Object? policyDoumentDetailId = freezed,
+    Object? policyDocumentDetailId = freezed,
     Object? agentApplicationId = freezed,
     Object? uploadDocumentId = freezed,
     Object? policyDocumentTypeId = freezed,
-    Object? policyDouImagePath = freezed,
+    Object? policyDocImagePath = freezed,
   }) {
     return _then(_$PolicyDocumentDetailImpl(
       isDisabled: freezed == isDisabled
@@ -2961,9 +3213,9 @@ class __$$PolicyDocumentDetailImplCopyWithImpl<$Res>
           ? _value.lmdBy
           : lmdBy // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDoumentDetailId: freezed == policyDoumentDetailId
-          ? _value.policyDoumentDetailId
-          : policyDoumentDetailId // ignore: cast_nullable_to_non_nullable
+      policyDocumentDetailId: freezed == policyDocumentDetailId
+          ? _value.policyDocumentDetailId
+          : policyDocumentDetailId // ignore: cast_nullable_to_non_nullable
               as int?,
       agentApplicationId: freezed == agentApplicationId
           ? _value.agentApplicationId
@@ -2977,9 +3229,9 @@ class __$$PolicyDocumentDetailImplCopyWithImpl<$Res>
           ? _value.policyDocumentTypeId
           : policyDocumentTypeId // ignore: cast_nullable_to_non_nullable
               as int?,
-      policyDouImagePath: freezed == policyDouImagePath
-          ? _value.policyDouImagePath
-          : policyDouImagePath // ignore: cast_nullable_to_non_nullable
+      policyDocImagePath: freezed == policyDocImagePath
+          ? _value.policyDocImagePath
+          : policyDocImagePath // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -2994,13 +3246,14 @@ class _$PolicyDocumentDetailImpl implements _PolicyDocumentDetail {
       @JsonKey(name: "crdBy") this.crdBy,
       @JsonKey(name: "lmd") this.lmd,
       @JsonKey(name: "lmdBy") this.lmdBy,
-      @JsonKey(name: "policyDoumentDetailId") this.policyDoumentDetailId,
+      @JsonKey(name: "policyDocumentDetailId") this.policyDocumentDetailId,
       @JsonKey(name: "agentApplicationId") this.agentApplicationId,
       @JsonKey(name: "uploadDocumentId") this.uploadDocumentId,
       @JsonKey(name: "policyDocumentTypeId") this.policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") this.policyDouImagePath});
+      @JsonKey(name: "policyDocImagePath") this.policyDocImagePath});
 
-  factory _$PolicyDocumentDetailImpl.fromJson(Map<String, dynamic> json) => _$$PolicyDocumentDetailImplFromJson(json);
+  factory _$PolicyDocumentDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PolicyDocumentDetailImplFromJson(json);
 
   @override
   @JsonKey(name: "isDisabled")
@@ -3018,8 +3271,8 @@ class _$PolicyDocumentDetailImpl implements _PolicyDocumentDetail {
   @JsonKey(name: "lmdBy")
   final int? lmdBy;
   @override
-  @JsonKey(name: "policyDoumentDetailId")
-  final int? policyDoumentDetailId;
+  @JsonKey(name: "policyDocumentDetailId")
+  final int? policyDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   final int? agentApplicationId;
@@ -3030,12 +3283,12 @@ class _$PolicyDocumentDetailImpl implements _PolicyDocumentDetail {
   @JsonKey(name: "policyDocumentTypeId")
   final int? policyDocumentTypeId;
   @override
-  @JsonKey(name: "policyDouImagePath")
-  final String? policyDouImagePath;
+  @JsonKey(name: "policyDocImagePath")
+  final String? policyDocImagePath;
 
   @override
   String toString() {
-    return 'PolicyDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, policyDoumentDetailId: $policyDoumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, policyDocumentTypeId: $policyDocumentTypeId, policyDouImagePath: $policyDouImagePath)';
+    return 'PolicyDocumentDetail(isDisabled: $isDisabled, crd: $crd, crdBy: $crdBy, lmd: $lmd, lmdBy: $lmdBy, policyDocumentDetailId: $policyDocumentDetailId, agentApplicationId: $agentApplicationId, uploadDocumentId: $uploadDocumentId, policyDocumentTypeId: $policyDocumentTypeId, policyDocImagePath: $policyDocImagePath)';
   }
 
   @override
@@ -3043,32 +3296,46 @@ class _$PolicyDocumentDetailImpl implements _PolicyDocumentDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PolicyDocumentDetailImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
-            (identical(other.policyDoumentDetailId, policyDoumentDetailId) ||
-                other.policyDoumentDetailId == policyDoumentDetailId) &&
+            (identical(other.policyDocumentDetailId, policyDocumentDetailId) ||
+                other.policyDocumentDetailId == policyDocumentDetailId) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.uploadDocumentId, uploadDocumentId) || other.uploadDocumentId == uploadDocumentId) &&
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
             (identical(other.policyDocumentTypeId, policyDocumentTypeId) ||
                 other.policyDocumentTypeId == policyDocumentTypeId) &&
-            (identical(other.policyDouImagePath, policyDouImagePath) ||
-                other.policyDouImagePath == policyDouImagePath));
+            (identical(other.policyDocImagePath, policyDocImagePath) ||
+                other.policyDocImagePath == policyDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, policyDoumentDetailId,
-      agentApplicationId, uploadDocumentId, policyDocumentTypeId, policyDouImagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isDisabled,
+      crd,
+      crdBy,
+      lmd,
+      lmdBy,
+      policyDocumentDetailId,
+      agentApplicationId,
+      uploadDocumentId,
+      policyDocumentTypeId,
+      policyDocImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$PolicyDocumentDetailImplCopyWith<_$PolicyDocumentDetailImpl> get copyWith =>
-      __$$PolicyDocumentDetailImplCopyWithImpl<_$PolicyDocumentDetailImpl>(this, _$identity);
+  _$$PolicyDocumentDetailImplCopyWith<_$PolicyDocumentDetailImpl>
+      get copyWith =>
+          __$$PolicyDocumentDetailImplCopyWithImpl<_$PolicyDocumentDetailImpl>(
+              this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -3085,13 +3352,16 @@ abstract class _PolicyDocumentDetail implements PolicyDocumentDetail {
       @JsonKey(name: "crdBy") final int? crdBy,
       @JsonKey(name: "lmd") final DateTime? lmd,
       @JsonKey(name: "lmdBy") final int? lmdBy,
-      @JsonKey(name: "policyDoumentDetailId") final int? policyDoumentDetailId,
+      @JsonKey(name: "policyDocumentDetailId")
+      final int? policyDocumentDetailId,
       @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
       @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
       @JsonKey(name: "policyDocumentTypeId") final int? policyDocumentTypeId,
-      @JsonKey(name: "policyDouImagePath") final String? policyDouImagePath}) = _$PolicyDocumentDetailImpl;
+      @JsonKey(name: "policyDocImagePath")
+      final String? policyDocImagePath}) = _$PolicyDocumentDetailImpl;
 
-  factory _PolicyDocumentDetail.fromJson(Map<String, dynamic> json) = _$PolicyDocumentDetailImpl.fromJson;
+  factory _PolicyDocumentDetail.fromJson(Map<String, dynamic> json) =
+      _$PolicyDocumentDetailImpl.fromJson;
 
   @override
   @JsonKey(name: "isDisabled")
@@ -3109,8 +3379,8 @@ abstract class _PolicyDocumentDetail implements PolicyDocumentDetail {
   @JsonKey(name: "lmdBy")
   int? get lmdBy;
   @override
-  @JsonKey(name: "policyDoumentDetailId")
-  int? get policyDoumentDetailId;
+  @JsonKey(name: "policyDocumentDetailId")
+  int? get policyDocumentDetailId;
   @override
   @JsonKey(name: "agentApplicationId")
   int? get agentApplicationId;
@@ -3121,11 +3391,12 @@ abstract class _PolicyDocumentDetail implements PolicyDocumentDetail {
   @JsonKey(name: "policyDocumentTypeId")
   int? get policyDocumentTypeId;
   @override
-  @JsonKey(name: "policyDouImagePath")
-  String? get policyDouImagePath;
+  @JsonKey(name: "policyDocImagePath")
+  String? get policyDocImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$PolicyDocumentDetailImplCopyWith<_$PolicyDocumentDetailImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$PolicyDocumentDetailImplCopyWith<_$PolicyDocumentDetailImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PorDocumentDetail _$PorDocumentDetailFromJson(Map<String, dynamic> json) {
@@ -3161,12 +3432,14 @@ mixin _$PorDocumentDetail {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PorDocumentDetailCopyWith<PorDocumentDetail> get copyWith => throw _privateConstructorUsedError;
+  $PorDocumentDetailCopyWith<PorDocumentDetail> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $PorDocumentDetailCopyWith<$Res> {
-  factory $PorDocumentDetailCopyWith(PorDocumentDetail value, $Res Function(PorDocumentDetail) then) =
+  factory $PorDocumentDetailCopyWith(
+          PorDocumentDetail value, $Res Function(PorDocumentDetail) then) =
       _$PorDocumentDetailCopyWithImpl<$Res, PorDocumentDetail>;
   @useResult
   $Res call(
@@ -3264,8 +3537,10 @@ class _$PorDocumentDetailCopyWithImpl<$Res, $Val extends PorDocumentDetail>
 }
 
 /// @nodoc
-abstract class _$$PorDocumentDetailImplCopyWith<$Res> implements $PorDocumentDetailCopyWith<$Res> {
-  factory _$$PorDocumentDetailImplCopyWith(_$PorDocumentDetailImpl value, $Res Function(_$PorDocumentDetailImpl) then) =
+abstract class _$$PorDocumentDetailImplCopyWith<$Res>
+    implements $PorDocumentDetailCopyWith<$Res> {
+  factory _$$PorDocumentDetailImplCopyWith(_$PorDocumentDetailImpl value,
+          $Res Function(_$PorDocumentDetailImpl) then) =
       __$$PorDocumentDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
@@ -3285,9 +3560,11 @@ abstract class _$$PorDocumentDetailImplCopyWith<$Res> implements $PorDocumentDet
 }
 
 /// @nodoc
-class __$$PorDocumentDetailImplCopyWithImpl<$Res> extends _$PorDocumentDetailCopyWithImpl<$Res, _$PorDocumentDetailImpl>
+class __$$PorDocumentDetailImplCopyWithImpl<$Res>
+    extends _$PorDocumentDetailCopyWithImpl<$Res, _$PorDocumentDetailImpl>
     implements _$$PorDocumentDetailImplCopyWith<$Res> {
-  __$$PorDocumentDetailImplCopyWithImpl(_$PorDocumentDetailImpl _value, $Res Function(_$PorDocumentDetailImpl) _then)
+  __$$PorDocumentDetailImplCopyWithImpl(_$PorDocumentDetailImpl _value,
+      $Res Function(_$PorDocumentDetailImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3376,7 +3653,8 @@ class _$PorDocumentDetailImpl implements _PorDocumentDetail {
       @JsonKey(name: "issueDate") this.issueDate,
       @JsonKey(name: "porDocImagePath") this.porDocImagePath});
 
-  factory _$PorDocumentDetailImpl.fromJson(Map<String, dynamic> json) => _$$PorDocumentDetailImplFromJson(json);
+  factory _$PorDocumentDetailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PorDocumentDetailImplFromJson(json);
 
   @override
   @JsonKey(name: "isDisabled")
@@ -3425,32 +3703,51 @@ class _$PorDocumentDetailImpl implements _PorDocumentDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PorDocumentDetailImpl &&
-            (identical(other.isDisabled, isDisabled) || other.isDisabled == isDisabled) &&
+            (identical(other.isDisabled, isDisabled) ||
+                other.isDisabled == isDisabled) &&
             (identical(other.crd, crd) || other.crd == crd) &&
             (identical(other.crdBy, crdBy) || other.crdBy == crdBy) &&
             (identical(other.lmd, lmd) || other.lmd == lmd) &&
             (identical(other.lmdBy, lmdBy) || other.lmdBy == lmdBy) &&
             (identical(other.porDocumentDetailId, porDocumentDetailId) ||
                 other.porDocumentDetailId == porDocumentDetailId) &&
-            (identical(other.porDocumentTypeId, porDocumentTypeId) || other.porDocumentTypeId == porDocumentTypeId) &&
+            (identical(other.porDocumentTypeId, porDocumentTypeId) ||
+                other.porDocumentTypeId == porDocumentTypeId) &&
             (identical(other.agentApplicationId, agentApplicationId) ||
                 other.agentApplicationId == agentApplicationId) &&
-            (identical(other.uploadDocumentId, uploadDocumentId) || other.uploadDocumentId == uploadDocumentId) &&
-            (identical(other.lastName, lastName) || other.lastName == lastName) &&
-            (identical(other.issueDate, issueDate) || other.issueDate == issueDate) &&
-            (identical(other.porDocImagePath, porDocImagePath) || other.porDocImagePath == porDocImagePath));
+            (identical(other.uploadDocumentId, uploadDocumentId) ||
+                other.uploadDocumentId == uploadDocumentId) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.issueDate, issueDate) ||
+                other.issueDate == issueDate) &&
+            (identical(other.porDocImagePath, porDocImagePath) ||
+                other.porDocImagePath == porDocImagePath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, isDisabled, crd, crdBy, lmd, lmdBy, porDocumentDetailId,
-      porDocumentTypeId, agentApplicationId, uploadDocumentId, lastName, issueDate, porDocImagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isDisabled,
+      crd,
+      crdBy,
+      lmd,
+      lmdBy,
+      porDocumentDetailId,
+      porDocumentTypeId,
+      agentApplicationId,
+      uploadDocumentId,
+      lastName,
+      issueDate,
+      porDocImagePath);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PorDocumentDetailImplCopyWith<_$PorDocumentDetailImpl> get copyWith =>
-      __$$PorDocumentDetailImplCopyWithImpl<_$PorDocumentDetailImpl>(this, _$identity);
+      __$$PorDocumentDetailImplCopyWithImpl<_$PorDocumentDetailImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -3462,20 +3759,22 @@ class _$PorDocumentDetailImpl implements _PorDocumentDetail {
 
 abstract class _PorDocumentDetail implements PorDocumentDetail {
   const factory _PorDocumentDetail(
-      {@JsonKey(name: "isDisabled") final bool? isDisabled,
-      @JsonKey(name: "crd") final DateTime? crd,
-      @JsonKey(name: "crdBy") final int? crdBy,
-      @JsonKey(name: "lmd") final DateTime? lmd,
-      @JsonKey(name: "lmdBy") final int? lmdBy,
-      @JsonKey(name: "porDocumentDetailId") final int? porDocumentDetailId,
-      @JsonKey(name: "porDocumentTypeId") final int? porDocumentTypeId,
-      @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
-      @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
-      @JsonKey(name: "lastName") final String? lastName,
-      @JsonKey(name: "issueDate") final DateTime? issueDate,
-      @JsonKey(name: "porDocImagePath") final String? porDocImagePath}) = _$PorDocumentDetailImpl;
+          {@JsonKey(name: "isDisabled") final bool? isDisabled,
+          @JsonKey(name: "crd") final DateTime? crd,
+          @JsonKey(name: "crdBy") final int? crdBy,
+          @JsonKey(name: "lmd") final DateTime? lmd,
+          @JsonKey(name: "lmdBy") final int? lmdBy,
+          @JsonKey(name: "porDocumentDetailId") final int? porDocumentDetailId,
+          @JsonKey(name: "porDocumentTypeId") final int? porDocumentTypeId,
+          @JsonKey(name: "agentApplicationId") final int? agentApplicationId,
+          @JsonKey(name: "uploadDocumentId") final int? uploadDocumentId,
+          @JsonKey(name: "lastName") final String? lastName,
+          @JsonKey(name: "issueDate") final DateTime? issueDate,
+          @JsonKey(name: "porDocImagePath") final String? porDocImagePath}) =
+      _$PorDocumentDetailImpl;
 
-  factory _PorDocumentDetail.fromJson(Map<String, dynamic> json) = _$PorDocumentDetailImpl.fromJson;
+  factory _PorDocumentDetail.fromJson(Map<String, dynamic> json) =
+      _$PorDocumentDetailImpl.fromJson;
 
   @override
   @JsonKey(name: "isDisabled")
@@ -3515,5 +3814,6 @@ abstract class _PorDocumentDetail implements PorDocumentDetail {
   String? get porDocImagePath;
   @override
   @JsonKey(ignore: true)
-  _$$PorDocumentDetailImplCopyWith<_$PorDocumentDetailImpl> get copyWith => throw _privateConstructorUsedError;
+  _$$PorDocumentDetailImplCopyWith<_$PorDocumentDetailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
