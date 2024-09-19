@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
+import 'package:ekyc/core/helpers/progress_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
@@ -15,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multiple_image_camera/camera_file.dart';
 import 'package:path_provider/path_provider.dart';
@@ -61,7 +63,10 @@ mixin GeneratePdfMixin {
                         index != list.length - 1 ? pw.MainAxisAlignment.center : pw.MainAxisAlignment.start,
                     children: [
                       pw.SizedBox(height: 50),
-                      pw.Image(image, height: index == list.length - 1 ? MediaQuery.of(ctx).size.height * 0.5 : null),
+                      pw.Image(image,
+                          height: index == list.length - 1
+                              ? MediaQuery.of(ctx).size.height * 0.5
+                              : MediaQuery.of(ctx).size.height * 0.7),
                       if (index == list.length - 1) ...[
                         pw.Spacer(),
                         _agentDetailsWidget(ref),
@@ -272,31 +277,40 @@ mixin GeneratePdfMixin {
     required BuildContext context,
     required WidgetRef ref,
   }) async {
-    ref.watch(signatureBase64Provider.notifier).update((state) => null);
+    try {
+      ProgressDialog.showProgressDialog(context);
 
-    final agentSignaturePath = ref.watch(agentSignaturePathProvider);
+      ref.watch(signatureBase64Provider.notifier).update((state) => null);
 
-    final ViewFileRequestModel request = ViewFileRequestModel(
-      fileName: agentSignaturePath ?? "",
-      isImage: false,
-    );
+      final agentSignaturePath = ref.watch(agentSignaturePathProvider);
 
-    final response = await getIt<ViewFile>().call(request);
+      final ViewFileRequestModel request = ViewFileRequestModel(
+        fileName: agentSignaturePath ?? "",
+        isImage: false,
+      );
 
-    response.fold(
-      (failure) {
-        debugPrint("failure: $failure");
-        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
-      },
-      (ViewFileResponseModel success) {
-        if (success.status?.isSuccess == true) {
-          ref.watch(signatureBase64Provider.notifier).update((state) => success.body?.responseBody);
-        } else {
-          context.showErrorSnackBar(
-            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
-          );
-        }
-      },
-    );
+      final response = await getIt<ViewFile>().call(request);
+
+      response.fold(
+        (failure) {
+          debugPrint("failure: $failure");
+          context.pop();
+          context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+        },
+        (ViewFileResponseModel success) {
+          context.pop();
+          if (success.status?.isSuccess == true) {
+            ref.watch(signatureBase64Provider.notifier).update((state) => success.body?.responseBody);
+          } else {
+            context.showErrorSnackBar(
+              message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+            );
+          }
+        },
+      );
+    } catch (error) {
+      context.pop();
+      debugPrint(error.toString());
+    }
   }
 }

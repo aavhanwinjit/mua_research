@@ -103,7 +103,7 @@ abstract class ApiService {
   static const SAVE_POR_DOCUMENTS = "/AgentAPI/Agent/SavePORDocuments";
   static const GET_POLICY_DOCUMENT_TYPES = "/AgentAPI/Data/GetPolicyDocumentTypes";
   static const SAVE_POLICY_DOCUMENTS = "/AgentAPI/Agent/SavePolicyDocuments";
-  static const GET_ADDITIONAL_DOCUMENT_TYPES = "/AgentAPI/Data/GetAdditionalDoumentTypes";
+  static const GET_ADDITIONAL_DOCUMENT_TYPES = "/AgentAPI/Data/GetAdditionalDocumentTypes";
   static const SAVE_ADDITIONAL_DOCUMENTS = "/AgentAPI/Agent/SaveAdditionalDocuments";
   static const GENERATE_PDF = "/AgentAPI/Agent/GeneratePDF";
 

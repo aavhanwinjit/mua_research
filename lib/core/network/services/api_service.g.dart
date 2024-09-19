@@ -1010,7 +1010,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/AgentAPI/Data/GetAdditionalDoumentTypes',
+              '/AgentAPI/Data/GetAdditionalDocumentTypes',
               queryParameters: queryParameters,
               data: _data,
             )
