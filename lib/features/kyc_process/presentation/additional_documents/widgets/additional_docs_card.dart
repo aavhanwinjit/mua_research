@@ -47,18 +47,46 @@ class AdditionalDocsCard extends ConsumerWidget {
   }
 
   Widget _imageRow(WidgetRef ref) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.w),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            Strings.otherKYCDocs,
-            style: TextStyle(color: textGrayColor2),
-          ),
-          const SizedBox(height: 5),
-          _imageWidget(ref),
-        ],
+    final selectedDocsListProvider = ref.watch(selectedAdditionalDocListNotifierProvider.notifier);
+    ref.watch(selectedAdditionalDocListNotifierProvider);
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        child: Row(
+          children: selectedDocsListProvider.list().map((e) {
+            return Container(
+              margin: EdgeInsets.only(right: 8.w),
+              width: 150.h,
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    e.documentElement?.additionalDocumentTypeName ?? "-",
+                    style: const TextStyle(color: textGrayColor2),
+                  ),
+                  const SizedBox(height: 5),
+                  _pdfWidget(e.filePath ?? ""),
+                ],
+              ),
+              // child: _image(e.filePath ?? ""),
+            );
+          }).toList(),
+        ),
+
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: [
+        //     const Text(
+        //       Strings.otherKYCDocs,
+        //       style: TextStyle(color: textGrayColor2),
+        //     ),
+        //     const SizedBox(height: 5),
+        //     _imageWidget(ref),
+        //   ],
+        // ),
       ),
     );
   }

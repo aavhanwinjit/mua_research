@@ -65,7 +65,7 @@ mixin GeneratePdfMixin {
                       pw.SizedBox(height: 50),
                       pw.Image(image,
                           height: index == list.length - 1
-                              ? MediaQuery.of(ctx).size.height * 0.5
+                              ? MediaQuery.of(ctx).size.height * 0.45
                               : MediaQuery.of(ctx).size.height * 0.7),
                       if (index == list.length - 1) ...[
                         pw.Spacer(),
@@ -245,7 +245,7 @@ mixin GeneratePdfMixin {
         if (signatureBase64 != null) ...[
           pw.Image(
             pw.MemoryImage(bytes),
-            width: 50,
+            width: 20,
           ),
         ],
       ],
