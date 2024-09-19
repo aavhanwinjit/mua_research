@@ -1,9 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
+import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
+import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
+import 'package:ekyc/features/signature/data/models/view_file/request/view_file_request_model.dart';
+import 'package:ekyc/features/signature/data/models/view_file/response/view_file_response_model.dart';
+import 'package:ekyc/features/signature/domain/usecases/view_file.dart';
+import 'package:ekyc/features/signature/presentation/providers/signature_base64_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,6 +29,8 @@ mixin GeneratePdfMixin {
     required BuildContext ctx,
   }) async {
     try {
+      await getSignature(context: ctx, ref: ref);
+
       final pdf = pw.Document();
 
       final img = await rootBundle.load(ImageConstants.pdfWatermark);
@@ -59,23 +68,12 @@ mixin GeneratePdfMixin {
                       ],
                     ],
                   ),
-                  // pw.Center(
-                  //   child: pw.Image(image),
-                  // ),
                   pw.Watermark(child: pw.Image(watermarkImage)),
                   pw.Positioned(
                     top: 0,
                     right: 0,
                     child: pw.Image(headerImage, width: 100),
                   ),
-                  // if (index == list.length - 1) ...[
-                  //   pw.Positioned(
-                  //     bottom: 0,
-                  //     left: 0,
-                  //     right: 0,
-                  //     child: _agentDetailsWidget(ref),
-                  //   ),
-                  // ],
                 ],
               );
             },
@@ -142,6 +140,8 @@ mixin GeneratePdfMixin {
   }
 
   pw.Widget _agentDetailsWidget(WidgetRef ref) {
+    debugPrint("inside agentDetailsWidget");
+
     final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
     final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
 
@@ -160,7 +160,7 @@ mixin GeneratePdfMixin {
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
           pw.Text(
-            "Certified true copy of the original",
+            Strings.certifiedByString,
             style: pw.TextStyle(
               fontWeight: pw.FontWeight.bold,
             ),
@@ -175,9 +175,10 @@ mixin GeneratePdfMixin {
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
                     _agentDetailsItem(
-                        title: "Full Name", value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
+                        title: Strings.fullName,
+                        value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
                     pw.SizedBox(height: 32),
-                    _agentDetailsItem(title: "Job Title", value: agentDetails?.designation ?? ""),
+                    _agentDetailsItem(title: Strings.jobTitle, value: agentDetails?.designation ?? ""),
                   ],
                 ),
               ),
@@ -186,10 +187,10 @@ mixin GeneratePdfMixin {
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    _agentDetailsItem(title: "Address", value: agentDetails?.address ?? ""),
+                    _agentDetailsItem(title: Strings.address, value: agentDetails?.address ?? ""),
                     pw.SizedBox(height: 32),
                     _agentDetailsItem(
-                      title: "Date & Time",
+                      title: Strings.dateTime,
                       value: DateTimeFormatter.formatSignatureDate(DateTime.now()),
                     ),
                   ],
@@ -200,9 +201,9 @@ mixin GeneratePdfMixin {
                   crossAxisAlignment: pw.CrossAxisAlignment.start,
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    _agentDetailsItem(title: "Email", value: agentDetails?.emailId ?? ""),
+                    _agentDetailsItem(title: Strings.globalEmail, value: agentDetails?.emailId ?? ""),
                     pw.SizedBox(height: 32),
-                    _agentDetailsItem(title: "Signature", value: agentDetails?.designation ?? ""),
+                    _agentSignatureWidget(ref),
                   ],
                 ),
               ),
@@ -210,7 +211,7 @@ mixin GeneratePdfMixin {
           ),
           pw.SizedBox(height: 16),
           pw.Text(
-            "[Automatically generated by MUA Mauritius Union Assurance Cy Ltd/Head office]",
+            Strings.automaticallyGeneratedString,
             style: pw.TextStyle(
               color: PdfColor.fromHex("5E5E5E"),
               fontWeight: pw.FontWeight.bold,
@@ -221,7 +222,32 @@ mixin GeneratePdfMixin {
     );
   }
 
-  _agentDetailsItem({required String title, required String value}) {
+  pw.Widget _agentSignatureWidget(WidgetRef ref) {
+    String? signatureBase64 = ref.watch(signatureBase64Provider);
+
+    final Uint8List bytes = base64Decode(signatureBase64 ?? "");
+
+    return pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          Strings.signature,
+          style: pw.TextStyle(
+            fontSize: 12,
+            fontWeight: pw.FontWeight.bold,
+          ),
+        ),
+        if (signatureBase64 != null) ...[
+          pw.Image(
+            pw.MemoryImage(bytes),
+            width: 50,
+          ),
+        ],
+      ],
+    );
+  }
+
+  pw.Widget _agentDetailsItem({required String title, required String value}) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
@@ -239,6 +265,38 @@ mixin GeneratePdfMixin {
           ),
         ),
       ],
+    );
+  }
+
+  Future<void> getSignature({
+    required BuildContext context,
+    required WidgetRef ref,
+  }) async {
+    ref.watch(signatureBase64Provider.notifier).update((state) => null);
+
+    final agentSignaturePath = ref.watch(agentSignaturePathProvider);
+
+    final ViewFileRequestModel request = ViewFileRequestModel(
+      fileName: agentSignaturePath ?? "",
+      isImage: false,
+    );
+
+    final response = await getIt<ViewFile>().call(request);
+
+    response.fold(
+      (failure) {
+        debugPrint("failure: $failure");
+        context.showErrorSnackBar(message: Strings.globalErrorGenericMessageOne);
+      },
+      (ViewFileResponseModel success) {
+        if (success.status?.isSuccess == true) {
+          ref.watch(signatureBase64Provider.notifier).update((state) => success.body?.responseBody);
+        } else {
+          context.showErrorSnackBar(
+            message: success.status?.message ?? Strings.globalErrorGenericMessageOne,
+          );
+        }
+      },
     );
   }
 }
