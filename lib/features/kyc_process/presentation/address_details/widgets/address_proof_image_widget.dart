@@ -23,6 +23,8 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final selectedApplication = ref.read(selectedApplicationProvider);
       debugPrint("!selectedApplication!.addressDocImagePath!: ${selectedApplication!.addressDocImagePath!}");
+      debugPrint(
+          "selectedApplication.addressDocumentTypes?.documentCode: ${selectedApplication.addressDocumentTypes?.documentCode}");
 
       if (selectedApplication.addressDocumentTypes?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
         debugPrint("inside get address proof");

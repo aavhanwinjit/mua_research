@@ -192,7 +192,7 @@ mixin GeneratePdfMixin {
                     pw.SizedBox(height: 32),
                     _agentDetailsItem(
                       title: Strings.dateTime,
-                      value: DateTimeFormatter.formatSignatureDate(DateTime.now()),
+                      value: DateTimeFormatter.getpdfDateTime(DateTime.now()),
                     ),
                   ],
                 ),
@@ -254,9 +254,8 @@ mixin GeneratePdfMixin {
       children: [
         pw.Text(
           title,
-          style: pw.TextStyle(
+          style: const pw.TextStyle(
             fontSize: 12,
-            fontWeight: pw.FontWeight.bold,
           ),
         ),
         pw.Text(
