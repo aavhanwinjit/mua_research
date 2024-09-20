@@ -62,23 +62,24 @@ mixin GeneratePdfMixin {
                     mainAxisAlignment:
                         index != list.length - 1 ? pw.MainAxisAlignment.center : pw.MainAxisAlignment.start,
                     children: [
-                      pw.SizedBox(height: 50),
-                      pw.Image(image,
-                          height: index == list.length - 1
-                              ? MediaQuery.of(ctx).size.height * 0.45
-                              : MediaQuery.of(ctx).size.height * 0.7),
-                      if (index == list.length - 1) ...[
-                        pw.Spacer(),
-                        _agentDetailsWidget(ref),
-                      ],
+                      pw.Row(
+                        mainAxisAlignment: pw.MainAxisAlignment.end,
+                        children: [
+                          pw.Image(headerImage, width: 100),
+                        ],
+                      ),
+                      pw.SizedBox(height: 10),
+                      pw.Image(image, height: MediaQuery.of(ctx).size.height * 0.45),
+                      pw.Spacer(),
+                      _agentDetailsWidget(ref),
                     ],
                   ),
                   pw.Watermark(child: pw.Image(watermarkImage)),
-                  pw.Positioned(
-                    top: 0,
-                    right: 0,
-                    child: pw.Image(headerImage, width: 100),
-                  ),
+                  // pw.Positioned(
+                  //   top: 0,
+                  //   right: 0,
+                  //   child: pw.Image(headerImage, width: 100),
+                  // ),
                 ],
               );
             },
