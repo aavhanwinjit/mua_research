@@ -235,7 +235,7 @@ mixin GeneratePdfMixin {
           Strings.signature,
           style: pw.TextStyle(
             fontSize: 12,
-            fontWeight: pw.FontWeight.bold,
+            color: PdfColor.fromHex("646464"),
           ),
         ),
         if (signatureBase64 != null) ...[

@@ -5,7 +5,7 @@ class DateTimeFormatter {
   static final _applicationCardDateTimeFormat = DateFormat('dd/MM/yy • hh:mm a');
   static final _monthShortDateFormat = DateFormat('dd MMM yyyy');
   static final _documentDateFormat = DateFormat('yyyy-MM-dd');
-  static final _pdfDateFormat = DateFormat('dd/MM/yy HH:mm:ss');
+  static final _pdfDateFormat = DateFormat('dd/MM/yyyy HH:mm:ss');
 
   static String getApplicationCardDateTime(DateTime? dateTime) {
     return dateTime != null ? _applicationCardDateTimeFormat.format(dateTime) : "";
