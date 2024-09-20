@@ -254,8 +254,9 @@ mixin GeneratePdfMixin {
       children: [
         pw.Text(
           title,
-          style: const pw.TextStyle(
+          style: pw.TextStyle(
             fontSize: 12,
+            color: PdfColor.fromHex("646464"),
           ),
         ),
         pw.Text(
