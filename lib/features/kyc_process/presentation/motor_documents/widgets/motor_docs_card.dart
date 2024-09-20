@@ -70,12 +70,13 @@ class _MotorDocsCardState extends ConsumerState<MotorDocsCard> {
               .map(
                 (MotorInsuranceDocumentElement e) => Container(
                   margin: EdgeInsets.only(right: 8.w),
-                  width: 150.h,
+                  width: 120.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         e.documentElement!.motorInsuranceDocType ?? "-",
+                        maxLines: 2,
                         style: const TextStyle(color: textGrayColor2),
                       ),
                       const SizedBox(height: 5),

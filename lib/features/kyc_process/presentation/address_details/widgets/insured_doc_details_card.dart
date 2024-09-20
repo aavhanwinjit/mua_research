@@ -10,6 +10,7 @@ import 'package:ekyc/widgets/info_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:open_file/open_file.dart';
 
 class InsuredDocDetailsCard extends ConsumerStatefulWidget {
   const InsuredDocDetailsCard({super.key});
@@ -245,7 +246,9 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
                           style: const TextStyle(color: textGrayColor2),
                         ),
                         const SizedBox(height: 5),
-                        _imageWidget(e.filePath),
+                        e.documentElement?.documentCode == DocumentCodes.DRC.toString().split('.').last
+                            ? _pdfWidget(e.filePath ?? "")
+                            : _imageWidget(e.filePath),
                       ],
                     ),
                   ))
@@ -263,6 +266,26 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
         height: 150.h,
         width: 150.h,
         fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _pdfWidget(String filePath) {
+    return InkWell(
+      onTap: () {
+        OpenFile.open(filePath);
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(12),
+        child: SizedBox(
+          height: 80.h,
+          width: 80.h,
+          child: Center(
+            child: Image.asset(
+              ImageConstants.pdfIcon2,
+            ),
+          ),
+        ),
       ),
     );
   }

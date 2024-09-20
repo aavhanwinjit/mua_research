@@ -24,7 +24,7 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
       final selectedApplication = ref.read(selectedApplicationProvider);
       debugPrint("!selectedApplication!.addressDocImagePath!: ${selectedApplication!.addressDocImagePath!}");
 
-      if (selectedApplication.addressDocumentTypes?.documentCode != DocumentCodes.LAA.toString().split('.').last) {
+      if (selectedApplication.addressDocumentTypes?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
         debugPrint("inside get address proof");
         getAddressProofImage(context: context, ref: ref);
       }
@@ -50,7 +50,7 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
               ? SizedBox(
                   height: 150.h,
                 )
-              : selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.LAA.toString().split('.').last
+              : selectedApplication?.addressDocumentTypes?.documentCode != DocumentCodes.UTB.toString().split('.').last
                   ? _pdfWidget()
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(12),
