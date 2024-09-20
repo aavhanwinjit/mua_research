@@ -299,7 +299,9 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
       if (generatedPdfPath != null) {
         await navigateToReviewScreen(generatedPdfPath, result.first.path);
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   void captureMultipleImage(BuildContext context) async {
@@ -332,7 +334,9 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
       if (generatedPdfPath != null) {
         await navigateToReviewScreen(generatedPdfPath, result.first.file.path);
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   Future<void> navigateToReviewScreen(String generatedPdfPath, String firstImagePath) async {

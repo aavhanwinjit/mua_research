@@ -75,11 +75,6 @@ mixin GeneratePdfMixin {
                     ],
                   ),
                   pw.Watermark(child: pw.Image(watermarkImage)),
-                  // pw.Positioned(
-                  //   top: 0,
-                  //   right: 0,
-                  //   child: pw.Image(headerImage, width: 100),
-                  // ),
                 ],
               );
             },

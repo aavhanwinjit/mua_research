@@ -168,6 +168,10 @@ class _InsuredDocumentsScreenState extends ConsumerState<InsuredDocumentsScreen>
         _dropdownWidget(item, index),
         SizedBox(height: 24.h),
         DocumentUploadContainer2(
+          uploadGeneratedPdfDoc: (item.documentElement?.documentCode != null &&
+                  item.documentElement?.documentCode == DocumentCodes.DRC.toString().split('.').last)
+              ? true
+              : false,
           filePath: item.filePath,
           documentCode: item.documentElement?.documentCode ?? "",
           onChange: (String path, ScanDocumentResponseBody? response) async {

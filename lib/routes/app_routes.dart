@@ -216,9 +216,12 @@ final GoRouter router = GoRouter(
         final String? documentCode = extra['documentCode'] as String?;
         // StateProvider<String?> provider = state.extra as StateProvider<String?>;
 
+        final bool? isPdf = extra['isPdf'] as bool?;
+
         return ReviewUploadedDocumentScreen(
           provider: provider,
           documentCode: documentCode,
+          isPdf: isPdf,
         );
       },
     ),

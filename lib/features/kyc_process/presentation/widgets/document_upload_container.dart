@@ -5,7 +5,6 @@ import 'dart:typed_data';
 // import 'package:docscan/docscan.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/mixins/generate_pdf_mixin.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
@@ -33,6 +32,7 @@ class DocumentUploadContainer extends ConsumerStatefulWidget {
   final Function()? disableCallback;
   final bool? hideClearButton;
   final String? documentCode;
+  final bool? uploadGeneratedPdfDoc;
 
   const DocumentUploadContainer({
     required this.provider,
@@ -44,6 +44,7 @@ class DocumentUploadContainer extends ConsumerStatefulWidget {
     this.disableCallback,
     this.hideClearButton,
     this.documentCode,
+    this.uploadGeneratedPdfDoc = false,
     super.key,
   });
 
@@ -96,8 +97,7 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
                 )
               : Stack(
                   children: [
-                    if (widget.documentCode != null &&
-                        widget.documentCode == DocumentCodes.LAA.toString().split('.').last) ...[
+                    if (widget.uploadGeneratedPdfDoc == true) ...[
                       Positioned.fill(
                         child: SizedBox(
                           height: 50.h,
@@ -149,7 +149,7 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           CupertinoActionSheetAction(
             child: const Text('Camera'),
             onPressed: () {
-              if (widget.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+              if (widget.uploadGeneratedPdfDoc == true) {
                 captureMultipleImage(context);
               } else {
                 pickImage(ImageSource.camera, context);
@@ -160,7 +160,7 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
           CupertinoActionSheetAction(
             child: const Text('Gallery'),
             onPressed: () {
-              if (widget.documentCode == DocumentCodes.LAA.toString().split('.').last) {
+              if (widget.uploadGeneratedPdfDoc == true) {
                 pickMultipleImage(context);
               } else {
                 pickImage(ImageSource.gallery, context);
@@ -267,26 +267,11 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
       );
 
       if (generatedPdfPath != null) {
-        ref.watch(capturedFilePathProvider.notifier).update((state) => generatedPdfPath);
-
-        context.pop();
-
-        final bool? res = await context.pushNamed(
-          AppRoutes.confirmUploadOrRetakeScreen,
-          extra: {"provider": widget.provider, "documentCode": widget.documentCode},
-        );
-
-        debugPrint("res: $res");
-
-        if (res == true) {
-          ref.watch(capturedFilePathProvider.notifier).update((state) => null);
-
-          debugPrint("before calling container tap");
-
-          _onContainerTap();
-        }
+        await navigateToReviewScreen(generatedPdfPath);
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 
   void captureMultipleImage(BuildContext context) async {
@@ -317,26 +302,36 @@ class _DocumentUploadContainerState extends ConsumerState<DocumentUploadContaine
       );
 
       if (generatedPdfPath != null) {
-        ref.watch(capturedFilePathProvider.notifier).update((state) => generatedPdfPath);
-
-        context.pop();
-
-        final bool? res = await context.pushNamed(
-          AppRoutes.confirmUploadOrRetakeScreen,
-          extra: {"provider": widget.provider, "documentCode": widget.documentCode},
-        );
-
-        debugPrint("res: $res");
-
-        if (res == true) {
-          ref.watch(capturedFilePathProvider.notifier).update((state) => null);
-
-          debugPrint("before calling container tap");
-
-          _onContainerTap();
-        }
+        await navigateToReviewScreen(generatedPdfPath);
       }
-    } catch (e) {}
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future<void> navigateToReviewScreen(String generatedPdfPath) async {
+    ref.watch(capturedFilePathProvider.notifier).update((state) => generatedPdfPath);
+
+    context.pop();
+
+    final bool? res = await context.pushNamed(
+      AppRoutes.confirmUploadOrRetakeScreen,
+      extra: {
+        "provider": widget.provider,
+        "documentCode": widget.documentCode,
+        'isPdf': true,
+      },
+    );
+
+    debugPrint("res: $res");
+
+    if (res == true) {
+      ref.watch(capturedFilePathProvider.notifier).update((state) => null);
+
+      debugPrint("before calling container tap");
+
+      _onContainerTap();
+    }
   }
 
   Future<String?> _cropImage(String path) async {

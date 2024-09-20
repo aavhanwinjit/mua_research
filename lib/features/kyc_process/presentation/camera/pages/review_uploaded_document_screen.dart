@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:ekyc/core/app_export.dart';
-import 'package:ekyc/core/constants/enums/document_codes.dart';
 import 'package:ekyc/core/helpers/appbar_helper.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/camera_screen_provider.dart';
 import 'package:ekyc/features/kyc_process/presentation/camera/providers/review_uploaded_doc_provider.dart';
@@ -13,10 +12,12 @@ import 'package:open_file/open_file.dart';
 class ReviewUploadedDocumentScreen extends ConsumerWidget {
   final StateProvider<String?> provider;
   final String? documentCode;
+  final bool? isPdf;
 
   const ReviewUploadedDocumentScreen({
     required this.provider,
     this.documentCode,
+    this.isPdf,
     super.key,
   });
 
@@ -37,7 +38,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
             children: [
               const Spacer(),
               InkWell(
-                onTap: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
+                onTap: isPdf == true
                     ? () {
                         OpenFile.open(capturedFilePath);
                       }
@@ -51,7 +52,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last
+                    child: isPdf == true
                         ? SizedBox(
                             width: double.infinity,
                             height: 250.h,
@@ -74,7 +75,7 @@ class ReviewUploadedDocumentScreen extends ConsumerWidget {
                 ),
               ),
               SizedBox(height: 32.h),
-              if (documentCode != null && documentCode == DocumentCodes.LAA.toString().split('.').last) ...[
+              if (isPdf == true) ...[
                 const SizedBox()
               ] else ...[
                 const Text(

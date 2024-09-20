@@ -135,7 +135,7 @@ class AddressDetailsCard extends ConsumerWidget {
             style: const TextStyle(color: textGrayColor2),
           ),
           const SizedBox(height: 10),
-          selectedAddressDocType?.documentCode == DocumentCodes.LAA.toString().split('.').last
+          selectedAddressDocType?.documentCode != DocumentCodes.UTB.toString().split('.').last
               ? _pdfWidget(addressProofImagePath ?? "")
               : _imageWidget(addressProofImagePath),
         ],

@@ -85,6 +85,11 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
                       _dropdownWidget(),
                       SizedBox(height: 24.h),
                       DocumentUploadContainer(
+                        uploadGeneratedPdfDoc: (ref.watch(selectedAddressDocTypeProvider)?.documentCode != null &&
+                                ref.watch(selectedAddressDocTypeProvider)?.documentCode !=
+                                    DocumentCodes.UTB.toString().split('.').last)
+                            ? true
+                            : false,
                         documentCode: ref.watch(selectedAddressDocTypeProvider)?.documentCode,
                         provider: addressProofFilePathProvider,
                         disable: ref.watch(selectedAddressDocTypeProvider) == null,
@@ -178,7 +183,7 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
           final List<int> addressProofFileBytes = await addressProofFile.readAsBytes() as List<int>;
           final String addressProofFileBase64 = base64Encode(addressProofFileBytes);
 
-          String? fileExtension = selectedAddressDocType?.documentCode == DocumentCodes.LAA.toString().split('.').last
+          String? fileExtension = selectedAddressDocType?.documentCode != DocumentCodes.UTB.toString().split('.').last
               ? FileExtensionEnums.pdf.toString().split('.').last
               : null;
 
