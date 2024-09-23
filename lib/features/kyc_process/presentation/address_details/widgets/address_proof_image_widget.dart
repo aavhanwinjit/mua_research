@@ -22,12 +22,11 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final selectedApplication = ref.read(selectedApplicationProvider);
-      debugPrint("!selectedApplication!.addressDocImagePath!: ${selectedApplication!.addressDocImagePath!}");
-      debugPrint(
+      print("!selectedApplication!.addressDocImagePath!: ${selectedApplication!.addressDocImagePath!}");
+      print(
           "selectedApplication.addressDocumentTypes?.documentCode: ${selectedApplication.addressDocumentTypes?.documentCode}");
 
       if (selectedApplication.addressDocumentTypes?.documentCode == DocumentCodes.UTB.toString().split('.').last) {
-        debugPrint("inside get address proof");
         getAddressProofImage(context: context, ref: ref);
       }
     });
@@ -48,12 +47,11 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
             style: const TextStyle(color: textGrayColor2),
           ),
           const SizedBox(height: 5),
-          addressProofBase64 == null
-              ? SizedBox(
-                  height: 150.h,
-                )
-              : selectedApplication?.addressDocumentTypes?.documentCode != DocumentCodes.UTB.toString().split('.').last
-                  ? _pdfWidget()
+          selectedApplication?.addressDocumentTypes?.documentCode == DocumentCodes.UTB.toString().split('.').last
+              ? addressProofBase64 == null
+                  ? SizedBox(
+                      height: 150.h,
+                    )
                   : ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.memory(
@@ -62,7 +60,8 @@ class SignatureWidgetState extends ConsumerState<AddressProofImageWidget> with G
                         width: 150.h,
                         fit: BoxFit.cover,
                       ),
-                    ),
+                    )
+              : _pdfWidget(),
         ],
       ),
     );

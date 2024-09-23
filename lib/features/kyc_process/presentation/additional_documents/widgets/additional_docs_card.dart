@@ -55,6 +55,7 @@ class AdditionalDocsCard extends ConsumerWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: selectedDocsListProvider.list().map((e) {
             return Container(
               margin: EdgeInsets.only(right: 8.w),
@@ -62,6 +63,7 @@ class AdditionalDocsCard extends ConsumerWidget {
 
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     e.documentElement?.additionalDocumentTypeName ?? "-",

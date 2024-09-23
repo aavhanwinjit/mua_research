@@ -234,12 +234,14 @@ class _InsuredDocDetailsCardState extends ConsumerState<InsuredDocDetailsCard> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: selectedDocsListProvider
               .list()
               .map((e) => Padding(
                     padding: EdgeInsets.only(right: 16.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
                           e.documentElement?.porDocType ?? "-",

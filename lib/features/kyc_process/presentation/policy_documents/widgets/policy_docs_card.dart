@@ -56,6 +56,7 @@ class PolicyDocsCard extends ConsumerWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: selectedDocsListProvider
               .list()
               .map(
@@ -64,6 +65,7 @@ class PolicyDocsCard extends ConsumerWidget {
                   width: 120.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
                         e.documentElement?.policyDocTypes ?? "-",

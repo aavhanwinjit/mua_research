@@ -59,6 +59,7 @@ class _NonMotorDocsCardState extends ConsumerState<NonMotorDocsCard> {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: selectedDocsListProvider
               .list()
               .map(
@@ -67,6 +68,7 @@ class _NonMotorDocsCardState extends ConsumerState<NonMotorDocsCard> {
                   width: 120.h,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Text(
                         e.documentElement!.nonMotorInsuranceDocType ?? "-",
