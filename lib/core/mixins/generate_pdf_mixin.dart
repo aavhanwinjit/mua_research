@@ -68,10 +68,16 @@ mixin GeneratePdfMixin {
                           pw.Image(headerImage, width: 100),
                         ],
                       ),
-                      pw.SizedBox(height: 10),
-                      pw.Image(image, height: MediaQuery.of(ctx).size.height * 0.45),
-                      pw.Spacer(),
-                      _agentDetailsWidget(ref),
+                      index == list.length - 1 ? pw.SizedBox(height: 10) : pw.Spacer(),
+                      pw.Image(image,
+                          height: index == list.length - 1
+                              ? MediaQuery.of(ctx).size.height * 0.45
+                              : MediaQuery.of(ctx).size.height * 0.7),
+                      index == list.length - 1 ? pw.SizedBox() : pw.Spacer(),
+                      if (index == list.length - 1) ...[
+                        pw.Spacer(),
+                        _agentDetailsWidget(ref),
+                      ],
                     ],
                   ),
                   pw.Watermark(child: pw.Image(watermarkImage)),
