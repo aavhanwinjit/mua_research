@@ -64,7 +64,8 @@ class EncryptionInterceptor extends Interceptor {
       debugPrint("${decryptedResponse['rb']}");
       debugPrint("${decryptedResponse['rb'].runtimeType}");
 
-      if (decryptedResponse['rb'] is String && decryptedResponse['rb'].length == 0) {
+      if ((decryptedResponse['rb'] is String && decryptedResponse['rb'].length == 0) ||
+          (decryptedResponse['rb'] == {})) {
         decryptedResponse['rb'] = null;
       } else {
         decryptedResponse['rb'] = json.decode(decryptedResponse['rb']);

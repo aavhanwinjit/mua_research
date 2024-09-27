@@ -6,12 +6,14 @@ import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/date_time_formatter.dart';
 import 'package:ekyc/core/helpers/progress_dialog_helper.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
+import 'package:ekyc/features/kyc_process/presentation/providers/kyc_process_common_providers.dart';
 import 'package:ekyc/features/profile/data/models/get_agent_details/response/get_agent_details_response_model.dart';
 import 'package:ekyc/features/profile/presentation/providers/get_agent_details_provider.dart';
 import 'package:ekyc/features/signature/data/models/view_file/request/view_file_request_model.dart';
 import 'package:ekyc/features/signature/data/models/view_file/response/view_file_response_model.dart';
 import 'package:ekyc/features/signature/domain/usecases/view_file.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_base64_provider.dart';
+import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -218,7 +220,7 @@ mixin GeneratePdfMixin {
           ),
           pw.SizedBox(height: 16),
           pw.Text(
-            Strings.automaticallyGeneratedString,
+            "${Strings.automaticallyGeneratedString} ${generateCompanyname(ref)}",
             style: pw.TextStyle(
               color: PdfColor.fromHex("5E5E5E"),
               fontWeight: pw.FontWeight.bold,
@@ -227,6 +229,39 @@ mixin GeneratePdfMixin {
         ],
       ),
     );
+  }
+
+  String generateCompanyname(WidgetRef ref) {
+    final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
+    // final companies = agentDetails?.companies;
+
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+    String kycLifeCompany = "MUA Life Ltd";
+    String kycMotorNonMotorCompany = "Mauritius Union Assurance Cy Ltd";
+
+    String companyName = "";
+
+    if (selectedApplication?.kycTypeId == 1) {
+      companyName = "$kycLifeCompany / ${agentDetails?.agencyName ?? ""}";
+    } else {
+      companyName = "$kycMotorNonMotorCompany / ${agentDetails?.agencyName ?? ""}";
+    }
+
+    // if (companies != null && companies.isNotEmpty) {
+    //   String companyName = companies.first.companyName ?? "";
+
+    //   if (companies.length > 1) {
+    //     companyName = "$companyName, ${companies[1].companyName ?? ""}";
+    //   }
+
+    //   companyName = "$companyName / ${agentDetails?.agencyName ?? ""}";
+
+    //   return companyName;
+    // }
+
+    return companyName;
   }
 
   pw.Widget _agentSignatureWidget(WidgetRef ref) {

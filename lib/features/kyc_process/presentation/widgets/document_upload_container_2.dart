@@ -316,6 +316,7 @@ class _DocumentUploadContainer2State extends ConsumerState<DocumentUploadContain
 
       for (var element in result) {
         final fileSize = await element.file.length();
+        debugPrint("fileSize: $fileSize");
 
         if (fileSize > 5000000) {
           context.showErrorSnackBar(message: Strings.fileSizeErrorString);
