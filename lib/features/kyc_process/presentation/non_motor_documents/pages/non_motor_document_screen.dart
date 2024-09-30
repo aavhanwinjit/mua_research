@@ -178,7 +178,7 @@ class _PolicyDocumentsScreenState extends ConsumerState<NonMotorDocumentScreen> 
           label: Strings.nonMotorDocsContainerLabel,
           cameraScreenTitle: Strings.scanDocuments,
           cameraScreenDescription: Strings.insuredDocCameraLabel,
-          reviewScreenTitle: Strings.uploadMotorInsuranceDocuments,
+          reviewScreenTitle: Strings.uploadNonMotorDocuments,
           disable: item.documentElement == null,
           disableCallback: () {
             context.showErrorSnackBar(message: Strings.selectDocumentType);
