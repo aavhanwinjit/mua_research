@@ -35,7 +35,6 @@ mixin GeneratePdfMixin {
     try {
       await getSignature(context: ctx, ref: ref);
 
-
       final pdf = pw.Document();
 
       final img = await rootBundle.load(ImageConstants.pdfWatermark);
@@ -86,7 +85,7 @@ mixin GeneratePdfMixin {
                           mainAxisAlignment: pw.MainAxisAlignment.end,
                           children: [
                             pw.Text(
-                              "${index + 1}",
+                              "Page ${index + 1}",
                               style: pw.TextStyle(
                                 fontSize: 12,
                                 color: PdfColor.fromHex("646464"),
@@ -181,7 +180,7 @@ mixin GeneratePdfMixin {
       children: [
         pw.Container(
           width: double.infinity,
-          padding: const pw.EdgeInsets.all(16),
+          padding: const pw.EdgeInsets.all(20),
           decoration: pw.BoxDecoration(
             border: pw.Border.all(
               color: PdfColor.fromHex("000000"),
@@ -243,7 +242,7 @@ mixin GeneratePdfMixin {
                   ),
                 ],
               ),
-              pw.SizedBox(height: 16),
+              pw.SizedBox(height: 20),
               pw.Text(
                 "${Strings.automaticallyGeneratedString} ${generateCompanyname(ref)}",
                 style: pw.TextStyle(
@@ -257,17 +256,19 @@ mixin GeneratePdfMixin {
         pw.SizedBox(height: 10),
         pw.Row(
           children: [
+            pw.SizedBox(width: 20),
             pw.Expanded(
               child: pw.Text(
                 "Digital KYC APP : ${selectedApplication?.idDocSurname ?? ""} ${selectedApplication?.idDocOtherName ?? ""} ${selectedApplication?.idDocNumber ?? ""}",
                 style: pw.TextStyle(
                   fontSize: 12,
+                  fontWeight: pw.FontWeight.bold,
                   color: PdfColor.fromHex("646464"),
                 ),
               ),
             ),
             pw.Text(
-              "$pageNumber",
+              "Page $pageNumber",
               style: pw.TextStyle(
                 fontSize: 12,
                 color: PdfColor.fromHex("646464"),
