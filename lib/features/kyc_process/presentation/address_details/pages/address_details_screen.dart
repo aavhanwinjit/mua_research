@@ -149,7 +149,8 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
       onChanged: loading == true
           ? null
           : (value) {
-              ref.watch(addressProofFilePathProvider.notifier).update((state) => null);
+              clearData();
+
               ref.watch(selectedAddressDocTypeProvider.notifier).update((state) => value as AddressDocumentTypeModel);
             },
       items: addressDocTypesNotifier.addressDocsTypesList().map((AddressDocumentTypeModel value) {
@@ -307,5 +308,13 @@ class _AddressDetailsScreenState extends ConsumerState<AddressDetailsScreen>
         response!.ocrResponse!.documentdata!.address!.isNotEmpty) {
       ref.watch(addressTextProvider.notifier).update((state) => response.ocrResponse?.documentdata?.address);
     }
+  }
+
+  void clearData() {
+    ref.watch(addressOtherNameProvider.notifier).update((state) => null);
+    ref.watch(addressSurnameProvider.notifier).update((state) => null);
+    ref.watch(addressTextProvider.notifier).update((state) => null);
+
+    ref.watch(addressProofFilePathProvider.notifier).update((state) => null);
   }
 }
