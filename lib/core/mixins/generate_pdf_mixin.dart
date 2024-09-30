@@ -35,6 +35,7 @@ mixin GeneratePdfMixin {
     try {
       await getSignature(context: ctx, ref: ref);
 
+
       final pdf = pw.Document();
 
       final img = await rootBundle.load(ImageConstants.pdfWatermark);
@@ -75,10 +76,28 @@ mixin GeneratePdfMixin {
                           height: index == list.length - 1
                               ? MediaQuery.of(ctx).size.height * 0.45
                               : MediaQuery.of(ctx).size.height * 0.7),
-                      index == list.length - 1 ? pw.SizedBox() : pw.Spacer(),
+
+                      // page number
+                      if (index == list.length - 1) ...[
+                        pw.SizedBox()
+                      ] else ...[
+                        pw.Spacer(),
+                        pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.end,
+                          children: [
+                            pw.Text(
+                              "${index + 1}",
+                              style: pw.TextStyle(
+                                fontSize: 12,
+                                color: PdfColor.fromHex("646464"),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                       if (index == list.length - 1) ...[
                         pw.Spacer(),
-                        _agentDetailsWidget(ref),
+                        _agentDetailsWidget(ref, index + 1),
                       ],
                     ],
                   ),
@@ -148,86 +167,115 @@ mixin GeneratePdfMixin {
     }
   }
 
-  pw.Widget _agentDetailsWidget(WidgetRef ref) {
+  pw.Widget _agentDetailsWidget(WidgetRef ref, int pageNumber) {
     debugPrint("inside agentDetailsWidget");
 
     final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
     final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
 
-    return pw.Container(
-      width: double.infinity,
-      padding: const pw.EdgeInsets.all(16),
-      decoration: pw.BoxDecoration(
-        border: pw.Border.all(
-          color: PdfColor.fromHex("000000"),
-          width: 1,
-        ),
-        borderRadius: pw.BorderRadius.circular(16),
-        color: PdfColor.fromHex("FFFFFF"),
-      ),
-      child: pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          pw.Text(
-            Strings.certifiedByString,
-            style: pw.TextStyle(
-              fontWeight: pw.FontWeight.bold,
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+    return pw.Column(
+      mainAxisSize: pw.MainAxisSize.min,
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Container(
+          width: double.infinity,
+          padding: const pw.EdgeInsets.all(16),
+          decoration: pw.BoxDecoration(
+            border: pw.Border.all(
+              color: PdfColor.fromHex("000000"),
+              width: 1,
             ),
+            borderRadius: pw.BorderRadius.circular(16),
+            color: PdfColor.fromHex("FFFFFF"),
           ),
-          pw.SizedBox(height: 16),
-          pw.Row(
+          child: pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    _agentDetailsItem(
-                        title: Strings.fullName,
-                        value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
-                    pw.SizedBox(height: 32),
-                    _agentDetailsItem(title: Strings.jobTitle, value: agentDetails?.designation ?? ""),
-                  ],
+              pw.Text(
+                Strings.certifiedByString,
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
-              pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    _agentDetailsItem(title: Strings.address, value: agentDetails?.address ?? ""),
-                    pw.SizedBox(height: 32),
-                    _agentDetailsItem(
-                      title: Strings.dateTime,
-                      value: DateTimeFormatter.getpdfDateTime(DateTime.now()),
+              pw.SizedBox(height: 16),
+              pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                children: [
+                  pw.Expanded(
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        _agentDetailsItem(
+                            title: Strings.fullName,
+                            value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
+                        pw.SizedBox(height: 32),
+                        _agentDetailsItem(title: Strings.jobTitle, value: agentDetails?.designation ?? ""),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  pw.Expanded(
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        _agentDetailsItem(title: Strings.address, value: agentDetails?.address ?? ""),
+                        pw.SizedBox(height: 32),
+                        _agentDetailsItem(
+                          title: Strings.dateTime,
+                          value: DateTimeFormatter.getpdfDateTime(DateTime.now()),
+                        ),
+                      ],
+                    ),
+                  ),
+                  pw.Expanded(
+                    child: pw.Column(
+                      crossAxisAlignment: pw.CrossAxisAlignment.start,
+                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+                      children: [
+                        _agentDetailsItem(title: Strings.globalEmail, value: agentDetails?.emailId ?? ""),
+                        pw.SizedBox(height: 32),
+                        _agentSignatureWidget(ref),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              pw.Expanded(
-                child: pw.Column(
-                  crossAxisAlignment: pw.CrossAxisAlignment.start,
-                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                  children: [
-                    _agentDetailsItem(title: Strings.globalEmail, value: agentDetails?.emailId ?? ""),
-                    pw.SizedBox(height: 32),
-                    _agentSignatureWidget(ref),
-                  ],
+              pw.SizedBox(height: 16),
+              pw.Text(
+                "${Strings.automaticallyGeneratedString} ${generateCompanyname(ref)}",
+                style: pw.TextStyle(
+                  color: PdfColor.fromHex("5E5E5E"),
+                  fontWeight: pw.FontWeight.bold,
                 ),
               ),
             ],
           ),
-          pw.SizedBox(height: 16),
-          pw.Text(
-            "${Strings.automaticallyGeneratedString} ${generateCompanyname(ref)}",
-            style: pw.TextStyle(
-              color: PdfColor.fromHex("5E5E5E"),
-              fontWeight: pw.FontWeight.bold,
+        ),
+        pw.SizedBox(height: 10),
+        pw.Row(
+          children: [
+            pw.Expanded(
+              child: pw.Text(
+                "Digital KYC APP : ${selectedApplication?.idDocSurname ?? ""} ${selectedApplication?.idDocOtherName ?? ""} ${selectedApplication?.idDocNumber ?? ""}",
+                style: pw.TextStyle(
+                  fontSize: 12,
+                  color: PdfColor.fromHex("646464"),
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
+            pw.Text(
+              "$pageNumber",
+              style: pw.TextStyle(
+                fontSize: 12,
+                color: PdfColor.fromHex("646464"),
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
