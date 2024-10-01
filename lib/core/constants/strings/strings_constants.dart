@@ -213,7 +213,8 @@ class Strings {
   static const String motorDocSubtitle = "Upload the motor document(s)";
   // static const String motorDocSubtitle = "Upload the motor document with visible details like number.";
   static const String nonMotorDocuments = "Non-Motor Documents";
-  static const String nonMotorDocSubtitle = "Upload the non-motor document with visible details like number.";
+  static const String nonMotorDocSubtitle = "Upload the non-motor document(s)";
+  // static const String nonMotorDocSubtitle = "Upload the non-motor document with visible details like number.";
 
   //Camera Screen
   static const String cameraPermissionRequired = "Camera Permission Required to Scan the document";
