@@ -43,6 +43,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
+      controller.text = "";
+      setState(() {});
     });
   }
 
@@ -95,7 +97,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   SizedBox(height: 24.h),
                   CustomPrimaryButton(
                     loading: ref.watch(verifyMobileNumberLoadingProvider),
-                    disable: ref.watch(phoneNumberProvider).trim().length < 8,
+                    disable: ref.watch(phoneNumberProvider).trim().length < 8 && controller.text.length < 8,
                     onTap: () {
                       _verifyMobileNumber();
                     },

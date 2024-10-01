@@ -210,7 +210,8 @@ class Strings {
   static const String additionalDocsSubtitle =
       "Provide any additional documents required for the specific KYC type you selected.";
   static const String motorDocuments = "Motor Documents";
-  static const String motorDocSubtitle = "Upload the motor document with visible details like number.";
+  static const String motorDocSubtitle = "Upload the motor document(s)";
+  // static const String motorDocSubtitle = "Upload the motor document with visible details like number.";
   static const String nonMotorDocuments = "Non-Motor Documents";
   static const String nonMotorDocSubtitle = "Upload the non-motor document with visible details like number.";
 
