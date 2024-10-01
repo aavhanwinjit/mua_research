@@ -14,7 +14,6 @@ import 'package:ekyc/features/signature/data/models/view_file/response/view_file
 import 'package:ekyc/features/signature/domain/usecases/view_file.dart';
 import 'package:ekyc/features/signature/presentation/providers/signature_base64_provider.dart';
 import 'package:ekyc/models/agent_application_model/agent_application_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -167,11 +166,6 @@ mixin GeneratePdfMixin {
   }
 
   pw.Widget _agentDetailsWidget(WidgetRef ref, int pageNumber) {
-    debugPrint("inside agentDetailsWidget");
-
-    final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
-    final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
-
     final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
 
     return pw.Column(
@@ -199,49 +193,7 @@ mixin GeneratePdfMixin {
                 ),
               ),
               pw.SizedBox(height: 16),
-              pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Expanded(
-                    child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        _agentDetailsItem(
-                            title: Strings.fullName,
-                            value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
-                        pw.SizedBox(height: 32),
-                        _agentDetailsItem(title: Strings.jobTitle, value: agentDetails?.designation ?? ""),
-                      ],
-                    ),
-                  ),
-                  pw.Expanded(
-                    child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        _agentDetailsItem(title: Strings.address, value: agentDetails?.address ?? ""),
-                        pw.SizedBox(height: 32),
-                        _agentDetailsItem(
-                          title: Strings.dateTime,
-                          value: DateTimeFormatter.getpdfDateTime(DateTime.now()),
-                        ),
-                      ],
-                    ),
-                  ),
-                  pw.Expanded(
-                    child: pw.Column(
-                      crossAxisAlignment: pw.CrossAxisAlignment.start,
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        _agentDetailsItem(title: Strings.globalEmail, value: agentDetails?.emailId ?? ""),
-                        pw.SizedBox(height: 32),
-                        _agentSignatureWidget(ref),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              gridView(ref),
               pw.SizedBox(height: 20),
               pw.Text(
                 "${Strings.automaticallyGeneratedString} ${generateCompanyname(ref)}",
@@ -255,11 +207,12 @@ mixin GeneratePdfMixin {
         ),
         pw.SizedBox(height: 10),
         pw.Row(
+          mainAxisAlignment: pw.MainAxisAlignment.end,
           children: [
             pw.SizedBox(width: 20),
             pw.Expanded(
               child: pw.Text(
-                "Digital KYC APP : ${selectedApplication?.idDocSurname ?? ""} ${selectedApplication?.idDocOtherName ?? ""} ${selectedApplication?.idDocNumber ?? ""}",
+                generateSpecimenString(ref),
                 style: pw.TextStyle(
                   fontSize: 12,
                   fontWeight: pw.FontWeight.bold,
@@ -267,6 +220,7 @@ mixin GeneratePdfMixin {
                 ),
               ),
             ),
+            pw.SizedBox(width: 20),
             pw.Text(
               "Page $pageNumber",
               style: pw.TextStyle(
@@ -274,6 +228,43 @@ mixin GeneratePdfMixin {
                 color: PdfColor.fromHex("646464"),
               ),
             ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  pw.Widget gridView(WidgetRef ref) {
+    final GetAgentDetailsResponseModel? getAgentDetailsResponse = ref.watch(agentDetailsResponseProvider);
+    final GetAgentDetailsResponseBody? agentDetails = getAgentDetailsResponse?.body?.responseBody;
+
+    return pw.Table(
+      columnWidths: {
+        0: const pw.FlexColumnWidth(),
+        2: const pw.FlexColumnWidth(),
+        4: const pw.FlexColumnWidth(),
+      },
+      children: [
+        pw.TableRow(
+          children: [
+            _agentDetailsItem(
+                title: Strings.fullName, value: "${agentDetails?.agentName ?? ""} ${agentDetails?.lastName ?? ""}"),
+            pw.SizedBox(width: 20),
+            _agentDetailsItem(title: Strings.address, value: agentDetails?.address ?? ""),
+            pw.SizedBox(width: 20),
+            _agentDetailsItem(title: Strings.globalEmail, value: agentDetails?.emailId ?? ""),
+          ],
+        ),
+        pw.TableRow(children: [
+          pw.SizedBox(height: 20),
+        ]),
+        pw.TableRow(
+          children: [
+            _agentDetailsItem(title: Strings.jobTitle, value: agentDetails?.designation ?? ""),
+            pw.SizedBox(width: 20),
+            _agentDetailsItem(title: Strings.dateTime, value: DateTimeFormatter.getpdfDateTime(DateTime.now())),
+            pw.SizedBox(width: 20),
+            _agentSignatureWidget(ref),
           ],
         ),
       ],
@@ -313,6 +304,24 @@ mixin GeneratePdfMixin {
     return companyName;
   }
 
+  String generateSpecimenString(WidgetRef ref) {
+    final AgentApplicationModel? selectedApplication = ref.watch(selectedApplicationProvider);
+
+    String? policyQuoteNumber;
+
+    if (selectedApplication?.kycTypeId == 1) {
+      if (selectedApplication?.policyNumber != null && selectedApplication!.policyNumber!.isNotEmpty) {
+        policyQuoteNumber = "/ ${selectedApplication.policyNumber}";
+      }
+    } else {
+      if (selectedApplication?.quoteNumber != null && selectedApplication!.quoteNumber!.isNotEmpty) {
+        policyQuoteNumber = "/ ${selectedApplication.quoteNumber}";
+      }
+    }
+
+    return "Digital KYC APP : ${selectedApplication?.idDocSurname ?? ""} ${selectedApplication?.idDocOtherName ?? ""} ${selectedApplication?.idDocNumber ?? ""} ${policyQuoteNumber ?? ""}";
+  }
+
   pw.Widget _agentSignatureWidget(WidgetRef ref) {
     String? signatureBase64 = ref.watch(signatureBase64Provider);
 
@@ -328,10 +337,18 @@ mixin GeneratePdfMixin {
             color: PdfColor.fromHex("646464"),
           ),
         ),
+        pw.SizedBox(height: 10),
         if (signatureBase64 != null) ...[
-          pw.Image(
-            pw.MemoryImage(bytes),
-            width: 20,
+          pw.Container(
+            width: 50,
+            height: 25,
+            // color: const PdfColor(1, 0, 0),
+            child: pw.Image(
+              pw.MemoryImage(bytes),
+              width: 50,
+              height: 25,
+              fit: pw.BoxFit.fill,
+            ),
           ),
         ],
       ],
@@ -349,6 +366,7 @@ mixin GeneratePdfMixin {
             color: PdfColor.fromHex("646464"),
           ),
         ),
+        pw.SizedBox(height: 10),
         pw.Text(
           value,
           style: pw.TextStyle(
