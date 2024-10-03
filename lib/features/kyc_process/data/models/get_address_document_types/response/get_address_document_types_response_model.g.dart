@@ -50,7 +50,7 @@ Map<String, dynamic> _$$AddressDocumentTypesDataImplToJson(
 _$AddressDocumentTypeModelImpl _$$AddressDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AddressDocumentTypeModelImpl(
-      addressDocumentTypeId: json['addressDocumentTypeId'] as int?,
+      addressDocumentTypeId: (json['addressDocumentTypeId'] as num?)?.toInt(),
       addressDocType: json['addressDocType'] as String?,
       documentCode: json['documentCode'] as String?,
     );

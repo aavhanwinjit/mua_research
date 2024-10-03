@@ -64,7 +64,7 @@ _$LaunchDetailsResponseBodyImpl _$$LaunchDetailsResponseBodyImplFromJson(
       tokenData: json['tokenData'] == null
           ? null
           : TokenData.fromJson(json['tokenData'] as Map<String, dynamic>),
-      unreadPushMessageCount: json['unreadPushMessageCount'] as int?,
+      unreadPushMessageCount: (json['unreadPushMessageCount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$LaunchDetailsResponseBodyImplToJson(
@@ -88,7 +88,7 @@ _$AgentDataImpl _$$AgentDataImplFromJson(Map<String, dynamic> json) =>
       loginData: json['loginData'] == null
           ? null
           : LoginData.fromJson(json['loginData'] as Map<String, dynamic>),
-      agentId: json['agentId'] as int?,
+      agentId: (json['agentId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$AgentDataImplToJson(_$AgentDataImpl instance) =>
@@ -128,12 +128,14 @@ _$AppSettingsDataImpl _$$AppSettingsDataImplFromJson(
       keys: json['keys'] as String?,
       appShareLink: json['appShareLink'] as String?,
       fcmToken: json['fcmToken'] as String?,
-      languageId: json['languageId'] as int?,
+      languageId: (json['languageId'] as num?)?.toInt(),
       dmsLink: json['dmsLink'] as String?,
       tempDmsLink: json['tempDMSLink'] as String?,
       callUsNumber: json['callUsNumber'] as String?,
       appDemoLink: json['appDemoLink'] as String?,
       tncurl: json['tncurl'] as String?,
+      appStoreLink: json['appStoreLink'] as String?,
+      playStoreLink: json['playStoreLink'] as String?,
     );
 
 Map<String, dynamic> _$$AppSettingsDataImplToJson(
@@ -150,16 +152,18 @@ Map<String, dynamic> _$$AppSettingsDataImplToJson(
       'callUsNumber': instance.callUsNumber,
       'appDemoLink': instance.appDemoLink,
       'tncurl': instance.tncurl,
+      'appStoreLink': instance.appStoreLink,
+      'playStoreLink': instance.playStoreLink,
     };
 
 _$AppStartImpl _$$AppStartImplFromJson(Map<String, dynamic> json) =>
     _$AppStartImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      appStartId: json['appStartId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      appStartId: (json['appStartId'] as num?)?.toInt(),
       platform: json['platform'] as String?,
       storeVersion: json['storeVersion'] as String?,
       apiVer: json['apiVer'] as String?,
@@ -192,7 +196,7 @@ Map<String, dynamic> _$$AppStartImplToJson(_$AppStartImpl instance) =>
 
 _$LanguageImpl _$$LanguageImplFromJson(Map<String, dynamic> json) =>
     _$LanguageImpl(
-      languageId: json['languageId'] as int?,
+      languageId: (json['languageId'] as num?)?.toInt(),
       languageCode: json['languageCode'] as String?,
       languageName: json['languageName'] as String?,
     );

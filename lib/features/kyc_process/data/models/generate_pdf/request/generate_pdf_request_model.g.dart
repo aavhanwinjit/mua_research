@@ -9,7 +9,7 @@ part of 'generate_pdf_request_model.dart';
 _$GeneratePdfRequestModelImpl _$$GeneratePdfRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$GeneratePdfRequestModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$GeneratePdfRequestModelImplToJson(

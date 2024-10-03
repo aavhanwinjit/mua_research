@@ -10,7 +10,7 @@ _$SaveIdentityDetailsRequestModelImpl
     _$$SaveIdentityDetailsRequestModelImplFromJson(Map<String, dynamic> json) =>
         _$SaveIdentityDetailsRequestModelImpl(
           applicationRefNo: json['applicationRefNo'] as String?,
-          idDocTypeId: json['idDocTypeId'] as int?,
+          idDocTypeId: (json['idDocTypeId'] as num?)?.toInt(),
           surname: json['surname'] as String?,
           otherName: json['otherName'] as String?,
           idDocNumber: json['idDocNumber'] as String?,

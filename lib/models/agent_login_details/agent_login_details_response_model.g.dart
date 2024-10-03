@@ -9,7 +9,7 @@ part of 'agent_login_details_response_model.dart';
 _$AgentLoginDetailsResponseModelImpl
     _$$AgentLoginDetailsResponseModelImplFromJson(Map<String, dynamic> json) =>
         _$AgentLoginDetailsResponseModelImpl(
-          agentId: json['agentId'] as int?,
+          agentId: (json['agentId'] as num?)?.toInt(),
           agentName: json['agentName'] as String?,
           mobileNumber: json['mobileNumber'] as String?,
           emailId: json['emailId'] as String?,
@@ -28,7 +28,7 @@ _$AgentLoginDetailsResponseModelImpl
           kycStatus: json['kycStatus'] as String?,
           isFpLogin: json['isFPLogin'] as bool?,
           authorized: json['authorized'] as bool?,
-          dailyLimit: json['dailyLimit'] as int?,
+          dailyLimit: (json['dailyLimit'] as num?)?.toInt(),
         );
 
 Map<String, dynamic> _$$AgentLoginDetailsResponseModelImplToJson(

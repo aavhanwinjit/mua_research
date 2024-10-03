@@ -1,14 +1,17 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
+import 'package:ekyc/core/helpers/package_info_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
 import 'package:ekyc/core/utils/extensions/context_extensions.dart';
 import 'package:ekyc/features/login_otp/presentation/providers/otp_provider.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/request/launch_details_request.dart';
 import 'package:ekyc/features/splash_screen/data/models/launch_details/response/launch_details_response.dart';
 import 'package:ekyc/features/splash_screen/domain/usecases/launch_details.dart';
+import 'package:ekyc/features/splash_screen/presentation/dialogs/app_update_dialog.dart';
 import 'package:ekyc/features/splash_screen/presentation/providers/launch_details_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:safe_device/safe_device.dart';
@@ -33,27 +36,31 @@ mixin LaunchDetailsMixin {
       },
       (LaunchDetailsResponse success) async {
         if (success.status?.isSuccess == true) {
-          ref.watch(launchDetailsResponseProvider.notifier).update((state) => success);
+          final bool proceed = await versionCheck(context, success, ref);
 
-          if (success.body?.responseBody?.agentData != null) {
-            if (success.body?.responseBody?.tokenData != null) {
-              await _setData(
-                authToken: success.body?.responseBody?.tokenData?.token,
-                sessionId: success.body?.responseBody?.tokenData?.sessionId,
-                deviceToken: success.body?.responseBody?.agentData?.loginData?.deviceToken,
-                ref: ref,
-              );
+          if (proceed == true) {
+            ref.watch(launchDetailsResponseProvider.notifier).update((state) => success);
+
+            if (success.body?.responseBody?.agentData != null) {
+              if (success.body?.responseBody?.tokenData != null) {
+                await _setData(
+                  authToken: success.body?.responseBody?.tokenData?.token,
+                  sessionId: success.body?.responseBody?.tokenData?.sessionId,
+                  deviceToken: success.body?.responseBody?.agentData?.loginData?.deviceToken,
+                  ref: ref,
+                );
+              }
+
+              ref
+                  .watch(isFPLoginProvider.notifier)
+                  .update((state) => success.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false);
+
+              context.go(AppRoutes.mpinLoginScreen);
+            } else {
+              ref.watch(userLoggedInProvider.notifier).update((state) => false);
+
+              context.go(AppRoutes.loginScreen);
             }
-
-            ref
-                .watch(isFPLoginProvider.notifier)
-                .update((state) => success.body?.responseBody?.agentData?.loginData?.isFpLogin ?? false);
-
-            context.go(AppRoutes.mpinLoginScreen);
-          } else {
-            ref.watch(userLoggedInProvider.notifier).update((state) => false);
-
-            context.go(AppRoutes.loginScreen);
           }
         } else {
           context.showErrorSnackBar(
@@ -62,6 +69,55 @@ mixin LaunchDetailsMixin {
         }
       },
     );
+  }
+
+  Future<bool> versionCheck(context, LaunchDetailsResponse launchDetailsResponse, WidgetRef ref) async {
+    debugPrint("inside version check funtion");
+
+    // if (kDebugMode) return;
+
+    try {
+      String version = await PackageInfoHelper.getVersion();
+
+      final AppStart? appStartData = launchDetailsResponse.body?.responseBody?.appStart;
+
+      // bool isForceUpdate = true;
+      bool isForceUpdate = appStartData?.isForceUpdate ?? false;
+      debugPrint("isForceUpdate: $isForceUpdate");
+
+      int storeVersion = int.parse(appStartData!.storeVersion!.replaceAll(".", ""));
+      debugPrint("storeVersion: $storeVersion");
+
+      // int currentDeviceVersion = int.parse("2.8.7".replaceAll(".", ""));
+      int currentDeviceVersion = int.parse(version.replaceAll(".", ""));
+      debugPrint("currentDeviceVersion: $currentDeviceVersion");
+
+      if (storeVersion > currentDeviceVersion) {
+        debugPrint("storeVersion > currentDeviceVersion: ${storeVersion > currentDeviceVersion}");
+
+        final AppSettingsData? appSettingsData = launchDetailsResponse.body?.responseBody?.appSettingsData;
+
+        final value = await showDialog(
+          barrierDismissible: false,
+          useSafeArea: false,
+          context: context,
+          builder: (BuildContext context) => AppUpdatePopUp(
+            forceUpdate: isForceUpdate,
+            appStoreLink: appSettingsData?.appStoreLink ?? "",
+            playStoreLink: appSettingsData?.playStoreLink ?? "",
+          ),
+        );
+        if (isForceUpdate) SystemNavigator.pop();
+
+        return value;
+      } else {
+        debugPrint("storeVersion > currentDeviceVersion: ${false}");
+        return true;
+      }
+    } catch (e) {
+      debugPrint("AppUpdateService versionCheck error $e");
+      return true;
+    }
   }
 
   Future<bool> _detectRootOrJailbreak() async {

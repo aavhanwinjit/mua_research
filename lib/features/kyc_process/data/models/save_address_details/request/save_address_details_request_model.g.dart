@@ -10,13 +10,13 @@ _$SaveAddressDetailsRequestModelImpl
     _$$SaveAddressDetailsRequestModelImplFromJson(Map<String, dynamic> json) =>
         _$SaveAddressDetailsRequestModelImpl(
           applicationRefNo: json['applicationRefNo'] as String?,
-          documentTypeId: json['documentTypeId'] as int?,
+          documentTypeId: (json['documentTypeId'] as num?)?.toInt(),
           docImagePath: json['docImagePath'] as String?,
           docSurname: json['docSurname'] as String?,
           docOtherName: json['docOtherName'] as String?,
           docBillDate: json['docBillDate'] as String?,
           docAddress: json['docAddress'] as String?,
-          uploadedDocumentId: json['uploadedDocumentId'] as int?,
+          uploadedDocumentId: (json['uploadedDocumentId'] as num?)?.toInt(),
           isAddressVerificationCompleted:
               json['isAddressVerificationCompleted'] as bool?,
           porRequired: json['porRequired'] as bool?,

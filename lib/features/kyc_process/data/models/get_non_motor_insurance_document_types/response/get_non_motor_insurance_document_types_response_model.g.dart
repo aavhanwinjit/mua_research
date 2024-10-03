@@ -53,7 +53,8 @@ _$NonMotorInsuranceDocumentTypeModelImpl
     _$$NonMotorInsuranceDocumentTypeModelImplFromJson(
             Map<String, dynamic> json) =>
         _$NonMotorInsuranceDocumentTypeModelImpl(
-          mDocumentTypeId: json['nonMotorInsuranceDocumentTypeId'] as int?,
+          mDocumentTypeId:
+              (json['nonMotorInsuranceDocumentTypeId'] as num?)?.toInt(),
           nonMotorInsuranceDocType: json['nonMotorInsuranceDocType'] as String?,
           documentCode: json['documentCode'] as String?,
         );

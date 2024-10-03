@@ -92,6 +92,8 @@ class AppSettingsData with _$AppSettingsData {
     @JsonKey(name: "callUsNumber") String? callUsNumber,
     @JsonKey(name: "appDemoLink") String? appDemoLink,
     @JsonKey(name: "tncurl") String? tncurl,
+    @JsonKey(name: "appStoreLink") String? appStoreLink,
+    @JsonKey(name: "playStoreLink") String? playStoreLink,
   }) = _AppSettingsData;
 
   factory AppSettingsData.fromJson(Map<String, dynamic> json) => _$AppSettingsDataFromJson(json);

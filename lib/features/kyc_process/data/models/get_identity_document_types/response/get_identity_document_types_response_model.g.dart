@@ -50,7 +50,7 @@ Map<String, dynamic> _$$IdentityDocumentTypesDataImplToJson(
 _$IdentityDocumentTypeModelImpl _$$IdentityDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$IdentityDocumentTypeModelImpl(
-      identityDocumentTypeId: json['identityDocumentTypeId'] as int?,
+      identityDocumentTypeId: (json['identityDocumentTypeId'] as num?)?.toInt(),
       identityDocType: json['identityDocType'] as String?,
       documentCode: json['documentCode'] as String?,
     );

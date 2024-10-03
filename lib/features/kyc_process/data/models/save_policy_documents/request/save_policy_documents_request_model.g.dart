@@ -9,7 +9,7 @@ part of 'save_policy_documents_request_model.dart';
 _$SavePolicyDocumentsRequestModelImpl
     _$$SavePolicyDocumentsRequestModelImplFromJson(Map<String, dynamic> json) =>
         _$SavePolicyDocumentsRequestModelImpl(
-          agentApplicationId: json['agentApplicationId'] as int?,
+          agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
           isPolicyDocVerificationCompleted:
               json['isPolicyDocVerificationCompleted'] as bool?,
           policyDoumentDetailsModel: (json['policyDoumentDetailsModel']
@@ -31,8 +31,8 @@ Map<String, dynamic> _$$SavePolicyDocumentsRequestModelImplToJson(
 _$PolicyDoumentDetailsModelImpl _$$PolicyDoumentDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PolicyDoumentDetailsModelImpl(
-      policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
+      policyDocumentTypeId: (json['policyDocumentTypeId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
       policyDocImagePath: json['policyDocImagePath'] as String?,
     );
 

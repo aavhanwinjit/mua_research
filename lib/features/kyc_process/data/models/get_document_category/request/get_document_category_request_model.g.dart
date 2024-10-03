@@ -9,7 +9,7 @@ part of 'get_document_category_request_model.dart';
 _$GetDocumentCategoryRequestModelImpl
     _$$GetDocumentCategoryRequestModelImplFromJson(Map<String, dynamic> json) =>
         _$GetDocumentCategoryRequestModelImpl(
-          id: json['id'] as int?,
+          id: (json['id'] as num?)?.toInt(),
         );
 
 Map<String, dynamic> _$$GetDocumentCategoryRequestModelImplToJson(

@@ -10,7 +10,7 @@ _$TokenDataImpl _$$TokenDataImplFromJson(Map<String, dynamic> json) =>
     _$TokenDataImpl(
       token: json['token'] as String?,
       sessionId: json['sessionId'] as String?,
-      expiry: json['expiry'] as int?,
+      expiry: (json['expiry'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TokenDataImplToJson(_$TokenDataImpl instance) =>

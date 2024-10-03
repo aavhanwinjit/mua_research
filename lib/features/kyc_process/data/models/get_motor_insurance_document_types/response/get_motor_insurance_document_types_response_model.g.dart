@@ -51,7 +51,8 @@ Map<String, dynamic> _$$GetMotorInsuranceDocumentTypesDataImplToJson(
 _$MotorInsuranceDocumentTypeModelImpl
     _$$MotorInsuranceDocumentTypeModelImplFromJson(Map<String, dynamic> json) =>
         _$MotorInsuranceDocumentTypeModelImpl(
-          mDocumentTypeId: json['motorInsuranceDocumentTypeId'] as int?,
+          mDocumentTypeId:
+              (json['motorInsuranceDocumentTypeId'] as num?)?.toInt(),
           motorInsuranceDocType: json['motorInsuranceDocType'] as String?,
           documentCode: json['documentCode'] as String?,
         );

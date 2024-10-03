@@ -15,7 +15,7 @@ _$AddCustomerInformationRequestModelImpl
           maritalStatus: json['maritalStatus'] as String?,
           nationality: json['nationality'] as String?,
           quoteNumber: json['quoteNumber'] as String?,
-          kycTypeId: json['kycTypeId'] as int?,
+          kycTypeId: (json['kycTypeId'] as num?)?.toInt(),
           policyNumber: json['policyNumber'] as String?,
         );
 

@@ -6,17 +6,20 @@ part of 'api_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _ApiService implements ApiService {
   _ApiService(
     this._dio, {
     this.baseUrl,
+    this.errorLogger,
   });
 
   final Dio _dio;
 
   String? baseUrl;
+
+  final ParseErrorLogger? errorLogger;
 
   @override
   Future<LaunchDetailsResponse> launchDetails(
@@ -25,25 +28,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LaunchDetailsResponse>(Options(
+    final _options = _setStreamType<LaunchDetailsResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/AppStarts/LaunchDetails',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = LaunchDetailsResponse.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/AppStarts/LaunchDetails',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LaunchDetailsResponse _value;
+    try {
+      _value = LaunchDetailsResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -53,25 +62,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VerifyMobileNumberResponseModel>(Options(
+    final _options = _setStreamType<VerifyMobileNumberResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/VerifyMobileNumber',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VerifyMobileNumberResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/VerifyMobileNumber',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VerifyMobileNumberResponseModel _value;
+    try {
+      _value = VerifyMobileNumberResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -81,25 +96,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ValidateOtpResponseModel>(Options(
+    final _options = _setStreamType<ValidateOtpResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/ValidateAgentRegOTP',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ValidateOtpResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/ValidateAgentRegOTP',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ValidateOtpResponseModel _value;
+    try {
+      _value = ValidateOtpResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -110,25 +131,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ResendOtpResponseModel>(Options(
+    final _options = _setStreamType<ResendOtpResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/ResendOTP',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ResendOtpResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/ResendOTP',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ResendOtpResponseModel _value;
+    try {
+      _value = ResendOtpResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -138,25 +165,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<RegisterDeviceResponseModel>(Options(
+    final _options = _setStreamType<RegisterDeviceResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/RegisterDevice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = RegisterDeviceResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/RegisterDevice',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late RegisterDeviceResponseModel _value;
+    try {
+      _value = RegisterDeviceResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -166,25 +199,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveFileResponseModel>(Options(
+    final _options = _setStreamType<SaveFileResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Default/SaveFile',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SaveFileResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Default/SaveFile',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveFileResponseModel _value;
+    try {
+      _value = SaveFileResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -195,25 +234,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveFileResponseModel>(Options(
+    final _options = _setStreamType<SaveFileResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/SaveSignature',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SaveFileResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/SaveSignature',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveFileResponseModel _value;
+    try {
+      _value = SaveFileResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -223,25 +268,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ViewFileResponseModel>(Options(
+    final _options = _setStreamType<ViewFileResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Default/ViewFile',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ViewFileResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Default/ViewFile',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ViewFileResponseModel _value;
+    try {
+      _value = ViewFileResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -251,25 +302,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SetAgentMpinResponseModel>(Options(
+    final _options = _setStreamType<SetAgentMpinResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/SetAgentMPIN',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SetAgentMpinResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/SetAgentMPIN',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SetAgentMpinResponseModel _value;
+    try {
+      _value = SetAgentMpinResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -279,25 +336,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SetFingerprintResponseModel>(Options(
+    final _options = _setStreamType<SetFingerprintResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/SetFingerPrint',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SetFingerprintResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/SetFingerPrint',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SetFingerprintResponseModel _value;
+    try {
+      _value = SetFingerprintResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -307,25 +370,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DeRegisterFingerprintResponseModel>(Options(
+    final _options = _setStreamType<DeRegisterFingerprintResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/DeRegisterFingerPrint',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DeRegisterFingerprintResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/DeRegisterFingerPrint',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late DeRegisterFingerprintResponseModel _value;
+    try {
+      _value = DeRegisterFingerprintResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -335,25 +404,31 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LoginbyMpinResponseModel>(Options(
+    final _options = _setStreamType<LoginbyMpinResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/LoginByMPIN',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = LoginbyMpinResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/LoginByMPIN',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LoginbyMpinResponseModel _value;
+    try {
+      _value = LoginbyMpinResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -364,25 +439,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LoginByFpResponseModel>(Options(
+    final _options = _setStreamType<LoginByFpResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/LoginByFP',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = LoginByFpResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/LoginByFP',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LoginByFpResponseModel _value;
+    try {
+      _value = LoginByFpResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -392,25 +473,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<LogoutResponseModel>(Options(
+    final _options = _setStreamType<LogoutResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Login/Logout',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = LogoutResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Login/Logout',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late LogoutResponseModel _value;
+    try {
+      _value = LogoutResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -420,25 +507,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetAgentDetailsResponseModel>(Options(
+    final _options = _setStreamType<GetAgentDetailsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/GetAgentDetails',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GetAgentDetailsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/GetAgentDetails',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAgentDetailsResponseModel _value;
+    try {
+      _value = GetAgentDetailsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -449,25 +542,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<VerifyMPINResponseModel>(Options(
+    final _options = _setStreamType<VerifyMPINResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/ValidateMPIN',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = VerifyMPINResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/ValidateMPIN',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late VerifyMPINResponseModel _value;
+    try {
+      _value = VerifyMPINResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -478,25 +577,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ChangeMPINResponseModel>(Options(
+    final _options = _setStreamType<ChangeMPINResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Registration/ChangeMPIN',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ChangeMPINResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Registration/ChangeMPIN',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ChangeMPINResponseModel _value;
+    try {
+      _value = ChangeMPINResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -507,25 +612,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetAgentApplicationsResponseModel>(Options(
+    final _options = _setStreamType<GetAgentApplicationsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/GetAgentApplications',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GetAgentApplicationsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/GetAgentApplications',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAgentApplicationsResponseModel _value;
+    try {
+      _value = GetAgentApplicationsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -536,25 +647,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetKycTypesResponseModel>(Options(
+    final _options = _setStreamType<GetKycTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Data/GetKYCTypes',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GetKycTypesResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Data/GetKYCTypes',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetKycTypesResponseModel _value;
+    try {
+      _value = GetKycTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -565,7 +682,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<AddCustomerInformationResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -581,9 +698,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = AddCustomerInformationResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late AddCustomerInformationResponseModel _value;
+    try {
+      _value = AddCustomerInformationResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -594,25 +718,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveIdentityDetailsResponseModel>(Options(
+    final _options = _setStreamType<SaveIdentityDetailsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/SaveIdentityDetails',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SaveIdentityDetailsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/SaveIdentityDetails',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveIdentityDetailsResponseModel _value;
+    try {
+      _value = SaveIdentityDetailsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -623,7 +753,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetIdentityDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -639,9 +769,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = GetIdentityDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetIdentityDocumentTypesResponseModel _value;
+    try {
+      _value = GetIdentityDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -652,25 +789,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetDocumentCategoryResponseModel>(Options(
+    final _options = _setStreamType<GetDocumentCategoryResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Data/GetDocumentCategories',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GetDocumentCategoryResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Data/GetDocumentCategories',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetDocumentCategoryResponseModel _value;
+    try {
+      _value = GetDocumentCategoryResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -680,7 +823,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetAddressDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -696,9 +839,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = GetAddressDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAddressDocumentTypesResponseModel _value;
+    try {
+      _value = GetAddressDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -709,25 +859,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ScanDocumentResponseModel>(Options(
+    final _options = _setStreamType<ScanDocumentResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/DocumentOCR/ScanDocument',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ScanDocumentResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/DocumentOCR/ScanDocument',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ScanDocumentResponseModel _value;
+    try {
+      _value = ScanDocumentResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -738,25 +894,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SaveAddressDetailsResponseModel>(Options(
+    final _options = _setStreamType<SaveAddressDetailsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/SaveAddressDetails',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SaveAddressDetailsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/SaveAddressDetails',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveAddressDetailsResponseModel _value;
+    try {
+      _value = SaveAddressDetailsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -766,25 +928,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GetPorDocumentTypesResponseModel>(Options(
+    final _options = _setStreamType<GetPorDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Data/GetPORDocumentTypes',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GetPorDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Data/GetPORDocumentTypes',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetPorDocumentTypesResponseModel _value;
+    try {
+      _value = GetPorDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -795,7 +963,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetMotorInsuranceDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -811,10 +979,17 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value =
-        GetMotorInsuranceDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetMotorInsuranceDocumentTypesResponseModel _value;
+    try {
+      _value =
+          GetMotorInsuranceDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -825,7 +1000,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<SaveMotorInsuranceDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -841,10 +1016,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value =
-        SaveMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveMotorInsuranceDocumentsResponseModel _value;
+    try {
+      _value = SaveMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -855,7 +1036,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetNonMotorInsuranceDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -871,10 +1052,17 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value =
-        GetNonMotorInsuranceDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetNonMotorInsuranceDocumentTypesResponseModel _value;
+    try {
+      _value = GetNonMotorInsuranceDocumentTypesResponseModel.fromJson(
+          _result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -886,7 +1074,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<SaveNonMotorInsuranceDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -902,10 +1090,17 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value =
-        SaveNonMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveNonMotorInsuranceDocumentsResponseModel _value;
+    try {
+      _value =
+          SaveNonMotorInsuranceDocumentsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -916,25 +1111,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SavePorDocumentsResponseModel>(Options(
+    final _options = _setStreamType<SavePorDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/SavePORDocuments',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SavePorDocumentsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/SavePORDocuments',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SavePorDocumentsResponseModel _value;
+    try {
+      _value = SavePorDocumentsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -944,7 +1145,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetPolicyDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -960,9 +1161,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = GetPolicyDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetPolicyDocumentTypesResponseModel _value;
+    try {
+      _value = GetPolicyDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -973,25 +1181,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<SavePolicyDocumentsResponseModel>(Options(
+    final _options = _setStreamType<SavePolicyDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/SavePolicyDocuments',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = SavePolicyDocumentsResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/SavePolicyDocuments',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SavePolicyDocumentsResponseModel _value;
+    try {
+      _value = SavePolicyDocumentsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -1002,7 +1216,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<GetAdditionalDocumentTypesResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -1018,10 +1232,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value =
-        GetAdditionalDocumentTypesResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GetAdditionalDocumentTypesResponseModel _value;
+    try {
+      _value = GetAdditionalDocumentTypesResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -1032,7 +1252,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final _options =
         _setStreamType<SaveAdditionalDocumentsResponseModel>(Options(
       method: 'POST',
       headers: _headers,
@@ -1048,9 +1268,16 @@ class _ApiService implements ApiService {
                 baseUrl: _combineBaseUrls(
               _dio.options.baseUrl,
               baseUrl,
-            ))));
-    final value = SaveAdditionalDocumentsResponseModel.fromJson(_result.data!);
-    return value;
+            )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SaveAdditionalDocumentsResponseModel _value;
+    try {
+      _value = SaveAdditionalDocumentsResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   @override
@@ -1061,25 +1288,31 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{r'Authorization': true};
     _headers.removeWhere((k, v) => v == null);
     final _data = request;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<GeneratePdfResponseModel>(Options(
+    final _options = _setStreamType<GeneratePdfResponseModel>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/AgentAPI/Agent/GeneratePDF',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = GeneratePdfResponseModel.fromJson(_result.data!);
-    return value;
+        .compose(
+          _dio.options,
+          '/AgentAPI/Agent/GeneratePDF',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        )));
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GeneratePdfResponseModel _value;
+    try {
+      _value = GeneratePdfResponseModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

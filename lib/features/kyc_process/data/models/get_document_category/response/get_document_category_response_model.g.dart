@@ -50,9 +50,9 @@ Map<String, dynamic> _$$GetDocumentCategoryDataImplToJson(
 _$DocumentCategoryModelImpl _$$DocumentCategoryModelImplFromJson(
         Map<String, dynamic> json) =>
     _$DocumentCategoryModelImpl(
-      documentCategoryId: json['documentCategoryId'] as int?,
+      documentCategoryId: (json['documentCategoryId'] as num?)?.toInt(),
       documentCategory: json['documentCategory'] as String?,
-      kycTypeId: json['kycTypeId'] as int?,
+      kycTypeId: (json['kycTypeId'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$DocumentCategoryModelImplToJson(

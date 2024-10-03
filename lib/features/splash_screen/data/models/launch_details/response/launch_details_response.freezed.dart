@@ -1342,6 +1342,10 @@ mixin _$AppSettingsData {
   String? get appDemoLink => throw _privateConstructorUsedError;
   @JsonKey(name: "tncurl")
   String? get tncurl => throw _privateConstructorUsedError;
+  @JsonKey(name: "appStoreLink")
+  String? get appStoreLink => throw _privateConstructorUsedError;
+  @JsonKey(name: "playStoreLink")
+  String? get playStoreLink => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1366,7 +1370,9 @@ abstract class $AppSettingsDataCopyWith<$Res> {
       @JsonKey(name: "tempDMSLink") String? tempDmsLink,
       @JsonKey(name: "callUsNumber") String? callUsNumber,
       @JsonKey(name: "appDemoLink") String? appDemoLink,
-      @JsonKey(name: "tncurl") String? tncurl});
+      @JsonKey(name: "tncurl") String? tncurl,
+      @JsonKey(name: "appStoreLink") String? appStoreLink,
+      @JsonKey(name: "playStoreLink") String? playStoreLink});
 }
 
 /// @nodoc
@@ -1393,6 +1399,8 @@ class _$AppSettingsDataCopyWithImpl<$Res, $Val extends AppSettingsData>
     Object? callUsNumber = freezed,
     Object? appDemoLink = freezed,
     Object? tncurl = freezed,
+    Object? appStoreLink = freezed,
+    Object? playStoreLink = freezed,
   }) {
     return _then(_value.copyWith(
       currentServerDate: freezed == currentServerDate
@@ -1439,6 +1447,14 @@ class _$AppSettingsDataCopyWithImpl<$Res, $Val extends AppSettingsData>
           ? _value.tncurl
           : tncurl // ignore: cast_nullable_to_non_nullable
               as String?,
+      appStoreLink: freezed == appStoreLink
+          ? _value.appStoreLink
+          : appStoreLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      playStoreLink: freezed == playStoreLink
+          ? _value.playStoreLink
+          : playStoreLink // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -1462,7 +1478,9 @@ abstract class _$$AppSettingsDataImplCopyWith<$Res>
       @JsonKey(name: "tempDMSLink") String? tempDmsLink,
       @JsonKey(name: "callUsNumber") String? callUsNumber,
       @JsonKey(name: "appDemoLink") String? appDemoLink,
-      @JsonKey(name: "tncurl") String? tncurl});
+      @JsonKey(name: "tncurl") String? tncurl,
+      @JsonKey(name: "appStoreLink") String? appStoreLink,
+      @JsonKey(name: "playStoreLink") String? playStoreLink});
 }
 
 /// @nodoc
@@ -1487,6 +1505,8 @@ class __$$AppSettingsDataImplCopyWithImpl<$Res>
     Object? callUsNumber = freezed,
     Object? appDemoLink = freezed,
     Object? tncurl = freezed,
+    Object? appStoreLink = freezed,
+    Object? playStoreLink = freezed,
   }) {
     return _then(_$AppSettingsDataImpl(
       currentServerDate: freezed == currentServerDate
@@ -1533,6 +1553,14 @@ class __$$AppSettingsDataImplCopyWithImpl<$Res>
           ? _value.tncurl
           : tncurl // ignore: cast_nullable_to_non_nullable
               as String?,
+      appStoreLink: freezed == appStoreLink
+          ? _value.appStoreLink
+          : appStoreLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      playStoreLink: freezed == playStoreLink
+          ? _value.playStoreLink
+          : playStoreLink // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -1551,7 +1579,9 @@ class _$AppSettingsDataImpl implements _AppSettingsData {
       @JsonKey(name: "tempDMSLink") this.tempDmsLink,
       @JsonKey(name: "callUsNumber") this.callUsNumber,
       @JsonKey(name: "appDemoLink") this.appDemoLink,
-      @JsonKey(name: "tncurl") this.tncurl});
+      @JsonKey(name: "tncurl") this.tncurl,
+      @JsonKey(name: "appStoreLink") this.appStoreLink,
+      @JsonKey(name: "playStoreLink") this.playStoreLink});
 
   factory _$AppSettingsDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppSettingsDataImplFromJson(json);
@@ -1589,10 +1619,16 @@ class _$AppSettingsDataImpl implements _AppSettingsData {
   @override
   @JsonKey(name: "tncurl")
   final String? tncurl;
+  @override
+  @JsonKey(name: "appStoreLink")
+  final String? appStoreLink;
+  @override
+  @JsonKey(name: "playStoreLink")
+  final String? playStoreLink;
 
   @override
   String toString() {
-    return 'AppSettingsData(currentServerDate: $currentServerDate, enableSslPinning: $enableSslPinning, keys: $keys, appShareLink: $appShareLink, fcmToken: $fcmToken, languageId: $languageId, dmsLink: $dmsLink, tempDmsLink: $tempDmsLink, callUsNumber: $callUsNumber, appDemoLink: $appDemoLink, tncurl: $tncurl)';
+    return 'AppSettingsData(currentServerDate: $currentServerDate, enableSslPinning: $enableSslPinning, keys: $keys, appShareLink: $appShareLink, fcmToken: $fcmToken, languageId: $languageId, dmsLink: $dmsLink, tempDmsLink: $tempDmsLink, callUsNumber: $callUsNumber, appDemoLink: $appDemoLink, tncurl: $tncurl, appStoreLink: $appStoreLink, playStoreLink: $playStoreLink)';
   }
 
   @override
@@ -1618,7 +1654,11 @@ class _$AppSettingsDataImpl implements _AppSettingsData {
                 other.callUsNumber == callUsNumber) &&
             (identical(other.appDemoLink, appDemoLink) ||
                 other.appDemoLink == appDemoLink) &&
-            (identical(other.tncurl, tncurl) || other.tncurl == tncurl));
+            (identical(other.tncurl, tncurl) || other.tncurl == tncurl) &&
+            (identical(other.appStoreLink, appStoreLink) ||
+                other.appStoreLink == appStoreLink) &&
+            (identical(other.playStoreLink, playStoreLink) ||
+                other.playStoreLink == playStoreLink));
   }
 
   @JsonKey(ignore: true)
@@ -1635,7 +1675,9 @@ class _$AppSettingsDataImpl implements _AppSettingsData {
       tempDmsLink,
       callUsNumber,
       appDemoLink,
-      tncurl);
+      tncurl,
+      appStoreLink,
+      playStoreLink);
 
   @JsonKey(ignore: true)
   @override
@@ -1654,17 +1696,20 @@ class _$AppSettingsDataImpl implements _AppSettingsData {
 
 abstract class _AppSettingsData implements AppSettingsData {
   const factory _AppSettingsData(
-      {@JsonKey(name: "currentServerDate") final String? currentServerDate,
-      @JsonKey(name: "enableSSLPinning") final bool? enableSslPinning,
-      @JsonKey(name: "keys") final String? keys,
-      @JsonKey(name: "appShareLink") final String? appShareLink,
-      @JsonKey(name: "fcmToken") final String? fcmToken,
-      @JsonKey(name: "languageId") final int? languageId,
-      @JsonKey(name: "dmsLink") final String? dmsLink,
-      @JsonKey(name: "tempDMSLink") final String? tempDmsLink,
-      @JsonKey(name: "callUsNumber") final String? callUsNumber,
-      @JsonKey(name: "appDemoLink") final String? appDemoLink,
-      @JsonKey(name: "tncurl") final String? tncurl}) = _$AppSettingsDataImpl;
+          {@JsonKey(name: "currentServerDate") final String? currentServerDate,
+          @JsonKey(name: "enableSSLPinning") final bool? enableSslPinning,
+          @JsonKey(name: "keys") final String? keys,
+          @JsonKey(name: "appShareLink") final String? appShareLink,
+          @JsonKey(name: "fcmToken") final String? fcmToken,
+          @JsonKey(name: "languageId") final int? languageId,
+          @JsonKey(name: "dmsLink") final String? dmsLink,
+          @JsonKey(name: "tempDMSLink") final String? tempDmsLink,
+          @JsonKey(name: "callUsNumber") final String? callUsNumber,
+          @JsonKey(name: "appDemoLink") final String? appDemoLink,
+          @JsonKey(name: "tncurl") final String? tncurl,
+          @JsonKey(name: "appStoreLink") final String? appStoreLink,
+          @JsonKey(name: "playStoreLink") final String? playStoreLink}) =
+      _$AppSettingsDataImpl;
 
   factory _AppSettingsData.fromJson(Map<String, dynamic> json) =
       _$AppSettingsDataImpl.fromJson;
@@ -1702,6 +1747,12 @@ abstract class _AppSettingsData implements AppSettingsData {
   @override
   @JsonKey(name: "tncurl")
   String? get tncurl;
+  @override
+  @JsonKey(name: "appStoreLink")
+  String? get appStoreLink;
+  @override
+  @JsonKey(name: "playStoreLink")
+  String? get playStoreLink;
   @override
   @JsonKey(ignore: true)
   _$$AppSettingsDataImplCopyWith<_$AppSettingsDataImpl> get copyWith =>

@@ -10,7 +10,7 @@ _$SaveFileRequestModelImpl _$$SaveFileRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SaveFileRequestModelImpl(
       fileName: json['fileName'] as String?,
-      allowedFileId: json['allowedFileId'] as int?,
+      allowedFileId: (json['allowedFileId'] as num?)?.toInt(),
       fileString: json['fileString'] as String?,
     );
 

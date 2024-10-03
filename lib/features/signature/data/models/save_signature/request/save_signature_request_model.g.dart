@@ -10,7 +10,7 @@ _$SaveSignatureRequestModelImpl _$$SaveSignatureRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SaveSignatureRequestModelImpl(
       fileName: json['fileName'] as String?,
-      allowedFileId: json['allowedFileId'] as int?,
+      allowedFileId: (json['allowedFileId'] as num?)?.toInt(),
       editFileName: json['editFileName'] as bool?,
       fileString: json['fileString'] as String?,
     );

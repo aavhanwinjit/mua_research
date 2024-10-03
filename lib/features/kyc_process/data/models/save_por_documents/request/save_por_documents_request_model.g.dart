@@ -9,7 +9,7 @@ part of 'save_por_documents_request_model.dart';
 _$SavePorDocumentsRequestModelImpl _$$SavePorDocumentsRequestModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SavePorDocumentsRequestModelImpl(
-      agentApplicationId: json['agentApplicationId'] as int?,
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
       isPorDocVerificationCompleted:
           json['isPORDocVerificationCompleted'] as bool?,
       porDocumentDetailsModel:
@@ -30,8 +30,8 @@ Map<String, dynamic> _$$SavePorDocumentsRequestModelImplToJson(
 _$PorDocumentDetailsModelImpl _$$PorDocumentDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PorDocumentDetailsModelImpl(
-      porDocumentTypeId: json['porDocumentTypeId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
+      porDocumentTypeId: (json['porDocumentTypeId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
       lastName: json['lastName'] as String?,
       issueDate: json['issueDate'] as String?,
       porDocImagePath: json['porDocImagePath'] as String?,

@@ -10,7 +10,7 @@ _$SaveAdditionalDocumentsRequestModelImpl
     _$$SaveAdditionalDocumentsRequestModelImplFromJson(
             Map<String, dynamic> json) =>
         _$SaveAdditionalDocumentsRequestModelImpl(
-          agentApplicationId: json['agentApplicationId'] as int?,
+          agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
           isAdditionalDocVerificationCompleted:
               json['isAdditionalDocVerificationCompleted'] as bool?,
           additionalDocumentDetailsModel:
@@ -32,8 +32,9 @@ Map<String, dynamic> _$$SaveAdditionalDocumentsRequestModelImplToJson(
 _$AdditionalDocumentDetailsModelImpl
     _$$AdditionalDocumentDetailsModelImplFromJson(Map<String, dynamic> json) =>
         _$AdditionalDocumentDetailsModelImpl(
-          additionalDoumentTypeId: json['additionalDoumentTypeId'] as int?,
-          uploadDocumentId: json['uploadDocumentId'] as int?,
+          additionalDoumentTypeId:
+              (json['additionalDoumentTypeId'] as num?)?.toInt(),
+          uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
           additionalDocImagePath: json['additionalDocImagePath'] as String?,
         );
 

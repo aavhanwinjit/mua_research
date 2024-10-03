@@ -53,7 +53,7 @@ _$ScanDocumentResponseBodyImpl _$$ScanDocumentResponseBodyImplFromJson(
       ocrResponse: json['ocrResponse'] == null
           ? null
           : OcrResponse.fromJson(json['ocrResponse'] as Map<String, dynamic>),
-      uploadedDocumentId: json['uploadedDocumentId'] as int?,
+      uploadedDocumentId: (json['uploadedDocumentId'] as num?)?.toInt(),
       currentDateTime: json['currentDateTime'] as String?,
     );
 
@@ -68,7 +68,7 @@ Map<String, dynamic> _$$ScanDocumentResponseBodyImplToJson(
 
 _$OcrResponseImpl _$$OcrResponseImplFromJson(Map<String, dynamic> json) =>
     _$OcrResponseImpl(
-      code: json['code'] as int?,
+      code: (json['code'] as num?)?.toInt(),
       documentdata: json['documentdata'] == null
           ? null
           : Documentdata.fromJson(json['documentdata'] as Map<String, dynamic>),

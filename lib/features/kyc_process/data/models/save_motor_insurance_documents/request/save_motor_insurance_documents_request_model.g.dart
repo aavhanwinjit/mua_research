@@ -10,7 +10,7 @@ _$SaveMotorInsuranceDocumentsRequestModelImpl
     _$$SaveMotorInsuranceDocumentsRequestModelImplFromJson(
             Map<String, dynamic> json) =>
         _$SaveMotorInsuranceDocumentsRequestModelImpl(
-          agentApplicationId: json['agentApplicationId'] as int?,
+          agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
           isMotorDocVerificationCompleted:
               json['isMotorDocVerificationCompleted'] as bool?,
           motorDocumentDetailsModel: (json['motorDoumentDetailsModel']
@@ -30,8 +30,8 @@ Map<String, dynamic> _$$SaveMotorInsuranceDocumentsRequestModelImplToJson(
 
 _$MotorDocDetailImpl _$$MotorDocDetailImplFromJson(Map<String, dynamic> json) =>
     _$MotorDocDetailImpl(
-      uploadDocumentId: json['uploadDocumentId'] as int?,
-      motorDocumentTypeId: json['motorDocumentTypeId'] as int?,
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
+      motorDocumentTypeId: (json['motorDocumentTypeId'] as num?)?.toInt(),
       motorDocImagePath: json['motorDocuImagePath'] as String?,
     );
 

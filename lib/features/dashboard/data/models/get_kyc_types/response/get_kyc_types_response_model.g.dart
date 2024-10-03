@@ -46,15 +46,15 @@ Map<String, dynamic> _$$GetKycTypesDataImplToJson(
 
 _$KycTypesModelImpl _$$KycTypesModelImplFromJson(Map<String, dynamic> json) =>
     _$KycTypesModelImpl(
-      kycTypeId: json['kycTypeId'] as int?,
+      kycTypeId: (json['kycTypeId'] as num?)?.toInt(),
       kycTypes: json['kycTypes'] as String?,
       companyId: json['companyId'] as String?,
       policyType: json['policyType'] as String?,
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$KycTypesModelImplToJson(_$KycTypesModelImpl instance) =>

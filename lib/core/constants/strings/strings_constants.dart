@@ -125,6 +125,13 @@ class Strings {
   static const String signHere = "Sign Here";
   static const String updateSignatureText = "Are you sure you want to proceed to update the signature?";
 
+  //App Update Dialog
+  static const String appUpdateAvailable = "App Update Available";
+  static const String newAppVersionAvailable =
+      "A new version of the app is available. Please update to the latest version to have a seamless experience.";
+  static const String updateNow = "Update Now";
+  static const String skip = "Skip";
+
   //Dashboard
   static const String emptyDashboardText = "No data to display!\nClick the button below\nto start KYC.";
   static const String startKyc = "Start KYC";
@@ -199,6 +206,8 @@ class Strings {
   //Insurance Stage Screen
   static const String kycSubmission = "KYC Submission";
   static const String insuranceStageScreenSubtitle = "Ensure a smooth process by completing the following steps.";
+  static const String stagesScreenNoteText =
+      "Note: Due to file size limitations, some documents may only be viewed and downloaded via the E-KYC online portal.";
 
   static const String identityIdDetails = "Identity/ID Details";
   static const String idDetailsSubtitle = "Upload a clear photo of a valid ID document (e.g., passport or NIC).";

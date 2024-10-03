@@ -11,21 +11,21 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
     _$AgentApplicationModelImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      agentApplicationId: json['agentApplicationId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
       applicationRefNo: json['applicationRefNo'] as String?,
-      agentId: json['agentId'] as int?,
+      agentId: (json['agentId'] as num?)?.toInt(),
       applicationStatus: json['applicationStatus'] as String?,
       mobileNumber: json['mobileNumber'] as String?,
       emailId: json['emailId'] as String?,
       maritalStatus: json['maritalStatus'] as String?,
       nationality: json['nationality'] as String?,
-      kycTypeId: json['kycTypeId'] as int?,
+      kycTypeId: (json['kycTypeId'] as num?)?.toInt(),
       quoteNumber: json['quoteNumber'] as String?,
       policyNumber: json['policyNumber'] as String?,
-      idDocumentTypeId: json['idDocumentTypeId'] as int?,
+      idDocumentTypeId: (json['idDocumentTypeId'] as num?)?.toInt(),
       idDocFrontImagePath: json['idDocFrontImagePath'] as String?,
       idDocBackImagePath: json['idDocBackImagePath'] as String?,
       idDocSurname: json['idDocSurname'] as String?,
@@ -33,10 +33,11 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
       idDocNumber: json['idDocNumber'] as String?,
       idDocPolicyNumber: json['idDocPolicyNumber'] as String?,
       idDocFrontUploadedDocumentId:
-          json['idDocFrontUploadedDocumentId'] as int?,
-      idDocBackUploadedDocumentId: json['idDocBackUploadedDocumentId'] as int?,
+          (json['idDocFrontUploadedDocumentId'] as num?)?.toInt(),
+      idDocBackUploadedDocumentId:
+          (json['idDocBackUploadedDocumentId'] as num?)?.toInt(),
       isIdVerificationCompleted: json['isIDVerificationCompleted'] as bool?,
-      addressDocumentTypeId: json['addressDocumentTypeId'] as int?,
+      addressDocumentTypeId: (json['addressDocumentTypeId'] as num?)?.toInt(),
       addressDocImagePath: json['addressDocImagePath'] as String?,
       addressDocSurname: json['addressDocSurname'] as String?,
       addressDocOtherName: json['addressDocOtherName'] as String?,
@@ -45,7 +46,7 @@ _$AgentApplicationModelImpl _$$AgentApplicationModelImplFromJson(
           : DateTime.parse(json['addressDocBillDate'] as String),
       addressDocAddress: json['addressDocAddress'] as String?,
       addressDocUploadedDocumentId:
-          json['addressDocUploadedDocumentId'] as int?,
+          (json['addressDocUploadedDocumentId'] as num?)?.toInt(),
       isAddressVerificationCompleted:
           json['isAddressVerificationCompleted'] as bool?,
       porRequired: json['porRequired'] as bool?,
@@ -155,13 +156,15 @@ _$AdditionalDoumentDetailImpl _$$AdditionalDoumentDetailImplFromJson(
     _$AdditionalDoumentDetailImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      additionalDocumentDetailId: json['additionalDocumentDetailId'] as int?,
-      agentApplicationId: json['agentApplicationId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
-      additionalDocumentTypeId: json['additionalDocumentTypeId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      additionalDocumentDetailId:
+          (json['additionalDocumentDetailId'] as num?)?.toInt(),
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
+      additionalDocumentTypeId:
+          (json['additionalDocumentTypeId'] as num?)?.toInt(),
       additionalDocImagePath: json['additionalDocImagePath'] as String?,
     );
 
@@ -185,10 +188,10 @@ _$AddressDocumentTypesImpl _$$AddressDocumentTypesImplFromJson(
     _$AddressDocumentTypesImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      addressDocumentTypeId: json['addressDocumentTypeId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      addressDocumentTypeId: (json['addressDocumentTypeId'] as num?)?.toInt(),
       addressDocType: json['addressDocType'] as String?,
       documentCode: json['documentCode'] as String?,
     );
@@ -211,15 +214,15 @@ _$MotorInsuranceDocumentDetailImpl _$$MotorInsuranceDocumentDetailImplFromJson(
     _$MotorInsuranceDocumentDetailImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
       motorInsuranceDocumentDetailId:
-          json['motorInsuranceDocumentDetailId'] as int?,
-      agentApplicationId: json['agentApplicationId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
+          (json['motorInsuranceDocumentDetailId'] as num?)?.toInt(),
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
       motorInsuranceDocumentTypeId:
-          json['motorInsuranceDocumentTypeId'] as int?,
+          (json['motorInsuranceDocumentTypeId'] as num?)?.toInt(),
       motorDocuImagePath: json['motorDocuImagePath'] as String?,
     );
 
@@ -245,17 +248,17 @@ _$NonMotorInsuranceDocumentDetailImpl
           crd: json['crd'] == null
               ? null
               : DateTime.parse(json['crd'] as String),
-          crdBy: json['crdBy'] as int?,
+          crdBy: (json['crdBy'] as num?)?.toInt(),
           lmd: json['lmd'] == null
               ? null
               : DateTime.parse(json['lmd'] as String),
-          lmdBy: json['lmdBy'] as int?,
+          lmdBy: (json['lmdBy'] as num?)?.toInt(),
           nonMotorInsuranceDocumentDetailId:
-              json['nonMotorInsuranceDocumentDetailId'] as int?,
-          agentApplicationId: json['agentApplicationId'] as int?,
-          uploadDocumentId: json['uploadDocumentId'] as int?,
+              (json['nonMotorInsuranceDocumentDetailId'] as num?)?.toInt(),
+          agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
+          uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
           nonMotorInsuranceDocumentTypeId:
-              json['nonMotorInsuranceDocumentTypeId'] as int?,
+              (json['nonMotorInsuranceDocumentTypeId'] as num?)?.toInt(),
           nonMotorDocImagePath: json['nonMotorDocImagePath'] as String?,
         );
 
@@ -281,13 +284,13 @@ _$PolicyDocumentDetailImpl _$$PolicyDocumentDetailImplFromJson(
     _$PolicyDocumentDetailImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      policyDocumentDetailId: json['policyDocumentDetailId'] as int?,
-      agentApplicationId: json['agentApplicationId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
-      policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      policyDocumentDetailId: (json['policyDocumentDetailId'] as num?)?.toInt(),
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
+      policyDocumentTypeId: (json['policyDocumentTypeId'] as num?)?.toInt(),
       policyDocImagePath: json['policyDocImagePath'] as String?,
     );
 
@@ -311,13 +314,13 @@ _$PorDocumentDetailImpl _$$PorDocumentDetailImplFromJson(
     _$PorDocumentDetailImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      porDocumentDetailId: json['porDocumentDetailId'] as int?,
-      porDocumentTypeId: json['porDocumentTypeId'] as int?,
-      agentApplicationId: json['agentApplicationId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      porDocumentDetailId: (json['porDocumentDetailId'] as num?)?.toInt(),
+      porDocumentTypeId: (json['porDocumentTypeId'] as num?)?.toInt(),
+      agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
       lastName: json['lastName'] as String?,
       issueDate: json['issueDate'] == null
           ? null

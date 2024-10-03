@@ -10,7 +10,7 @@ _$SaveNonMotorInsuranceDocumentsRequestModelImpl
     _$$SaveNonMotorInsuranceDocumentsRequestModelImplFromJson(
             Map<String, dynamic> json) =>
         _$SaveNonMotorInsuranceDocumentsRequestModelImpl(
-          agentApplicationId: json['agentApplicationId'] as int?,
+          agentApplicationId: (json['agentApplicationId'] as num?)?.toInt(),
           isNonMotorDocVerificationCompleted:
               json['isNonMotorDocVerificationCompleted'] as bool?,
           nonMotorDocumentDetailsModel:
@@ -32,8 +32,9 @@ Map<String, dynamic> _$$SaveNonMotorInsuranceDocumentsRequestModelImplToJson(
 _$NonMotorDocDetailImpl _$$NonMotorDocDetailImplFromJson(
         Map<String, dynamic> json) =>
     _$NonMotorDocDetailImpl(
-      nonMotorDocumentTypeId: json['nonMotorInsuranceDocumentTypeId'] as int?,
-      uploadDocumentId: json['uploadDocumentId'] as int?,
+      nonMotorDocumentTypeId:
+          (json['nonMotorInsuranceDocumentTypeId'] as num?)?.toInt(),
+      uploadDocumentId: (json['uploadDocumentId'] as num?)?.toInt(),
       nonMotorDocImagePath: json['nonMotorDocImagePath'] as String?,
     );
 

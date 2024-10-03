@@ -50,12 +50,12 @@ _$RegisterDeviceResponseBodyImpl _$$RegisterDeviceResponseBodyImplFromJson(
     _$RegisterDeviceResponseBodyImpl(
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
-      appDeviceId: json['appDeviceId'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
+      appDeviceId: (json['appDeviceId'] as num?)?.toInt(),
       channelId: json['channelId'] as String?,
-      loginId: json['loginId'] as int?,
+      loginId: (json['loginId'] as num?)?.toInt(),
       deviceId: json['deviceId'] as String?,
       deviceToken: json['deviceToken'] as String?,
       modelName: json['modelName'] as String?,
@@ -66,13 +66,13 @@ _$RegisterDeviceResponseBodyImpl _$$RegisterDeviceResponseBodyImplFromJson(
       blockedTill: json['blockedTill'] == null
           ? null
           : DateTime.parse(json['blockedTill'] as String),
-      wrongMpinAttempts: json['wrongMPINAttempts'] as int?,
+      wrongMpinAttempts: (json['wrongMPINAttempts'] as num?)?.toInt(),
       isFpLogin: json['isFPLogin'] as bool?,
       fingerPrintToken: json['fingerPrintToken'] as String?,
       fpBlockedTill: json['fpBlockedTill'] == null
           ? null
           : DateTime.parse(json['fpBlockedTill'] as String),
-      wrongFpAttempts: json['wrongFPAttempts'] as int?,
+      wrongFpAttempts: (json['wrongFPAttempts'] as num?)?.toInt(),
       lastLogin: json['lastLogin'] == null
           ? null
           : DateTime.parse(json['lastLogin'] as String),

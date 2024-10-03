@@ -50,7 +50,8 @@ Map<String, dynamic> _$$GetAdditionalDocumentTypesDataImplToJson(
 _$AdditionalDocumentTypeModelImpl _$$AdditionalDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$AdditionalDocumentTypeModelImpl(
-      additionalDocumentTypeId: json['additionalDocumentTypeId'] as int?,
+      additionalDocumentTypeId:
+          (json['additionalDocumentTypeId'] as num?)?.toInt(),
       additionalDocumentTypeName: json['additionalDocumentTypeName'] as String?,
       documentCode: json['documentCode'] as String?,
     );

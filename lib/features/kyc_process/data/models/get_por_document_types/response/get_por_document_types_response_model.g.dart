@@ -49,7 +49,7 @@ Map<String, dynamic> _$$GetPORDocumentTypesDataImplToJson(
 _$PORDocumentTypeModelImpl _$$PORDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PORDocumentTypeModelImpl(
-      porDocumentTypeId: json['porDocumentTypeId'] as int?,
+      porDocumentTypeId: (json['porDocumentTypeId'] as num?)?.toInt(),
       porDocType: json['porDocType'] as String?,
       documentCode: json['documentCode'] as String?,
     );

@@ -50,7 +50,7 @@ Map<String, dynamic> _$$GetPolicyDocumentTypesDataImplToJson(
 _$PolicyDocumentTypeModelImpl _$$PolicyDocumentTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$PolicyDocumentTypeModelImpl(
-      policyDocumentTypeId: json['policyDocumentTypeId'] as int?,
+      policyDocumentTypeId: (json['policyDocumentTypeId'] as num?)?.toInt(),
       policyDocTypes: json['policyDocTypes'] as String?,
       documentCode: json['documentCode'] as String?,
     );

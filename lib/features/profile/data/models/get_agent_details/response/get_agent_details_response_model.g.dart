@@ -48,7 +48,7 @@ Map<String, dynamic> _$$GetAgentDetailsDataImplToJson(
 _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
         Map<String, dynamic> json) =>
     _$GetAgentDetailsResponseBodyImpl(
-      agentId: json['agentId'] as int?,
+      agentId: (json['agentId'] as num?)?.toInt(),
       agentName: json['agentName'] as String?,
       lastName: json['lastName'] as String?,
       address: json['address'] as String?,
@@ -85,7 +85,7 @@ _$GetAgentDetailsResponseBodyImpl _$$GetAgentDetailsResponseBodyImplFromJson(
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
       crdBy: json['crdBy'],
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
@@ -127,13 +127,13 @@ Map<String, dynamic> _$$GetAgentDetailsResponseBodyImplToJson(
 
 _$CompanyImpl _$$CompanyImplFromJson(Map<String, dynamic> json) =>
     _$CompanyImpl(
-      companyId: json['companyId'] as int?,
+      companyId: (json['companyId'] as num?)?.toInt(),
       companyName: json['companyName'] as String?,
       isDisabled: json['isDisabled'] as bool?,
       crd: json['crd'] == null ? null : DateTime.parse(json['crd'] as String),
-      crdBy: json['crdBy'] as int?,
+      crdBy: (json['crdBy'] as num?)?.toInt(),
       lmd: json['lmd'] == null ? null : DateTime.parse(json['lmd'] as String),
-      lmdBy: json['lmdBy'] as int?,
+      lmdBy: (json['lmdBy'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$CompanyImplToJson(_$CompanyImpl instance) =>

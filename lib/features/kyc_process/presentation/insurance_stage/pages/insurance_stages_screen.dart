@@ -206,7 +206,7 @@ class InsuranceStagesScreenState extends ConsumerState<InsuranceStagesScreen>
     return Column(
       children: [
         const Text(
-          "Note: Due to file size limitations, some documents may only be viewed and downloaded via the E-KYC online portal.",
+          Strings.stagesScreenNoteText,
           style: TextStyle(
             fontStyle: FontStyle.italic,
           ),
