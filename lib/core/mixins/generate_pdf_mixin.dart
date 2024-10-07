@@ -340,8 +340,8 @@ mixin GeneratePdfMixin {
         pw.SizedBox(height: 10),
         if (signatureBase64 != null) ...[
           pw.Container(
-            width: 50,
-            height: 25,
+            width: 75,
+            height: 50,
             // color: const PdfColor(1, 0, 0),
             child: pw.Image(
               pw.MemoryImage(bytes),
