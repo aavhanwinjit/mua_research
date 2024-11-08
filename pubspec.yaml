@@ -1,16 +1,16 @@
 name: ekyc
- 
+
 description: A new Flutter project.
- 
+
 # Production
 # version: 1.0.1+2
- 
+
 # Development
 version: 2.10.0+59
 
-environment: 
-  sdk: '>=3.4.0 <4.0.0'
- 
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -66,7 +66,7 @@ dependencies:
   # file_picker: ^8.0.6
   pdf: ^3.11.1
   multiple_image_camera: ^0.0.2
- 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -79,27 +79,27 @@ dev_dependencies:
   injectable_generator: ^2.6.2
   flutter_lints: ^4.0.0
   icons_launcher: ^3.0.0
- 
+
 dependency_overrides:
   analyzer:
   meta: ^1.12.0
 
 icons_launcher:
-  image_path: 'assets/images/launcher_icon/launcher_icon.png'
+  image_path: "assets/images/launcher_icon/launcher_icon.png"
   platforms:
     android:
       enable: true
     ios:
       enable: true
-    
-flutter: 
+
+flutter:
   uses-material-design: true
- 
+
   assets:
     - assets/
     - assets/images/
     - assets/images/launcher_icon/
- 
+
   fonts:
     - family: Nunito Sans
       fonts:
@@ -119,7 +119,7 @@ flutter:
           weight: 300
         - asset: assets/fonts/Nunito_Sans/NunitoSans_10pt-ExtraLight.ttf
           weight: 200
- 
+
     - family: Isidora Sans
       fonts:
         # - asset: assets/fonts/Isidora-Sans/isidorasans-black.otf
