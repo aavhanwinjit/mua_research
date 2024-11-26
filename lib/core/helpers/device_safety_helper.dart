@@ -10,7 +10,17 @@ class DeviceSafetyHelper {
     bool isRealDevice = await SafeDevice.isRealDevice;
     debugPrint("realDevice: $isRealDevice");
 
-    bool isSafeDevice = await SafeDevice.isSafeDevice;
+    // bool isSafeDevice = await SafeDevice.isSafeDevice;
+    // debugPrint("isSafeDevice: $isSafeDevice");
+
+    bool isSafeDevice = false;
+
+    if (isJailBroken == true || isRealDevice == false) {
+      isSafeDevice = false;
+    } else {
+      isSafeDevice = true;
+    }
+
     debugPrint("isSafeDevice: $isSafeDevice");
 
     // return true;
