@@ -18,8 +18,7 @@ class StorageManagerImpl implements AppStorageManager {
       final value = Future.value(json.decode(data));
       return data == null ? data : value;
     } catch (e) {
-      debugPrint(
-          "Error while extracting data from local storage: ${e.toString()}");
+      debugPrint("Error while extracting data from local storage: ${e.toString()}");
       throw CacheException();
     }
   }
@@ -40,8 +39,7 @@ class StorageManagerImpl implements AppStorageManager {
     try {
       return box.remove(key.name);
     } catch (e) {
-      debugPrint(
-          "Error while removing data from local storage: ${e.toString()}");
+      debugPrint("Error while removing data from local storage: ${e.toString()}");
       throw CacheException();
     }
   }
@@ -66,8 +64,7 @@ class StorageManagerImpl implements AppStorageManager {
       final value = Future.value(data.toString());
       return data == null ? data : value;
     } catch (e) {
-      debugPrint(
-          "Error while extracting string from local storage: ${e.toString()}");
+      debugPrint("Error while extracting string from local storage: ${e.toString()}");
       throw CacheException();
     }
   }
@@ -77,8 +74,37 @@ class StorageManagerImpl implements AppStorageManager {
     try {
       return box.remove(key.name);
     } catch (e) {
-      debugPrint(
-          "Error while removing string from local storage: ${e.toString()}");
+      debugPrint("Error while removing string from local storage: ${e.toString()}");
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<bool?>? getBool({required StorageKey key}) {
+    try {
+      final data = box.read(key.name);
+      final value = Future.value(data);
+      return data == null ? data : value;
+    } catch (e) {
+      debugPrint("Error while extracting string from local storage: ${e.toString()}");
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> storeBool({required StorageKey key, required bool? data}) {
+    return box.write(
+      key.name,
+      data,
+    );
+  }
+
+  @override
+  Future<void> removeBool({required StorageKey key}) {
+    try {
+      return box.remove(key.name);
+    } catch (e) {
+      debugPrint("Error while removing string from local storage: ${e.toString()}");
       throw CacheException();
     }
   }

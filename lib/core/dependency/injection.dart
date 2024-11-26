@@ -22,9 +22,14 @@ abstract class MAUEngineModule {
       // baseUrl: "http://192.168.0.134:9890", // DEV
       // baseUrl: "http://10.100.1.121/agentapi/",
       // baseUrl: "https://dev-kycapi.mua.mu/reverseproxy/", // UAT
-      baseUrl: "https://kycapi.mua.mu/reverseproxy/", // UAT
+      baseUrl: "https://kycapi.mua.mu/reverseproxy/", // PROD
     );
   }
+
+  // @singleton
+  // Future<void> initializeSSLCertificate() async {
+  //   return await CertReader.initWialize();
+  // }
 
   // @preResolve
   // Future<SharedPreferences> getSharedPreferences() {

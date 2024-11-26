@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/cert_reader.dart';
 import 'package:ekyc/core/network/interceptors/authorization_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/encryption_interceptor.dart';
 import 'package:flutter/foundation.dart';
@@ -12,31 +13,20 @@ class NetworkHelper {
   static Dio getDioClient({List<Interceptor>? interceptors}) {
     Dio dio = Dio();
 
+    CertReader.addSslPinning(dio);
+
     dio.options.headers[ACCEPT_HEADER] = "application/json";
     dio.options.headers[CONTENT_TYPE_HEADER] = "application/json";
 
-    if (interceptors != null) {
-      dio.interceptors.addAll(interceptors);
-    }
-
-    // dio.interceptors.add(
-    //   ConnectionCheckerInterceptor(),
-    // );
-
-    // dio.interceptors.add(
-    //   HeaderInterceptor(),
-    // );
-
-    dio.interceptors.add(
+    List<Interceptor> interceptorsList = [
+      //   ConnectionCheckerInterceptor(),
+      //   HeaderInterceptor(),
       AuthorizationInterceptor(),
-    );
-
-    dio.interceptors.add(
       EncryptionInterceptor(),
-    );
+    ];
 
     if (kDebugMode) {
-      dio.interceptors.add(
+      interceptorsList.add(
         PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
@@ -46,6 +36,12 @@ class NetworkHelper {
         ),
       );
     }
+
+    if (interceptors != null) {
+      dio.interceptors.addAll(interceptors);
+    }
+
+    dio.interceptors.addAll(interceptorsList);
 
     return dio;
   }

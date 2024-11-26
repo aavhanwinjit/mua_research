@@ -12,6 +12,7 @@ class Strings {
   static const String globalRegister = 'REGISTER';
   static const String globalErrorGenericMessageOne = "Something went wrong, please try again.";
   static const String globalOk = "OK";
+  static const String globalOkay = "Okay";
   static const String globalError = 'ERROR';
   static const String globalName = 'Name';
   static const String globalMobile = 'Mobile';
@@ -79,6 +80,8 @@ class Strings {
   static const String uploadSignature = "Upload signature";
   static const String errorInFullnameInDoc = "Invalid characters present in name";
   static const String cropImage = "Crop Image";
+  static const String jailBreakDetected =
+      "You can not run this app due to Jailbreak/Rooted/Emulator Device/Not Correctly installed from";
 
   //2.Login
   static const String loginScreenTitle = "Let's get started!";

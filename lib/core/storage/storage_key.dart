@@ -4,4 +4,5 @@ enum StorageKey {
   FP_TOKEN,
   MOBILE_NUMBER,
   AGENT_NAME,
+  SSL_PINNING,
 }

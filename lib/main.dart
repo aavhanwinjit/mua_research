@@ -1,4 +1,7 @@
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/cert_reader.dart';
+import 'package:ekyc/core/helpers/device_safety_helper.dart';
+import 'package:ekyc/features/jail_break/mua_jailbreak_app.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
@@ -29,17 +32,26 @@ Future<void> main() async {
     return true;
   };
 
-  configureDependencies();
-  await getIt.allReady();
-  await GetStorage.init();
+  final bool isSafeDevice = await DeviceSafetyHelper.detectRootOrJailbreak();
 
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  if (!isSafeDevice) {
+    // Restrict user from entering the app
+    runApp(const MUAJailbreakApp());
+  } else {
+    await CertReader.initialize();
 
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+    configureDependencies();
+    await getIt.allReady();
+    await GetStorage.init();
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    runApp(
+      const ProviderScope(
+        child: MyApp(),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

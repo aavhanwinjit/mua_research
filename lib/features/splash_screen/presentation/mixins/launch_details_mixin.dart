@@ -1,5 +1,6 @@
 import 'package:ekyc/core/app_export.dart';
 import 'package:ekyc/core/dependency/injection.dart';
+import 'package:ekyc/core/helpers/device_safety_helper.dart';
 import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:ekyc/core/helpers/package_info_helper.dart';
 import 'package:ekyc/core/providers/session_id_provider.dart';
@@ -14,16 +15,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:safe_device/safe_device.dart';
 
 mixin LaunchDetailsMixin {
   void callLaunchDetailsApi({required BuildContext context, required WidgetRef ref}) async {
-    final bool isRootedDevice = await _detectRootOrJailbreak();
+    final bool isSafeDevice = await DeviceSafetyHelper.detectRootOrJailbreak();
 
     final String deviceToken = await _getDeviceToken();
 
     final request = LaunchDetailsRequest(
-      rootedDevice: isRootedDevice,
+      rootedDevice: !isSafeDevice,
       deviceToken: deviceToken,
     );
 
@@ -47,6 +47,7 @@ mixin LaunchDetailsMixin {
                   authToken: success.body?.responseBody?.tokenData?.token,
                   sessionId: success.body?.responseBody?.tokenData?.sessionId,
                   deviceToken: success.body?.responseBody?.agentData?.loginData?.deviceToken,
+                  isSSLEnabled: success.body?.responseBody?.appSettingsData?.enableSslPinning,
                   ref: ref,
                 );
               }
@@ -72,7 +73,7 @@ mixin LaunchDetailsMixin {
   }
 
   Future<bool> versionCheck(context, LaunchDetailsResponse launchDetailsResponse, WidgetRef ref) async {
-    debugPrint("inside version check funtion");
+    // debugPrint("inside version check funtion");
 
     // if (kDebugMode) return;
 
@@ -120,17 +121,6 @@ mixin LaunchDetailsMixin {
     }
   }
 
-  Future<bool> _detectRootOrJailbreak() async {
-    bool isJailBroken = false;
-    // await SafeDevice.isJailBroken;
-    debugPrint("jailBroken: $isJailBroken");
-
-    bool isRealDevice = await SafeDevice.isRealDevice;
-    debugPrint("realDevice: $isRealDevice");
-
-    return isJailBroken;
-  }
-
   Future<String> _getDeviceToken() async {
     final String deviceToken = await LocalDataHelper.getDeviceToken();
     return deviceToken;
@@ -140,11 +130,13 @@ mixin LaunchDetailsMixin {
     required String? authToken,
     required String? sessionId,
     required String? deviceToken,
+    required bool? isSSLEnabled,
     required WidgetRef ref,
   }) async {
     await LocalDataHelper.storeAuthToken(authToken);
     await LocalDataHelper.storeSessionId(sessionId);
     await LocalDataHelper.storeDeviceToken(deviceToken);
+    await LocalDataHelper.storeSSLPinning(isSSLEnabled ?? false);
 
     ref.watch(sessionIdProvider.notifier).update((state) => sessionId ?? "");
   }

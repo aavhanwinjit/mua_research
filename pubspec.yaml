@@ -99,6 +99,7 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/launcher_icon/
+    - assets/certificates/
 
   fonts:
     - family: Nunito Sans

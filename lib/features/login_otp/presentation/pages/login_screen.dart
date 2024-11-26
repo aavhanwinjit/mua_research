@@ -39,8 +39,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   void initState() {
     super.initState();
 
-    debugPrint('init triggered');
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(verifyMobileNumberLoadingProvider.notifier).update((state) => false);
       controller.text = "";

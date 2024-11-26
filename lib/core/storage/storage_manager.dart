@@ -10,14 +10,17 @@ abstract class AppStorageManager {
 
   Future<void> removeMap({required StorageKey key});
 
-  Future<void> storeString({
-    required StorageKey key,
-    required String? data,
-  });
+  Future<void> storeString({required StorageKey key, required String? data});
 
   Future<String?>? getString({required StorageKey key});
 
   Future<void> removeString({required StorageKey key});
+
+  Future<void> storeBool({required StorageKey key, required bool? data});
+
+  Future<bool?>? getBool({required StorageKey key});
+
+  Future<void> removeBool({required StorageKey key});
 
   Future<void> clearStorage();
 }
