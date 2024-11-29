@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:ekyc/core/dependency/injection.dart';
 import 'package:ekyc/core/helpers/cert_reader.dart';
 import 'package:ekyc/core/network/interceptors/authorization_interceptor.dart';
 import 'package:ekyc/core/network/interceptors/encryption_interceptor.dart';
@@ -46,15 +45,15 @@ class NetworkHelper {
     return dio;
   }
 
-  static void reInitDio({List<Interceptor>? interceptors}) {
-    if (getIt.isRegistered<Dio>()) {
-      getIt.unregister<Dio>();
-    }
+  // static void reInitDio({List<Interceptor>? interceptors}) {
+  //   if (getIt.isRegistered<Dio>()) {
+  //     getIt.unregister<Dio>();
+  //   }
 
-    getIt.registerLazySingleton<Dio>(() {
-      Dio dio = getDioClient(interceptors: interceptors);
-      // ServiceHelper.reInitLazyServices();
-      return dio;
-    });
-  }
+  //   getIt.registerLazySingleton<Dio>(() {
+  //     Dio dio = getDioClient(interceptors: interceptors);
+  //     // ServiceHelper.reInitLazyServices();
+  //     return dio;
+  //   });
+  // }
 }

@@ -17,7 +17,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 mixin LaunchDetailsMixin {
-  void callLaunchDetailsApi({required BuildContext context, required WidgetRef ref}) async {
+  Future<void> callLaunchDetailsApi({required BuildContext context, required WidgetRef ref}) async {
     final bool isSafeDevice = await DeviceSafetyHelper.detectRootOrJailbreak();
 
     final String deviceToken = await _getDeviceToken();

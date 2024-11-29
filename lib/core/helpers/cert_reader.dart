@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:ekyc/core/helpers/local_data_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -14,7 +15,10 @@ class CertReader {
 
   static ByteData? get getCert => cert;
 
-  static HttpClient? addSslPinning(Dio dio) {
+  static Future<HttpClient?> addSslPinning(Dio dio) async {
+    // final bool sslPinningFlag = await getSSLPinningFlag();
+
+    // if (sslPinningFlag == true) {
     debugPrint("inside add ssl pinning function");
 
     ByteData bytes = getCert!;
@@ -39,5 +43,12 @@ class CertReader {
     );
 
     return null;
+    // }
+    // return null;
+  }
+
+  static Future<bool> getSSLPinningFlag() async {
+    final bool sslPinning = await LocalDataHelper.getSSLPinning();
+    return sslPinning;
   }
 }
